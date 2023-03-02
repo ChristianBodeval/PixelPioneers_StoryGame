@@ -14,6 +14,6 @@ public class FollowPlayer : MonoBehaviour
 
     void Update()
     {
-        transform.position = new Vector3(player.position.x, player.position.y, cameraDistance);
+        transform.position = new Vector3(player.position.x, player.position.y, cameraDistance); // Follows the player
     }
 }
