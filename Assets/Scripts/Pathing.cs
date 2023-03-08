@@ -8,7 +8,7 @@ public class Pathing : MonoBehaviour
     [Header("General for Pathfinding")]
     [SerializeField] private float speed = 3f;
     [SerializeField] private float activateDistance = 0.5f;
-    private GameObject player;
+    [SerializeField] private GameObject player;
     private Rigidbody2D rb;
 
     [Header("A*")]
@@ -23,7 +23,6 @@ public class Pathing : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindWithTag("Player");
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
