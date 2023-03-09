@@ -11,8 +11,9 @@ public class Pool : MonoBehaviour
     [SerializeField] private float spawnFrequency = 5f;
     [SerializeField] private GameObject prefab;
     private Camera camera;
-    private Tilemap obstacleTileMap;
-    private Tilemap groundTileMap;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask obstacleLayer;
+    private int recursions = 0;
 
     public static Pool pool { get; private set; }
 
@@ -33,8 +34,6 @@ public class Pool : MonoBehaviour
     {
         InvokeRepeating("SpawnEnemy", 0f, spawnFrequency);
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        obstacleTileMap = GameObject.FindGameObjectWithTag("Obstacles").GetComponent<Tilemap>();
-        groundTileMap = GameObject.FindGameObjectWithTag("Ground").GetComponent<Tilemap>();
     }
 
     public GameObject DrawFromPool()
@@ -78,49 +77,50 @@ public class Pool : MonoBehaviour
     //returns a point eligible for spawning an enemy outside of the screen
     private Vector2 FindSpawnPoint()
     {
-        float width = camera.pixelWidth / 96f + 0.5f; //half the width of the screen
-        float height = camera.pixelHeight / 96f + 0.5f; //half the height of the screen
+        float width = camera.pixelWidth / 68f + 0.5f; //half the width of the screen
+        float height = camera.pixelHeight / 68f + 0.5f; //half the height of the screen
 
-        Vector2 point = new Vector2();
+        Vector2 point = Vector2.zero;
 
-        //random edge of the screen
+        // Random edge of the screen
         switch (Random.Range(1,5))
         {
             case 1:
-                point = new Vector2(-width - 0.5f, Random.Range(0, height)); //left
+                point = new Vector2(-width, Random.Range(-height, height)); // Left
                 break;
             case 2:
-                point = new Vector2(Random.Range(0, width), height + 0.5f); //top
+                point = new Vector2(Random.Range(-width, width), height); // Top
                 break;
             case 3:
-                point = new Vector2(width + 0.5f, Random.Range(0, height)); //right
+                point = new Vector2(width, Random.Range(-height, height)); // Right
                 break;
             case 4:
-                point = new Vector2(Random.Range(0, width), -height -0.5f); //bottom
+                point = new Vector2(Random.Range(-width, width), -height); // Bottom
                 break;
             default:
                 return new Vector2(Random.Range(-width, width), Random.Range(-height, height));
         }
 
-        RaycastHit2D[] hits = Physics2D.RaycastAll(point + Vector2.up, Vector2.down);
+        bool grounded = Physics2D.OverlapPoint((Vector2)GameObject.FindGameObjectWithTag("Player").transform.position + point, groundLayer);
+        bool unobstructed = !Physics2D.OverlapPoint((Vector2)GameObject.FindGameObjectWithTag("Player").transform.position + point, obstacleLayer);
 
-        //checks if we have ground and no obstacles in the way
-        bool hasGround = false;
-        foreach (RaycastHit2D hit in hits)
+        Debug.Log(point + " " + grounded + " " + unobstructed + " " + recursions);
+
+
+        if (grounded && unobstructed)  // Checks if we have ground and no obstacles in the way
         {
-            /*
-            if (hit.collider.gameObject.CompareTag("Obstacles")) //obstaclecheck
-            {
-                Debug.Log("Obstacle" + point);
-                point = new Vector2();
-            }
-            else if (hit.collider.gameObject.CompareTag("Ground") && !hasGround) //groundcheck
-            {
-                hasGround = true;
-            }
-            */
+            recursions = 0; // Reset recussion count
+            return point + (Vector2)GameObject.FindGameObjectWithTag("Player").transform.position; 
         }
-
-        return point + (Vector2)GameObject.FindGameObjectWithTag("Player").transform.position;
+        else if (recursions < 50 && (!grounded || !unobstructed)) // Call method again if we can't spawn
+        {
+            recursions++; // Keep track of how many recursions we do, to avoid stackoverflow
+            return FindSpawnPoint();
+        }
+        else // Default case in case of recussion limit
+        {
+            recursions = 0;
+            return (Vector2)GameObject.FindGameObjectWithTag("Player").transform.position;
+        }
     }
 }
