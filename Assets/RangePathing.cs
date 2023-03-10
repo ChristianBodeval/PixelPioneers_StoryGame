@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class Pathing : MonoBehaviour
+public class RangePathing : MonoBehaviour
 {
     [Header("General for Pathfinding")]
     [SerializeField] private float speed = 3f;
@@ -22,6 +22,7 @@ public class Pathing : MonoBehaviour
 
     [Header("Custom Behavior")]
     [SerializeField] private bool isFollowing = true;
+    private int recurses = 0;
 
     private void Start()
     {
@@ -37,11 +38,17 @@ public class Pathing : MonoBehaviour
         //A* pathing
         if (TargetInDistance())
         {
+            isFollowing = true;
+            PathFollow();
+        }
+        else if (Vector3.Distance(player.transform.position, transform.position) < attackRange - 0.2f) // Too close to ranged enemy
+        {
+            isFollowing = false;
             PathFollow();
         }
         else
         {
-            rb.velocity = new Vector3(0f,0f,0f);
+            rb.velocity = new Vector3(0f, 0f, 0f);
         }
     }
 
@@ -51,11 +58,40 @@ public class Pathing : MonoBehaviour
         rb.velocity = speed * dir;
     }
 
+    private Vector2 PathingTarget(Vector2 offset)
+    {
+        Vector2 direction = player.transform.position - transform.position; // Direction of player
+
+        if (Vector3.Distance(player.transform.position, transform.position) > attackRange && isFollowing || Physics2D.Raycast(transform.position, direction, attackRange, obstacleLayer) && isFollowing)
+        {
+            recurses = 0;
+            return player.transform.position;
+        }
+
+        Vector2 point = (Vector2)player.transform.position + direction * 1f + offset; // Point to walk to
+
+        if (!isFollowing && !Physics2D.Raycast(transform.position, direction, 1f, obstacleLayer)) // Is point free of obstacles
+        {
+            recurses = 0;
+            return point;
+        }
+        else if (recurses < 50)
+        {
+            recurses++;
+            return PathingTarget(new Vector2(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f))); // Try again but with a random offset
+        }
+        else
+        {
+            recurses = 0;
+            return player.transform.position;
+        }
+    }
+
     private void UpdatePath()
     {
         if (seeker.IsDone())
         {
-            seeker.StartPath(transform.position, player.transform.position, OnPathComplete);
+            seeker.StartPath(transform.position, PathingTarget(Vector2.zero), OnPathComplete);
         }
     }
 
@@ -73,7 +109,7 @@ public class Pathing : MonoBehaviour
 
         if (distance < nextWayPointDistance)
         {
-            currentWayPoint++; 
+            currentWayPoint++;
         }
 
         Flip();

@@ -5,9 +5,6 @@ using Ink.Runtime;
 
 public class Dialogue : MonoBehaviour
 {
-    [Header("Visual Cue")]
-    [SerializeField] private GameObject visualCue;
-
     [Header("Dialogue")]
     public bool inDialogue = false;
     [SerializeField] private TextAsset inkFileText;
@@ -15,15 +12,17 @@ public class Dialogue : MonoBehaviour
     private Choice[] choice;
     private bool playerInRange = false;
     private GameObject player;
+    private GameObject visualCue; // Pops up when the player can interact   
 
     private void Awake()
     {
-        playerInRange = false;
+        visualCue = GameObject.Find("DialogueCue");
         visualCue.SetActive(false);
     }
 
     private void Start()
     {
+        playerInRange = false;
         inkStory = new Story(inkFileText.text);
     }
 
@@ -32,6 +31,7 @@ public class Dialogue : MonoBehaviour
         if (playerInRange)
         {
             visualCue.SetActive(true);
+            visualCue.transform.position = gameObject.transform.position + (Vector3)Vector2.up * 0.4f;
 
             if (Input.GetButton("Interact") && !inDialogue)
             {
