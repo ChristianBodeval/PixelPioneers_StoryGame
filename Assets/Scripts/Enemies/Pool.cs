@@ -5,23 +5,21 @@ using UnityEngine.Tilemaps;
 
 public class Pool : MonoBehaviour
 {
-    // Enemy pool
     private List<GameObject> storageEnemies = new List<GameObject>();
     private List<GameObject> inUseEnemies = new List<GameObject>();
-
     [Header("Spawner")]
     [SerializeField] private float spawnFrequency = 5f;
     [SerializeField] private GameObject prefab;
-    [SerializeField] private LayerMask obstacleLayer;
+    private Camera camera;
     [SerializeField] private LayerMask groundLayer;
-    private Camera camera; // To spawn enemies outside the player's view
-    private int recurses = 0; // Restricts the amount of recursive calls to avoid memory leak
+    [SerializeField] private LayerMask obstacleLayer;
+    private int recursions = 0;
 
     public static Pool pool { get; private set; }
 
     private void Awake()
     {
-        // Singleton pattern
+        //if there is an instance, and it's not me, delete myself
         if (pool != null && pool != this)
         {
             Destroy(this);
@@ -34,11 +32,10 @@ public class Pool : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("SpawnEnemy", 0f, spawnFrequency); // Sets interval for spawning enemies
+        InvokeRepeating("SpawnEnemy", 0f, spawnFrequency);
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
-    // Generates an enemy
     public GameObject DrawFromPool()
     {
         if (storageEnemies.Count > 0)
@@ -59,7 +56,6 @@ public class Pool : MonoBehaviour
         }
     }
 
-    // Removes an enemy and stores it
     public void ReturnToPool(GameObject enemy)
     {
         enemy.SetActive(false);
@@ -72,56 +68,58 @@ public class Pool : MonoBehaviour
         storageEnemies.Add(enemy);
     }
 
-    // Positions an enemy - Activated by the InvokeRepeating in Start()
     private void SpawnEnemy()
     {
         GameObject enemy = DrawFromPool();
         enemy.transform.position = FindSpawnPoint();
     }
 
-    // Returns a point eligible for spawning an enemy outside of the screen
+    //returns a point eligible for spawning an enemy outside of the screen
     private Vector2 FindSpawnPoint()
     {
-        float width = camera.pixelWidth / 96f + 0.5f; // Half the width of the screen
-        float height = camera.pixelHeight / 96f + 0.5f; // Half the height of the screen
+        float width = camera.pixelWidth / 68f + 0.5f; //half the width of the screen
+        float height = camera.pixelHeight / 68f + 0.5f; //half the height of the screen
 
-        Vector2 point = new Vector2();
+        Vector2 point = Vector2.zero;
 
         // Random edge of the screen
         switch (Random.Range(1,5))
         {
             case 1:
-                point = new Vector2(-width - 0.5f, Random.Range(0, height)); // Left
+                point = new Vector2(-width, Random.Range(-height, height)); // Left
                 break;
             case 2:
-                point = new Vector2(Random.Range(0, width), height + 0.5f); // Top
+                point = new Vector2(Random.Range(-width, width), height); // Top
                 break;
             case 3:
-                point = new Vector2(width + 0.5f, Random.Range(0, height)); // Right
+                point = new Vector2(width, Random.Range(-height, height)); // Right
                 break;
             case 4:
-                point = new Vector2(Random.Range(0, width), -height -0.5f); // Bottom
+                point = new Vector2(Random.Range(-width, width), -height); // Bottom
                 break;
             default:
                 return new Vector2(Random.Range(-width, width), Random.Range(-height, height));
         }
 
-        point += (Vector2)GameObject.FindGameObjectWithTag("Player").transform.position;
+        bool grounded = Physics2D.OverlapPoint((Vector2)GameObject.FindGameObjectWithTag("Player").transform.position + point, groundLayer);
+        bool unobstructed = !Physics2D.OverlapPoint((Vector2)GameObject.FindGameObjectWithTag("Player").transform.position + point, obstacleLayer);
 
-        // Checks if we have ground and no obstacles in the way
-        if (Physics2D.CircleCast(point, 0.5f, Vector2.up, 0.5f, groundLayer) && !Physics2D.CircleCast(point, 0.5f, Vector2.up, 0.5f, obstacleLayer)) // Has ground and not in a wall
+        Debug.Log(point + " " + grounded + " " + unobstructed + " " + recursions);
+
+
+        if (grounded && unobstructed)  // Checks if we have ground and no obstacles in the way
         {
-            recurses = 0; // Resets the recusion count
-            return point;
+            recursions = 0; // Reset recussion count
+            return point + (Vector2)GameObject.FindGameObjectWithTag("Player").transform.position; 
         }
-        else if (recurses < 25)
+        else if (recursions < 50 && (!grounded || !unobstructed)) // Call method again if we can't spawn
         {
-            recurses++; // Counts the amount of times we recursively call this function, we limit the amount to avoid memory leaks
-            return FindSpawnPoint(); // Find new eligible spawn location
+            recursions++; // Keep track of how many recursions we do, to avoid stackoverflow
+            return FindSpawnPoint();
         }
-        else
+        else // Default case in case of recussion limit
         {
-            recurses = 0; // Resets the recusion count
+            recursions = 0;
             return (Vector2)GameObject.FindGameObjectWithTag("Player").transform.position;
         }
     }
