@@ -2,30 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bat_Attack : StateMachineBehaviour
+public class FSM_Melee_Move : StateMachineBehaviour
 {
-    GameObject player;
-    public LayerMask mask;
-    float attackRange;
-
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        attackRange = animator.GetComponentInParent<RangePathing>().attackRange;
+        animator.SetBool("CanMove", true);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        Vector2 animPos = animator.transform.position;
-        Vector2 playerPos = player.transform.position;
+    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
 
-        if (Vector2.Distance(playerPos, animPos) > attackRange || Physics2D.Raycast(animPos, playerPos - animPos, attackRange, mask))
-        {
-            animator.SetBool("Attacking", false);
-        }
-    }
+    //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

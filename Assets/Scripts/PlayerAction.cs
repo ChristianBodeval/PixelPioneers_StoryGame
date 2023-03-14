@@ -6,7 +6,7 @@ public class PlayerAction : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float speed = 10f;
-    [SerializeField] private LayerMask obstacleLayer;
+    public LayerMask obstacleLayer;
     [SerializeField] private LayerMask groundLayer;
     private Rigidbody2D rb;
     private Vector3 moveVector = new Vector3(1f, 0f, 0f);
@@ -27,9 +27,9 @@ public class PlayerAction : MonoBehaviour
     [SerializeField] private Transform cone; // temp
     [SerializeField] private Transform color; // temp
     [SerializeField] private float inputBuffer = 0.1f;
+    [HideInInspector] public Vector2 lastFacing = new Vector2(1f, 0f);
     private float BufferCountdown;
     private bool canAttack = true;
-    private Vector2 lastFacing = new Vector2(1f, 0f);
     private ParticleSystem arcParticles;
 
     private void Start()
@@ -68,26 +68,13 @@ public class PlayerAction : MonoBehaviour
 
     private void Move()
     {
-        if (!canMove) { return; } // Guard clause
-
-        // Horizontal movement
-        if (moveVector.x != 0)
+        if (moveVector.magnitude > 0f && canMove) // Horizontal movement
         {
-            rb.velocity = new Vector3(moveVector.x * speed, rb.velocity.y, 0f);
+            rb.velocity = moveVector * speed;
         }
-        else
+        else if (moveVector.magnitude < 0.1f && canMove)
         {
-            rb.velocity = new Vector3(0f, rb.velocity.y, 0f); // Stops the player
-        }
-
-        // Vertical movement
-        if (moveVector.y != 0)
-        {
-            rb.velocity = new Vector3(rb.velocity.x, moveVector.y * speed, 0f);
-        }
-        else
-        {
-            rb.velocity = new Vector3(rb.velocity.x, 0f, 0f); // Stops the player
+            rb.velocity = Vector2.zero; // Stops the player
         }
     }
 
@@ -99,6 +86,7 @@ public class PlayerAction : MonoBehaviour
     public void StopMove()
     {
         canMove = false;
+        rb.velocity = Vector2.zero;
     }
 
     public IEnumerator StopMove(float time)

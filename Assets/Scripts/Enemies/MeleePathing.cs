@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class Pathing : MonoBehaviour
+public class MeleePathing : MonoBehaviour
 {
     [Header("General for Pathfinding")]
     [SerializeField] private float speed = 3f;
     [SerializeField] private float activateDistance = 0.5f;
-    public float attackRange = 0.5f;
+    private float attackRange = 0.5f;
     private GameObject player;
     private Rigidbody2D rb;
+    private Animator animator;
 
     [Header("A*")]
     [SerializeField] private LayerMask obstacleLayer;
@@ -28,8 +29,10 @@ public class Pathing : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponentInChildren<Animator>();
+        attackRange = GetComponent<Melee_Attack>().attackRange;
 
-        InvokeRepeating("UpdatePath", 0f, updateInterval); //updates pathfinding regularly
+        InvokeRepeating("UpdatePath", 0f, updateInterval); // Updates pathfinding regularly
     }
 
     private void FixedUpdate()
@@ -45,10 +48,11 @@ public class Pathing : MonoBehaviour
         }
     }
 
-    private void AStarMove(Vector2 dir)
+    private void Move(Vector2 dir)
     {
-        //movement
-        rb.velocity = speed * dir;
+        if (!animator.GetBool("CanMove")) { rb.velocity = Vector2.zero; return; } // Guard clause - can we move
+
+        rb.velocity = speed * dir; // Movement
     }
 
     private void UpdatePath()
@@ -61,33 +65,33 @@ public class Pathing : MonoBehaviour
 
     private void PathFollow()
     {
-        //guard clause
-        if (path == null || currentWayPoint >= path.vectorPath.Count || !isFollowing) { return; } //is not there yet and has a path
+        Flip(); // Flips sprite
+
+        // Guard clause
+        if (path == null || currentWayPoint >= path.vectorPath.Count || !isFollowing) { return; } // Is not there yet and has a path
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
 
-        AStarMove(direction);
+        Move(direction);
 
-        //swaps early to new waypoint
+        // Swaps early to new waypoint
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
 
         if (distance < nextWayPointDistance)
         {
             currentWayPoint++; 
         }
-
-        Flip();
     }
 
     private void Flip()
     {
-        Vector2 dir = ((Vector2)player.transform.position - rb.position).normalized; //look to player
+        Vector2 dir = ((Vector2)player.transform.position - rb.position).normalized; // Look to player
 
-        if (dir.x > 0.24f) //right
+        if (dir.x > 0.24f) // Right
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
         }
-        else if (dir.x < -0.24f) //left
+        else if (dir.x < -0.24f) // Left
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
@@ -98,7 +102,7 @@ public class Pathing : MonoBehaviour
         float dis = Vector2.Distance(transform.position, player.transform.position);
 
         // Return true if terrain is in the way
-        if (Physics2D.Raycast(transform.position, player.transform.position - transform.position, attackRange, obstacleLayer) && dis > 0.5f)
+        if (Physics2D.Raycast(transform.position, player.transform.position - transform.position, attackRange, obstacleLayer) && dis > attackRange)
         {
             return true;
         }
@@ -110,7 +114,7 @@ public class Pathing : MonoBehaviour
         if (!p.error)
         {
             path = p;
-            currentWayPoint = 0;
+            currentWayPoint = 1;
         }
     }
 }

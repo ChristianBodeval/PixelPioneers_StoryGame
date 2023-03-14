@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Obstacles
   - NPC
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Pickup
   - Ground
   - NPC
-  - 
+  - Projectile
   - 
   - 
   - 

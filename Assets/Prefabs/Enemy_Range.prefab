@@ -16,8 +16,10 @@ GameObject:
   - component: {fileID: 4020096897058174605}
   - component: {fileID: 7628423892788284204}
   - component: {fileID: 8001648274423330539}
+  - component: {fileID: 254720778}
+  - component: {fileID: 254720779}
   m_Layer: 7
-  m_Name: TestBehavior_Bat
+  m_Name: Enemy_Range
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,7 +57,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 2fcb8922e16efda498d209517daf2b23, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -69,7 +71,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 4020096897058174614}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 2fcb8922e16efda498d209517daf2b23, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -162,7 +164,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4020096897058174614}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77f586f285b3847808d79083bd19ef1f, type: 3}
   m_Name: 
@@ -204,15 +206,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fc24da38aa19645951b6dcb514a681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 3
   activateDistance: 20
-  attackRange: 2.7
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
   updateInterval: 0.1
-  nextWayPointDistance: 0.2
+  nextWayPointDistance: 0.4
+  offset: 0.2
   isFollowing: 1
+--- !u!114 &254720778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4020096897058174614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e9f177283444e649b0b043b71cf13ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 4.5
+  attackCD: 1
+  attackRDY: 0
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  projectile: {fileID: 2191891527132068989, guid: ec1d677d95de0c7409e0c489421ff1f2, type: 3}
+  projectileSpeed: 2
+--- !u!114 &254720779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4020096897058174614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e5c2ca2d886c1d40aa1b3d198593914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4020096898732813612
 GameObject:
   m_ObjectHideFlags: 0
