@@ -1034,7 +1034,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f03845e4bf3f7d4ba7b59ce5f133575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnFrequency: 5
+  timeBetweenWaves: 5
+  timeBetweenMobs: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -1054,8 +1055,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b4dbb9e91676e4dab0cbdc48efed40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeAmount: 5
-  rangeAmount: 2
+  meleeAmount: 10
+  rangeAmount: 3
 --- !u!1 &1156670429 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 146702678940892861, guid: facc3f81a943c774c917f35e333d0129, type: 3}

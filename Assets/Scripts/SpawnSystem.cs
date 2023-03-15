@@ -6,7 +6,8 @@ using UnityEngine;
 public class SpawnSystem : MonoBehaviour
 {
     [Header("Pool")]
-    [SerializeField] private float spawnFrequency = 5f;
+    [SerializeField] private float timeBetweenWaves = 5f;
+    [SerializeField] private float timeBetweenMobs = 0.2f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private WaveObject tempWave;
@@ -37,12 +38,12 @@ public class SpawnSystem : MonoBehaviour
                 for (int i = 0; i < e.Item2; i++) // Less than amount in wave
                 {
                     SpawnEnemy(e.Item1); // Spawn enemy of type
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(timeBetweenMobs);
                 }
             }
 
             enemies.Clear();
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(timeBetweenWaves);
         }
     }
 
@@ -55,8 +56,8 @@ public class SpawnSystem : MonoBehaviour
     //returns a point eligible for spawning an enemy outside of the screen
     private Vector2 FindSpawnPoint()
     {
-        float width = camera.pixelWidth / 68f + 0.5f; //half the width of the screen
-        float height = camera.pixelHeight / 68f + 0.5f; //half the height of the screen
+        float width = camera.pixelWidth / 80f + 0.5f; //half the width of the screen
+        float height = camera.pixelHeight / 80f + 0.5f; //half the height of the screen
 
         Vector2 point = Vector2.zero;
 
