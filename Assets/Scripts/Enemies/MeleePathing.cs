@@ -29,8 +29,8 @@ public class MeleePathing : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponentInChildren<Animator>();
-        attackRange = GetComponent<Melee_Attack>().attackRange;
+        animator = GetComponent<Animator>();
+        //attackRange = GetComponent<Melee_Attack>().attackRange;
 
         InvokeRepeating("UpdatePath", 0f, updateInterval); // Updates pathfinding regularly
     }

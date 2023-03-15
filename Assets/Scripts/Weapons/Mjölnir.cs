@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mjölnir : MonoBehaviour
+public class MjÃ¶lnir : MonoBehaviour
 {
     [Header("Hammer Movement")]
     [SerializeField] private float spinRadius;
@@ -56,7 +56,7 @@ public class Mjölnir : MonoBehaviour
     // Spins the hammer around the player
     private void Spin()
     {
-        if (chargeBeingUsed) // Guard clause - if an ability using mjölnir is being used, stop spinning
+        if (chargeBeingUsed) // Guard clause - if an ability using mjï¿½lnir is being used, stop spinning
         {
             Vector2 direction = player.GetComponent<PlayerAction>().lastFacing;
             transform.position = player.transform.position + (Vector3)direction * 1.5f;
