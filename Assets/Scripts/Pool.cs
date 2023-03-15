@@ -104,7 +104,7 @@ public class Pool : MonoBehaviour
         bool grounded = Physics2D.OverlapPoint((Vector2)GameObject.FindGameObjectWithTag("Player").transform.position + point, groundLayer);
         bool unobstructed = !Physics2D.OverlapPoint((Vector2)GameObject.FindGameObjectWithTag("Player").transform.position + point, obstacleLayer);
 
-        Debug.Log(point + " " + grounded + " " + unobstructed + " " + recursions);
+        //Debug.Log(point + " " + grounded + " " + unobstructed + " " + recursions);
 
 
         if (grounded && unobstructed)  // Checks if we have ground and no obstacles in the way
