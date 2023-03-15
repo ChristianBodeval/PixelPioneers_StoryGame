@@ -8,7 +8,7 @@ public class Mjölnir : MonoBehaviour
     [SerializeField] private float spinRadius;
     [SerializeField] private float spinSpeed;
     [SerializeField] private float spriteRotationSpeed;
-    [SerializeField] private GameObject sprite;
+    [SerializeField] private GameObject mjölnirSprite;
     private GameObject player;
 
     [Header("Charge Upgrade")]
@@ -21,12 +21,16 @@ public class Mjölnir : MonoBehaviour
     [SerializeField] private float minCharge;
     [SerializeField] private float maxCharge;
     [SerializeField] private float stunDuration = 1f;
+    [SerializeField] private GameObject rangeIndicator;
     private bool chargeBeingUsed = false;
     private float charge = 0f;
 
     [Header("Area Of Effect Upgrade")]
     public bool hasAreaOfEffectUpgrade = false;
+    [SerializeField] private float castTime = 0.3f;
+    [SerializeField] private float aoeRadius = 3f;
     [SerializeField] private float areaOfEffectCD;
+    [SerializeField] private GameObject aoeIndicator;
     private bool areaOfEffectBeingUsed = false;
 
     private bool abilityRDY = true;
@@ -43,6 +47,8 @@ public class Mjölnir : MonoBehaviour
         Spin();
 
         ChargeAbility();
+
+        AOEAbility();
     }
 
     private void FixedUpdate()
@@ -64,7 +70,7 @@ public class Mjölnir : MonoBehaviour
         }
 
         transform.position = player.transform.position + (transform.right + transform.up) * spinRadius;
-        sprite.transform.Rotate(0f, 0f, spriteRotationSpeed);
+        mjölnirSprite.transform.Rotate(0f, 0f, spriteRotationSpeed);
     }
 
     private void EnableHammer()
@@ -91,20 +97,33 @@ public class Mjölnir : MonoBehaviour
 
             // Position the hammer on player
             transform.position = player.transform.position;
-            sprite.transform.Rotate(0f, 0f, spriteRotationSpeed);
+            mjölnirSprite.transform.Rotate(0f, 0f, spriteRotationSpeed);
 
             charge += Time.deltaTime * buttonChargeUpRate;  // Charge value
             if (charge > maxCharge) // Cannot exceed max value
             {
                 charge = maxCharge;
             }
+
+            // Charge range indicator - change its size and rotation
+            rangeIndicator.GetComponent<SpriteRenderer>().color = new Color32(180, 180, 0, 180); ;
+            rangeIndicator.transform.localScale = new Vector3(charge, chargeHitbox * 2 - 0.2f, 1f); // Sets the length - chargeHitbox * 2 - 0.2f is the diameter of the indicator -0.2f is such that the player feels cheated of a hit less often
+            Vector2 direction = player.GetComponent<PlayerAction>().lastFacing;
+            rangeIndicator.transform.position = transform.position + (Vector3)direction * (charge / 2); // Move indicator
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            rangeIndicator.gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
         if (Input.GetButtonUp("Fire2") && abilityRDY)
         {
             Vector2 direction = player.GetComponent<PlayerAction>().lastFacing;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;                // Angle for pointing to player
-            sprite.transform.rotation = Quaternion.AngleAxis(angle + -135f, Vector3.forward);   // Point hammer away from player
+            mjölnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -135f, Vector3.forward);   // Point hammer away from player
+
+            // Charge range indicator - change its size and rotation
+            rangeIndicator.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 0);
+            rangeIndicator.transform.position = transform.position; // Move indicator
+            rangeIndicator.transform.localScale = new Vector3(1f, 1f, 1f); // Sets the length
 
             if (charge < minCharge) // Cannot be less than min value
             {
@@ -161,6 +180,40 @@ public class Mjölnir : MonoBehaviour
         EnableHammer(); // Hammer can hit enemies again
     }
 
+    // AoE ability
+    private void AOEAbility()
+    {
+        if (!hasAreaOfEffectUpgrade) { return; }                  // Checks if we have the upgrade
+
+        if (Input.GetButton("Fire2") && abilityRDY)         // 'K' button held charges the ability, note you also need to have the cd ready
+        {
+            DisableHammer();
+
+            // Toggle aoe indicator
+            GameObject indicator = Instantiate(aoeIndicator, player.transform);
+            Vector2 direction = player.GetComponent<PlayerAction>().lastFacing;
+            indicator.transform.localScale = new Vector3(aoeRadius * 2, aoeRadius * 2, 1f); // Sets the length
+
+            StartCoroutine(AbilityCD(areaOfEffectCD));
+            StartCoroutine(AreaOfEffect(direction, indicator));
+        }
+    }
+
+    private IEnumerator AreaOfEffect(Vector3 dir, GameObject indicator)
+    {
+        yield return new WaitForSeconds(castTime);
+
+        RaycastHit2D[] enemies = CheckForEnemies(aoeRadius, dir);
+
+        foreach (RaycastHit2D enemy in enemies)
+        {
+            Pool.pool.ReturnToPool(enemy.transform.gameObject);
+        }
+
+        Destroy(indicator); // Removes indicator from view
+        EnableHammer();
+    }
+
     private RaycastHit2D[] CheckForEnemies(float radius, Vector2 direction)
     {
         return Physics2D.CircleCastAll(player.transform.position, radius, direction, radius, LayerMask.GetMask("Enemy"));
@@ -185,7 +238,7 @@ public class Mjölnir : MonoBehaviour
         abilityRDY = true;
     }
 
-    // Kills enemies and deletes projectiles
+    // Kills enemies and deletes projectiles when they enter mjölnir's collider
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Enemy"))

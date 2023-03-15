@@ -983,6 +983,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1123084845}
   - component: {fileID: 1123084844}
+  - component: {fileID: 1123084846}
+  - component: {fileID: 1123084847}
   m_Layer: 0
   m_Name: EnemyFactory
   m_TagString: Untagged
@@ -1002,14 +1004,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203ddcda09453dd4f9522546fa1dac89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnFrequency: 2
-  prefab: {fileID: 4020096897058174614, guid: 01d84595286b7bb4ea21000244e4c2ea, type: 3}
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 512
+  enemyPrefabs:
+  - {fileID: 4020096897058174614, guid: 01d84595286b7bb4ea21000244e4c2ea, type: 3}
+  - {fileID: 4020096897058174614, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
 --- !u!4 &1123084845
 Transform:
   m_ObjectHideFlags: 0
@@ -1025,6 +1022,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1123084846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123084843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f03845e4bf3f7d4ba7b59ce5f133575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnFrequency: 5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  tempWave: {fileID: 1123084847}
+--- !u!114 &1123084847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123084843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b4dbb9e91676e4dab0cbdc48efed40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeAmount: 5
+  rangeAmount: 2
+--- !u!1 &1156670429 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 146702678940892861, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+  m_PrefabInstance: {fileID: 146702679188194793}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1429575314
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,7 +1219,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -4165,7 +4201,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -21228,6 +21264,11 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!1 &1724249966 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1724249966, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+  m_PrefabInstance: {fileID: 146702679188194793}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1795872223
 GameObject:
   m_ObjectHideFlags: 0
@@ -21406,9 +21447,53 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1724249968, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724249968, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724249968, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5615011
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724249968, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724249968, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 146702678757508234, guid: facc3f81a943c774c917f35e333d0129, type: 3}
       propertyPath: m_Name
       value: "Mj\xF6lnir"
+      objectReference: {fileID: 0}
+    - target: {fileID: 146702678757508236, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+      propertyPath: aoeIndicator
+      value: 
+      objectReference: {fileID: 5329026731082029813, guid: de5e183b1d77fd9498fc6ad42cdee46e, type: 3}
+    - target: {fileID: 146702678757508236, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+      propertyPath: areaOfEffectCD
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 146702678757508236, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+      propertyPath: "mj\xF6lnirSprite"
+      value: 
+      objectReference: {fileID: 1156670429}
+    - target: {fileID: 146702678757508236, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+      propertyPath: rangeIndicator
+      value: 
+      objectReference: {fileID: 1724249966}
+    - target: {fileID: 146702678757508236, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+      propertyPath: hasChargeUpgrade
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 146702678757508236, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+      propertyPath: hasAreaOfEffectUpgrade
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 146702678757508237, guid: facc3f81a943c774c917f35e333d0129, type: 3}
       propertyPath: m_RootOrder
@@ -21452,6 +21537,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 146702678757508237, guid: facc3f81a943c774c917f35e333d0129, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 146702678757508237, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
