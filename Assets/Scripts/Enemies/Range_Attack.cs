@@ -24,6 +24,9 @@ public class Range_Attack : Enemy_Attack
         if (animator != null) { animator.SetBool("AttackRDY", true); } // Resets variable when respawning
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public override void Attack()
     {
         StartCoroutine(AttackCD()); // Starts cooldown for the attack

@@ -44,10 +44,10 @@ public class RangePathing : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Flip(); // Flips sprite
+        FlipSprite(); // FlipSprites sprite
 
         //A* pathing
-        if (TargetNotAttackable() || TargetTooClose())
+        if (IsTargetNotAttackable() || IsTargetTooClose())
         {
             PathFollow();
         }
@@ -63,7 +63,7 @@ public class RangePathing : MonoBehaviour
         isFollowing = true; // Reset variable - we want to move by default
 
         // If we are out of range or can't see player > move to player
-        if (TargetNotAttackable()) 
+        if (IsTargetNotAttackable()) 
         {
             return player.transform.position;
         }
@@ -73,7 +73,7 @@ public class RangePathing : MonoBehaviour
         Vector2 direction = (playerPos - (Vector2)transform.position).normalized; // Direction to player
         Vector2 point = (Vector2)transform.position - direction * 1.5f; // Point to walk to
         
-        if (TargetTooClose() && !Physics2D.OverlapPoint(point, obstacleLayer) && Physics2D.OverlapPoint(point, groundLayer)) // Player is too close & point can be walked to
+        if (IsTargetTooClose() && !Physics2D.OverlapPoint(point, obstacleLayer) && Physics2D.OverlapPoint(point, groundLayer)) // Player is too close & point can be walked to
         {
             return point;
         }
@@ -130,7 +130,7 @@ public class RangePathing : MonoBehaviour
         rb.velocity = dir * speed; // Movement
     }
 
-    private void Flip()
+    private void FlipSprite()
     {
         Vector2 dir = ((Vector2)player.transform.position - rb.position).normalized; // Look to player
 
@@ -144,7 +144,7 @@ public class RangePathing : MonoBehaviour
         }
     }
 
-    private bool TargetNotAttackable()
+    private bool IsTargetNotAttackable()
     {
         float dis = Mathf.Abs(Vector2.Distance(player.transform.position, transform.position));
 
@@ -156,7 +156,7 @@ public class RangePathing : MonoBehaviour
         return dis > attackRange; // Return true if we are not in attackrange
     }
 
-    private bool TargetTooClose()
+    private bool IsTargetTooClose()
     {
         float dis = Mathf.Abs(Vector2.Distance(player.transform.position, transform.position));
 
