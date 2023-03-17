@@ -12,12 +12,6 @@ public class PlayerAction : MonoBehaviour
     private Vector3 moveVector = new Vector3(1f, 0f, 0f);
     private bool canMove = true;
 
-    [Header("Dash")]
-    [SerializeField] private float dashDuration = 0.1f;
-    [SerializeField] private float dashStepLength = 0.2f; // The distance covered pr frame
-    [SerializeField] private float dashCD = 0.8f;
-    private bool canDash = true;
-
     [Header("Base Attack")]
     [SerializeField] private float cooldown = 0.4f;
 
@@ -39,11 +33,11 @@ public class PlayerAction : MonoBehaviour
     public Slider DashCDVisual;
     public float dashDistance = 5f; // Distance of the dash
     public float dashDuration = 0.5f; // Duration of the dash
+    public float dashCooldownTime = 1.8f;
     private bool isDashing = false; // Flag to check if the player is currently dashing
     private float dashTime = 0f; // Time elapsed during the dash
     private Vector2 dashDirection; // Direction of the dash
     private bool canDash = true; //C Flag to check if the player can dash
-    private float dashCooldownTime = 3f;
     private float dashCooldownRemaining = 0f; // Initialize to 0 to allow dashing immediately
 
     private void Start()
@@ -227,7 +221,7 @@ public class PlayerAction : MonoBehaviour
     private void Dash()
     {
         // Check if the player is not currently dashing and if they can dash
-        if (!isDashing && Input.GetButton("Fire3") && canDash) // Dash is on 'not k'
+        if (!isDashing && Input.GetButton("Dash") && canDash) // Dash is on 'not k'
         {
 
             healthScript.enabled = false;
@@ -244,6 +238,16 @@ public class PlayerAction : MonoBehaviour
 
 
         }
+    }
+
+    public void CanDash()
+    {
+        canDash = true;
+    }
+
+    public void CannotDash()
+    {
+        canDash = false;
     }
 
     // Coroutine that controls the dash cooldown time

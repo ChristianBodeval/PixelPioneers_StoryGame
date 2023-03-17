@@ -51,6 +51,7 @@ public class SpawnSystem : MonoBehaviour
     {
         GameObject enemy = Pool.pool.DrawFromPool(type);
         enemy.transform.position = FindSpawnPoint();
+        enemy.transform.rotation = Quaternion.Euler(-45f, 0f, 0f);
     }
 
     //returns a point eligible for spawning an enemy outside of the screen

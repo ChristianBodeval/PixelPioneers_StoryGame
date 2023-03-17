@@ -93,6 +93,7 @@ public class Mjölnir : MonoBehaviour
         {
             chargeBeingUsed = true;
             player.GetComponent<PlayerAction>().StopMove(); // Root the player while casting
+            player.GetComponent<PlayerAction>().CannotDash();
             DisableHammer();
 
             // Position the hammer on player
@@ -144,7 +145,7 @@ public class Mjölnir : MonoBehaviour
         LayerMask obstacleLayer = player.GetComponent<PlayerAction>().obstacleLayer;
         RaycastHit2D[] enemies;
 
-        while (distance > 0.2f && !Physics2D.Raycast(player.transform.position, direction, 0.5f, obstacleLayer))
+        while (distance > 0.8f && !Physics2D.Raycast(player.transform.position, direction, 0.5f, obstacleLayer))
         {
             dir = (targetPos - player.transform.position).normalized;
             rb.velocity = dir * chargeSpeed; // Lerp from our pos to targetpos
@@ -176,6 +177,7 @@ public class Mjölnir : MonoBehaviour
         }
 
         player.GetComponent<PlayerAction>().StartMove(); // Allow player to move again
+        player.GetComponent<PlayerAction>().CanDash();
 
         EnableHammer(); // Hammer can hit enemies again
     }
