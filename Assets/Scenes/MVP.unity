@@ -10932,7 +10932,6 @@ MonoBehaviour:
   cone: {fileID: 688100691}
   color: {fileID: 1301892638}
   inputBuffer: 0.1
-  healthScript: {fileID: 1966406494}
   DashCDVisual: {fileID: 774172321}
   dashDistance: 5
   dashDuration: 0.5

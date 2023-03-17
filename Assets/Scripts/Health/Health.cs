@@ -54,8 +54,7 @@ public class Health : MonoBehaviour
     public void Die()
     {
         Destroy(this.gameObject);
-        Debug.Log(this.gameObject.name +  "HAVE DIED HAHA!");
-
+        Debug.Log(this.gameObject.name +  "HAVE DIED HAHA!"); 
 
     }
 
@@ -67,7 +66,7 @@ public class Health : MonoBehaviour
     {
         this.currentHealth = maxHealth;
     }
-    private void Update()
+    protected virtual void Update()
     {
         if (this.currentHealth <= 0)
         {

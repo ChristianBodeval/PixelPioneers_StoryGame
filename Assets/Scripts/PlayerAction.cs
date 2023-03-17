@@ -211,7 +211,7 @@ public class PlayerAction : MonoBehaviour
     private void Dash()
     {
         // Check if the player is not currently dashing and if they can dash
-        if (!isDashing && Input.GetButton("Fire2") && canDash) // Dash is on 'K'
+        if (!isDashing && Input.GetButton("Fire3") && canDash) // Dash is on 'not k'
         {
 
             healthScript.enabled = false;

@@ -11,7 +11,7 @@ public class PlayerHealth : Health
         this.maxHealth = maxHealth;
     }
 
-    private void Update()
+    protected void Update()
     {
         HP.value = currentHealth;
         if (this.currentHealth <= 0)
