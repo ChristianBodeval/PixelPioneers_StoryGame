@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerAction : MonoBehaviour
 {
@@ -20,6 +20,7 @@ public class PlayerAction : MonoBehaviour
 
     [Header("Base Attack")]
     [SerializeField] private float cooldown = 0.4f;
+
     [SerializeField] private float coneRange = 2f;
     [SerializeField] private float innerRange = 0.4f; // Killzone range around the player, serves to kill enemies who are very close to the cone but not quite in it
     [SerializeField] private float degreeOfArc = 50f;
@@ -32,10 +33,27 @@ public class PlayerAction : MonoBehaviour
     private bool canAttack = true;
     private ParticleSystem arcParticles;
 
+    private Health healthScript;
+
+    [Header("Dash")]
+    public Slider DashCDVisual;
+    public float dashDistance = 5f; // Distance of the dash
+    public float dashDuration = 0.5f; // Duration of the dash
+    private bool isDashing = false; // Flag to check if the player is currently dashing
+    private float dashTime = 0f; // Time elapsed during the dash
+    private Vector2 dashDirection; // Direction of the dash
+    private bool canDash = true; //C Flag to check if the player can dash
+    private float dashCooldownTime = 3f;
+    private float dashCooldownRemaining = 0f; // Initialize to 0 to allow dashing immediately
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Physics2D.IgnoreLayerCollision(3,7);
+        Physics2D.IgnoreLayerCollision(3, 7);
+        dashDirection = GetDashDirection();
+
+        healthScript = GetComponent<Health>();
+
     }
 
     private void Update()
@@ -57,11 +75,34 @@ public class PlayerAction : MonoBehaviour
         BaseMelee(); //melee coneattack
 
         Facing();
+
+        Dash();
+
+        DashCDVisual.value = dashCooldownRemaining / dashCooldownTime;
+        
+        if (!canDash)
+        Debug.Log("Dash Cooldown:" + dashCooldownRemaining);
     }
 
     private void FixedUpdate()
     {
         Move();
+
+        // Check if the player is dashing
+        if (isDashing)
+        {
+            // If the dash duration has not elapsed, move the player in the dash direction
+            if (dashTime < dashDuration)
+            {
+                rb.MovePosition(rb.position + dashDirection * dashDistance / dashDuration * Time.fixedDeltaTime);
+                dashTime += Time.fixedDeltaTime;
+            }
+            // Otherwise, end the dash
+            else
+            {
+                EndDash();
+            }
+        }
     }
 
     private void Move()
@@ -181,5 +222,56 @@ public class PlayerAction : MonoBehaviour
                 return true;
         }
         return false;
+    }
+
+    private void Dash()
+    {
+        // Check if the player is not currently dashing and if they can dash
+        if (!isDashing && Input.GetButton("Fire3") && canDash) // Dash is on 'not k'
+        {
+
+            healthScript.enabled = false;
+
+            // Set the player to dashing state
+            isDashing = true;
+            dashTime = 0f;
+
+            // Set the dash direction to the last facing direction of the player
+            dashDirection = lastFacing;
+
+            // Start the dash cooldown coroutine
+            StartCoroutine("DashCD");
+
+
+        }
+    }
+
+    // Coroutine that controls the dash cooldown time
+    private IEnumerator DashCD()
+    {
+        canDash = false; // Set the player to be unable to dash
+        dashCooldownRemaining = dashCooldownTime; // Reset the remaining cooldown time
+        while (dashCooldownRemaining > 0f) // Count down the cooldown time
+        {
+            dashCooldownRemaining -= Time.deltaTime;
+            yield return null; // Wait for the end of the frame
+        }
+        canDash = true; // Set the player to be able to dash again
+    }
+
+    private void EndDash()
+    {
+        isDashing = false;
+        healthScript.enabled = true;
+
+    }
+
+    private Vector2 GetDashDirection()
+    {
+        // Get the direction the player is facing
+        float angle = transform.eulerAngles.y;
+        Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+
+        return direction.normalized;
     }
 }

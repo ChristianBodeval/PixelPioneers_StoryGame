@@ -2,24 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthObject : MonoBehaviour
+public class Health : MonoBehaviour
 {
-    public float health { get; private set; }
-    public float maxHealth { get; private set; }
+    public float currentHealth;
+    public float maxHealth; 
 
     private float blinkDuration = 0.1f;
     private static Material blinkMaterial = (Material)Resources.Load("Materials/White", typeof(Material));
 
     // Constructor
-    public HealthObject(float health, float maxHealth)
+    public Health(float health, float maxHealth)
     {
-        this.health = health;
+        this.currentHealth = health;
         this.maxHealth = maxHealth;
     }
 
     public void SetHealth(float health)
     {
-        this.health = health;
+        this.currentHealth = health;
     }
 
     public void SetMaxHealth(float maxHealth)
@@ -29,7 +29,7 @@ public class HealthObject : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        this.health -= damage;
+        this.currentHealth -= damage;
 
         StartCoroutine(BlinkOnDmgTaken(blinkDuration));
         DisplayNumber(damage, Color.red);
@@ -37,7 +37,7 @@ public class HealthObject : MonoBehaviour
 
     public void HealDamage(float heal)
     {
-        this.health += heal;
+        this.currentHealth += heal;
         DisplayNumber(heal, Color.green);
     }
 
@@ -45,15 +45,32 @@ public class HealthObject : MonoBehaviour
     {
         SpriteRenderer sr = this.gameObject.GetComponentInChildren<SpriteRenderer>();
         Material temp = sr.material;
-        sr.material = HealthObject.blinkMaterial;
+        sr.material = Health.blinkMaterial;
 
         yield return new WaitForSeconds(wait);
 
         sr.material = temp;
     }
+    public void Die()
+    {
+        Destroy(this.gameObject);
+        Debug.Log(this.gameObject.name +  "HAVE DIED HAHA!"); 
+
+    }
 
     private void DisplayNumber(float number, Color color)
     {
         //**
+    }
+    private void Start()
+    {
+        this.currentHealth = maxHealth;
+    }
+    protected virtual void Update()
+    {
+        if (this.currentHealth <= 0)
+        {
+            Die();
+        }
     }
 }
