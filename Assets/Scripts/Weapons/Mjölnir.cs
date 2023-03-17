@@ -109,7 +109,7 @@ public class Mjölnir : MonoBehaviour
             rangeIndicator.GetComponent<SpriteRenderer>().color = new Color32(180, 180, 0, 180); ;
             rangeIndicator.transform.localScale = new Vector3(charge, chargeHitbox * 2 - 0.2f, 1f); // Sets the length - chargeHitbox * 2 - 0.2f is the diameter of the indicator -0.2f is such that the player feels cheated of a hit less often
             Vector2 direction = player.GetComponent<PlayerAction>().lastFacing;
-            rangeIndicator.transform.position = transform.position + (Vector3)direction * (charge / 2); // Move indicator
+            rangeIndicator.transform.position = player.transform.position + (Vector3)direction * (charge / 2); // Move indicator
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             rangeIndicator.gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
@@ -144,7 +144,7 @@ public class Mjölnir : MonoBehaviour
         LayerMask obstacleLayer = player.GetComponent<PlayerAction>().obstacleLayer;
         RaycastHit2D[] enemies;
 
-        while (distance > 1f && !Physics2D.Raycast(player.transform.position, direction, 0.5f, obstacleLayer))
+        while (distance > 0.2f && !Physics2D.Raycast(player.transform.position, direction, 0.5f, obstacleLayer))
         {
             dir = (targetPos - player.transform.position).normalized;
             rb.velocity = dir * chargeSpeed; // Lerp from our pos to targetpos

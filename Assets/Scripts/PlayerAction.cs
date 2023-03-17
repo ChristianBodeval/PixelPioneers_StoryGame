@@ -62,8 +62,6 @@ public class PlayerAction : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
-
-        Dash();
     }
 
     private void Move()
@@ -126,44 +124,6 @@ public class PlayerAction : MonoBehaviour
 
         // Repositions the cone to be infront of player
         cone.position = (Vector2)transform.position + lastFacing.normalized * coneRange;
-    }
-
-    private void Dash()
-    {
-        if (!canDash || !Input.GetButton("Dash")) { return; } // Guard clause - Continues if we can dash and have pressed button
-
-        StartCoroutine(DashCD());
-        StartCoroutine(DashMove());
-        StartCoroutine(StopMove(dashDuration));
-    }
-
-    private IEnumerator DashMove()
-    {
-        float currentDashTime = dashDuration;
-
-        while (currentDashTime > 0)
-        {
-            currentDashTime -= Time.deltaTime; // Countdown
-            transform.position += dashStepLength * (Vector3)lastFacing;
-            CircleCollider2D col = GetComponent<CircleCollider2D>(); // Players collider, used to check if the player is in a wall
-
-            // Gets the player through walls if near them
-            if (Physics2D.CircleCast(transform.position, col.radius-0.2f, lastFacing, col.radius-0.2f, obstacleLayer))
-            {
-                transform.position += dashStepLength * (Vector3)lastFacing; // Try and move through it
-            }
-
-            yield return null;
-        }
-    }
-
-    private IEnumerator DashCD()
-    {
-        canDash = false;
-
-        yield return new WaitForSeconds(dashDuration + dashCD);
-
-        canDash = true;
     }
 
     private void BaseMelee()
