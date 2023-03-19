@@ -11,29 +11,32 @@ public class SpawnSystem : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private WaveObject tempWave;
-    private List<(WaveObject.EnemyType, int)> enemies = new List<(WaveObject.EnemyType, int)>(); // List of tuples
-    private Camera camera;
+    private List<(WaveObject.EnemyType, int)> enemiesToSpawn = new List<(WaveObject.EnemyType, int)>(); // List of tuples
     private int recursions = 0;
 
     private void Start()
     {
-        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        StartCoroutine(TempSpawnSystem());
+        StartCoroutine(SpawnEnemies());
     }
 
-    private IEnumerator TempSpawnSystem()
+    public void AddWave(WaveObject wave)
+    {
+        // Find the amount of each type of enemy in wave
+        for (int i = 0; i < Enum.GetNames(typeof(WaveObject.EnemyType)).Length; i++) // For each enemytype
+        {
+            int amount = wave.GetNumberOfType((WaveObject.EnemyType)i);
+            enemiesToSpawn.Add(((WaveObject.EnemyType)i, amount)); // Extra ( ) such that c# thinks its a tuple
+        }
+    }
+
+    private IEnumerator SpawnEnemies()
     {
         while (true)
         {
-            // Find the amount of each type of enemy in wave
-            for (int i = 0; i < Enum.GetNames(typeof(WaveObject.EnemyType)).Length; i++) // For each enemytype
-            {
-                int amount = tempWave.GetNumberOfType((WaveObject.EnemyType)i);
-                enemies.Add(((WaveObject.EnemyType)i, amount)); // Extra ( ) such that c# thinks its a tuple
-            }
+            AddWave(tempWave);
 
             // Spawn the appropriate amount of type from wave
-            foreach ((WaveObject.EnemyType, int) e in enemies)
+            foreach ((WaveObject.EnemyType, int) e in enemiesToSpawn)
             {
                 for (int i = 0; i < e.Item2; i++) // Less than amount in wave
                 {
@@ -42,7 +45,7 @@ public class SpawnSystem : MonoBehaviour
                 }
             }
 
-            enemies.Clear();
+            enemiesToSpawn.Clear();
             yield return new WaitForSeconds(timeBetweenWaves);
         }
     }
@@ -57,8 +60,8 @@ public class SpawnSystem : MonoBehaviour
     //returns a point eligible for spawning an enemy outside of the screen
     private Vector2 FindSpawnPoint()
     {
-        float width = camera.pixelWidth / 80f + 0.5f; //half the width of the screen
-        float height = camera.pixelHeight / 80f + 0.5f; //half the height of the screen
+        float width = Camera.main.pixelWidth / 80f + 0.5f; //half the width of the screen
+        float height = Camera.main.pixelHeight / 80f + 0.5f; //half the height of the screen
 
         Vector2 point = Vector2.zero;
 

@@ -6,6 +6,8 @@ public class Range_Attack : Enemy_Attack
 {
     public GameObject projectile;
     [SerializeField] private float projectileSpeed;
+    [SerializeField] private float attackDMG;
+    public new float attackCD;
 
     private void FixedUpdate()
     {
@@ -29,7 +31,7 @@ public class Range_Attack : Enemy_Attack
     /// </summary>
     public override void Attack()
     {
-        StartCoroutine(AttackCD()); // Starts cooldown for the attack
+        StartCoroutine(AttackCD(attackCD)); // Starts cooldown for the attack
 
         Vector3 direction = player.transform.position - transform.position; // Direction of player
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Angle for pointing to player
@@ -37,15 +39,6 @@ public class Range_Attack : Enemy_Attack
         GameObject newProjectile = Instantiate(projectile, transform.position + (direction).normalized * 0.5f, Quaternion.AngleAxis(angle, Vector3.forward)); // Spawn projectile
 
         newProjectile.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed; // Make projectile move
-    }
-
-    public override IEnumerator AttackCD() // Can be overwritten
-    {
-        animator.SetBool("AttackRDY", false);
-
-        yield return new WaitForSeconds(attackCD);
-
-        animator.SetBool("AttackRDY", true);
     }
 
     private bool InAttackRange(GameObject player)

@@ -85,6 +85,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: CanMove
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: CannotTransitionState
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4618701992862531797}
   m_Solo: 0
@@ -168,6 +171,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: AttackRDY
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: CannotTransitionState
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1356980378900121897}
   m_Solo: 0
@@ -205,6 +211,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: IsStunned
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: CannotTransitionState
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1356980378900121897}
   m_Solo: 0
@@ -214,7 +223,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.25
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -226,7 +235,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Skele_Idle
+  m_Name: Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -313,7 +322,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Skelebob
+  m_Name: Melee
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: InAttackRange
@@ -335,6 +344,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: IsStunned
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: CannotTransitionState
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -364,6 +379,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: IsStunned
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: CannotTransitionState
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4019410121958639674}
   m_Solo: 0
@@ -388,6 +406,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: IsStunned
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: CannotTransitionState
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4019410121958639674}
@@ -470,6 +491,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: CanMove
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: CannotTransitionState
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1356980378900121897}
   m_Solo: 0
@@ -494,6 +518,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: IsStunned
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: CannotTransitionState
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4019410121958639674}
@@ -546,6 +573,9 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: InAttackRange
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: CannotTransitionState
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -153272456156369603}

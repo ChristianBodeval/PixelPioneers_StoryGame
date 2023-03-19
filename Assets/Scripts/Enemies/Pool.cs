@@ -7,7 +7,7 @@ public class Pool : MonoBehaviour
 {
     private List<GameObject> storageEnemies = new List<GameObject>();
     private List<GameObject> inUseEnemies = new List<GameObject>();
-    [SerializeField] private GameObject[] enemyPrefabs = new GameObject[2];
+    [SerializeField] private GameObject[] enemyPrefabs = new GameObject[6];
 
     public static Pool pool { get; private set; }
 

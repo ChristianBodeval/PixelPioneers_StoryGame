@@ -7,11 +7,13 @@ public class WaveObject : MonoBehaviour
     [Header("Enemies in Wave")]
     [SerializeField] private int meleeAmount = 0;
     [SerializeField] private int rangeAmount = 0;
+    [SerializeField] private int chargerAmount = 0;
 
     public enum EnemyType
     {
         Melee,
-        Range
+        Range,
+        Charger
     }
 
     // Constructor
@@ -29,6 +31,8 @@ public class WaveObject : MonoBehaviour
                 return meleeAmount;
             case EnemyType.Range:
                 return rangeAmount;
+            case EnemyType.Charger:
+                return chargerAmount;
             default:
                 return 0;
         }

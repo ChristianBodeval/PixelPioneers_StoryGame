@@ -7,7 +7,6 @@ public class MeleePathing : MonoBehaviour
 {
     [Header("General for Pathfinding")]
     [SerializeField] private float speed = 3f;
-    [SerializeField] private float activateDistance = 0.5f;
     private float attackRange = 0.5f;
     private GameObject player;
     private Rigidbody2D rb;
@@ -38,11 +37,11 @@ public class MeleePathing : MonoBehaviour
     private void FixedUpdate()
     {
         //A* pathing
-        if (TargetInDistance())
+        if (TargetNotAttackable() && !animator.GetBool("IsStunned") && !animator.GetBool("CannotTransitionState") && animator.GetBool("CanMove"))
         {
             PathFollow();
         }
-        else
+        else if (animator.GetBool("CanMove"))
         {
             rb.velocity = new Vector3(0f,0f,0f);
         }
@@ -97,7 +96,7 @@ public class MeleePathing : MonoBehaviour
         }
     }
 
-    private bool TargetInDistance()
+    private bool TargetNotAttackable()
     {
         float dis = Vector2.Distance(transform.position, player.transform.position);
 
@@ -106,7 +105,7 @@ public class MeleePathing : MonoBehaviour
         {
             return true;
         }
-        return dis < activateDistance && dis > attackRange; // Return true if we are in range and not in attackrange
+        return dis > attackRange; // Return true if we are in range and not in attackrange
     }
 
     private void OnPathComplete(Path p)

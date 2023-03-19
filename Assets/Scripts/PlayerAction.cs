@@ -73,9 +73,6 @@ public class PlayerAction : MonoBehaviour
         Dash();
 
         DashCDVisual.value = dashCooldownRemaining / dashCooldownTime;
-        
-        if (!canDash)
-        Debug.Log("Dash Cooldown:" + dashCooldownRemaining);
     }
 
     private void FixedUpdate()
@@ -223,8 +220,7 @@ public class PlayerAction : MonoBehaviour
         // Check if the player is not currently dashing and if they can dash
         if (!isDashing && Input.GetButton("Dash") && canDash) // Dash is on 'not k'
         {
-
-            healthScript.enabled = false;
+            GetComponent<PlayerHealth>().AddInvulnerability();
 
             // Set the player to dashing state
             isDashing = true;
@@ -234,7 +230,7 @@ public class PlayerAction : MonoBehaviour
             dashDirection = lastFacing;
 
             // Start the dash cooldown coroutine
-            StartCoroutine("DashCD");
+            StartCoroutine(DashCD());
 
 
         }
@@ -266,8 +262,7 @@ public class PlayerAction : MonoBehaviour
     private void EndDash()
     {
         isDashing = false;
-        healthScript.enabled = true;
-
+        GetComponent<PlayerHealth>().RemoveInvulnerability();
     }
 
     private Vector2 GetDashDirection()

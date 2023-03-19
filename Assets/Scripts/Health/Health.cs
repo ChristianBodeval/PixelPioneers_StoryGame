@@ -5,10 +5,18 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public float currentHealth;
-    public float maxHealth; 
+    public float maxHealth;
+    [SerializeField] private Material blinkMaterial;
+    [SerializeField] private Material baseMaterial;
+    protected Coroutine blinkCoroutine;
+    protected static readonly float freezeDurationOnDmgTaken = 0.15f;
 
-    private float blinkDuration = 0.1f;
-    private static Material blinkMaterial = (Material)Resources.Load("Materials/White", typeof(Material));
+    private SpriteRenderer sr;
+
+    private void Start()
+    {
+        sr = gameObject.GetComponentInChildren<SpriteRenderer>();
+    }
 
     // Constructor
     public Health(float health, float maxHealth)
@@ -17,55 +25,66 @@ public class Health : MonoBehaviour
         this.maxHealth = maxHealth;
     }
 
-    public void SetHealth(float health)
-    {
-        this.currentHealth = health;
-    }
-
-    public void SetMaxHealth(float maxHealth)
-    {
-        this.maxHealth = maxHealth;
-    }
-
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         this.currentHealth -= damage;
 
-        StartCoroutine(BlinkOnDmgTaken(blinkDuration));
-        DisplayNumber(damage, Color.red);
+        // Freeze frame enemies
+        if (gameObject.CompareTag("Enemy")) StartCoroutine(GetComponent<Crowd_Control>().FreezeFrame(freezeDurationOnDmgTaken));
+
+        if (blinkCoroutine != null)
+        {
+            StopCoroutine(blinkCoroutine);
+        }
+
+        blinkCoroutine = StartCoroutine(BlinkOnDmgTaken(freezeDurationOnDmgTaken));
+        //PrintDmgToScreen(damage, Color.red);
     }
 
-    public void HealDamage(float heal)
+    public virtual void HealDamage(float heal)
     {
         this.currentHealth += heal;
-        DisplayNumber(heal, Color.green);
+        PrintDmgToScreen(heal, Color.green);
     }
 
-    private IEnumerator BlinkOnDmgTaken(float wait)
+    // Changes material and color for a duration
+    public IEnumerator BlinkOnDmgTaken(float duration = 0.15f)
     {
-        SpriteRenderer sr = this.gameObject.GetComponentInChildren<SpriteRenderer>();
-        Material temp = sr.material;
-        sr.material = Health.blinkMaterial;
+        Material blinkMat = Instantiate(blinkMaterial);
+        sr.material = blinkMat;
+        sr.material.color = Color.red;
 
-        yield return new WaitForSeconds(wait);
+        yield return new WaitForSeconds(duration);
 
-        sr.material = temp;
+        sr.material = baseMaterial;
+        sr.material.color = Color.white;
+
+        blinkCoroutine = null;
     }
+
+
     public void Die()
     {
-        Destroy(this.gameObject);
-        Debug.Log(this.gameObject.name +  "HAVE DIED HAHA!"); 
-
+        if (gameObject.CompareTag("Enemy")) Pool.pool.ReturnToPool(gameObject);
     }
 
-    private void DisplayNumber(float number, Color color)
+    private void PrintDmgToScreen(float number, Color color)
     {
         //**
     }
-    private void Start()
+
+    private void OnEnable()
     {
         this.currentHealth = maxHealth;
     }
+
+    private void OnDisable()
+    {
+        sr.material = baseMaterial;
+        sr.color = Color.white;
+        Mjölnir.cannotHitList.Remove(gameObject); // Remove this enemy from the list
+    }
+
     protected virtual void Update()
     {
         if (this.currentHealth <= 0)

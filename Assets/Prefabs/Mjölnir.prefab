@@ -72,9 +72,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 0.5615011, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -134,21 +134,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee3f7fdb7a6d1f64fb4a29de96342fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spinDMG: 1
   spinRadius: 1
   spinSpeed: 10
   spriteRotationSpeed: 14
-  sprite: {fileID: 146702678940892861}
+  "mj\xF6lnirSprite": {fileID: 146702678940892861}
+  onCollisionFreezeDuration: 0.05
+  collisionFreezeCD: 0.05
   hasChargeUpgrade: 1
+  chargeDMG: 2
   chargeSpeed: 20
-  chargeHitbox: 0.7
+  baseHitboxSize: 1
   chargeCD: 2
   buttonChargeUpRate: 10
   chargeUpdateInterval: 0.05
   minCharge: 4
   maxCharge: 10
   stunDuration: 0.4
+  rangeIndicator: {fileID: 1724249966}
   hasAreaOfEffectUpgrade: 0
-  areaOfEffectCD: 0
+  aoeDMG: 3
+  castTime: 0.3
+  aoeRadius: 3
+  areaOfEffectCD: 2
+  aoeIndicator: {fileID: 5329026731082029813, guid: de5e183b1d77fd9498fc6ad42cdee46e, type: 3}
 --- !u!58 &146702678757508239
 CircleCollider2D:
   m_ObjectHideFlags: 0

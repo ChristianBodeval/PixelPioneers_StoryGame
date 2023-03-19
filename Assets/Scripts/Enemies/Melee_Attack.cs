@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Melee_Attack : Enemy_Attack
 {
+    [SerializeField] private new float attackCD;
+    [SerializeField] private float attackDMG;
+    [SerializeField] private float attackTelegraphTime;
+
     private void FixedUpdate()
     {
         InAttackRange(player); // Player variable is inherited from IEnemyAttack
@@ -21,20 +25,16 @@ public class Melee_Attack : Enemy_Attack
         if (animator != null) { animator.SetBool("AttackRDY", true); } // Resets variable when respawning
     }
 
-    public override void Attack()
+    public override void Attack() // Called from animator
     {
-        StartCoroutine(AttackCD()); // Starts cooldown for the attack
-
-        // ** Dmg player function - potentially after the attack anim is done to give more reaction time to the player
+        StartCoroutine(AttackCD(attackCD)); // Starts cooldown for the attack
+        StartCoroutine(TelegraphAttack());
     }
 
-    public override IEnumerator AttackCD() // Can be overwritten
+    private IEnumerator TelegraphAttack()
     {
-        animator.SetBool("AttackRDY", false);
-
-        yield return new WaitForSeconds(attackCD);
-
-        animator.SetBool("AttackRDY", true);
+        yield return new WaitForSeconds(attackTelegraphTime);
+        if (Vector3.Distance(player.transform.position, transform.position) <= attackRange) player.GetComponent<PlayerHealth>().TakeDamage(attackDMG); // Deal damage
     }
 
     private bool InAttackRange(GameObject player)
