@@ -37,7 +37,7 @@ public class MeleePathing : MonoBehaviour
     private void FixedUpdate()
     {
         //A* pathing
-        if (TargetNotAttackable() && !animator.GetBool("IsStunned") && !animator.GetBool("CannotTransitionState") && animator.GetBool("CanMove"))
+        if (TargetNotAttackable() && !animator.GetBool("IsStunned"))
         {
             PathFollow();
         }
@@ -49,7 +49,7 @@ public class MeleePathing : MonoBehaviour
 
     private void Move(Vector2 dir)
     {
-        if (!animator.GetBool("CanMove")) { rb.velocity = Vector2.zero; return; } // Guard clause - can we move
+        if (!animator.GetBool("CanMove") || animator.GetBool("IsStunned")) { rb.velocity = Vector2.zero; return; } // Guard clause - can we move
 
         rb.velocity = speed * dir; // Movement
     }

@@ -141,6 +141,9 @@ MonoBehaviour:
   "mj\xF6lnirSprite": {fileID: 146702678940892861}
   onCollisionFreezeDuration: 0.05
   collisionFreezeCD: 0.05
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 4224
   hasChargeUpgrade: 1
   chargeDMG: 2
   chargeSpeed: 20
@@ -5141,7 +5144,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4c9a87858e2754648b8f0d5143303072, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

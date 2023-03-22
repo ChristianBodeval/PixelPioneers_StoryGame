@@ -43,7 +43,13 @@ public class Health : MonoBehaviour
 
     public virtual void HealDamage(float heal)
     {
-        this.currentHealth += heal;
+        if (currentHealth + heal > maxHealth)
+        {
+            currentHealth = maxHealth;
+            return;
+        }
+
+        currentHealth += heal;
         PrintDmgToScreen(heal, Color.green);
     }
 
@@ -65,7 +71,11 @@ public class Health : MonoBehaviour
 
     public void Die()
     {
-        if (gameObject.CompareTag("Enemy")) Pool.pool.ReturnToPool(gameObject);
+        if (gameObject.CompareTag("Enemy") && isActiveAndEnabled)
+        {
+            HealthPickUp.pickUpPool.AddHealthPickUp(transform.position, maxHealth / 4); // Spawn health pickup
+            Pool.pool.ReturnToPool(gameObject);
+        }
     }
 
     private void PrintDmgToScreen(float number, Color color)

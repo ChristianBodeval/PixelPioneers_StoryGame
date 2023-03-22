@@ -85,12 +85,14 @@ public class PlayerAction : MonoBehaviour
             // If the dash duration has not elapsed, move the player in the dash direction
             if (dashTime < dashDuration)
             {
+                Camera.main.GetComponent<CameraScript>().StartLagBehindPlayer();
                 rb.MovePosition(rb.position + dashDirection * dashDistance / dashDuration * Time.fixedDeltaTime);
                 dashTime += Time.fixedDeltaTime;
             }
             // Otherwise, end the dash
             else
             {
+                Camera.main.GetComponent<CameraScript>().StopLagBehindPlayer();
                 EndDash();
             }
         }
@@ -262,7 +264,7 @@ public class PlayerAction : MonoBehaviour
     private void EndDash()
     {
         isDashing = false;
-        GetComponent<PlayerHealth>().RemoveInvulnerability();
+        GetComponent<PlayerHealth>().RemoveInvulnerability(); // I frames
     }
 
     private Vector2 GetDashDirection()

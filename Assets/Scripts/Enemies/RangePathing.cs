@@ -189,6 +189,7 @@ public class RangePathing : MonoBehaviour
         if (dis < attackRange - 0.5f) // Return true if we are in range and not in attackrange - -0.5f so enemy has a headzone where it does not move
         {
             animator.SetBool("IsFleeing", true);
+            GetComponent<Enemy_Attack>().AttackCD(0.4f); // Put attack on cd
             return true;
         }
         else

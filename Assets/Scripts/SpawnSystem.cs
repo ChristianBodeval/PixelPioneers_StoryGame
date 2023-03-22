@@ -13,6 +13,7 @@ public class SpawnSystem : MonoBehaviour
     [SerializeField] private WaveObject tempWave;
     private List<(WaveObject.EnemyType, int)> enemiesToSpawn = new List<(WaveObject.EnemyType, int)>(); // List of tuples
     private int recursions = 0;
+    private bool isSpawning = false;
 
     private void Start()
     {
@@ -21,6 +22,13 @@ public class SpawnSystem : MonoBehaviour
 
     public void AddWave(WaveObject wave)
     {
+        // If list is being used while we are iterating on it we break the game - so we hold the info in a while loop until the list is no longer used
+        if (isSpawning)
+        {
+            StartCoroutine(AwaitSpawnComplete(wave));
+            return;
+        }
+
         // Find the amount of each type of enemy in wave
         for (int i = 0; i < Enum.GetNames(typeof(WaveObject.EnemyType)).Length; i++) // For each enemytype
         {
@@ -29,23 +37,39 @@ public class SpawnSystem : MonoBehaviour
         }
     }
 
+    // Waits for spawning to be complete
+    private IEnumerator AwaitSpawnComplete(WaveObject wave)
+    {
+        while (isSpawning)
+        {
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        AddWave(wave);
+    }
+
     private IEnumerator SpawnEnemies()
     {
         while (true)
         {
-            AddWave(tempWave);
-
-            // Spawn the appropriate amount of type from wave
-            foreach ((WaveObject.EnemyType, int) e in enemiesToSpawn)
+            isSpawning = true; // Tell other functions to save themselves when we are spawning
+            lock (enemiesToSpawn)
             {
-                for (int i = 0; i < e.Item2; i++) // Less than amount in wave
-                {
-                    SpawnEnemy(e.Item1); // Spawn enemy of type
-                    yield return new WaitForSeconds(timeBetweenMobs);
-                }
-            }
+                AddWave(tempWave);
 
-            enemiesToSpawn.Clear();
+                // Spawn the appropriate amount of type from wave
+                foreach ((WaveObject.EnemyType, int) e in enemiesToSpawn)
+                {
+                    for (int i = 0; i < e.Item2; i++) // Less than amount in wave
+                    {
+                        SpawnEnemy(e.Item1); // Spawn enemy of type
+                        yield return new WaitForSeconds(timeBetweenMobs);
+                    }
+                }
+
+                enemiesToSpawn.Clear();
+            }
+            isSpawning = false;
             yield return new WaitForSeconds(timeBetweenWaves);
         }
     }

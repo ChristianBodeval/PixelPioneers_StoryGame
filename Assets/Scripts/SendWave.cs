@@ -7,6 +7,7 @@ public class SendWave : MonoBehaviour
 {
     [SerializeField] private WaveObject wave;
 
+    // Temporary proof of concept
     private void OnTriggerEnter2D (Collider2D col)
     {
         if (col.gameObject.CompareTag("Player"))
