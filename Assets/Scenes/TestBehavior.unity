@@ -28785,6 +28785,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 644661609, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d6855f006ba173646821bd8f7f702f34, type: 2}
+    - target: {fileID: 644661609, guid: facc3f81a943c774c917f35e333d0129, type: 3}
       propertyPath: m_Parameters.colorGradient.atime1
       value: 52428
       objectReference: {fileID: 0}
@@ -28892,6 +28896,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4c9a87858e2754648b8f0d5143303072, type: 2}
+    - target: {fileID: 6910043217106864019, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d6855f006ba173646821bd8f7f702f34, type: 2}
+    - target: {fileID: 6910043217106864019, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d6855f006ba173646821bd8f7f702f34, type: 2}
     - target: {fileID: 8902172645961445844, guid: facc3f81a943c774c917f35e333d0129, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0.7924528
