@@ -40,7 +40,7 @@ public class PlayerHealth : Health
         blinkCoroutine = StartCoroutine(BlinkOnDmgTaken(freezeDurationOnDmgTaken));
         
     }
-    public void Heal(float healAmount)
+    public override void HealDamage(float healAmount)
     {
         this.currentHealth += healAmount;
         if (this.currentHealth > maxHealth)
