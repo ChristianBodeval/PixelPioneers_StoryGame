@@ -30,7 +30,7 @@ public class PlayerAction : MonoBehaviour
     private Health healthScript;
 
     [Header("Dash")]
-    public Slider DashCDVisual;
+    public Image DashCDVisual;
     public float dashDistance = 5f; // Distance of the dash
     public float dashDuration = 0.5f; // Duration of the dash
     public float dashCooldownTime = 1.8f;
@@ -47,6 +47,7 @@ public class PlayerAction : MonoBehaviour
         dashDirection = GetDashDirection();
 
         healthScript = GetComponent<Health>();
+        DashCDVisual.fillAmount = 1;
 
     }
 
@@ -72,7 +73,7 @@ public class PlayerAction : MonoBehaviour
 
         Dash();
 
-        DashCDVisual.value = dashCooldownRemaining / dashCooldownTime;
+        DashCDVisual.fillAmount = dashCooldownRemaining / dashCooldownTime;
     }
 
     private void FixedUpdate()
