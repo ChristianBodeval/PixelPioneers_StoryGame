@@ -1,17 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.U2D;
 
 public class AbilityHolder : MonoBehaviour
 {
+    public GameObject caster;
     public Ability ability;
     float cooldownTime;
-    float activeTime;
+    private float duration;
+
+    private float timeCasted;
     List<Transform> targets;
 
+    //TODO make an event for ready,active and cooldown and make the ColliderDrawer listen for them
+    public Color readyColor;
+    public Color activeColor;
+    public Color cooldownColor;
+
+    public AbilityHolder nextAbility;
+
+    [SerializeField] public ColliderDrawer collider;
+
+    [SerializeField] private SlashCone colliderStat;
 
 
-    public KeyCode key;
+    IEnumerator effectOverTimeCoroutine;
+
 
     enum AbilityState
     {
@@ -20,19 +36,54 @@ public class AbilityHolder : MonoBehaviour
         cooldown
     }
 
-    AbilityState state = AbilityState.ready; 
 
+    private void ActivateNextAbility()
+    {
+        nextAbility.SetActive();
+    }
+
+    private void Awake()
+    {
+        duration = ability.duration;
+
+    }
+
+    AbilityState state = AbilityState.ready; 
 
     private void SetReady()
     {
+        collider.spriteShapeRenderer.color = readyColor;
         state = AbilityState.ready;
+
+
+        //Copy position. DOSEN'T WORK - How do i handle it should follow the player?
+
+        
+        
+
+    }
+
+    private IEnumerator ChangeColor()
+    {
+        collider.spriteShapeRenderer.color = activeColor;
+        yield return new WaitForSeconds(ability.duration);
+        collider.spriteShapeRenderer.color = cooldownColor;
+        yield return null;
     }
 
     private void SetActive()
     {
+        this.gameObject.transform.position = caster.transform.position;
+        this.gameObject.transform.rotation = caster.transform.rotation;
+
+
+        Debug.Log("Called Active");
+        StartCoroutine(ChangeColor());
         //TODO reduce this to only all once
-        activeTime = ability.activeTime;
+        duration = ability.duration;
         state = AbilityState.active;
+
+        //Sets the players position to the ability
     }
 
     private void SetCooldown()
@@ -41,28 +92,54 @@ public class AbilityHolder : MonoBehaviour
         state = AbilityState.cooldown;
     }
 
+    private List<GameObject> GetTargets()
+    {
+        return collider.targets;
+    }
+
 
     public IEnumerator EffectOverTime()
     {
-        float duration = Time.deltaTime + ability.activeTime;
-
-        while (Time.deltaTime < duration)
+        while (Time.time < timeCasted)
         {
-            ability.ActivateEffect();
-            yield return new WaitForSeconds(ability.tickEveryXSeconds);
+
+            
+            
+
+            ability.ActivateEffect(GetTargets());
+            Debug.Log("Casted");
+            yield return new WaitForSeconds(1f);
         }
+        SetCooldown();
         yield return null;
     }
 
 
+    private void Start()
+    {
+        SetReady();
+    }
+
     //TODO consider using nested switch-statements instead
 
-    private void Update()
+    private void FixedUpdate()
     {
+        //Follow transform or not
+        if (ability.followCaster)
+        {
+            this.gameObject.transform.position = caster.transform.position;
+            this.gameObject.transform.rotation = caster.transform.rotation;
+        }        
+
+        //Cast next ability
+
+        
+
         switch (state)
         {
             case AbilityState.ready:
 
+                Debug.Log("Ability ready");
                 if (ability.triggerType == Ability.TriggerType.KeyHold && Input.GetKey(ability.keyTrigger))
                     Debug.Log("Charging up");
                     //TODO Hold && charge up value
@@ -70,61 +147,48 @@ public class AbilityHolder : MonoBehaviour
                 else if(ability.triggerType == Ability.TriggerType.KeyPress && Input.GetKeyDown(ability.keyTrigger)) 
                     SetActive();
 
-                else if(ability.triggerType == Ability.TriggerType.OnEvent && ability.eventTrigger != null)
+                else if(ability.triggerType == Ability.TriggerType.OnEvent && ability.activateEvent != null)
                     SetActive();
 
                 break;
 
-                //Might be redundant, since Active() should handle how it is active.
+                
             case AbilityState.active:
 
-                if(ability.effectType == Ability.EffectType.OneTime)
+                Debug.Log("Activated");
+
+
+                if (nextAbility != null)
                 {
-                    //GetTargets
+                    nextAbility.SetActive();
+                }
+
+
+                if (ability.effectType == Ability.EffectType.Instant)
+                {
                     //Activate
-                    ability.ActivateEffect();
+                    ability.ActivateEffect(GetTargets());
                     SetCooldown();
 
                 }
-                else if(ability.effectType == Ability.EffectType.OverTime)
+                else if (ability.effectType == Ability.EffectType.OverTime)
                 {
-                    //GetTargets
-                    EffectOverTime();
-                    SetCooldown();
-
-                }
-                else if(ability.effectType == Ability.EffectType.ChainEffect)
-                {
-                    //TODO test later
-                    //GetTargets
-
-                    /*
-                    foreach (var target in targets)
+                    if (effectOverTimeCoroutine != null) //Guard clause to call once
                     {
-                        //Get new target x times by running for loop
-                        for()
-                        ability.ActivateEffect
+                        return;
                     }
-                    
-                    ability.ActivateEffect(target);
-                    */
-                }
 
-
-                // HIS CODE - look at what he did
-                if(activeTime > 0) 
-                {
-                    activeTime -= Time.deltaTime;
-                }
-                else
-                {
-                    state = AbilityState.cooldown;
-                    cooldownTime = ability.cooldownTime;
+                    effectOverTimeCoroutine = EffectOverTime();
+                    timeCasted = Time.time + duration;
+                    StartCoroutine(effectOverTimeCoroutine);
                 }
                 break;
 
             case AbilityState.cooldown:
-                if(ability.cooldownType == Ability.CooldownType.Timed)
+                Debug.Log("On cooldown");
+
+
+                if (ability.cooldownType == Ability.CooldownType.Timed)
                 {
                     if (cooldownTime > 0)
                     {
@@ -139,10 +203,10 @@ public class AbilityHolder : MonoBehaviour
                 else if (ability.cooldownType == Ability.CooldownType.OnEvent)
                 {
                     //Listen for event then set ready
-                    if (ability.offCooldownEvent != null)
-                    {
-                        SetReady();
-                    }
+                    //if (ability.offCooldownEvent != null)
+                    //{
+                    //    SetReady();
+                    //}
                 }
                 break;
 

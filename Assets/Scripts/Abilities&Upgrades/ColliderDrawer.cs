@@ -1,30 +1,79 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
 using Color = UnityEngine.Color;
 //TODO Require SpriteShape
-    public class ColliderDrawer : MonoBehaviour
+
+[ExecuteAlways]
+public class ColliderDrawer : MonoBehaviour
+{
+    public List<GameObject> targets = new List<GameObject>();
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!targets.Contains(collision.gameObject))
+        {
+            targets.Add(collision.gameObject);
+            Debug.Log("Added " + gameObject.name);
+            Debug.Log("GameObjects in list: " + targets.Count);
+        }        
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (targets.Contains(collision.gameObject))
+        {
+            targets.Remove(collision.gameObject);
+            Debug.Log("Removed " + collision.name);
+            Debug.Log("GameObjects in list: " + targets.Count);
+        }
+        
+    }
+
+
     //Sprite handling
     public SpriteShapeController spriteShapeController;
-    public SpriteShape spriteShape;
+    public SpriteShapeRenderer spriteShapeRenderer;
 
     //Points
-    public List<Vector3> endPoints;
+    private List<Vector3> endPoints;
+    private List<Vector3> points;
+
 
     public bool DrawInInspector;
 
-    //Attributes
-    [Range(1f,20f)]
-    [SerializeField] public float range;
-    [Range(3,20)]
-    [SerializeField] public int corners;
-    [Range(0,20f)]
-    [SerializeField] public float width;
-    [Range(0f,360f)]
-    [SerializeField] public float angle;
+    public ColliderStat colliderStat;
 
-    public List<Vector3> points;
+
+    //Attributes
+    private float range, width, angle;
+    private int corners;
+
+    private void Awake()
+    {
+        range = colliderStat.range;
+        width = colliderStat.width;
+        angle = colliderStat.angle;
+        corners = colliderStat.corners;
+    }
+
+    private void OnValidate()
+    {
+        //Use this instead of update, to save processing power
+    }
+
+    private void Update()
+    {
+        range = colliderStat.range;
+        width = colliderStat.width;
+        angle = colliderStat.angle;
+        corners = colliderStat.corners;
+        points = GetPolygonPoints();
+        UpdateSpriteShapeController(points);
+    }
+
 
     void UpdateSpriteShapeController(List<Vector3> points)
     {
@@ -37,6 +86,7 @@ using Color = UnityEngine.Color;
         }
     }
 
+
     private void OnDrawGizmos()
     {
         if(DrawInInspector)
@@ -48,7 +98,7 @@ using Color = UnityEngine.Color;
             Gizmos.color = Color.red;
             foreach (var point in points)
             {
-                Gizmos.DrawSphere(point, 0.1f);
+                Gizmos.DrawSphere(point+transform.position, 0.1f);
             }
 
             //Draw lines between points
@@ -59,25 +109,15 @@ using Color = UnityEngine.Color;
             {
                 if (lastPoint != point)
                 {
-                    Gizmos.DrawLine(lastPoint, point);
+                    Gizmos.DrawLine(lastPoint+ transform.position, point+ transform.position);
                 }
                 lastPoint = point;
             }
-            Gizmos.DrawLine(lastPoint, points[0]);
+            Gizmos.DrawLine(lastPoint+ transform.position, points[0]+ transform.position);
         }
     }
 
-    private void Start()
-    {
-        points = GetPolygonPoints();
-        UpdateSpriteShapeController(points);
-    }
 
-    private void OnValidate()
-    {
-        points = GetPolygonPoints();
-        UpdateSpriteShapeController(points);
-    }
 
     List<Vector3> GetPolygonPoints()
     {
@@ -93,7 +133,9 @@ using Color = UnityEngine.Color;
         float pointDistanceStep = width / (corners - 1);
         //Current values
         float currentPointDistance = 0 - (width / 2);
-        float currentAngle = 0 - (angle / 2) + transform.rotation.eulerAngles.z;
+        //Use instead
+        //float currentAngle = 0 - (angle / 2) + transform.rotation.eulerAngles.z;
+        float currentAngle = 0 - (angle / 2);
 
             for (int i = 0; i < corners; i++)
             {

@@ -10,15 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6200f99461c8247e786fcfd0f4916609, type: 3}
-  m_Name: New Slash Ability
+  m_Name: SlashAbility_v1
   m_EditorClassIdentifier: 
-  name: "Mj\xF8r"
-  activeTime: 0
-  damage: 0
-  cooldownTime: 0
-  keyTrigger: 0
-  triggerType: 2
-  cooldownType: 1
+  name: Slash
+  damage: 30
+  cooldownTime: 3
+  keyTrigger: 107
+  activateEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  offCooldownEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerType: 1
+  cooldownType: 0
   effectType: 0
   duration: 0
   tickEveryXSeconds: 0
@@ -26,6 +31,11 @@ MonoBehaviour:
   startChargeValue: 0
   endChargeValue: 0
   chargeUpSpeed: 0
-  OnStartAbilities: []
-  OnEndAbilities: []
-  dashVelocity: 0
+  OnStartAbilities:
+  - {fileID: 11400000, guid: ff5907b9f070245c184fdad28046124c, type: 2}
+  OnEndAbilities:
+  - {fileID: 0}
+  someVariableDELETE: 0
+  myEvent:
+    m_PersistentCalls:
+      m_Calls: []

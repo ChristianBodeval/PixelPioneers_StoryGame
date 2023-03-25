@@ -11,6 +11,7 @@ public class PlayerAction : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 moveVector = new Vector3(1f, 0f, 0f);
     private bool canMove = true;
+    [SerializeField] private float smoothTurningFactor;
 
     [Header("Dash")]
     [SerializeField] private float dashDuration = 0.1f;
@@ -55,8 +56,6 @@ public class PlayerAction : MonoBehaviour
         }
 
         BaseMelee(); //melee coneattack
-
-        Facing();
     }
 
     private void FixedUpdate()
@@ -64,6 +63,8 @@ public class PlayerAction : MonoBehaviour
         Move();
 
         Dash();
+
+        FaceWalkingDirection();
     }
 
     private void Move()
@@ -78,10 +79,25 @@ public class PlayerAction : MonoBehaviour
         }
     }
 
+    public Vector3 direction = new Vector3(0, 0, 1);
+
+    public void FaceWalkingDirection()
+    {
+        if (rb.velocity != Vector2.zero)
+        {
+            //Moving direction
+            Vector3 direction = ((Vector3)transform.position + (Vector3)rb.velocity) - transform.position;
+            Vector3 velocity = Vector3.zero;
+            transform.right = Vector3.SmoothDamp(transform.right, direction, ref velocity, smoothTurningFactor);
+        }
+    }
+
+    //TODO Can these be deleted now?
     public void StartMove()
     {
         canMove = true;
     }
+    //TODO Can these be deleted now?
 
     public void StopMove()
     {
@@ -96,36 +112,6 @@ public class PlayerAction : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         canMove = true;
-    }
-
-    private void Facing()
-    {
-        // Saves the vector of where the player was last moving
-        if (moveVector.magnitude > 0.5f)
-        {
-            lastFacing = new Vector2(moveVector.x, moveVector.y).normalized;
-        }
-
-        // Faces a cone in the direction of attack
-        if (Mathf.Abs(lastFacing.x) > 0.9f) // Right & left
-        {
-            cone.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-        else if (Mathf.Abs(lastFacing.y) > 0.9f) // Up & down
-        {
-            cone.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-        }
-        else if (lastFacing.x > 0.5f && lastFacing.y > 0.5f || lastFacing.x < -0.5f && lastFacing.y < -0.5f) // Up right & down left
-        {
-            cone.transform.rotation = Quaternion.Euler(0f, 0f, 45f);
-        }
-        else if (lastFacing.x < -0.5f && lastFacing.y > 0.5f || lastFacing.x > -0.5f && lastFacing.y < 0.5f) // Up left & down right
-        {
-            cone.transform.rotation = Quaternion.Euler(0f, 0f, -45f);
-        }
-
-        // Repositions the cone to be infront of player
-        cone.position = (Vector2)transform.position + lastFacing.normalized * coneRange;
     }
 
     private void Dash()

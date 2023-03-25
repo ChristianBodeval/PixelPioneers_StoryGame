@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.U2D;
 
 public class Ability : ScriptableObject
 {
     public new string name;
-
-    public float activeTime;
     public float damage;
 
     //TODO Hide unrelevant info, for different settings. E.g cooldownTime, for non-timed cooldown,
@@ -17,27 +17,30 @@ public class Ability : ScriptableObject
     //This might be redundant since keyTrigger can be an event
     public float cooldownTime;
     public KeyCode keyTrigger;
-    public Event eventTrigger;
-    public Event offCooldownEvent;
-    
 
+    [Header("Only for effect over time")]
+    public UnityEvent activateEvent;
+    public UnityEvent offCooldownEvent;
+    
     public TriggerType triggerType;
     public CooldownType cooldownType;
     public EffectType effectType;
 
 
-    //Only for cooldown type of Timed
+    //Only for effect over time
+    [Header("Only for effect over time")]
     public float duration;
     public float tickEveryXSeconds;
 
-
     //Hold down trigger
-    //Todo finetune this 
+    //Todo finetune this
+    [Header("Only for KeyHold")]
     public float holdingChargeValue; //0 to 1 which is 0% to 100%
     public float startChargeValue; //E.g 0.05
     public float endChargeValue; 
     public float chargeUpSpeed;
-    
+
+    public bool followCaster;
 
     public enum TriggerType
     {
@@ -48,9 +51,8 @@ public class Ability : ScriptableObject
 
     public enum EffectType
     {
-        OneTime,
-        OverTime,
-        ChainEffect
+        Instant,
+        OverTime
     }
 
     public enum CooldownType
@@ -63,23 +65,29 @@ public class Ability : ScriptableObject
     public IEnumerator EffectCoroutine;
 
 
-    //Use Event instead?
-    public List<Ability> OnStartAbilities;
-    public List<Ability> OnEndAbilities;
 
-    public virtual void ActivateEffect()
+    public virtual void ActivateEffect(List<GameObject> targets)
     {
-        
         
     }
 
-    public virtual void ActivateEffect(GameObject target)
+    public virtual void ActivateEffect(AbilityHolder ability)
     {
-                
+        
+        //Follow caster
     }
+
+
+
+    public virtual void BeginCooldown(GameObject player)
+    {
+
+    }
+
 
     public virtual List<GameObject> GetTargets()
     {
+
         //TODO Throw expection
         Debug.Log("Getting targets not specified");
         return null;
