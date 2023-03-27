@@ -9,6 +9,8 @@ TagManager:
   - Obstacles
   - NPC
   - Projectile
+  - SpawnBounds
+  - CameraBounds
   layers:
   - Default
   - TransparentFX
@@ -23,9 +25,9 @@ TagManager:
   - NPC
   - Projectile
   - Charger
-  - 
-  - 
-  - 
+  - Pit
+  - Camera
+  - CameraBounds
   - 
   - 
   - 

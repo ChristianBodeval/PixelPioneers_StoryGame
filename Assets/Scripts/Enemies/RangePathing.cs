@@ -34,12 +34,15 @@ public class RangePathing : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         attackRange = GetComponent<Range_Attack>().attackRange;
+        animator.SetBool("CanMove", true);
 
         StartCoroutine(UpdatePath()); // Updates pathfinding regularly
     }
 
     private void OnEnable()
     {
+        if (animator != null) animator.SetBool("CanMove", true);
+
         if (seeker != null) { StartCoroutine(UpdatePath()); } // Updates pathfinding regularly - only starts if we have a seeker
         canGeneratePath = true;
     }

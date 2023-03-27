@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class WaveObject : MonoBehaviour
 {
-    [Header("Enemies in Wave")]
+    [Header("Wave attributes")]
+    public float waitAmountUntilNextWave = 2f;
+    public bool waitForWaveToBeDead = false;
+    public float timeBetweenMobs = 0.01f;
     [SerializeField] private int meleeAmount = 0;
     [SerializeField] private int rangeAmount = 0;
     [SerializeField] private int chargerAmount = 0;

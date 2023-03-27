@@ -5,14 +5,15 @@ using UnityEngine;
 public class CameraScript : MonoBehaviour
 {
     [SerializeField] private float cameraDistance = -10f;
-    private Transform player;
+    private Vector3 boundsOffset;
+    private GameObject player;
     private float defaultZoomAmount = 5f;
     private bool isLaggingBehind = false;
 
     private void Start()
     {
-        player = GameObject.FindWithTag("Player").transform;
-        defaultZoomAmount = Camera.main.orthographicSize; 
+        player = GameObject.FindGameObjectWithTag("Player");
+        defaultZoomAmount = Camera.main.orthographicSize;
     }
 
     private void Update()
@@ -23,7 +24,7 @@ public class CameraScript : MonoBehaviour
     private void SetPositionOnPlayer()
     {
         if (isLaggingBehind) return;
-        transform.position = new Vector3(player.position.x, player.position.y - 10, cameraDistance); // Follows the player
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 10, cameraDistance) + boundsOffset; // Follows the player
     }
 
     public void SetZoomAmount(float zoom)
@@ -78,9 +79,7 @@ public class CameraScript : MonoBehaviour
 
             transform.position = new Vector3(newX, newY, cameraDistance);
             prevPos = transform.position;
-            t += 0.05f;
-
-            Debug.Log(t);
+            t += 0.1f;
 
             yield return new WaitForSeconds(dashDuration / 30);
         }
@@ -90,5 +89,10 @@ public class CameraScript : MonoBehaviour
     {
         end -= start;
         return -end * value * (value - 2) + start;
+    }
+
+    public void SetBoundsOffset(Vector2 offset)
+    {
+        boundsOffset = offset;
     }
 }

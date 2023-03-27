@@ -50,12 +50,9 @@ public class Pool : MonoBehaviour
     {
         enemy.SetActive(false);
 
-        if (inUseEnemies.Contains(enemy))
-        {
-            inUseEnemies.Remove(enemy);
-        }
+        if (inUseEnemies.Contains(enemy)) inUseEnemies.Remove(enemy); // Enemy is in use > remove from use
 
-        storageEnemies.Add(enemy);
+        if (!storageEnemies.Contains(enemy)) storageEnemies.Add(enemy); // Enemy is not in storage > move to storage
     }
 
     // Instansiate enemies before they fully spawn such that we don't lag during combat

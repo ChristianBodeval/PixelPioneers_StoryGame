@@ -41,7 +41,7 @@ public class MeleePathing : MonoBehaviour
         {
             PathFollow();
         }
-        else if (animator.GetBool("CanMove"))
+        else if (animator.GetBool("CanMove") || animator.GetBool("IsStunned"))
         {
             rb.velocity = new Vector3(0f,0f,0f);
         }

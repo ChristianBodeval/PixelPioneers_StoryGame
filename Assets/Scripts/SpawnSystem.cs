@@ -6,18 +6,20 @@ using UnityEngine;
 public class SpawnSystem : MonoBehaviour
 {
     [Header("Pool")]
-    [SerializeField] private float timeBetweenWaves = 5f;
-    [SerializeField] private float timeBetweenMobs = 0.2f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask obstacleLayer;
-    [SerializeField] private WaveObject tempWave;
-    private List<(WaveObject.EnemyType, int)> enemiesToSpawn = new List<(WaveObject.EnemyType, int)>(); // List of tuples
+    [SerializeField] private float spawnApartDistance;
+    private List<WaveObject> wavesToSpawn = new List<WaveObject>();
+    private List<GameObject> waitingDeathList = new List<GameObject>();
+    private Coroutine waveAliveCoroutine = null;
     private int recursions = 0;
     private bool isSpawning = false;
+    private bool waveAlive = false;
+    private bool isWaitingForWaveToDie = false;
 
     private void Start()
     {
-        StartCoroutine(SpawnEnemies());
+        StartCoroutine(SpawnWaves());
     }
 
     public void AddWave(WaveObject wave)
@@ -29,12 +31,7 @@ public class SpawnSystem : MonoBehaviour
             return;
         }
 
-        // Find the amount of each type of enemy in wave
-        for (int i = 0; i < Enum.GetNames(typeof(WaveObject.EnemyType)).Length; i++) // For each enemytype
-        {
-            int amount = wave.GetNumberOfType((WaveObject.EnemyType)i);
-            enemiesToSpawn.Add(((WaveObject.EnemyType)i, amount)); // Extra ( ) such that c# thinks its a tuple
-        }
+        wavesToSpawn.Add(wave);
     }
 
     // Waits for spawning to be complete
@@ -48,30 +45,55 @@ public class SpawnSystem : MonoBehaviour
         AddWave(wave);
     }
 
-    private IEnumerator SpawnEnemies()
+    private IEnumerator SpawnWaves()
     {
         while (true)
         {
-            isSpawning = true; // Tell other functions to save themselves when we are spawning
-            lock (enemiesToSpawn)
+            // Suspend execution of function until wave is dead if enable on previous wave
+            while (isWaitingForWaveToDie && waveAlive)
             {
-                AddWave(tempWave);
-
-                // Spawn the appropriate amount of type from wave
-                foreach ((WaveObject.EnemyType, int) e in enemiesToSpawn)
-                {
-                    for (int i = 0; i < e.Item2; i++) // Less than amount in wave
-                    {
-                        SpawnEnemy(e.Item1); // Spawn enemy of type
-                        yield return new WaitForSeconds(timeBetweenMobs);
-                    }
-                }
-
-                enemiesToSpawn.Clear();
+                yield return new WaitForSeconds(0.1f);
             }
+
+            isSpawning = true; // Tell other functions to save themselves when we are spawning
+            if (wavesToSpawn.Count > 0) isWaitingForWaveToDie = wavesToSpawn[0].waitForWaveToBeDead; // Are we waiting on wave being dead before spawning the next one
+
+            // Find the amount of each type of enemy in wave
+            for (int i = 0; i < Enum.GetNames(typeof(WaveObject.EnemyType)).Length; i++) // For each enemytype
+            {
+                int amountToSpawn = 0;
+                if (wavesToSpawn.Count > 0) amountToSpawn = wavesToSpawn[0].GetNumberOfType((WaveObject.EnemyType)i); // Amount of each type of enemies from the wave
+
+                for (int j = 0; j < amountToSpawn; j++)
+                {
+                    SpawnEnemy((WaveObject.EnemyType)i); // Spawn enemy of type
+                    waveAlive = true;
+                    yield return new WaitForSeconds(wavesToSpawn[0].timeBetweenMobs); // Space mob spawning out - for performance and look reason, it looks better if mobs seem a bit more random in their timing
+                }
+            }
+            if (isWaitingForWaveToDie && waveAliveCoroutine == null) StartCoroutine(CheckIfWaveIsDead()); // Function checks if wave is alive during play
+            if (wavesToSpawn.Count > 0) wavesToSpawn.Remove(wavesToSpawn[0]); // Instead of iterating through the list we remove waves we have already used
+
             isSpawning = false;
-            yield return new WaitForSeconds(timeBetweenWaves);
+            float waitDuration = 0.1f; // Default value
+            if (wavesToSpawn.Count > 0) waitDuration = wavesToSpawn[0].waitAmountUntilNextWave; // Wait for duration specified by the wave object - edit the duration in the object
+            yield return new WaitForSeconds(waitDuration); 
         }
+    }
+
+    private IEnumerator CheckIfWaveIsDead()
+    {
+        while (waitingDeathList.Count > 0)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        waveAlive = false;
+    }
+
+    public void RemoveFromWaitDeathList(GameObject e)
+    {
+        if (waitingDeathList.Contains(e)) waitingDeathList.Remove(e);
     }
 
     private void SpawnEnemy(WaveObject.EnemyType type)
@@ -79,53 +101,56 @@ public class SpawnSystem : MonoBehaviour
         GameObject enemy = Pool.pool.DrawFromPool(type);
         enemy.transform.position = FindSpawnPoint();
         enemy.transform.rotation = Quaternion.Euler(-45f, 0f, 0f);
+        if (isWaitingForWaveToDie) waitingDeathList.Add(enemy);
     }
 
-    //returns a point eligible for spawning an enemy outside of the screen
+    // Returns a point eligible for spawning an enemy outside of the screen
     private Vector2 FindSpawnPoint()
     {
-        float width = Camera.main.pixelWidth / 80f + 0.5f; //half the width of the screen
-        float height = Camera.main.pixelHeight / 80f + 0.5f; //half the height of the screen
+        Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+        Vector3 point = Vector2.zero;
 
-        Vector2 point = Vector2.zero;
+        int recursionCount = 0;
+        const int maxRecursions = 20;
 
-        // Random edge of the screen
-        switch (UnityEngine.Random.Range(1, 5))
+        while (recursionCount < maxRecursions)
         {
-            case 1:
-                point = new Vector2(-width, UnityEngine.Random.Range(-height, height)); // Left
-                break;
-            case 2:
-                point = new Vector2(UnityEngine.Random.Range(-width, width), height); // Top
-                break;
-            case 3:
-                point = new Vector2(width, UnityEngine.Random.Range(-height, height)); // Right
-                break;
-            case 4:
-                point = new Vector2(UnityEngine.Random.Range(-width, width), -height); // Bottom
-                break;
-            default:
-                return new Vector2(UnityEngine.Random.Range(-width, width), UnityEngine.Random.Range(-height, height));
+            var randomEdge = UnityEngine.Random.Range(0, 4);
+            switch (randomEdge)
+            {
+                case 0:
+                    point = Camera.main.ViewportToWorldPoint(new Vector2(0f, UnityEngine.Random.Range(0f, 1f))); // Left
+                    break;
+                case 1:
+                    point = Camera.main.ViewportToWorldPoint(new Vector2(UnityEngine.Random.Range(0f, 1f), 1f)); // Top
+                    break;
+                case 2:
+                    point = Camera.main.ViewportToWorldPoint(new Vector2(1f, UnityEngine.Random.Range(0f, 1f))); // Right
+                    break;
+                case 3:
+                    point = Camera.main.ViewportToWorldPoint(new Vector2(UnityEngine.Random.Range(0f, 1f), 0f)); // Bottom
+                    break;
+            }
+
+            point = new Vector3(point.x, point.y - point.z, 0f); // Compensate for 45 degree angle
+            point += (point - playerPosition).normalized * 1.5f; // Put point outside screenspace
+
+            bool isGrounded = Physics2D.OverlapPoint(point, groundLayer);
+            bool isObstructed = Physics2D.OverlapPoint(point, obstacleLayer);
+            bool isEnemyInTheWay = Physics2D.CircleCast(point, spawnApartDistance / recursionCount, Vector2.up, spawnApartDistance / recursionCount, LayerMask.GetMask("Enemy"));
+
+            if (isGrounded && !isObstructed && !isEnemyInTheWay) // Checks if we have ground and no obstacles in the way
+            {
+                return point;
+            }
+
+            recursionCount++;
         }
 
-        bool grounded = Physics2D.OverlapPoint((Vector2)GameObject.FindGameObjectWithTag("Player").transform.position + point, groundLayer);
-        bool unobstructed = !Physics2D.OverlapPoint((Vector2)GameObject.FindGameObjectWithTag("Player").transform.position + point, obstacleLayer);
-
-        if (grounded && unobstructed)  // Checks if we have ground and no obstacles in the way
-        {
-            recursions = 0; // Reset recussion count
-            return point + (Vector2)GameObject.FindGameObjectWithTag("Player").transform.position;
-        }
-        else if (recursions < 50 && (!grounded || !unobstructed)) // Call method again if we can't spawn
-        {
-            recursions++; // Keep track of how many recursions we do, to avoid stackoverflow
-            return FindSpawnPoint();
-        }
-        else // Default case in case of recussion limit
-        {
-            recursions = 0;
-            return (Vector2)GameObject.FindGameObjectWithTag("Player").transform.position;
-        }
+        return playerPosition; // Default case in case of recursion limit
     }
+
 }
+
+
 

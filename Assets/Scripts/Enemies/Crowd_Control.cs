@@ -6,7 +6,8 @@ using UnityEngine.U2D.IK;
 public class Crowd_Control : MonoBehaviour
 {
     public bool isStunImmune = false;
-    private Coroutine coroutine;
+    private Coroutine stunCoroutine;
+    private Coroutine freezeCoroutine;
     private Animator animator;
     private float remainingStunDuration = 0f;
 
@@ -32,11 +33,17 @@ public class Crowd_Control : MonoBehaviour
     {
         if (isStunImmune) { return; } // Guard clause
 
+        if (stunCoroutine != null) StopCoroutine(stunCoroutine);
+        if (freezeCoroutine != null) StopCoroutine(freezeCoroutine);
+
+        animator.SetBool("CannotTransitionState", true);
         animator.SetBool("IsStunned", true);
+        animator.Play("Base Layer.Stunned");
     }
 
     public void RemoveStun()
     {
+        animator.SetBool("CannotTransitionState", false);
         animator.SetBool("IsStunned", false);
     }
 
@@ -44,34 +51,55 @@ public class Crowd_Control : MonoBehaviour
     {
         if (isStunImmune) { return; } // Guard clause
 
+        if (freezeCoroutine != null) StopCoroutine(freezeCoroutine);
+
         if (duration > remainingStunDuration) // Make sure to remove a previous stun if a new one is applied and is longer than the older one
         {
-            if (coroutine != null) { StopCoroutine(coroutine); coroutine = null; }    // Replace old stun if new is longer
-            coroutine = StartCoroutine(StunDuration(duration));     // Start the stun duration
+            if (stunCoroutine != null) StopCoroutine(stunCoroutine); // Replace old stun if new is longer
+            stunCoroutine = StartCoroutine(StunDuration(duration)); // Start the stun duration
             remainingStunDuration = duration;
         }
     }
 
     private IEnumerator StunDuration(float duration)
     {
-        animator.SetBool("IsStunned", true);
-
-        yield return new WaitForSeconds(duration);
-
-        animator.SetBool("IsStunned", false);
-    }
-
-    public IEnumerator FreezeFrame(float duration)
-    {
-        animator.speed = 0f;
         animator.SetBool("CannotTransitionState", true);
-        Stun();
+        animator.SetBool("IsStunned", true);
+        animator.Play("Base Layer.Stunned");
 
         yield return new WaitForSeconds(duration);
 
         animator.SetBool("CannotTransitionState", false);
+        animator.SetBool("IsStunned", false);
+    }
+
+    public void FreezeFrame(float duration)
+    {
+        if (freezeCoroutine != null)
+        {
+            StopCoroutine(freezeCoroutine);
+        }
+
+        freezeCoroutine = StartCoroutine(FreezeFrameCoroutine(duration));
+    }
+
+    public IEnumerator FreezeFrameCoroutine(float duration)
+    {
+        bool alreadyStunned = animator.GetBool("IsStunned");
+
+        animator.speed = 0f;
+        if (!alreadyStunned)
+        {
+            Stun();
+        }
+
+        yield return new WaitForSeconds(duration);
+
+        if (!alreadyStunned)
+        {
+            RemoveStun();
+        }
         animator.speed = 1f;
-        RemoveStun();
         //animator.Play("Idle");
     }
 
@@ -79,7 +107,8 @@ public class Crowd_Control : MonoBehaviour
     {
         animator.SetBool("CannotTransitionState", false);
         RemoveStun();
-        coroutine = null;
+        if (stunCoroutine != null) StopCoroutine(stunCoroutine);
+        if (freezeCoroutine != null) StopCoroutine(freezeCoroutine);
         animator.speed = 1f;
     }
 }

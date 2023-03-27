@@ -104,6 +104,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 40040618040465577, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
+      propertyPath: deathAnimDuration
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 40040618040465577, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
       propertyPath: enemyLayers.m_Bits
       value: 4096
       objectReference: {fileID: 0}

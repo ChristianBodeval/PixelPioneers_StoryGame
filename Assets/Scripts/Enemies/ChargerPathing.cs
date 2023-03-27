@@ -105,7 +105,7 @@ public class ChargerPathing : MonoBehaviour
             rb.velocity = Vector2.zero; 
             return; 
         }
-        else if (animator.GetBool("CanMove"))
+        else if (animator.GetBool("CanMove") && !animator.GetBool("IsStunned"))
         {
             rb.velocity = dir * speed; // Movement
         }
