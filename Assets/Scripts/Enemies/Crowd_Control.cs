@@ -45,6 +45,7 @@ public class Crowd_Control : MonoBehaviour
     {
         animator.SetBool("CannotTransitionState", false);
         animator.SetBool("IsStunned", false);
+        animator.Play("Base Layer.Idle");
     }
 
     public void Stun(float duration)
@@ -75,16 +76,15 @@ public class Crowd_Control : MonoBehaviour
 
     public void FreezeFrame(float duration)
     {
-        if (freezeCoroutine != null)
-        {
-            StopCoroutine(freezeCoroutine);
-        }
-
+        if (remainingStunDuration < duration) RemoveStun();
+        if (freezeCoroutine != null) StopCoroutine(freezeCoroutine);
         freezeCoroutine = StartCoroutine(FreezeFrameCoroutine(duration));
     }
 
     public IEnumerator FreezeFrameCoroutine(float duration)
     {
+        if (isStunImmune) yield break; // Guard clause
+
         bool alreadyStunned = animator.GetBool("IsStunned");
 
         animator.speed = 0f;

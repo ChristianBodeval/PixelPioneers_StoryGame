@@ -48,9 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2.6
-  moveDistance: 3
+  moveDistance: 1.6
   consumeDistance: 0.4
-  oppositeDuration: 0.1
+  oppositeDuration: 0.14
 --- !u!212 &5762518001066619711
 SpriteRenderer:
   m_ObjectHideFlags: 0

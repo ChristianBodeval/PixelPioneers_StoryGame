@@ -59,7 +59,7 @@ public class RangePathing : MonoBehaviour
         else
         {
             animator.SetBool("IsFleeing", false); // Reset variable - only attacks if enemy isn't fleeing
-            rb.velocity = new Vector3(0f, 0f, 0f);
+            rb.velocity = Vector3.zero;
         }
     }
 
@@ -144,6 +144,8 @@ public class RangePathing : MonoBehaviour
 
     private void FlipSprite()
     {
+        if (animator.GetBool("IsStunned")) return; // Guard clause - don't flip if stunned
+
         Vector2 dir;
 
         if (animator.GetBool("IsFleeing"))

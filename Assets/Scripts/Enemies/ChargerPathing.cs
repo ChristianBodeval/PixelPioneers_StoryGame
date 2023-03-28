@@ -100,16 +100,11 @@ public class ChargerPathing : MonoBehaviour
 
     private void Move(Vector2 dir)
     {
-        if (!animator.GetBool("CanMove") && !animator.GetBool("IsCharging")) 
-        { 
-            rb.velocity = Vector2.zero; 
-            return; 
-        }
-        else if (animator.GetBool("CanMove") && !animator.GetBool("IsStunned"))
+        if (animator.GetBool("CanMove") && !animator.GetBool("IsStunned") && !animator.GetBool("IsCharging") && !GetComponent<Charger_Attack>().chargingCharge)
         {
             rb.velocity = dir * speed; // Movement
         }
-        else if (GetComponent<Charger_Attack>().chargingCharge || animator.GetBool("IsStunned"))
+        else if (!animator.GetBool("IsCharging") || GetComponent<Charger_Attack>().chargingCharge)
         {
             rb.velocity = Vector2.zero;
         }

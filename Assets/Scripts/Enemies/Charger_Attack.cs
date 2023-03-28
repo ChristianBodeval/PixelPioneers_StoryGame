@@ -131,7 +131,11 @@ public class Charger_Attack : Enemy_Attack
     // Starts the charge ability if player is in los and range + has ChargeCD rdy
     private void StartCharge(GameObject player)
     {
-        if (Vector2.Distance(player.transform.position, transform.position) <= chargeRange && LineOfSight(player, animator) && canCharge) { animator.SetBool("IsCharging", true); animator.Play("Charge"); }
+        if (Vector2.Distance(player.transform.position, transform.position) <= chargeRange && LineOfSight(player, animator) && canCharge)
+        {
+            animator.SetBool("IsCharging", true);
+            animator.Play("Charge");
+        }
     }
 
     // Changes 'InAttackRange' bool to if enemy is in attack range

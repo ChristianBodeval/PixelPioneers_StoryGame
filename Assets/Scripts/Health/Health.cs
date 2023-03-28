@@ -12,6 +12,7 @@ public class Health : MonoBehaviour
     [SerializeField] private float deathAnimDuration;
     private Coroutine deathCoroutine;
     protected Coroutine blinkCoroutine;
+    protected Coroutine shakeCoroutine;
     protected static readonly float freezeDurationOnDmgTaken = 0.15f;
 
     private SpriteRenderer sr;
@@ -35,12 +36,11 @@ public class Health : MonoBehaviour
         // Freeze frame enemies
         if (gameObject.CompareTag("Enemy")) GetComponent<Crowd_Control>().FreezeFrame(freezeDurationOnDmgTaken);
 
-        if (blinkCoroutine != null)
-        {
-            StopCoroutine(blinkCoroutine);
-        }
-
+        if (blinkCoroutine != null) StopCoroutine(blinkCoroutine); // Stops blink coroutine
         blinkCoroutine = StartCoroutine(BlinkOnDmgTaken(freezeDurationOnDmgTaken));
+
+        if (shakeCoroutine != null) StopCoroutine(shakeCoroutine);
+        shakeCoroutine = StartCoroutine(SpriteShake(0.2f, freezeDurationOnDmgTaken));
         //PrintDmgToScreen(damage, Color.red);
     }
 
@@ -106,6 +106,28 @@ public class Health : MonoBehaviour
         //**
     }
 
+    protected IEnumerator SpriteShake(float magnitude, float duration)
+    {
+        int iterations = 8;
+        float timeBetweenShakes = duration / iterations;
+        float magnitudeReductionOverDuration = magnitude / iterations;
+        GameObject spriteObject = GetComponentInChildren<SpriteRenderer>().gameObject;
+        duration += Time.time;
+
+        // Shake to either left or right first, at random
+        Vector3 dir = Random.Range(0, 2) == 0 ? Vector3.left : Vector3.right; // Ternary operator '?' is just a short if statement - outputs left or right vector
+
+        while (duration > Time.time)
+        {
+            spriteObject.transform.localPosition = dir * magnitude; // Displace sprite
+            dir = dir * -1f; // Swap direction
+            magnitude -= magnitudeReductionOverDuration; // Reduce shake over the duration
+            yield return new WaitForSeconds(timeBetweenShakes);
+        }
+
+        spriteObject.transform.localPosition = Vector3.zero;
+    }
+
     private void OnEnable()
     {
         this.currentHealth = maxHealth;
@@ -119,6 +141,7 @@ public class Health : MonoBehaviour
         sr.material = baseMaterial;
         sr.color = Color.white;
         gameObject.GetComponent<Collider2D>().enabled = true;
+        GetComponentInChildren<SpriteRenderer>().gameObject.transform.localPosition = Vector3.zero; // Resets sprite position
     }
 
     protected virtual void Update()
@@ -126,6 +149,7 @@ public class Health : MonoBehaviour
         if (this.currentHealth <= 0 && deathCoroutine == null)
         {
             if (blinkCoroutine != null) StopCoroutine(blinkCoroutine);
+            if (shakeCoroutine != null) StopCoroutine(shakeCoroutine);
             deathCoroutine = StartCoroutine(Die());
         }
     }
