@@ -11,44 +11,27 @@ public class SlashUpgrade2 : Ability
     public float timeBetweenEachBounce;
     public int numOfBounces;
 
+    public GameObject myPrefab;
+
+    public DrawLineBetween2Points lineDrawer;
+
+
+
+
     public void ActivateEffect(List<GameObject> targets)
     {
         //Pick random target
-        int randomNumber = Random.Range(1, targets.Count);
-
-        GameObject target = targets[randomNumber];
-
-        Debug.Log("SlashUpgrade1 activated");
-
-        ChainDamage(target, 3f, 0.1f, 3);
-    }
-
-    IEnumerator ChainDamage(GameObject startingTarget, float range, float timeBetweenEachBounce, int bounces)
-    {
-        Damage(startingTarget);
-
-        for (int i = 0; i < bounces; i++)
+        for (int i = 0; i < targets.Count; i++)
         {
+            Damage(targets[i]);
 
-            //Find next target
-            RaycastHit2D[] newTargets = Physics2D.CircleCastAll(startingTarget.transform.position, range, startingTarget.transform.up);
-
-            //Guard clause, stop bouncing, if no one is in range
-            if (newTargets.Length == 0)
-            {
-                yield return null;
-            }
-
-            int randomNumber = Random.Range(1, newTargets.Length);
-
-            startingTarget = newTargets[randomNumber].transform.gameObject;
-
-            Damage(startingTarget);
-
-            yield return new WaitForSeconds(timeBetweenEachBounce);
+            if (i < targets.Count - 1)
+                lineDrawer.SetLine(targets[i].transform.position, targets[i + 1].transform.position);
         }
-        yield return null;
+
     }
+
+    
 
     public void Damage(GameObject target)
     {

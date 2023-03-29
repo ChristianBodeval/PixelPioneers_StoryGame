@@ -22,11 +22,7 @@ public class SlashUpgrade1 : Ability
         }
     }
 
-    public override void BeginCooldown(GameObject caster)
-    {
-        
-        
-    }
+    
 
 
     public void Damage(GameObject target)

@@ -15,13 +15,10 @@ public class Ability : ScriptableObject
     //TODO choose which layers can be hit
 
     //This might be redundant since keyTrigger can be an event
+
     public float cooldownTime;
     public KeyCode keyTrigger;
 
-    [Header("Only for effect over time")]
-    public UnityEvent activateEvent;
-    public UnityEvent offCooldownEvent;
-    
     public TriggerType triggerType;
     public CooldownType cooldownType;
     public EffectType effectType;
@@ -42,6 +39,7 @@ public class Ability : ScriptableObject
 
     public bool followCaster;
 
+    //TODO Split these into Abstract classes instead
     public enum TriggerType
     {
         OnEvent, //Fx saml spyd op, samtidig med en anden ability eller efter en anden ability er slut
@@ -52,8 +50,10 @@ public class Ability : ScriptableObject
     public enum EffectType
     {
         Instant,
-        OverTime
+        OverTime,
+        Chain
     }
+
 
     public enum CooldownType
     {
@@ -71,19 +71,10 @@ public class Ability : ScriptableObject
         
     }
 
-    public virtual void ActivateEffect(AbilityHolder ability)
-    {
-        
-        //Follow caster
-    }
-
-
-
-    public virtual void BeginCooldown(GameObject player)
+    public virtual void ActivateEffect(GameObject target)
     {
 
     }
-
 
     public virtual List<GameObject> GetTargets()
     {

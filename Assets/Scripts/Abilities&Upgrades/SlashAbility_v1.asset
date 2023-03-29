@@ -31,10 +31,7 @@ MonoBehaviour:
   startChargeValue: 0
   endChargeValue: 0
   chargeUpSpeed: 0
-  OnStartAbilities:
-  - {fileID: 11400000, guid: ff5907b9f070245c184fdad28046124c, type: 2}
-  OnEndAbilities:
-  - {fileID: 0}
+  followCaster: 1
   someVariableDELETE: 0
   myEvent:
     m_PersistentCalls:

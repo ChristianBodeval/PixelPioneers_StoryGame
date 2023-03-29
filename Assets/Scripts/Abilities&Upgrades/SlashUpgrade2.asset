@@ -9,23 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75dc6f4f7cf984ab287edfcc0010bdcc, type: 3}
-  m_Name: Slash Upgrade 1
+  m_Script: {fileID: 11500000, guid: c6bf5de913ec44c57a1320bcb6cb2ff9, type: 3}
+  m_Name: SlashUpgrade2
   m_EditorClassIdentifier: 
   name: 
   damage: 5
   cooldownTime: 3
-  keyTrigger: 0
+  keyTrigger: 116
   triggerType: 1
   cooldownType: 0
-  effectType: 1
-  duration: 5
+  effectType: 2
+  duration: 3
   tickEveryXSeconds: 1
   holdingChargeValue: 0
   startChargeValue: 0
   endChargeValue: 0
   chargeUpSpeed: 0
-  followCaster: 0
+  followCaster: 1
   range: 0
   timeBetweenEachBounce: 0
   numOfBounces: 0
+  myPrefab: {fileID: 2191891527132068989, guid: ec1d677d95de0c7409e0c489421ff1f2, type: 3}
+  lineDrawer: {fileID: 0}
