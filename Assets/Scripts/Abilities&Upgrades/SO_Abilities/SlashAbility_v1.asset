@@ -14,25 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Slash
   damage: 30
-  cooldownTime: 3
-  keyTrigger: 107
-  activateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  offCooldownEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  triggerType: 1
-  cooldownType: 0
-  effectType: 0
   duration: 0
-  tickEveryXSeconds: 0
-  holdingChargeValue: 0
-  startChargeValue: 0
-  endChargeValue: 0
-  chargeUpSpeed: 0
-  followCaster: 1
-  someVariableDELETE: 0
-  myEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  cooldownTime: 3
+  keyTrigger: 104
+  isFollowingCaster: 1
+  canChangeColors: 1

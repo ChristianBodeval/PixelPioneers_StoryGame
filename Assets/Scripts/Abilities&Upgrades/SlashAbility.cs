@@ -7,11 +7,6 @@ using UnityEngine.U2D;
 [CreateAssetMenu]
 public class SlashAbility : Ability
 {    
-    [Header("Ability specific attributes")]
-    public float someVariableDELETE;
-
-    public UnityEvent myEvent;
-
     public override void ActivateEffect(List<GameObject> targets)
     {
         //TODO Damage all enemy with health.

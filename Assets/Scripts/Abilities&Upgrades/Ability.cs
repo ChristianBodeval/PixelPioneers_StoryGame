@@ -8,6 +8,7 @@ public class Ability : ScriptableObject
 {
     public new string name;
     public float damage;
+    public float duration;
 
     //TODO Hide unrelevant info, for different settings. E.g cooldownTime, for non-timed cooldown,
     //and KeyCode for effectTriggered from other effects
@@ -19,50 +20,11 @@ public class Ability : ScriptableObject
     public float cooldownTime;
     public KeyCode keyTrigger;
 
-    public TriggerType triggerType;
-    public CooldownType cooldownType;
-    public EffectType effectType;
-
-
-    //Only for effect over time
-    [Header("Only for effect over time")]
-    public float duration;
-    public float tickEveryXSeconds;
-
-    //Hold down trigger
-    //Todo finetune this
-    [Header("Only for KeyHold")]
-    public float holdingChargeValue; //0 to 1 which is 0% to 100%
-    public float startChargeValue; //E.g 0.05
-    public float endChargeValue; 
-    public float chargeUpSpeed;
-
-    public bool followCaster;
+    public bool isFollowingCaster;
+    public bool canChangeColors;
 
     //TODO Split these into Abstract classes instead
-    public enum TriggerType
-    {
-        OnEvent, //Fx saml spyd op, samtidig med en anden ability eller efter en anden ability er slut
-        KeyPress,
-        KeyHold
-    }
-
-    public enum EffectType
-    {
-        Instant,
-        OverTime,
-        Chain
-    }
-
-
-    public enum CooldownType
-    {
-        Timed,
-        OnEvent
-        //Eventuelt combination.
-    }
-
-    public IEnumerator EffectCoroutine;
+    
 
 
 
@@ -71,7 +33,7 @@ public class Ability : ScriptableObject
         
     }
 
-    public virtual void ActivateEffect(GameObject target)
+    public virtual void Initialize(GameObject obj)
     {
 
     }

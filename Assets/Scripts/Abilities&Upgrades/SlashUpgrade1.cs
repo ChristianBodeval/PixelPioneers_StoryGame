@@ -7,27 +7,19 @@ using static UnityEngine.GraphicsBuffer;
 [CreateAssetMenu]
 public class SlashUpgrade1 : Ability
 {
-    public float range;
-    public float timeBetweenEachBounce;
-    public int numOfBounces;
+    public float tickEveryXSeconds;
+
+    OverTimeEffect effect;
+
+    public override void Initialize(GameObject obj)
+    {
+        effect = obj.GetComponent<OverTimeEffect>();
+        effect.tickEveryXSeconds = tickEveryXSeconds;
+        effect.duration = duration;
+    }
 
     public override void ActivateEffect(List<GameObject> targets)
     {
-        Debug.Log("Targets: " + targets);
-
-        //TODO Damage all enemy with health.
-        foreach (GameObject target in targets)
-        {
-            Damage(target);
-        }
-    }
-
-    
-
-
-    public void Damage(GameObject target)
-    {
-        //Deal damage
-        Debug.Log("Damaged " + this.damage + " to " + target.name);
+        effect.Activate(targets);
     }
 }

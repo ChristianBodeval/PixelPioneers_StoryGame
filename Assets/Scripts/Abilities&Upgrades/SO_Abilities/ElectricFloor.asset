@@ -10,22 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75dc6f4f7cf984ab287edfcc0010bdcc, type: 3}
-  m_Name: Slash Upgrade 1
+  m_Name: ElectricFloor
   m_EditorClassIdentifier: 
-  name: 
+  name: ElectricFloor
   damage: 5
-  cooldownTime: 3
+  duration: 3
+  cooldownTime: 5
   keyTrigger: 0
-  triggerType: 1
-  cooldownType: 0
-  effectType: 1
-  duration: 5
-  tickEveryXSeconds: 1
-  holdingChargeValue: 0
-  startChargeValue: 0
-  endChargeValue: 0
-  chargeUpSpeed: 0
-  followCaster: 0
-  range: 0
-  timeBetweenEachBounce: 0
-  numOfBounces: 0
+  isFollowingCaster: 0
+  canChangeColors: 1
+  tickEveryXSeconds: 0.5

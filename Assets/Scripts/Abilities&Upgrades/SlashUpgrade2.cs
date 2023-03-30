@@ -7,35 +7,30 @@ using static UnityEngine.GraphicsBuffer;
 [CreateAssetMenu]
 public class SlashUpgrade2 : Ability
 {
+    [Header("Ability Specific")]
     public float range;
     public float timeBetweenEachBounce;
-    public int numOfBounces;
-
-    public GameObject myPrefab;
-
-    public DrawLineBetween2Points lineDrawer;
+    public int bounces;
+    private ChainEffect chainEffect;
 
 
+    public override void Initialize(GameObject obj)
+    {
+        chainEffect = obj.GetComponent<ChainEffect>();
+        chainEffect.range = range;
+        chainEffect.timeBetweenEachBounce = timeBetweenEachBounce;
+        chainEffect.bounces = bounces;
+    }
 
-
-    public void ActivateEffect(List<GameObject> targets)
+    public override void ActivateEffect(List<GameObject> targets)
     {
         //Pick random target
-        for (int i = 0; i < targets.Count; i++)
-        {
-            Damage(targets[i]);
+        //Todo make this an Generic ScriptableObject function
+        //Random target
 
-            if (i < targets.Count - 1)
-                lineDrawer.SetLine(targets[i].transform.position, targets[i + 1].transform.position);
-        }
+        chainEffect.Activate(targets);
+
 
     }
 
-    
-
-    public void Damage(GameObject target)
-    {
-        //Deal damage
-        Debug.Log("Damaged " + this.damage + " to " + target.name);
-    }
 }

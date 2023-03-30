@@ -9,9 +9,8 @@ public class AbilityHolder : MonoBehaviour
 {
     public GameObject caster;
     public Ability ability;
-    float cooldownTime;
+    private float cooldownTime;
     private float duration;
-
     private float timeCasted;
     List<GameObject> targets;
 
@@ -22,10 +21,7 @@ public class AbilityHolder : MonoBehaviour
 
     public AbilityHolder nextAbility;
 
-    public DrawLineBetween2Points lineRenderer;
-
     [SerializeField] public ColliderDrawer collider;
-
     [SerializeField] private SlashCone colliderStat;
 
     IEnumerator effectOverTimeCoroutine;
@@ -47,9 +43,9 @@ public class AbilityHolder : MonoBehaviour
     private void Awake()
     {
         duration = ability.duration;
+        ability.Initialize(this.gameObject);
 
-
-        if (ability.followCaster)
+        if (ability.isFollowingCaster)
         {
             //Set caster as parent
             transform.parent = caster.transform;
@@ -58,8 +54,6 @@ public class AbilityHolder : MonoBehaviour
             //Same rotation as caster
             transform.rotation = caster.transform.rotation;
         }
-
-
     }
 
     AbilityState state = AbilityState.ready; 
@@ -71,18 +65,17 @@ public class AbilityHolder : MonoBehaviour
 
 
         //Copy position. DOSEN'T WORK - How do i handle it should follow the player?
-
-        
-        
-
     }
 
     private IEnumerator ChangeColor()
     {
-        collider.spriteShapeRenderer.color = activeColor;
-        yield return new WaitForSeconds(ability.duration);
-        collider.spriteShapeRenderer.color = cooldownColor;
-        yield return null;
+        if(ability.canChangeColors)
+        {
+            collider.spriteShapeRenderer.color = activeColor;
+            yield return new WaitForSeconds(ability.duration);
+            collider.spriteShapeRenderer.color = cooldownColor;
+            yield return null;
+        }
     }
 
     private void SetActive()
@@ -90,6 +83,10 @@ public class AbilityHolder : MonoBehaviour
         this.gameObject.transform.position = caster.transform.position;
         this.gameObject.transform.rotation = caster.transform.rotation;
 
+        targets = collider.targets;
+
+        if (targets.Count > 0)
+            ability.ActivateEffect(targets);
 
         Debug.Log("Called Active");
         StartCoroutine(ChangeColor());
@@ -97,7 +94,11 @@ public class AbilityHolder : MonoBehaviour
         duration = ability.duration;
         state = AbilityState.active;
 
-        //Sets the players position to the ability
+        //Effect type
+        if (nextAbility != null)
+        {
+            nextAbility.SetActive();
+        }
     }
 
     private void SetCooldown()
@@ -110,118 +111,6 @@ public class AbilityHolder : MonoBehaviour
         state = AbilityState.cooldown;
     }
 
-
-    public IEnumerator EffectOverTime()
-    {
-        while (Time.time < timeCasted)
-        {
-            ability.ActivateEffect(collider.targets);
-            Debug.Log("Casted");
-            //TODO Set to tick pr seconds
-            yield return new WaitForSeconds(1f);
-        }
-        SetCooldown();
-        yield return null;
-    }
-
-
-
-
-
-
-    GameObject myGM;
-    float myradius = 0;
-    public Collider2D[] mytargets;
-    private void OnDrawGizmos()
-    {
-        if(myGM != null)
-            Gizmos.DrawWireSphere(myGM.transform.position + myGM.transform.right * 0, myradius);
-    }
-
-    IEnumerator ChainDamage(GameObject startingTarget, float range, float timeBetweenEachBounce, int bounces)
-    {
-
-        myradius = range;
-
-        Debug.Log("ChainDamge");
-        ability.ActivateEffect(startingTarget);
-
-        Collider2D[] newTargets;
-
-        GameObject newTarget;
-
-        int randomNumber;
-
-        for (int i = 0; i < bounces; i++)
-        {
-
-
-            myGM = startingTarget;
-
-            //Cast circle to tind targets
-
-
-            newTargets = null;
-
-            //TODO Add layermask
-            newTargets = Physics2D.OverlapCircleAll(startingTarget.transform.position, range,LayerMask.GetMask("Enemy"));
-
-            mytargets = newTargets;
-
-            Debug.Log("Target Length: " + newTargets.Length);
-
-            if (newTargets.Length == 0)
-            {
-                break;
-            }
-
-
-
-
-            randomNumber = Random.Range(0, newTargets.Length);
-            newTarget = newTargets[randomNumber].transform.gameObject;
-
-            //Debug.Log("Current target:" + startingTarget.GetInstanceID() + " && New target:" + newTarget.GetInstanceID());
-
-
-            
-
-            for (int counter = 0; counter < 10; counter++)
-            {
-                if (newTarget.GetInstanceID() != startingTarget.GetInstanceID())
-                    break;
-                randomNumber = Random.Range(0, newTargets.Length);
-                newTarget = newTargets[randomNumber].transform.gameObject;                
-            }
-            
-
-            if (startingTarget.GetInstanceID() == newTarget.GetInstanceID())
-            {
-                break;
-                Debug.Log("THEY ARE THE SAME");
-            }
-
-
-            lineRenderer.SetLine(startingTarget.transform.position, newTarget.transform.position);
-
-            ability.ActivateEffect(startingTarget);
-
-            startingTarget = newTarget;
-
-
-            yield return new WaitForSeconds(timeBetweenEachBounce);
-
-            
-        }
-
-        lineRenderer.ResetLine();
-        SetCooldown();
-        yield return null;
-    }
-
-
-
-
     private void Start()
     {
         SetReady();
@@ -231,44 +120,21 @@ public class AbilityHolder : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Follow transform or not
-                
-
-        //Cast next ability
-
-        
-
         switch (state)
         {
             case AbilityState.ready:
 
-                Debug.Log("Ability ready");
-                if (ability.triggerType == Ability.TriggerType.KeyHold && Input.GetKey(ability.keyTrigger))
-                    Debug.Log("Charging up");
-                    //TODO Hold && charge up value
-
-                else if(ability.triggerType == Ability.TriggerType.KeyPress && Input.GetKeyDown(ability.keyTrigger)) 
+                if(Input.GetKeyDown(ability.keyTrigger)) 
                     SetActive();
-
-                //else if(ability.triggerType == Ability.TriggerType.OnEvent && ability.activateEvent != null)
-                //    SetActive();
 
                 break;
 
                 
             case AbilityState.active:
 
-                Debug.Log("Activated");
+                SetCooldown();
 
-
-
-                //Effect type
-                if (nextAbility != null)
-                {
-                    nextAbility.SetActive();
-                }
-
-
+                /*
                 if (ability.effectType == Ability.EffectType.Instant)
                 {
                     //Activate
@@ -300,36 +166,24 @@ public class AbilityHolder : MonoBehaviour
 
                     int randomNum = Random.Range(0, targets.Count - 1);
 
-                    chainDamageCoroutine = ChainDamage(targets[randomNum], 2f, 1f, 20);
+                    ability.ActivateEffect(targets);
                     StartCoroutine(chainDamageCoroutine);
-                }
+                }*/
                 break;
 
             case AbilityState.cooldown:
                 Debug.Log("On cooldown");
 
                 
-
-                if (ability.cooldownType == Ability.CooldownType.Timed)
+                if (cooldownTime > 0)
                 {
-                    if (cooldownTime > 0)
-                    {
-                        cooldownTime -= Time.deltaTime;
-                    }
-                    else
-                    {
-                        SetReady();
-                    }
+                    cooldownTime -= Time.deltaTime;
+                }
+                else
+                {
+                    SetReady();
                 }
 
-                else if (ability.cooldownType == Ability.CooldownType.OnEvent)
-                {
-                    //Listen for event then set ready
-                    //if (ability.offCooldownEvent != null)
-                    //{
-                    //    SetReady();
-                    //}
-                }
                 break;
 
         }
