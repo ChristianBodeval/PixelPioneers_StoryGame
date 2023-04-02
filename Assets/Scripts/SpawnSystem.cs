@@ -98,7 +98,7 @@ public class SpawnSystem : MonoBehaviour
 
     private void SpawnEnemy(WaveObject.EnemyType type)
     {
-        GameObject enemy = Pool.pool.DrawFromPool(type);
+        GameObject enemy = Pool.pool.DrawFromEnemyPool(type);
         enemy.transform.position = FindSpawnPoint();
         enemy.transform.rotation = Quaternion.Euler(-45f, 0f, 0f);
         if (isWaitingForWaveToDie) waitingDeathList.Add(enemy);
@@ -119,21 +119,21 @@ public class SpawnSystem : MonoBehaviour
             switch (randomEdge)
             {
                 case 0:
-                    point = Camera.main.ViewportToWorldPoint(new Vector2(0f, UnityEngine.Random.Range(0f, 1f))); // Left
+                    point = Camera.main.ViewportToWorldPoint(new Vector3(0f, UnityEngine.Random.Range(0f, 1f), 0f)); // Left
                     break;
                 case 1:
-                    point = Camera.main.ViewportToWorldPoint(new Vector2(UnityEngine.Random.Range(0f, 1f), 1f)); // Top
+                    point = Camera.main.ViewportToWorldPoint(new Vector3(UnityEngine.Random.Range(0f, 1f), 1f, 0f)); // Top
                     break;
                 case 2:
-                    point = Camera.main.ViewportToWorldPoint(new Vector2(1f, UnityEngine.Random.Range(0f, 1f))); // Right
+                    point = Camera.main.ViewportToWorldPoint(new Vector3(1f, UnityEngine.Random.Range(0f, 1f), 0f)); // Right
                     break;
                 case 3:
-                    point = Camera.main.ViewportToWorldPoint(new Vector2(UnityEngine.Random.Range(0f, 1f), 0f)); // Bottom
+                    point = Camera.main.ViewportToWorldPoint(new Vector3(UnityEngine.Random.Range(0f, 1f), 0f, 0f)); // Bottom
                     break;
             }
 
-            point = new Vector3(point.x, point.y - point.z, 0f); // Compensate for 45 degree angle
-            point += (point - playerPosition).normalized * 1.5f; // Put point outside screenspace
+            point = new Vector3(point.x, point.y - point.z, 0f); // Compensate for 45 degree angle of cam
+            point += (point - new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y + 10f, 0f)).normalized * 1.5f; // Put point outside screenspace
 
             bool isGrounded = Physics2D.OverlapPoint(point, groundLayer);
             bool isObstructed = Physics2D.OverlapPoint(point, obstacleLayer);
@@ -151,6 +151,3 @@ public class SpawnSystem : MonoBehaviour
     }
 
 }
-
-
-

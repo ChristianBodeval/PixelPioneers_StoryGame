@@ -180,7 +180,7 @@ public class PlayerAction : MonoBehaviour
 
                 if (isHit && los || Vector3.Distance(playerPos, enemyPos) < innerRange && los) // Is hit and in line of sight of the player
                 {
-                    Pool.pool.ReturnToPool(e.transform.gameObject); // Deactivates enemy and returns them to the pool
+                    Pool.pool.ReturnToEnemyPool(e.transform.gameObject); // Deactivates enemy and returns them to the pool
                 }
             }
         }

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class CameraScript : MonoBehaviour
 {
     [SerializeField] private float cameraDistance = -10f;
-    private Vector3 boundsOffset;
+    private CinemachineVirtualCamera cinemachineCam;
     private GameObject player;
     private float defaultZoomAmount = 5f;
     private bool isLaggingBehind = false;
@@ -13,34 +14,24 @@ public class CameraScript : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        defaultZoomAmount = Camera.main.orthographicSize;
-    }
-
-    private void Update()
-    {
-        SetPositionOnPlayer(); // Camera follows player by default
-    }
-
-    private void SetPositionOnPlayer()
-    {
-        if (isLaggingBehind) return;
-        transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 10, cameraDistance) + boundsOffset; // Follows the player
+        cinemachineCam = GameObject.FindGameObjectWithTag("CMCamera").GetComponent<CinemachineVirtualCamera>();
+        defaultZoomAmount = cinemachineCam.m_Lens.OrthographicSize;
     }
 
     public void SetZoomAmount(float zoom)
     {
-        Camera.main.orthographicSize = zoom;
+        cinemachineCam.m_Lens.OrthographicSize = zoom;
     }
 
     public float GetZoomAmount()
     {
-        return Camera.main.orthographicSize;
+        return cinemachineCam.m_Lens.OrthographicSize;
     }
 
 
     public void ResetZoom()
     {
-        Camera.main.orthographicSize = defaultZoomAmount;
+        cinemachineCam.m_Lens.OrthographicSize = defaultZoomAmount;
     }
 
     // Starts coroutine
@@ -89,10 +80,5 @@ public class CameraScript : MonoBehaviour
     {
         end -= start;
         return -end * value * (value - 2) + start;
-    }
-
-    public void SetBoundsOffset(Vector2 offset)
-    {
-        boundsOffset = offset;
     }
 }

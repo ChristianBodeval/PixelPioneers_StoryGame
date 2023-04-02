@@ -32,6 +32,7 @@ public class Mjölnir : MonoBehaviour
     [SerializeField] private float stunDuration = 1f;
     [SerializeField] private GameObject rangeIndicator;
     private bool isCharging = false;
+    private bool isCharghingCharge = false;
     private Coroutine initCharge;
     private float charge = 0f;
 
@@ -74,7 +75,7 @@ public class Mjölnir : MonoBehaviour
     // Spins the hammer around the player
     private void Spin()
     {
-        if (!canSpin && onFreezeCD) // Guard clause
+        if (!canSpin && onFreezeCD && !isCharging) // Guard clause
         {
             transform.position = freezeLocation;
             return;
@@ -125,6 +126,7 @@ public class Mjölnir : MonoBehaviour
 
     private void EnableHammer()
     {
+        isCharging = false;
         canSpin = true;    // Allow the hammer to spin again
         GetComponent<CircleCollider2D>().enabled = true;    // Player can move again
     }
@@ -140,7 +142,7 @@ public class Mjölnir : MonoBehaviour
         if (!hasChargeUpgrade) { return; }                  // Checks if we have the upgrade
 
         // Hold button
-        if ((Input.GetButton("Fire2") || isCharging) && abilityRDY)         // 'K' button held charges the ability, note you also need to have the cd ready
+        if ((Input.GetButton("Fire2") || isCharghingCharge) && abilityRDY)         // 'K' button held charges the ability, note you also need to have the cd ready
         {
             DisableHammer();
             if (initCharge != null) StopCoroutine(initCharge);
@@ -185,23 +187,20 @@ public class Mjölnir : MonoBehaviour
     // Coroutine for suspending execution in a while loop
     private IEnumerator ReleaseCharge()
     {
-        while (isCharging) { yield return null; } // Suspends charge until we have charged for a minimum amount
+        while (isCharghingCharge) { yield return null; } // Suspends charge until we have charged for a minimum amount
 
         player.GetComponent<PlayerHealth>().AddInvulnerability(); // Cannot be hit during charge
 
-        // Points hammer and player in direction
         Vector2 direction = player.GetComponent<PlayerAction>().lastFacing;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;                // Angle for pointing to player
-        mjölnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -135f, Vector3.forward);   // Point hammer away from player
+        StartCoroutine(PointHammerForwards(direction)); // Faces hammer forward while player is charging forwards
 
         // Charge range indicator - change its size and rotation
         rangeIndicator.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 0);
         rangeIndicator.transform.position = transform.position; // Move indicator
         rangeIndicator.transform.localScale = new Vector3(1f, 1f, 1f); // Sets the length
 
-        // Camera
+        // Cameras
         Camera.main.GetComponent<CameraScript>().ResetZoom();
-        // ** Lag behind player
 
         if (charge < minCharge) // Cannot be less than min value
         {
@@ -212,39 +211,39 @@ public class Mjölnir : MonoBehaviour
     }
 
     // CHARGE function
-    private IEnumerator Charge(Vector2 direction, float chargedAmount)
+    private IEnumerator Charge(Vector2 dir, float chargedAmount)
     {
-        Vector3 targetPos = (Vector2)player.transform.position + direction * chargedAmount;
+        Vector3 targetPos = (Vector2)player.transform.position + dir * chargedAmount;
         float distance = Vector2.Distance((Vector2)player.transform.position, targetPos);
         Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-        Vector3 dir = Vector3.zero;
         LayerMask obstacleLayer = player.GetComponent<PlayerAction>().obstacleLayer;
         RaycastHit2D[] enemies;
-        List<GameObject> alreadyHit = new List<GameObject>();
+        List<GameObject> alreadyHit = new(); // new() is apparantly a thing - VS suggested it
 
-        while (distance > 0.8f && !Physics2D.Raycast(player.transform.position, direction, 0.5f, obstacleLayer))
+        while (distance > 0.8f && !Physics2D.Raycast(player.transform.position, dir, 0.5f, obstacleLayer))
         {
-            transform.position = player.transform.position + (Vector3)direction * 1.5f; // Position hammer in front of player
-
             dir = (targetPos - player.transform.position).normalized;
-            rb.velocity = dir * chargeSpeed; // Lerp from our pos to targetpos
+            rb.velocity = dir * chargeSpeed; // Move towards targetpos
 
             // Hitting enemies and the consequences
-            enemies = CheckForEnemies(baseHitboxSize + (chargedAmount * 0.1f) / 1.8f, direction);
+            enemies = CheckForEnemies(baseHitboxSize + (chargedAmount * 0.1f) / 1.8f, dir);
             foreach (RaycastHit2D enemy in enemies)
             {
                 if (!alreadyHit.Contains(enemy.transform.gameObject)) // Only hit the enemy if they have not been damaged yet
                 {
                     enemy.transform.gameObject.GetComponent<Health>().TakeDamage(aoeDMG);
                     alreadyHit.Add(enemy.transform.gameObject);
+                    enemy.transform.gameObject.GetComponent<Crowd_Control>().Stun(stunDuration);
                 }
 
+                /*
                 if (enemy.transform.gameObject.GetComponent<Health>().currentHealth > 0f) // If not dead and 
                 {
                     enemy.transform.position = Vector2.Lerp(enemy.transform.position, transform.position, 0.6f);        // Move enemy closer to hammer
                     enemy.transform.SetParent(transform);                                                               // Enemy moves with player
                     enemy.transform.gameObject.GetComponent<Crowd_Control>().Stun(stunDuration);                        // Enemy is stunned and cannot attack or move
                 }
+                */
             }
 
             yield return new WaitForSeconds(chargeUpdateInterval); // Time between steps
@@ -252,12 +251,13 @@ public class Mjölnir : MonoBehaviour
             distance = Vector2.Distance(player.transform.position, targetPos);
         }
 
-        // Remove player as parent
+        /* // Remove player as parent
         GameObject[] enemiesToUnparent = GameObject.FindGameObjectsWithTag("Enemy"); // All enemies
         foreach (GameObject enemy in enemiesToUnparent)
         {
             enemy.transform.SetParent(null);
         }
+        */
 
         player.GetComponent<PlayerAction>().StartMove(); // Allow player to move again
         player.GetComponent<PlayerAction>().CanDash();
@@ -271,11 +271,27 @@ public class Mjölnir : MonoBehaviour
     {
         while (charge < minCharge)
         {
-            isCharging = true;
+            isCharghingCharge = true;
             yield return null;
         }
 
-        isCharging = false;
+        isCharghingCharge = false;
+    }
+
+    private IEnumerator PointHammerForwards(Vector2 dir)
+    {
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;                // Angle for pointing to player
+        mjölnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -135f, Vector3.forward);   // Point hammer away from player
+
+        isCharging = true;
+
+        while (isCharging)
+        {
+            // Points hammer and player in direction
+            transform.position = player.transform.position + (Vector3)dir * 1.5f; // Position hammer in front of player
+
+            yield return null;
+        }
     }
 
     // AoE ability

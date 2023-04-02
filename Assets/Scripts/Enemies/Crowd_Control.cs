@@ -45,7 +45,7 @@ public class Crowd_Control : MonoBehaviour
     {
         animator.SetBool("CannotTransitionState", false);
         animator.SetBool("IsStunned", false);
-        animator.Play("Base Layer.Idle");
+        if (animator.isActiveAndEnabled) animator.Play("Base Layer.Idle");
     }
 
     public void Stun(float duration)

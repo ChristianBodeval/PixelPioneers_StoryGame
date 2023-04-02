@@ -33,6 +33,7 @@ public class CameraBounds : MonoBehaviour
         Gizmos.DrawSphere(pos6, 1);
         Gizmos.DrawSphere(pos7, 1);
         Gizmos.DrawSphere(pos8, 1);
+        Gizmos.DrawCube(Camera.main.transform.position + (Vector3)Vector2.up * 10f, new Vector3(1f,1f,1f));
     }
 
     public static Vector3 GetPointAtHeight(Vector3 pos)

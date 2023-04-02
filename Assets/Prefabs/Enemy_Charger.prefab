@@ -100,6 +100,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 40040618040465577, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
+      propertyPath: baseMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 4c9a87858e2754648b8f0d5143303072, type: 2}
+    - target: {fileID: 40040618040465577, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
       propertyPath: currentHealth
       value: 5
       objectReference: {fileID: 0}
@@ -246,10 +250,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 0.8
+  attackCD: 1
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
   dangerIndicator: {fileID: 1629126486}
+  chargeDmg: 4
   chargeRange: 7
   chargeUpTime: 1
   chargeHitBox: 1
@@ -257,7 +263,6 @@ MonoBehaviour:
   chargeUpdateInterval: 0.1
   chargeCD: 5
   chargingCharge: 0
-  attackCD: 1
 --- !u!114 &724059292
 MonoBehaviour:
   m_ObjectHideFlags: 0

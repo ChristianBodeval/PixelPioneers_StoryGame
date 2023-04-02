@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SpriteRendererTestMaterial
+  m_Name: PixelCircle
   m_Shader: {fileID: -6465566751694194690, guid: 1ba8b76e225828a4dac516899a9a41e9, type: 3}
   m_ValidKeywords:
   - _ALPHAPREMULTIPLY_ON
@@ -82,7 +82,7 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 2, g: 2, b: 2, a: 1}
+    - _Color: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

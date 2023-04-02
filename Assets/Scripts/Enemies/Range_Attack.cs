@@ -7,7 +7,6 @@ public class Range_Attack : Enemy_Attack
     public GameObject projectile;
     [SerializeField] private float projectileSpeed;
     [SerializeField] private float attackDMG;
-    public new float attackCD;
 
     private void FixedUpdate()
     {

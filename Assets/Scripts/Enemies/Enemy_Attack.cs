@@ -6,11 +6,11 @@ using UnityEngine;
 public class Enemy_Attack : MonoBehaviour
 {
     public float attackRange;
-    public const float attackCD = 0.2f;
+    public float attackCD = 0.2f;
     public LayerMask obstacleLayer;
     protected Animator animator;
     protected GameObject player;
-    protected Coroutine attackCDCoroutine;
+    [HideInInspector] public Coroutine attackCDCoroutine;
 
     private void FixedUpdate()
     {
@@ -48,7 +48,7 @@ public class Enemy_Attack : MonoBehaviour
         attackCDCoroutine = StartCoroutine(AttackCD()); // Starts cooldown for the attack
     }
 
-    public virtual IEnumerator AttackCD(float cooldown = attackCD) // Can be overwritten
+    public virtual IEnumerator AttackCD(float cooldown = 0.2f) // Can be overwritten
     {
         animator.SetBool("AttackRDY", false);
 

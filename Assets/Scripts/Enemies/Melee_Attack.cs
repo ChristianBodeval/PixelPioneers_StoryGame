@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Melee_Attack : Enemy_Attack
 {
-    [SerializeField] private new float attackCD;
     [SerializeField] private float attackDMG;
     [SerializeField] private float attackTelegraphTime;
 

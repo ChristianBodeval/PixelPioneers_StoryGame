@@ -175,12 +175,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 0.7
+  attackCD: 1.2
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
-  attackCD: 1.2
-  attackDMG: 0.5
-  attackTelegraphTime: 0.4
+  attackDMG: 1.5
+  attackTelegraphTime: 0.2
 --- !u!114 &1174431493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +209,7 @@ MonoBehaviour:
   currentHealth: 3
   maxHealth: 3
   blinkMaterial: {fileID: 2100000, guid: a8af1c8b3ad351b4b8c015c0516f7fc9, type: 2}
-  baseMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  baseMaterial: {fileID: 2100000, guid: 4c9a87858e2754648b8f0d5143303072, type: 2}
   deathMaterial: {fileID: 2100000, guid: bc4b0c691a23bd747b4d5cbd517df6fe, type: 2}
   deathAnimDuration: 0.2
 --- !u!1 &4020096898732813612

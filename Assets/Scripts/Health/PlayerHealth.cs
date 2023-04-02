@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,8 +24,10 @@ public class PlayerHealth : Health
 
     private void Start()
     {
+        sr = GetComponentInChildren<SpriteRenderer>();
         DamagedBar.value = HP.value;
     }
+
     public override void TakeDamage(float damage)
     {
         damagedHealthShrinkTimer = DAMAGED_HEALTH_SHRINK_TIMER_MAX;
@@ -40,6 +43,24 @@ public class PlayerHealth : Health
         blinkCoroutine = StartCoroutine(BlinkOnDmgTaken(freezeDurationOnDmgTaken));
         
     }
+
+    // Changes material and color for a duration
+    public override IEnumerator BlinkOnDmgTaken(float duration = 0.15f)
+    {
+        if (deathCoroutine != null) yield break;
+
+        Material blinkMat = Instantiate(blinkMaterial);
+        sr.material = blinkMat;
+        sr.material.color = Color.white;
+
+        yield return new WaitForSeconds(duration);
+
+        sr.material = baseMaterial;
+        sr.material.color = Color.white;
+
+        blinkCoroutine = null;
+    }
+
     public override void HealDamage(float healAmount)
     {
         this.currentHealth += healAmount;
@@ -71,6 +92,8 @@ public class PlayerHealth : Health
 
     protected override void Update()
     {
+        Debug.Log(currentHealth);
+
         HP.value = currentHealth;
         HPFill.color = gradient.Evaluate(HP.normalizedValue);
         if (this.currentHealth <= 0)

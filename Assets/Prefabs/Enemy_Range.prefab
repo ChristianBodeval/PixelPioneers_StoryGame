@@ -179,13 +179,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 4.5
+  attackCD: 1
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
   projectile: {fileID: 2191891527132068989, guid: ec1d677d95de0c7409e0c489421ff1f2, type: 3}
   projectileSpeed: 7
-  attackDMG: 0
-  attackCD: 1
+  attackDMG: 1
 --- !u!114 &254720779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +214,7 @@ MonoBehaviour:
   currentHealth: 2
   maxHealth: 2
   blinkMaterial: {fileID: 2100000, guid: a8af1c8b3ad351b4b8c015c0516f7fc9, type: 2}
-  baseMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  baseMaterial: {fileID: 2100000, guid: 4c9a87858e2754648b8f0d5143303072, type: 2}
   deathMaterial: {fileID: 2100000, guid: bc4b0c691a23bd747b4d5cbd517df6fe, type: 2}
   deathAnimDuration: 0.4
 --- !u!1 &4020096898732813612

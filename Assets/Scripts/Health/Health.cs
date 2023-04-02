@@ -6,16 +6,16 @@ public class Health : MonoBehaviour
 {
     public float currentHealth;
     public float maxHealth;
-    [SerializeField] private Material blinkMaterial;
-    [SerializeField] private Material baseMaterial;
-    [SerializeField] private Material deathMaterial;
-    [SerializeField] private float deathAnimDuration;
-    private Coroutine deathCoroutine;
+    [SerializeField] protected Material blinkMaterial;
+    [SerializeField] protected Material baseMaterial;
+    [SerializeField] protected Material deathMaterial;
+    [SerializeField] protected float deathAnimDuration;
+    protected Coroutine deathCoroutine;
     protected Coroutine blinkCoroutine;
     protected Coroutine shakeCoroutine;
     protected static readonly float freezeDurationOnDmgTaken = 0.15f;
 
-    private SpriteRenderer sr;
+    protected SpriteRenderer sr;
 
     private void Start()
     {
@@ -40,7 +40,7 @@ public class Health : MonoBehaviour
         blinkCoroutine = StartCoroutine(BlinkOnDmgTaken(freezeDurationOnDmgTaken));
 
         if (shakeCoroutine != null) StopCoroutine(shakeCoroutine);
-        shakeCoroutine = StartCoroutine(SpriteShake(0.2f, freezeDurationOnDmgTaken));
+        shakeCoroutine = StartCoroutine(SpriteShake(0.12f, freezeDurationOnDmgTaken));
         //PrintDmgToScreen(damage, Color.red);
     }
 
@@ -57,13 +57,13 @@ public class Health : MonoBehaviour
     }
 
     // Changes material and color for a duration
-    public IEnumerator BlinkOnDmgTaken(float duration = 0.15f)
+    public virtual IEnumerator BlinkOnDmgTaken(float duration = 0.15f)
     {
         if (deathCoroutine != null) yield break;
 
         Material blinkMat = Instantiate(blinkMaterial);
         sr.material = blinkMat;
-        sr.material.color = Color.red;
+        sr.material.color = Color.white;
 
         yield return new WaitForSeconds(duration);
 
@@ -73,21 +73,23 @@ public class Health : MonoBehaviour
         blinkCoroutine = null;
     }
 
+    // Removes enemy from active pool, plays death anim and spawns pickup
     protected IEnumerator Die()
     {
         if (gameObject.CompareTag("Enemy"))
         {
-            HealthPickUp.pickUpPool.AddHealthPickUp(transform.position, maxHealth / 4); // Spawn health pickup
+            HealthPickUp.pickUpPool.AddHealthPickUp(transform.position, maxHealth / 8); // Spawn health pickup
+            GameObject blood = Pool.pool.DrawFromBloodPool();
+            blood.transform.position = transform.position;
 
             gameObject.GetComponent<Crowd_Control>().Stun();
             gameObject.GetComponent<Collider2D>().enabled = false;
             Material deathMat = Instantiate(deathMaterial);
             sr.material = deathMat;
-            sr.material.color = Color.red;
+            sr.material.color = Color.white;
 
             float timeStep = deathAnimDuration / 4;
             float t = 1f;
-            float tStep = 1 / timeStep;
 
             while (sr.material.GetFloat("_FadeTime") > 0f)
             {
@@ -97,7 +99,7 @@ public class Health : MonoBehaviour
             }
 
             GameObject.Find("EnemyFactory").GetComponent<SpawnSystem>().RemoveFromWaitDeathList(gameObject);
-            Pool.pool.ReturnToPool(gameObject);
+            Pool.pool.ReturnToEnemyPool(gameObject);
         }
     }
 

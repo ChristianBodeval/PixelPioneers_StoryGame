@@ -22,7 +22,7 @@ public class SendWave : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player") && !wavesSent && sendWavesCoroutine == null)
         {
-            wavesSent = true;
+            StartCoroutine(ActivationCD());
             sendWavesCoroutine = StartCoroutine(SendWaves());
         }
     }
@@ -31,14 +31,19 @@ public class SendWave : MonoBehaviour
     {
         while (currentWave < waves.Length)
         {
-            if (wavesSent)
-            {
-                spawnSystem.AddWave(waves[currentWave]); // Add wave to spawnsystem
-                Debug.Log(currentWave);
-                currentWave++;
-            }
+            spawnSystem.AddWave(waves[currentWave]); // Add wave to spawnsystem
+            currentWave++;
 
             yield return null;
         }
+    }
+
+    private IEnumerator ActivationCD()
+    {
+        wavesSent = true;
+
+        yield return new WaitForSeconds(10f);
+
+        wavesSent = false;
     }
 }

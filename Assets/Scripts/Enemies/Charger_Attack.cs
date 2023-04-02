@@ -7,6 +7,7 @@ public class Charger_Attack : Enemy_Attack
 {
     [Header("Charge Attack")]
     [SerializeField] private GameObject dangerIndicator;
+    [SerializeField] private float chargeDmg;
     [SerializeField] private float chargeRange;
     [SerializeField] private float chargeUpTime;
     [SerializeField] private float chargeHitBox;
@@ -17,9 +18,6 @@ public class Charger_Attack : Enemy_Attack
     [HideInInspector] public bool chargingCharge; // 10/10 naming
     private Coroutine chargeCoroutine;
     private Collider2D col;
-
-    [Header("Melee Attack")]
-    public new float attackCD;
 
     private void FixedUpdate()
     {
@@ -88,6 +86,7 @@ public class Charger_Attack : Enemy_Attack
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         LayerMask obstacleLayer = player.GetComponent<PlayerAction>().obstacleLayer;
         float t = 0;
+        bool isPlayerHit = false;
 
         while (distance > 1.5f && !Physics2D.Raycast(transform.position, dir, 0.5f, obstacleLayer))
         {
@@ -100,9 +99,10 @@ public class Charger_Attack : Enemy_Attack
 
             RaycastHit2D playerHit = Physics2D.CircleCast(transform.position, chargeHitBox, dir, LayerMask.GetMask("Player")); // Check for player around enemy
 
-            if (playerHit.collider.CompareTag("Player") && playerHit.collider != null)
+            if (playerHit.collider.CompareTag("Player") && !isPlayerHit && playerHit.collider != null)
             {
-                playerHit.transform.gameObject.GetComponent<PlayerHealth>().TakeDamage(2f); // Deal damage
+                playerHit.transform.gameObject.GetComponent<PlayerHealth>().TakeDamage(chargeDmg); // Deal damage
+                isPlayerHit = true;
             }
 
             yield return new WaitForSeconds(chargeUpdateInterval); // Time between steps
