@@ -24,7 +24,7 @@ public class Mjölnir : MonoBehaviour
     [SerializeField] private float chargeDMG;
     [SerializeField] private float chargeSpeed;
     [SerializeField] private float baseHitboxSize;
-    [SerializeField] private float chargeCD;
+    public float chargeCD;
     [SerializeField] private float buttonChargeUpRate = 10;
     [SerializeField] private float chargeUpdateInterval = 0.05f;
     [SerializeField] private float minCharge;
@@ -34,6 +34,7 @@ public class Mjölnir : MonoBehaviour
     private bool isCharging = false;
     private Coroutine initCharge;
     private float charge = 0f;
+    public WeaponCDs weaponCDVisual;
 
     [Header("Area Of Effect Upgrade")]
     public bool hasAreaOfEffectUpgrade = false;
@@ -327,6 +328,7 @@ public class Mjölnir : MonoBehaviour
 
         if (abilityCDFunction != null) { StopCoroutine(abilityCDFunction); } // If we already have a cooldown running, stop it
         abilityCDFunction = StartCoroutine(AbilityCD(chargeCD));
+        weaponCDVisual.StartCoroutine("MjölnirCD");
     }
 
     // Puts ability on cd and is reset after a duration

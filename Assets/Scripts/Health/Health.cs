@@ -69,7 +69,7 @@ public class Health : MonoBehaviour
     }
 
 
-    public void Die()
+    public virtual void Die()
     {
         if (gameObject.CompareTag("Enemy") && isActiveAndEnabled)
         {

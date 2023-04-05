@@ -28903,7 +28903,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: da1dea6e9688af9468e3b9b1895c2f84, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 20aed5bf3200c8e448b755c7a202eb48, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -29532,7 +29532,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c667bf7427a571d4383cd7b5b6315242, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 78c82c49ef7fdc64c93a2dbe80de7f79, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -29941,7 +29941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 146702678757508236, guid: facc3f81a943c774c917f35e333d0129, type: 3}
       propertyPath: hasChargeUpgrade
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 146702678757508236, guid: facc3f81a943c774c917f35e333d0129, type: 3}
       propertyPath: enemyLayers.m_Bits
@@ -29953,7 +29953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 146702678757508236, guid: facc3f81a943c774c917f35e333d0129, type: 3}
       propertyPath: hasAreaOfEffectUpgrade
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 146702678757508237, guid: facc3f81a943c774c917f35e333d0129, type: 3}
       propertyPath: m_RootOrder
