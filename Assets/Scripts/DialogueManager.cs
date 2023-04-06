@@ -26,9 +26,13 @@ public class DialogueManager : MonoBehaviour
 
     private PlayerAction playerAction;
 
+    private Mjölnir mjölnir;
+
     //public bool isPlayerInRange;
 
     private Dialogue dialogueTarget;
+
+    private Animator dialogBoxAnim;
 
     private void Awake()
     {
@@ -47,7 +51,9 @@ public class DialogueManager : MonoBehaviour
         isDialoguePlaying = false;
         dialogueBox.SetActive(false);
         playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
+        mjölnir = GameObject.Find("Mjölnir").GetComponent<Mjölnir>();
         dialogueTarget = GetComponent<Dialogue>();
+        dialogBoxAnim = dialogueBox.GetComponent<Animator>();
     }
 
     private void Update()
@@ -79,29 +85,34 @@ public class DialogueManager : MonoBehaviour
         isDialoguePlaying = true;
         playerAction.StopMove();
         playerAction.enabled = false;
+        mjölnir.enabled = false;
         ContinueStory();
+        dialogBoxAnim.Play("FlyUp");
+        
     }
 
     private IEnumerator ExitDialogueMode()
     {
         yield return new WaitForSeconds(0.2f);
         isDialoguePlaying = false;
-        dialogueBox.SetActive(false);
+        //dialogueBox.SetActive(false);
 
         //resets the text
         dialogueText.text = "";
 
         playerAction.enabled = true;
+        mjölnir.enabled = true;
 
         Debug.Log("Exited Dialog Mode");
 
         currentStory.ResetState();
-        //currentStory.ChoosePathString("main");
-
-        //Allows the player to move agian
+        
         playerAction.StartMove();
 
         dialogueTarget.isDialoguePlaying = false;
+        
+        if (dialogBoxAnim != null)
+        dialogBoxAnim.Play("FlyDown");
     }
 
     private void ContinueStory()
@@ -124,6 +135,7 @@ public class DialogueManager : MonoBehaviour
             Debug.Log("Dialog CANT continue");
         }
     }
+
     private IEnumerator ShowText(string line)
     {
         isShowingText = true;
@@ -138,5 +150,4 @@ public class DialogueManager : MonoBehaviour
         }
         isShowingText = false;
     }
-
 }
