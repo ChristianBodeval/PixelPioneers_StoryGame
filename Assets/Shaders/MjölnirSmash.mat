@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PixelBase
+  m_Name: "Mj\xF6lnirSmash"
   m_Shader: {fileID: -6465566751694194690, guid: 1ba8b76e225828a4dac516899a9a41e9, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -52,7 +52,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
-    - _Bits: 32
+    - _Bits: 16
     - _Blend: 0
     - _CastShadows: 1
     - _Cull: 2
@@ -66,7 +66,7 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 1.0592737, g: 1.0592737, b: 1.0592737, a: 1}
+    - _Color: {r: 2.9960785, g: 2.9960785, b: 2.9960785, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

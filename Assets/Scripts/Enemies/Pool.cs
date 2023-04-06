@@ -7,24 +7,28 @@ public class Pool : MonoBehaviour
 {
     [Header("Enemy Pool")]
     [SerializeField] private GameObject[] enemyPrefabs = new GameObject[6];
-    private List<GameObject> storageEnemies = new();
-    private List<GameObject> inUseEnemies = new();
+    private List<GameObject> storageEnemies = new List<GameObject>();
+    private List<GameObject> inUseEnemies = new List<GameObject>();
 
     [Header("Pickup Pool")]
     [SerializeField] private GameObject pickupPrefab;
-    private List<GameObject> storagePickUps = new();
-    private List<GameObject> inUsePickUps = new();
-    private List<(Vector3, float)> toBeSpawned = new();
+    private List<GameObject> storagePickUps = new List<GameObject>();
+    private List<GameObject> inUsePickUps = new List<GameObject>();
+    private List<(Vector3, float)> toBeSpawned = new List<(Vector3, float)>();
 
     [Header("Projectile Pool")]
     [SerializeField] private GameObject projectilePrefab;
-    private List<GameObject> storageProjectiles = new();
-    private List<GameObject> inUseProjectiles = new();
+    private List<GameObject> storageProjectiles = new List<GameObject>();
+    private List<GameObject> inUseProjectiles = new List<GameObject>();
 
     [Header("Blood Pool")]
     [SerializeField] private GameObject BloodPrefab;
-    private List<GameObject> storageBloods = new();
-    private List<GameObject> inUseBloods = new();
+    [SerializeField] private GameObject BloodSplatterPSPrefab;
+    private List<GameObject> storageBloods = new List<GameObject>();
+    private List<GameObject> inUseBloods = new List<GameObject>();
+    private List<GameObject> storageBloodSplatters = new List<GameObject>();
+    private List<GameObject> inUseBloodSplatters = new List<GameObject>();
+
 
     public static Pool pool { get; private set; } // Singleton
 
@@ -196,10 +200,10 @@ public class Pool : MonoBehaviour
             return s;
         }
 
-        GameObject Blood = Instantiate(BloodPrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(0f, 0f, 0f)); // New projectile
-        inUseBloods.Add(Blood);
-        Blood.SetActive(true);
-        return Blood;
+        GameObject blood = Instantiate(BloodPrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(0f, 0f, 0f)); // New projectile
+        inUseBloods.Add(blood);
+        blood.SetActive(true);
+        return blood;
     }
 
     // Returns pickup to pool
@@ -209,5 +213,34 @@ public class Pool : MonoBehaviour
 
         if (inUseBloods.Contains(s)) inUseBloods.Remove(s);
         storageBloods.Add(s);
+    }
+
+    /// Bloodsplatter particlesystem
+
+    // Gets pickup from pool
+    public GameObject DrawFromBloodSpatterPool()
+    {
+        if (storageBloodSplatters.Count > 0)
+        {
+            GameObject ps = storageBloodSplatters[0];
+            storageBloodSplatters.Remove(ps);
+            inUseBloodSplatters.Add(ps);
+            ps.SetActive(true);
+            return ps;
+        }
+
+        GameObject bloodSplatter = Instantiate(BloodSplatterPSPrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(0f, 0f, 0f)); // New projectile
+        inUseBloodSplatters.Add(bloodSplatter);
+        bloodSplatter.SetActive(true);
+        return bloodSplatter;
+    }
+
+    // Returns pickup to pool
+    public void ReturnToBloodSplatterPool(GameObject ps)
+    {
+        ps.SetActive(false);
+
+        if (inUseBloodSplatters.Contains(ps)) inUseBloodSplatters.Remove(ps);
+        storageBloodSplatters.Add(ps);
     }
 }

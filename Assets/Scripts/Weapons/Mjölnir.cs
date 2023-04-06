@@ -306,7 +306,6 @@ public class Mjölnir : MonoBehaviour
             // Toggle aoe indicator
             GameObject indicator = Instantiate(aoeIndicator, player.transform);
             Vector2 direction = player.GetComponent<PlayerAction>().lastFacing;
-            indicator.transform.localScale = new Vector3(aoeRadius * 2, aoeRadius * 2, 1f); // Sets the length
 
             StartCoroutine(AbilityCD(areaOfEffectCD));
             StartCoroutine(AreaOfEffect(direction, indicator));
@@ -316,6 +315,8 @@ public class Mjölnir : MonoBehaviour
     // Aoe ability
     private IEnumerator AreaOfEffect(Vector3 dir, GameObject indicator)
     {
+        transform.position = player.transform.position; // Places hammer on player
+
         yield return new WaitForSeconds(castTime / 2);
 
         // Deal damage

@@ -35,6 +35,8 @@ public class Health : MonoBehaviour
 
         // Freeze frame enemies
         if (gameObject.CompareTag("Enemy")) GetComponent<Crowd_Control>().FreezeFrame(freezeDurationOnDmgTaken);
+        GameObject bloodSplatter = Pool.pool.DrawFromBloodSpatterPool();
+        bloodSplatter.transform.position = transform.position;
 
         if (blinkCoroutine != null) StopCoroutine(blinkCoroutine); // Stops blink coroutine
         blinkCoroutine = StartCoroutine(BlinkOnDmgTaken(freezeDurationOnDmgTaken));
@@ -78,12 +80,18 @@ public class Health : MonoBehaviour
     {
         if (gameObject.CompareTag("Enemy"))
         {
+            // Create blood and pickup
             HealthPickUp.pickUpPool.AddHealthPickUp(transform.position, maxHealth / 8); // Spawn health pickup
             GameObject blood = Pool.pool.DrawFromBloodPool();
             blood.transform.position = transform.position;
+            blood.transform.Rotate(new Vector3(0f, 0f, Random.Range(0, 4) * 90f)); // Random rotation
 
+            // Stop movement
             gameObject.GetComponent<Crowd_Control>().Stun();
             gameObject.GetComponent<Collider2D>().enabled = false;
+
+            // Stop animation and play dissipation shader
+            GetComponentInChildren<Animator>().speed = 0f;
             Material deathMat = Instantiate(deathMaterial);
             sr.material = deathMat;
             sr.material.color = Color.white;
@@ -98,6 +106,7 @@ public class Health : MonoBehaviour
                 yield return new WaitForSeconds(timeStep);
             }
 
+            // Deactivate enemy and return to pool
             GameObject.Find("EnemyFactory").GetComponent<SpawnSystem>().RemoveFromWaitDeathList(gameObject);
             Pool.pool.ReturnToEnemyPool(gameObject);
         }
@@ -144,6 +153,7 @@ public class Health : MonoBehaviour
         sr.color = Color.white;
         gameObject.GetComponent<Collider2D>().enabled = true;
         GetComponentInChildren<SpriteRenderer>().gameObject.transform.localPosition = Vector3.zero; // Resets sprite position
+        if (CompareTag("Enemy")) GetComponentInChildren<Animator>().speed = 1f;
     }
 
     protected virtual void Update()
