@@ -5,21 +5,36 @@ using UnityEngine.Tilemaps;
 
 public class Pool : MonoBehaviour
 {
+    [Header("Enemy Pool")]
+    [SerializeField] private GameObject[] enemyPrefabs = new GameObject[6];
     private List<GameObject> storageEnemies = new List<GameObject>();
     private List<GameObject> inUseEnemies = new List<GameObject>();
-    [Header("Spawner")]
-    [SerializeField] private float spawnFrequency = 5f;
-    [SerializeField] private GameObject prefab;
-    private Camera camera;
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private LayerMask obstacleLayer;
-    private int recursions = 0;
 
-    public static Pool pool { get; private set; }
+    [Header("Pickup Pool")]
+    [SerializeField] private GameObject pickupPrefab;
+    private List<GameObject> storagePickUps = new List<GameObject>();
+    private List<GameObject> inUsePickUps = new List<GameObject>();
+    private List<(Vector3, float)> toBeSpawned = new List<(Vector3, float)>();
+
+    [Header("Projectile Pool")]
+    [SerializeField] private GameObject projectilePrefab;
+    private List<GameObject> storageProjectiles = new List<GameObject>();
+    private List<GameObject> inUseProjectiles = new List<GameObject>();
+
+    [Header("Blood Pool")]
+    [SerializeField] private GameObject BloodPrefab;
+    [SerializeField] private GameObject BloodSplatterPSPrefab;
+    private List<GameObject> storageBloods = new List<GameObject>();
+    private List<GameObject> inUseBloods = new List<GameObject>();
+    private List<GameObject> storageBloodSplatters = new List<GameObject>();
+    private List<GameObject> inUseBloodSplatters = new List<GameObject>();
+
+
+    public static Pool pool { get; private set; } // Singleton
 
     private void Awake()
     {
-        //if there is an instance, and it's not me, delete myself
+        // If there is an instance, and it's not me, delete myself
         if (pool != null && pool != this)
         {
             Destroy(this);
@@ -32,58 +47,74 @@ public class Pool : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("SpawnEnemy", 0f, spawnFrequency);
-        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        StartCoroutine(SpawnPickUps()); // Constantly checking for healthpicks to spawn
     }
 
-    public GameObject DrawFromPool()
+
+    /// Enemy pool
+    
+    public GameObject DrawFromEnemyPool(WaveObject.EnemyType type)
     {
         if (storageEnemies.Count > 0)
         {
-            GameObject enemy = storageEnemies[0];
-            storageEnemies.Remove(enemy);
-            inUseEnemies.Add(enemy);
-            enemy.SetActive(true);
-            return enemy;
+            foreach (GameObject e in storageEnemies)
+            {
+                if (e.name.Contains(type + ""))
+                {
+                    storageEnemies.Remove(e);
+                    inUseEnemies.Add(e);
+                    e.SetActive(true);
+                    return e;
+                }
+            }
         }
-        else
-        {
-            //**spawn outside screen
-            GameObject enemy = Instantiate(prefab, new Vector3(0f,0f,0f), Quaternion.identity); //new enemy
-            inUseEnemies.Add(enemy);
-            enemy.SetActive(true);
-            return enemy;
-        }
+
+        GameObject enemy = Instantiate(enemyPrefabs[(int)type], new Vector3(0f, 0f, 0f), Quaternion.identity); // New enemy
+        inUseEnemies.Add(enemy);
+        enemy.SetActive(true);
+        return enemy;
     }
 
-    public void ReturnToPool(GameObject enemy)
+    public void ReturnToEnemyPool(GameObject enemy)
     {
         enemy.SetActive(false);
 
-        if (inUseEnemies.Contains(enemy))
+        if (inUseEnemies.Contains(enemy)) inUseEnemies.Remove(enemy); // Enemy is in use > remove from use
+
+        if (!storageEnemies.Contains(enemy)) storageEnemies.Add(enemy); // Enemy is not in storage > move to storage
+    }
+
+    // Instansiate enemies before they fully spawn such that we don't lag during combat
+    public IEnumerator PrimeEnemies(WaveObject wave)
+    {
+        /*
+        foreach (var item in collection)
         {
-            inUseEnemies.Remove(enemy);
+            // Spawn enemies offscreen
+            // Deactivate
+            yield return null;
         }
-
-        storageEnemies.Add(enemy);
+        */
+        yield return null;
     }
 
-    private void SpawnEnemy()
+    public void ClearEnemyPool()
     {
-        GameObject enemy = DrawFromPool();
-        enemy.transform.position = FindSpawnPoint();
+        storageEnemies.Clear();
     }
 
-    //returns a point eligible for spawning an enemy outside of the screen
-    private Vector2 FindSpawnPoint()
+    /// Pickup pool
+    
+    // Adds healthpickup to list for later spawning
+    public void AddHealthPickUp(Vector3 pos, float healAmount)
     {
-        float width = camera.pixelWidth / 68f + 0.5f; //half the width of the screen
-        float height = camera.pixelHeight / 68f + 0.5f; //half the height of the screen
+        lock (toBeSpawned) toBeSpawned.Add((pos, healAmount)); // Add pickup values and lock the list so it cant be used while we edit
+    }
 
-        Vector2 point = Vector2.zero;
-
-        // Random edge of the screen
-        switch (Random.Range(1,5))
+    // Spawns everything from the pickup list
+    private IEnumerator SpawnPickUps()
+    {
+        while (true)
         {
             case 1:
                 point = new Vector2(-width, Random.Range(-height, height)); // Left
@@ -120,6 +151,131 @@ public class Pool : MonoBehaviour
         {
             recursions = 0;
             return (Vector2)GameObject.FindGameObjectWithTag("Player").transform.position;
+            lock (toBeSpawned)
+            {
+                foreach (var p in toBeSpawned)
+                {
+                    GameObject pickUp = DrawFromProjectilePool();
+                    pickUp.transform.position = p.Item1;
+                    pickUp.GetComponent<HealPickUp>().healAmount = p.Item2;
+                }
+            }
+            toBeSpawned.Clear();
+            yield return new WaitForSeconds(0.01f);
         }
+    }
+
+    // Gets pickup from pool
+    public GameObject DrawFromPickupPool()
+    {
+        if (storagePickUps.Count > 0)
+        {
+            GameObject p = storagePickUps[0];
+            storagePickUps.Remove(p);
+            inUsePickUps.Add(p);
+            p.SetActive(true);
+            return p;
+        }
+
+        GameObject pickUp = Instantiate(pickupPrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(-45f, 0f, 0f)); // New pickup
+        inUsePickUps.Add(pickUp);
+        pickUp.SetActive(true);
+        return pickUp;
+    }
+
+    // Returns pickup to pool
+    public void ReturnToPickupPool(GameObject p)
+    {
+        p.SetActive(false);
+
+        if (inUsePickUps.Contains(p)) inUsePickUps.Remove(p);
+        storagePickUps.Add(p);
+    }
+
+    /// Projectile pool
+
+    // Gets pickup from pool
+    public GameObject DrawFromProjectilePool()
+    {
+        if (storagePickUps.Count > 0)
+        {
+            GameObject p = storageProjectiles[0];
+            storageProjectiles.Remove(p);
+            inUseProjectiles.Add(p);
+            p.SetActive(true);
+            return p;
+        }
+
+        GameObject projectile = Instantiate(projectilePrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(-45f, 0f, 0f)); // New projectile
+        inUseProjectiles.Add(projectile);
+        projectile.SetActive(true);
+        return projectile;
+    }
+
+    // Returns pickup to pool
+    public void ReturnToProjectilePool(GameObject p)
+    {
+        p.SetActive(false);
+
+        if (inUseProjectiles.Contains(p)) inUseProjectiles.Remove(p);
+        storageProjectiles.Add(p);
+    }
+
+    /// Blood pool
+
+    // Gets pickup from pool
+    public GameObject DrawFromBloodPool()
+    {
+        if (storageBloods.Count > 0)
+        {
+            GameObject s = storageBloods[0];
+            storageBloods.Remove(s);
+            inUseBloods.Add(s);
+            s.SetActive(true);
+            return s;
+        }
+
+        GameObject blood = Instantiate(BloodPrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(0f, 0f, 0f)); // New projectile
+        inUseBloods.Add(blood);
+        blood.SetActive(true);
+        return blood;
+    }
+
+    // Returns pickup to pool
+    public void ReturnToBloodPool(GameObject s)
+    {
+        s.SetActive(false);
+
+        if (inUseBloods.Contains(s)) inUseBloods.Remove(s);
+        storageBloods.Add(s);
+    }
+
+    /// Bloodsplatter particlesystem
+
+    // Gets pickup from pool
+    public GameObject DrawFromBloodSpatterPool()
+    {
+        if (storageBloodSplatters.Count > 0)
+        {
+            GameObject ps = storageBloodSplatters[0];
+            storageBloodSplatters.Remove(ps);
+            inUseBloodSplatters.Add(ps);
+            ps.SetActive(true);
+            return ps;
+        }
+
+        GameObject bloodSplatter = Instantiate(BloodSplatterPSPrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(0f, 0f, 0f)); // New projectile
+        inUseBloodSplatters.Add(bloodSplatter);
+        bloodSplatter.SetActive(true);
+        return bloodSplatter;
+    }
+
+    // Returns pickup to pool
+    public void ReturnToBloodSplatterPool(GameObject ps)
+    {
+        ps.SetActive(false);
+
+        if (inUseBloodSplatters.Contains(ps)) inUseBloodSplatters.Remove(ps);
+        storageBloodSplatters.Add(ps);
     }
 }

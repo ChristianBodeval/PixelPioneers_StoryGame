@@ -72,9 +72,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 0.5615011, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -134,21 +134,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee3f7fdb7a6d1f64fb4a29de96342fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spinDMG: 1
   spinRadius: 1
   spinSpeed: 10
   spriteRotationSpeed: 14
-  sprite: {fileID: 146702678940892861}
-  hasChargeUpgrade: 1
+  "mj\xF6lnirSprite": {fileID: 146702678940892861}
+  onCollisionFreezeDuration: 0.05
+  collisionFreezeCD: 0.05
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 4224
+  hasChargeUpgrade: 0
+  chargeDMG: 2
   chargeSpeed: 20
-  chargeHitbox: 0.7
-  chargeCD: 2
+  baseHitboxSize: 1
+  chargeCD: 6
   buttonChargeUpRate: 10
-  chargeUpdateInterval: 0.05
+  chargeUpdateInterval: 0.01
   minCharge: 4
   maxCharge: 10
   stunDuration: 0.4
-  hasAreaOfEffectUpgrade: 0
-  areaOfEffectCD: 0
+  rangeIndicator: {fileID: 1724249966}
+  hasAreaOfEffectUpgrade: 1
+  aoeDMG: 3
+  castTime: 0.3
+  aoeRadius: 3
+  areaOfEffectCD: 6
+  aoeIndicator: {fileID: 5329026731082029813, guid: de5e183b1d77fd9498fc6ad42cdee46e, type: 3}
 --- !u!58 &146702678757508239
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -355,7 +367,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.9056604, g: 0.89507943, b: 0.20932718, a: 1}
+      maxColor: {r: 0.002990329, g: 0.35386252, b: 0.7924528, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4256,7 +4268,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.8666878, b: 0, a: 1}
+      maxColor: {r: 0.7018868, g: 0.7772883, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4902,8 +4914,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 87dee5d03323e4003a9785eface0284a, type: 2}
-  - {fileID: 2100000, guid: 87dee5d03323e4003a9785eface0284a, type: 2}
+  - {fileID: 2100000, guid: d6855f006ba173646821bd8f7f702f34, type: 2}
+  - {fileID: 2100000, guid: d6855f006ba173646821bd8f7f702f34, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4975,7 +4987,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 87dee5d03323e4003a9785eface0284a, type: 2}
+  - {fileID: 2100000, guid: d6855f006ba173646821bd8f7f702f34, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5044,8 +5056,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.9886322, b: 0, a: 1}
-      key1: {r: 0.8962264, g: 0.88271797, b: 0.26633143, a: 0.7921569}
+      key0: {r: 0, g: 0.33657384, b: 1, a: 1}
+      key1: {r: 0.11461371, g: 0.20031445, b: 0.4433962, a: 0.827451}
       key2: {r: 0, g: 0, b: 0, a: 0.25882354}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -5061,7 +5073,7 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 48188
+      atime1: 52428
       atime2: 65535
       atime3: 0
       atime4: 0
@@ -5132,7 +5144,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: bc4b0c691a23bd747b4d5cbd517df6fe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

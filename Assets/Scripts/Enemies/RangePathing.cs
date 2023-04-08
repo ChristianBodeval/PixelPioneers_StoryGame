@@ -7,7 +7,6 @@ public class RangePathing : MonoBehaviour
 {
     [Header("General for Pathfinding")]
     [SerializeField] private float speed = 3f;
-    [SerializeField] private float activateDistance = 0.5f;
     private float attackRange;
     private GameObject player;
     private Rigidbody2D rb;
@@ -21,10 +20,12 @@ public class RangePathing : MonoBehaviour
     [SerializeField] private float offset = 0.2f;
     private Path path;
     private int currentWayPoint = 0;
+    private bool canGeneratePath = true;
     private Seeker seeker;
 
     [Header("Custom Behavior")]
-    [SerializeField] private bool isFollowing = true;
+    [SerializeField] private float fleeStickToPathDuration = 0.5f;
+    private Coroutine fleeStickToPath;
 
     private void Start()
     {
@@ -33,38 +34,42 @@ public class RangePathing : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         attackRange = GetComponent<Range_Attack>().attackRange;
+        animator.SetBool("CanMove", true);
 
         StartCoroutine(UpdatePath()); // Updates pathfinding regularly
     }
 
     private void OnEnable()
     {
-        if (seeker != null) { StartCoroutine(UpdatePath()); } // Updates pathfinding regularly - only starts if we have a seeker        
+        if (animator != null) animator.SetBool("CanMove", true);
+
+        if (seeker != null) { StartCoroutine(UpdatePath()); } // Updates pathfinding regularly - only starts if we have a seeker
+        canGeneratePath = true;
     }
 
     private void FixedUpdate()
     {
-        Flip(); // Flips sprite
+        FlipSprite(); // FlipSprites sprite
 
         //A* pathing
-        if (TargetNotAttackable() || TargetTooClose())
+        if ((IsTargetNotAttackable() || IsTargetTooClose()) && !animator.GetBool("CannotTransitionState") && !animator.GetBool("IsStunned") && animator.GetBool("CanMove"))
         {
             PathFollow();
         }
         else
         {
-            rb.velocity = new Vector3(0f, 0f, 0f);
+            animator.SetBool("IsFleeing", false); // Reset variable - only attacks if enemy isn't fleeing
+            rb.velocity = Vector3.zero;
         }
     }
 
     // Decides where to make an A* path to
     private Vector2 PathingTarget()
     {
-        isFollowing = true; // Reset variable - we want to move by default
-
         // If we are out of range or can't see player > move to player
-        if (TargetNotAttackable()) 
+        if (IsTargetNotAttackable()) 
         {
+            animator.SetBool("IsFleeing", false);
             return player.transform.position;
         }
 
@@ -73,7 +78,7 @@ public class RangePathing : MonoBehaviour
         Vector2 direction = (playerPos - (Vector2)transform.position).normalized; // Direction to player
         Vector2 point = (Vector2)transform.position - direction * 1.5f; // Point to walk to
         
-        if (TargetTooClose() && !Physics2D.OverlapPoint(point, obstacleLayer) && Physics2D.OverlapPoint(point, groundLayer)) // Player is too close & point can be walked to
+        if (IsTargetTooClose() && !Physics2D.OverlapPoint(point, obstacleLayer) && Physics2D.OverlapPoint(point, groundLayer)) // Player is too close & point can be walked to
         {
             return point;
         }
@@ -93,7 +98,6 @@ public class RangePathing : MonoBehaviour
             }
         }
 
-        isFollowing = false;
         return transform.position; // Default if we can't find a spot
     }
 
@@ -109,9 +113,17 @@ public class RangePathing : MonoBehaviour
 
     private void PathFollow()
     {
-        if (path == null || currentWayPoint >= path.vectorPath.Count || !isFollowing) { return; } // Guard clause - There is no path or we are at our endpoint or not following
+        if (path == null || currentWayPoint >= path.vectorPath.Count) { return; } // Guard clause - There is no path or we are at our endpoint or not following
 
-        Vector2 direction = (path.vectorPath[currentWayPoint] - transform.position).normalized;
+        Vector2 direction;
+        if (!animator.GetBool("IsFleeing"))
+        {
+            direction = (path.vectorPath[currentWayPoint] - transform.position).normalized;
+        }
+        else
+        {
+            direction = (path.vectorPath[path.vectorPath.Count - 1] - transform.position).normalized;
+        }
 
         Move(direction);
 
@@ -130,9 +142,22 @@ public class RangePathing : MonoBehaviour
         rb.velocity = dir * speed; // Movement
     }
 
-    private void Flip()
+    private void FlipSprite()
     {
-        Vector2 dir = ((Vector2)player.transform.position - rb.position).normalized; // Look to player
+        if (animator.GetBool("IsStunned")) return; // Guard clause - don't flip if stunned
+
+        Vector2 dir;
+
+        if (animator.GetBool("IsFleeing"))
+        {
+            if (path == null || currentWayPoint >= path.vectorPath.Count) { return; } // Guard clause - There is no path or we are at our endpoint or not following
+
+            dir = (path.vectorPath[currentWayPoint] - transform.position).normalized; // Look away from player
+        }
+        else
+        {
+            dir = (player.transform.position - transform.position).normalized; // Look to player
+        }
 
         if (dir.x > 0.24f) // Right
         {
@@ -144,7 +169,7 @@ public class RangePathing : MonoBehaviour
         }
     }
 
-    private bool TargetNotAttackable()
+    private bool IsTargetNotAttackable()
     {
         float dis = Mathf.Abs(Vector2.Distance(player.transform.position, transform.position));
 
@@ -156,7 +181,7 @@ public class RangePathing : MonoBehaviour
         return dis > attackRange; // Return true if we are not in attackrange
     }
 
-    private bool TargetTooClose()
+    private bool IsTargetTooClose()
     {
         float dis = Mathf.Abs(Vector2.Distance(player.transform.position, transform.position));
 
@@ -166,7 +191,16 @@ public class RangePathing : MonoBehaviour
             return false;
         }
 
-        return dis < attackRange - 0.5f; // Return true if we are in range and not in attackrange - -0.5f so enemy has a headzone where it does not move
+        if (dis < attackRange - 0.5f) // Return true if we are in range and not in attackrange - -0.5f so enemy has a headzone where it does not move
+        {
+            animator.SetBool("IsFleeing", true);
+            GetComponent<Enemy_Attack>().AttackCD(0.4f); // Put attack on cd
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void OnPathComplete(Path p)
