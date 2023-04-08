@@ -52,7 +52,7 @@ public class Pool : MonoBehaviour
 
 
     /// Enemy pool
-    
+
     public GameObject DrawFromEnemyPool(WaveObject.EnemyType type)
     {
         if (storageEnemies.Count > 0)
@@ -104,7 +104,7 @@ public class Pool : MonoBehaviour
     }
 
     /// Pickup pool
-    
+
     // Adds healthpickup to list for later spawning
     public void AddHealthPickUp(Vector3 pos, float healAmount)
     {
@@ -116,41 +116,6 @@ public class Pool : MonoBehaviour
     {
         while (true)
         {
-            case 1:
-                point = new Vector2(-width, Random.Range(-height, height)); // Left
-                break;
-            case 2:
-                point = new Vector2(Random.Range(-width, width), height); // Top
-                break;
-            case 3:
-                point = new Vector2(width, Random.Range(-height, height)); // Right
-                break;
-            case 4:
-                point = new Vector2(Random.Range(-width, width), -height); // Bottom
-                break;
-            default:
-                return new Vector2(Random.Range(-width, width), Random.Range(-height, height));
-        }
-
-        bool grounded = Physics2D.OverlapPoint((Vector2)GameObject.FindGameObjectWithTag("Player").transform.position + point, groundLayer);
-        bool unobstructed = !Physics2D.OverlapPoint((Vector2)GameObject.FindGameObjectWithTag("Player").transform.position + point, obstacleLayer);
-
-
-
-        if (grounded && unobstructed)  // Checks if we have ground and no obstacles in the way
-        {
-            recursions = 0; // Reset recussion count
-            return point + (Vector2)GameObject.FindGameObjectWithTag("Player").transform.position; 
-        }
-        else if (recursions < 50 && (!grounded || !unobstructed)) // Call method again if we can't spawn
-        {
-            recursions++; // Keep track of how many recursions we do, to avoid stackoverflow
-            return FindSpawnPoint();
-        }
-        else // Default case in case of recussion limit
-        {
-            recursions = 0;
-            return (Vector2)GameObject.FindGameObjectWithTag("Player").transform.position;
             lock (toBeSpawned)
             {
                 foreach (var p in toBeSpawned)

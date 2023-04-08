@@ -146,7 +146,7 @@ public class Health : MonoBehaviour
 
     private void OnDisable()
     {
-        Mjölnir.cannotHitList.Remove(gameObject); // Remove this enemy from the list
+        Mjoelnir.cannotHitList.Remove(gameObject); // Remove this enemy from the list
         if (deathCoroutine != null) StopCoroutine(deathCoroutine);
         deathCoroutine = null;
         sr.material = baseMaterial;

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class Mjölnir : MonoBehaviour
+public class Mjoelnir : MonoBehaviour
 {
     [Header("Hammer Movement")]
     [SerializeField] private float spinDMG;
     [SerializeField] private float spinRadius;
     [SerializeField] private float spinSpeed;
     [SerializeField] private float spriteRotationSpeed;
-    [SerializeField] private GameObject mj�lnirSprite;
+    [SerializeField] private GameObject mjoelnirSprite;
     [SerializeField] private float onCollisionFreezeDuration;
     [SerializeField] private float collisionFreezeCD; // Cannot be held still forever
     [SerializeField] private LayerMask enemyLayers;
@@ -86,7 +86,7 @@ public class Mjölnir : MonoBehaviour
         }
 
         transform.position = player.transform.position + (transform.right + transform.up) * spinRadius;
-        mj�lnirSprite.transform.Rotate(0f, 0f, spriteRotationSpeed);
+        mjoelnirSprite.transform.Rotate(0f, 0f, spriteRotationSpeed);
     }
 
     private IEnumerator FreezeSpin()
@@ -152,7 +152,7 @@ public class Mjölnir : MonoBehaviour
 
             // Position the hammer on player
             transform.position = player.transform.position;
-            mj�lnirSprite.transform.Rotate(0f, 0f, spriteRotationSpeed);
+            mjoelnirSprite.transform.Rotate(0f, 0f, spriteRotationSpeed);
 
             charge += Time.deltaTime * buttonChargeUpRate;  // Charge value
             if (charge > maxCharge) // Cannot exceed max value
@@ -281,7 +281,7 @@ public class Mjölnir : MonoBehaviour
     private IEnumerator PointHammerForwards(Vector2 dir)
     {
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;                // Angle for pointing to player
-        mj�lnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -135f, Vector3.forward);   // Point hammer away from player
+        mjoelnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -135f, Vector3.forward);   // Point hammer away from player
 
         isCharging = true;
 

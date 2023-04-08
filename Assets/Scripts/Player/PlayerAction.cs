@@ -11,7 +11,6 @@ public class PlayerAction : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 moveVector = new Vector3(1f, 0f, 0f);
     private bool canMove = true;
-    [SerializeField] private float smoothTurningFactor;
 
     [Header("Base Attack")]
     [SerializeField] private float cooldown = 0.4f;
@@ -31,7 +30,7 @@ public class PlayerAction : MonoBehaviour
     private Health healthScript;
 
     [Header("Dash")]
-    public Image DashCDVisual;
+    //public Image DashCDVisual;
     public float dashDistance = 5f; // Distance of the dash
     public float dashDuration = 0.5f; // Duration of the dash
     public float dashCooldownTime = 1.8f;
@@ -48,7 +47,7 @@ public class PlayerAction : MonoBehaviour
         dashDirection = GetDashDirection();
 
         healthScript = GetComponent<Health>();
-        DashCDVisual.fillAmount = 1;
+        //DashCDVisual.fillAmount = 1;
 
     }
 
@@ -74,16 +73,13 @@ public class PlayerAction : MonoBehaviour
 
         Dash();
 
-        DashCDVisual.fillAmount = dashCooldownRemaining / dashCooldownTime;
+        //DashCDVisual.fillAmount = dashCooldownRemaining / dashCooldownTime;
     }
 
     private void FixedUpdate()
     {
         Move();
 
-        Dash();
-
-        FaceWalkingDirection();
         // Check if the player is dashing
         if (isDashing)
         {
@@ -115,25 +111,10 @@ public class PlayerAction : MonoBehaviour
         }
     }
 
-    public Vector3 direction = new Vector3(0, 0, 1);
-
-    public void FaceWalkingDirection()
-    {
-        if (rb.velocity != Vector2.zero)
-        {
-            //Moving direction
-            Vector3 direction = ((Vector3)transform.position + (Vector3)rb.velocity) - transform.position;
-            Vector3 velocity = Vector3.zero;
-            transform.right = Vector3.SmoothDamp(transform.right, direction, ref velocity, smoothTurningFactor);
-        }
-    }
-
-    //TODO Can these be deleted now?
     public void StartMove()
     {
         canMove = true;
     }
-    //TODO Can these be deleted now?
 
     public void StopMove()
     {
@@ -150,42 +131,6 @@ public class PlayerAction : MonoBehaviour
         canMove = true;
     }
 
-    private void Dash()
-    {
-        if (!canDash || !Input.GetButton("Dash")) { return; } // Guard clause - Continues if we can dash and have pressed button
-
-        StartCoroutine(DashCD());
-        StartCoroutine(DashMove());
-        StartCoroutine(StopMove(dashDuration));
-    }
-
-    private IEnumerator DashMove()
-    {
-        float currentDashTime = dashDuration;
-
-        while (currentDashTime > 0)
-        {
-            currentDashTime -= Time.deltaTime; // Countdown
-            transform.position += dashStepLength * (Vector3)lastFacing;
-            CircleCollider2D col = GetComponent<CircleCollider2D>(); // Players collider, used to check if the player is in a wall
-
-            // Gets the player through walls if near them
-            if (Physics2D.CircleCast(transform.position, col.radius-0.2f, lastFacing, col.radius-0.2f, obstacleLayer))
-            {
-                transform.position += dashStepLength * (Vector3)lastFacing; // Try and move through it
-            }
-
-            yield return null;
-        }
-    }
-
-    private IEnumerator DashCD()
-    {
-        canDash = false;
-
-        yield return new WaitForSeconds(dashDuration + dashCD);
-
-        canDash = true;
     private void Facing()
     {
         // Saves the vector of where the player was last moving
