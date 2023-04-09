@@ -1,5 +1,6 @@
 using Ink.Runtime;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Dialogue : MonoBehaviour
@@ -17,11 +18,13 @@ public class Dialogue : MonoBehaviour
     public GameObject visualCue; // Pops up when the player can interact
     private PlayerAction playerAction;
     private DialogueManager dialogueManager;
+    private TextMeshProUGUI dialogueNPCName;
 
     private void Awake()
     {
         playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
         dialogueManager = FindObjectOfType<DialogueManager>();
+        dialogueNPCName = dialogueManager.dialogueNPCName;
     }
 
     private void Start()
@@ -61,6 +64,7 @@ public class Dialogue : MonoBehaviour
         {
             isPlayerInRange = true;
             //player = col.gameObject;
+            dialogueNPCName.text = gameObject.name;
 
             Debug.Log("Player collided with " + gameObject.name);
         }
@@ -71,6 +75,7 @@ public class Dialogue : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             isPlayerInRange = false;
+            dialogueNPCName.text = "";
         }
     }
 }

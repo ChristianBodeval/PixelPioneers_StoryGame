@@ -14,6 +14,8 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] public Story currentStory;
 
+    public TextMeshProUGUI dialogueNPCName;
+    
     public bool isDialoguePlaying;
 
     private bool isButtonOnCD;
