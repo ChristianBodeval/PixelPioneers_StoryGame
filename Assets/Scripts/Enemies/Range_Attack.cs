@@ -36,6 +36,7 @@ public class Range_Attack : Enemy_Attack
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Angle for pointing to player
 
         GameObject newProjectile = Instantiate(projectile, transform.position + direction * 0.5f, Quaternion.AngleAxis(angle, Vector3.forward)); // Spawn projectile
+        newProjectile.transform.eulerAngles = new Vector3(-45f, newProjectile.transform.eulerAngles.y, newProjectile.transform.eulerAngles.z); // Angle -45 degrees on x axis and point towards camera
 
         newProjectile.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed; // Make projectile move
     }

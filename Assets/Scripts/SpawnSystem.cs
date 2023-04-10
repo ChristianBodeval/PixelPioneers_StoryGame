@@ -16,6 +16,8 @@ public class SpawnSystem : MonoBehaviour
     private bool isSpawning = false;
     private bool waveAlive = false;
     private bool isWaitingForWaveToDie = false;
+    [HideInInspector] public static int totalWaves;
+    [HideInInspector] public static int currentWave;
 
     private void Start()
     {
@@ -31,6 +33,7 @@ public class SpawnSystem : MonoBehaviour
             return;
         }
 
+        totalWaves++; // Increase max waves by 1
         wavesToSpawn.Add(wave);
     }
 
@@ -49,7 +52,7 @@ public class SpawnSystem : MonoBehaviour
     {
         while (true)
         {
-            // Suspend execution of function until wave is dead if enable on previous wave
+            // Suspend execution of function until wave is dead if enabled on previous wave
             while (isWaitingForWaveToDie && waveAlive)
             {
                 yield return new WaitForSeconds(0.1f);
@@ -71,13 +74,23 @@ public class SpawnSystem : MonoBehaviour
                     yield return new WaitForSeconds(wavesToSpawn[0].timeBetweenMobs); // Space mob spawning out - for performance and look reason, it looks better if mobs seem a bit more random in their timing
                 }
             }
+
+            currentWave++;
+
             if (isWaitingForWaveToDie && waveAliveCoroutine == null) StartCoroutine(CheckIfWaveIsDead()); // Function checks if wave is alive during play
             if (wavesToSpawn.Count > 0) wavesToSpawn.Remove(wavesToSpawn[0]); // Instead of iterating through the list we remove waves we have already used
 
             isSpawning = false;
             float waitDuration = 0.1f; // Default value
             if (wavesToSpawn.Count > 0) waitDuration = wavesToSpawn[0].waitAmountUntilNextWave; // Wait for duration specified by the wave object - edit the duration in the object
-            yield return new WaitForSeconds(waitDuration); 
+            yield return new WaitForSeconds(waitDuration);
+
+            // Resets wave variables if the waves are all done
+            if (currentWave == totalWaves && !isWaitingForWaveToDie && !waveAlive)
+            {
+                totalWaves = 0;
+                currentWave = 0;
+            }
         }
     }
 
