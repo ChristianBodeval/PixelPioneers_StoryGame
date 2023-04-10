@@ -178,9 +178,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bat_Attack_2: 774074337
-      Bat_Attack_1: -2033196527
       Bat_Attack_0: 135968747
+      Bat_Attack_1: -2033196527
+      Bat_Attack_2: 774074337
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

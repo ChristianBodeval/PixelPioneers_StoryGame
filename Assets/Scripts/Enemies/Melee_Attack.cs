@@ -9,7 +9,7 @@ public class Melee_Attack : Enemy_Attack
 
     private void FixedUpdate()
     {
-        InAttackRange(player); // Player variable is inherited from IEnemyAttack
+        IsInAttackRange(player); // Player variable is inherited from IEnemyAttack
     }
 
     private void Start()
@@ -36,9 +36,9 @@ public class Melee_Attack : Enemy_Attack
         if (Vector3.Distance(player.transform.position, transform.position) <= attackRange) player.GetComponent<PlayerHealth>().TakeDamage(attackDMG); // Deal damage
     }
 
-    private bool InAttackRange(GameObject player)
+    private bool IsInAttackRange(GameObject player)
     {
-        bool inRange = Vector2.Distance(player.transform.position, transform.position) <= attackRange && LineOfSight(player, animator); // In attack range & los
+        bool inRange = Vector2.Distance(player.transform.position, transform.position) <= attackRange && IsInLineOfSight(player, animator); // In attack range & los
         animator.SetBool("InAttackRange", inRange);
         return inRange;
     }

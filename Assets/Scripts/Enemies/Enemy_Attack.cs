@@ -14,7 +14,7 @@ public class Enemy_Attack : MonoBehaviour
 
     private void FixedUpdate()
     {
-        InAttackRange(player); // Player variable is inherited from IEnemyAttack
+        IsInAttackRange(player); // Player variable is inherited from IEnemyAttack
     }
 
     private void Start()
@@ -57,14 +57,14 @@ public class Enemy_Attack : MonoBehaviour
         animator.SetBool("AttackRDY", true);
     }
 
-    private bool InAttackRange(GameObject player)
+    private bool IsInAttackRange(GameObject player)
     {
-        bool inRange = Vector2.Distance(player.transform.position, transform.position) <= attackRange && LineOfSight(player, animator); // In attack range & los
+        bool inRange = Vector2.Distance(player.transform.position, transform.position) <= attackRange && IsInLineOfSight(player, animator); // In attack range & los
         animator.SetBool("InAttackRange", inRange);
         return inRange;
     }
 
-    public virtual bool LineOfSight(GameObject target, Animator thisEnemy)
+    public virtual bool IsInLineOfSight(GameObject target, Animator thisEnemy)
     {
         return !Physics2D.Raycast(thisEnemy.transform.position, target.transform.position - thisEnemy.transform.position, attackRange, obstacleLayer); // Can be overridden - checks if there is no obstacles from enemy to player by default
     }

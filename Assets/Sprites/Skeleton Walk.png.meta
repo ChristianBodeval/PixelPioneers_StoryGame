@@ -388,19 +388,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Skeleton Walk_11: 454168052
+      Skeleton Walk_0: 1062476107
+      Skeleton Walk_1: -1805449948
       Skeleton Walk_10: -332704136
-      Skeleton Walk_6: 2069625109
-      Skeleton Walk_9: -647730162
-      Skeleton Walk_4: -2112551166
+      Skeleton Walk_11: 454168052
       Skeleton Walk_12: 831153216
       Skeleton Walk_2: 2030871863
       Skeleton Walk_3: 149791641
-      Skeleton Walk_7: -246701953
-      Skeleton Walk_1: -1805449948
-      Skeleton Walk_8: -934825851
-      Skeleton Walk_0: 1062476107
+      Skeleton Walk_4: -2112551166
       Skeleton Walk_5: 1438454362
+      Skeleton Walk_6: 2069625109
+      Skeleton Walk_7: -246701953
+      Skeleton Walk_8: -934825851
+      Skeleton Walk_9: -647730162
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

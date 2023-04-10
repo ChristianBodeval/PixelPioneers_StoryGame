@@ -46,6 +46,7 @@ public class Charger_Attack : Enemy_Attack
         dangerIndicator.SetActive(false);
     }
 
+    //TODO Unoedvendig, hvis den gør det samme som parentklassen
     public override void Attack()
     {
         StartCoroutine(AttackCD(attackCD));
@@ -131,7 +132,7 @@ public class Charger_Attack : Enemy_Attack
     // Starts the charge ability if player is in los and range + has ChargeCD rdy
     private void StartCharge(GameObject player)
     {
-        if (Vector2.Distance(player.transform.position, transform.position) <= chargeRange && LineOfSight(player, animator) && canCharge)
+        if (Vector2.Distance(player.transform.position, transform.position) <= chargeRange && IsInLineOfSight(player, animator) && canCharge)
         {
             animator.SetBool("IsCharging", true);
             animator.Play("Charge");
@@ -141,7 +142,7 @@ public class Charger_Attack : Enemy_Attack
     // Changes 'InAttackRange' bool to if enemy is in attack range
     private void InAttackRange(GameObject player)
     {
-        if (Vector2.Distance(player.transform.position, transform.position) <= attackRange && LineOfSight(player, animator))
+        if (Vector2.Distance(player.transform.position, transform.position) <= attackRange && IsInLineOfSight(player, animator))
         { 
             animator.SetBool("InAttackRange", true); 
         }
