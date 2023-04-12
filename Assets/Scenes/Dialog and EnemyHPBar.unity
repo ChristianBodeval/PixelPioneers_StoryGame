@@ -240,6 +240,8 @@ MonoBehaviour:
   inkFileText: {fileID: 4900000, guid: 19b1ba2243335f14e8bc03595ddbe3c8, type: 3}
   isPlayerInRange: 0
   visualCue: {fileID: 1588627097}
+  hasTalkedTo: {fileID: 11400000, guid: 6571bbd002002544eac0d1614cca6b54, type: 2}
+  NPCIndex: 4
 --- !u!58 &70358107
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1697,7 +1699,7 @@ MonoBehaviour:
   - {fileID: 208214927}
   - {fileID: 474962594}
   - {fileID: 1828527202}
-  waveCount: 0
+  waveCount: 4
   wavesLeft: 0
   crackedCrystal: {fileID: 21300000, guid: 03ab4b440e586714c8a8dcc16a01982b, type: 3}
   unCrackedCrystal: {fileID: 21300000, guid: e9efa378002a36945a63972b980965b7, type: 3}
@@ -8274,6 +8276,8 @@ MonoBehaviour:
   inkFileText: {fileID: 4900000, guid: 1e884b4752997c744bc0f385965b0f1e, type: 3}
   isPlayerInRange: 0
   visualCue: {fileID: 1429575314}
+  hasTalkedTo: {fileID: 11400000, guid: 6571bbd002002544eac0d1614cca6b54, type: 2}
+  NPCIndex: 1
 --- !u!1 &977341369
 GameObject:
   m_ObjectHideFlags: 0
@@ -8410,7 +8414,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c3bb54478dacfd04db5acf2a986dfe76, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 044f287bebf4bf04993ed81c452b2ee3, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8463,6 +8467,8 @@ MonoBehaviour:
   inkFileText: {fileID: 4900000, guid: 19b1ba2243335f14e8bc03595ddbe3c8, type: 3}
   isPlayerInRange: 0
   visualCue: {fileID: 1511632060}
+  hasTalkedTo: {fileID: 11400000, guid: 6571bbd002002544eac0d1614cca6b54, type: 2}
+  NPCIndex: 3
 --- !u!58 &1081744088
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8659,6 +8665,8 @@ MonoBehaviour:
   inkFileText: {fileID: 4900000, guid: b8b9e8155081f764db8895669211cb52, type: 3}
   isPlayerInRange: 0
   visualCue: {fileID: 1896004223}
+  hasTalkedTo: {fileID: 11400000, guid: 6571bbd002002544eac0d1614cca6b54, type: 2}
+  NPCIndex: 2
 --- !u!58 &1119064213
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8800,7 +8808,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1123084843}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f03845e4bf3f7d4ba7b59ce5f133575, type: 3}
   m_Name: 
@@ -9367,8 +9375,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4b7a145085d56bb4183eb962d70c8a2d, type: 2}
-  m_sharedMaterial: {fileID: 2709380555615022509, guid: 4b7a145085d56bb4183eb962d70c8a2d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3086f956446f63a458bf536e978da7d5, type: 2}
+  m_sharedMaterial: {fileID: 2709380555615022509, guid: 3086f956446f63a458bf536e978da7d5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9487,7 +9495,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372115088}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -31972,8 +31980,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4b7a145085d56bb4183eb962d70c8a2d, type: 2}
-  m_sharedMaterial: {fileID: 2709380555615022509, guid: 4b7a145085d56bb4183eb962d70c8a2d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3086f956446f63a458bf536e978da7d5, type: 2}
+  m_sharedMaterial: {fileID: 2709380555615022509, guid: 3086f956446f63a458bf536e978da7d5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

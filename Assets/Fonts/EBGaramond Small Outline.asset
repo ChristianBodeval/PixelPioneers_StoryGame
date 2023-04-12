@@ -57,11 +57,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: EBGaramond-VariableFont_wght SDF
+  m_Name: EBGaramond Small Outline
   m_EditorClassIdentifier: 
-  hashCode: -1566686400
+  hashCode: 361907461
   material: {fileID: 2709380555615022509}
-  materialHashCode: -47475872
+  materialHashCode: -1759566971
   m_Version: 1.1.0
   m_SourceFontFileGUID: 168cbd481b1cdb3409bb9c22965b808a
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 168cbd481b1cdb3409bb9c22965b808a, type: 3}
@@ -2709,7 +2709,7 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0.258
+    - _OutlineWidth: 0.052
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.8333333

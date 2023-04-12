@@ -20,6 +20,10 @@ public class Dialogue : MonoBehaviour
     private DialogueManager dialogueManager;
     private TextMeshProUGUI dialogueNPCName;
 
+    public HasTalkedTo hasTalkedTo;
+
+    public int NPCIndex;
+
     private void Awake()
     {
         playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
@@ -34,10 +38,13 @@ public class Dialogue : MonoBehaviour
         inkStory = new Story(inkFileText.text);
     }
 
+    
+
     private void Update()
     {
+        SetNPCIndex();
         isDialoguePlaying = dialogueManager.isDialoguePlaying;
-        
+
         if (isPlayerInRange && !isDialoguePlaying)
         {
             visualCue.SetActive(true);
@@ -45,12 +52,17 @@ public class Dialogue : MonoBehaviour
             {
                 isDialoguePlaying = true;
                 dialogueManager.EnterDialogueMode(inkFileText);
+                SetHasTalkedToArr();
             }
         }
         else
         {
             visualCue.SetActive(false);
         }
+    }
+    private void SetHasTalkedToArr()
+    {
+        hasTalkedTo.hasTalkedToArr[NPCIndex] = true;
     }
 
     private void ChoiceDialogue(List<Choice> choices)
@@ -76,6 +88,28 @@ public class Dialogue : MonoBehaviour
         {
             isPlayerInRange = false;
             dialogueNPCName.text = "";
+        }
+    }
+
+    public void SetNPCIndex()
+    {
+        switch (gameObject.name)
+        {
+            case "NPC 1":
+                NPCIndex = 1;
+                break;
+
+            case "NPC 2":
+                NPCIndex = 2;
+                break;
+
+            case "NPC 3":
+                NPCIndex = 3;
+                break;
+
+            case "NPC 4":
+                NPCIndex = 4;
+                break;
         }
     }
 }

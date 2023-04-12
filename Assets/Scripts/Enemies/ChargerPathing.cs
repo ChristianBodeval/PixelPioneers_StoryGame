@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.UI;
 
 public class ChargerPathing : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class ChargerPathing : MonoBehaviour
     [Header("Custom Behavior")]
     [SerializeField] private bool isFollowing = true;
 
+    [Header("HP Bar")]
+    private Slider hpBar;
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -31,6 +34,7 @@ public class ChargerPathing : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         attackRange = GetComponent<Charger_Attack>().attackRange;
+        hpBar = GetComponentInChildren<Slider>();
 
         StartCoroutine(UpdatePath()); // Updates pathfinding regularly
     }
@@ -122,10 +126,12 @@ public class ChargerPathing : MonoBehaviour
         if (dir.x > 0.24f && !animator.GetBool("IsCharging")) // Right
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
+            hpBar.transform.localScale = new Vector3(0.03175378f, 0.0259373f, 0.2461215f);
         }
         else if (dir.x < -0.24f && !animator.GetBool("IsCharging")) // Left
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
+            hpBar.transform.localScale = new Vector3(-0.03175378f, 0.0259373f, 0.2461215f);
         }
     }
 

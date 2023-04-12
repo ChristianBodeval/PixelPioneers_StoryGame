@@ -5,8 +5,8 @@ public class WaveVisual : MonoBehaviour
 {
     public Image[] waves;
 
-    [SerializeField] public int waveCount = 4;
-    [SerializeField] public int wavesLeft;
+    public int waveCount = 4;
+    public int wavesLeft;
 
     public Sprite crackedCrystal;
     public Sprite unCrackedCrystal;
@@ -17,6 +17,7 @@ public class WaveVisual : MonoBehaviour
         waves[1].enabled = false;
         waves[2].enabled = false;
         waves[3].enabled = false;
+        wavesLeft = waveCount;
     }
 
     private void Update()
@@ -46,10 +47,10 @@ public class WaveVisual : MonoBehaviour
 
     public void WaveHalfWayThrough()
     {
-        if (waves[wavesLeft-1].sprite == crackedCrystal)
-            waves[wavesLeft-1].sprite = unCrackedCrystal;
+        if (waves[wavesLeft - 1].sprite == crackedCrystal)
+            waves[wavesLeft - 1].sprite = unCrackedCrystal;
         else
-            waves[wavesLeft-1].sprite = crackedCrystal;
+            waves[wavesLeft - 1].sprite = crackedCrystal;
     }
 
     public void SetWave()
