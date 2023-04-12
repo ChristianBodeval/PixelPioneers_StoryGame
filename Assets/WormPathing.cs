@@ -112,7 +112,6 @@ public class WormPathing : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         float originalSpeed = speed;
         speed = digSpeed;
-        GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
         Collider2D opstacles = Physics2D.OverlapCircle(digDirection, 0.1f, obstacleLayer);
 
         digDirection = player.transform.position + digLength * (player.transform.position - transform.position).normalized;
@@ -152,7 +151,6 @@ public class WormPathing : MonoBehaviour
         */
 
 
-        GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
 
 
 
@@ -181,7 +179,6 @@ public class WormPathing : MonoBehaviour
         spriteRenderer.enabled = true;
         diggingEffect.Stop();
         animator.SetBool("IsDigging", false);
-        GetComponentInChildren<SpriteRenderer>().color = Color.red;
         Debug.Log("Stopping velocity");
         rb.velocity = Vector3.zero;
         yield return new WaitForSeconds(0.5f);
