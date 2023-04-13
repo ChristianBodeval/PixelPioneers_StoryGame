@@ -41,13 +41,11 @@ public class WormPathing : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindWithTag("Player");
-
-
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
-        //attackRange = GetComponent<Melee_Attack>().attackRange;
+        attackRange = GetComponent<Melee_Attack>().attackRange;
         healthScript = GetComponent<Health>();
     }
 
@@ -78,8 +76,6 @@ public class WormPathing : MonoBehaviour
 
     }
 
-
-
     private void Move()
     {
         Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
@@ -98,79 +94,31 @@ public class WormPathing : MonoBehaviour
         }
     }
 
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(digDirection, 1.5f);
-    }
-
-
     private IEnumerator MyCoroutine()
     {
         canMove = false;
         yield return new WaitForSeconds(0.5f);
         float originalSpeed = speed;
         speed = digSpeed;
-        Collider2D opstacles = Physics2D.OverlapCircle(digDirection, 0.1f, obstacleLayer);
 
         digDirection = player.transform.position + digLength * (player.transform.position - transform.position).normalized;
-
-
-        Debug.Log("Disabling collider");
-
-
         rb.bodyType = RigidbodyType2D.Kinematic;
         healthScript.enabled = false;
-
-
         spriteRenderer.enabled = false;
-
         diggingEffect.Play();
-
         animator.SetBool("IsDigging", true);
 
         //TODO Dosen't work for pit layer, should pit  be in obstacle layer?
         while (Physics2D.OverlapCircle(digDirection, 0.1f, groundLayer) == null || Physics2D.OverlapCircle(digDirection, 0.1f, obstacleLayer)) //If hit an obstacle or hit no collider (out of map)
         {
-
-
-
             digDirection += (player.transform.position - digDirection).normalized * 1f;
             yield return null;
         }
 
-        //When in obstacle layer
-        /* 
-        while (Physics2D.OverlapCircle(digDirection, 0.1f, obstacleLayer)) //If hit an obstacle or hit no collider (out of map)
-        {
-            Debug.Log("Hit an obstacle");
-            digDirection += (player.transform.position - digDirection).normalized * 1f;
-            yield return null;
-        }
-        */
-
-
-
-
-
-        //Move towards digging point
+        //Move towards digging point, untill reached. 
         while (Vector3.Distance(transform.position, digDirection) > 0.1f ) //If not close to the digPosition or hit an obstacle
         {
-
             rb.velocity = (digDirection - transform.position).normalized*digSpeed*Time.fixedDeltaTime;
-            Debug.Log("Moving");
-
-            Debug.Log("rb.velocity" + rb.velocity);
-            /*
-            // Move our position a step closer to the target.
-            var step = speed * Time.deltaTime; // calculate distance to move
-            transform.position = Vector3.MoveTowards(transform.position, digDirection, step);
-
-            Debug.Log("Current position");
-            */
-
-
             yield return null;
 
         }
