@@ -67,8 +67,8 @@ public class MeleePathing : MonoBehaviour
         Flip(); // Flips sprite
 
         // Guard clause
-        if (path == null || currentWayPoint >= path.vectorPath.Count || animator.GetBool("IsDigging")) { return; } // Is not there yet and has a path && is not Digging
-
+        if (path == null || currentWayPoint >= path.vectorPath.Count || false ) { return; } // Is not there yet and has a path && is not Digging
+        // animator.GetBool("IsDigging")) was removed for debugging purposes
 
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;

@@ -6,7 +6,7 @@ public class WaveVisual : MonoBehaviour
     public Image[] waves;
 
     private int maxWaves;
-    public int wavesLeft;
+    public static int wavesLeft = 0; // Changed through Spawnsystem script
 
     public Sprite crackedCrystal;
     public Sprite unCrackedCrystal;
@@ -19,47 +19,40 @@ public class WaveVisual : MonoBehaviour
         waves[1].enabled = false;
         waves[2].enabled = false;
         waves[3].enabled = false;
-        wavesLeft = SpawnSystem.totalWaves;
     }
 
     private void Update()
     {
+        maxWaves = SpawnSystem.totalWaves; // Updates the maxWaves
 
+        if (WaveVisual.wavesLeft >= maxWaves) WaveVisual.wavesLeft = maxWaves; // We have more waves left
 
-        SetWave();
+        if (WaveVisual.wavesLeft < -1) WaveVisual.wavesLeft = -1; // Wavesleft value cannot go below
 
-        if (wavesLeft >= maxWaves)
-        {
-            wavesLeft = maxWaves;
-        }
-
-        if (wavesLeft <= 0)
-        {
-            wavesLeft = 0;
-        }
+        SetWave(); // Sets the amouont of active crystals
     }
 
-    public void AddWave()
+    public static void AddWave()
     {
-        wavesLeft++;
+        WaveVisual.wavesLeft++;
     }
 
-    public void RemoveWave()
+    public static void RemoveWave()
     {
-        wavesLeft--;
+        WaveVisual.wavesLeft--;
     }
 
     public void WaveHalfWayThrough()
     {
-        if (waves[wavesLeft - 1].sprite == crackedCrystal)
-            waves[wavesLeft - 1].sprite = unCrackedCrystal;
+        if (waves[WaveVisual.wavesLeft - 1].sprite == crackedCrystal)
+            waves[WaveVisual.wavesLeft - 1].sprite = unCrackedCrystal;
         else
-            waves[wavesLeft - 1].sprite = crackedCrystal;
+            waves[WaveVisual.wavesLeft - 1].sprite = crackedCrystal;
     }
 
     public void SetWave()
     {
-        switch (wavesLeft)
+        switch (WaveVisual.wavesLeft)
         {
             case 0:
                 waves[0].enabled = false;
@@ -94,6 +87,13 @@ public class WaveVisual : MonoBehaviour
                 waves[1].enabled = true;
                 waves[2].enabled = true;
                 waves[3].enabled = true;
+                break;
+
+            default:
+                foreach (var item in waves)
+                {
+                    item.enabled = false;
+                }
                 break;
         }
     }

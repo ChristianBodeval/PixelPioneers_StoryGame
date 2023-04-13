@@ -9,7 +9,7 @@ public class SendWave : MonoBehaviour
     [SerializeField] private float timeBetweenWaves;
     private SpawnSystem spawnSystem;
     private Coroutine sendWavesCoroutine = null;
-    private bool wavesSent = false;
+    [HideInInspector] public static bool canSendWaves = true;
     private int currentWave = 0;
 
     private void Start()
@@ -20,9 +20,9 @@ public class SendWave : MonoBehaviour
     // Temporary proof of concept
     public void StartWaves()
     {
-        if (!wavesSent && sendWavesCoroutine == null)
+        if (canSendWaves && sendWavesCoroutine == null)
         {
-            StartCoroutine(ActivationCD());
+            canSendWaves = false;
             sendWavesCoroutine = StartCoroutine(SendWaves());
         }
     }
@@ -36,14 +36,5 @@ public class SendWave : MonoBehaviour
 
             yield return null;
         }
-    }
-
-    private IEnumerator ActivationCD()
-    {
-        wavesSent = true;
-
-        yield return new WaitForSeconds(10f);
-
-        wavesSent = false;
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class WaveObject : MonoBehaviour
 {
     [Header("Wave attributes")]
-    public float waitAmountUntilNextWave = 2f;
     public bool waitForWaveToBeDead = false;
     public float timeBetweenMobs = 0.01f;
     [SerializeField] private int meleeAmount = 0;

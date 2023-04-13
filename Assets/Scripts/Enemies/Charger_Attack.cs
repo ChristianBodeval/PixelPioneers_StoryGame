@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class Charger_Attack : Enemy_Attack
 {
+    [SerializeField] private float attackTelegraphTime;
+    [SerializeField] private float attackDMG;
+
     [Header("Charge Attack")]
     [SerializeField] private GameObject dangerIndicator;
     [SerializeField] private float chargeDmg;
@@ -55,8 +58,14 @@ public class Charger_Attack : Enemy_Attack
     //TODO Unoedvendig, hvis den gør det samme som parentklassen
     public override void Attack()
     {
-        StartCoroutine(AttackCD(attackCD));
-        // ** Melee attack when in range
+        StartCoroutine(AttackCD(attackCD)); // Starts cooldown for the attack
+        StartCoroutine(TelegraphAttack());
+    }
+
+    private IEnumerator TelegraphAttack()
+    {
+        yield return new WaitForSeconds(attackTelegraphTime);
+        if (Vector3.Distance(player.transform.position, transform.position) <= attackRange) player.GetComponent<PlayerHealth>().TakeDamage(attackDMG); // Deal damage
     }
 
     public void Charge()
