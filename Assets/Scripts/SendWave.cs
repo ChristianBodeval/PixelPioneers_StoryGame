@@ -18,9 +18,9 @@ public class SendWave : MonoBehaviour
     }
 
     // Temporary proof of concept
-    private void OnTriggerEnter2D (Collider2D col)
+    public void StartWaves()
     {
-        if (col.gameObject.CompareTag("Player") && !wavesSent && sendWavesCoroutine == null)
+        if (!wavesSent && sendWavesCoroutine == null)
         {
             StartCoroutine(ActivationCD());
             sendWavesCoroutine = StartCoroutine(SendWaves());
