@@ -22,7 +22,7 @@ public class SlashUpgrade2 : Ability
         chainEffect.bounces = bounces;
     }
 
-    public override void ActivateEffect(List<GameObject> targets)
+    public override void ActivateEffect(AbilityHolder ability, List<GameObject> targets)
     {
         //Pick random target
         //Todo make this an Generic ScriptableObject function

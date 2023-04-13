@@ -16,6 +16,9 @@ public class OverTimeEffect : Effect
     public override IEnumerator EffectCoroutine(List<GameObject> targets)
     {
         timer = Time.time + duration;
+
+
+
         while (Time.time < timer)
         {
             //Damage all targets
