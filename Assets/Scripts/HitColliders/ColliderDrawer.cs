@@ -10,24 +10,24 @@ public class ColliderDrawer : MonoBehaviour
 {
     public List<GameObject> targets = new List<GameObject>();
 
+    [SerializeField] private LayerMask enemyLayer;
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!targets.Contains(collision.gameObject))
+
+        if (!targets.Contains(collision.gameObject) && collision.gameObject.CompareTag("Enemy"))
         {
             targets.Add(collision.gameObject);
-            Debug.Log("Added " + gameObject.name);
-            Debug.Log("GameObjects in list: " + targets.Count);
         }        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (targets.Contains(collision.gameObject))
+        if (targets.Contains(collision.gameObject) && collision.gameObject.CompareTag("Enemy"))
         {
             targets.Remove(collision.gameObject);
-            Debug.Log("Removed " + collision.name);
-            Debug.Log("GameObjects in list: " + targets.Count);
         }
         
     }
@@ -53,25 +53,15 @@ public class ColliderDrawer : MonoBehaviour
 
     private void Awake()
     {
-        range = colliderStat.range;
-        width = colliderStat.width;
-        angle = colliderStat.angle;
-        corners = colliderStat.corners;
     }
 
-    private void OnValidate()
-    {
-        //Use this instead of update, to save processing power
-    }
+    
 
     private void Update()
     {
-        range = colliderStat.range;
-        width = colliderStat.width;
-        angle = colliderStat.angle;
-        corners = colliderStat.corners;
         points = GetPolygonPoints();
         UpdateSpriteShapeController(points);
+
     }
 
 
@@ -122,26 +112,26 @@ public class ColliderDrawer : MonoBehaviour
     List<Vector3> GetPolygonPoints()
     {
         //Bugfix
-        if (width == 0 && angle < 5)
-            angle = 5f;
+        if (width == 0 && colliderStat.angle < 5)
+            colliderStat.angle = 5f;
 
         endPoints = new List<Vector3>();
         //For one corner, just update
 
         //Step values
-        float angleStep = angle / (corners - 1);
-        float pointDistanceStep = width / (corners - 1);
+        float angleStep = colliderStat.angle / (colliderStat.corners - 1);
+        float pointDistanceStep = colliderStat.width / (colliderStat.corners - 1);
         //Current values
-        float currentPointDistance = 0 - (width / 2);
+        float currentPointDistance = 0 - (colliderStat.width / 2);
         //Use instead
         //float currentAngle = 0 - (angle / 2) + transform.rotation.eulerAngles.z;
-        float currentAngle = 0 - (angle / 2);
+        float currentAngle = 0 - (colliderStat.angle / 2);
 
-            for (int i = 0; i < corners; i++)
+            for (int i = 0; i < colliderStat.corners; i++)
             {
                 Vector3 start = transform.up * currentPointDistance;                                //Gets start position by moving the point a little up or down dependenet on currentPointDistance
                 Vector3 direction = GetVectorFromAngle(currentAngle);                               //Vector from the angle
-                Vector3 target = direction * range + start;                                         //Ending of the line
+                Vector3 target = direction * colliderStat.range + start;                                         //Ending of the line
 
                 endPoints.Add(target);
 
@@ -156,7 +146,7 @@ public class ColliderDrawer : MonoBehaviour
             returnList.Add(point);
         }
 
-        if (Mathf.Approximately(angle, 360f))
+        if (Mathf.Approximately(colliderStat.angle, 360f))
         {
             Vector3 firstValue = returnList[0];
             Vector3 lastValue = returnList[returnList.Count-1];

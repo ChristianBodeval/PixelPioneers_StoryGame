@@ -4,6 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.U2D;
+using UnityEngine.Windows;
+using Input = UnityEngine.Input;
 
 public class AbilityHolder : MonoBehaviour
 {
@@ -13,8 +15,6 @@ public class AbilityHolder : MonoBehaviour
     private float duration;
     private float timeCasted;
     List<GameObject> targets;
-
-    //TODO make an event for ready,active and cooldown and make the ColliderDrawer listen for them
     public Color readyColor;
     public Color activeColor;
     public Color cooldownColor;
@@ -23,9 +23,14 @@ public class AbilityHolder : MonoBehaviour
 
     [SerializeField] public ColliderDrawer collider;
     [SerializeField] private SlashCone colliderStat;
+    private Vector2 movement;
 
     IEnumerator effectOverTimeCoroutine;
     IEnumerator chainDamageCoroutine;
+
+
+
+    AbilityState state = AbilityState.ready; 
 
     enum AbilityState
     {
@@ -33,7 +38,6 @@ public class AbilityHolder : MonoBehaviour
         active,
         cooldown
     }
-
 
     private void ActivateNextAbility()
     {
@@ -48,26 +52,17 @@ public class AbilityHolder : MonoBehaviour
 
         if (ability.isFollowingCaster)
         {
-            //Set caster as parent
             transform.parent = caster.transform;
-            //Place them right on the parent
             transform.position = caster.transform.position;
-            //Same rotation as caster
             transform.rotation = caster.transform.rotation;
         }
-
-        
     }
 
-    AbilityState state = AbilityState.ready; 
 
     private void SetReady()
     {
         collider.spriteShapeRenderer.color = readyColor;
         state = AbilityState.ready;
-
-
-        //Copy position. DOSEN'T WORK - How do i handle it should follow the player?
     }
 
     private IEnumerator ChangeColor()
@@ -83,17 +78,14 @@ public class AbilityHolder : MonoBehaviour
 
     private void SetActive()
     {
-        this.gameObject.transform.position = caster.transform.position;
-        this.gameObject.transform.rotation = caster.transform.rotation;
-
         targets = collider.targets;
 
         if (targets.Count > 0)
+        {
             ability.ActivateEffect(this,targets);
+        }
 
-        Debug.Log("Called Active");
         StartCoroutine(ChangeColor());
-        //TODO reduce this to only all once
         duration = ability.duration;
         state = AbilityState.active;
 
@@ -106,7 +98,6 @@ public class AbilityHolder : MonoBehaviour
 
     private void SetCooldown()
     {
-        //TODO tight solution, should instead be Ability specific
         chainDamageCoroutine = null;
         effectOverTimeCoroutine = null;
 
@@ -119,14 +110,16 @@ public class AbilityHolder : MonoBehaviour
         SetReady();
     }
 
-    //TODO consider using nested switch-statements instead
-
     private void FixedUpdate()
     {
-        //Point where player is looking, if it has a rigidbody
-        if (caster.GetComponent<Rigidbody2D>() && ability.isFollowingCaster)
-            transform.right = caster.GetComponent<PlayerAction>().lastFacing;
-            
+        //Change direction of the ability according to the input
+        float inputX = Input.GetAxisRaw("Horizontal");
+        float inputY = Input.GetAxisRaw("Vertical");
+        movement = new Vector2(inputX, inputY);
+
+
+        if(inputX != 0 || inputY != 0)
+            transform.right = movement;
 
         switch (state)
         {
@@ -134,54 +127,15 @@ public class AbilityHolder : MonoBehaviour
 
                 if(Input.GetKeyDown(ability.keyTrigger)) 
                     SetActive();
-
                 break;
 
                 
             case AbilityState.active:
 
                 SetCooldown();
-
-                /*
-                if (ability.effectType == Ability.EffectType.Instant)
-                {
-                    //Activate
-                    ability.ActivateEffect(collider.targets);
-                    SetCooldown();
-
-                }
-                else if (ability.effectType == Ability.EffectType.OverTime)
-                {
-                    if (effectOverTimeCoroutine != null) //Guard clause to call once
-                    {
-                        return;
-                    }
-
-                    effectOverTimeCoroutine = EffectOverTime();
-                    timeCasted = Time.time + duration;
-                    StartCoroutine(effectOverTimeCoroutine);
-                }
-
-                else if (ability.effectType == Ability.EffectType.Chain)
-                {
-                    targets = collider.targets;
-
-                    //Run once only when there is targets
-                    if (targets.Count == 0 || chainDamageCoroutine != null) //Guard clause to call once
-                    {
-                        return;
-                    }
-
-                    int randomNum = Random.Range(0, targets.Count - 1);
-
-                    ability.ActivateEffect(targets);
-                    StartCoroutine(chainDamageCoroutine);
-                }*/
                 break;
 
             case AbilityState.cooldown:
-                Debug.Log("On cooldown");
-
                 
                 if (cooldownTime > 0)
                 {

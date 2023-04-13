@@ -31,7 +31,10 @@ public class WeaponCDs : MonoBehaviour
         mjoelnirCDVisual.fillAmount = 1;
         gungnirCDVisual.fillAmount = 1;
 
-        baseMeleeCooldownTime = playerActionScript.baseMeleeCooldown;
+        //TODO Fix this - Christian ability system (Get info from Ability SO's instead)
+        //baseMeleeCooldownTime = playerActionScript.baseMeleeCooldown;
+        /*Cheated for now: */
+        baseMeleeCooldownTime = 4f;
         dashCooldownTime = playerActionScript.dashCooldownTime;
         mjoelnirCooldownTime = mjoelnirScript.chargeCD;
     }

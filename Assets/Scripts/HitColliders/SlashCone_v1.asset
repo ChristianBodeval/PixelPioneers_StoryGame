@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4886d89e9d8e641d8ba119a14b4b531c, type: 3}
-  m_Name: SlashCone1
+  m_Name: SlashCone_v1
   m_EditorClassIdentifier: 
   name: SlashCone
-  range: 2.8
-  corners: 7
+  range: 2
+  corners: 6
   width: 0
-  angle: 45
+  angle: 55

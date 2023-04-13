@@ -5,25 +5,14 @@ public class PlayerAction : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float speed = 10f;
-
-    public LayerMask obstacleLayer;
-    [SerializeField] private LayerMask groundLayer;
     private Rigidbody2D rb;
-    private Vector3 moveVector = new Vector3(1f, 0f, 0f);
+    public Vector3 moveVector;
     private bool canMove = true;
 
-    [Header("Base Attack")]
-    [SerializeField] public float baseMeleeCooldown = 0.4f;
-
-    [SerializeField] private float coneRange = 2f;
-    [SerializeField] private float innerRange = 0.4f; // Killzone range around the player, serves to kill enemies who are very close to the cone but not quite in it
-    [SerializeField] private float degreeOfArc = 50f;
-    [SerializeField] private LayerMask layerMask; // Enemy layer
-    [SerializeField] private Transform cone; // temp
-    [SerializeField] private Transform color; // temp
+    [Header("Input")]
     [SerializeField] private float inputBuffer = 0.1f;
-    [HideInInspector] public Vector2 lastFacing = new Vector2(1f, 0f);
-    public float attackCooldownRemaining = 0f;
+    [HideInInspector] public Vector2 lastFacing;
+    [HideInInspector] public Vector2 lastFacing2;
     private float BufferCountdown;
     private bool canAttack = true;
     private ParticleSystem arcParticles;
@@ -32,7 +21,6 @@ public class PlayerAction : MonoBehaviour
 
     [Header("Dash")]
     public float dashDistance = 5f; // Distance of the dash
-
     public float dashDuration = 0.5f; // Duration of the dash
     [HideInInspector] public float dashCooldownTime = 1.8f;
     private bool isDashing = false; // Flag to check if the player is currently dashing
@@ -48,7 +36,6 @@ public class PlayerAction : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Physics2D.IgnoreLayerCollision(3, 7);
         dashDirection = GetDashDirection();
-
         healthScript = GetComponent<Health>();
     }
 
@@ -56,9 +43,9 @@ public class PlayerAction : MonoBehaviour
     {
         // Update player input
         moveVector.x = Input.GetAxis("Horizontal");
-        moveVector.y = Input.GetAxis("Vertical");
+        moveVector.y = Input.GetAxis("Vertical");        
         moveVector = moveVector.normalized; // As to not have faster movement when going diagonal
-
+        
         if (Input.GetButton("Fire1")) // j,k,l are Fire1, Fire2, Fire3
         {
             BufferCountdown = inputBuffer;
@@ -68,17 +55,12 @@ public class PlayerAction : MonoBehaviour
             BufferCountdown -= Time.deltaTime;
         }
 
-        BaseMelee(); //melee coneattack
-
-        Facing();
-
         Dash();
     }
 
     private void FixedUpdate()
     {
         Move();
-
         // Check if the player is dashing
         if (isDashing)
         {
@@ -103,6 +85,7 @@ public class PlayerAction : MonoBehaviour
         if (moveVector.magnitude > 0f && canMove) // Horizontal movement
         {
             rb.velocity = moveVector * speed;
+
         }
         else if (moveVector.magnitude < 0.1f && canMove)
         {
@@ -128,87 +111,6 @@ public class PlayerAction : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         canMove = true;
-    }
-
-
-
-
-
-
-    private void Facing()
-    {
-        //Checks which direction was last faced on input
-        if(moveVector.magnitude > 0.5f)
-        {
-            lastFacing = rb.velocity;
-        }
-    }
-
-    private void BaseMelee()
-    {
-        if (BufferCountdown > 0f && canAttack)
-        {
-            weaponCDVisual.StartCoroutine("BaseMeleeCD"); // Cooldown visual
-            StartCoroutine(MeleeCD()); // Cooldown
-            StartCoroutine(MeleeAttackEffects()); // Changes the color or the cone indicating when we attack
-
-            RaycastHit2D[] enemies = Physics2D.CircleCastAll(transform.position, coneRange, lastFacing, coneRange, layerMask); // List of enemies around player
-
-            foreach (RaycastHit2D e in enemies)
-            {
-                bool isHit = IsPointInsideCone(e.transform.position, transform.position, lastFacing, degreeOfArc, coneRange); // Checks if enemies are within a cone of a circle
-
-                Vector2 enemyPos = e.transform.position;
-                Vector2 playerPos = transform.position;
-                bool los = !Physics2D.Raycast(playerPos, enemyPos - playerPos, coneRange, obstacleLayer); // Line of sight
-
-                if (isHit && los || Vector3.Distance(playerPos, enemyPos) < innerRange && los) // Is hit and in line of sight of the player
-                {
-                    Pool.pool.ReturnToEnemyPool(e.transform.gameObject); // Deactivates enemy and returns them to the pool
-                }
-            }
-        }
-    }
-
-    private IEnumerator MeleeCD()
-    {
-        //canAttack = false;
-
-        //yield return new WaitForSeconds(cooldown);
-
-        //canAttack = true;
-
-        canAttack = false; // Set the player to be unable to dash
-        attackCooldownRemaining = baseMeleeCooldown; // Reset the remaining cooldown time
-        while (attackCooldownRemaining > 0f) // Count down the cooldown time
-        {
-            attackCooldownRemaining -= Time.deltaTime;
-            yield return null; // Wait for the end of the frame
-        }
-        canAttack = true; // Set the player to be able to dash again
-    }
-
-    private IEnumerator MeleeAttackEffects()
-    {
-        SpriteRenderer c = color.GetComponent<SpriteRenderer>();
-        c.color = new Color32(255, 0, 0, 100);
-
-        yield return new WaitForSeconds(0.1f);
-
-        c.color = new Color32(255, 255, 255, 100);
-    }
-
-    public static bool IsPointInsideCone(Vector3 point, Vector3 coneOrigin, Vector3 coneDirection, float maxAngle, float maxDistance)
-    {
-        var distanceToConeOrigin = (point - coneOrigin).magnitude;
-        if (distanceToConeOrigin < maxDistance)
-        {
-            var pointDirection = point - coneOrigin;
-            var angle = Vector3.Angle(coneDirection, pointDirection);
-            if (angle < maxAngle)
-                return true;
-        }
-        return false;
     }
 
     private void Dash()

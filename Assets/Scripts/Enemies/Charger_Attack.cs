@@ -18,12 +18,18 @@ public class Charger_Attack : Enemy_Attack
     [HideInInspector] public bool chargingCharge; // 10/10 naming
     private Coroutine chargeCoroutine;
     private Collider2D col;
+    private LayerMask obstacleLayer;
 
     private void FixedUpdate()
     {
         StartCharge(player);
         InAttackRange(player); // Player variable is inherited from IEnemyAttack
         StopCharge();
+    }
+
+    private void Awake()
+    {
+        obstacleLayer = LayerMask.GetMask("Obstacles");
     }
 
     private void Start()
@@ -85,7 +91,7 @@ public class Charger_Attack : Enemy_Attack
         Vector3 targetPos = transform.position + 2f * chargeRange * dir;
         float distance = Vector2.Distance(transform.position, targetPos);
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        LayerMask obstacleLayer = player.GetComponent<PlayerAction>().obstacleLayer;
+
         float t = 0;
         bool isPlayerHit = false;
 

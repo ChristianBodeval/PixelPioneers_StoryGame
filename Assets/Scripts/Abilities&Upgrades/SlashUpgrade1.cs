@@ -20,8 +20,6 @@ public class SlashUpgrade1 : Ability
 
     public override void ActivateEffect(AbilityHolder ability, List<GameObject> targets)
     {
-        ability.transform.right = ability.caster.GetComponent<PlayerAction>().lastFacing;
-
         effect.Activate(targets);
     }
 }

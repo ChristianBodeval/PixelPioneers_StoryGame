@@ -16,6 +16,6 @@ MonoBehaviour:
   damage: 30
   duration: 0
   cooldownTime: 3
-  keyTrigger: 104
+  keyTrigger: 110
   isFollowingCaster: 1
   canChangeColors: 1

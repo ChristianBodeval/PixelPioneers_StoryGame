@@ -19,6 +19,7 @@ public class SlashAbility : Ability
 
     public void Damage(GameObject target)
     {
+        target.GetComponent<Health>().TakeDamage(damage);
         //Deal damage
         Debug.Log("Damaged " + this.damage + " to " + target.name);
     }

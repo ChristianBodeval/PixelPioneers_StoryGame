@@ -12,6 +12,7 @@ public class ColliderDebugger : MonoBehaviour
 
     public LayerMask obstacleLayer;
     public LayerMask groundLayer;
+    public LayerMask enemyLayer;
 
 
     private void OnDrawGizmos()
@@ -20,8 +21,20 @@ public class ColliderDebugger : MonoBehaviour
         Gizmos.DrawSphere(transform.position, radius);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer.Equals(enemyLayer))
+        {
+            Debug.Log("Enemy in trigger");
+        }
+        
+    }
+
+
     private void Update()
     {
+
+
         if (!Physics2D.OverlapPoint(transform.position, groundLayer))
         {
             Debug.Log("Out of map");

@@ -45,6 +45,8 @@ public class Mjoelnir : MonoBehaviour
     [SerializeField] private float areaOfEffectCD;
     [SerializeField] private GameObject aoeIndicator;
 
+    private LayerMask obstacleLayer;
+
     private bool abilityRDY = true;
     private Coroutine abilityCDFunction;
     private bool canSpin = true;
@@ -54,6 +56,8 @@ public class Mjoelnir : MonoBehaviour
     {
         mjoelnirSprite = GetComponentInChildren<SpriteRenderer>().gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
+
+        obstacleLayer = LayerMask.GetMask("Obstacles");
     }
 
     private void Update()
@@ -218,7 +222,6 @@ public class Mjoelnir : MonoBehaviour
         Vector3 targetPos = (Vector2)player.transform.position + dir * chargedAmount;
         float distance = Vector2.Distance((Vector2)player.transform.position, targetPos);
         Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-        LayerMask obstacleLayer = player.GetComponent<PlayerAction>().obstacleLayer;
         RaycastHit2D[] enemies;
         List<GameObject> alreadyHit = new(); // new() is apparantly a thing - VS suggested it
 
