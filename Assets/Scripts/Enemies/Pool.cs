@@ -52,7 +52,7 @@ public class Pool : MonoBehaviour
 
 
     /// Enemy pool
-    
+
     public GameObject DrawFromEnemyPool(WaveObject.EnemyType type)
     {
         if (storageEnemies.Count > 0)
@@ -104,7 +104,7 @@ public class Pool : MonoBehaviour
     }
 
     /// Pickup pool
-    
+
     // Adds healthpickup to list for later spawning
     public void AddHealthPickUp(Vector3 pos, float healAmount)
     {
