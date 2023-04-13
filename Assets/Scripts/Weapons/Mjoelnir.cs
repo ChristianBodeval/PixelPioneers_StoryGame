@@ -51,6 +51,7 @@ public class Mjoelnir : MonoBehaviour
 
     private void Start()
     {
+        mjoelnirSprite = GetComponentInChildren<SpriteRenderer>().gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
