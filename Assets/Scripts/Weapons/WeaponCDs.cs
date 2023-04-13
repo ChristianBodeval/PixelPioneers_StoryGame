@@ -6,7 +6,7 @@ public class WeaponCDs : MonoBehaviour
 {
     public Image baseMeleeCDVisual;
     public Image dashCDVisual;
-    public Image mjølnirCDVisual;
+    public Image mjoelnirCDVisual;
     public Image gungnirCDVisual;
 
     public PlayerAction playerActionScript;
@@ -18,8 +18,8 @@ public class WeaponCDs : MonoBehaviour
     private float dashCooldownRemaining;
     private float dashCooldownTime;
 
-    private float mjölnirCooldownRemaining;
-    private float mjölnirCooldownTime;
+    private float mjoelnirCooldownRemaining;
+    private float mjoelnirCooldownTime;
 
     private float gungnirCooldownRemaining;
     private float gungnirCooldownTime;
@@ -28,12 +28,12 @@ public class WeaponCDs : MonoBehaviour
     {
         dashCDVisual.fillAmount = 1;
         baseMeleeCDVisual.fillAmount = 1;
-        mjølnirCDVisual.fillAmount = 1;
+        mjoelnirCDVisual.fillAmount = 1;
         gungnirCDVisual.fillAmount = 1;
 
         baseMeleeCooldownTime = playerActionScript.baseMeleeCooldown;
         dashCooldownTime = playerActionScript.dashCooldownTime;
-        mjölnirCooldownTime = mjoelnirScript.chargeCD;
+        mjoelnirCooldownTime = mjoelnirScript.chargeCD;
     }
 
     // Update is called once per frame
@@ -41,7 +41,7 @@ public class WeaponCDs : MonoBehaviour
     {
         baseMeleeCDVisual.fillAmount = baseMeleeCooldownRemaining / baseMeleeCooldownTime;
         dashCDVisual.fillAmount = dashCooldownRemaining / dashCooldownTime;
-        mjølnirCDVisual.fillAmount = mjölnirCooldownRemaining / mjölnirCooldownTime;
+        mjoelnirCDVisual.fillAmount = mjoelnirCooldownRemaining / mjoelnirCooldownTime;
     }
 
     public IEnumerator BaseMeleeCD()
@@ -66,10 +66,10 @@ public class WeaponCDs : MonoBehaviour
 
     public IEnumerator MjoelnirCD()
     {
-        mjölnirCooldownRemaining = mjölnirCooldownTime; // Reset the remaining cooldown time
-        while (mjölnirCooldownRemaining > 0f) // Count down the cooldown time
+        mjoelnirCooldownRemaining = mjoelnirCooldownTime; // Reset the remaining cooldown time
+        while (mjoelnirCooldownRemaining > 0f) // Count down the cooldown time
         {
-            mjölnirCooldownRemaining -= Time.deltaTime;
+            mjoelnirCooldownRemaining -= Time.deltaTime;
             yield return null; // Wait for the end of the frame
         }
     }
@@ -77,10 +77,10 @@ public class WeaponCDs : MonoBehaviour
     //TODO..
     public IEnumerator GungnirCD()
     {
-        mjölnirCooldownRemaining = mjölnirCooldownTime; // Reset the remaining cooldown time
-        while (mjölnirCooldownRemaining > 0f) // Count down the cooldown time
+        mjoelnirCooldownRemaining = mjoelnirCooldownTime; // Reset the remaining cooldown time
+        while (mjoelnirCooldownRemaining > 0f) // Count down the cooldown time
         {
-            mjölnirCooldownRemaining -= Time.deltaTime;
+            mjoelnirCooldownRemaining -= Time.deltaTime;
             yield return null; // Wait for the end of the frame
         }
     }
