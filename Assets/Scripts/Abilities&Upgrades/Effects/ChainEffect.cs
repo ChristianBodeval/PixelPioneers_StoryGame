@@ -14,13 +14,14 @@ public class ChainEffect : Effect
     GameObject myGM;
     float myradius = 0;
     private Collider2D[] mytargets;
-    private DrawLineBetween2Points lineRenderer;
+    //TODO Make line renderer
+    //private DrawLineBetween2Points lineRenderer;
 
     IEnumerator enumerator;
 
     private void Awake()
     {
-        lineRenderer = GetComponent<DrawLineBetween2Points>();   
+        //lineRenderer = GetComponent<DrawLineBetween2Points>();   
     }
 
     private void OnDrawGizmos()
@@ -72,7 +73,7 @@ public class ChainEffect : Effect
             }
 
             //TODO make this an event
-            lineRenderer.SetLine(startingTarget.transform.position, newTarget.transform.position);
+            //lineRenderer.SetLine(startingTarget.transform.position, newTarget.transform.position);
 
 
             //TODO Deal damage here too
@@ -82,7 +83,7 @@ public class ChainEffect : Effect
             yield return new WaitForSeconds(timeBetweenEachBounce);
 
         }
-        lineRenderer.ResetLine();
+        //lineRenderer.ResetLine();
 
         yield return null;
     }
