@@ -11,8 +11,8 @@ public class SpawnSystem : MonoBehaviour
     [SerializeField] private float spawnApartDistance;
     private List<WaveObject> wavesToSpawn = new List<WaveObject>();
     private List<GameObject> waitingDeathList = new List<GameObject>();
+    private List<int> randomizingList = new List<int>();
     private Coroutine waveAliveCoroutine = null;
-    private int recursions = 0;
     private bool isSpawning = false;
     private bool waveAlive = false;
     private bool isWaitingForWaveToDie = false;
@@ -35,6 +35,7 @@ public class SpawnSystem : MonoBehaviour
 
         totalWaves++; // Increase max waves by 1
         wavesToSpawn.Add(wave);
+        WaveVisual.AddWave(); // Add another wave crystal in the UI
     }
 
     // Waits for spawning to be complete
@@ -53,7 +54,7 @@ public class SpawnSystem : MonoBehaviour
         while (true)
         {
             // Suspend execution of function until wave is dead if enabled on previous wave
-            while (isWaitingForWaveToDie && waveAlive)
+            while (isWaitingForWaveToDie && waveAlive || totalWaves <= 0 || currentWave >= totalWaves)
             {
                 yield return new WaitForSeconds(0.1f);
             }
@@ -69,27 +70,26 @@ public class SpawnSystem : MonoBehaviour
 
                 for (int j = 0; j < amountToSpawn; j++)
                 {
-                    SpawnEnemy((WaveObject.EnemyType)i); // Spawn enemy of type
+                    randomizingList.Add(i);
                     waveAlive = true;
-                    yield return new WaitForSeconds(wavesToSpawn[0].timeBetweenMobs); // Space mob spawning out - for performance and look reason, it looks better if mobs seem a bit more random in their timing
+                    
                 }
             }
 
+            yield return StartCoroutine(IterateListRandomly()); // Spawn the enemies in a random order
             currentWave++;
 
             if (isWaitingForWaveToDie && waveAliveCoroutine == null) StartCoroutine(CheckIfWaveIsDead()); // Function checks if wave is alive during play
             if (wavesToSpawn.Count > 0) wavesToSpawn.Remove(wavesToSpawn[0]); // Instead of iterating through the list we remove waves we have already used
 
-            isSpawning = false;
-            float waitDuration = 0.1f; // Default value
-            if (wavesToSpawn.Count > 0) waitDuration = wavesToSpawn[0].waitAmountUntilNextWave; // Wait for duration specified by the wave object - edit the duration in the object
-            yield return new WaitForSeconds(waitDuration);
+            isSpawning = false; // Its safe to edit the wavelist again
 
             // Resets wave variables if the waves are all done
-            if (currentWave == totalWaves && !isWaitingForWaveToDie && !waveAlive)
+            if (currentWave == totalWaves && !waveAlive) // Last wave is dead
             {
                 totalWaves = 0;
                 currentWave = 0;
+                SendWave.canSendWaves = true;
             }
         }
     }
@@ -101,12 +101,28 @@ public class SpawnSystem : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
+        WaveVisual.RemoveWave(); // Static method for removing a visual indicator for a wave - crystal is broken
         waveAlive = false;
     }
 
     public void RemoveFromWaitDeathList(GameObject e)
     {
         if (waitingDeathList.Contains(e)) waitingDeathList.Remove(e);
+    }
+
+    private IEnumerator IterateListRandomly()
+    {
+        while (randomizingList.Count > 0)
+        {
+            int i = UnityEngine.Random.Range(0, randomizingList.Count);
+            int enemyType = randomizingList[i];
+            SpawnEnemy((WaveObject.EnemyType)enemyType); // Spawn enemy of type
+            randomizingList.Remove(enemyType);
+            if (wavesToSpawn.Count > 0) yield return new WaitForSeconds(wavesToSpawn[0].timeBetweenMobs); // Space mob spawning out - for performance and look reason, it looks better if mobs seem a bit more random in their timing
+            Debug.Log(randomizingList.Count);
+        }
+
+        yield return new WaitForSeconds(0.2f);
     }
 
     private void SpawnEnemy(WaveObject.EnemyType type)
