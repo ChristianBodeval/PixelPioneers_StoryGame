@@ -10,7 +10,7 @@ public class WeaponCDs : MonoBehaviour
     public Image gungnirCDVisual;
 
     public PlayerAction playerActionScript;
-    public Mjölnir mjølnirScript;
+    public Mjoelnir mjoelnirScript;
 
     private float baseMeleeCooldownRemaining;
     private float baseMeleeCooldownTime;
@@ -33,7 +33,7 @@ public class WeaponCDs : MonoBehaviour
 
         baseMeleeCooldownTime = playerActionScript.baseMeleeCooldown;
         dashCooldownTime = playerActionScript.dashCooldownTime;
-        mjölnirCooldownTime = mjølnirScript.chargeCD;
+        mjölnirCooldownTime = mjoelnirScript.chargeCD;
     }
 
     // Update is called once per frame
@@ -64,7 +64,7 @@ public class WeaponCDs : MonoBehaviour
         }
     }
 
-    public IEnumerator MjölnirCD()
+    public IEnumerator MjoelnirCD()
     {
         mjölnirCooldownRemaining = mjölnirCooldownTime; // Reset the remaining cooldown time
         while (mjölnirCooldownRemaining > 0f) // Count down the cooldown time

@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d11464d039dc249bb65ee045a1f4c7, type: 3}
   m_Name: HasTalkedTo
   m_EditorClassIdentifier: 
-  hasTalkedTo: 0
-  hasTalkedToArr: 0000000000
+  hasTalkedToArr: 0001010101

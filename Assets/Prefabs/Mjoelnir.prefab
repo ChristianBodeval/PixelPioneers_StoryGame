@@ -138,13 +138,13 @@ MonoBehaviour:
   spinRadius: 1
   spinSpeed: 10
   spriteRotationSpeed: 14
-  "mj\xF6lnirSprite": {fileID: 146702678940892861}
+  mjoelnirSprite: {fileID: 0}
   onCollisionFreezeDuration: 0.05
   collisionFreezeCD: 0.05
   enemyLayers:
     serializedVersion: 2
     m_Bits: 4224
-  hasChargeUpgrade: 0
+  hasChargeUpgrade: 1
   chargeDMG: 2
   chargeSpeed: 20
   baseHitboxSize: 1
@@ -155,7 +155,8 @@ MonoBehaviour:
   maxCharge: 10
   stunDuration: 0.4
   rangeIndicator: {fileID: 1724249966}
-  hasAreaOfEffectUpgrade: 1
+  weaponCDVisual: {fileID: 0}
+  hasAreaOfEffectUpgrade: 0
   aoeDMG: 3
   castTime: 0.3
   aoeRadius: 3
@@ -5144,7 +5145,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bc4b0c691a23bd747b4d5cbd517df6fe, type: 2}
+  - {fileID: 2100000, guid: 4c9a87858e2754648b8f0d5143303072, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

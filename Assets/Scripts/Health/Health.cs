@@ -90,7 +90,7 @@ public class Health : MonoBehaviour
     }
 
     // Removes enemy from active pool, plays death anim and spawns pickup
-    protected IEnumerator Die()
+    public virtual IEnumerator Die()
     {
         if (gameObject.CompareTag("Enemy"))
         {

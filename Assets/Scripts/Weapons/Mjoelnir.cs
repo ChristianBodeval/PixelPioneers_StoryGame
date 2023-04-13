@@ -346,7 +346,7 @@ public class Mjoelnir : MonoBehaviour
 
         if (abilityCDFunction != null) { StopCoroutine(abilityCDFunction); } // If we already have a cooldown running, stop it
         abilityCDFunction = StartCoroutine(AbilityCD(chargeCD));
-        weaponCDVisual.StartCoroutine("MjölnirCD");
+        weaponCDVisual.StartCoroutine("MjoelnirCD");
     }
 
     // Puts ability on cd and is reset after a duration

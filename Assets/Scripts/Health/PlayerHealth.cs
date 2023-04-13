@@ -107,11 +107,12 @@ public class PlayerHealth : Health
             }
         }
     }
-    public override void Die()
+    public override IEnumerator Die()
     {
         if(this.currentHealth <= 0)
             gameObject.SetActive(false);
         //.. play deathscreen
+        yield return new WaitForEndOfFrame();
     }
     
 }

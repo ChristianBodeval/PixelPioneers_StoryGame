@@ -28,11 +28,11 @@ public class DialogueManager : MonoBehaviour
 
     private PlayerAction playerAction;
 
-    private Mjölnir mjölnir;
+    private Mjoelnir mjoelnir;
 
     //public bool isPlayerInRange;
 
-    private Dialogue dialogueTarget;
+    private GameObject[] dialogueTarget;
 
     private Animator dialogBoxAnim;
 
@@ -53,8 +53,8 @@ public class DialogueManager : MonoBehaviour
         isDialoguePlaying = false;
         dialogueBox.SetActive(false);
         playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
-        mjölnir = GameObject.Find("Mjölnir").GetComponent<Mjölnir>();
-        dialogueTarget = GetComponent<Dialogue>();
+        mjoelnir = GameObject.Find("Mjoelnir").GetComponent<Mjoelnir>();
+        dialogueTarget = GameObject.FindGameObjectsWithTag("NPC");
         dialogBoxAnim = dialogueBox.GetComponent<Animator>();
     }
 
@@ -65,7 +65,7 @@ public class DialogueManager : MonoBehaviour
             ContinueStory();
         }
 
-        Debug.Log("Current story is:" + currentStory.currentText);
+        //Debug.Log("Current story is:" + currentStory.currentText);
     }
 
     private IEnumerator ButtonCD()
@@ -87,7 +87,7 @@ public class DialogueManager : MonoBehaviour
         isDialoguePlaying = true;
         playerAction.StopMove();
         playerAction.enabled = false;
-        mjölnir.enabled = false;
+        mjoelnir.enabled = false;
         ContinueStory();
         dialogBoxAnim.Play("FlyUp");
         
@@ -103,7 +103,7 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = "";
 
         playerAction.enabled = true;
-        mjölnir.enabled = true;
+        mjoelnir.enabled = true;
 
         Debug.Log("Exited Dialog Mode");
 
@@ -111,7 +111,10 @@ public class DialogueManager : MonoBehaviour
         
         playerAction.StartMove();
 
-        dialogueTarget.isDialoguePlaying = false;
+        foreach(GameObject i in dialogueTarget)
+        {
+            i.GetComponent<Dialogue>().isDialoguePlaying = false;
+        }
         
         if (dialogBoxAnim != null)
         dialogBoxAnim.Play("FlyDown");
