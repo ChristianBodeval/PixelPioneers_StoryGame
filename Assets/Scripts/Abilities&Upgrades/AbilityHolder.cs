@@ -37,13 +37,14 @@ public class AbilityHolder : MonoBehaviour
 
     private void ActivateNextAbility()
     {
-        nextAbility.SetActive();
+        if(nextAbility != null)
+            nextAbility.SetActive();
     }
 
     private void Awake()
     {
-        duration = ability.duration;
         ability.Initialize(this.gameObject);
+        duration = ability.duration;
 
         if (ability.isFollowingCaster)
         {
@@ -54,6 +55,8 @@ public class AbilityHolder : MonoBehaviour
             //Same rotation as caster
             transform.rotation = caster.transform.rotation;
         }
+
+        
     }
 
     AbilityState state = AbilityState.ready; 
@@ -86,7 +89,7 @@ public class AbilityHolder : MonoBehaviour
         targets = collider.targets;
 
         if (targets.Count > 0)
-            ability.ActivateEffect(targets);
+            ability.ActivateEffect(this,targets);
 
         Debug.Log("Called Active");
         StartCoroutine(ChangeColor());
@@ -120,6 +123,11 @@ public class AbilityHolder : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Point where player is looking, if it has a rigidbody
+        if (caster.GetComponent<Rigidbody2D>() && ability.isFollowingCaster)
+            transform.right = caster.GetComponent<PlayerAction>().lastFacing;
+            
+
         switch (state)
         {
             case AbilityState.ready:

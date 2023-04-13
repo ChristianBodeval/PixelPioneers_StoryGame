@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SlashCone1
   m_EditorClassIdentifier: 
   name: SlashCone
-  range: 4.1
+  range: 2.8
   corners: 7
   width: 0
   angle: 45

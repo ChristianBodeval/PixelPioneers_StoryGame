@@ -28,7 +28,7 @@ public class Ability : ScriptableObject
 
 
 
-    public virtual void ActivateEffect(List<GameObject> targets)
+    public virtual void ActivateEffect(AbilityHolder ability, List<GameObject> targets)
     {
         
     }

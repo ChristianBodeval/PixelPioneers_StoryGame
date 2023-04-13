@@ -130,34 +130,18 @@ public class PlayerAction : MonoBehaviour
         canMove = true;
     }
 
+
+
+
+
+
     private void Facing()
     {
-        // Saves the vector of where the player was last moving
-        if (moveVector.magnitude > 0.5f)
+        //Checks which direction was last faced on input
+        if(moveVector.magnitude > 0.5f)
         {
-            lastFacing = new Vector2(moveVector.x, moveVector.y).normalized;
+            lastFacing = rb.velocity;
         }
-
-        // Faces a cone in the direction of attack
-        if (Mathf.Abs(lastFacing.x) > 0.9f) // Right & left
-        {
-            cone.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-        else if (Mathf.Abs(lastFacing.y) > 0.9f) // Up & down
-        {
-            cone.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-        }
-        else if (lastFacing.x > 0.5f && lastFacing.y > 0.5f || lastFacing.x < -0.5f && lastFacing.y < -0.5f) // Up right & down left
-        {
-            cone.transform.rotation = Quaternion.Euler(0f, 0f, 45f);
-        }
-        else if (lastFacing.x < -0.5f && lastFacing.y > 0.5f || lastFacing.x > -0.5f && lastFacing.y < 0.5f) // Up left & down right
-        {
-            cone.transform.rotation = Quaternion.Euler(0f, 0f, -45f);
-        }
-
-        // Repositions the cone to be infront of player
-        cone.position = (Vector2)transform.position + lastFacing.normalized * coneRange;
     }
 
     private void BaseMelee()
