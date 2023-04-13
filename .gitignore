@@ -58,12 +58,8 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-.plastic/plastic.changes
-.plastic/plastic.changes
-.plastic/plastic.changes
-.plastic/plastic.changes
-.plastic/plastic.wktree
-UserSettings/Layouts/default-2021.dwlt
-UserSettings/Layouts/default-2021.dwlt
-UserSettings/Layouts/default-2021.dwlt
-UserSettings/Layouts/default-2021.dwlt
+#Other ignores
+.plastic/
+.UserSettings/
+**/.DS_Store
+
