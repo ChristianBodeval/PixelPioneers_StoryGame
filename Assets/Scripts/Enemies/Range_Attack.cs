@@ -43,7 +43,7 @@ public class Range_Attack : Enemy_Attack
 
     private bool InAttackRange(GameObject player)
     {
-        bool inRange = Vector2.Distance(player.transform.position, transform.position) <= attackRange && LineOfSight(player, animator); // In attack range & los
+        bool inRange = Vector2.Distance(player.transform.position, transform.position) <= attackRange && IsInLineOfSight(player, animator); // In attack range & los
         animator.SetBool("InAttackRange", inRange);
         return inRange;
     }

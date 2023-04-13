@@ -262,13 +262,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bat_Fly_6: 1420595122
+      Bat_Fly_0: 1785585863
+      Bat_Fly_1: -937175677
+      Bat_Fly_2: 3466406
       Bat_Fly_3: -721324763
       Bat_Fly_4: -1156595231
       Bat_Fly_5: 454743965
-      Bat_Fly_1: -937175677
-      Bat_Fly_2: 3466406
-      Bat_Fly_0: 1785585863
+      Bat_Fly_6: 1420595122
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

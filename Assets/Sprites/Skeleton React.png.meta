@@ -199,10 +199,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Skeleton React_2: 2035786192
-      Skeleton React_3: 598661417
       Skeleton React_0: 1504884069
       Skeleton React_1: 72090293
+      Skeleton React_2: 2035786192
+      Skeleton React_3: 598661417
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

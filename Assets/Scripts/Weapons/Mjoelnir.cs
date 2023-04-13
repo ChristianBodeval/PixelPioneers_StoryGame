@@ -366,6 +366,7 @@ public class Mjoelnir : MonoBehaviour
 
         if (col.CompareTag("Enemy") && !cannotHitList.ContainsKey(col.gameObject))
         {
+            //TODO rettes til et egentlig Knockback script eller metode paa enemy. Kald derfra metoden her. 
             col.transform.position += (col.transform.position - player.transform.position).normalized * 0.3f; // Slight knockback
             col.gameObject.GetComponent<Health>().TakeDamage(spinDMG);
             if (!onFreezeCD) StartCoroutine(FreezeSpin());

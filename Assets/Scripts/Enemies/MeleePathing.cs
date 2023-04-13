@@ -35,8 +35,8 @@ public class MeleePathing : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
-        //A* pathing
+    {       
+
         if (TargetNotAttackable() && !animator.GetBool("IsStunned"))
         {
             PathFollow();
@@ -67,7 +67,9 @@ public class MeleePathing : MonoBehaviour
         Flip(); // Flips sprite
 
         // Guard clause
-        if (path == null || currentWayPoint >= path.vectorPath.Count || !isFollowing) { return; } // Is not there yet and has a path
+        if (path == null || currentWayPoint >= path.vectorPath.Count || animator.GetBool("IsDigging")) { return; } // Is not there yet and has a path && is not Digging
+
+
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
 

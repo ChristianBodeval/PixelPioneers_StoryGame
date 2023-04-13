@@ -92,8 +92,6 @@ public class PlayerHealth : Health
 
     protected override void Update()
     {
-        Debug.Log(currentHealth);
-
         HP.value = currentHealth;
         HPFill.color = gradient.Evaluate(HP.normalizedValue);
         if (this.currentHealth <= 0)

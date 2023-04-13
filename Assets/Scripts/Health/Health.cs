@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class Health : MonoBehaviour
     protected static readonly float freezeDurationOnDmgTaken = 0.15f;
 
     protected SpriteRenderer sr;
+    public UnityEvent DamageTakenEvent;
+
 
     private void Start()
     {
@@ -29,21 +32,30 @@ public class Health : MonoBehaviour
         this.maxHealth = maxHealth;
     }
 
+
+
+
+   
     public virtual void TakeDamage(float damage)
     {
-        this.currentHealth -= damage;
+        if(this.isActiveAndEnabled)
+        {
+            DamageTakenEvent.Invoke();
 
-        // Freeze frame enemies
-        if (gameObject.CompareTag("Enemy")) GetComponent<Crowd_Control>().FreezeFrame(freezeDurationOnDmgTaken);
-        GameObject bloodSplatter = Pool.pool.DrawFromBloodSpatterPool();
-        bloodSplatter.transform.position = transform.position;
+            this.currentHealth -= damage;
 
-        if (blinkCoroutine != null) StopCoroutine(blinkCoroutine); // Stops blink coroutine
-        blinkCoroutine = StartCoroutine(BlinkOnDmgTaken(freezeDurationOnDmgTaken));
+            // Freeze frame enemies
+            if (gameObject.CompareTag("Enemy")) GetComponent<Crowd_Control>().FreezeFrame(freezeDurationOnDmgTaken);
+            GameObject bloodSplatter = Pool.pool.DrawFromBloodSpatterPool();
+            bloodSplatter.transform.position = transform.position;
 
-        if (shakeCoroutine != null) StopCoroutine(shakeCoroutine);
-        shakeCoroutine = StartCoroutine(SpriteShake(0.12f, freezeDurationOnDmgTaken));
-        //PrintDmgToScreen(damage, Color.red);
+            if (blinkCoroutine != null) StopCoroutine(blinkCoroutine); // Stops blink coroutine
+            blinkCoroutine = StartCoroutine(BlinkOnDmgTaken(freezeDurationOnDmgTaken));
+
+            if (shakeCoroutine != null) StopCoroutine(shakeCoroutine);
+            shakeCoroutine = StartCoroutine(SpriteShake(0.12f, freezeDurationOnDmgTaken));
+            //PrintDmgToScreen(damage, Color.red);
+        }
     }
 
     public virtual void HealDamage(float heal)
@@ -55,6 +67,8 @@ public class Health : MonoBehaviour
         }
 
         currentHealth += heal;
+
+        //TODO Add this as a listener to the DamageTakenEvent
         PrintDmgToScreen(heal, Color.green);
     }
 
