@@ -28,7 +28,7 @@ public class AbilityHolder : MonoBehaviour
     IEnumerator effectOverTimeCoroutine;
     IEnumerator chainDamageCoroutine;
 
-
+    private Rigidbody2D casterRB; 
 
     AbilityState state = AbilityState.ready; 
 
@@ -47,6 +47,7 @@ public class AbilityHolder : MonoBehaviour
 
     private void Awake()
     {
+        casterRB = caster.GetComponent<Rigidbody2D>();
         ability.Initialize(this.gameObject);
         duration = ability.duration;
 
@@ -112,14 +113,9 @@ public class AbilityHolder : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Change direction of the ability according to the input
-        float inputX = Input.GetAxisRaw("Horizontal");
-        float inputY = Input.GetAxisRaw("Vertical");
-        movement = new Vector2(inputX, inputY);
-
-
-        if(inputX != 0 || inputY != 0)
-            transform.right = movement;
+        //Change direction of the ability according to where the player is moving
+        if (casterRB.velocity.magnitude > 0)
+            transform.right = casterRB.velocity;
 
         switch (state)
         {
