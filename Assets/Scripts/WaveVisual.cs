@@ -5,7 +5,7 @@ public class WaveVisual : MonoBehaviour
 {
     public Image[] waves;
 
-    public int waveCount = 4;
+    private int maxWaves;
     public int wavesLeft;
 
     public Sprite crackedCrystal;
@@ -13,20 +13,24 @@ public class WaveVisual : MonoBehaviour
 
     private void Start()
     {
+        maxWaves = SpawnSystem.totalWaves;
+
         waves[0].enabled = false;
         waves[1].enabled = false;
         waves[2].enabled = false;
         waves[3].enabled = false;
-        wavesLeft = waveCount;
+        wavesLeft = SpawnSystem.totalWaves;
     }
 
     private void Update()
     {
+
+
         SetWave();
 
-        if (wavesLeft >= waveCount)
+        if (wavesLeft >= maxWaves)
         {
-            wavesLeft = waveCount;
+            wavesLeft = maxWaves;
         }
 
         if (wavesLeft <= 0)
