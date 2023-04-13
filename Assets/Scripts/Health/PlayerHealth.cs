@@ -107,4 +107,11 @@ public class PlayerHealth : Health
             }
         }
     }
+    public override void Die()
+    {
+        if(this.currentHealth <= 0)
+            gameObject.SetActive(false);
+        //.. play deathscreen
+    }
+    
 }

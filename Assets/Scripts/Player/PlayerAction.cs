@@ -1,11 +1,11 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerAction : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float speed = 10f;
+
     public LayerMask obstacleLayer;
     [SerializeField] private LayerMask groundLayer;
     private Rigidbody2D rb;
@@ -13,7 +13,7 @@ public class PlayerAction : MonoBehaviour
     private bool canMove = true;
 
     [Header("Base Attack")]
-    [SerializeField] private float cooldown = 0.4f;
+    [SerializeField] public float baseMeleeCooldown = 0.4f;
 
     [SerializeField] private float coneRange = 2f;
     [SerializeField] private float innerRange = 0.4f; // Killzone range around the player, serves to kill enemies who are very close to the cone but not quite in it
@@ -23,6 +23,7 @@ public class PlayerAction : MonoBehaviour
     [SerializeField] private Transform color; // temp
     [SerializeField] private float inputBuffer = 0.1f;
     [HideInInspector] public Vector2 lastFacing = new Vector2(1f, 0f);
+    public float attackCooldownRemaining = 0f;
     private float BufferCountdown;
     private bool canAttack = true;
     private ParticleSystem arcParticles;
@@ -30,15 +31,17 @@ public class PlayerAction : MonoBehaviour
     private Health healthScript;
 
     [Header("Dash")]
-    public Image DashCDVisual;
     public float dashDistance = 5f; // Distance of the dash
+
     public float dashDuration = 0.5f; // Duration of the dash
-    public float dashCooldownTime = 1.8f;
+    [HideInInspector] public float dashCooldownTime = 1.8f;
     private bool isDashing = false; // Flag to check if the player is currently dashing
     private float dashTime = 0f; // Time elapsed during the dash
     private Vector2 dashDirection; // Direction of the dash
     private bool canDash = true; //C Flag to check if the player can dash
-    private float dashCooldownRemaining = 0f; // Initialize to 0 to allow dashing immediately
+    [HideInInspector] public float dashCooldownRemaining = 0f; // Initialize to 0 to allow dashing immediately
+
+    public WeaponCDs weaponCDVisual;
 
     private void Start()
     {
@@ -47,8 +50,6 @@ public class PlayerAction : MonoBehaviour
         dashDirection = GetDashDirection();
 
         healthScript = GetComponent<Health>();
-        DashCDVisual.fillAmount = 1;
-
     }
 
     private void Update()
@@ -72,8 +73,6 @@ public class PlayerAction : MonoBehaviour
         Facing();
 
         Dash();
-
-        DashCDVisual.fillAmount = dashCooldownRemaining / dashCooldownTime;
     }
 
     private void FixedUpdate()
@@ -165,6 +164,7 @@ public class PlayerAction : MonoBehaviour
     {
         if (BufferCountdown > 0f && canAttack)
         {
+            weaponCDVisual.StartCoroutine("BaseMeleeCD"); // Cooldown visual
             StartCoroutine(MeleeCD()); // Cooldown
             StartCoroutine(MeleeAttackEffects()); // Changes the color or the cone indicating when we attack
 
@@ -188,11 +188,20 @@ public class PlayerAction : MonoBehaviour
 
     private IEnumerator MeleeCD()
     {
-        canAttack = false;
+        //canAttack = false;
 
-        yield return new WaitForSeconds(cooldown);
+        //yield return new WaitForSeconds(cooldown);
 
-        canAttack = true;
+        //canAttack = true;
+
+        canAttack = false; // Set the player to be unable to dash
+        attackCooldownRemaining = baseMeleeCooldown; // Reset the remaining cooldown time
+        while (attackCooldownRemaining > 0f) // Count down the cooldown time
+        {
+            attackCooldownRemaining -= Time.deltaTime;
+            yield return null; // Wait for the end of the frame
+        }
+        canAttack = true; // Set the player to be able to dash again
     }
 
     private IEnumerator MeleeAttackEffects()
@@ -233,9 +242,8 @@ public class PlayerAction : MonoBehaviour
             dashDirection = lastFacing;
 
             // Start the dash cooldown coroutine
+            weaponCDVisual.StartCoroutine("DashCD");
             StartCoroutine(DashCD());
-
-
         }
     }
 

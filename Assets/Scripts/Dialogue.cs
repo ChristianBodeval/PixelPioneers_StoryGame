@@ -1,53 +1,58 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Ink.Runtime;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 public class Dialogue : MonoBehaviour
 {
     [Header("Dialogue")]
-    public bool inDialogue = false;
+    public bool isDialoguePlaying = false;
+
+    [Header("Ink JSON")]
     [SerializeField] private TextAsset inkFileText;
+
     private Story inkStory;
     private Choice[] choice;
-    private bool playerInRange = false;
+    [SerializeField] private bool isPlayerInRange;
     private GameObject player;
-    private GameObject visualCue; // Pops up when the player can interact   
+    public GameObject visualCue; // Pops up when the player can interact
+    private PlayerAction playerAction;
+    private DialogueManager dialogueManager;
+    private TextMeshProUGUI dialogueNPCName;
+
+    public HasTalkedTo hasTalkedTo;
+
+    public int NPCIndex;
 
     private void Awake()
     {
-        visualCue = GameObject.Find("DialogueCue");
-        visualCue.SetActive(false);
+        playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
+        dialogueManager = FindObjectOfType<DialogueManager>();
+        dialogueNPCName = dialogueManager.dialogueNPCName;
     }
 
     private void Start()
     {
-        playerInRange = false;
+        visualCue.SetActive(false);
+        isPlayerInRange = false;
         inkStory = new Story(inkFileText.text);
     }
 
+    
+
     private void Update()
     {
-        if (playerInRange)
+        SetNPCIndex();
+        isDialoguePlaying = dialogueManager.isDialoguePlaying;
+
+        if (isPlayerInRange && !isDialoguePlaying)
         {
             visualCue.SetActive(true);
-            visualCue.transform.position = gameObject.transform.position + (Vector3)Vector2.up * 0.4f;
-
-            if (Input.GetButton("Interact") && !inDialogue)
+            if (Input.GetButtonDown("Interact"))
             {
-                StartDialogue();
-            }
-            else if (Input.GetButton("Interact") && inkStory.canContinue)
-            {
-                ContinueDialogue();
-            }
-            else if (Input.GetButton("Interact") && inkStory.currentChoices.Count > 0)
-            {
-                ChoiceDialogue(inkStory.currentChoices);
-            }
-            else if (Input.GetButton("Interact") && inDialogue)
-            {
-                EndDialogue();
+                isDialoguePlaying = true;
+                dialogueManager.EnterDialogueMode(inkFileText);
+                SetHasTalkedToArr();
             }
         }
         else
@@ -55,16 +60,9 @@ public class Dialogue : MonoBehaviour
             visualCue.SetActive(false);
         }
     }
-
-    private void StartDialogue()
+    private void SetHasTalkedToArr()
     {
-        inDialogue = true;
-        player.GetComponent<PlayerAction>().StopMove(); // Disallow player movement
-    }
-
-    private void ContinueDialogue()
-    {
-        inkStory.Continue();
+        hasTalkedTo.hasTalkedToArr[NPCIndex] = true;
     }
 
     private void ChoiceDialogue(List<Choice> choices)
@@ -72,26 +70,46 @@ public class Dialogue : MonoBehaviour
         //** Do something with choices
     }
 
-    private void EndDialogue()
-    {
-        inDialogue = false;
-        player.GetComponent<PlayerAction>().StartMove(); // Allow player movement
-    }
-
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
         {
-            playerInRange = true;
-            player = col.gameObject;
-        }   
+            isPlayerInRange = true;
+            //player = col.gameObject;
+            dialogueNPCName.text = gameObject.name;
+
+            Debug.Log("Player collided with " + gameObject.name);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
         {
-            playerInRange = false;
+            isPlayerInRange = false;
+            dialogueNPCName.text = "";
+        }
+    }
+
+    public void SetNPCIndex()
+    {
+        switch (gameObject.name)
+        {
+            case "NPC 1":
+                NPCIndex = 1;
+                break;
+
+            case "NPC 2":
+                NPCIndex = 2;
+                break;
+
+            case "NPC 3":
+                NPCIndex = 3;
+                break;
+
+            case "NPC 4":
+                NPCIndex = 4;
+                break;
         }
     }
 }
