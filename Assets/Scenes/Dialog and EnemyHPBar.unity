@@ -1166,16 +1166,17 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.4142135, y: -1.4142135}
-      - {x: 1.7844766, y: -0.90039885}
-      - {x: 1.9753767, y: -0.30489653}
-      - {x: 1.972913, y: 0.32045108}
-      - {x: 1.777327, y: 0.9144308}
-      - {x: 1.4142135, y: 1.4142135}
-      - {x: 0, y: 0}
-      - {x: 1.3454933, y: -1.3454933}
-      - {x: 1.3961954, y: -1.3961954}
-      - {x: 1.4142135, y: -1.4142135}
+    - - {x: 1.4142135, y: -1.6642135}
+      - {x: 1.7844766, y: -1.0491247}
+      - {x: 1.9753767, y: -0.35362253}
+      - {x: 1.972913, y: 0.37172523}
+      - {x: 1.777327, y: 1.0657048}
+      - {x: 1.4142135, y: 1.6642135}
+      - {x: 0, y: 0.25}
+      - {x: 0, y: -0.25}
+      - {x: 1.3454933, y: -1.5954932}
+      - {x: 1.3961954, y: -1.6461954}
+      - {x: 1.4142135, y: -1.6642135}
 --- !u!114 &432432136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1191,7 +1192,7 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: 1.4142135, y: -1.4142135, z: 0}
+    - position: {x: 1.4142135, y: -1.6642135, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1201,7 +1202,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
       m_CornerMode: 1
-    - position: {x: 1.782013, y: -0.907981, z: 0}
+    - position: {x: 1.782013, y: -1.057981, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1211,7 +1212,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
       m_CornerMode: 1
-    - position: {x: 1.9753767, y: -0.31286895, z: 0}
+    - position: {x: 1.9753767, y: -0.36286896, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1221,7 +1222,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
       m_CornerMode: 1
-    - position: {x: 1.9753767, y: 0.31286895, z: 0}
+    - position: {x: 1.9753767, y: 0.36286896, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1231,7 +1232,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
       m_CornerMode: 1
-    - position: {x: 1.782013, y: 0.907981, z: 0}
+    - position: {x: 1.782013, y: 1.057981, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1241,7 +1242,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
       m_CornerMode: 1
-    - position: {x: 1.4142135, y: 1.4142135, z: 0}
+    - position: {x: 1.4142135, y: 1.6642135, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1251,7 +1252,17 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
       m_CornerMode: 1
-    - position: {x: 0, y: 0, z: 0}
+    - position: {x: 0, y: 0.25, z: 0}
+      leftTangent: {x: 0, y: 0, z: 0}
+      rightTangent: {x: 0, y: 0, z: 0}
+      mode: 0
+      height: 1
+      bevelCutoff: 0
+      bevelSize: 0
+      spriteIndex: 0
+      corner: 0
+      m_CornerMode: 1
+    - position: {x: 0, y: -0.25, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1325,7 +1336,7 @@ SpriteShapeRenderer:
   m_Sprites: []
   m_LocalAABB:
     m_Center: {x: 0.9876884, y: 0, z: 0}
-    m_Extent: {x: 0.9876884, y: 1.4142135, z: 0}
+    m_Extent: {x: 0.9876884, y: 1.6642135, z: 0}
 --- !u!114 &432432138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1545,7 +1556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59001ed7e403827468dad0381069dab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.5
+  duration: 0.2
   takesDamage: 0
   curve:
     serializedVersion: 2
@@ -1560,8 +1571,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.5916319
-      value: 1.6169624
+      time: 0.16859722
+      value: 1.0568924
       inSlope: -0.066960275
       outSlope: -0.066960275
       tangentMode: 0
@@ -35126,6 +35137,7 @@ GameObject:
   - component: {fileID: 1964647771}
   - component: {fileID: 1964647773}
   - component: {fileID: 1964647772}
+  - component: {fileID: 1964647774}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -35182,6 +35194,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1964647774
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964647770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: e9ce97b7a206dc64d90931ea044e0c72, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &2022383795
 GameObject:
   m_ObjectHideFlags: 0
