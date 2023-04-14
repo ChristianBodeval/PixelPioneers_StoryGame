@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.TestTools;
 
 public class PlayerAction : MonoBehaviour
 {
@@ -56,6 +57,8 @@ public class PlayerAction : MonoBehaviour
         }
 
         Dash();
+
+        Facing();
     }
 
     private void FixedUpdate()
@@ -154,6 +157,15 @@ public class PlayerAction : MonoBehaviour
             yield return null; // Wait for the end of the frame
         }
         canDash = true; // Set the player to be able to dash again
+    }
+
+    private void Facing()
+    {
+        // Saves the vector of where the player was last moving
+        if (moveVector.magnitude > 0.5f)
+        {
+            lastFacing = new Vector2(moveVector.x, moveVector.y).normalized;
+        }
     }
 
     private void EndDash()
