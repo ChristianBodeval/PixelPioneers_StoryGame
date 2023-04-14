@@ -129,7 +129,7 @@ public class ColliderDrawer : MonoBehaviour
 
             for (int i = 0; i < colliderStat.corners; i++)
             {
-                Vector3 start = transform.up * currentPointDistance;                                //Gets start position by moving the point a little up or down dependenet on currentPointDistance
+                Vector3 start = Vector3.up * currentPointDistance;                                //Gets start position by moving the point a little up or down dependenet on currentPointDistance
                 Vector3 direction = GetVectorFromAngle(currentAngle);                               //Vector from the angle
                 Vector3 target = direction * colliderStat.range + start;                                         //Ending of the line
 
@@ -159,10 +159,11 @@ public class ColliderDrawer : MonoBehaviour
             returnList.Add(finalValue);
         }
         
-        else if(width > 0)
+        if(colliderStat.width > 0)
         {
-            returnList.Add(Vector3.zero + transform.up * 0.5f * width);
-            returnList.Add(Vector3.zero - transform.up * 0.5f * width);
+            Debug.Log("Trasnform up" + transform.up);
+            returnList.Add(Vector3.zero + Vector3.up * 0.5f * colliderStat.width);
+            returnList.Add(Vector3.zero - Vector3.up * 0.5f * colliderStat.width);
         }
 
         else { 

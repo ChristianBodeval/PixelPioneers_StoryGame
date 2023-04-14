@@ -15,5 +15,5 @@ MonoBehaviour:
   name: SlashCone
   range: 2
   corners: 6
-  width: 0
+  width: 0.5
   angle: 90
