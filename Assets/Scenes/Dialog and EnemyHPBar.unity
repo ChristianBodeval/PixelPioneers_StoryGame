@@ -1134,7 +1134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caster: {fileID: 839822837}
-  ability: {fileID: 11400000, guid: fdb31110f6c91455c831de0240be0ec1, type: 2}
+  ability: {fileID: 11400000, guid: d5413daa01c80ac45bb41732acf51b7a, type: 2}
   readyColor: {r: 0.41935158, g: 0.8301887, b: 0.3250267, a: 0.4627451}
   activeColor: {r: 0.87951994, g: 0.85882354, b: 0.9254902, a: 0.57254905}
   cooldownColor: {r: 0.8207547, g: 0.2516465, b: 0.2516465, a: 0.34901962}
@@ -1166,14 +1166,16 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.7740216, y: -0.9234972}
-      - {x: 1.9907925, y: -0.17306194}
-      - {x: 1.9106609, y: 0.5853038}
-      - {x: 1.7740216, y: 0.9234972}
+    - - {x: 1.4142135, y: -1.4142135}
+      - {x: 1.7844766, y: -0.90039885}
+      - {x: 1.9753767, y: -0.30489653}
+      - {x: 1.972913, y: 0.32045108}
+      - {x: 1.777327, y: 0.9144308}
+      - {x: 1.4142135, y: 1.4142135}
       - {x: 0, y: 0}
-      - {x: 1.6878173, y: -0.87862206}
-      - {x: 1.7514193, y: -0.9117312}
-      - {x: 1.7740216, y: -0.9234972}
+      - {x: 1.3454933, y: -1.3454933}
+      - {x: 1.3961954, y: -1.3961954}
+      - {x: 1.4142135, y: -1.4142135}
 --- !u!114 &432432136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1189,7 +1191,7 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: 1.7740216, y: -0.9234972, z: 0}
+    - position: {x: 1.4142135, y: -1.4142135, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1199,7 +1201,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
       m_CornerMode: 1
-    - position: {x: 1.9176395, y: -0.5680307, z: 0}
+    - position: {x: 1.782013, y: -0.907981, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1209,7 +1211,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
       m_CornerMode: 1
-    - position: {x: 1.9907924, y: -0.1916915, z: 0}
+    - position: {x: 1.9753767, y: -0.31286895, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1219,7 +1221,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
       m_CornerMode: 1
-    - position: {x: 1.9907924, y: 0.1916915, z: 0}
+    - position: {x: 1.9753767, y: 0.31286895, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1229,7 +1231,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
       m_CornerMode: 1
-    - position: {x: 1.9176395, y: 0.5680307, z: 0}
+    - position: {x: 1.782013, y: 0.907981, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1239,7 +1241,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
       m_CornerMode: 1
-    - position: {x: 1.7740216, y: 0.9234972, z: 0}
+    - position: {x: 1.4142135, y: 1.4142135, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1322,8 +1324,8 @@ SpriteShapeRenderer:
   m_ShapeTexture: {fileID: 0}
   m_Sprites: []
   m_LocalAABB:
-    m_Center: {x: 0.9953963, y: 0, z: 0}
-    m_Extent: {x: 0.9953963, y: 0.9234972, z: 0}
+    m_Center: {x: 0.9876884, y: 0, z: 0}
+    m_Extent: {x: 0.9876884, y: 1.4142135, z: 0}
 --- !u!114 &432432138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1547,7 +1549,34 @@ MonoBehaviour:
   takesDamage: 0
   curve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5916319
+      value: 1.6169624
+      inSlope: -0.066960275
+      outSlope: -0.066960275
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9830322
+      value: 0.017436981
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -11131,8 +11160,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitForWaveToBeDead: 1
   timeBetweenMobs: 0.3
-  meleeAmount: 22
-  rangeAmount: 6
+  meleeAmount: 28
+  rangeAmount: 8
   chargerAmount: 2
 --- !u!114 &826308695
 MonoBehaviour:
@@ -11150,7 +11179,7 @@ MonoBehaviour:
   timeBetweenMobs: 6
   meleeAmount: 0
   rangeAmount: 0
-  chargerAmount: 2
+  chargerAmount: 3
 --- !u!114 &826308696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11166,7 +11195,7 @@ MonoBehaviour:
   waitForWaveToBeDead: 1
   timeBetweenMobs: 1
   meleeAmount: 0
-  rangeAmount: 6
+  rangeAmount: 12
   chargerAmount: 0
 --- !u!114 &826308697
 MonoBehaviour:
@@ -11182,9 +11211,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitForWaveToBeDead: 1
   timeBetweenMobs: 0.5
-  meleeAmount: 20
-  rangeAmount: 2
-  chargerAmount: 2
+  meleeAmount: 30
+  rangeAmount: 0
+  chargerAmount: 0
 --- !u!114 &826308698
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: SlashAbility_v1 1
   m_EditorClassIdentifier: 
   name: Slash
-  damage: 3
+  damage: 1.5
   duration: 0
-  cooldownTime: 1
+  cooldownTime: 0.7
   keyTrigger: 106
   isFollowingCaster: 1
   canChangeColors: 1

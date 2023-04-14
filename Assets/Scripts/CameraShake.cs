@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using UnityEngine;
 
@@ -8,6 +9,15 @@ public class CameraShake : MonoBehaviour
     public AnimationCurve curve;
     private bool shakeIsOnCD = false;
 
+    private CinemachineVirtualCamera CMCam;
+
+
+
+    private void Start()
+    {
+        CMCam = GameObject.Find("CM vcam").GetComponent<CinemachineVirtualCamera>();
+
+    }
     // Update is called once per frame
     private void Update()
     {
@@ -22,6 +32,7 @@ public class CameraShake : MonoBehaviour
 
     private IEnumerator Shaking()
     {
+        CinemachineBasicMultiChannelPerlin CBMCP = CMCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         if (!shakeIsOnCD)
         {
             Vector3 originalPos = transform.position;
@@ -33,7 +44,7 @@ public class CameraShake : MonoBehaviour
                 originalPos = transform.position;
                 elapsed += Time.deltaTime;
                 float strength = curve.Evaluate(elapsed / duration);
-                transform.position = originalPos + Random.insideUnitSphere * strength;
+                CBMCP.m_AmplitudeGain = strength;
                 yield return null;
             }
 
@@ -44,7 +55,7 @@ public class CameraShake : MonoBehaviour
     private IEnumerator ShakeCD()
     {
         shakeIsOnCD = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         shakeIsOnCD = false;
     }
 }

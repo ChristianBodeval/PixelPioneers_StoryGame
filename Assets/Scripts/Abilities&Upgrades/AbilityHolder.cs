@@ -111,7 +111,7 @@ public class AbilityHolder : MonoBehaviour
         SetReady();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         //Change direction of the ability according to where the player is moving
         if (casterRB.velocity.magnitude > 0)

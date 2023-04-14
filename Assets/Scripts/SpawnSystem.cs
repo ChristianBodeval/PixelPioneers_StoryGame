@@ -16,6 +16,8 @@ public class SpawnSystem : MonoBehaviour
     private bool isSpawning = false;
     private bool waveAlive = false;
     private bool isWaitingForWaveToDie = false;
+    private bool isAwaitingWaves = false;
+    private Coroutine awaitAddWaveCoroutine;
     [HideInInspector] public static int totalWaves;
     [HideInInspector] public static int currentWave;
 
@@ -54,10 +56,12 @@ public class SpawnSystem : MonoBehaviour
         while (true)
         {
             // Suspend execution of function until wave is dead if enabled on previous wave
-            while (isWaitingForWaveToDie && waveAlive || totalWaves <= 0 || currentWave >= totalWaves)
+            while (isWaitingForWaveToDie && waveAlive || totalWaves <= 0 || currentWave >= totalWaves || isAwaitingWaves)
             {
                 yield return new WaitForSeconds(0.1f);
             }
+
+            yield return new WaitForSeconds(0.1f); // Be sure all waves are added before isSpawning is set to true
 
             isSpawning = true; // Tell other functions to save themselves when we are spawning
             if (wavesToSpawn.Count > 0) isWaitingForWaveToDie = wavesToSpawn[0].waitForWaveToBeDead; // Are we waiting on wave being dead before spawning the next one
@@ -72,7 +76,6 @@ public class SpawnSystem : MonoBehaviour
                 {
                     randomizingList.Add(i);
                     waveAlive = true;
-                    
                 }
             }
 
