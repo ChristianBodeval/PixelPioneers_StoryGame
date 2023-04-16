@@ -6,6 +6,7 @@ public class PlayerAction : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float speed = 10f;
+    private float slowAmount;
     private Rigidbody2D rb;
     public Vector3 moveVector;
     private bool canMove = true;
@@ -87,7 +88,7 @@ public class PlayerAction : MonoBehaviour
     {
         if (moveVector.magnitude > 0f && canMove) // Horizontal movement
         {
-            rb.velocity = moveVector * speed;
+            rb.velocity = moveVector * speed * (1 - slowAmount);
 
         }
         else if (moveVector.magnitude < 0.1f && canMove)
@@ -114,6 +115,26 @@ public class PlayerAction : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         canMove = true;
+    }
+
+    public void StartSlow(float percentage)
+    {
+        slowAmount = percentage / 100;
+    }
+
+    public void StopSlow()
+    {
+        slowAmount = 0;
+    }
+
+    public IEnumerator Slow(float percentage, float duration)
+    {
+        duration += Time.time;
+        slowAmount = percentage / 100;
+
+        yield return new WaitForSeconds(duration);
+
+        slowAmount = 0f;
     }
 
     private void Dash()

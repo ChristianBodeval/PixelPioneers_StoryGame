@@ -99,9 +99,12 @@ public class Health : MonoBehaviour
             GameObject blood = Pool.pool.DrawFromBloodPool();
             blood.transform.position = transform.position;
             blood.transform.Rotate(new Vector3(0f, 0f, Random.Range(0, 4) * 90f)); // Random rotation
+            float size = Random.Range(0.8f, 1.2f);
+            blood.transform.localScale = new Vector3(size, size, 1f);
 
             // Stop movement
             gameObject.GetComponent<Crowd_Control>().Stun();
+            GetComponentInChildren<Animator>().SetBool("CanMove", false);
             gameObject.GetComponent<Collider2D>().enabled = false;
 
             // Stop animation and play dissipation shader

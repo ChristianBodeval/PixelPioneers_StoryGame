@@ -18,7 +18,12 @@ public class Crowd_Control : MonoBehaviour
 
     private void OnEnable()
     {
-        animator = GetComponentInChildren<Animator>();
+        if (animator == null) return;
+
+        animator.SetBool("CannotTransitionState", false);
+        animator.SetBool("IsStunned", false);
+        animator.SetBool("CanMove", true);
+        animator.SetBool("AttackRDY", true);
     }
 
     private void Update()
@@ -27,6 +32,13 @@ public class Crowd_Control : MonoBehaviour
         {
             remainingStunDuration -= Time.deltaTime; // Tick down remaining duration of stun, this is for later comparison of durations
         }
+    }
+
+    public void Die()
+    {
+        animator.SetBool("CannotTransitionState", true);
+        animator.SetBool("IsStunned", true);
+        animator.Play("Base Layer.Stunned");
     }
 
     public void Stun()
@@ -45,7 +57,8 @@ public class Crowd_Control : MonoBehaviour
     {
         animator.SetBool("CannotTransitionState", false);
         animator.SetBool("IsStunned", false);
-        if (animator.isActiveAndEnabled) animator.Play("Base Layer.Idle");
+        animator.SetBool("AttackRDY", true);
+        animator.SetBool("CanMove", true);
     }
 
     public void Stun(float duration)
@@ -100,7 +113,6 @@ public class Crowd_Control : MonoBehaviour
             RemoveStun();
         }
         animator.speed = 1f;
-        //animator.Play("Idle");
     }
 
     private void OnDisable()

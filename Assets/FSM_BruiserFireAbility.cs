@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FSM_Melee_Idle : StateMachineBehaviour
+public class FSM_BruiserFireAbility : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //animator.SetBool("CanMove", true);
+        animator.gameObject.GetComponentInParent<Bruiser_Attack>().ThrowWave();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

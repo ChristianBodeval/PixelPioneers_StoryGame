@@ -37,11 +37,10 @@ public class PlayerHealth : Health
             this.currentHealth -= damage;
             if (invulnerableCoroutine != null) StopCoroutine(invulnerableCoroutine);
             invulnerableCoroutine = StartCoroutine(MomentaryInvulnerability());
-        }
 
-        if (blinkCoroutine != null) StopCoroutine(blinkCoroutine);
-        blinkCoroutine = StartCoroutine(BlinkOnDmgTaken(freezeDurationOnDmgTaken));
-        
+            if (blinkCoroutine != null) StopCoroutine(blinkCoroutine);
+            blinkCoroutine = StartCoroutine(BlinkOnDmgTaken(freezeDurationOnDmgTaken));
+        }
     }
 
     // Changes material and color for a duration

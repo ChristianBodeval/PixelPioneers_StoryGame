@@ -42,6 +42,7 @@ public class ChargerPathing : MonoBehaviour
     private void OnEnable()
     {
         if (seeker != null) { StartCoroutine(UpdatePath()); } // Updates pathfinding regularly - only starts if we have a seeker        
+        if (animator != null) animator.SetBool("CanMove", true);
     }
 
     private void FixedUpdate()
@@ -116,6 +117,8 @@ public class ChargerPathing : MonoBehaviour
 
     private void FlipSprite()
     {
+        if (!GetComponentInChildren<Animator>().GetBool("CanMove")) return;
+
         Vector2 dir = ((Vector2)player.transform.position - rb.position).normalized; // Look to player
 
         if (dir.x > 0.24f && !animator.GetBool("IsCharging")) // Right

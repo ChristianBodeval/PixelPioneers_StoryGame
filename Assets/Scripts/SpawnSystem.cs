@@ -79,7 +79,7 @@ public class SpawnSystem : MonoBehaviour
                 }
             }
 
-            yield return StartCoroutine(IterateListRandomly()); // Spawn the enemies in a random order
+            yield return StartCoroutine(IterateListRandomly(wavesToSpawn[0].timeBetweenMobs)); // Spawn the enemies in a random order
             currentWave++;
 
             if (isWaitingForWaveToDie && waveAliveCoroutine == null) StartCoroutine(CheckIfWaveIsDead()); // Function checks if wave is alive during play
@@ -113,7 +113,7 @@ public class SpawnSystem : MonoBehaviour
         if (waitingDeathList.Contains(e)) waitingDeathList.Remove(e);
     }
 
-    private IEnumerator IterateListRandomly()
+    private IEnumerator IterateListRandomly(float timeBetweenMobs)
     {
         while (randomizingList.Count > 0)
         {
@@ -121,7 +121,7 @@ public class SpawnSystem : MonoBehaviour
             int enemyType = randomizingList[i];
             SpawnEnemy((WaveObject.EnemyType)enemyType); // Spawn enemy of type
             randomizingList.Remove(enemyType);
-            if (wavesToSpawn.Count > 0) yield return new WaitForSeconds(wavesToSpawn[0].timeBetweenMobs); // Space mob spawning out - for performance and look reason, it looks better if mobs seem a bit more random in their timing
+            if (wavesToSpawn.Count > 0) yield return new WaitForSeconds(timeBetweenMobs); // Space mob spawning out - for performance and look reason, it looks better if mobs seem a bit more random in their timing
             Debug.Log(randomizingList.Count);
         }
 

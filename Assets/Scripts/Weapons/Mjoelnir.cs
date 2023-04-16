@@ -23,7 +23,10 @@ public class Mjoelnir : MonoBehaviour
     public bool hasChargeUpgrade = true;
     [SerializeField] private float chargeDMG;
     [SerializeField] private float chargeSpeed;
+    [SerializeField] private float slowAmountWhileCharging;
+    public AnimationCurve accelerationCurve;
     [SerializeField] private float baseHitboxSize;
+    [SerializeField] private float hitboxWidthMultiplier = 0.1f;
     public float chargeCD;
     [SerializeField] private float buttonChargeUpRate = 10;
     [SerializeField] private float chargeUpdateInterval = 0.05f;
@@ -154,7 +157,7 @@ public class Mjoelnir : MonoBehaviour
             if (initCharge != null) StopCoroutine(initCharge);
             initCharge =  StartCoroutine(InitialCharging());
             Debug.Log(player + " " + player.GetComponent<PlayerAction>());
-            player.GetComponent<PlayerAction>().StopMove(); // Root the player while casting
+            player.GetComponent<PlayerAction>().StartSlow(slowAmountWhileCharging); // Root the player while casting
             player.GetComponent<PlayerAction>().CannotDash();
 
             // Position the hammer on player
@@ -177,7 +180,7 @@ public class Mjoelnir : MonoBehaviour
 
             // Charge range indicator - change its size and rotation
             rangeIndicator.GetComponent<SpriteRenderer>().color = new Color32(180, 180, 0, 180); ;
-            rangeIndicator.transform.localScale = new Vector3(charge, baseHitboxSize + (charge * 0.1f) - 0.3f, 1f); // Sets the length - chargeHitbox * 2 - 0.2f is the diameter of the indicator -0.2f is such that the player feels cheated of a hit less often
+            rangeIndicator.transform.localScale = new Vector3(charge, baseHitboxSize + (charge * hitboxWidthMultiplier) - 0.3f, 1f); // Sets the length - chargeHitbox * 2 - 0.2f is the diameter of the indicator -0.2f is such that the player feels cheated of a hit less often
             Vector2 direction = player.GetComponent<PlayerAction>().lastFacing;
             rangeIndicator.transform.position = player.transform.position + (Vector3)direction * (charge / 2); // Move indicator
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -196,6 +199,7 @@ public class Mjoelnir : MonoBehaviour
     {
         while (isCharghingCharge) { yield return null; } // Suspends charge until we have charged for a minimum amount
 
+        player.GetComponent<PlayerAction>().StopMove();
         player.GetComponent<PlayerHealth>().AddInvulnerability(); // Cannot be hit during charge
 
         Vector2 direction = player.GetComponent<PlayerAction>().lastFacing;
@@ -220,6 +224,8 @@ public class Mjoelnir : MonoBehaviour
     // CHARGE function
     private IEnumerator Charge(Vector2 dir, float chargedAmount)
     {
+        float startTime = Time.time;
+
         Vector3 targetPos = (Vector2)player.transform.position + dir * chargedAmount;
         float distance = Vector2.Distance((Vector2)player.transform.position, targetPos);
         Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
@@ -229,10 +235,20 @@ public class Mjoelnir : MonoBehaviour
         while (distance > 0.8f && !Physics2D.Raycast(player.transform.position, dir, 0.5f, obstacleLayer))
         {
             dir = (targetPos - player.transform.position).normalized;
-            rb.velocity = dir * chargeSpeed; // Move towards targetpos
+
+            float speed = 1f; // Default of 1 such that it has no effect if we are beyond accelerating
+            float elapsed = 0f;
+
+            if (elapsed < 0.2f)
+            {
+                elapsed += Time.time - startTime;
+                speed = accelerationCurve.Evaluate(elapsed);
+            }
+
+            rb.velocity = dir * chargeSpeed * speed; // Move towards targetpos
 
             // Hitting enemies and the consequences
-            enemies = CheckForEnemies(baseHitboxSize + (chargedAmount * 0.1f) / 1.8f, dir);
+            enemies = CheckForEnemies(baseHitboxSize + (chargedAmount * hitboxWidthMultiplier) / 1.8f, dir);
             foreach (RaycastHit2D enemy in enemies)
             {
                 if (!alreadyHit.Contains(enemy.transform.gameObject)) // Only hit the enemy if they have not been damaged yet
@@ -241,15 +257,6 @@ public class Mjoelnir : MonoBehaviour
                     alreadyHit.Add(enemy.transform.gameObject);
                     enemy.transform.gameObject.GetComponent<Crowd_Control>().Stun(stunDuration);
                 }
-
-                /*
-                if (enemy.transform.gameObject.GetComponent<Health>().currentHealth > 0f) // If not dead and 
-                {
-                    enemy.transform.position = Vector2.Lerp(enemy.transform.position, transform.position, 0.6f);        // Move enemy closer to hammer
-                    enemy.transform.SetParent(transform);                                                               // Enemy moves with player
-                    enemy.transform.gameObject.GetComponent<Crowd_Control>().Stun(stunDuration);                        // Enemy is stunned and cannot attack or move
-                }
-                */
             }
 
             yield return new WaitForSeconds(chargeUpdateInterval); // Time between steps
@@ -257,15 +264,8 @@ public class Mjoelnir : MonoBehaviour
             distance = Vector2.Distance(player.transform.position, targetPos);
         }
 
-        /* // Remove player as parent
-        GameObject[] enemiesToUnparent = GameObject.FindGameObjectsWithTag("Enemy"); // All enemies
-        foreach (GameObject enemy in enemiesToUnparent)
-        {
-            enemy.transform.SetParent(null);
-        }
-        */
-
         player.GetComponent<PlayerAction>().StartMove(); // Allow player to move again
+        player.GetComponent<PlayerAction>().StopSlow();
         player.GetComponent<PlayerAction>().CanDash();
         player.GetComponent<PlayerHealth>().RemoveInvulnerability();
 

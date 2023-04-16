@@ -21,18 +21,12 @@ public class Charger_Attack : Enemy_Attack
     [HideInInspector] public bool chargingCharge; // 10/10 naming
     private Coroutine chargeCoroutine;
     private Collider2D col;
-    private LayerMask obstacleLayer;
 
     private void FixedUpdate()
     {
         StartCharge(player);
         InAttackRange(player); // Player variable is inherited from IEnemyAttack
         StopCharge();
-    }
-
-    private void Awake()
-    {
-        obstacleLayer = LayerMask.GetMask("Obstacles");
     }
 
     private void Start()
@@ -78,19 +72,20 @@ public class Charger_Attack : Enemy_Attack
     private IEnumerator ChargeCoroutine()
     {
         GetComponent<Crowd_Control>().isStunImmune = true;
+        chargingCharge = true; // Enemy doesn't slide around before charging
         dangerIndicator.SetActive(true);
 
         float countdown = Time.time + chargeUpTime;
 
         while (countdown > Time.time)   // Gives player a headsup
         {
-            chargingCharge = true; // Enemy doesn't slide around before charging
+            if (!IsInLineOfSight(player, animator)) { chargingCharge = false; yield break; }
             // ** Implement visual element
             yield return null; 
         }
 
         dangerIndicator.SetActive(false);
-        chargingCharge = false; // Deactivate collisions
+        chargingCharge = false;
 
         // Turn off collisions between charger and enemies + player
         Physics2D.IgnoreLayerCollision(12, 3);
@@ -104,7 +99,7 @@ public class Charger_Attack : Enemy_Attack
         float t = 0;
         bool isPlayerHit = false;
 
-        while (distance > 1.5f && !Physics2D.Raycast(transform.position, dir, 0.5f, obstacleLayer))
+        while (distance > 1.5f && !Physics2D.Raycast(transform.position, dir, 0.5f, LayerMask.GetMask("Obstacles")))
         {
             // Updates direction and movement
             t += 0.3f;
@@ -172,6 +167,7 @@ public class Charger_Attack : Enemy_Attack
         if (animator.GetBool("IsStunned"))
         {
             if (chargeCoroutine != null) StopCoroutine(chargeCoroutine);
+            chargingCharge = false;
             animator.SetBool("IsCharging", false);
             dangerIndicator.SetActive(false);
         }

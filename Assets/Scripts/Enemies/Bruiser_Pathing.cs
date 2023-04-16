@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class MeleePathing : MonoBehaviour
+public class Bruiser_Pathing : MonoBehaviour
 {
     [Header("General for Pathfinding")]
     [SerializeField] private float speed = 3f;
@@ -29,7 +29,7 @@ public class MeleePathing : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
-        attackRange = GetComponent<Melee_Attack>().attackRange;
+        attackRange = GetComponent<Bruiser_Attack>().attackRange;
 
         InvokeRepeating("UpdatePath", 0f, updateInterval); // Updates pathfinding regularly
     }
@@ -41,7 +41,7 @@ public class MeleePathing : MonoBehaviour
         {
             PathFollow();
         }
-        else if (animator.GetBool("CanMove") || animator.GetBool("IsStunned"))
+        else if (animator.GetBool("CanMove") || animator.GetBool("IsStunned") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Wave"))
         {
             rb.velocity = new Vector3(0f,0f,0f);
         }
@@ -86,7 +86,7 @@ public class MeleePathing : MonoBehaviour
 
     private void Flip()
     {
-        if (!GetComponentInChildren<Animator>().GetBool("CanMove")) return;
+        if (!GetComponentInChildren<Animator>().GetBool("CanMove") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Wave")) return;
 
         Vector2 dir = ((Vector2)player.transform.position - rb.position).normalized; // Look to player
 
@@ -117,7 +117,7 @@ public class MeleePathing : MonoBehaviour
         if (!p.error)
         {
             path = p;
-            currentWayPoint = 1;
+            currentWayPoint = 2;
         }
     }
 }
