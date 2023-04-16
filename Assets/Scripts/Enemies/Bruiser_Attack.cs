@@ -99,6 +99,8 @@ public class Bruiser_Attack : Enemy_Attack
         GameObject segment = Instantiate(segmentPrefab, transform.position, Quaternion.AngleAxis(angle, Vector3.forward));
         segment.transform.position = startLocation + dir * (currentSegment * segmentLength - (segmentLength / 2) );
         segment.transform.localScale = new Vector3(segmentLength, segmentWidth * (1 + segmentGrowthRate * currentSegment), 1f);
+        var ps = segment.GetComponentInChildren<ParticleSystem>().shape; // Shape of particle emitter
+        ps.scale = new Vector3(segmentLength, segmentWidth * (1 + segmentGrowthRate * currentSegment), 1f); // Set scale of emitter
 
         StartCoroutine(segment.GetComponent<SegmentScript>().LerpAlphaIn(angle, waveDamage)); 
 

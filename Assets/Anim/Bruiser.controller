@@ -420,8 +420,8 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Idle
-  m_Speed: 0.1
-  m_CycleOffset: 0
+  m_Speed: 0.01
+  m_CycleOffset: 0.2
   m_Transitions:
   - {fileID: 8679935220910252562}
   - {fileID: -5970219064593426951}
