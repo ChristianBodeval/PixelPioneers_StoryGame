@@ -6,14 +6,22 @@ public class SegmentScript : MonoBehaviour
 {
     [SerializeField] private float alphaMaximum = 0.5f;
     [SerializeField] private AnimationCurve accelerationCurve;
+    private GameObject parentBruiser;
     private SpriteRenderer sr;
+    private Coroutine cr;
     private float r = 0f;
     private float g = 0f;
     private float b = 0f;
     private float a = 0f;
 
-    public IEnumerator LerpAlphaIn(float angle, float damage)
+    private void Update()
     {
+        if (!parentBruiser.activeSelf) ReturnToPool();
+    }
+
+    public IEnumerator LerpAlphaIn(float angle, float damage, GameObject parent)
+    {
+        parentBruiser = parent;
         sr = GetComponent<SpriteRenderer>();
         r = sr.color.r;
         g = sr.color.g;
@@ -55,6 +63,11 @@ public class SegmentScript : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        ReturnToPool();
+    }
+
+    private void ReturnToPool()
+    {
         Destroy(gameObject);
         // TODO Return to pool
     }

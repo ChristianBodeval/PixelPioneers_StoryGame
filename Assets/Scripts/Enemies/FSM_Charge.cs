@@ -7,7 +7,6 @@ public class FSM_Charge : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetBool("IsCharging", true);
         animator.SetBool("CanMove", false);
         animator.gameObject.GetComponentInParent<Charger_Attack>().Charge();
     }

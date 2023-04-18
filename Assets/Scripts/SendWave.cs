@@ -9,20 +9,19 @@ public class SendWave : MonoBehaviour
     [SerializeField] private float timeBetweenWaves;
     private SpawnSystem spawnSystem;
     private Coroutine sendWavesCoroutine = null;
-    [HideInInspector] public static bool canSendWaves = true;
-    private int currentWave = 0;
+    private int currentWave;
 
     private void Start()
     {
         spawnSystem = GameObject.Find("EnemyFactory").GetComponent<SpawnSystem>();
     }
 
-    // Temporary proof of concept
     public void StartWaves()
     {
-        if (canSendWaves && sendWavesCoroutine == null)
+        if (!SpawnSystem.waveAlive)
         {
-            canSendWaves = false;
+            currentWave = 0;
+            if (sendWavesCoroutine != null) StopCoroutine(sendWavesCoroutine);
             sendWavesCoroutine = StartCoroutine(SendWaves());
         }
     }

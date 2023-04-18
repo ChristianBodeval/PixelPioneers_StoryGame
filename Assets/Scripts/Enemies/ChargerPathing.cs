@@ -33,6 +33,7 @@ public class ChargerPathing : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
+        animator.SetBool("CanMove", true);
         attackRange = GetComponent<Charger_Attack>().attackRange;
         hpBar = GetComponentInChildren<Slider>();
 
@@ -105,11 +106,11 @@ public class ChargerPathing : MonoBehaviour
 
     private void Move(Vector2 dir)
     {
-        if (animator.GetBool("CanMove") && !animator.GetBool("IsStunned") && !animator.GetBool("IsCharging") && !GetComponent<Charger_Attack>().chargingCharge)
+        if (animator.GetBool("CanMove") && !animator.GetBool("IsStunned") && !animator.GetBool("IsCharging"))
         {
             rb.velocity = dir * speed; // Movement
         }
-        else if (!animator.GetBool("IsCharging") || GetComponent<Charger_Attack>().chargingCharge)
+        else if (animator.GetBool("IsStunned") || (!animator.GetBool("CanMove") && !animator.GetBool("IsCharging")) )
         {
             rb.velocity = Vector2.zero;
         }
@@ -117,19 +118,19 @@ public class ChargerPathing : MonoBehaviour
 
     private void FlipSprite()
     {
-        if (!GetComponentInChildren<Animator>().GetBool("CanMove")) return;
+        if (animator.GetBool("IsStunned")) return;
 
         Vector2 dir = ((Vector2)player.transform.position - rb.position).normalized; // Look to player
 
         if (dir.x > 0.24f && !animator.GetBool("IsCharging")) // Right
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
-            hpBar.transform.localScale = new Vector3(0.03175378f, 0.0259373f, 0.2461215f);
+            hpBar.transform.localScale = new Vector3(Mathf.Abs(hpBar.transform.localScale.x) * 1f, hpBar.transform.localScale.y, hpBar.transform.localScale.z);
         }
         else if (dir.x < -0.24f && !animator.GetBool("IsCharging")) // Left
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
-            hpBar.transform.localScale = new Vector3(-0.03175378f, 0.0259373f, 0.2461215f);
+            hpBar.transform.localScale = new Vector3(Mathf.Abs(hpBar.transform.localScale.x) * -1f, hpBar.transform.localScale.y, hpBar.transform.localScale.z);
         }
     }
 

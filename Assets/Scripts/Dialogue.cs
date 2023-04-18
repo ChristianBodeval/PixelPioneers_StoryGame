@@ -77,8 +77,6 @@ public class Dialogue : MonoBehaviour
             isPlayerInRange = true;
             //player = col.gameObject;
             dialogueNPCName.text = gameObject.name;
-
-            Debug.Log("Player collided with " + gameObject.name);
         }
     }
 

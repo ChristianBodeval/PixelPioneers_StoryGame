@@ -6,7 +6,7 @@ public class WaveVisual : MonoBehaviour
     public Image[] waves;
 
     private int maxWaves;
-    public static int wavesLeft = 0; // Changed through Spawnsystem script
+    private int wavesLeft = 0; // Changed through Spawnsystem script
 
     public Sprite crackedCrystal;
     public Sprite unCrackedCrystal;
@@ -24,35 +24,26 @@ public class WaveVisual : MonoBehaviour
     private void Update()
     {
         maxWaves = SpawnSystem.totalWaves; // Updates the maxWaves
+        wavesLeft = maxWaves - SpawnSystem.currentWave;
 
-        if (WaveVisual.wavesLeft >= maxWaves) WaveVisual.wavesLeft = maxWaves; // We have more waves left
+        if (wavesLeft >= maxWaves) wavesLeft = maxWaves; // We have more waves left
 
-        if (WaveVisual.wavesLeft < -1) WaveVisual.wavesLeft = -1; // Wavesleft value cannot go below
+        if (wavesLeft < -1) wavesLeft = -1; // Wavesleft value cannot go below
 
         SetWave(); // Sets the amouont of active crystals
     }
 
-    public static void AddWave()
-    {
-        WaveVisual.wavesLeft++;
-    }
-
-    public static void RemoveWave()
-    {
-        WaveVisual.wavesLeft--;
-    }
-
     public void WaveHalfWayThrough()
     {
-        if (waves[WaveVisual.wavesLeft - 1].sprite == crackedCrystal)
-            waves[WaveVisual.wavesLeft - 1].sprite = unCrackedCrystal;
+        if (waves[wavesLeft - 1].sprite == crackedCrystal)
+            waves[wavesLeft - 1].sprite = unCrackedCrystal;
         else
-            waves[WaveVisual.wavesLeft - 1].sprite = crackedCrystal;
+            waves[wavesLeft - 1].sprite = crackedCrystal;
     }
 
     public void SetWave()
     {
-        switch (WaveVisual.wavesLeft)
+        switch (wavesLeft)
         {
             case 0:
                 waves[0].enabled = false;

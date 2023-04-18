@@ -14,16 +14,16 @@ public class SpawnSystem : MonoBehaviour
     private List<int> randomizingList = new List<int>();
     private Coroutine waveAliveCoroutine = null;
     private bool isSpawning = false;
-    private bool waveAlive = false;
     private bool isWaitingForWaveToDie = false;
-    private bool isAwaitingWaves = false;
     private Coroutine awaitAddWaveCoroutine;
+    [HideInInspector] public static bool waveAlive = false;
     [HideInInspector] public static int totalWaves;
     [HideInInspector] public static int currentWave;
 
     private void Start()
     {
         StartCoroutine(SpawnWaves());
+        StartCoroutine(CheckIfWaveIsDead()); // Function checks if wave is alive during play
     }
 
     public void AddWave(WaveObject wave)
@@ -37,7 +37,6 @@ public class SpawnSystem : MonoBehaviour
 
         totalWaves++; // Increase max waves by 1
         wavesToSpawn.Add(wave);
-        WaveVisual.AddWave(); // Add another wave crystal in the UI
     }
 
     // Waits for spawning to be complete
@@ -56,15 +55,14 @@ public class SpawnSystem : MonoBehaviour
         while (true)
         {
             // Suspend execution of function until wave is dead if enabled on previous wave
-            while (isWaitingForWaveToDie && waveAlive || totalWaves <= 0 || currentWave >= totalWaves || isAwaitingWaves)
+            while (isWaitingForWaveToDie && waveAlive || wavesToSpawn.Count < 1)
             {
                 yield return new WaitForSeconds(0.1f);
             }
 
-            yield return new WaitForSeconds(0.1f); // Be sure all waves are added before isSpawning is set to true
+            yield return new WaitForSeconds(0.3f); // Be sure all waves are added before isSpawning is set to true
 
             isSpawning = true; // Tell other functions to save themselves when we are spawning
-            if (wavesToSpawn.Count > 0) isWaitingForWaveToDie = wavesToSpawn[0].waitForWaveToBeDead; // Are we waiting on wave being dead before spawning the next one
 
             // Find the amount of each type of enemy in wave
             for (int i = 0; i < Enum.GetNames(typeof(WaveObject.EnemyType)).Length; i++) // For each enemytype
@@ -79,33 +77,45 @@ public class SpawnSystem : MonoBehaviour
                 }
             }
 
-            yield return StartCoroutine(IterateListRandomly(wavesToSpawn[0].timeBetweenMobs)); // Spawn the enemies in a random order
-            currentWave++;
-
-            if (isWaitingForWaveToDie && waveAliveCoroutine == null) StartCoroutine(CheckIfWaveIsDead()); // Function checks if wave is alive during play
-            if (wavesToSpawn.Count > 0) wavesToSpawn.Remove(wavesToSpawn[0]); // Instead of iterating through the list we remove waves we have already used
+            // Spawn wave > remove it from waiting list > tell UI its the next wave
+            if (wavesToSpawn.Count > 0)
+            {
+                if (wavesToSpawn.Count > 0) isWaitingForWaveToDie = wavesToSpawn[0].waitForWaveToBeDead; // Are we waiting on wave being dead before spawning the next one
+                yield return StartCoroutine(IterateListRandomly(wavesToSpawn[0].timeBetweenMobs)); // Spawn the enemies in a random order
+                if (wavesToSpawn.Count > 0) wavesToSpawn.Remove(wavesToSpawn[0]); // Remove waves we have already used
+            }
 
             isSpawning = false; // Its safe to edit the wavelist again
-
-            // Resets wave variables if the waves are all done
-            if (currentWave == totalWaves && !waveAlive) // Last wave is dead
-            {
-                totalWaves = 0;
-                currentWave = 0;
-                SendWave.canSendWaves = true;
-            }
         }
     }
 
     private IEnumerator CheckIfWaveIsDead()
     {
-        while (waitingDeathList.Count > 0)
+        while (true)
         {
+            while (waitingDeathList.Count > 0 || isSpawning)
+            {
+                yield return new WaitForSeconds(0.1f);
+            }
+
+            if (!waveAlive && waitingDeathList.Count < 1)
+            {
+                // Resets wave variables if the waves are all done
+                if (currentWave > 0 && currentWave >= totalWaves && !isSpawning) // Last wave is dead
+                {
+                    totalWaves = 0;
+                    currentWave = 0;
+                }
+            }
+
+            if (waveAlive)
+            {
+                currentWave++; // UI knows its the next wave - only true if wave was alive and now is dead
+                if (waitingDeathList.Count < 1) waveAlive = false;
+            }
+
             yield return new WaitForSeconds(0.1f);
         }
-
-        WaveVisual.RemoveWave(); // Static method for removing a visual indicator for a wave - crystal is broken
-        waveAlive = false;
     }
 
     public void RemoveFromWaitDeathList(GameObject e)
@@ -121,8 +131,7 @@ public class SpawnSystem : MonoBehaviour
             int enemyType = randomizingList[i];
             SpawnEnemy((WaveObject.EnemyType)enemyType); // Spawn enemy of type
             randomizingList.Remove(enemyType);
-            if (wavesToSpawn.Count > 0) yield return new WaitForSeconds(timeBetweenMobs); // Space mob spawning out - for performance and look reason, it looks better if mobs seem a bit more random in their timing
-            Debug.Log(randomizingList.Count);
+            yield return new WaitForSeconds(timeBetweenMobs); // Space mob spawning out - for performance and look reason, it looks better if mobs seem a bit more random in their timing
         }
 
         yield return new WaitForSeconds(0.2f);

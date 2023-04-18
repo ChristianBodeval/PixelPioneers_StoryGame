@@ -18,7 +18,6 @@ public class Charger_Attack : Enemy_Attack
     [SerializeField] private float chargeUpdateInterval;
     [SerializeField] private float chargeCD;
     private bool canCharge = true;
-    [HideInInspector] public bool chargingCharge; // 10/10 naming
     private Coroutine chargeCoroutine;
     private Collider2D col;
 
@@ -72,20 +71,20 @@ public class Charger_Attack : Enemy_Attack
     private IEnumerator ChargeCoroutine()
     {
         GetComponent<Crowd_Control>().isStunImmune = true;
-        chargingCharge = true; // Enemy doesn't slide around before charging
+        animator.SetBool("CanMove", false);
         dangerIndicator.SetActive(true);
 
         float countdown = Time.time + chargeUpTime;
 
         while (countdown > Time.time)   // Gives player a headsup
         {
-            if (!IsInLineOfSight(player, animator)) { chargingCharge = false; yield break; }
+            if (!IsInLineOfSight(player, animator)) { animator.SetBool("CanMove", true); yield break; }
             // ** Implement visual element
             yield return null; 
         }
 
         dangerIndicator.SetActive(false);
-        chargingCharge = false;
+        animator.SetBool("IsCharging", true);
 
         // Turn off collisions between charger and enemies + player
         Physics2D.IgnoreLayerCollision(12, 3);
@@ -144,7 +143,6 @@ public class Charger_Attack : Enemy_Attack
     {
         if (Vector2.Distance(player.transform.position, transform.position) <= chargeRange && IsInLineOfSight(player, animator) && canCharge)
         {
-            animator.SetBool("IsCharging", true);
             animator.Play("Charge");
         }
     }
@@ -164,11 +162,11 @@ public class Charger_Attack : Enemy_Attack
 
     public void StopCharge()
     {
-        if (animator.GetBool("IsStunned"))
+        if (animator.GetBool("IsStunned") || GetComponent<Health>().currentHealth <= 0f)
         {
             if (chargeCoroutine != null) StopCoroutine(chargeCoroutine);
-            chargingCharge = false;
             animator.SetBool("IsCharging", false);
+            if (GetComponent<Health>().currentHealth > 0f) animator.SetBool("CanMove", true);
             dangerIndicator.SetActive(false);
         }
     }

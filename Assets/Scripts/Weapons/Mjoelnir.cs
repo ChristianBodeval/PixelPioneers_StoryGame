@@ -156,7 +156,6 @@ public class Mjoelnir : MonoBehaviour
             DisableHammer();
             if (initCharge != null) StopCoroutine(initCharge);
             initCharge =  StartCoroutine(InitialCharging());
-            Debug.Log(player + " " + player.GetComponent<PlayerAction>());
             player.GetComponent<PlayerAction>().StartSlow(slowAmountWhileCharging); // Root the player while casting
             player.GetComponent<PlayerAction>().CannotDash();
 
