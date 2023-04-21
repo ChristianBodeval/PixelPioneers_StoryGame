@@ -8,11 +8,12 @@ using Color = UnityEngine.Color;
 [ExecuteAlways]
 public class ColliderDrawer : MonoBehaviour
 {
-    public List<GameObject> targets = new List<GameObject>();
+    public List<GameObject> targets;
+    
 
     [SerializeField] private LayerMask enemyLayer;
 
-
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -59,13 +60,17 @@ public class ColliderDrawer : MonoBehaviour
 
     private void Update()
     {
-        points = GetPolygonPoints();
-        UpdateSpriteShapeController(points);
+        //UpdateCollider();
+    }
 
+    public void UpdateCollider()
+    {
+        points = GetPolygonPoints();
+        UpdateSpriteShapeController();
     }
 
 
-    void UpdateSpriteShapeController(List<Vector3> points)
+    public void UpdateSpriteShapeController()
     {
         //TODO test for when there is more existing points than what is needed
         spriteShapeController.spline.Clear();
@@ -82,7 +87,7 @@ public class ColliderDrawer : MonoBehaviour
         if(DrawInInspector)
         {
             points = GetPolygonPoints();
-            UpdateSpriteShapeController(points);
+            UpdateSpriteShapeController();
 
             //Draw points
             Gizmos.color = Color.red;
@@ -161,7 +166,6 @@ public class ColliderDrawer : MonoBehaviour
         
         if(colliderStat.width > 0)
         {
-            Debug.Log("Trasnform up" + transform.up);
             returnList.Add(Vector3.zero + Vector3.up * 0.5f * colliderStat.width);
             returnList.Add(Vector3.zero - Vector3.up * 0.5f * colliderStat.width);
         }

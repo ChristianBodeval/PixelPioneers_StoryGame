@@ -12,7 +12,7 @@ public class SlashUpgrade2 : Ability
     public float timeBetweenEachBounce;
     public int bounces;
     private ChainEffect chainEffect;
-
+    
 
     public override void Initialize(GameObject obj)
     {
@@ -22,13 +22,13 @@ public class SlashUpgrade2 : Ability
         chainEffect.bounces = bounces;
     }
 
-    public override void ActivateEffect(AbilityHolder ability, List<GameObject> targets)
+    public override void ActivateEffect(ColliderDrawer colliderDrawer)
     {
         //Pick random target
         //Todo make this an Generic ScriptableObject function
         //Random target
 
-        chainEffect.Activate(targets);
+        chainEffect.Activate(colliderDrawer);
 
 
     }

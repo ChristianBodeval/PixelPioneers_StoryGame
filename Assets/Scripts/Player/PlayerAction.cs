@@ -14,11 +14,12 @@ public class PlayerAction : MonoBehaviour
     [Header("Input")]
     [SerializeField] private float inputBuffer = 0.1f;
     [HideInInspector] public Vector2 lastFacing;
-    [HideInInspector] public Vector2 lastFacing2;
+    
     private float BufferCountdown;
     private bool canAttack = true;
     private ParticleSystem arcParticles;
 
+    //TODO Bruges ikke...
     private Health healthScript;
 
     [Header("Dash")]
@@ -48,6 +49,7 @@ public class PlayerAction : MonoBehaviour
         moveVector.y = Input.GetAxis("Vertical");        
         moveVector = moveVector.normalized; // As to not have faster movement when going diagonal
         
+        //TODO Dette bliver ikke brugt her, saa vi kan slette det, eller rykke det til et andet script, hvor det bruges.
         if (Input.GetButton("Fire1")) // j,k,l are Fire1, Fire2, Fire3
         {
             BufferCountdown = inputBuffer;

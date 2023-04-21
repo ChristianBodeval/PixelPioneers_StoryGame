@@ -5,23 +5,23 @@ using static UnityEngine.GraphicsBuffer;
 
 public class ChainEffect : Effect
 {
-    public float damage;
-    public float range;
-    public float timeBetweenEachBounce;
-    public int bounces;
+    [HideInInspector] public float damage;
+    [HideInInspector] public float range;
+    [HideInInspector] public float timeBetweenEachBounce;
+    [HideInInspector] public int bounces;
 
     //For testing
     GameObject myGM;
     float myradius = 0;
     private Collider2D[] mytargets;
     //TODO Make line renderer
-    //private DrawLineBetween2Points lineRenderer;
+    private DrawLineBetween2Points lineRenderer;
 
     IEnumerator enumerator;
 
     private void Awake()
     {
-        //lineRenderer = GetComponent<DrawLineBetween2Points>();   
+        lineRenderer = GetComponent<DrawLineBetween2Points>();   
     }
 
     private void OnDrawGizmos()
@@ -30,9 +30,10 @@ public class ChainEffect : Effect
             Gizmos.DrawWireSphere(myGM.transform.position + myGM.transform.right * 0, myradius);
     }
 
-    public override void Activate(List<GameObject> targets)
+    public override void Activate(ColliderDrawer colliderDrawer)
     {
-        GameObject target = targets[Random.Range(0, targets.Count)];
+        Debug.Log("Activated");
+        GameObject target = colliderDrawer.targets[Random.Range(0, colliderDrawer.targets.Count)];
         enumerator = ChainDamage(target);
         StartCoroutine(enumerator);
     }
@@ -46,14 +47,18 @@ public class ChainEffect : Effect
         Collider2D[] newTargets;
         GameObject newTarget;
         int randomNumber;
-
+        
+        
+        
         for (int i = 0; i < bounces; i++)
         {
             myGM = startingTarget;
 
             newTargets = null;
             newTargets = Physics2D.OverlapCircleAll(startingTarget.transform.position, range, LayerMask.GetMask("Enemy"));
-
+            
+            startingTarget.GetComponent<Health>().TakeDamage(damage);
+            
             mytargets = newTargets;
 
             if (newTargets.Length == 0)
@@ -73,17 +78,20 @@ public class ChainEffect : Effect
             }
 
             //TODO make this an event
-            //lineRenderer.SetLine(startingTarget.transform.position, newTarget.transform.position);
+            lineRenderer.SetLine(startingTarget.transform.position, newTarget.transform.position);
 
 
             //TODO Deal damage here too
-
+            if (startingTarget.Equals(newTarget))
+                break;
+                
             startingTarget = newTarget;
 
             yield return new WaitForSeconds(timeBetweenEachBounce);
 
         }
-        //lineRenderer.ResetLine();
+        
+        lineRenderer.ResetLine();
 
         yield return null;
     }

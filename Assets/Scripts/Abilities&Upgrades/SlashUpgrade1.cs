@@ -16,10 +16,11 @@ public class SlashUpgrade1 : Ability
         effect = obj.GetComponent<OverTimeEffect>();
         effect.tickEveryXSeconds = tickEveryXSeconds;
         effect.duration = duration;
+        effect.damagePrTick = damage;
     }
 
-    public override void ActivateEffect(AbilityHolder ability, List<GameObject> targets)
+    public override void ActivateEffect(ColliderDrawer colliderDrawer)
     {
-        effect.Activate(targets);
+        effect.Activate(colliderDrawer);
     }
 }

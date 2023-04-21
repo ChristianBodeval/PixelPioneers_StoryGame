@@ -18,5 +18,5 @@ MonoBehaviour:
   cooldownTime: 5
   keyTrigger: 0
   isFollowingCaster: 0
-  canChangeColors: 1
+  canChangeColors: 0
   tickEveryXSeconds: 0.5

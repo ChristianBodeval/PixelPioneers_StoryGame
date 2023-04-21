@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.U2D;
@@ -24,16 +25,14 @@ public class Ability : ScriptableObject
     public bool canChangeColors;
 
     //TODO Split these into Abstract classes instead
-    
-
-
-
-    public virtual void ActivateEffect(AbilityHolder ability, List<GameObject> targets)
-    {
-        
-    }
 
     public virtual void Initialize(GameObject obj)
+    {
+
+    }
+    
+    
+    public virtual void ActivateEffect(ColliderDrawer colliderDrawer)
     {
 
     }

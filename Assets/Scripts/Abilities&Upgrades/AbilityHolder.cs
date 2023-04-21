@@ -3,34 +3,33 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.U2D;
 using UnityEngine.Windows;
 using Input = UnityEngine.Input;
 
+//Handles the state of the ability, position and rotation & changes color of the collider
 public class AbilityHolder : MonoBehaviour
 {
     public GameObject caster;
+    
+    public PlayerAction playerAction;
     public Ability ability;
     private float cooldownTime;
     private float duration;
     private float timeCasted;
-    List<GameObject> targets;
     public Color readyColor;
     public Color activeColor;
     public Color cooldownColor;
 
     public AbilityHolder nextAbility;
 
-    [SerializeField] public ColliderDrawer collider;
+    [FormerlySerializedAs("collider")] [SerializeField] public ColliderDrawer hitCollider;
     [SerializeField] private SlashCone colliderStat;
     private Vector2 movement;
-
-    IEnumerator effectOverTimeCoroutine;
-    IEnumerator chainDamageCoroutine;
-
-    private Rigidbody2D casterRB; 
-
-    AbilityState state = AbilityState.ready; 
+    
+    AbilityState state = AbilityState.ready;
+    public Transform spawnPoint;
 
     enum AbilityState
     {
@@ -38,16 +37,35 @@ public class AbilityHolder : MonoBehaviour
         active,
         cooldown
     }
-
-    private void ActivateNextAbility()
+    
+    //Calling in IEnumerator to wait for next frame, since the SpriteShapeRenderer is not updated in the same frame
+    private IEnumerator ActivateNextAbility()
     {
-        if(nextAbility != null)
+        if (nextAbility != null)
+        {
             nextAbility.SetActive();
+        }
+        yield return null;
+    }
+    
+    private IEnumerator ActivateEffect()
+    {
+        yield return new WaitForSeconds(00.1f);
+        if (hitCollider.targets.Count > 0)
+        {
+            ability.ActivateEffect(hitCollider);
+        }
+
+        yield return null;
     }
 
     private void Awake()
     {
-        casterRB = caster.GetComponent<Rigidbody2D>();
+        readyColor = GetComponent<SpriteShapeRenderer>().color;
+        
+        if(caster.tag == "Player")
+            playerAction = caster.GetComponent<PlayerAction>();
+        
         ability.Initialize(this.gameObject);
         duration = ability.duration;
 
@@ -59,63 +77,87 @@ public class AbilityHolder : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (!ability.isFollowingCaster)
+        {
+            transform.position = caster.transform.position;
+            transform.right = playerAction.lastFacing;
+        }
+        
+        SetReady();
+    }
+
 
     private void SetReady()
     {
-        collider.spriteShapeRenderer.color = readyColor;
-        state = AbilityState.ready;
+        if (ability.canChangeColors)
+        {
+            hitCollider.spriteShapeRenderer.color = readyColor;
+            state = AbilityState.ready;
+        }
     }
 
+    
     private IEnumerator ChangeColor()
     {
         if(ability.canChangeColors)
         {
-            collider.spriteShapeRenderer.color = activeColor;
+            hitCollider.spriteShapeRenderer.color = activeColor;
             yield return new WaitForSeconds(ability.duration);
-            collider.spriteShapeRenderer.color = cooldownColor;
+            hitCollider.spriteShapeRenderer.color = cooldownColor;
             yield return null;
         }
     }
 
     private void SetActive()
     {
-        targets = collider.targets;
-
-        if (targets.Count > 0)
+        Debug.Log("this.gameObject = " + this.gameObject);
+        if(spawnPoint != null)
+            transform.position = spawnPoint.transform.position;
+        else if (!ability.isFollowingCaster)
         {
-            ability.ActivateEffect(this,targets);
+            transform.position = caster.transform.position;
+            transform.right = playerAction.lastFacing;
         }
+
+        Debug.Log("this.gameObject = " + this.gameObject);
+        
+        hitCollider.UpdateCollider();
 
         StartCoroutine(ChangeColor());
         duration = ability.duration;
         state = AbilityState.active;
-
+        
+        
+        
+        StartCoroutine(ActivateEffect());
+//            ability.ActivateEffect(hitCollider);
         //Effect type
         if (nextAbility != null)
         {
             nextAbility.SetActive();
         }
     }
-
+    
     private void SetCooldown()
     {
-        chainDamageCoroutine = null;
-        effectOverTimeCoroutine = null;
-
         cooldownTime = ability.cooldownTime;
         state = AbilityState.cooldown;
     }
 
-    private void Start()
-    {
-        SetReady();
-    }
+    
 
     private void Update()
     {
         //Change direction of the ability according to where the player is moving
-        if (casterRB.velocity.magnitude > 0)
-            transform.right = casterRB.velocity;
+        //if (ability.isFollowingCaster && casterRB.velocity.magnitude > 0)
+        //    transform.right = casterRB.velocity;
+        
+        if (ability.isFollowingCaster)
+        {
+            transform.right = playerAction.lastFacing;
+        }
 
         switch (state)
         {

@@ -7,12 +7,11 @@ using UnityEngine.U2D;
 [CreateAssetMenu]
 public class SlashAbility : Ability
 {    
-    public override void ActivateEffect(AbilityHolder ability, List<GameObject> targets)
+    public override void ActivateEffect(ColliderDrawer colliderDrawer)
     {
         //TODO Damage all enemy with health.
-        foreach (GameObject target in targets)
+        foreach (GameObject target in colliderDrawer.targets)
         {
-            
             Damage(target);
         }
     }
