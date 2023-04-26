@@ -13,7 +13,6 @@ public class FSM_Bruiser_PostAbility : StateMachineBehaviour
         ba = animator.gameObject.GetComponentInParent<Bruiser_Attack>();
 
         waitDuration = Time.time + ba.postFireDelay;
-        // TODO Set waitduration from attack script
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

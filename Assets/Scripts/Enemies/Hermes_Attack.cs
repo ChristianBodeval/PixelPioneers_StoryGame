@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bruiser_Attack : Enemy_Attack
+public class Hermes_Attack : Enemy_Attack
 {
     [SerializeField] private float attackDMG;
     [SerializeField] private float attackTelegraphTime;
@@ -21,7 +21,7 @@ public class Bruiser_Attack : Enemy_Attack
     private int currentSegment = 1;
     private bool isWaveRDY = true;
     private Coroutine waveCDCoroutine;
-    private float waveRange;
+    [HideInInspector] public static float waveRange { get; private set; }
     private float waveRangeBuffer = 4f;
     private Vector3 startLocation;
     private Vector3 dir = Vector3.zero;
@@ -37,48 +37,25 @@ public class Bruiser_Attack : Enemy_Attack
     private void OnEnable()
     {
         if (animator != null) ResetVariables();
-        isWaveRDY = true;
     }
 
     private void FixedUpdate()
     {
-        IsInAttackRange(player); // Player variable is inherited from IEnemyAttack
-
-        if (WaveUsable() && !(animator.GetBool("AttackRDY") && animator.GetBool("InAttackRange")) )
+        if (IsWaveUsable())
         {
             if (waveCDCoroutine != null) StopCoroutine(waveCDCoroutine);
             waveCDCoroutine = StartCoroutine(WaveCooldown(0.5f));
-            animator.Play("ChargeUp");
+            animator.Play("Hermes_Attack_ChargeUp");
         }
     }
-
-    public override void Attack() // Called from animator
-    {
-        StartCoroutine(AttackCD(attackCD)); // Starts cooldown for the attack
-        StartCoroutine(TelegraphAttack());
-    }
-
-    private IEnumerator TelegraphAttack()
-    {
-        yield return new WaitForSeconds(attackTelegraphTime);
-        if (Vector3.Distance(player.transform.position, transform.position) <= attackRange) player.GetComponent<PlayerHealth>().TakeDamage(attackDMG); // Deal damage
-    }
-
-    private bool IsInAttackRange(GameObject player)
-    {
-        bool inRange = Vector2.Distance(player.transform.position, transform.position) <= attackRange && IsInLineOfSight(player, animator); // In attack range & los
-        animator.SetBool("InAttackRange", inRange);
-        return inRange;
-    }
-
     
-    public bool WaveUsable(bool isWaveBeingCharged = false)
+    public bool IsWaveUsable()
     {
-        // In range, los and not stunned
-        if (isWaveBeingCharged) return Vector2.Distance(player.transform.position, transform.position) <= waveRange + waveRangeBuffer && IsInLineOfSight(player, animator) && !animator.GetBool("IsStunned");
+        // Is something else being done by Hermes
+        if (animator.GetBool("IsBusy") || animator.GetBool("IsStunned") || !animator.GetBool("AttackRDY") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Immobile")) return false;
 
-        // In In range, los, not stunned and ability rdy
-        return Vector2.Distance(player.transform.position, transform.position) <= waveRange && IsInLineOfSight(player, animator) && !animator.GetBool("IsStunned") && isWaveRDY;
+        // In range and los
+        return Vector2.Distance(player.transform.position, transform.position) <= waveRange && IsInLineOfSight(player, animator);
     }
 
     public void ThrowWave()
@@ -87,7 +64,7 @@ public class Bruiser_Attack : Enemy_Attack
         if (waveCDCoroutine != null) StopCoroutine(waveCDCoroutine);
         waveCDCoroutine = StartCoroutine(WaveCooldown());
 
-        if (currentSegment > segmentAmounts) { ResetVariables(); return; } // Guard clause
+        if (currentSegment > segmentAmounts) { currentSegment = 1; return; } // Guard clause
 
         if (currentSegment == 1)
         {
@@ -108,7 +85,7 @@ public class Bruiser_Attack : Enemy_Attack
 
     private IEnumerator SegmentDelay()
     {
-        if (currentSegment > segmentAmounts) { ResetVariables(); yield break; } // Guard clause
+        if (currentSegment > segmentAmounts) { currentSegment = 1; yield break; } // Guard clause
         yield return new WaitForSeconds(attackTelegraphTime);
         currentSegment++;
         ThrowWave();
@@ -116,16 +93,23 @@ public class Bruiser_Attack : Enemy_Attack
 
     private IEnumerator WaveCooldown(float multiplier = 1f)
     {
-        isWaveRDY = false;
+        animator.SetBool("AttackRDY", false);
 
         yield return new WaitForSeconds(waveCooldown * multiplier);
 
-        isWaveRDY = true;
+        animator.SetBool("AttackRDY", true);
     }
 
     private void ResetVariables()
     {
         currentSegment = 1;
-        if (animator != null) { animator.SetBool("AttackRDY", true); } // Resets variable when respawning
+        if (animator != null)
+        {
+            animator.SetBool("AttackRDY", true);
+            animator.SetBool("CanMove", true);
+            animator.SetBool("IsChargedUp", false);
+            animator.SetBool("IsStunned", false);
+            animator.SetBool("IsBusy", false);
+        }
     }
 }

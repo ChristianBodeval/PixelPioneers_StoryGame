@@ -175,7 +175,10 @@ public class Mjoelnir : MonoBehaviour
                 float t = charge / endValue;
                 float zoomAmount = Mathf.Lerp(startValue, endValue, Mathf.Pow(t, 1f / 3f)); // Cube root function - slows down zooming over time
                 Camera.main.GetComponent<CameraScript>().SetZoomAmount(zoomAmount);
-            }        
+            }
+
+            // Shake camera
+            Camera.main.GetComponent<CameraShake>().ShakeCamera(false, charge / maxCharge);
 
             // Charge range indicator - change its size and rotation
             rangeIndicator.GetComponent<SpriteRenderer>().color = new Color32(180, 180, 0, 180); ;
@@ -370,10 +373,10 @@ public class Mjoelnir : MonoBehaviour
             cannotHitList.Remove(col.gameObject);
         }
 
-        if (col.CompareTag("Enemy") && !cannotHitList.ContainsKey(col.gameObject))
+        if (col.CompareTag("Enemy") || col.CompareTag("Boss") && !cannotHitList.ContainsKey(col.gameObject))
         {
             //TODO rettes til et egentlig Knockback script eller metode paa enemy. Kald derfra metoden her. 
-            col.transform.position += (col.transform.position - player.transform.position).normalized * 0.3f; // Slight knockback
+            //col.transform.position += (col.transform.position - player.transform.position).normalized * 0.3f; // Slight knockback
             col.gameObject.GetComponent<Health>().TakeDamage(spinDMG);
             if (!onFreezeCD) StartCoroutine(FreezeSpin());
             AddToSpinCDList(col.gameObject);

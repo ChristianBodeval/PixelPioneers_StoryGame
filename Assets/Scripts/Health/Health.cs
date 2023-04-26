@@ -32,20 +32,33 @@ public class Health : MonoBehaviour
         this.maxHealth = maxHealth;
     }
 
-
-
-
-   
     public virtual void TakeDamage(float damage)
     {
         if(this.isActiveAndEnabled)
         {
-            DamageTakenEvent.Invoke();
-
             this.currentHealth -= damage;
+
+            // Hermes moves when haven taken damage
+            if (gameObject.CompareTag("Boss"))
+            {
+                GetComponent<Hermes_Pathing>().MoveOnHitTaken();
+
+                if (Random.Range(0,2) == 0)
+                {
+                    // Create blood and pickup
+                    HealthPickUp.pickUpPool.AddHealthPickUp(transform.position, 1f); // Spawn health pickup
+                    GameObject blood = Pool.pool.DrawFromBloodPool();
+                    blood.transform.position = transform.position;
+                    blood.transform.Rotate(new Vector3(0f, 0f, Random.Range(0, 4) * 90f)); // Random rotation
+                    float size = Random.Range(0.8f, 1.2f);
+                    blood.transform.localScale = new Vector3(size, size, 1f);
+                }
+            }
 
             // Freeze frame enemies
             if (gameObject.CompareTag("Enemy")) GetComponent<Crowd_Control>().FreezeFrame(freezeDurationOnDmgTaken);
+
+            // Spawn blood
             GameObject bloodSplatter = Pool.pool.DrawFromBloodSpatterPool();
             bloodSplatter.transform.position = transform.position;
 
@@ -55,6 +68,8 @@ public class Health : MonoBehaviour
             if (shakeCoroutine != null) StopCoroutine(shakeCoroutine);
             shakeCoroutine = StartCoroutine(SpriteShake(0.12f, freezeDurationOnDmgTaken));
             //PrintDmgToScreen(damage, Color.red);
+
+            DamageTakenEvent.Invoke();
         }
     }
 
