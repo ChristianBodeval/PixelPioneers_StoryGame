@@ -9,7 +9,7 @@ using UnityEngine.Windows;
 using Input = UnityEngine.Input;
 
 //Handles the state of the ability, position and rotation & changes color of the collider
-public class AbilityHolder : MonoBehaviour
+public class AbilityHolder : MonoBehaviour, IUpgradeable
 {
     public GameObject caster;
     
@@ -30,6 +30,8 @@ public class AbilityHolder : MonoBehaviour
     
     AbilityState state = AbilityState.ready;
     public Transform spawnPoint;
+    [SerializeField] private AbilityHolder upgradeOption1;
+    [SerializeField] private AbilityHolder upgradeOption2;
 
     enum AbilityState
     {
@@ -187,6 +189,24 @@ public class AbilityHolder : MonoBehaviour
                 break;
 
         }
+        
+
+    }
+    
+    
+
+    public void UpgradeOption1()
+    {
+        nextAbility = upgradeOption1;
     }
 
+    public void UpgradeOption2()
+    {
+        nextAbility = upgradeOption2;
+    }
+
+    public void Downgrade()
+    {
+        nextAbility = null;
+    }
 }
