@@ -75,8 +75,8 @@ public class Dialogue : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             isPlayerInRange = true;
-            //player = col.gameObject;
             dialogueNPCName.text = gameObject.name;
+            dialogueManager.NPCname = gameObject.name;
         }
     }
 
@@ -86,6 +86,8 @@ public class Dialogue : MonoBehaviour
         {
             isPlayerInRange = false;
             dialogueNPCName.text = "";
+            dialogueManager.NPCname = "";
+
         }
     }
 

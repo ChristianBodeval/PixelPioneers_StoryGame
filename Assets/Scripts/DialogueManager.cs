@@ -36,6 +36,11 @@ public class DialogueManager : MonoBehaviour
 
     private Animator dialogBoxAnim;
 
+    public string NPCname;
+
+    public UpgradeSystemVisual upgradeSystemVisual;
+
+    
     private void Awake()
     {
         if (dialogManager != null && dialogManager != this)
@@ -90,14 +95,21 @@ public class DialogueManager : MonoBehaviour
         mjoelnir.enabled = false;
         ContinueStory();
         dialogBoxAnim.Play("FlyUp");
-        
+
+        if (NPCname == "Anvil")
+        {
+            upgradeSystemVisual.StartUpgradeVisual();
+        }
+
+
+
+
     }
 
     private IEnumerator ExitDialogueMode()
     {
         yield return new WaitForSeconds(0.2f);
         isDialoguePlaying = false;
-        //dialogueBox.SetActive(false);
 
         //resets the text
         dialogueText.text = "";

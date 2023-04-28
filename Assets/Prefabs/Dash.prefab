@@ -62,6 +62,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab1699396882214e94cf172a713d0f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePrefab: {fileID: 0}
+  firePrefab: {fileID: 4107877873598398161, guid: 80fe04768f0b87c47a6293c93d75d5c6, type: 3}
   playerTransform: {fileID: 0}
   spawnDuration: 0.3
