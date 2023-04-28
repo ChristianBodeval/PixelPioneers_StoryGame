@@ -19,3 +19,4 @@ MonoBehaviour:
   keyTrigger: 106
   isFollowingCaster: 1
   canChangeColors: 1
+  anim: {fileID: 5329026731082029813, guid: 0a70706c5622641428cfd9923b28a4f5, type: 3}

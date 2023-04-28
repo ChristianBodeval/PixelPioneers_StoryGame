@@ -10,6 +10,8 @@ public class Ability : ScriptableObject
     public float damage;
     public float duration;
 
+    public GameObject anim;
+
     //TODO Hide unrelevant info, for different settings. E.g cooldownTime, for non-timed cooldown,
     //and KeyCode for effectTriggered from other effects
 

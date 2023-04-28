@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.U2D;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 [CreateAssetMenu]
+
 public class SlashAbility : Ability
-{    
+{
     public override void ActivateEffect(AbilityHolder ability, List<GameObject> targets)
     {
         //TODO Damage all enemy with health.

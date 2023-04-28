@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 102
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a1ff837a3b398847ac11bba33665d85
-      internalID: 1730066385
+      spriteID: 8559521080d23754e9c7497b3630ded5
+      internalID: -1932815563
       vertices: []
       indices: 
       edges: []
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d3474beb01568741a85437de786f0c7
-      internalID: -1729359232
+      spriteID: 796940564d0650746ba69fc976c9db83
+      internalID: 1634470630
       vertices: []
       indices: 
       edges: []
@@ -161,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e940e110be70474abe3d1b96626a184
-      internalID: 1559301444
+      spriteID: 6633b5265a2ee314ea4266b7a635222b
+      internalID: -2046578105
       vertices: []
       indices: 
       edges: []
@@ -182,8 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d3e89308d1b72f439b055f5c857b5ed
-      internalID: 149868937
+      spriteID: bc2cdc9ba706a0542a029a746e45dfa1
+      internalID: -629924463
       vertices: []
       indices: 
       edges: []
@@ -203,8 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e1a5f455bded574b94ba74c2a0bf486
-      internalID: -1713456405
+      spriteID: a39007a27f035db449f0f6df6d54e0d7
+      internalID: 794769415
       vertices: []
       indices: 
       edges: []
@@ -224,8 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6dfa2bec343174645ad4f8cf481094b1
-      internalID: 197075880
+      spriteID: b4252a99f21a83344a5fb60ba25ad8b6
+      internalID: -1312434594
       vertices: []
       indices: 
       edges: []
@@ -245,8 +245,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: abea0bb2e7364cb4da15544083455a36
-      internalID: 406340037
+      spriteID: 60998af2d826db6429aabbf7c5502cc6
+      internalID: -926204243
       vertices: []
       indices: 
       edges: []
@@ -266,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 108d36a3b67037c46a453125a22dcabb
-      internalID: 12337218
+      spriteID: d6e26f763e72b8d4aace46b7788964fe
+      internalID: 1792032047
       vertices: []
       indices: 
       edges: []
@@ -287,8 +287,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2cb93459bb04294ea8fc577d097aca5
-      internalID: 758646564
+      spriteID: f067fad2e3bac3f4fa83bfed130faabb
+      internalID: 503380431
       vertices: []
       indices: 
       edges: []
@@ -308,8 +308,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2369a28daec9dd447aa5768f0c8797d6
-      internalID: 690690011
+      spriteID: 4274b2d48bc64a64a94c17aae4c102c8
+      internalID: -208452128
       vertices: []
       indices: 
       edges: []
@@ -325,16 +325,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Cone_Attack_0: 1730066385
-      Cone_Attack_1: -1729359232
-      Cone_Attack_2: 1559301444
-      Cone_Attack_3: 149868937
-      Cone_Attack_4: -1713456405
-      Cone_Attack_5: 197075880
-      Cone_Attack_6: 406340037
-      Cone_Attack_7: 12337218
-      Cone_Attack_8: 758646564
-      Cone_Attack_9: 690690011
+      Cone_Attack_0: -1932815563
+      Cone_Attack_1: 1634470630
+      Cone_Attack_2: -2046578105
+      Cone_Attack_3: -629924463
+      Cone_Attack_4: 794769415
+      Cone_Attack_5: -1312434594
+      Cone_Attack_6: -926204243
+      Cone_Attack_7: 1792032047
+      Cone_Attack_8: 503380431
+      Cone_Attack_9: -208452128
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

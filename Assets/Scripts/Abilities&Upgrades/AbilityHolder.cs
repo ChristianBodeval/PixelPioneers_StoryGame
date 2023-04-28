@@ -81,10 +81,9 @@ public class AbilityHolder : MonoBehaviour
     {
         targets = collider.targets;
 
-        if (targets.Count > 0)
-        {
-            ability.ActivateEffect(this,targets);
-        }
+        if (collider.targets.Count > 0) ability.ActivateEffect(this,targets);
+
+        if (ability.anim != null) PlayAnim();
 
         StartCoroutine(ChangeColor());
         duration = ability.duration;
@@ -95,6 +94,16 @@ public class AbilityHolder : MonoBehaviour
         {
             nextAbility.SetActive();
         }
+    }
+
+    public void PlayAnim()
+    {
+        GameObject player = GameObject.Find("Player");
+        GameObject cone = Instantiate(ability.anim, player.transform);
+        Vector2 direction = player.GetComponent<PlayerAction>().lastFacing;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        cone.transform.rotation = Quaternion.AngleAxis(angle - 90f, Vector3.forward);
+        cone.transform.localPosition = direction * 1f;
     }
 
     private void SetCooldown()
