@@ -9,8 +9,13 @@ public class WeaponCDs : MonoBehaviour
     public Image mjoelnirCDVisual;
     public Image gungnirCDVisual;
 
-    public PlayerAction playerActionScript;
+    public Dash dashScript;
     public Mjoelnir mjoelnirScript;
+    public Gungnir gungnirScript;
+
+    public GameObject eyeCatcherMjoelnir;
+    public GameObject eyeCatcherDash;
+    public GameObject eyeCatcherGungnir;
 
     private float baseMeleeCooldownRemaining;
     private float baseMeleeCooldownTime;
@@ -35,8 +40,9 @@ public class WeaponCDs : MonoBehaviour
         //baseMeleeCooldownTime = playerActionScript.baseMeleeCooldown;
         /*Cheated for now: */
         baseMeleeCooldownTime = 4f;
-        dashCooldownTime = playerActionScript.dashCooldownTime;
+        dashCooldownTime = dashScript.dashCooldownTime;
         mjoelnirCooldownTime = mjoelnirScript.chargeCD;
+        gungnirCooldownTime = gungnirScript.CD;
     }
 
     // Update is called once per frame
@@ -45,6 +51,7 @@ public class WeaponCDs : MonoBehaviour
         baseMeleeCDVisual.fillAmount = baseMeleeCooldownRemaining / baseMeleeCooldownTime;
         dashCDVisual.fillAmount = dashCooldownRemaining / dashCooldownTime;
         mjoelnirCDVisual.fillAmount = mjoelnirCooldownRemaining / mjoelnirCooldownTime;
+        gungnirCDVisual.fillAmount = gungnirCooldownRemaining / gungnirCooldownTime;
     }
 
     public IEnumerator BaseMeleeCD()
@@ -65,6 +72,13 @@ public class WeaponCDs : MonoBehaviour
             dashCooldownRemaining -= Time.deltaTime;
             yield return null; // Wait for the end of the frame
         }
+        if (dashCooldownRemaining <= 0f)
+        {
+            eyeCatcherDash.SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+            eyeCatcherDash.SetActive(false);
+
+        }
     }
 
     public IEnumerator MjoelnirCD()
@@ -75,16 +89,43 @@ public class WeaponCDs : MonoBehaviour
             mjoelnirCooldownRemaining -= Time.deltaTime;
             yield return null; // Wait for the end of the frame
         }
+        if (mjoelnirCooldownRemaining <= 0f)
+        {
+            eyeCatcherMjoelnir.SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+            eyeCatcherMjoelnir.SetActive(false);
+
+        }
     }
 
-    //TODO..
     public IEnumerator GungnirCD()
     {
-        mjoelnirCooldownRemaining = mjoelnirCooldownTime; // Reset the remaining cooldown time
-        while (mjoelnirCooldownRemaining > 0f) // Count down the cooldown time
+        gungnirCooldownRemaining = gungnirCooldownTime; // Reset the remaining cooldown time
+        while (gungnirCooldownRemaining > 0f) // Count down the cooldown time
         {
-            mjoelnirCooldownRemaining -= Time.deltaTime;
+            gungnirCooldownRemaining -= Time.deltaTime;
             yield return null; // Wait for the end of the frame
         }
+        if (gungnirCooldownRemaining <= 0f)
+        {
+            eyeCatcherGungnir.SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+            eyeCatcherGungnir.SetActive(false);
+
+        }
+    }
+
+    public void ResetGungnirCD()
+    {
+        gungnirCooldownRemaining = 0f;
+        gungnirCDVisual.fillAmount = 0f;
+        StartCoroutine("SetGungnirEyecatcher");
+    }
+    private IEnumerator SetGungnirEyecatcher()
+    {
+        eyeCatcherGungnir.SetActive(true);
+        yield return new WaitForSeconds(0.3f);
+        eyeCatcherGungnir.SetActive(false);
+
     }
 }

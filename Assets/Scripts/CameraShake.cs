@@ -7,6 +7,7 @@ public class CameraShake : MonoBehaviour
     public float duration = 0.5f;
     public bool takesDamage;
     public AnimationCurve curve;
+    public AnimationCurve smallCurve;
     private bool shakeIsOnCD = false;
 
     private CinemachineVirtualCamera CMCam;
@@ -29,8 +30,34 @@ public class CameraShake : MonoBehaviour
         StartCoroutine("Shaking");
         StartCoroutine("ShakeCD");
     }
+    public void SmallShake()
+    {
+        StartCoroutine("SmallShaking");
+        StartCoroutine("ShakeCD");
+    }
 
     private IEnumerator Shaking()
+    {
+        CinemachineBasicMultiChannelPerlin CBMCP = CMCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        if (!shakeIsOnCD)
+        {
+            Vector3 originalPos = transform.position;
+
+            float elapsed = 0.0f;
+
+            while (elapsed < duration)
+            {
+                originalPos = transform.position;
+                elapsed += Time.deltaTime;
+                float strength = curve.Evaluate(elapsed / duration);
+                CBMCP.m_AmplitudeGain = strength;
+                yield return null;
+            }
+
+            transform.localPosition = originalPos;
+        }
+    }
+    private IEnumerator SmallShaking()
     {
         CinemachineBasicMultiChannelPerlin CBMCP = CMCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         if (!shakeIsOnCD)

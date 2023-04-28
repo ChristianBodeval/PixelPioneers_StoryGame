@@ -8,12 +8,16 @@ public class CameraScript : MonoBehaviour
     [SerializeField] private float cameraDistance = -10f;
     private CinemachineVirtualCamera cinemachineCam;
     private GameObject player;
+    private GameObject dash;
     private float defaultZoomAmount = 5f;
     private bool isLaggingBehind = false;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        dash = GameObject.Find("Dash");
+
+
         cinemachineCam = GameObject.FindGameObjectWithTag("CMCamera").GetComponent<CinemachineVirtualCamera>();
         defaultZoomAmount = cinemachineCam.m_Lens.OrthographicSize;
     }
@@ -60,7 +64,7 @@ public class CameraScript : MonoBehaviour
     public IEnumerator LagBehind()
     {
         Vector3 prevPos = transform.position;
-        float dashDuration = player.GetComponent<PlayerAction>().dashDuration;
+        float dashDuration = dash.GetComponent<Dash>().dashDuration;
         float t = 0f;
 
         while (isLaggingBehind)

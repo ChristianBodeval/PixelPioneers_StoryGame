@@ -54,11 +54,14 @@ public class Mjoelnir : MonoBehaviour
     private Coroutine abilityCDFunction;
     private bool canSpin = true;
 
+    private Dash dash;
+
 
     private void Start()
     {
         mjoelnirSprite = GetComponentInChildren<SpriteRenderer>().gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
+        dash = GameObject.Find("Dash").GetComponent<Dash>();
 
         obstacleLayer = LayerMask.GetMask("Obstacles");
     }
@@ -157,7 +160,7 @@ public class Mjoelnir : MonoBehaviour
             if (initCharge != null) StopCoroutine(initCharge);
             initCharge =  StartCoroutine(InitialCharging());
             player.GetComponent<PlayerAction>().StartSlow(slowAmountWhileCharging); // Root the player while casting
-            player.GetComponent<PlayerAction>().CannotDash();
+            dash.CannotDash();
 
             // Position the hammer on player
             transform.position = player.transform.position;
@@ -265,7 +268,7 @@ public class Mjoelnir : MonoBehaviour
 
         player.GetComponent<PlayerAction>().StartMove(); // Allow player to move again
         player.GetComponent<PlayerAction>().StopSlow();
-        player.GetComponent<PlayerAction>().CanDash();
+        dash.CanDash();
         player.GetComponent<PlayerHealth>().RemoveInvulnerability();
 
         EnableHammer(); // Hammer can hit enemies again
