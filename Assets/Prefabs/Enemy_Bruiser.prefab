@@ -209,19 +209,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 0.7
-  attackCD: 0.2
+  attackCD: 0.3
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
   attackDMG: 3
   attackTelegraphTime: 0.3
   segmentPrefab: {fileID: 2110713007026889626, guid: b51f3005dbd6eaf4c8aef9280eeea043, type: 3}
-  segmentLength: 1.2
-  segmentWidth: 0.5
-  segmentAmounts: 5
+  segmentLength: 2
+  segmentWidth: 3
+  segmentGrowthRate: 0.2
+  segmentAmounts: 3
   segmentSpawnDelay: 0.3
   waveDamage: 2
-  waveCooldown: 10
+  waveCooldown: 8
   chargeDelay: 1
   postFireDelay: 0.2
 --- !u!1 &2667928336342201541
