@@ -14,9 +14,6 @@ public class OverTimeEffect : Effect
         StartCoroutine(EffectCoroutine(colliderDrawer));
     }
 
-    
-    
-
     private List<GameObject> targets;
     public override IEnumerator EffectCoroutine(ColliderDrawer colliderDrawer)
     {
@@ -28,7 +25,7 @@ public class OverTimeEffect : Effect
             Debug.Log("Casted 1 tick");
             //TODO Set to tick pr seconds
 
-            targets = colliderDrawer.targets;;
+            targets = colliderDrawer.targets;
             
             foreach (GameObject target in targets)
             {
