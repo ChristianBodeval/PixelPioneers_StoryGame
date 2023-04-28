@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31ee322b-587a-4c99-afc9-1b2b30998f9e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/BackupDELETE.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/BackupDELETE.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestDELETE.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestDELETE.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashAbility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashAbility.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/Mjoelnir.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/Mjoelnir.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UpgradeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UpgradeManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +93,7 @@
       <workItem from="1681999782930" duration="23173000" />
       <workItem from="1682532137065" duration="1844000" />
       <workItem from="1682534121715" duration="18000" />
-      <workItem from="1682534171305" duration="1282000" />
+      <workItem from="1682534171305" duration="5208000" />
     </task>
     <servers />
   </component>
@@ -147,10 +139,10 @@
           <line>122</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" initialLine="105" containingFunctionPresentation="Method 'SetActive'">
             <startOffsets>
-              <option value="3310" />
+              <option value="3344" />
             </startOffsets>
             <endOffsets>
-              <option value="3339" />
+              <option value="3373" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="18" />
@@ -160,10 +152,10 @@
           <line>117</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" initialLine="115" containingFunctionPresentation="Method 'SetActive'">
             <startOffsets>
-              <option value="3180" />
+              <option value="3214" />
             </startOffsets>
             <endOffsets>
-              <option value="3222" />
+              <option value="3256" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="20" />

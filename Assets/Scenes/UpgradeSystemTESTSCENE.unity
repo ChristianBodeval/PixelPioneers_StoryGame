@@ -482,19 +482,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caster: {fileID: 839822837}
+  playerAction: {fileID: 0}
   ability: {fileID: 11400000, guid: 9904d66bfa7d04e859cd8157c6c65e19, type: 2}
   readyColor: {r: 0, g: 0, b: 0, a: 0}
   activeColor: {r: 0, g: 0, b: 0, a: 0}
   cooldownColor: {r: 0, g: 0, b: 0, a: 0}
   nextAbility: {fileID: 0}
-  collider: {fileID: 0}
+  hitCollider: {fileID: 0}
   colliderStat: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  upgradeOption1: {fileID: 0}
+  upgradeOption2: {fileID: 0}
 --- !u!114 &61269101 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 146702678757508236, guid: facc3f81a943c774c917f35e333d0129, type: 3}
   m_PrefabInstance: {fileID: 2063172999}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 151117694}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee3f7fdb7a6d1f64fb4a29de96342fb7, type: 3}
@@ -805,6 +809,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &151117694 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 146702678757508234, guid: facc3f81a943c774c917f35e333d0129, type: 3}
+  m_PrefabInstance: {fileID: 2063172999}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &208214925
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,13 +1143,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caster: {fileID: 839822837}
+  playerAction: {fileID: 0}
   ability: {fileID: 11400000, guid: d5413daa01c80ac45bb41732acf51b7a, type: 2}
   readyColor: {r: 0.41935158, g: 0.8301887, b: 0.3250267, a: 0.4627451}
   activeColor: {r: 0.87951994, g: 0.85882354, b: 0.9254902, a: 0.57254905}
   cooldownColor: {r: 0.8207547, g: 0.2516465, b: 0.2516465, a: 0.34901962}
   nextAbility: {fileID: 0}
-  collider: {fileID: 432432138}
+  hitCollider: {fileID: 432432138}
   colliderStat: {fileID: 11400000, guid: 5e269b22577be486fa851899f4cf3e37, type: 2}
+  spawnPoint: {fileID: 0}
+  upgradeOption1: {fileID: 2139135355}
+  upgradeOption2: {fileID: 37594936}
 --- !u!60 &432432135
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -11174,6 +11187,8 @@ MonoBehaviour:
   meleeAmount: 28
   rangeAmount: 8
   chargerAmount: 2
+  wurmAmount: 0
+  bruiserAmount: 0
 --- !u!114 &826308695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11191,6 +11206,8 @@ MonoBehaviour:
   meleeAmount: 0
   rangeAmount: 0
   chargerAmount: 3
+  wurmAmount: 0
+  bruiserAmount: 0
 --- !u!114 &826308696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11208,6 +11225,8 @@ MonoBehaviour:
   meleeAmount: 0
   rangeAmount: 12
   chargerAmount: 0
+  wurmAmount: 0
+  bruiserAmount: 0
 --- !u!114 &826308697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11225,6 +11244,8 @@ MonoBehaviour:
   meleeAmount: 30
   rangeAmount: 0
   chargerAmount: 0
+  wurmAmount: 0
+  bruiserAmount: 0
 --- !u!114 &826308698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11451,7 +11472,6 @@ MonoBehaviour:
   moveVector: {x: 0, y: 0, z: 0}
   inputBuffer: 0.1
   lastFacing: {x: 1, y: 0}
-  lastFacing2: {x: 0, y: 0}
   dashDistance: 2.8
   dashDuration: 0.2
   dashCooldownTime: 1.5
@@ -33840,6 +33860,53 @@ RectTransform:
   m_AnchoredPosition: {x: 60.102, y: 0.0000038146973}
   m_SizeDelta: {x: -113.451, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1560894326
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1560894328}
+  - component: {fileID: 1560894327}
+  m_Layer: 0
+  m_Name: UpgradeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1560894327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560894326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4307370c3418f402582a8befd26a0853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityGameObjects:
+  - {fileID: 432432133}
+  - {fileID: 151117694}
+--- !u!4 &1560894328
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560894326}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 12.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 34
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1574994815
 GameObject:
   m_ObjectHideFlags: 0
@@ -35952,6 +36019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tickEveryXSeconds: 1
   duration: 5
+  damagePrTick: 0
 --- !u!114 &2139135355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35965,13 +36033,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caster: {fileID: 839822837}
+  playerAction: {fileID: 0}
   ability: {fileID: 11400000, guid: ff5907b9f070245c184fdad28046124c, type: 2}
   readyColor: {r: 0.1749637, g: 0.9433962, b: 0, a: 0}
   activeColor: {r: 0.9245283, g: 0.8591136, b: 0.8591136, a: 0.77254903}
   cooldownColor: {r: 0.8207547, g: 0.2516465, b: 0.2516465, a: 0}
   nextAbility: {fileID: 0}
-  collider: {fileID: 2139135359}
+  hitCollider: {fileID: 2139135359}
   colliderStat: {fileID: 11400000, guid: 5e269b22577be486fa851899f4cf3e37, type: 2}
+  spawnPoint: {fileID: 0}
+  upgradeOption1: {fileID: 0}
+  upgradeOption2: {fileID: 0}
 --- !u!60 &2139135356
 PolygonCollider2D:
   m_ObjectHideFlags: 0

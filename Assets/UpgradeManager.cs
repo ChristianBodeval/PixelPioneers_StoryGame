@@ -5,17 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class UpgradeManager : MonoBehaviour
-{
-    
-    [SerializeField] private List<IUpgradeable> upgradeableAbilities = new List<IUpgradeable>();
-
-    
-
-    [SerializeField] private List<GameObject> abilityGameObjects = new List<GameObject>();
-    
-
-    //TODO make this a singlton
-    
+{ [SerializeField] private List<IUpgradeable> upgradeableAbilities = new List<IUpgradeable>();
+   [SerializeField] private List<GameObject> abilityGameObjects = new List<GameObject>();
 
     private void Awake()
     {
@@ -27,25 +18,19 @@ public class UpgradeManager : MonoBehaviour
     {
         return upgradeableAbilities;
     }
-
     private void UpgradeAbilityOption1(IUpgradeable upgradeable)
     {
         upgradeable.UpgradeOption1();
     }
-    
     private void UpgradeAbilityOption2(IUpgradeable upgradeable)
     {
         upgradeable.UpgradeOption2();
     }
-    
     private void Downgrade(IUpgradeable upgradeable)
     {
         upgradeable.Downgrade();
     }
 
-
-    
-    
     //Only for testing
     private void Update()
     {
