@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class Mjoelnir : MonoBehaviour
+public class Mjoelnir : MonoBehaviour, IUpgradeable
 {
     [Header("Hammer Movement")]
     [SerializeField] private float spinDMG;
@@ -385,5 +385,23 @@ public class Mjoelnir : MonoBehaviour
         {
             Destroy(col.gameObject);
         }
+    }
+
+    public void UpgradeOption1()
+    {
+        if(!hasAreaOfEffectUpgrade)
+            hasChargeUpgrade = true;
+    }
+
+    public void UpgradeOption2()
+    {
+        if (!hasChargeUpgrade)
+            hasAreaOfEffectUpgrade = true;
+    }
+
+    public void Downgrade()
+    {
+        hasAreaOfEffectUpgrade = false;
+        hasChargeUpgrade = false;
     }
 }

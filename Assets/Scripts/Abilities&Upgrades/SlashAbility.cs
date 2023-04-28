@@ -22,4 +22,6 @@ public class SlashAbility : Ability
         //Deal damage
         Debug.Log("Damaged " + this.damage + " to " + target.name);
     }
+
+    
 }
