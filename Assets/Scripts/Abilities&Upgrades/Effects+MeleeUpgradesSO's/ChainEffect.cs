@@ -9,12 +9,7 @@ public class ChainEffect : Effect
     [HideInInspector] public float range;
     [HideInInspector] public float timeBetweenEachBounce;
     [HideInInspector] public int bounces;
-
-    //For testing
-    GameObject myGM;
-    float myradius = 0;
-    private Collider2D[] mytargets;
-    //TODO Make line renderer
+    
     private DrawLineBetween2Points lineRenderer;
 
     IEnumerator enumerator;
@@ -24,15 +19,8 @@ public class ChainEffect : Effect
         lineRenderer = GetComponent<DrawLineBetween2Points>();   
     }
 
-    private void OnDrawGizmos()
-    {
-        if (myGM != null)
-            Gizmos.DrawWireSphere(myGM.transform.position + myGM.transform.right * 0, myradius);
-    }
-
     public override void Activate(ColliderDrawer colliderDrawer)
     {
-        Debug.Log("Activated");
         GameObject target = colliderDrawer.targets[Random.Range(0, colliderDrawer.targets.Count)];
         enumerator = ChainDamage(target);
         StartCoroutine(enumerator);
@@ -41,9 +29,6 @@ public class ChainEffect : Effect
 
     public IEnumerator ChainDamage(GameObject startingTarget)
     {
-        myradius = range;
-        Debug.Log("ChainDamge");
-        //TODO Deal damage to target
         Collider2D[] newTargets;
         GameObject newTarget;
         int randomNumber;
@@ -52,14 +37,9 @@ public class ChainEffect : Effect
         
         for (int i = 0; i < bounces; i++)
         {
-            myGM = startingTarget;
-
-            newTargets = null;
             newTargets = Physics2D.OverlapCircleAll(startingTarget.transform.position, range, LayerMask.GetMask("Enemy"));
             
             startingTarget.GetComponent<Health>().TakeDamage(damage);
-            
-            mytargets = newTargets;
 
             if (newTargets.Length == 0)
             {
@@ -76,12 +56,9 @@ public class ChainEffect : Effect
                 randomNumber = Random.Range(0, newTargets.Length);
                 newTarget = newTargets[randomNumber].transform.gameObject;
             }
-
-            //TODO make this an event
+            
             lineRenderer.SetLine(startingTarget.transform.position, newTarget.transform.position);
 
-
-            //TODO Deal damage here too
             if (startingTarget.Equals(newTarget))
                 break;
                 

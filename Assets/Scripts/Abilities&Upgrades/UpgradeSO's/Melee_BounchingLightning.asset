@@ -9,14 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75dc6f4f7cf984ab287edfcc0010bdcc, type: 3}
-  m_Name: V2
+  m_Script: {fileID: 11500000, guid: 0da1dfd549f4347aa97f0cbcebebcfc7, type: 3}
+  m_Name: Melee_BounchingLightning
   m_EditorClassIdentifier: 
-  name: 
-  damage: 0
-  duration: 0
-  cooldownTime: 0
-  keyTrigger: 0
-  isFollowingCaster: 0
-  canChangeColors: 0
-  tickEveryXSeconds: 0
+  name: Bouncing Lightning
+  description: 'Lightning jumps from enemy to enemy for (x) to (x) times. '
+  sprite: {fileID: 21300000, guid: c3bb54478dacfd04db5acf2a986dfe76, type: 3}

@@ -5,43 +5,28 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.U2D;
 
+[CreateAssetMenu]
 public class Ability : ScriptableObject
 {
     public new string name;
+    [TextArea(1, 5)] public string description;
     public float damage;
     public float duration;
-
-    //TODO Hide unrelevant info, for different settings. E.g cooldownTime, for non-timed cooldown,
-    //and KeyCode for effectTriggered from other effects
-
-    //TODO choose which layers can be hit
-
-    //This might be redundant since keyTrigger can be an event
-
     public float cooldownTime;
     public KeyCode keyTrigger;
+    public Sprite sprite;
 
+    //TODO Move this to specific spells using this
     public bool isFollowingCaster;
     public bool canChangeColors;
-
-    //TODO Split these into Abstract classes instead
-
+    
     public virtual void Initialize(GameObject obj)
     {
 
     }
     
-    
     public virtual void ActivateEffect(ColliderDrawer colliderDrawer)
     {
 
-    }
-
-    public virtual List<GameObject> GetTargets()
-    {
-
-        //TODO Throw expection
-        Debug.Log("Getting targets not specified");
-        return null;
     }
 }

@@ -6,14 +6,47 @@
   <component name="ChangeListManager">
     <list default="true" id="31ee322b-587a-4c99-afc9-1b2b30998f9e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/BackupDELETE.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/BackupDELETE.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestDELETE.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestDELETE.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashAbility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashAbility.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/Mjoelnir.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/Mjoelnir.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CameraTESTSCRIPTDELETE.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CameraTESTSCRIPTDELETE.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ColliderDebugger.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ColliderDebugger.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FSM_BruiserChargeUp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FSM_BruiserChargeUp.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FSM_BruiserFireAbility.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FSM_BruiserFireAbility.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FSM_Bruiser_PostAbility.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FSM_Bruiser_PostAbility.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LineAnimator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LineAnimator.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects/ChainEffect.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects/ChainEffect.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects/Effect.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects/Effect.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects/OverTimeEffect.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects/OverTimeEffect.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SO_Abilities.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SO_Abilities/BouncingLightning.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SO_Abilities/BouncingLightning.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SO_Abilities/ElectricFloor.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SO_Abilities/ElectricFloor.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SO_Abilities/SlashAbility_v1 1.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SO_Abilities/SlashAbility_v1 1.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SO_Abilities/V2.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SO_Abilities/V2.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Circle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SegmentScript.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SegmentScript.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shadows.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shadows.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/DialogueBox 2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/DialogueBox 2.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WormPathing.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WormPathing.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +56,10 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b6c5d0f08ddf477186f780f49bb14dee469200/14/8dc4cda3/List`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff33ef4d15af4b21939284be593d47da159a00/3b/083861a1/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff33ef4d15af4b21939284be593d47da159a00/70/331e9559/FormerlySerializedAsAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff33ef4d15af4b21939284be593d47da159a00/8e/7599b513/Object.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/LineAnimator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder_UI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Image.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2Oh536PqLqAike2semGs9PZcpFr" />
   <component name="ProjectViewState">
@@ -99,9 +134,7 @@
       <option name="presentableId" value="Default" />
       <updated>1681999778044</updated>
       <workItem from="1681999782930" duration="23173000" />
-      <workItem from="1682532137065" duration="1844000" />
-      <workItem from="1682534121715" duration="18000" />
-      <workItem from="1682534171305" duration="1282000" />
+      <workItem from="1682699464532" duration="6262000" />
     </task>
     <servers />
   </component>
@@ -118,13 +151,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects/ChainEffect.cs</url>
-          <line>59</line>
+          <line>41</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects/ChainEffect.cs" initialLine="56" containingFunctionPresentation="Method 'ChainDamage'">
             <startOffsets>
-              <option value="1666" />
+              <option value="1178" />
             </startOffsets>
             <endOffsets>
-              <option value="1723" />
+              <option value="1235" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="13" />
@@ -144,26 +177,26 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs</url>
-          <line>122</line>
+          <line>120</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" initialLine="105" containingFunctionPresentation="Method 'SetActive'">
             <startOffsets>
-              <option value="3310" />
+              <option value="3212" />
             </startOffsets>
             <endOffsets>
-              <option value="3339" />
+              <option value="3241" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs</url>
-          <line>117</line>
+          <line>115</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" initialLine="115" containingFunctionPresentation="Method 'SetActive'">
             <startOffsets>
-              <option value="3180" />
+              <option value="3082" />
             </startOffsets>
             <endOffsets>
-              <option value="3222" />
+              <option value="3124" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="20" />
