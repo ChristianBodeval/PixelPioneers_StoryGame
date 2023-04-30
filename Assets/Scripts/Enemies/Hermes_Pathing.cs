@@ -88,7 +88,7 @@ public class Hermes_Pathing : MonoBehaviour
     {
         if (animator.GetBool("IsStunned") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Immobile")) { rb.velocity = Vector2.zero; return; } // Guard clause
 
-        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Ready") && animator.GetBool("CanMove") && !animator.GetBool("IsFleeing")) // Only Move and Idle states are tagged 'Ready'
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Ready") && animator.GetBool("CanMove") && !animator.GetBool("IsFleeing") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Special")) // Only Move and Idle states are tagged 'Ready'
         {
             rb.velocity = speed * dir; // Movement
         }

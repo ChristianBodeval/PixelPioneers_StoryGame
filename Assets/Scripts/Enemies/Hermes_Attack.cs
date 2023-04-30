@@ -52,7 +52,7 @@ public class Hermes_Attack : Enemy_Attack
     public bool IsWaveUsable()
     {
         // Is something else being done by Hermes
-        if (animator.GetBool("IsBusy") || animator.GetBool("IsStunned") || !animator.GetBool("AttackRDY") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Immobile")) return false;
+        if (animator.GetBool("IsBusy") || animator.GetBool("IsStunned") || !animator.GetBool("AttackRDY") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Immobile") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Special")) return false;
 
         // In range and los
         return Vector2.Distance(player.transform.position, transform.position) <= waveRange && IsInLineOfSight(player, animator);

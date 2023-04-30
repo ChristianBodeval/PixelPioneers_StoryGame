@@ -99,6 +99,7 @@ public class WaveVisual : MonoBehaviour
             GameObject obj = waveIndicatorsPool[0];
             inUseWaveIndicators.Add(obj);
             waveIndicatorsPool.Remove(obj);
+            obj.GetComponentInChildren<Image>().color = Color.red;
             return obj;
         }
         else
@@ -148,33 +149,34 @@ public class WaveVisual : MonoBehaviour
 
             if (inUseWaveIndicators.Count < 1) continue; // Skip this loop iteration
 
-            int i = inUseWaveIndicators.Count;
+            int i = 0;
 
             lock (inUseWaveIndicators)
             {
                 foreach (GameObject wave in inUseWaveIndicators)
                 {
-                    i--;
+                    i++;
 
-                    var indicator = inUseWaveIndicators[i];
-
-                    if (i == wavesLeft && i >= 0)
+                    if (i == wavesLeft)
                     {
-                        Image image = GetComponentInChildren<RemoveFill>().GetImageComponent();
+                        Image image = wave.GetComponentInChildren<RemoveFill>().GetImageComponent();
                         image.sprite = currentWave;
-                        indicator.SetActive(true);
+                        image.color = Color.yellow;
+                        wave.SetActive(true);
                     }
-                    else if (i < wavesLeft && i >= 0)
+                    else if (i < wavesLeft)
                     {
-                        Image image = GetComponentInChildren<RemoveFill>().GetImageComponent();
+                        Image image = wave.GetComponentInChildren<RemoveFill>().GetImageComponent();
                         image.sprite = unbrokenCrystal;
-                        indicator.SetActive(true);
+                        image.color = Color.red;
+                        wave.SetActive(true);
                     }
-                    else if (i > wavesLeft && i >= 0)
+                    else if (i > wavesLeft)
                     {
-                        indicator.GetComponentInChildren<RemoveFill>().Remove(); // Deactivates fill for indicator
-                        indicator.SetActive(true);
+                        wave.GetComponentInChildren<RemoveFill>().Remove(); // Deactivates fill for indicator
+                        wave.SetActive(true);
                     }
+
                 }
 
                 yield return null;
