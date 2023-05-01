@@ -25,7 +25,8 @@ public class Gungnir : MonoBehaviour, IUpgradeable
     public bool canPickUp;
 
     public float bounceForce = 0.5f;
-    public float bounciness = 0.2f;
+
+    public float bounceDuration = 2;
 
     private void Start()
     {
@@ -62,7 +63,6 @@ public class Gungnir : MonoBehaviour, IUpgradeable
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
-                //enemy.transform.gameObject.GetComponent<Crowd_Control>().Stun(stunDuration);
             }
             if (pierceAmount >= maxPierceAmount)
             {
@@ -82,10 +82,20 @@ public class Gungnir : MonoBehaviour, IUpgradeable
 
         if (col.CompareTag("Obstacles"))
         {
-            Vector2 normal = (transform.position - col.transform.position).normalized;
-            Vector2 direction = Vector2.Reflect(rb.velocity.normalized, normal);
-            float speed = Mathf.Max(rb.velocity.magnitude * (1 - bounciness), 0);
-            rb.velocity = direction * speed * bounceForce;
+            StartCoroutine(Bounce());
+        }
+    }
+
+    private IEnumerator Bounce()
+    {
+        float CooldownRemaining; // The remaining cooldown time
+
+        CooldownRemaining = bounceDuration; // Reset the remaining cooldown time
+        while (CooldownRemaining > 0f) // Count down the cooldown time
+        {
+            transform.position += (Vector3)(-direction * bounceForce);
+            CooldownRemaining -= Time.deltaTime;
+            yield return null; // Wait for the end of the frame
         }
     }
 

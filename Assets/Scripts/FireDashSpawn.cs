@@ -14,14 +14,9 @@ public class FireDashSpawn : MonoBehaviour
         dash = GetComponent<Dash>();
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-    }
-
     private IEnumerator SpawnFire()
     {
-        if (dash.isDashing == true) 
+        if (dash.isDashing == true)
         {
             GameObject fireSpawn = Instantiate(firePrefab, playerTransform.position, Quaternion.identity);
             yield return null;

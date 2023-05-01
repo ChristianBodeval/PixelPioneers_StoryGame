@@ -25,23 +25,11 @@ public class PlayerAction : MonoBehaviour
 
     public WeaponCDs weaponCDVisual;
 
-    [Header("Gungnir")]
-    public GameObject gungnir;
-
-    public IEnumerator gungnirCDCoroutine;
-
-    private Gungnir gungnirScript;
-    [HideInInspector] public bool canThrowGungnir = true;
-    private float gungnirCD;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         Physics2D.IgnoreLayerCollision(3, 7);
         healthScript = GetComponent<Health>();
-
-        gungnirCDCoroutine = GungnirCD();
-        gungnirScript = gungnir.GetComponent<Gungnir>();
     }
 
     private void Update()
@@ -63,8 +51,6 @@ public class PlayerAction : MonoBehaviour
 
         Facing();
 
-        ThrowGungnir();
-        gungnirCD = gungnirScript.CD;
     }
 
     private void FixedUpdate()
@@ -133,24 +119,5 @@ public class PlayerAction : MonoBehaviour
         {
             lastFacing = new Vector2(moveVector.x, moveVector.y).normalized;
         }
-    }
-
-    private void ThrowGungnir()
-    {
-        if (Input.GetButtonDown("Fire3") && canThrowGungnir)
-        {
-            Gungnir spear = Instantiate(gungnirScript, transform.position, Quaternion.identity);
-            spear.SetDirection(lastFacing);
-            StartCoroutine("GungnirCD");
-            Debug.Log("Threw gungnir");
-            weaponCDVisual.StartCoroutine("GungnirCD");
-        }
-    }
-
-    public IEnumerator GungnirCD()
-    {
-        canThrowGungnir = false;
-        yield return new WaitForSeconds(gungnirCD);
-        canThrowGungnir = true;
     }
 }

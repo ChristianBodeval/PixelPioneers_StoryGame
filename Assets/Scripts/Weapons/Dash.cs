@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Dash : MonoBehaviour
+public class Dash : MonoBehaviour, IUpgradeable
 {
     [Header("Dash")]
     public float dashDistance = 5f; // Distance of the dash
@@ -20,6 +20,7 @@ public class Dash : MonoBehaviour
     private GameObject playerGO;
 
     private FireDashSpawn fireSpawn;
+    public bool hasUpgrade1;
 
     // Start is called before the first frame update
     private void Start()
@@ -49,7 +50,11 @@ public class Dash : MonoBehaviour
                 Camera.main.GetComponent<CameraScript>().StartLagBehindPlayer();
                 playerRb.MovePosition(playerRb.position + dashDirection * dashDistance / dashDuration * Time.fixedDeltaTime);
                 dashTime += Time.fixedDeltaTime;
+                if (hasUpgrade1)
+                {
+                    
                 fireSpawn.StartCoroutine("SpawnFire");
+                }
             }
             // Otherwise, end the dash
             else
@@ -115,5 +120,20 @@ public class Dash : MonoBehaviour
             weaponCDs.StartCoroutine("DashCD");
             StartCoroutine(DashCD());
         }
+    }
+
+    public void UpgradeOption1()
+    {
+        hasUpgrade1 = true;   
+    }
+
+    public void UpgradeOption2()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Downgrade()
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -12,7 +12,7 @@ public class AbilityHolder_UI : MonoBehaviour
     public Image imageComponent;
     private void OnEnable()
     {
-        nameText.text = abilitySO.name;
+        nameText.text = "Change " + abilitySO.name + " Upgrade";
         imageComponent.sprite = abilitySO.sprite;
     }
     private void OnBecameInvisible()

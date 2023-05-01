@@ -4,13 +4,13 @@ using UnityEngine;
 public class GungnirPickUp : MonoBehaviour
 {
     private Gungnir gungnir;
-    private PlayerAction playerAction;
+    private ThrowGungnir throwGungnirScript;
     private WeaponCDs weaponCDs;
     public Collider2D pickUpCollider;
     private void Start()
     {
         gungnir = GetComponentInParent<Gungnir>();
-        playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
+        throwGungnirScript = GameObject.Find("GungnirThrow").GetComponent<ThrowGungnir>();
         weaponCDs = GameObject.Find("WeaponCDs").GetComponent<WeaponCDs>();
     }
 
@@ -25,10 +25,10 @@ public class GungnirPickUp : MonoBehaviour
 
     public void ResetCD()
     {
-        playerAction.StopCoroutine("GungnirCD");
+        throwGungnirScript.StopCoroutine("GungnirCD");
         weaponCDs.StopCoroutine("GungnirCD");
         weaponCDs.ResetGungnirCD();
-        playerAction.canThrowGungnir = true;
+        throwGungnirScript.canThrowGungnir = true;
     }
 
     

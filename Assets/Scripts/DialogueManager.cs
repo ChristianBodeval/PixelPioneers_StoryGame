@@ -96,10 +96,6 @@ public class DialogueManager : MonoBehaviour
         ContinueStory();
         dialogBoxAnim.Play("FlyUp");
 
-        if (NPCname == "Anvil")
-        {
-            upgradeSystemVisual.StartUpgradeVisual();
-        }
 
 
 
@@ -130,6 +126,12 @@ public class DialogueManager : MonoBehaviour
         
         if (dialogBoxAnim != null)
         dialogBoxAnim.Play("FlyDown");
+
+
+        if (NPCname == "Anvil")
+        {
+            upgradeSystemVisual.StartUpgradeVisual();
+        }
     }
 
     private void ContinueStory()

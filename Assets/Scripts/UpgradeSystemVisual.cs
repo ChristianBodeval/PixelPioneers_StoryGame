@@ -7,7 +7,7 @@ public class UpgradeSystemVisual : MonoBehaviour
     public GameObject mjoelnirUpgrades;
     public GameObject gungnirUpgrades;
 
-    public WeaponType currentWeapon;
+    public WeaponType currentWeapon = WeaponType.Dash;
 
     public enum WeaponType
     {
