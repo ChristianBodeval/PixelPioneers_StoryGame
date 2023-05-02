@@ -240,6 +240,8 @@ MonoBehaviour:
   nameText: {fileID: 4165491214587783439}
   descriptionText: {fileID: 4165491215172972638}
   imageComponent: {fileID: 2786498876742795889}
+  outlineMaterial: {fileID: 2100000, guid: babf2dacf508072439e412c5931daa92, type: 2}
+  isAvailable: 0
 --- !u!1 &4165491214587783537
 GameObject:
   m_ObjectHideFlags: 0

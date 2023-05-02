@@ -9,12 +9,12 @@ using UnityEngine.Windows;
 using Input = UnityEngine.Input;
 
 //Handles the state of the ability, position and rotation & changes color of the collider
-public class AbilityHolder : MonoBehaviour, IUpgradeable
+public class AbilityHolder : Ability, IUpgradeable
 {
     public GameObject caster;
     
     public PlayerAction playerAction;
-    public Ability ability;
+    public AbilitySO ability;
     private float cooldownTime;
     private float duration;
     private float timeCasted;
@@ -192,8 +192,17 @@ public class AbilityHolder : MonoBehaviour, IUpgradeable
         
 
     }
-    
-    
+
+
+    public List<UpgradeSO> GetUpgrades()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public AbilitySO GetAbilitySO()
+    {
+        return ability;
+    }
 
     public void UpgradeOption1()
     {

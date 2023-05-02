@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowGungnir : MonoBehaviour, IUpgradeable
+public class ThrowGungnir : MonoBehaviour
 {
     [Header("Gungnir")]
     public GameObject gungnir;
@@ -70,20 +71,5 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
         triSpearPref.SetDirection1(playerAction.lastFacing);
         TriThrow triSpearPref2 = Instantiate(triThrowScript, playerAction.transform.position, spawn2.rotation);
         triSpearPref2.SetDirection2(playerAction.lastFacing);
-    }
-
-    public void UpgradeOption1()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void UpgradeOption2()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Downgrade()
-    {
-        throw new NotImplementedException();
     }
 }

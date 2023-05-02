@@ -1,7 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Gungnir : MonoBehaviour, IUpgradeable
+public class Gungnir : Ability, IUpgradeable
 {
     public float damage = 10;
     public float speed;
@@ -130,6 +131,8 @@ public class Gungnir : MonoBehaviour, IUpgradeable
         yield return new WaitForSeconds(time);
         Destroy(gameObject);
     }
+    
+    
 
     public void UpgradeOption1()
     {

@@ -1,7 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Dash : MonoBehaviour, IUpgradeable
+public class Dash : Ability, IUpgradeable
 {
     [Header("Dash")]
     public float dashDistance = 5f; // Distance of the dash

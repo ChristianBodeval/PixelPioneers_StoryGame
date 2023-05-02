@@ -5,7 +5,7 @@ using UnityEngine.U2D;
 using static UnityEngine.GraphicsBuffer;
 
 [CreateAssetMenu]
-public class SlashUpgrade2 : Ability
+public class SlashUpgrade2 : AbilitySO
 {
     [Header("Ability Specific")]
     public float range;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d8551a38c844c32acd6dad41ee2ff1, type: 3}
   m_Name: Unavailiable
   m_EditorClassIdentifier: 
-  name: 
+  name: Unavailible
   description: 
   damage: 0
   duration: 0

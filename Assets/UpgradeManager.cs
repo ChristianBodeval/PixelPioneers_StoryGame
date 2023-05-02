@@ -12,33 +12,50 @@ public class UpgradeManager : MonoBehaviour
     
 
     [SerializeField] private List<GameObject> abilityGameObjects = new List<GameObject>();
-    
+    [SerializeField] private UpgradeUI upgradeUI;
 
-    //TODO make this a singlton
+    public static UpgradeManager instance { get; private set; }
     
 
     private void Awake()
     {
-        abilityGameObjects.ForEach(x => upgradeableAbilities.Add(x.GetComponent<IUpgradeable>()));
+        if (instance == null)
+        {
+            instance = this;
+        }
+        
+        
+        abilityGameObjects.ForEach(abilityGameObject =>
+        {
+            upgradeableAbilities.Add(abilityGameObject.GetComponent<IUpgradeable>());
+        });
     }
     
     //Write method for Get list of IUpgradeable
-    private List<IUpgradeable> GetUpgradeableAbilities()
+    public List<IUpgradeable> GetUpgradeableAbilities()
     {
         return upgradeableAbilities;
     }
+    public List<GameObject> GetAbilitiesGameObjects()
+    {
+        return abilityGameObjects;
+    }
+    
 
-    private void UpgradeAbilityOption1(IUpgradeable upgradeable)
+
+    public void UpgradeAbilityOption1(IUpgradeable upgradeable)
     {
         upgradeable.UpgradeOption1();
     }
     
-    private void UpgradeAbilityOption2(IUpgradeable upgradeable)
+    public void UpgradeAbilityOption2(IUpgradeable upgradeable)
     {
         upgradeable.UpgradeOption2();
     }
     
-    private void Downgrade(IUpgradeable upgradeable)
+    
+    
+    public void Downgrade(IUpgradeable upgradeable)
     {
         upgradeable.Downgrade();
     }
@@ -63,6 +80,11 @@ public class UpgradeManager : MonoBehaviour
         {
             GetUpgradeableAbilities()[1].Downgrade();
         }
+    }
+
+    public void OpenUpgradeUI()
+    {
+        upgradeUI.OpenUpgradeUI();
     }
 }
 
