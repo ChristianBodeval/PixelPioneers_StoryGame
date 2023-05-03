@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Mjoelnir ElectricField
   description: Activates a electricfield around yourself damaging enemies
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 953ee79d4ff694545ba23a67b64e363c, type: 3}

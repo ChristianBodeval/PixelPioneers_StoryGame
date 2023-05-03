@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Fire Dash
   description: Dashes with fire, Enemies go "Auch auch!"
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 4f6af2e834578154e87f544b8b51699b, type: 3}
