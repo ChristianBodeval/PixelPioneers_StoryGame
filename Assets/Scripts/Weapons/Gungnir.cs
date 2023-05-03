@@ -137,14 +137,11 @@ public class Gungnir : Ability, IUpgradeable
     public void UpgradeOption1()
     {
         Debug.Log("Gungnir has been upgraded with upgrade 1");
-        throw new System.NotImplementedException();
     }
 
     public void UpgradeOption2()
     {
         Debug.Log("Gungnir has been upgraded with upgrade 2");
-
-        throw new System.NotImplementedException();
     }
 
     public void Downgrade()

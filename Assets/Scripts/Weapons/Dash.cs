@@ -22,6 +22,7 @@ public class Dash : Ability, IUpgradeable
 
     private FireDashSpawn fireSpawn;
     public bool hasUpgrade1;
+    private bool hasUpgrade2;
 
     // Start is called before the first frame update
     private void Start()
@@ -125,12 +126,14 @@ public class Dash : Ability, IUpgradeable
 
     public void UpgradeOption1()
     {
-        hasUpgrade1 = true;   
+        hasUpgrade1 = true;
+        hasUpgrade2 = false;
     }
 
     public void UpgradeOption2()
     {
-        throw new System.NotImplementedException();
+        hasUpgrade1 = false;
+        hasUpgrade2 = true;
     }
 
     public void Downgrade()

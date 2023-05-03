@@ -16,6 +16,7 @@ public class UpgradeUI : MonoBehaviour
     
     private int currentSelectedNumber;
     private bool isUpgradeUIOpen;
+    private bool isAbilityUIOpen;
     
     public Material outlineMaterial;
     
@@ -25,14 +26,15 @@ public class UpgradeUI : MonoBehaviour
     [SerializeField] private List<AbilityHolder_UI> abilitiesUIs = new List<AbilityHolder_UI>();
     [SerializeField] private GameObject abilityUI;
     
-    
+    [SerializeField] private PlayerAction playerActions;
+    [SerializeField] private Rigidbody2D playerRigidbody;
     
     List<GameObject> abilityGameObjects = new List<GameObject>();
-    private bool isNextToAnvil;
 
 
     public void OpenUpgradeUI()
-    {
+    {        
+        Debug.Log("Called open upgrade UI");
         this.gameObject.SetActive(true);
         for (int i = 0; i < abilityGameObjects.Count; i++)
         {
@@ -42,10 +44,22 @@ public class UpgradeUI : MonoBehaviour
         abilityGameObjects.AddRange(UpgradeManager.instance.GetAbilitiesGameObjects());
         UpdateAbilityUI();
         
+        playerActions.enabled = false;
+        playerRigidbody.velocity = Vector2.zero;
+        playerRigidbody.bodyType = RigidbodyType2D.Kinematic;
+
         
         SetIsUpgradeUIOpen(false);
         currentAbility = currentChoises[0];
         currentAbility.SetOutline(true);
+    }
+    
+    void DeselectAll()
+    {
+        foreach (var choise in currentChoises)
+        {
+            choise.SetOutline(false);
+        }
     }
    
     
@@ -80,13 +94,17 @@ public class UpgradeUI : MonoBehaviour
         
         upgrades[0].upgradeSO = abilityUpgradeSOs[0];
         upgrades[1].upgradeSO = abilityUpgradeSOs[1];
-
+    
         selectedAbility = abilityGameObjects[currentSelectedNumber].GetComponent<IUpgradeable>();
+        
+        
         
         UpdateAbilityUI();
 
         SetIsUpgradeUIOpen(true);
     }
+    
+    
 
     void SelectUpgrade()
     {
@@ -99,6 +117,8 @@ public class UpgradeUI : MonoBehaviour
         {
             UpgradeManager.instance.UpgradeAbilityOption2(selectedAbility);
         }
+        
+        ExitAnvil();
     }
     
     void SetIsUpgradeUIOpen(bool value)
@@ -107,7 +127,7 @@ public class UpgradeUI : MonoBehaviour
         isUpgradeUIOpen = value;
         abilityUI.SetActive(!value);
         
-        
+        DeselectAll();
         currentChoises.Clear();
         
         if(value)
@@ -152,15 +172,27 @@ public class UpgradeUI : MonoBehaviour
     {
         SetIsUpgradeUIOpen(false);
         currentAbility = currentChoises[0];
+        DeselectAll();
         currentAbility.SetOutline(true);
     }
     void ExitAnvil()
     {
+        DeselectAll();
         SetIsUpgradeUIOpen(false);
         abilityUI.SetActive(false);
         currentChoises.Clear();
+        abilityGameObjects.Clear();
         currentAbility.SetOutline(false);
         currentAbility = null;
+        playerActions.enabled = true;
+        playerRigidbody.isKinematic = false;
+        
+        playerRigidbody.bodyType = RigidbodyType2D.Dynamic;
+        playerRigidbody.velocity = Vector2.zero;
+        //Set the playerRigidbody bodytype to dynamic
+        
+
+
         this.gameObject.SetActive(false);
     }
 

@@ -9,7 +9,13 @@ public class PlayerAction : MonoBehaviour
     private float slowAmount;
     private Rigidbody2D rb;
     public Vector3 moveVector;
-    private bool canMove = true;
+    private bool canMove = true; 
+
+    public bool canMoveAccessor
+    {
+        get => canMove;
+        set => canMove = value;
+    }
 
     [Header("Input")]
     [SerializeField] private float inputBuffer = 0.1f;
