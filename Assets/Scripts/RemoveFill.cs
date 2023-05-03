@@ -21,4 +21,9 @@ public class RemoveFill : MonoBehaviour
     {
         return fill;
     }
+
+    public bool IsActive()
+    {
+        return fill.enabled;
+    }
 }

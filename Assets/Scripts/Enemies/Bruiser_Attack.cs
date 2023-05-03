@@ -30,7 +30,7 @@ public class Bruiser_Attack : Enemy_Attack
     {
         player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponentInChildren<Animator>();
-        animator.SetBool("AttackRDY", true); // Make sure we can attack
+        ResetVariables();
         waveRange = segmentLength * segmentAmounts;
     }
 
@@ -126,6 +126,6 @@ public class Bruiser_Attack : Enemy_Attack
     private void ResetVariables()
     {
         currentSegment = 1;
-        if (animator != null) { animator.SetBool("AttackRDY", true); } // Resets variable when respawning
+        if (animator != null) { animator.SetBool("AttackRDY", true); animator.SetBool("CanMove", true); } // Resets variable when respawning
     }
 }

@@ -21,6 +21,8 @@ public class WaveVisual : MonoBehaviour
     public Sprite currentWave;
     public Sprite unbrokenCrystal;
 
+    [SerializeField] private ParticleSystem particleSystem;
+
     private void Start()
     {
         maxWaves = SpawnSystem.totalWaves;
@@ -173,14 +175,22 @@ public class WaveVisual : MonoBehaviour
                     }
                     else if (i > wavesLeft)
                     {
-                        wave.GetComponentInChildren<RemoveFill>().Remove(); // Deactivates fill for indicator
+                        var script = wave.GetComponentInChildren<RemoveFill>();
+                        if (script.IsActive()) ExplodeCrystal(wave);
+                        script.Remove(); // Deactivates fill for indicator
                         wave.SetActive(true);
                     }
-
                 }
 
                 yield return null;
             }
         }
+    }
+
+    private void ExplodeCrystal(GameObject obj)
+    {
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(obj.transform.position);
+        GameObject player = GameObject.Find("Player");
+        ParticleSystem ps = Instantiate(particleSystem, worldPosition, player.transform.rotation, player.transform);
     }
 }

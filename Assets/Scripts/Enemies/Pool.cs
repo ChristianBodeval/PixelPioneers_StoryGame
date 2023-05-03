@@ -210,6 +210,7 @@ public class Pool : MonoBehaviour
     public void ReturnToBloodPool(GameObject s)
     {
         s.SetActive(false);
+        s.transform.localScale = new Vector3(1f, 1f, 1f); // Reset size
 
         if (inUseBloods.Contains(s)) inUseBloods.Remove(s);
         storageBloods.Add(s);

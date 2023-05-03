@@ -1,65 +1,41 @@
-using System.Linq;
-using System.Reflection;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Tilemaps;
 
-[RequireComponent(typeof(CompositeCollider2D))]
 public class Shadows : MonoBehaviour
 {
+    public Tilemap tilemap;
+    public GameObject shadowPrefab;
 
-    [Space]
-    [SerializeField]
-    private bool selfShadows = true;
+    private Dictionary<Vector3Int, GameObject> shadowTiles = new Dictionary<Vector3Int, GameObject>();
 
-    private CompositeCollider2D tilemapCollider;
-
-
-    static readonly FieldInfo meshField = typeof(ShadowCaster2D).GetField("m_Mesh", BindingFlags.NonPublic | BindingFlags.Instance);
-    static readonly FieldInfo shapePathField = typeof(ShadowCaster2D).GetField("m_ShapePath", BindingFlags.NonPublic | BindingFlags.Instance);
-    static readonly FieldInfo shapePathHashField = typeof(ShadowCaster2D).GetField("m_ShapePathHash", BindingFlags.NonPublic | BindingFlags.Instance);
-    static readonly MethodInfo generateShadowMeshMethod = typeof(ShadowCaster2D)
-                                    .Assembly
-                                    .GetType("UnityEngine.Rendering.Universal.ShadowUtility")
-                                    .GetMethod("GenerateShadowMesh", BindingFlags.Public | BindingFlags.Static);
-    public void Generate()
+    void Start()
     {
-        DestroyAllChildren();
+        GetComponent<CompositeShadowCaster2D>().enabled = true;
+        GenerateShadows();
+    }
 
-        tilemapCollider = GetComponent<CompositeCollider2D>();
-
-        for (int i = 0; i < tilemapCollider.pathCount; i++)
+    void GenerateShadows()
+    {
+        // Loop through all tiles in the tilemap
+        foreach (Vector3Int pos in tilemap.cellBounds.allPositionsWithin)
         {
-            Vector2[] pathVertices = new Vector2[tilemapCollider.GetPathPointCount(i)];
-            tilemapCollider.GetPath(i, pathVertices);
-            GameObject shadowCaster = new GameObject("shadow_caster_" + i);
-            shadowCaster.transform.parent = gameObject.transform;
-            ShadowCaster2D shadowCasterComponent = shadowCaster.AddComponent<ShadowCaster2D>();
-            shadowCasterComponent.selfShadows = this.selfShadows;
+            TileBase tile = tilemap.GetTile(pos);
 
-            Vector3[] testPath = new Vector3[pathVertices.Length];
-            for (int j = 0; j < pathVertices.Length; j++)
+            if (tile != null)
             {
-                testPath[j] = pathVertices[j];
+                // Calculate the position of the shadow tile
+                Vector3 shadowPos = tilemap.GetCellCenterWorld(pos);
+                shadowPos.z = 0f;
+
+                // Instantiate the shadow prefab at the calculated position
+                GameObject shadow = Instantiate(shadowPrefab, shadowPos, Quaternion.identity, transform);
+
+                // Add the shadow tile to the dictionary
+                shadowTiles.Add(pos, shadow);
             }
-
-            shapePathField.SetValue(shadowCasterComponent, testPath);
-            shapePathHashField.SetValue(shadowCasterComponent, Random.Range(int.MinValue, int.MaxValue));
-            meshField.SetValue(shadowCasterComponent, new Mesh());
-            generateShadowMeshMethod.Invoke(shadowCasterComponent, new object[] { meshField.GetValue(shadowCasterComponent), shapePathField.GetValue(shadowCasterComponent) });
         }
-
-        // Debug.Log("Generate");
-
     }
-    public void DestroyAllChildren()
-    {
-
-        var tempList = transform.Cast<Transform>().ToList();
-        foreach (var child in tempList)
-        {
-            DestroyImmediate(child.gameObject);
-        }
-
-    }
-
 }

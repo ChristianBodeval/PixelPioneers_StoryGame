@@ -52,3 +52,6 @@ TagManager:
   - name: Obstacle
     uniqueID: 3926137093
     locked: 0
+  - name: Decal
+    uniqueID: 1813100569
+    locked: 0

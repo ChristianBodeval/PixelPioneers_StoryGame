@@ -166,7 +166,7 @@ public class Hermes_Pathing : MonoBehaviour
 
     public void MoveOnHitTaken()
     {
-        if (animator.GetBool("IsBusy"))
+        if (animator.GetBool("IsBusy") || animator.GetBool("IsStunned") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Immobile") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Special"))
         {
             return;
         }
@@ -181,11 +181,11 @@ public class Hermes_Pathing : MonoBehaviour
 
     private IEnumerator FindNewLocation()
     {
+        StopWaitingOnFlee();
+
         // Animator
         animator.SetBool("IsFleeing", true);
         animator.Play("Sprint");
-
-        StopWaitingOnFlee();
 
         // Variables
         bool isLocationFound = false;
@@ -205,7 +205,7 @@ public class Hermes_Pathing : MonoBehaviour
                 // Call coroutine to move hermes
                 if (movetoPositionCoroutine != null) StopCoroutine(movetoPositionCoroutine);
                 movetoPositionCoroutine = StartCoroutine(MoveToNewPos(pos));
-                yield break;
+                isLocationFound = true;
             }
 
             yield return null;
