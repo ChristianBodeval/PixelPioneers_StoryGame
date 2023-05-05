@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31ee322b-587a-4c99-afc9-1b2b30998f9e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GeneralPathing.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GeneralPathing.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/MeleePathing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/MeleePathing.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GeneralPathing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GeneralPathing.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WormFSM.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WormFSM.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,10 +73,10 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="62892">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="62892" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -193,6 +195,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/WormFSM.cs</url>
+          <line>158</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/WormFSM.cs" initialLine="155" containingFunctionPresentation="Method 'Enter'">
+            <startOffsets>
+              <option value="4727" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4856" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

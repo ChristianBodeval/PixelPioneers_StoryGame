@@ -26,6 +26,7 @@ public class GeneralPathing : MonoBehaviour
     
     public void SetDirection(Vector3 dir)
     {
+        UpdatePath();
         direction = dir;
     }
     
@@ -48,7 +49,7 @@ public class GeneralPathing : MonoBehaviour
         InvokeRepeating("UpdatePath", 0f, updateInterval); // Updates pathfinding regularly
     }
     
-    
+    //Update when changes inspector
 
     private void FixedUpdate()
     {
@@ -57,6 +58,13 @@ public class GeneralPathing : MonoBehaviour
 
     private void Move()
     {
+        //If position is almost the same is the last point in path.vectorPath, then stop moving
+        if (Vector2.Distance(rb.position, path.vectorPath[path.vectorPath.Count - 1]) < 0.1f)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        }
+        
         Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
         
         rb.velocity = speed * direction; // Movement
