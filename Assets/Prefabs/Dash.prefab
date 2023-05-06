@@ -46,14 +46,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3184e4a2e2bbc524b900731249d0f3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilitySO: {fileID: 11400000, guid: c6a3b37abe58f41caa25f4a2b5a2fc13, type: 2}
+  upgrades:
+  - {fileID: 11400000, guid: 0c76cefc0109a4291a34e94e703dbedb, type: 2}
+  - {fileID: 11400000, guid: fda63ece2b33b4bb5bc508f0077d70a0, type: 2}
   dashDistance: 5
   dashDuration: 0.5
   dashCooldownTime: 1.8
   isDashing: 0
   dashCooldownRemaining: 0
-  abilityHolder: {fileID: 0}
   hasUpgrade1: 0
-  hasUpgrade2: 1
 --- !u!114 &4607218378068542103
 MonoBehaviour:
   m_ObjectHideFlags: 0

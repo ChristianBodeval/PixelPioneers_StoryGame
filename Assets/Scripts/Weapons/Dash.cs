@@ -28,10 +28,10 @@ public class Dash : Ability, IUpgradeable
     private void Start()
     {
         dashDirection = GetDashDirection();
+        playerGO = GameObject.Find("Player");
         playerRb = GameObject.Find("Player").GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player").GetComponent<PlayerAction>();
-        weaponCDs = GameObject.Find("WeaponCDs").GetComponent<WeaponCDs>();
-        playerGO = GameObject.FindGameObjectWithTag("Player");
+        weaponCDs = GameObject.Find("CD's").GetComponent<WeaponCDs>();
         fireSpawn = GetComponent<FireDashSpawn>();
     }
 
@@ -109,6 +109,7 @@ public class Dash : Ability, IUpgradeable
         // Check if the player is not currently dashing and if they can dash
         if (!isDashing && Input.GetButtonDown("Dash") && canDash) // Dash is on 'space'
         {
+            Debug.Log("Dashing");
             playerGO.GetComponent<PlayerHealth>().AddInvulnerability();
 
             // Set the player to dashing state

@@ -26,12 +26,12 @@ public class ThrowGungnir : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        weaponCDVisual = GameObject.Find("CD's").GetComponent<WeaponCDs>();
+        playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
         gungnirCDCoroutine = GungnirCD();
         gungnirScript = gungnir.GetComponent<Gungnir>();
         triThrowScript = triThrow.GetComponent<TriThrow>();
 
-        weaponCDVisual = GameObject.Find("WeaponCDs").GetComponent<WeaponCDs>();
-        playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
     }
 
     // Update is called once per frame

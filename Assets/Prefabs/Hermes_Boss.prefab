@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 157113163669937703}
   - component: {fileID: 6645613609091556230}
   - component: {fileID: 3883348914704256943}
-  - component: {fileID: 6594669849559183237}
   - component: {fileID: 979528337}
   - component: {fileID: 979528338}
+  - component: {fileID: 1319783909}
   m_Layer: 7
   m_Name: Hermes_Boss
   m_TagString: Boss
@@ -157,27 +157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStunImmune: 1
---- !u!114 &6594669849559183237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 157113163669937724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25b601c409a0b1b46a23c40df8cc3a3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
-  blinkMaterial: {fileID: 2100000, guid: a8af1c8b3ad351b4b8c015c0516f7fc9, type: 2}
-  baseMaterial: {fileID: 2100000, guid: 4c9a87858e2754648b8f0d5143303072, type: 2}
-  deathMaterial: {fileID: 2100000, guid: bc4b0c691a23bd747b4d5cbd517df6fe, type: 2}
-  deathAnimDuration: 0.5
-  DamageTakenEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &979528337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,6 +213,32 @@ MonoBehaviour:
   waveCooldown: 3
   chargeDelay: 0.1
   postFireDelay: 0.2
+--- !u!114 &1319783909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157113163669937724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc3ee877b3dbca4e805745615d7f2f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
+  maxHealth: 100
+  blinkMaterial: {fileID: 2100000, guid: a8af1c8b3ad351b4b8c015c0516f7fc9, type: 2}
+  baseMaterial: {fileID: 2100000, guid: 4c9a87858e2754648b8f0d5143303072, type: 2}
+  deathMaterial: {fileID: 2100000, guid: bc4b0c691a23bd747b4d5cbd517df6fe, type: 2}
+  deathAnimDuration: 0.5
+  DamageTakenEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  Dead:
+    m_PersistentCalls:
+      m_Calls: []
+  HP: {fileID: 0}
+  DamagedBar: {fileID: 0}
 --- !u!1 &157113165350864262
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,7 +404,7 @@ MonoBehaviour:
   - {x: 0.4707036, y: -0.017021198, z: 0.00000018483634}
   m_ShapePathHash: 96680608
   m_Mesh: {fileID: 0}
-  m_InstanceId: -105008
+  m_InstanceId: -121088
   m_LocalBounds:
     m_Center: {x: -0.009998858, y: 0.0018541366, z: 0}
     m_Extent: {x: 0.48070246, y: 0.20846152, z: 0}

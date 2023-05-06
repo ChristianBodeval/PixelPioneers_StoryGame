@@ -11,7 +11,7 @@ public class GungnirPickUp : MonoBehaviour
     {
         gungnir = GetComponentInParent<Gungnir>();
         throwGungnirScript = GameObject.Find("GungnirThrow").GetComponent<ThrowGungnir>();
-        weaponCDs = GameObject.Find("WeaponCDs").GetComponent<WeaponCDs>();
+        weaponCDs = GameObject.Find("CD's").GetComponent<WeaponCDs>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

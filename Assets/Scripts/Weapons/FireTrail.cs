@@ -23,27 +23,27 @@ public class FireTrail : MonoBehaviour
         yield return new WaitForSeconds(time);
         Destroy(gameObject);
     }
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            Health enemy = collision.gameObject.GetComponent<Health>();
-            if (enemy != null)
-            {
-                enemy.TakeDamage(damage);
-            }
-        }
-    }
-    //private void OnTriggerStay2D(Collider2D collision)
+    //private void OnCollisionStay2D(Collision2D collision)
     //{
-    //    if (collision.CompareTag("Enemy"))
+    //    if (collision.gameObject.CompareTag("Enemy"))
     //    {
-    //        Health enemy = collision.GetComponent<Health>();
+    //        Health enemy = collision.gameObject.GetComponent<Health>();
     //        if (enemy != null)
     //        {
     //            enemy.TakeDamage(damage);
     //        }
-
     //    }
     //}
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            Health enemy = collision.GetComponent<Health>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
+
+        }
+    }
 }
