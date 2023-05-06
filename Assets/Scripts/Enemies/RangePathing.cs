@@ -88,11 +88,11 @@ public class RangePathing : MonoBehaviour
         {
             Vector2 offsetPos = new Vector2(offset * i, offset * i);
 
-            if (!Physics2D.OverlapPoint(point + offsetPos, obstacleLayer) && Physics2D.OverlapPoint(point + offsetPos, groundLayer) && Vector2.Distance(playerPos, point) > Vector2.Distance(playerPos, point + offsetPos))
+            if (!Physics2D.OverlapPoint(point + offsetPos, obstacleLayer) && Physics2D.OverlapPoint(point + offsetPos, groundLayer) && Vector2.Distance(playerPos, transform.position) > Vector2.Distance(playerPos, point + offsetPos))
             {
                 return point + new Vector2(offset * i, offset * i);
             }
-            else if (!Physics2D.OverlapPoint(point - offsetPos, obstacleLayer) && Physics2D.OverlapPoint(point - offsetPos, -groundLayer) && Vector2.Distance(playerPos, point) > Vector2.Distance(playerPos, point - offsetPos))
+            else if (!Physics2D.OverlapPoint(point - offsetPos, obstacleLayer) && Physics2D.OverlapPoint(point - offsetPos, -groundLayer) && Vector2.Distance(playerPos, transform.position) > Vector2.Distance(playerPos, point - offsetPos))
             {
                 return point + new Vector2(-offset * i, -offset * i);
             }

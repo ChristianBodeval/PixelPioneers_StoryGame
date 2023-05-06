@@ -36,6 +36,7 @@ public class Mjoelnir : Ability, IUpgradeable
     [SerializeField] private float maxCharge;
     [SerializeField] private float stunDuration = 1f;
     [SerializeField] private GameObject rangeIndicator;
+    [SerializeField] private GameObject chargeParticles;
     private bool isCharging = false;
     private bool isCharghingCharge = false;
     private Coroutine initCharge;
@@ -80,6 +81,7 @@ public class Mjoelnir : Ability, IUpgradeable
 
     private void FixedUpdate()
     {
+        // Spin hammer around player
         if (canSpin)
         {
             transform.RotateAround(player.transform.position, new Vector3(0f, 0f, 1f), spinSpeed);
@@ -181,10 +183,14 @@ public class Mjoelnir : Ability, IUpgradeable
                 float t = charge / endValue;
                 float zoomAmount = Mathf.Lerp(startValue, endValue, Mathf.Pow(t, 1f / 3f)); // Cube root function - slows down zooming over time
                 Camera.main.GetComponent<CameraScript>().SetZoomAmount(zoomAmount);
-            }        
+            }
+
+            // Shake camera
+            Camera.main.GetComponent<CameraShake>().ShakeCamera(false, charge / maxCharge);
 
             // Charge range indicator - change its size and rotation
-            rangeIndicator.GetComponent<SpriteRenderer>().color = new Color32(180, 180, 0, 180); ;
+            SpriteRenderer sr = rangeIndicator.GetComponent<SpriteRenderer>();
+            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f);
             rangeIndicator.transform.localScale = new Vector3(charge, baseHitboxSize + (charge * hitboxWidthMultiplier) - 0.3f, 1f); // Sets the length - chargeHitbox * 2 - 0.2f is the diameter of the indicator -0.2f is such that the player feels cheated of a hit less often
             Vector2 direction = player.GetComponent<PlayerAction>().lastFacing;
             rangeIndicator.transform.position = player.transform.position + (Vector3)direction * (charge / 2); // Move indicator
@@ -211,7 +217,8 @@ public class Mjoelnir : Ability, IUpgradeable
         StartCoroutine(PointHammerForwards(direction)); // Faces hammer forward while player is charging forwards
 
         // Charge range indicator - change its size and rotation
-        rangeIndicator.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 0);
+        SpriteRenderer sr = rangeIndicator.GetComponent<SpriteRenderer>();
+        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0f);
         rangeIndicator.transform.position = transform.position; // Move indicator
         rangeIndicator.transform.localScale = new Vector3(1f, 1f, 1f); // Sets the length
 
@@ -236,6 +243,9 @@ public class Mjoelnir : Ability, IUpgradeable
         Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
         RaycastHit2D[] enemies;
         List<GameObject> alreadyHit = new(); // new() is apparantly a thing - VS suggested it
+
+        // Enable particles
+        chargeParticles.SetActive(true);
 
         while (distance > 0.8f && !Physics2D.Raycast(player.transform.position, dir, 0.5f, obstacleLayer))
         {
@@ -269,12 +279,16 @@ public class Mjoelnir : Ability, IUpgradeable
             distance = Vector2.Distance(player.transform.position, targetPos);
         }
 
+        // Disable particles
+        chargeParticles.SetActive(false);
+
         player.GetComponent<PlayerAction>().StartMove(); // Allow player to move again
         player.GetComponent<PlayerAction>().StopSlow();
         dash.CanDash();
         player.GetComponent<PlayerHealth>().RemoveInvulnerability();
 
         EnableHammer(); // Hammer can hit enemies again
+
     }
 
     // Minimum time standing and charging
@@ -339,7 +353,6 @@ public class Mjoelnir : Ability, IUpgradeable
         
         yield return new WaitForSeconds(castTime);
 
-        Destroy(indicator); // Removes indicator from view
         EnableHammer();
     }
 
@@ -376,10 +389,10 @@ public class Mjoelnir : Ability, IUpgradeable
             cannotHitList.Remove(col.gameObject);
         }
 
-        if (col.CompareTag("Enemy") && !cannotHitList.ContainsKey(col.gameObject))
+        if (col.CompareTag("Enemy") || col.CompareTag("Boss") && !cannotHitList.ContainsKey(col.gameObject))
         {
             //TODO rettes til et egentlig Knockback script eller metode paa enemy. Kald derfra metoden her. 
-            col.transform.position += (col.transform.position - player.transform.position).normalized * 0.3f; // Slight knockback
+            //col.transform.position += (col.transform.position - player.transform.position).normalized * 0.3f; // Slight knockback
             col.gameObject.GetComponent<Health>().TakeDamage(spinDMG);
             if (!onFreezeCD) StartCoroutine(FreezeSpin());
             AddToSpinCDList(col.gameObject);

@@ -37,6 +37,6 @@ public class BloodScript : MonoBehaviour
             sr.color = new Color32(color.r, color.g, color.b, alpha);
         }
 
-        Pool.pool.ReturnToBloodPool(gameObject);
+        if (gameObject.activeSelf) Pool.pool.ReturnToBloodPool(gameObject);
     }
 }

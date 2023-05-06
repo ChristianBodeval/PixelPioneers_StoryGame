@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Anvil.cs.meta
+guid: d3d728b75bda1ec4aa4317c13b5d07ba
+========
+guid: 5d9df4c4bbd3f2140bed02f47b325785
+>>>>>>>> origin/Andreas:Assets/Scripts/DestroyAnim.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
