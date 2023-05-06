@@ -112,7 +112,7 @@ public class AbilityHolder : MonoBehaviour, IUpgradeable
         }
     }
 
-    private void SetActive()
+    public void SetActive()
     {
         Debug.Log("this.gameObject = " + this.gameObject);
         if(spawnPoint != null)
@@ -142,7 +142,7 @@ public class AbilityHolder : MonoBehaviour, IUpgradeable
         }
     }
     
-    private void SetCooldown()
+    public void SetCooldown()
     {
         cooldownTime = ability.cooldownTime;
         state = AbilityState.cooldown;

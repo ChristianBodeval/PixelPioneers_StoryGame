@@ -8,8 +8,9 @@ public class TriThrow : MonoBehaviour
     public float CD;
 
     private Rigidbody2D rb;
-    private Vector2 direction;
+    public Vector2 direction;
 
+    public float angleOfSpear;
     private float pierceAmount = 0f;
     public float maxPierceAmount;
 
@@ -33,29 +34,26 @@ public class TriThrow : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
         cameraShake = GameObject.Find("Camera").GetComponent<CameraShake>();
-        //SetDirection1(playerAction.lastFacing);
-        SetDirection1(playerAction.lastFacing);
     }
+
+    public void SetDirection(Vector2 dir, float throwAngle)
+    {
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + throwAngle;                // Angle for pointing to player
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        direction = dir + GetDirectionFromAngle(throwAngle);
+    }
+    //public void SetDirection(Vector2 dir, float angle)
+    //{
+    //    direction = dir;
+    //    float angleInRadians = (playerAction.lastFacing + GetDirectionFromAngle(angle)).normalized.y >= 0 ? angle : -angle;
+    //    transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg, Vector3.forward) * Quaternion.Euler(0f, 0f, angleInRadians);
+    //    direction = Quaternion.Euler(0f, 0f, angleInRadians) * dir;
+    //}
+
 
     private void FixedUpdate()
     {
-        transform.position += (Vector3)(direction * speed * Time.deltaTime);
-        Debug.Log("Moving triSpear");
-    }
-    
-    public void SetDirection1(Vector2 dir)
-    {
-        direction = dir;
-
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;                // Angle for pointing to player
-        transform.rotation = Quaternion.AngleAxis(45, Vector3.forward);
-    }
-    public void SetDirection2(Vector2 dir)
-    {
-        direction = dir;
-
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;                // Angle for pointing to player
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.position += (Vector3)(direction.normalized * speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -86,6 +84,13 @@ public class TriThrow : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private Vector2 GetDirectionFromAngle(float angle)
+    {
+        float angleInRadians = angle * Mathf.Deg2Rad;
+        return new Vector2(Mathf.Cos(angleInRadians), Mathf.Sin(angleInRadians));
+    }
+
 
     public void ResetCD()
     {

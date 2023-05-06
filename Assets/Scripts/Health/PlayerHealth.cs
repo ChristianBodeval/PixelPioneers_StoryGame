@@ -91,6 +91,8 @@ public class PlayerHealth : Health
 
     protected override void Update()
     {
+
+        // Use this for the Boss Healthbar aswell
         HP.value = currentHealth;
         HPFill.color = gradient.Evaluate(HP.normalizedValue);
         if (this.currentHealth <= 0)

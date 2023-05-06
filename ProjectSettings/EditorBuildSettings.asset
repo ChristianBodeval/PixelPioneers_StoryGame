@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/GungnirETC.unity
+    guid: de4124969bb21374d82197a3836e50f2
   m_configObjects: {}

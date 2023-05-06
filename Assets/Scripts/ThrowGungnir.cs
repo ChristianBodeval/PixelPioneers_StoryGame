@@ -38,6 +38,8 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
     {
         StartThrow();
         gungnirCD = gungnirScript.CD;
+
+        Vector2 movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
     }
 
     private void StartThrow()
@@ -66,10 +68,18 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
 
     public void ThrowTriSpear()
     {
-        TriThrow triSpearPref = Instantiate(triThrowScript, playerAction.transform.position, spawn1.rotation);
-        triSpearPref.SetDirection1(playerAction.lastFacing);
-        TriThrow triSpearPref2 = Instantiate(triThrowScript, playerAction.transform.position, spawn2.rotation);
-        triSpearPref2.SetDirection2(playerAction.lastFacing);
+        TriThrow triSpearPref = Instantiate(triThrowScript, playerAction.transform.position, Quaternion.identity);
+        triSpearPref.SetDirection(playerAction.lastFacing, -45f);
+        TriThrow triSpearPref2 = Instantiate(triThrowScript, playerAction.transform.position, Quaternion.identity);
+        triSpearPref2.SetDirection(playerAction.lastFacing, 45f);
+
+        Vector2 lastFacing = playerAction.lastFacing;
+
+        //triSpearPref.transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(lastFacing.y, lastFacing.x) * Mathf.Rad2Deg + triSpearPref.angleOfSpear);
+        //triSpearPref2.transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(lastFacing.y, lastFacing.x) * Mathf.Rad2Deg + triSpearPref2.angleOfSpear);
+
+        // Set the spear's velocity to make it move in the desired direction
+        //triSpearPref.GetComponent<Rigidbody2D>().velocity = playerAction.lastFacing.normalized * triThrowScript.speed;
     }
 
     public void UpgradeOption1()

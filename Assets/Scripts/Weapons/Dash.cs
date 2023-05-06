@@ -19,8 +19,14 @@ public class Dash : MonoBehaviour, IUpgradeable
     private WeaponCDs weaponCDs;
     private GameObject playerGO;
 
+    [Header("Upgrades")]
     private FireDashSpawn fireSpawn;
+
+    private SweepingDash sweepingDash;
+    public AbilityHolder abilityHolder;
     public bool hasUpgrade1;
+    public bool hasUpgrade2;
+    private bool hasSlashed;
 
     // Start is called before the first frame update
     private void Start()
@@ -31,6 +37,7 @@ public class Dash : MonoBehaviour, IUpgradeable
         weaponCDs = GameObject.Find("WeaponCDs").GetComponent<WeaponCDs>();
         playerGO = GameObject.FindGameObjectWithTag("Player");
         fireSpawn = GetComponent<FireDashSpawn>();
+        sweepingDash.GetComponent<SweepingDash>();
     }
 
     // Update is called once per frame
@@ -45,15 +52,20 @@ public class Dash : MonoBehaviour, IUpgradeable
         if (isDashing)
         {
             // If the dash duration has not elapsed, move the player in the dash direction
+            if (hasUpgrade2 && !hasSlashed)
+            {
+                abilityHolder.SetActive();
+                hasSlashed = true;
+            }
             if (dashTime < dashDuration)
             {
                 Camera.main.GetComponent<CameraScript>().StartLagBehindPlayer();
                 playerRb.MovePosition(playerRb.position + dashDirection * dashDistance / dashDuration * Time.fixedDeltaTime);
                 dashTime += Time.fixedDeltaTime;
+
                 if (hasUpgrade1)
                 {
-                    
-                fireSpawn.StartCoroutine("SpawnFire");
+                    fireSpawn.StartCoroutine("SpawnFire");
                 }
             }
             // Otherwise, end the dash
@@ -91,6 +103,7 @@ public class Dash : MonoBehaviour, IUpgradeable
     {
         isDashing = false;
         playerGO.GetComponent<PlayerHealth>().RemoveInvulnerability(); // I frames
+        hasSlashed = false;
     }
 
     private Vector2 GetDashDirection()
@@ -124,11 +137,12 @@ public class Dash : MonoBehaviour, IUpgradeable
 
     public void UpgradeOption1()
     {
-        hasUpgrade1 = true;   
+        hasUpgrade1 = true;
     }
 
     public void UpgradeOption2()
     {
+        hasUpgrade2 = true;
         throw new System.NotImplementedException();
     }
 
