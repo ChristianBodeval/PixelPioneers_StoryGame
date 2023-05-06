@@ -6,10 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="31ee322b-587a-4c99-afc9-1b2b30998f9e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/MeleePathing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/MeleePathing.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/WormScene2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/WormScene2.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ColliderDebugger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ColliderDebugger.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GeneralPathing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GeneralPathing.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Health/Health.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Health/Health.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/WormFSM.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WormFSM.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +21,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b6c5d0f08ddf477186f780f49bb14dee469200/14/8dc4cda3/List`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/dbe61739a05246e1994668ef874896ee27000/07/a590dcc6/StateMachineBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff33ef4d15af4b21939284be593d47da159a00/3b/083861a1/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff33ef4d15af4b21939284be593d47da159a00/70/331e9559/FormerlySerializedAsAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff33ef4d15af4b21939284be593d47da159a00/7c/f5da2bd0/LayerMask.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff33ef4d15af4b21939284be593d47da159a00/80/c4f22ec7/Component.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff33ef4d15af4b21939284be593d47da159a00/8e/7599b513/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="SKIP_HIGHLIGHTING" />
@@ -27,6 +32,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder_UI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitySO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/HelperMethods.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Image.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.8.0/Runtime/VisualScripting.Core/Utilities/LinqUtility.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -73,10 +79,10 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="62892">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="62892" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -111,6 +117,7 @@
       <workItem from="1683028110967" duration="14449000" />
       <workItem from="1683099200412" duration="2159000" />
       <workItem from="1683101754203" duration="2527000" />
+      <workItem from="1683374907869" duration="21905000" />
     </task>
     <servers />
   </component>
@@ -195,19 +202,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/WormFSM.cs</url>
-          <line>158</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/WormFSM.cs" initialLine="155" containingFunctionPresentation="Method 'Enter'">
-            <startOffsets>
-              <option value="4727" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4856" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

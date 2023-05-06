@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-
+//TODO Make private coroutines for each state, so that there can only be 1 of each running at a time
 public enum State
 {
     Idle,
     Patrol,
+    Searching,
     Chase,
     Attack,
     Stunned,
@@ -19,86 +21,64 @@ public enum State
 
 public class WormFSM : MonoBehaviour
 {
-    //Intialise all the states of EnemyState
+    //States
     private IdleState idleState;
     private PatrolState patrolState;
+    private SearchingState searchingState;
     private ChaseState chaseState;
     private AttackState attackState;
     private StunnedState stunnedState;
     [HideInInspector]  public DiggingState diggingState;
     private DeadState deadState;
     
-    // and the variable holding the current state
     private EnemyState currentState;
+
+    [Header("General")]
+    public GameObject player;
+    public float speed;
+    [HideInInspector] public GeneralPathing aStarPathing;
+    [HideInInspector] public Health healthScript;
+
+    // and the variable holding the current state
     [HideInInspector] public Rigidbody rb;
     public LayerMask groundLayer;
-    public float patrolTime;
-
-    public float patrolRadius = 5f;
-    [HideInInspector] public GeneralPathing aStarPathing;
+    public LayerMask obstacleLayer;
+    
+    [Header("ChaseState")]
     public float sightRange;
+    
+    [Header("PatrolState")]
+    public float patrolTime;
+    public float patrolRadius = 5f;
+
+    
+    [Header("AttackState")]
     public float attackRange;
+    public float attackTime;
     public float attackDamage;
     
-    public GameObject player;
-    public float diggingCooldown;
+    [Header("StunState")]
     public float stunTime;
-    public float attackTime;
+    
+    [Header("DiggingState")]
+    public float diggingCooldown;
+    public GameObject diggingEffect;
+    public GameObject sprite;
+    public float diggingSpeed;
+    
+    [Header("Icon & Colors")]
+    public SpriteRenderer icon;
+    public Color cluelessColor;
+    public Color suspiciousColor;
+    public Color chaseColor;
 
-
-    
-    
-    //Make a similar function as GetRandomPointInLayerMask, but get a random point from the camera's view
-    
-    
-    
-    public Vector3 GetRandomPointInTriggerRadius(GameObject gameObject, LayerMask layerMask, float radius)
-    {
-        // Get all trigger colliders in a sphere around the gameobject
-        Collider[] triggerColliders = Physics.OverlapSphere(gameObject.transform.position, radius, layerMask, QueryTriggerInteraction.Collide);
-
-        // Keep trying to find a point until it's inside a trigger collider
-        bool foundValidPoint = false;
-        Vector3 point = Vector3.zero;
-        while (!foundValidPoint)
-        {
-            // Get a random point within the sphere and multiply it by the radius
-            point = Random.insideUnitSphere * radius;
-
-            // Check if the point is inside any of the trigger colliders
-            int overlaps = Physics.OverlapSphereNonAlloc(gameObject.transform.position + point, 0.1f, triggerColliders, layerMask, QueryTriggerInteraction.Collide);
-            foundValidPoint = (overlaps > 0);
-        }
-
-        Debug.Log("Random point: " + (transform.position + point));
-        //Draw the transform.position + point in the scene view
-        Debug.DrawLine(transform.position, transform.position + point, Color.red, 5f);
-
-        
-        return gameObject.transform.position + point;
-    }
-    
-    //Call GetRandomPointInCameraView when pressing space
-    private void FixedUpdate()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GetRandomPointInTriggerRadius(this.gameObject, groundLayer, patrolRadius);
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
     // Start is called before the first frame update
     void Start()
     {
         //Initialize all the states
         idleState = this.gameObject.AddComponent<IdleState>();
         patrolState = this.gameObject.AddComponent<PatrolState>();
+        searchingState = this.gameObject.AddComponent<SearchingState>();
         chaseState = this.gameObject.AddComponent<ChaseState>();
         attackState = this.gameObject.AddComponent<AttackState>();
         stunnedState = this.gameObject.AddComponent<StunnedState>();
@@ -107,18 +87,22 @@ public class WormFSM : MonoBehaviour
         
         aStarPathing = GetComponent<GeneralPathing>();
 
+        healthScript = GetComponent<Health>();
+        
         rb = GetComponent<Rigidbody>();
         //set up the starting state
         ChangeState(State.Idle);
         
-        this.GetComponent<Health>().DamageTakenEvent.AddListener(OnDamageTaken);
-        this.GetComponent<Health>().Dead.AddListener(OnDamageTaken);
+        healthScript.DamageTakenEvent.AddListener(OnDamageTaken);
+        healthScript.Dead.AddListener(OnDamageTaken);
+        aStarPathing.SetSpeed(speed); 
     }
    void Update()
     {
         currentState.Update(this);
         
-        
+        //Log currentState
+        Debug.Log("Current state: " + currentState);
     }
    
    //Make function that subscribes to an event from the playerHealth script and is called when the player takes damage
@@ -150,6 +134,9 @@ public class WormFSM : MonoBehaviour
                 break;
             case State.Patrol:
                 currentState = patrolState;
+                break;
+            case State.Searching:
+                currentState = searchingState;
                 break;
             case State.Chase:
                 currentState = chaseState;
@@ -183,9 +170,19 @@ public abstract class EnemyState : MonoBehaviour
 
 public class IdleState : EnemyState
 {
+    
+    /*private void DestinationReached()
+    {
+        
+        Debug.Log("Destination reached");
+        ChangeState(State.Patrol);
+    }*/
     public override void Enter(WormFSM enemy)
     {
+        //enemy.aStarPathing.OnDirectionReached.AddListener(DestinationReached);
         //Change state to patrol after 3 seconds
+        enemy.icon.color = enemy.cluelessColor;
+        
         StartCoroutine(enemy.InvokeAfterDelay(() =>
         {
             enemy.ChangeState(State.Patrol);
@@ -194,7 +191,7 @@ public class IdleState : EnemyState
 
     public override void Exit(WormFSM enemy)
     {
-        return;
+        StopAllCoroutines();
     }
     
     // Check if player is in sightRange and the view is not blocked by an obstacle
@@ -219,7 +216,8 @@ public class PatrolState : EnemyState
         }, enemy.patrolTime));
         
         //Move to random point in layer mask in patrol radius
-        //enemy.aStarPathing.SetDirection(enemy.GetRandomPointInLayerMask(enemy.groundLayer, enemy.patrolRadius));
+        
+        enemy.aStarPathing.SetDirection(HelperMethods.GetRandomPointInRadiusOnGround(enemy.patrolRadius, enemy.transform.position));
     }
 
 
@@ -228,7 +226,9 @@ public class PatrolState : EnemyState
     public override void Exit(WormFSM enemy)
     {
         //Don't move
-        enemy.aStarPathing.SetDirection(transform.position);
+        enemy.aStarPathing.StopMoving();
+        StopAllCoroutines();
+
     }
 
     public override void Update(WormFSM enemy)
@@ -241,32 +241,90 @@ public class PatrolState : EnemyState
     }
 }
 
-public class ChaseState : EnemyState
+public class SearchingState : EnemyState
 {
+    Vector3 currentPlayerPosition;
     public override void Enter(WormFSM enemy)
     {
-        return;
+        enemy.icon.color = enemy.suspiciousColor;
+        
+        currentPlayerPosition = enemy.player.transform.position;
+        enemy.aStarPathing.SetDirection(currentPlayerPosition);
     }
 
     public override void Exit(WormFSM enemy)
     {
-        return;
     }
 
     public override void Update(WormFSM enemy)
     {
+        if (enemy.aStarPathing.GetDistanceToPlayer() < enemy.sightRange && !enemy.aStarPathing.IsObstacleBetweenPlayer())
+        {
+            enemy.ChangeState(State.Chase);
+        }
+        
+        else if (Vector2.Distance(enemy.transform.position, currentPlayerPosition) < 0.1f)
+        {
+            enemy.ChangeState(State.Idle);
+        }
+    }
+}
+
+public class ChaseState : EnemyState
+{
+    public override void Enter(WormFSM enemy)
+    {
+        //Move towards player
+        enemy.icon.color = enemy.chaseColor;
+    }
+
+    public override void Exit(WormFSM enemy)
+    {
+    }
+
+    public override void Update(WormFSM enemy)
+    {
+        
         //If player is in attackRange, and no obstacle is blocking the view, then change state to attack
         if (enemy.aStarPathing.GetDistanceToPlayer() < enemy.attackRange && !enemy.aStarPathing.IsObstacleBetweenPlayer())
         {
             enemy.ChangeState(State.Attack);
         }
+        
+        if (enemy.aStarPathing.IsObstacleBetweenPlayer() || enemy.aStarPathing.GetDistanceToPlayer() > enemy.sightRange)
+        {
+            enemy.ChangeState(State.Searching);
+        }
+        enemy.aStarPathing.SetDirection(enemy.player.transform.position);
     }
 }
 
 public class AttackState : EnemyState
 {
+    private IEnumerator attackCoroutine;
     public override void Enter(WormFSM enemy)
     {
+        bool isOnCooldown = false;
+        bool hasAttacked = false;
+        
+        //Initialize coroutine
+        
+        attackCoroutine = enemy.InvokeAfterDelay(() =>
+        {
+            //Damage the player
+            enemy.player.GetComponent<PlayerHealth>().TakeDamage(enemy.attackDamage);
+            hasAttacked = true;
+        }, enemy.attackTime);
+
+        
+        if (!isOnCooldown)
+        {
+            StartCoroutine(attackCoroutine);
+        }
+        else
+        {
+            enemy.ChangeState(State.Chase);
+        }
         //Damage the player
         enemy.player.GetComponent<PlayerHealth>().TakeDamage(enemy.attackDamage);
         
@@ -300,10 +358,12 @@ public class StunnedState : EnemyState
 {
     public override void Enter(WormFSM enemy)
     {
+        enemy.aStarPathing.StopMoving();
+
         //Change state to chase after x seconds
         StartCoroutine(enemy.InvokeAfterDelay(() =>
         {
-            enemy.ChangeState(State.Chase);
+            enemy.ChangeState(State.Digging);
         }, enemy.stunTime));
     }
 
@@ -314,7 +374,11 @@ public class StunnedState : EnemyState
 
     public override void Update(WormFSM enemy)
     {
-        return;
+        //Call log on pressing space
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Space pressed");
+        }
     }
 }
 
@@ -323,31 +387,36 @@ public class DiggingState : EnemyState
     public bool isOnCooldown;
     public bool isDigging;
 
-
+    //Initialize digging cooldown coroutine
+    private IEnumerator diggingCooldownCoroutine;
     private Vector3 currentPlayerPosition;
     //Write cooldown function with IEnumerator
     public override void Enter(WormFSM enemy)
     {
+        diggingCooldownCoroutine = enemy.InvokeAfterDelay(() =>
+        {
+            isOnCooldown = false;
+        }, enemy.diggingCooldown);
+
         if (!isOnCooldown)
         {
             //Start cooldown
             isOnCooldown = true;
             isDigging = true;
             
+            enemy.aStarPathing.SetSpeed(enemy.diggingSpeed);
+            enemy.diggingEffect.SetActive(true);
+            enemy.sprite.SetActive(false);
+            enemy.healthScript.SetCanTakeDamage(false);
+            
             currentPlayerPosition = enemy.player.transform.position;
+            
+            //Add the players velocity to the direction of the digging
+            currentPlayerPosition += (Vector3)enemy.player.GetComponent<Rigidbody2D>().velocity.normalized * 3f;
+            
             enemy.aStarPathing.SetDirection(currentPlayerPosition);
 
-            //Disable collider & set to isKinematic
-            enemy.GetComponent<Collider2D>().enabled = false;
-            enemy.GetComponent<Rigidbody2D>().isKinematic = true;
-            
-            
-            StartCoroutine(enemy.InvokeAfterDelay(() =>
-            {
-                isOnCooldown = false;
-            }, enemy.diggingCooldown));
-            
-            
+            StartCoroutine(diggingCooldownCoroutine);
         }
         else
         {
@@ -358,16 +427,19 @@ public class DiggingState : EnemyState
     
     public override void Exit(WormFSM enemy)
     {
-        return;
+        enemy.diggingEffect.SetActive(false);
+        enemy.sprite.SetActive(true);
+        enemy.healthScript.SetCanTakeDamage(true);
+        enemy.aStarPathing.SetSpeed(enemy.speed);
+        isDigging = false;
     }
 
     public override void Update(WormFSM enemy)
     {
-        //When the digging is finished
-        if(isDigging && currentPlayerPosition == transform.position)
+        //If the currentPlayerPosition is reached, then change state to chase and reset cooldown
+        if (Vector2.Distance(enemy.transform.position, currentPlayerPosition) < 0.1f)
         {
             enemy.ChangeState(State.Chase);
-            isDigging = false;
         }
     }
 }
