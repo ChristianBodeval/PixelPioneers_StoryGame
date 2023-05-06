@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class Mjoelnir : MonoBehaviour, IUpgradeable
+public class Mjoelnir : Ability, IUpgradeable
 {
     [Header("Hammer Movement")]
     [SerializeField] private float spinDMG;
@@ -18,6 +18,8 @@ public class Mjoelnir : MonoBehaviour, IUpgradeable
     private bool onFreezeCD = false;
     private Vector3 freezeLocation;
     private GameObject player;
+    
+    
     
     [Header("Charge Upgrade")]
     public bool hasChargeUpgrade = true;
@@ -55,6 +57,7 @@ public class Mjoelnir : MonoBehaviour, IUpgradeable
     private bool canSpin = true;
 
     private Dash dash;
+
 
 
     private void Start()
@@ -387,6 +390,12 @@ public class Mjoelnir : MonoBehaviour, IUpgradeable
         }
     }
 
+
+    public List<UpgradeSO> GetUpgrades()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void UpgradeOption1()
     {
         if(!hasAreaOfEffectUpgrade)
@@ -397,6 +406,18 @@ public class Mjoelnir : MonoBehaviour, IUpgradeable
     {
         if (!hasChargeUpgrade)
             hasAreaOfEffectUpgrade = true;
+    }
+
+    public void Upgrade(UpgradeSO upgradeSO)
+    {
+        if (upgradeSO.Equals(upgrades[0]))
+        {
+            UpgradeOption1();
+        }
+        if (upgradeSO.Equals(upgrades[1]))
+        {
+            UpgradeOption2();
+        }
     }
 
     public void Downgrade()

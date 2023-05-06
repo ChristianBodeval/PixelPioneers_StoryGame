@@ -25,7 +25,7 @@ public class ColliderDebugger : MonoBehaviour
     {
         if (collision.gameObject.layer.Equals(enemyLayer))
         {
-            Debug.Log("Enemy in trigger");
+
         }
         
     }

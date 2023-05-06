@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowGungnir : MonoBehaviour, IUpgradeable
+public class ThrowGungnir : MonoBehaviour
 {
     [Header("Gungnir")]
     public GameObject gungnir;
@@ -80,20 +81,5 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
 
         // Set the spear's velocity to make it move in the desired direction
         //triSpearPref.GetComponent<Rigidbody2D>().velocity = playerAction.lastFacing.normalized * triThrowScript.speed;
-    }
-
-    public void UpgradeOption1()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void UpgradeOption2()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Downgrade()
-    {
-        throw new NotImplementedException();
     }
 }

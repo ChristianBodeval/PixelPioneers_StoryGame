@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.U2D;
 
 [CreateAssetMenu]
-public class SlashAbility : Ability
+public class SlashAbility : AbilitySO
 {    
     public override void ActivateEffect(ColliderDrawer colliderDrawer)
     {

@@ -455,6 +455,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c802132e3970d649969683c03c4cda8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilitySO: {fileID: 11400000, guid: c0841f02c7946448a8a8f82ec1c7b45a, type: 2}
+  upgrades:
+  - {fileID: 11400000, guid: eeeda3fa93a3945b38bab81e1f385f3c, type: 2}
+  - {fileID: 11400000, guid: 22241782dac5f4bbc8fb0f7e39d0cccf, type: 2}
   damage: 4
   speed: 22
   stunDuration: 2

@@ -4925,6 +4925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee3f7fdb7a6d1f64fb4a29de96342fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgrades: []
   spinDMG: 1
   spinRadius: 1
   spinSpeed: 10
@@ -4988,6 +4989,7 @@ MonoBehaviour:
   aoeRadius: 3
   areaOfEffectCD: 6
   aoeIndicator: {fileID: 5329026731082029813, guid: de5e183b1d77fd9498fc6ad42cdee46e, type: 3}
+  abilitySO: {fileID: 11400000, guid: f235137545f5f40f79f3a8c078449f43, type: 2}
 --- !u!58 &146702678757508239
 CircleCollider2D:
   m_ObjectHideFlags: 0

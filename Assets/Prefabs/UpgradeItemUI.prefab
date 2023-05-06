@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2955529815210642127}
   - component: {fileID: 3666730179670537393}
   - component: {fileID: 2786498876742795889}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 4165491214177620329}
   - component: {fileID: 4165491214177620324}
   - component: {fileID: 2377224592878430830}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UpgradeItemUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,6 +240,8 @@ MonoBehaviour:
   nameText: {fileID: 4165491214587783439}
   descriptionText: {fileID: 4165491215172972638}
   imageComponent: {fileID: 2786498876742795889}
+  outlineMaterial: {fileID: 2100000, guid: babf2dacf508072439e412c5931daa92, type: 2}
+  isAvailable: 0
 --- !u!1 &4165491214587783537
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +253,7 @@ GameObject:
   - component: {fileID: 4165491214587783438}
   - component: {fileID: 4165491214587783436}
   - component: {fileID: 4165491214587783439}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UpgradeName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +388,7 @@ GameObject:
   - component: {fileID: 4165491215172972609}
   - component: {fileID: 4165491215172972639}
   - component: {fileID: 4165491215172972638}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}

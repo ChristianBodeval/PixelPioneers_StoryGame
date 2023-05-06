@@ -5,7 +5,7 @@ using UnityEngine.U2D;
 using static UnityEngine.GraphicsBuffer;
 
 [CreateAssetMenu]
-public class SlashUpgrade1 : Ability
+public class SlashUpgrade1 : AbilitySO
 {
     public float tickEveryXSeconds;
 

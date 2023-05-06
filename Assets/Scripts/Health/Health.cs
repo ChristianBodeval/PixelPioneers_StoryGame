@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class Health : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Health : MonoBehaviour
 
     protected SpriteRenderer sr;
     public UnityEvent DamageTakenEvent;
+    [FormerlySerializedAs("DeathEvent")] [FormerlySerializedAs("ODeathEvent")] [FormerlySerializedAs("OnDeathEvent")] public UnityEvent Dead;
 
 
     private void Start()
@@ -92,6 +94,7 @@ public class Health : MonoBehaviour
     // Removes enemy from active pool, plays death anim and spawns pickup
     public virtual IEnumerator Die()
     {
+        Dead.Invoke();
         if (gameObject.CompareTag("Enemy"))
         {
             // Create blood and pickup

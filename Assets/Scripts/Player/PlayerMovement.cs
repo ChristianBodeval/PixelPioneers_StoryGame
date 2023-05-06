@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
       Move();
-        Facing();
+      Facing();
     }
     private void Move()
     {
