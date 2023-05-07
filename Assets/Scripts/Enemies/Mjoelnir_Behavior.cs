@@ -53,6 +53,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
     private bool isCharging = false;
     private bool isChargingCharge = false;
     private float charge = 0f;
+    private Coroutine chargeCoroutine;
 
     [Header("Area Of Effect")]
     [SerializeField] private float aoeDMG;
@@ -97,13 +98,13 @@ public class Mjoelnir_Behavior : MonoBehaviour
     private void FixedUpdate()
     {       
         // Move closer if not in range
-        if (TargetNotAttackable() && !isChargingCharge)
+        if (TargetNotAttackable() && !isChargingCharge && !isCharging)
         {
             PathFollow();
         }
-        else
+        else if (isChargingCharge || !isCharging)
         {
-            rb.velocity = new Vector3(0f,0f,0f);
+            rb.velocity = Vector2.zero;
         }
 
         // Spin hammer around player
@@ -121,10 +122,6 @@ public class Mjoelnir_Behavior : MonoBehaviour
         if (!isCharging)
         {
             rb.velocity = speed * dir; // Movement
-        }
-        else if (isChargingCharge)
-        {
-            rb.velocity = Vector2.zero;
         }
     }
 
@@ -244,7 +241,8 @@ public class Mjoelnir_Behavior : MonoBehaviour
         if (Physics2D.Raycast(transform.position, player.transform.position - transform.position, maxCharge - (maxCharge / 4), obstacleLayer))
         {
             StartCoroutine(AbilityCD(specialCooldown));
-            StartCoroutine(ChargeAbility());
+            if (chargeCoroutine != null) StopCoroutine(chargeCoroutine);
+            chargeCoroutine = StartCoroutine(ChargeAbility());
         }
     }
 
@@ -305,8 +303,8 @@ public class Mjoelnir_Behavior : MonoBehaviour
         
         float startTime = Time.time; // Used for acceleration curve
 
-        Vector3 targetPos = (Vector2)parentTransform.position + dir * chargedAmount;
-        float distance = Vector2.Distance((Vector2)parentTransform.position, targetPos);
+        Vector3 targetPos = (Vector2)transform.position + dir * chargedAmount;
+        float distance = Vector2.Distance((Vector2)transform.position, targetPos);
 
         // Enable particles
         chargeParticles.SetActive(true);
@@ -319,15 +317,15 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
         while (distance > 1f && !Physics2D.CircleCast(parentTransform.position, 0.3f, dir, 0.3f, obstacleLayer))
         {
-            dir = (targetPos - parentTransform.position).normalized;
+            dir = (targetPos - transform.position).normalized;
 
             if (elapsed < 0.2f)
             {
                 elapsed += Time.time - startTime;
-                speed = accelerationCurve.Evaluate(elapsed * 5);
+                speed = accelerationCurve.Evaluate(elapsed * 3f);
             }
 
-            if (distance < 2f) slowDown = (targetPos - parentTransform.position).magnitude / 2f;
+            //if (distance < 2f) slowDown = (targetPos - parentTransform.position).magnitude * 2f;
 
             rb.velocity = chargeSpeed * speed * dir * slowDown; // Move towards targetpos
 
@@ -335,18 +333,18 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
             if (!isPlayerHit)
             {
-                isPlayerHit = CheckForPlayer(baseHitboxSize + (chargedAmount * hitboxWidthMultiplier), dir);
+                isPlayerHit = CheckForPlayer((Vector2)transform.position, baseHitboxSize + hitboxWidthMultiplier * maxCharge - 0.2f, dir);
                 if (isPlayerHit)
                 {
                     player.GetComponent<PlayerHealth>().TakeDamage(chargeDMG);
-                    rb.velocity = Vector2.zero;
-                    break; // Break out of the while loop
+                    targetPos = (Vector2)player.transform.position + dir;
+                    //break; // Break out of the while loop
                 }
             }
 
             yield return new WaitForSeconds(chargeUpdateInterval); // Time between steps
 
-            distance = Vector2.Distance(parentTransform.position, targetPos); // Update distance for next loop iteration
+            distance = Vector2.Distance(transform.position, targetPos); // Update distance for next loop iteration
         }
 
         parentTransform.position = transform.position;
@@ -361,7 +359,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
         
         EnableHammer(); // Hammer can hit enemies again
         */
-        StartCoroutine(AOEAbility());
+        StartCoroutine(AOEAbility(dir));
     }
 
     private IEnumerator PointHammerForwards(Vector2 dir)
@@ -372,14 +370,14 @@ public class Mjoelnir_Behavior : MonoBehaviour
         while (isCharging)
         {
             // Points hammer and player in direction
-            transform.position = parentTransform.position; // Position hammer in front of player
+            //transform.position = parentTransform.position; // Position hammer in front of player
 
             yield return null;
         }
     }
 
     // AoE ability
-    private IEnumerator AOEAbility()
+    private IEnumerator AOEAbility(Vector2 dir)
     {
         DisableHammer();
         rb.velocity = Vector2.zero;
@@ -389,6 +387,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
         // Instantiate circle
         SpriteRenderer sr = aoeIndicator.GetComponent<SpriteRenderer>();
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0f); // Not visible
+        aoeIndicator.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         aoeIndicator.SetActive(true);
         aoeIndicator.transform.localScale = new Vector2(1f, 1f);
         float a = 0f;
@@ -406,10 +405,11 @@ public class Mjoelnir_Behavior : MonoBehaviour
         aoeIndicator.SetActive(false);
 
         // Toggle aoe anim
-        Instantiate(aoeAnim, transform);
+        GameObject obj = Instantiate(aoeAnim, transform);
+        obj.SetActive(true);
 
         // Deal damage
-        bool isPlayerHit = CheckForPlayer(aoeRadius - 0.2f, Vector2.right);
+        bool isPlayerHit = CheckForPlayer((Vector2)transform.position, aoeRadius - 0.2f, Vector2.right);
         if (isPlayerHit) player.GetComponent<PlayerHealth>().TakeDamage(aoeDMG);
 
         yield return new WaitForSeconds(castTime);
@@ -418,9 +418,9 @@ public class Mjoelnir_Behavior : MonoBehaviour
         StartCoroutine(LerpToSpinRadius());
     }
 
-    private bool CheckForPlayer(float radius, Vector2 direction)
+    private bool CheckForPlayer(Vector2 pos, float radius, Vector2 direction)
     {
-        return Physics2D.CircleCast(transform.position, radius, direction, radius, LayerMask.GetMask("Player"));
+        return Physics2D.CircleCast(pos, radius, direction, radius, LayerMask.GetMask("Player"));
     }
 
     private IEnumerator LerpToSpinRadius()
@@ -455,7 +455,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
         {
             timeOfPlayerHit = Time.time;
             col.gameObject.GetComponent<PlayerHealth>().TakeDamage(spinDMG);
-            if (!onFreezeCD) StartCoroutine(FreezeSpin());
+            if (!onFreezeCD && !isCharging) StartCoroutine(FreezeSpin());
         }
     }
 }
