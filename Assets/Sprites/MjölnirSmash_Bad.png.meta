@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 85a0aacd123397e49963d8d3ceaa3711
+guid: 5078d4018f6aecd49ad349e9349549af
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_0"
+      name: output-onlinepngtools_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a99a9c6bf7524614d8e83fdf1f86a704
-      internalID: -1525712123
+      spriteID: e985c1cfb8d95b547bb7d87755c1189d
+      internalID: -989431853
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_1"
+      name: output-onlinepngtools_1
       rect:
         serializedVersion: 2
         x: 400
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef8af86d1df0be54faffc04216e6d9ec
-      internalID: -196060171
+      spriteID: 3955380737fe85940ab010c81e5973c4
+      internalID: 751561445
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_2"
+      name: output-onlinepngtools_2
       rect:
         serializedVersion: 2
         x: 800
@@ -161,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e24a24c2b76be624596f69f79b9ee2ef
-      internalID: -138031339
+      spriteID: dc1e9dc0b62ad614d833e750cd5bbc02
+      internalID: -2053175177
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_3"
+      name: output-onlinepngtools_3
       rect:
         serializedVersion: 2
         x: 1200
@@ -182,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11fca28505390f34ebd77fd07c29e9cb
-      internalID: -793466900
+      spriteID: 64b2baedc3fb2fd4d876abefeebb7159
+      internalID: -779178059
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_4"
+      name: output-onlinepngtools_4
       rect:
         serializedVersion: 2
         x: 1600
@@ -203,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf6b570fd5d1072429a5615b5abdb4ad
-      internalID: 1010497062
+      spriteID: 47fc0ec77f4d95747ba7279081a5649f
+      internalID: -918394664
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_5"
+      name: output-onlinepngtools_5
       rect:
         serializedVersion: 2
         x: 0
@@ -224,14 +224,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb9d79c0e0413a841b6ee6a1f1e59a20
-      internalID: 200509360
+      spriteID: 0fbba53a03227a0419ccc82033eb7884
+      internalID: 23774190
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_6"
+      name: output-onlinepngtools_6
       rect:
         serializedVersion: 2
         x: 400
@@ -245,14 +245,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99c97b5620cbdf0449c6440bbe9d50e7
-      internalID: -136659672
+      spriteID: fbc97715bc9c95d44ac194e9101063c7
+      internalID: -180502771
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_7"
+      name: output-onlinepngtools_7
       rect:
         serializedVersion: 2
         x: 800
@@ -266,14 +266,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1dc85c630364d0d4c90654e5c5e8b114
-      internalID: 1421259917
+      spriteID: 4cbc8704c327d214ab6fa71939188eea
+      internalID: -82200583
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_8"
+      name: output-onlinepngtools_8
       rect:
         serializedVersion: 2
         x: 1200
@@ -287,14 +287,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20ca5fb96361b714cac0314391f679b2
-      internalID: 453173065
+      spriteID: a2148ced05562c34da5ca0faf6e124ed
+      internalID: -1651429420
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_9"
+      name: output-onlinepngtools_9
       rect:
         serializedVersion: 2
         x: 1600
@@ -308,14 +308,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c43259cfeaf13246a15545ad75d5ad0
-      internalID: 1240633468
+      spriteID: f33228269151ecb4ca36ce90d862eaeb
+      internalID: 1460263483
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_10"
+      name: output-onlinepngtools_10
       rect:
         serializedVersion: 2
         x: 0
@@ -329,14 +329,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0c7fd401feed1f4ca857533740002f1
-      internalID: 850063500
+      spriteID: 4f399f72c2cd5e446a3c05e482cebadc
+      internalID: 1989818526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_11"
+      name: output-onlinepngtools_11
       rect:
         serializedVersion: 2
         x: 400
@@ -350,14 +350,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f41199bd005ce834c8b115182a7392a6
-      internalID: -629151603
+      spriteID: fc316529323c02f48b3f7ea7d9d22913
+      internalID: 440394149
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_12"
+      name: output-onlinepngtools_12
       rect:
         serializedVersion: 2
         x: 800
@@ -371,14 +371,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01689883f93615e4eb4dbcccca28a950
-      internalID: 2141848373
+      spriteID: 2cda061b088db4f488d07de076a5f955
+      internalID: 1795618613
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_13"
+      name: output-onlinepngtools_13
       rect:
         serializedVersion: 2
         x: 1200
@@ -392,14 +392,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8fb688682eb78034d90897493badf913
-      internalID: -376240432
+      spriteID: e1c23f5de6a64c247b5b1eac65222edc
+      internalID: 798313637
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_14"
+      name: output-onlinepngtools_14
       rect:
         serializedVersion: 2
         x: 1600
@@ -413,14 +413,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a582f62d3fdd83d4e982468948516f63
-      internalID: -794306221
+      spriteID: 585482c47047e384f90f57fead7fee36
+      internalID: -1875341689
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_15"
+      name: output-onlinepngtools_15
       rect:
         serializedVersion: 2
         x: 0
@@ -434,14 +434,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 172f3aee195cdea43a8178fd4e0503c5
-      internalID: -1714440457
+      spriteID: 39562489103c21347b8aef43d3b52ecb
+      internalID: -1912341368
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_16"
+      name: output-onlinepngtools_16
       rect:
         serializedVersion: 2
         x: 400
@@ -455,14 +455,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd49da42308a13343a9f90e64f1f508f
-      internalID: -1060544844
+      spriteID: 10c7cc8ec1dbcfa44a09f389d080a86d
+      internalID: 1344484264
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_17"
+      name: output-onlinepngtools_17
       rect:
         serializedVersion: 2
         x: 800
@@ -476,14 +476,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d18556016af1d904bbdb1efed943b143
-      internalID: -1923187115
+      spriteID: 235eaf022a12174469f0c5b2b06e2eaf
+      internalID: 1997049101
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_18"
+      name: output-onlinepngtools_18
       rect:
         serializedVersion: 2
         x: 1200
@@ -497,14 +497,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 908c6d066955e074e85b9ce9df732435
-      internalID: 533749256
+      spriteID: f919d643f93927e46b4d79eb8d75f259
+      internalID: 935549178
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_19"
+      name: output-onlinepngtools_19
       rect:
         serializedVersion: 2
         x: 1600
@@ -518,14 +518,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6f0d803220da104ab949e1812298b6b
-      internalID: 405089427
+      spriteID: 0d611a88ca755524cae732b9287c53fc
+      internalID: 13111714
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_20"
+      name: output-onlinepngtools_20
       rect:
         serializedVersion: 2
         x: 0
@@ -539,14 +539,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 533ce2891c0588e449f155e0019bd617
-      internalID: -949066428
+      spriteID: 36672349dca677a41a465db62b9f91d2
+      internalID: 1042220341
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_21"
+      name: output-onlinepngtools_21
       rect:
         serializedVersion: 2
         x: 400
@@ -560,14 +560,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10143317f6aa34041989bcddf9ffcb03
-      internalID: -1893486096
+      spriteID: 9102290a003088c4d887ea5a15f2029c
+      internalID: 1077181389
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_22"
+      name: output-onlinepngtools_22
       rect:
         serializedVersion: 2
         x: 800
@@ -581,14 +581,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e6c84802523f8a4fbb369e7489e7ea8
-      internalID: 1821788236
+      spriteID: 534f52553fe8cac4ba3978fac9383dc3
+      internalID: -617784927
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_23"
+      name: output-onlinepngtools_23
       rect:
         serializedVersion: 2
         x: 1200
@@ -602,14 +602,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbc2f9e6d9be2dd4b84b1591e8297fa2
-      internalID: -1471872707
+      spriteID: 9e44314c6ad6e0d448a9ee6e64ac09b6
+      internalID: -670695183
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_24"
+      name: output-onlinepngtools_24
       rect:
         serializedVersion: 2
         x: 1600
@@ -623,14 +623,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c76f06b23465cdf428e5c24eae4b7025
-      internalID: -106296153
+      spriteID: 8072ad77036690946a1598c8280499a4
+      internalID: 577727684
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_25"
+      name: output-onlinepngtools_25
       rect:
         serializedVersion: 2
         x: 0
@@ -644,14 +644,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d715037e9ebb464cbc4642e4a4779a1
-      internalID: 1996618534
+      spriteID: 0c5fc85f97616384fbb415147e476548
+      internalID: 1286028405
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_26"
+      name: output-onlinepngtools_26
       rect:
         serializedVersion: 2
         x: 400
@@ -665,14 +665,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71ff8bb228b43204782e5c3ab3dff711
-      internalID: -1021275951
+      spriteID: 7e7348c090fe3054aa3d1c41e9a776d6
+      internalID: 1590725438
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_27"
+      name: output-onlinepngtools_27
       rect:
         serializedVersion: 2
         x: 800
@@ -686,14 +686,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c39ca3d456d4a69489d7a319c3ef0f42
-      internalID: -942104235
+      spriteID: 9d450f319d8f59843953fba089141903
+      internalID: -1754901205
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_28"
+      name: output-onlinepngtools_28
       rect:
         serializedVersion: 2
         x: 1200
@@ -707,14 +707,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8661365c48005364b839c88632f760d2
-      internalID: -724867512
+      spriteID: 1f6eb957e134e744ba1cfe114c527e81
+      internalID: 1393264056
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_29"
+      name: output-onlinepngtools_29
       rect:
         serializedVersion: 2
         x: 1600
@@ -728,14 +728,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2cf667650bf16134f9587855bdd25e03
-      internalID: -892163966
+      spriteID: d3d9b2dc2b98fdd48a5f73dce735fcac
+      internalID: -1057279835
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_30"
+      name: output-onlinepngtools_30
       rect:
         serializedVersion: 2
         x: 0
@@ -749,14 +749,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3dde37cabefe3814fbd1476790389d89
-      internalID: 691140606
+      spriteID: 19f5a2404ba11e14ba17aa66f6ce438b
+      internalID: -1991328503
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_31"
+      name: output-onlinepngtools_31
       rect:
         serializedVersion: 2
         x: 400
@@ -770,14 +770,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b8079e7955fee4845afa6c8147831f00
-      internalID: -741509953
+      spriteID: f209eb3d51f4e4e44a69652947374741
+      internalID: 1869073254
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_32"
+      name: output-onlinepngtools_32
       rect:
         serializedVersion: 2
         x: 800
@@ -791,14 +791,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b550cd8e8a6822f4a9d97d16928d47f6
-      internalID: 1770396596
+      spriteID: cdf0140ac3646064b93eb9af95adf735
+      internalID: 761681686
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_33"
+      name: output-onlinepngtools_33
       rect:
         serializedVersion: 2
         x: 1200
@@ -812,14 +812,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 563e396f8278ddb4d9bf7833f98eb081
-      internalID: -1232013737
+      spriteID: 64dc0ef3e3daf8e4dbead9e55672442d
+      internalID: 2008343052
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_34"
+      name: output-onlinepngtools_34
       rect:
         serializedVersion: 2
         x: 1600
@@ -833,14 +833,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d1209c93a703ca44a403876506c6e16
-      internalID: -2111385691
+      spriteID: f79d3bc0238b6684aa1736757477599e
+      internalID: -798696324
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_35"
+      name: output-onlinepngtools_35
       rect:
         serializedVersion: 2
         x: 0
@@ -854,14 +854,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c1bbd9c7ada1ef40af741c0adfa07c0
-      internalID: 1865811328
+      spriteID: 806211e2b2a19544d9eea8422faf1a77
+      internalID: 989767872
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_36"
+      name: output-onlinepngtools_36
       rect:
         serializedVersion: 2
         x: 400
@@ -875,14 +875,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb5f38cc0e5da34419a1c503bd41be2e
-      internalID: 463073857
+      spriteID: c18a5ce9e552c29408f45923dcfb3de7
+      internalID: -1584014257
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_37"
+      name: output-onlinepngtools_37
       rect:
         serializedVersion: 2
         x: 800
@@ -896,14 +896,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a95e8fe277d3bc641a9af1aef903bae9
-      internalID: 1454060511
+      spriteID: bc064c9d29118b94fb1ee4651b43b67e
+      internalID: 696123775
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_38"
+      name: output-onlinepngtools_38
       rect:
         serializedVersion: 2
         x: 1200
@@ -917,14 +917,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae54a9f91d9a1fa46a9eec1400944089
-      internalID: -1575707779
+      spriteID: ed90d3e85aeb94e4a802a0d0a944f6e7
+      internalID: -62734029
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_39"
+      name: output-onlinepngtools_39
       rect:
         serializedVersion: 2
         x: 1600
@@ -938,14 +938,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ce28cc07100c794daff8b9f31b5e43e
-      internalID: 1062174724
+      spriteID: 5e02c81b0799f7c43a9c6f893ba29a46
+      internalID: -1555299179
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_40"
+      name: output-onlinepngtools_40
       rect:
         serializedVersion: 2
         x: 0
@@ -959,14 +959,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d5d02ae04c83db48b46c15d5656c7e7
-      internalID: 1839292013
+      spriteID: 2e3d2589e67698d4d9dde9d3e797db98
+      internalID: 144533563
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_41"
+      name: output-onlinepngtools_41
       rect:
         serializedVersion: 2
         x: 400
@@ -980,14 +980,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c1121e653f5eef458fa20158c1b67a1
-      internalID: 1229397030
+      spriteID: 1a246b090a618d4438ab0e736b713940
+      internalID: -419988204
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_42"
+      name: output-onlinepngtools_42
       rect:
         serializedVersion: 2
         x: 800
@@ -1001,14 +1001,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 870d968efe34c88478c40cd035ced37c
-      internalID: 1647533391
+      spriteID: dad77e72f45df5e4d88f37482c54e522
+      internalID: -1282769243
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_43"
+      name: output-onlinepngtools_43
       rect:
         serializedVersion: 2
         x: 1200
@@ -1022,14 +1022,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc2fcf6520c3f47409f976a8ba9aa1fb
-      internalID: 130537717
+      spriteID: 263497032891a5f4cbae2a3c9ee7f2b5
+      internalID: 1923346365
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_44"
+      name: output-onlinepngtools_44
       rect:
         serializedVersion: 2
         x: 1600
@@ -1043,14 +1043,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53d19e8a41f083f49afa88812a02a782
-      internalID: -289312630
+      spriteID: 43024963bf5afd948976c2d8ff57890a
+      internalID: -388000720
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_45"
+      name: output-onlinepngtools_45
       rect:
         serializedVersion: 2
         x: 0
@@ -1064,14 +1064,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6a2ab9f85b4f8a4c9d7e3e391bc40d8
-      internalID: -104445292
+      spriteID: 147fffacde62073449a23f5cdd14fb4d
+      internalID: 1806790009
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_46"
+      name: output-onlinepngtools_46
       rect:
         serializedVersion: 2
         x: 400
@@ -1085,14 +1085,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dce0e1d351821e849bc99e682d81a5f9
-      internalID: -1428127069
+      spriteID: 7229e1dca7698634a92538f8418dba59
+      internalID: 306229951
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_47"
+      name: output-onlinepngtools_47
       rect:
         serializedVersion: 2
         x: 800
@@ -1106,14 +1106,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8258264e279eb24a9d3fb97a9e4ac7f
-      internalID: -222539049
+      spriteID: adb40ab2908139144a355c9e913b6508
+      internalID: 575554726
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_48"
+      name: output-onlinepngtools_48
       rect:
         serializedVersion: 2
         x: 1200
@@ -1127,14 +1127,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 648e7f298a8c41244a839941e359dc85
-      internalID: -1271788036
+      spriteID: 874d52fb1ca22ef41847dc2f16476329
+      internalID: -868281771
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_49"
+      name: output-onlinepngtools_49
       rect:
         serializedVersion: 2
         x: 1600
@@ -1148,14 +1148,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 397019cf0d6c0c44b82f22803574f9de
-      internalID: -154269
+      spriteID: cabc8a924ecbeaa4f9f71f74f5d5f3fa
+      internalID: 1112447332
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_50"
+      name: output-onlinepngtools_50
       rect:
         serializedVersion: 2
         x: 0
@@ -1169,14 +1169,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01eb10830076f494c89919b521ce9ad8
-      internalID: 537140606
+      spriteID: 13a490df92ed5c846b822e1b00c9804f
+      internalID: -1948907574
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_51"
+      name: output-onlinepngtools_51
       rect:
         serializedVersion: 2
         x: 400
@@ -1190,14 +1190,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1bc351a76d3651545b0df90b32529e29
-      internalID: 1834245617
+      spriteID: 5bae197800987664d93b011b9077d3d3
+      internalID: -1961092503
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_52"
+      name: output-onlinepngtools_52
       rect:
         serializedVersion: 2
         x: 800
@@ -1211,14 +1211,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7af290fda0de3ef46a276e917506c7d9
-      internalID: -19665784
+      spriteID: 2ec5e10ddc8a84e44a09cb0f94b55032
+      internalID: -727878038
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_53"
+      name: output-onlinepngtools_53
       rect:
         serializedVersion: 2
         x: 1200
@@ -1232,14 +1232,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5fdbd59aa794ff4fad5c3e92d035579
-      internalID: 854206041
+      spriteID: 288cd6704034c1b4f82d995bfd4bce56
+      internalID: 13380010
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_54"
+      name: output-onlinepngtools_54
       rect:
         serializedVersion: 2
         x: 1600
@@ -1253,14 +1253,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 708a53f8ab12b7c4d84c0b7c4c388069
-      internalID: 1711158180
+      spriteID: c043e62648a87a1479e1bec0f1ad527b
+      internalID: -1699534724
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_55"
+      name: output-onlinepngtools_55
       rect:
         serializedVersion: 2
         x: 0
@@ -1274,14 +1274,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a850c59c13d55b4ba40ecbe8480d157
-      internalID: 714943659
+      spriteID: a4f9d5988692a7c46a51b8bb38c14bf8
+      internalID: -2146076489
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_56"
+      name: output-onlinepngtools_56
       rect:
         serializedVersion: 2
         x: 400
@@ -1295,14 +1295,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b691b048bae515a40bb400299b3ed3aa
-      internalID: 2050252365
+      spriteID: c8f6a0ebae15aae4bae7d55d09fdbba9
+      internalID: 2041675201
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Mj\xF6lnirSmash_57"
+      name: output-onlinepngtools_57
       rect:
         serializedVersion: 2
         x: 800
@@ -1316,8 +1316,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e376cba7adbfa140b04df89f8a05317
-      internalID: 337817577
+      spriteID: d55c46843550d544eb315675704e1ea1
+      internalID: 1298378795
       vertices: []
       indices: 
       edges: []
@@ -1333,64 +1333,64 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "Mj\xF6lnirSmash_0": -1525712123
-      "Mj\xF6lnirSmash_1": -196060171
-      "Mj\xF6lnirSmash_10": 850063500
-      "Mj\xF6lnirSmash_11": -629151603
-      "Mj\xF6lnirSmash_12": 2141848373
-      "Mj\xF6lnirSmash_13": -376240432
-      "Mj\xF6lnirSmash_14": -794306221
-      "Mj\xF6lnirSmash_15": -1714440457
-      "Mj\xF6lnirSmash_16": -1060544844
-      "Mj\xF6lnirSmash_17": -1923187115
-      "Mj\xF6lnirSmash_18": 533749256
-      "Mj\xF6lnirSmash_19": 405089427
-      "Mj\xF6lnirSmash_2": -138031339
-      "Mj\xF6lnirSmash_20": -949066428
-      "Mj\xF6lnirSmash_21": -1893486096
-      "Mj\xF6lnirSmash_22": 1821788236
-      "Mj\xF6lnirSmash_23": -1471872707
-      "Mj\xF6lnirSmash_24": -106296153
-      "Mj\xF6lnirSmash_25": 1996618534
-      "Mj\xF6lnirSmash_26": -1021275951
-      "Mj\xF6lnirSmash_27": -942104235
-      "Mj\xF6lnirSmash_28": -724867512
-      "Mj\xF6lnirSmash_29": -892163966
-      "Mj\xF6lnirSmash_3": -793466900
-      "Mj\xF6lnirSmash_30": 691140606
-      "Mj\xF6lnirSmash_31": -741509953
-      "Mj\xF6lnirSmash_32": 1770396596
-      "Mj\xF6lnirSmash_33": -1232013737
-      "Mj\xF6lnirSmash_34": -2111385691
-      "Mj\xF6lnirSmash_35": 1865811328
-      "Mj\xF6lnirSmash_36": 463073857
-      "Mj\xF6lnirSmash_37": 1454060511
-      "Mj\xF6lnirSmash_38": -1575707779
-      "Mj\xF6lnirSmash_39": 1062174724
-      "Mj\xF6lnirSmash_4": 1010497062
-      "Mj\xF6lnirSmash_40": 1839292013
-      "Mj\xF6lnirSmash_41": 1229397030
-      "Mj\xF6lnirSmash_42": 1647533391
-      "Mj\xF6lnirSmash_43": 130537717
-      "Mj\xF6lnirSmash_44": -289312630
-      "Mj\xF6lnirSmash_45": -104445292
-      "Mj\xF6lnirSmash_46": -1428127069
-      "Mj\xF6lnirSmash_47": -222539049
-      "Mj\xF6lnirSmash_48": -1271788036
-      "Mj\xF6lnirSmash_49": -154269
-      "Mj\xF6lnirSmash_5": 200509360
-      "Mj\xF6lnirSmash_50": 537140606
-      "Mj\xF6lnirSmash_51": 1834245617
-      "Mj\xF6lnirSmash_52": -19665784
-      "Mj\xF6lnirSmash_53": 854206041
-      "Mj\xF6lnirSmash_54": 1711158180
-      "Mj\xF6lnirSmash_55": 714943659
-      "Mj\xF6lnirSmash_56": 2050252365
-      "Mj\xF6lnirSmash_57": 337817577
-      "Mj\xF6lnirSmash_6": -136659672
-      "Mj\xF6lnirSmash_7": 1421259917
-      "Mj\xF6lnirSmash_8": 453173065
-      "Mj\xF6lnirSmash_9": 1240633468
+      output-onlinepngtools_0: -989431853
+      output-onlinepngtools_1: 751561445
+      output-onlinepngtools_10: 1989818526
+      output-onlinepngtools_11: 440394149
+      output-onlinepngtools_12: 1795618613
+      output-onlinepngtools_13: 798313637
+      output-onlinepngtools_14: -1875341689
+      output-onlinepngtools_15: -1912341368
+      output-onlinepngtools_16: 1344484264
+      output-onlinepngtools_17: 1997049101
+      output-onlinepngtools_18: 935549178
+      output-onlinepngtools_19: 13111714
+      output-onlinepngtools_2: -2053175177
+      output-onlinepngtools_20: 1042220341
+      output-onlinepngtools_21: 1077181389
+      output-onlinepngtools_22: -617784927
+      output-onlinepngtools_23: -670695183
+      output-onlinepngtools_24: 577727684
+      output-onlinepngtools_25: 1286028405
+      output-onlinepngtools_26: 1590725438
+      output-onlinepngtools_27: -1754901205
+      output-onlinepngtools_28: 1393264056
+      output-onlinepngtools_29: -1057279835
+      output-onlinepngtools_3: -779178059
+      output-onlinepngtools_30: -1991328503
+      output-onlinepngtools_31: 1869073254
+      output-onlinepngtools_32: 761681686
+      output-onlinepngtools_33: 2008343052
+      output-onlinepngtools_34: -798696324
+      output-onlinepngtools_35: 989767872
+      output-onlinepngtools_36: -1584014257
+      output-onlinepngtools_37: 696123775
+      output-onlinepngtools_38: -62734029
+      output-onlinepngtools_39: -1555299179
+      output-onlinepngtools_4: -918394664
+      output-onlinepngtools_40: 144533563
+      output-onlinepngtools_41: -419988204
+      output-onlinepngtools_42: -1282769243
+      output-onlinepngtools_43: 1923346365
+      output-onlinepngtools_44: -388000720
+      output-onlinepngtools_45: 1806790009
+      output-onlinepngtools_46: 306229951
+      output-onlinepngtools_47: 575554726
+      output-onlinepngtools_48: -868281771
+      output-onlinepngtools_49: 1112447332
+      output-onlinepngtools_5: 23774190
+      output-onlinepngtools_50: -1948907574
+      output-onlinepngtools_51: -1961092503
+      output-onlinepngtools_52: -727878038
+      output-onlinepngtools_53: 13380010
+      output-onlinepngtools_54: -1699534724
+      output-onlinepngtools_55: -2146076489
+      output-onlinepngtools_56: 2041675201
+      output-onlinepngtools_57: 1298378795
+      output-onlinepngtools_6: -180502771
+      output-onlinepngtools_7: -82200583
+      output-onlinepngtools_8: -1651429420
+      output-onlinepngtools_9: 1460263483
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
