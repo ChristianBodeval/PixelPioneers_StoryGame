@@ -175,6 +175,12 @@ public class Hermes_Pathing : MonoBehaviour
             animator.SetBool("IsBusy", true);
         }
 
+        if (waitCoroutine != null) 
+        { 
+            isWaitingToRunAwayCoroutine = false; 
+            StopCoroutine(waitCoroutine);
+        }
+
         if (newPositionCoroutine != null) StopCoroutine(newPositionCoroutine);
         newPositionCoroutine = StartCoroutine(FindNewLocation());
     } 

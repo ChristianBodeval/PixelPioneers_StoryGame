@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Test02
+  m_Name: RockWall
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 36137624653f14444a6aaf12f9211643, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8b48339692279cc488c3fe14d9d12434, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -33,4 +33,4 @@ MonoBehaviour:
     e33: 1
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
-  m_ColliderType: 2
+  m_ColliderType: 1

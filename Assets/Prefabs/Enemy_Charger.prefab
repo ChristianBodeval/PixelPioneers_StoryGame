@@ -371,7 +371,7 @@ MonoBehaviour:
   - {x: 0.4707036, y: -0.017021198, z: 0.00000018483634}
   m_ShapePathHash: 96680608
   m_Mesh: {fileID: 0}
-  m_InstanceId: 88158
+  m_InstanceId: 78076
   m_LocalBounds:
     m_Center: {x: -0.009998858, y: 0.0018541366, z: 0}
     m_Extent: {x: 0.48070246, y: 0.20846152, z: 0}
@@ -613,6 +613,18 @@ PrefabInstance:
     - target: {fileID: 40040618040465577, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
       propertyPath: enemyLayers.m_Bits
       value: 4096
+      objectReference: {fileID: 0}
+    - target: {fileID: 4020096897058174608, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
+      propertyPath: m_Radius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4020096897058174608, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4020096897058174608, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 4020096897058174609, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
       propertyPath: m_CollisionDetection

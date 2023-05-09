@@ -335,7 +335,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
             if (!isPlayerHit)
             {
-                isPlayerHit = CheckForPlayer(baseHitboxSize + (chargedAmount * hitboxWidthMultiplier), dir);
+                isPlayerHit = CheckForPlayer(baseHitboxSize, dir);
                 if (isPlayerHit)
                 {
                     player.GetComponent<PlayerHealth>().TakeDamage(chargeDMG);
