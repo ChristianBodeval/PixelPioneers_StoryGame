@@ -27,8 +27,6 @@ public class FSM_Hermes_Pause : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetBool("IsChargedUp", false);
-        animator.SetBool("CanMove", true);
-        animator.GetComponentInParent<Hermes_Pathing>().StopWaitingOnFlee();
     }
 }
 

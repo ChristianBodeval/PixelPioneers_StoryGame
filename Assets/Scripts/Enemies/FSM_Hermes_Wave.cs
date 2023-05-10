@@ -11,7 +11,6 @@ public class FSM_Hermes_Wave : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetBool("IsBusy", true);
-        animator.SetBool("CanMove", false);
 
         script = animator.gameObject.GetComponentInParent<Hermes_Attack>();
 

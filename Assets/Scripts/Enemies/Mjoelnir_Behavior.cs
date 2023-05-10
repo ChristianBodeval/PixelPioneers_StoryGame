@@ -191,7 +191,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
     {
         if (canSpin)
         {
-            bool isReady = timeOfPlayerHit + onCollisionFreezeDuration * 2 > Time.time; // Is still on not rdy to be hit again
+            bool isReady = timeOfPlayerHit + onCollisionFreezeDuration * 2f < Time.time; // Is still on not rdy to be hit again
             if (isReady) timeOfPlayerHit = 0f;
             return isReady;
         }
@@ -262,14 +262,14 @@ public class Mjoelnir_Behavior : MonoBehaviour
         float a = 0f;
 
 
-        // Slow increase of alpha and size of cirle
+        // Slow increase of alpha and size of indicator
         while (a < 1f)
         {
             charge += maxCharge / 50;
             a += 1f / 50;
 
             // Alpha
-            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, accelerationCurve.Evaluate(a) * 0.5f);
+            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, accelerationCurve.Evaluate(a) * 0.3f);
             
 
             // Charge range indicator - change its size and rotation
@@ -287,13 +287,12 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
         yield return new WaitForSeconds(0.05f);
 
-        // Reset variables
-        rangeIndicator.SetActive(false);
+        rangeIndicator.transform.SetParent(null);
 
         // Start charge
         isChargingCharge = false;
         isCharging = true;
-        StartCoroutine(PointHammerForwards(direction)); // Faces hammer forward while player is charging forwards
+        PointHammerForwards(direction); // Faces hammer forward while player is charging forwards
         StartCoroutine(Charge(direction, maxCharge));
     }
 
@@ -333,11 +332,11 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
             if (!isPlayerHit)
             {
-                isPlayerHit = CheckForPlayer((Vector2)transform.position, baseHitboxSize + hitboxWidthMultiplier * maxCharge - 0.2f, dir);
+                isPlayerHit = CheckForPlayer((Vector2)transform.position, baseHitboxSize + hitboxWidthMultiplier * maxCharge - 0.3f, dir);
                 if (isPlayerHit)
                 {
                     player.GetComponent<PlayerHealth>().TakeDamage(chargeDMG);
-                    targetPos = (Vector2)player.transform.position + dir;
+                    targetPos = (Vector2)transform.position + dir * 1.2f;
                     //break; // Break out of the while loop
                 }
             }
@@ -347,10 +346,11 @@ public class Mjoelnir_Behavior : MonoBehaviour
             distance = Vector2.Distance(transform.position, targetPos); // Update distance for next loop iteration
         }
 
+        // Reset variables
+        rangeIndicator.SetActive(false);
+        rangeIndicator.transform.SetParent(parentTransform);
         parentTransform.position = transform.position;
         transform.position = parentTransform.position;
-
-        // Disable particles
         chargeParticles.SetActive(false);
         isCharging = false;
 
@@ -362,18 +362,10 @@ public class Mjoelnir_Behavior : MonoBehaviour
         StartCoroutine(AOEAbility(dir));
     }
 
-    private IEnumerator PointHammerForwards(Vector2 dir)
+    private void PointHammerForwards(Vector2 dir)
     {
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;                // Angle for pointing to player
         mjoelnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -135f, Vector3.forward);   // Point hammer away from player
-
-        while (isCharging)
-        {
-            // Points hammer and player in direction
-            //transform.position = parentTransform.position; // Position hammer in front of player
-
-            yield return null;
-        }
     }
 
     // AoE ability
@@ -398,7 +390,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
         {
             a += 0.1f;
             aoeIndicator.transform.localScale = new Vector2(a * aoeRadius * 2f, a * aoeRadius * 2f); // Scale size over time
-            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, accelerationCurve.Evaluate(a) * 0.5f);
+            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, accelerationCurve.Evaluate(a) * 0.3f);
             yield return new WaitForSeconds(castTime / 10);
         }
 

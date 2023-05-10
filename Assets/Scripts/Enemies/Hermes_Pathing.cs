@@ -27,13 +27,12 @@ public class Hermes_Pathing : MonoBehaviour
     [SerializeField] private bool isFollowing = true;
     [SerializeField] private float newPositionRange = 2f;
     [SerializeField] private float newPositionSpeed = 15f;
-    [SerializeField] private float waitDurationRunAway = 1f;
-    private bool isRunningAway = false;
-    private bool isReadyToRunAway = false;
-    private bool isWaitingToRunAwayCoroutine = false;
+    [SerializeField] private float sprintAwayCD = 1f;
+    [HideInInspector] public bool isSprintRDY = true;
+    private bool isAwaiting = false;
     private Coroutine newPositionCoroutine;
     private Coroutine movetoPositionCoroutine;
-    private Coroutine waitCoroutine;
+    private Coroutine sprintCDCoroutine;
 
     private void Start()
     {
@@ -54,13 +53,16 @@ public class Hermes_Pathing : MonoBehaviour
 
     private void FixedUpdate()
     {       
-        if ( (IsTargetNotAttackable() || IsTargetTooClose() ) && !animator.GetBool("IsStunned"))
+        PathFollow();
+
+        // Is Hermes in attack range and not too close
+        if (!IsTargetNotAttackable() && !IsTargetTooClose())
         {
-            PathFollow();
+            animator.SetBool("InAttackRange", true);
         }
-        else if (animator.GetBool("CanMove") || animator.GetBool("IsStunned"))
+        else
         {
-            rb.velocity = new Vector3(0f,0f,0f);
+            animator.SetBool("InAttackRange", false);
         }
     }
 
@@ -86,11 +88,21 @@ public class Hermes_Pathing : MonoBehaviour
 
     private void Move(Vector2 dir)
     {
-        if (animator.GetBool("IsStunned") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Immobile")) { rb.velocity = Vector2.zero; return; } // Guard clause
-
-        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Ready") && animator.GetBool("CanMove") && !animator.GetBool("IsFleeing") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Special")) // Only Move and Idle states are tagged 'Ready'
+        if (animator.GetBool("IsStunned") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Immobile"))
         {
-            rb.velocity = speed * dir; // Movement
+            rb.velocity = Vector2.zero;
+            return;
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Special"))
+        {
+            return;
+        } 
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Ready")) // Only Move and Idle states are tagged 'Ready'
+        {
+            float modifier = (Vector2.Distance(transform.position, player.transform.position) > Hermes_Attack.waveRange + 2f) ? 1.5f : 1f; // Move faster when far from the player
+            modifier = (IsTargetNotAttackable() ? modifier : 0f); // Do not move if hermes is close enough
+            rb.velocity = speed * dir * modifier; // Movement
         }
     }
 
@@ -106,93 +118,40 @@ public class Hermes_Pathing : MonoBehaviour
     // Decides where to make an A* path to
     private Vector2 PathingTarget()
     {
-        // Player out of reach
-        if (IsTargetNotAttackable())
-        {
-            isReadyToRunAway = false;
-            return player.transform.position;
-        }
-
-        // In the deadzone
-        if (!IsTargetTooClose())
-        {
-            isReadyToRunAway = false;
-            return transform.position;
-        }
-        // Too close to player
-        else if (!isReadyToRunAway)
-        {
-            // Start a waittime
-            GetComponent<Enemy_Attack>().AttackCD(0.5f); // Put attack on cd
-            if (!isWaitingToRunAwayCoroutine) { isWaitingToRunAwayCoroutine = true; waitCoroutine = StartCoroutine(WaitBeforeMovingAway(waitDurationRunAway)); }
-            return transform.position;
-        }
-
-        // Player is too close and we must move away
-        Vector2 playerPos = player.transform.position;
-        Vector2 direction = (playerPos - (Vector2)transform.position).normalized; // Direction to player
-        Vector2 point = (Vector2)transform.position - direction * 1.5f; // Position away from player
-
-        // Is point free to walk to?
-        if (!Physics2D.OverlapPoint(point, obstacleLayer) && Physics2D.OverlapPoint(point, groundLayer)) 
-        {
-            return point;
-        }
-
-        // Point was not free of obstacles, we try again
-        for (int i = 0; i < 20; i++) // x axis offset
-        {
-            Vector2 offsetPos = new Vector2(offset * i, offset * i);
-
-            if (!Physics2D.OverlapPoint(point + offsetPos, obstacleLayer) && Physics2D.OverlapPoint(point + offsetPos, groundLayer) && Vector2.Distance(playerPos, transform.position) > Vector2.Distance(playerPos, point + offsetPos))
-            {
-                return point + new Vector2(offset * i, offset * i);
-            }
-            else if (!Physics2D.OverlapPoint(point - offsetPos, obstacleLayer) && Physics2D.OverlapPoint(point - offsetPos, groundLayer) && Vector2.Distance(playerPos, transform.position) > Vector2.Distance(playerPos, point - offsetPos))
-            {
-                return point + new Vector2(-offset * i, -offset * i);
-            }
-            else if (!Physics2D.OverlapPoint(point + new Vector2(-offsetPos.x, offsetPos.y), obstacleLayer) && Physics2D.OverlapPoint(point + new Vector2(-offsetPos.x, offsetPos.y), groundLayer) && Vector2.Distance(playerPos, transform.position) > Vector2.Distance(playerPos, point + new Vector2(-offsetPos.x, offsetPos.y)))
-            {
-                return point + new Vector2(-offset * i, offset * i);
-            }
-            else if (!Physics2D.OverlapPoint(point + new Vector2(offsetPos.x, -offsetPos.y), obstacleLayer) && Physics2D.OverlapPoint(point + new Vector2(offsetPos.x, -offsetPos.y), groundLayer) && Vector2.Distance(playerPos, transform.position) > Vector2.Distance(playerPos, point + new Vector2(offsetPos.x, -offsetPos.y)))
-            {
-                return point + new Vector2(offset * i, -offset * i);
-            }
-        }
-        return transform.position; // Default if we can't find a spot
+        return player.transform.position; // Default
     }
 
     public void MoveOnHitTaken()
     {
-        if (animator.GetBool("IsBusy") || animator.GetBool("IsStunned") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Immobile") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Special"))
+        Debug.Log("State good: " + animator.GetCurrentAnimatorStateInfo(0).IsTag("Ready") + " CD rdy: " + isSprintRDY);
+        if (!isSprintRDY || !animator.GetCurrentAnimatorStateInfo(0).IsTag("Ready"))
         {
+            if (isSprintRDY && !isAwaiting) { StartCoroutine(WaitForNotBusy()); isAwaiting = true; }
             return;
         }
-        else
-        {
-            animator.SetBool("IsBusy", true);
-        }
 
-        if (waitCoroutine != null) 
-        { 
-            isWaitingToRunAwayCoroutine = false; 
-            StopCoroutine(waitCoroutine);
-        }
+        isSprintRDY = false;
+        animator.Play("Sprint");
 
         if (newPositionCoroutine != null) StopCoroutine(newPositionCoroutine);
         newPositionCoroutine = StartCoroutine(FindNewLocation());
-    } 
+    }
+
+    private IEnumerator WaitForNotBusy()
+    {
+        float expirationTime = Time.time + 1f;
+
+        while (!isSprintRDY || !animator.GetCurrentAnimatorStateInfo(0).IsTag("Ready") || expirationTime > Time.time)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        isAwaiting = false;
+        MoveOnHitTaken();
+    }
 
     private IEnumerator FindNewLocation()
     {
-        StopWaitingOnFlee();
-
-        // Animator
-        animator.SetBool("IsFleeing", true);
-        animator.Play("Sprint");
-
         // Variables
         bool isLocationFound = false;
         float distanceToPlayer = 0f;
@@ -201,12 +160,12 @@ public class Hermes_Pathing : MonoBehaviour
         while (!isLocationFound)
         {
             // Random position around the player
-            Vector2 pos = Random.insideUnitSphere.normalized * Hermes_Attack.waveRange;
+            Vector3 pos = (Vector3)((Vector2)Random.insideUnitSphere).normalized * (Hermes_Attack.waveRange - attackDeadZone / 4f) + player.transform.position;
             distanceToPlayer = Vector2.Distance(player.transform.position, transform.position);
             distanceToPos = Vector2.Distance(pos, transform.position);
 
             // Position is valid if its further away than hermes is from the player
-            if (distanceToPos >= distanceToPlayer)
+            if (distanceToPos >= distanceToPlayer && distanceToPos > 2f && !Physics2D.Raycast(transform.position, pos - transform.position, (pos - player.transform.position).magnitude, obstacleLayer) && !Physics2D.OverlapPoint(pos, obstacleLayer) && Physics2D.OverlapPoint(pos, groundLayer))
             {
                 // Call coroutine to move hermes
                 if (movetoPositionCoroutine != null) StopCoroutine(movetoPositionCoroutine);
@@ -218,24 +177,27 @@ public class Hermes_Pathing : MonoBehaviour
         }
     }
 
-    public void StopWaitingOnFlee()
-    {
-        // Stop coroutine to avoid strange behavior
-        if (isWaitingToRunAwayCoroutine) isWaitingToRunAwayCoroutine = false;
-        if (waitCoroutine != null) StopCoroutine(waitCoroutine);
-    }
-
     private IEnumerator MoveToNewPos(Vector3 newPos)
     {
         // Variables
-        Vector3 dir = (newPos - transform.position).normalized;
-        float distance = Vector2.Distance(transform.position, newPos);
+        Vector3 startPos = transform.position;
+        Vector3 dir = (newPos - startPos).normalized;
+        float distance = Vector2.Distance(startPos, newPos);
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         float start = Time.time;
 
-        // While not at the position and collided with a wall
-        while (distance > 1.5f && !Physics2D.Raycast(transform.position, dir, 0.6f, LayerMask.GetMask("Obstacles")))
+        // Move to new position
+        while (distance > 1.5f)
         {
+            // Move through obstacles if any are encountered
+            float t = 0;
+            while (Physics2D.CircleCast(transform.position, 0.6f, dir, 0.6f, LayerMask.GetMask("Obstacles")))
+            {
+                t += 0.1f;
+                transform.position = Vector3.Lerp(startPos, newPos, t);
+                yield return new WaitForSeconds(0.02f);
+            }
+
             // Updates direction and movement
             dir = (newPos - transform.position).normalized;
             rb.velocity = dir * newPositionSpeed;
@@ -246,14 +208,26 @@ public class Hermes_Pathing : MonoBehaviour
             distance = Vector2.Distance(transform.position, newPos); 
         }
 
+        if (sprintCDCoroutine != null) StopCoroutine(sprintCDCoroutine);
+        sprintCDCoroutine = StartCoroutine(SprintCooldown());
+
         // Animator
         animator.SetBool("IsFleeing", false);
     }
 
+    private IEnumerator SprintCooldown()
+    {
+        rb.velocity = Vector2.zero;
+        isSprintRDY = false;
+
+        yield return new WaitForSeconds(sprintAwayCD);
+
+        isSprintRDY = true;
+    }
+
     private void Flip()
     {
-        // TODO Stop flipping while attacking
-        if (!GetComponentInChildren<Animator>().GetBool("CanMove")) return;
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("Ready")) return;
 
         Vector2 dir = ((Vector2)player.transform.position - rb.position).normalized; // Look to player
 
@@ -277,7 +251,7 @@ public class Hermes_Pathing : MonoBehaviour
             return true;
         }
 
-        return dis > Hermes_Attack.waveRange; // Return true if we are not in attackrange
+        return dis > Hermes_Attack.waveRange - 0.5f; // Return true if we are not in attackrange
     }
 
     private bool IsTargetTooClose()
@@ -301,20 +275,24 @@ public class Hermes_Pathing : MonoBehaviour
         }
     }
 
+    /*
     private IEnumerator WaitBeforeMovingAway(float waitDuration)
     {
         float wait = waitDuration + Time.time;
 
-        while (!isReadyToRunAway)
+        // While not fleeing
+        while (!animator.GetBool("IsFleeing"))
         {
             yield return new WaitForSeconds(0.1f);
             if (wait < Time.time)
             {
-                isReadyToRunAway = true;
-                isWaitingToRunAwayCoroutine = false;
+                animator.SetBool("IsFleeing", true);
             }
         }
+
+        isCountingDown = false;
     }
+    */
 
     private void OnPathComplete(Path p)
     {
