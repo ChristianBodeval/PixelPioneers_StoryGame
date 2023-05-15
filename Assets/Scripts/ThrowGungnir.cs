@@ -21,6 +21,7 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
 
     [Header("Pin Upgrade")]
     public bool hasUpgrade2;
+    
 
 
     private Vector3 lastDirection = Vector3.right;
@@ -59,12 +60,6 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
             Gungnir spear = Instantiate(gungnirScript, playerAction.transform.position, Quaternion.identity);
             spear.SetDirection(playerAction.lastFacing);
 
-            //GameObject spear = Instantiate(gungnir, playerAction.transform.position, Quaternion.identity);
-            //spear.transform.rotation = Quaternion.Euler(0f, 0f, GetThrowAngle());
-
-            //Rigidbody2D spearRigidbody = spear.GetComponent<Rigidbody2D>();
-            //spearRigidbody.AddForce(playerAction.transform.right * 10f, ForceMode2D.Impulse);
-
             StartCoroutine("GungnirCD");
             Debug.Log("Threw gungnir");
             weaponCDVisual.StartCoroutine("GungnirCD");
@@ -85,6 +80,8 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
                 spear2.transform.rotation = Quaternion.Euler(0f, 0f, angle2);
                 spear2.GetComponent<Rigidbody2D>().AddForce(GetThrowDirection(angle2) * gungnirScript.speed, ForceMode2D.Impulse);
             }
+            
+         
         }
     }
 

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Dash : Ability, IUpgradeable
@@ -20,9 +19,15 @@ public class Dash : Ability, IUpgradeable
     private WeaponCDs weaponCDs;
     private GameObject playerGO;
 
-    private FireDashSpawn fireSpawn;
+    [Header("Fire Dash")]
     public bool hasUpgrade1;
-    private bool hasUpgrade2;
+
+    private FireDashSpawn fireSpawn;
+
+    [Header("Slash Dash")]
+    public bool hasUpgrade2;
+
+    private SweepingDash slashDash;
 
     // Start is called before the first frame update
     private void Start()
@@ -33,6 +38,7 @@ public class Dash : Ability, IUpgradeable
         player = GameObject.Find("Player").GetComponent<PlayerAction>();
         weaponCDs = GameObject.Find("CD's").GetComponent<WeaponCDs>();
         fireSpawn = GetComponent<FireDashSpawn>();
+        slashDash = GetComponent<SweepingDash>();
     }
 
     // Update is called once per frame
@@ -54,8 +60,15 @@ public class Dash : Ability, IUpgradeable
                 dashTime += Time.fixedDeltaTime;
                 if (hasUpgrade1)
                 {
-                    
-                fireSpawn.StartCoroutine("SpawnFire");
+                    fireSpawn.StartCoroutine("SpawnFire");
+                }
+                if (hasUpgrade2)
+                {
+                    slashDash.TurnAreaOn();
+                }
+                else
+                {
+                    slashDash.TurnAreaOff();
                 }
             }
             // Otherwise, end the dash
@@ -93,6 +106,7 @@ public class Dash : Ability, IUpgradeable
     {
         isDashing = false;
         playerGO.GetComponent<PlayerHealth>().RemoveInvulnerability(); // I frames
+        slashDash.TurnAreaOff();
     }
 
     private Vector2 GetDashDirection()

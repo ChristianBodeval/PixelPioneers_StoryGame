@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class SweepingDash : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject slashCollider;
+
+
+    public void TurnAreaOn()
     {
-        
+        slashCollider.SetActive(true);
+
+    } 
+    public void TurnAreaOff()
+    {
+        slashCollider.SetActive(false);
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
