@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Gungnir : Ability, IUpgradeable
+public class Gungnir : Ability
 {
     public float damage = 10;
     public float speed;
@@ -13,10 +12,12 @@ public class Gungnir : Ability, IUpgradeable
     private bool isDragging;
     private Vector2 dragDirection;
     private Vector2 direction;
-    private Collider2D gungnirCollider;
+    private BoxCollider2D gungnirCollider;
+
     private Collider2D pickUpCollider;
 
     private bool canMove = true;
+    private bool isPinned = false;
 
     private float pierceAmount = 0f;
     public float maxPierceAmount;
@@ -29,12 +30,19 @@ public class Gungnir : Ability, IUpgradeable
 
     public float bounceDuration = 2;
 
+    private ThrowGungnir throwGungnir;
+
+    private GungnirPickUp gungnirPickUp;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        gungnirCollider = GetComponent<Collider2D>();
+        gungnirCollider = GetComponent<BoxCollider2D>();
         pickUpCollider = GameObject.Find("PickUp").GetComponent<Collider2D>();
+        gungnirPickUp = GetComponent<GungnirPickUp>();
+        gungnirPickUp.enabled = false;
         cameraShake = GameObject.Find("Camera").GetComponent<CameraShake>();
+        throwGungnir = GameObject.Find("GungnirThrow").GetComponent<ThrowGungnir>();
     }
 
     private void FixedUpdate()
@@ -53,7 +61,7 @@ public class Gungnir : Ability, IUpgradeable
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Enemy") && !isStuck)
+        if (col.CompareTag("Enemy") && !isStuck && !throwGungnir.hasUpgrade2)
         {
             pierceAmount++;
             //speed = speed - 5 * pierceAmount;
@@ -75,37 +83,52 @@ public class Gungnir : Ability, IUpgradeable
         {
             StopMove();
             StartCoroutine(DieAfterTime(20f));
+            //if (!throwGungnir.hasUpgrade2)
+            //    StartCoroutine(Bounce());
         }
         if (col.CompareTag("Obstacles") || col.CompareTag("Enemy"))
         {
             cameraShake.SmallShake();
         }
-
-        if (col.CompareTag("Obstacles"))
+        if (throwGungnir.hasUpgrade2)
         {
-            StartCoroutine(Bounce());
+            if (col.CompareTag("Enemy"))
+            {
+                Health enemy = col.GetComponent<Health>();
+
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(damage);
+                }
+                isPinned = true;
+                col.transform.SetParent(transform);
+            }
+        }
+        if (isStuck && isPinned)
+        {
+            col.GetComponent<Crowd_Control>().Stun(stunDuration);
         }
     }
 
-    private IEnumerator Bounce()
-    {
-        float CooldownRemaining; // The remaining cooldown time
+    //private IEnumerator Bounce()
+    //{
+    //    float CooldownRemaining; // The remaining cooldown time
 
-        CooldownRemaining = bounceDuration; // Reset the remaining cooldown time
-        while (CooldownRemaining > 0f) // Count down the cooldown time
-        {
-            transform.position += (Vector3)(-direction * bounceForce);
-            CooldownRemaining -= Time.deltaTime;
-            yield return null; // Wait for the end of the frame
-        }
-    }
+    //    CooldownRemaining = bounceDuration; // Reset the remaining cooldown time
+    //    while (CooldownRemaining > 0f) // Count down the cooldown time
+    //    {
+    //        transform.position += (Vector3)(-direction * bounceForce);
+    //        CooldownRemaining -= Time.deltaTime;
+    //        yield return null; // Wait for the end of the frame
+    //    }
+    //}
 
     public void StopMove()
     {
         canMove = false;
         gungnirCollider.enabled = false;
         isStuck = true;
-        pickUpCollider.enabled = true;
+        gungnirPickUp.enabled = true;
         StartCoroutine("PickUpBuffer");
     }
 
@@ -130,24 +153,5 @@ public class Gungnir : Ability, IUpgradeable
     {
         yield return new WaitForSeconds(time);
         Destroy(gameObject);
-    }
-    
-    
-
-    public void UpgradeOption1()
-    {
-        Debug.Log("Gungnir has been upgraded with upgrade 1");
-    }
-
-    public void UpgradeOption2()
-    {
-        Debug.Log("Gungnir has been upgraded with upgrade 2");
-    }
-
-    public void Downgrade()
-    {
-        Debug.Log("Gungnir has been Downgraded");
-
-        throw new System.NotImplementedException();
     }
 }

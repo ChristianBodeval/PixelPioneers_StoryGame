@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowGungnir : MonoBehaviour
+public class ThrowGungnir : MonoBehaviour, IUpgradeable
 {
     [Header("Gungnir")]
     public GameObject gungnir;
@@ -14,24 +12,28 @@ public class ThrowGungnir : MonoBehaviour
     private float gungnirCD;
     private WeaponCDs weaponCDVisual;
     private PlayerAction playerAction;
+    private GameObject player;
 
     [Header("TriThrow Upgrade")]
-    public GameObject triThrow;
-
-    private TriThrow triThrowScript;
     public bool hasUpgrade1;
-    public Transform spawn1;
-    public Transform spawn2;
+    public GameObject triThrow;
+    private TriThrow triThrowScript;
+
+    [Header("Pin Upgrade")]
+    public bool hasUpgrade2;
+
+
+    private Vector3 lastDirection = Vector3.right;
 
     // Start is called before the first frame update
     private void Start()
     {
         weaponCDVisual = GameObject.Find("CD's").GetComponent<WeaponCDs>();
         playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
+        player = GameObject.Find("Player");
         gungnirCDCoroutine = GungnirCD();
         gungnirScript = gungnir.GetComponent<Gungnir>();
         triThrowScript = triThrow.GetComponent<TriThrow>();
-
     }
 
     // Update is called once per frame
@@ -41,6 +43,13 @@ public class ThrowGungnir : MonoBehaviour
         gungnirCD = gungnirScript.CD;
 
         Vector2 movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+
+        Vector3 playerFacingDirection = playerAction.moveVector.normalized;
+
+        if (playerFacingDirection.magnitude > 0f)
+        {
+            lastDirection = playerFacingDirection;
+        }
     }
 
     private void StartThrow()
@@ -49,15 +58,105 @@ public class ThrowGungnir : MonoBehaviour
         {
             Gungnir spear = Instantiate(gungnirScript, playerAction.transform.position, Quaternion.identity);
             spear.SetDirection(playerAction.lastFacing);
+
+            //GameObject spear = Instantiate(gungnir, playerAction.transform.position, Quaternion.identity);
+            //spear.transform.rotation = Quaternion.Euler(0f, 0f, GetThrowAngle());
+
+            //Rigidbody2D spearRigidbody = spear.GetComponent<Rigidbody2D>();
+            //spearRigidbody.AddForce(playerAction.transform.right * 10f, ForceMode2D.Impulse);
+
             StartCoroutine("GungnirCD");
             Debug.Log("Threw gungnir");
             weaponCDVisual.StartCoroutine("GungnirCD");
 
+           
             if (hasUpgrade1)
             {
-                ThrowTriSpear();
+                // Calculate angles for the additional spears
+                float angle1 = GetThrowAngle() + 20f;
+                float angle2 = GetThrowAngle() - 20f;
+
+                // Instantiate and throw the additional spears
+                GameObject spear1 = Instantiate(triThrow, playerAction.transform.position, Quaternion.identity);
+                spear1.transform.rotation = Quaternion.Euler(0f, 0f, angle1);
+                spear1.GetComponent<Rigidbody2D>().AddForce(GetThrowDirection(angle1) * gungnirScript.speed, ForceMode2D.Impulse);
+
+                GameObject spear2 = Instantiate(triThrow, playerAction.transform.position, Quaternion.identity);
+                spear2.transform.rotation = Quaternion.Euler(0f, 0f, angle2);
+                spear2.GetComponent<Rigidbody2D>().AddForce(GetThrowDirection(angle2) * gungnirScript.speed, ForceMode2D.Impulse);
             }
         }
+    }
+
+    private float GetThrowAngle()
+    {
+        // Calculate the angle based on the player's facing direction
+        // Calculate the angle based on the player's facing direction
+        float angle = 0f;
+        Vector3 playerFacingDirection = playerAction.moveVector.normalized;
+
+        if (playerFacingDirection.magnitude > 0f)
+        {
+            playerFacingDirection = playerFacingDirection.normalized;
+        }
+        else
+        {
+            playerFacingDirection = lastDirection;
+        }
+
+        if (playerFacingDirection.x > 0f) // Facing right
+        {
+            if (playerFacingDirection.y > 0f) // Facing up-right
+            {
+                angle = 45f;
+            }
+            else if (playerFacingDirection.y < 0f) // Facing down-right
+            {
+                angle = -45f;
+            }
+            else // Facing right only
+            {
+                angle = 0f;
+            }
+        }
+        else if (playerFacingDirection.x < 0f) // Facing left
+        {
+            if (playerFacingDirection.y > 0f) // Facing up-left
+            {
+                angle = 135f;
+            }
+            else if (playerFacingDirection.y < 0f) // Facing down-left
+            {
+                angle = -135f;
+            }
+            else // Facing left only
+            {
+                angle = 180f;
+            }
+        }
+        else // Not moving horizontally (left/right)
+        {
+            if (playerFacingDirection.y > 0f) // Facing up only
+            {
+                angle = 90f;
+            }
+            else if (playerFacingDirection.y < 0f) // Facing down only
+            {
+                angle = 270f;
+            }
+        }
+
+        Debug.Log("Player facing direction: " + playerFacingDirection);
+        Debug.Log("Main spear direction: " + angle);
+
+        return angle;
+    }
+
+    private Vector2 GetThrowDirection(float angle)
+    {
+        // Calculate the throw direction based on the specified angle
+        float angleInRadians = angle * Mathf.Deg2Rad;
+        return new Vector2(Mathf.Cos(angleInRadians), Mathf.Sin(angleInRadians));
     }
 
     public IEnumerator GungnirCD()
@@ -67,19 +166,36 @@ public class ThrowGungnir : MonoBehaviour
         canThrowGungnir = true;
     }
 
-    public void ThrowTriSpear()
+    public void UpgradeOption1()
     {
-        TriThrow triSpearPref = Instantiate(triThrowScript, playerAction.transform.position, Quaternion.identity);
-        triSpearPref.SetDirection(playerAction.lastFacing, -45f);
-        TriThrow triSpearPref2 = Instantiate(triThrowScript, playerAction.transform.position, Quaternion.identity);
-        triSpearPref2.SetDirection(playerAction.lastFacing, 45f);
-
-        Vector2 lastFacing = playerAction.lastFacing;
-
-        //triSpearPref.transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(lastFacing.y, lastFacing.x) * Mathf.Rad2Deg + triSpearPref.angleOfSpear);
-        //triSpearPref2.transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(lastFacing.y, lastFacing.x) * Mathf.Rad2Deg + triSpearPref2.angleOfSpear);
-
-        // Set the spear's velocity to make it move in the desired direction
-        //triSpearPref.GetComponent<Rigidbody2D>().velocity = playerAction.lastFacing.normalized * triThrowScript.speed;
+        hasUpgrade1 = true;
+        throw new System.NotImplementedException();
     }
+
+    public void UpgradeOption2()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Downgrade()
+    {
+        hasUpgrade1 = false;
+        throw new System.NotImplementedException();
+    }
+
+    //public void ThrowTriSpear()
+    //{
+    //    TriThrow triSpearPref = Instantiate(triThrowScript, playerAction.transform.position, Quaternion.identity);
+    //    triSpearPref.SetDirection(playerAction.lastFacing, -45f);
+    //    TriThrow triSpearPref2 = Instantiate(triThrowScript, playerAction.transform.position, Quaternion.identity);
+    //    triSpearPref2.SetDirection(playerAction.lastFacing, 45f);
+
+    //    Vector2 lastFacing = playerAction.lastFacing;
+
+    //    //triSpearPref.transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(lastFacing.y, lastFacing.x) * Mathf.Rad2Deg + triSpearPref.angleOfSpear);
+    //    //triSpearPref2.transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(lastFacing.y, lastFacing.x) * Mathf.Rad2Deg + triSpearPref2.angleOfSpear);
+
+    //    // Set the spear's velocity to make it move in the desired direction
+    //    //triSpearPref.GetComponent<Rigidbody2D>().velocity = playerAction.lastFacing.normalized * triThrowScript.speed;
+    //}
 }
