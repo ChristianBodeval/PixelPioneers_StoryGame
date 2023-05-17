@@ -43,8 +43,7 @@ public class Hermes_Attack : Enemy_Attack
     {
         if (IsWaveUsable())
         {
-            if (waveCDCoroutine != null) StopCoroutine(waveCDCoroutine);
-            waveCDCoroutine = StartCoroutine(WaveCooldown(0.5f));
+            waveCDCoroutine = StartCoroutine(WaveCooldown());
             animator.Play("Hermes_Attack_ChargeUp");
         }
     }
@@ -52,7 +51,7 @@ public class Hermes_Attack : Enemy_Attack
     public bool IsWaveUsable()
     {
         // Is something else being done by Hermes
-        if (animator.GetBool("IsBusy") || animator.GetBool("IsStunned") || !animator.GetBool("AttackRDY") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Immobile") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Special")) return false;
+        if (!animator.GetBool("AttackRDY") || !animator.GetCurrentAnimatorStateInfo(0).IsTag("Ready")) return false;
 
         // In range and los
         return Vector2.Distance(player.transform.position, transform.position) <= waveRange && IsInLineOfSight(player, animator);
@@ -60,10 +59,6 @@ public class Hermes_Attack : Enemy_Attack
 
     public void ThrowWave()
     {
-        // Start cooldown
-        if (waveCDCoroutine != null) StopCoroutine(waveCDCoroutine);
-        waveCDCoroutine = StartCoroutine(WaveCooldown());
-
         if (currentSegment > segmentAmounts) { currentSegment = 1; return; } // Guard clause
 
         if (currentSegment == 1)
