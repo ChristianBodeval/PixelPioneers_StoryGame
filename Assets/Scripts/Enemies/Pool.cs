@@ -21,6 +21,11 @@ public class Pool : MonoBehaviour
     private List<GameObject> storageProjectiles = new List<GameObject>();
     private List<GameObject> inUseProjectiles = new List<GameObject>();
 
+    [Header("SFX Pool")]
+    [SerializeField] private GameObject sfxPrefab;
+    private List<GameObject> storageSFX = new List<GameObject>();
+    private List<GameObject> inUseSFX = new List<GameObject>();
+
     [Header("Blood Pool")]
     [SerializeField] private GameObject BloodPrefab;
     [SerializeField] private GameObject BloodSplatterPSPrefab;
@@ -184,6 +189,35 @@ public class Pool : MonoBehaviour
 
         if (inUseProjectiles.Contains(p)) inUseProjectiles.Remove(p);
         storageProjectiles.Add(p);
+    }
+
+    /// SFX pool
+
+    // Gets pickup from pool
+    public GameObject DrawFromSFXPool()
+    {
+        if (storageSFX.Count > 0)
+        {
+            GameObject sfx = storageSFX[0];
+            storageSFX.Remove(sfx);
+            inUseSFX.Add(sfx);
+            sfx.SetActive(true);
+            return sfx;
+        }
+
+        GameObject s = Instantiate(sfxPrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(0f, 0f, 0f)); // New projectile
+        inUseSFX.Add(s);
+        s.SetActive(true);
+        return s;
+    }
+
+    // Returns pickup to pool
+    public void ReturnToSFXPool(GameObject sfx)
+    {
+        sfx.SetActive(false);
+
+        if (inUseSFX.Contains(sfx)) inUseSFX.Remove(sfx);
+        storageSFX.Add(sfx);
     }
 
     /// Blood pool

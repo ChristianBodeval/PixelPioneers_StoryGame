@@ -13,7 +13,7 @@ public class SendWave : MonoBehaviour
 
     private void Start()
     {
-        spawnSystem = GameObject.Find("EnemyFactory").GetComponent<SpawnSystem>();
+        spawnSystem = GameObject.Find("GameManager").GetComponent<SpawnSystem>();
     }
 
     public void StartWaves()

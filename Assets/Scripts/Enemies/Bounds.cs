@@ -29,7 +29,15 @@ public class Bounds : MonoBehaviour
             {
                 if (!Physics2D.OverlapPoint(e.transform.position, groundLayer) || Physics2D.OverlapPoint(e.transform.position, obstacleLayer))
                 {
-                    StartCoroutine(FindClosestValidPosition(e.transform.gameObject));
+                    if (e.transform.CompareTag("Boss") && e.transform.GetComponentInChildren<Animator>().GetBool("IsFleeing")) // Is hermes and is fleeing)
+                    {
+                        
+                    }
+                    else
+                    {
+                        StartCoroutine(FindClosestValidPosition(e.transform.gameObject));
+                    }
+                     
                 }
                 yield return null;
             }

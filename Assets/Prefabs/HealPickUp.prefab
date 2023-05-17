@@ -49,6 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444f5f4329250044e8acbb3083699a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxVolume: 0.3
+  pickupSFX: {fileID: 8300000, guid: e9d82c244d8026e46887213f1dbdfa0f, type: 3}
   moveSpeed: 2.6
   moveDistance: 1.6
   consumeDistance: 0.4

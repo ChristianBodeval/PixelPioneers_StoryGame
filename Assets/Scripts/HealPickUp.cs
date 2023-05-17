@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class HealPickUp : MonoBehaviour
 {
+    [Header("SFX")]
+    [Range(0, 1)] public float sfxVolume = 1f;
+    [SerializeField] private AudioClip pickupSFX;
+
     public float healAmount { get; set; }
     [SerializeField] private float moveSpeed;
     [SerializeField] private float moveDistance;
@@ -65,6 +69,7 @@ public class HealPickUp : MonoBehaviour
     // Resets variables before next use - healthpickups are pooled and reused
     private void OnDisable()
     {
+        SFXManager.singleton.PlaySound(pickupSFX, transform.position, sfxVolume);
         if (coroutine != null) StopCoroutine(coroutine);
         isMoving = false;
     }

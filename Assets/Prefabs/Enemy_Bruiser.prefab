@@ -175,6 +175,8 @@ MonoBehaviour:
   baseMaterial: {fileID: 2100000, guid: 4c9a87858e2754648b8f0d5143303072, type: 2}
   deathMaterial: {fileID: 2100000, guid: bc4b0c691a23bd747b4d5cbd517df6fe, type: 2}
   deathAnimDuration: 0.25
+  deathSFX: {fileID: 8300000, guid: 8641cc0723aa04f4bb401dcf8ccc53b4, type: 3}
+  bossBloodSFX: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
   DamageTakenEvent:
     m_PersistentCalls:
       m_Calls: []
