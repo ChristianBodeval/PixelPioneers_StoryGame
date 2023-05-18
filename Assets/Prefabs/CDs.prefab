@@ -4991,7 +4991,7 @@ RectTransform:
   m_GameObject: {fileID: 4967315355038190070}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.76136, y: 0.76136, z: 0.76136}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4967315355374779352}
@@ -5025,7 +5025,7 @@ MonoBehaviour:
   gungnirCDVisual: {fileID: 4967315353854717289}
   dashScript: {fileID: 0}
   mjoelnirScript: {fileID: 0}
-  gungnirScript: {fileID: 806585984884844841, guid: 617f5ca0b97d61c448ad0c46d6406ba8, type: 3}
+  gungnirScript: {fileID: 0}
   eyeCatcherMjoelnir: {fileID: 0}
   eyeCatcherDash: {fileID: 0}
   eyeCatcherGungnir: {fileID: 0}

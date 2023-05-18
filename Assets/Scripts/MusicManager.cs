@@ -19,7 +19,6 @@ public class MusicManager : MonoBehaviour
         else
         {
             singleton = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
 

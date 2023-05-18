@@ -78,9 +78,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4777890625766839134}
     m_Modifications:
+    - target: {fileID: 626848064, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724249966, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 146702678757508234, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
       propertyPath: m_Name
       value: Hermes_Mjoelnir
+      objectReference: {fileID: 0}
+    - target: {fileID: 146702678757508234, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 146702678757508237, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
       propertyPath: m_RootOrder
@@ -126,10 +138,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 146702678940892861, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8011305717191019474, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
       propertyPath: parentTransform
       value: 
       objectReference: {fileID: 4777890625766839134}
+    - target: {fileID: 8828570852275422769, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
 --- !u!4 &654972322511225870 stripped

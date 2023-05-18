@@ -19,7 +19,6 @@ public class SoundManager : MonoBehaviour
         else
         {
             singleton = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
 
