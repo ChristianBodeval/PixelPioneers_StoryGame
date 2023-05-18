@@ -12,13 +12,25 @@ public class ColliderDrawer : MonoBehaviour
     
 
     [SerializeField] private LayerMask enemyLayer;
-
     
+
+    private void Start()
+    {
+        // Set the enemy layer using the layer name
+        enemyLayer = LayerMask.GetMask("Enemy");
+
+        // Alternatively, set the enemy layer using the layer index
+        // enemyLayer = 1 << LayerMask.NameToLayer("Enemies");
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        if (!targets.Contains(collision.gameObject) && collision.gameObject.CompareTag("Enemy"))
+        //Make a layer mask for enemies
+        
+        
+        
+        
+        if (!targets.Contains(collision.gameObject) && enemyLayer == (enemyLayer | (1 << collision.gameObject.layer)))
         {
             targets.Add(collision.gameObject);
         }        
@@ -26,7 +38,7 @@ public class ColliderDrawer : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (targets.Contains(collision.gameObject) && collision.gameObject.CompareTag("Enemy"))
+        if (targets.Contains(collision.gameObject) && enemyLayer == (enemyLayer | (1 << collision.gameObject.layer)))
         {
             targets.Remove(collision.gameObject);
         }

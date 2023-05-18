@@ -29,6 +29,9 @@ public class WeaponCDs : MonoBehaviour
     private float gungnirCooldownRemaining;
     private float gungnirCooldownTime;
 
+    
+    
+    
     private void Start()
     {
         dashCDVisual.fillAmount = 1;
