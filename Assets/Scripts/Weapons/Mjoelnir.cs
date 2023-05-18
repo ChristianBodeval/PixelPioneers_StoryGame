@@ -64,7 +64,7 @@ public class Mjoelnir : Ability, IUpgradeable
     private void Start()
     {
         mjoelnirSprite = GetComponentInChildren<SpriteRenderer>().gameObject;
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.Find("Player");
         dash = GameObject.Find("Dash").GetComponent<Dash>();
 
         obstacleLayer = LayerMask.GetMask("Obstacles");
