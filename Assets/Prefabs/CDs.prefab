@@ -4976,7 +4976,7 @@ GameObject:
   - component: {fileID: 4967315355038190069}
   - component: {fileID: 4967315355038190068}
   m_Layer: 5
-  m_Name: WeaponCDs
+  m_Name: CDs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

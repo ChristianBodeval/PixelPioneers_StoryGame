@@ -7,6 +7,7 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
     public GameObject gungnir;
 
     public IEnumerator gungnirCDCoroutine;
+    public float CD;
     private Gungnir gungnirScript;
     [HideInInspector] public bool canThrowGungnir = true;
     private float gungnirCD;
@@ -29,7 +30,7 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
     // Start is called before the first frame update
     private void Start()
     {
-        weaponCDVisual = GameObject.Find("CD's").GetComponent<WeaponCDs>();
+        weaponCDVisual = GameObject.Find("CDs").GetComponent<WeaponCDs>();
         playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
         player = GameObject.Find("Player");
         gungnirCDCoroutine = GungnirCD();
@@ -41,7 +42,7 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
     private void Update()
     {
         StartThrow();
-        gungnirCD = gungnirScript.CD;
+        gungnirCD = CD;
 
         Vector2 movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
 
@@ -51,6 +52,12 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
         {
             lastDirection = playerFacingDirection;
         }
+    }
+
+    public void ResetCD()
+    {
+        CD = 0;
+        Debug.Log("RESET CD on GUNGNIR");
     }
 
     private void StartThrow()

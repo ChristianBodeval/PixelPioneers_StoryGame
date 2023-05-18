@@ -18,7 +18,7 @@ public class Dash : Ability, IUpgradeable
     private PlayerAction player;
     private WeaponCDs weaponCDs;
     private GameObject playerGO;
-    public GameObject playerTrail;
+    //public GameObject playerTrail;
 
     [Header("Fire Dash")]
     public bool hasUpgrade1;
@@ -37,7 +37,7 @@ public class Dash : Ability, IUpgradeable
         playerGO = GameObject.Find("Player");
         playerRb = GameObject.Find("Player").GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player").GetComponent<PlayerAction>();
-        weaponCDs = GameObject.Find("CD's").GetComponent<WeaponCDs>();
+        weaponCDs = GameObject.Find("CDs").GetComponent<WeaponCDs>();
         fireSpawn = GetComponent<FireDashSpawn>();
         slashDash = GetComponent<SweepingDash>();
     }
@@ -56,7 +56,7 @@ public class Dash : Ability, IUpgradeable
             // If the dash duration has not elapsed, move the player in the dash direction
             if (dashTime < dashDuration)
             {
-                playerTrail.SetActive(true);
+                //playerTrail.SetActive(true);
                 Camera.main.GetComponent<CameraScript>().StartLagBehindPlayer();
                 playerRb.MovePosition(playerRb.position + dashDirection * dashDistance / dashDuration * Time.fixedDeltaTime);
                 dashTime += Time.fixedDeltaTime;
@@ -109,7 +109,7 @@ public class Dash : Ability, IUpgradeable
         isDashing = false;
         playerGO.GetComponent<PlayerHealth>().RemoveInvulnerability(); // I frames
         slashDash.TurnAreaOff();
-        playerTrail.SetActive(false);
+        //playerTrail.SetActive(false);
     }
 
     private Vector2 GetDashDirection()
