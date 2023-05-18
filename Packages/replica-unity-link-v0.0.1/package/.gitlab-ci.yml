@@ -1,0 +1,35 @@
+default:
+  image: node:14
+  tags:
+    - docker
+
+stages:
+  - build
+  - release
+
+Build dist:
+  stage: build
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/'
+  script:
+    - yarn pack
+    - mv com.replicastudios.link-${CI_COMMIT_TAG}.tgz replica-unity-link-${CI_COMMIT_TAG}.tgz
+  artifacts:
+    paths:
+      - replica-unity-link-*.tgz
+    expire_in: 30 days
+
+Upload to download site:
+  stage: release
+  needs:
+    - Build dist
+  dependencies:
+    - Build dist
+  environment:
+    name: production
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/'
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  script:
+    - aws s3 cp --content-type=application/x-gzip replica-unity-link-${CI_COMMIT_TAG}.tgz s3://$S3_BUCKET_NAME/replica-unity-link/replica-unity-link-${CI_COMMIT_TAG}.tgz
+    - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/replica-unity-link/replica-unity-link-${CI_COMMIT_TAG}.tgz"
