@@ -271,7 +271,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
             rangeIndicator.gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
             // Mjoelnir sprite
-            mjoelnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -135f, Vector3.forward);   // Point hammer away from player
+            mjoelnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -90f, Vector3.forward);   // Point hammer away from player
 
             yield return new WaitForSeconds(castTime/1.4f / 50f);
         }

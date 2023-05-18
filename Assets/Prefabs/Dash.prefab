@@ -56,6 +56,7 @@ MonoBehaviour:
   dashCooldownTime: 1.8
   isDashing: 0
   dashCooldownRemaining: 0
+  playerTrail: {fileID: 0}
   hasUpgrade1: 0
   hasUpgrade2: 1
 --- !u!114 &4607218378068542103

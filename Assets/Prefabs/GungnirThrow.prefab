@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gungnir: {fileID: 6239296000708971393, guid: 617f5ca0b97d61c448ad0c46d6406ba8, type: 3}
   canThrowGungnir: 1
-  hasUpgrade1: 0
+  hasUpgrade1: 1
   triThrow: {fileID: 5494780652819236533, guid: fa15c06f4e052734b89959ab61400f71, type: 3}
-  hasUpgrade2: 1
+  hasUpgrade2: 0

@@ -306,7 +306,7 @@ public class Mjoelnir : Ability, IUpgradeable
     private IEnumerator PointHammerForwards(Vector2 dir)
     {
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;                // Angle for pointing to player
-        mjoelnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -135f, Vector3.forward);   // Point hammer away from player
+        mjoelnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -90f, Vector3.forward);   // Point hammer away from player
 
         isCharging = true;
 
