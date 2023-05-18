@@ -6,49 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="31ee322b-587a-4c99-afc9-1b2b30998f9e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Audio.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Audio.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/SFX.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/SFX.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/WormScene2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/WormScene2.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CheatSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CheatSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/ChargerPathing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/ChargerPathing.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_BruiserChargeUp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_BruiserChargeUp.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_BruiserFireAbility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_BruiserFireAbility.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Bruiser_Move.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Bruiser_Move.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Bruiser_PostAbility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Bruiser_PostAbility.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Charge.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Charge.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Charger_Attack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Charger_Attack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Charger_Idle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Charger_Idle.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Charger_Move.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Charger_Move.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Hermes_Attack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Hermes_Attack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Hermes_Idle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Hermes_Idle.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Hermes_Pause.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Hermes_Pause.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Hermes_Wave.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Hermes_Wave.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Melee_Attack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Melee_Attack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Melee_Idle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Melee_Idle.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Melee_Move.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Melee_Move.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Range_Attack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Range_Attack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Range_Idle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Range_Idle.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Range_Move.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Range_Move.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Stunned.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/FSM_Stunned.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hermes_Pathing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hermes_Pathing.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Mjoelnir_Behavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Mjoelnir_Behavior.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/RangePathing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/RangePathing.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GeneralPathing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GeneralPathing.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Health/BigEnemyHPBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Health/BigEnemyHPBar.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Health/EnemyDamageTEst.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Health/EnemyDamageTEst.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Health/Health.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Health/Health.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Health/HealthBarGradient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Health/HealthBarGradient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Interfaces/IEnemyMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Interfaces/IEnemyMove.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LineAnimator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LineAnimator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SlashDash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SlashDash.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ThrowGungnir.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ThrowGungnir.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/Dash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/Dash.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/SweepingDash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/SweepingDash.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_01.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_01.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HitColliders/ColliderDrawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HitColliders/ColliderDrawer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponCDs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponCDs.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WormFSM.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WormFSM.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +117,7 @@
       <workItem from="1683099200412" duration="2159000" />
       <workItem from="1683101754203" duration="2527000" />
       <workItem from="1683374907869" duration="21905000" />
-      <workItem from="1684407439002" duration="1252000" />
+      <workItem from="1684407439002" duration="3955000" />
     </task>
     <servers />
   </component>
@@ -190,26 +153,26 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs</url>
-          <line>120</line>
+          <line>124</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" initialLine="105" containingFunctionPresentation="Method 'SetActive'">
             <startOffsets>
-              <option value="3208" />
+              <option value="3246" />
             </startOffsets>
             <endOffsets>
-              <option value="3237" />
+              <option value="3275" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs</url>
-          <line>115</line>
+          <line>119</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" initialLine="115" containingFunctionPresentation="Method 'SetActive'">
             <startOffsets>
-              <option value="3078" />
+              <option value="3116" />
             </startOffsets>
             <endOffsets>
-              <option value="3120" />
+              <option value="3158" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="20" />

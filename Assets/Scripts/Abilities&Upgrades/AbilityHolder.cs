@@ -65,26 +65,30 @@ public class AbilityHolder : Ability, IUpgradeable
     {
         readyColor = GetComponent<SpriteShapeRenderer>().color;
         
-        if(caster.tag == "Player")
-            playerAction = caster.GetComponent<PlayerAction>();
+        //Set caster to gameobject called player
+        
         
         ability.Initialize(this.gameObject);
         duration = ability.duration;
 
+    }
+
+    private void Start()
+    {
         if (ability.isFollowingCaster)
         {
             transform.parent = caster.transform;
             transform.position = caster.transform.position;
             transform.rotation = caster.transform.rotation;
         }
-    }
-
-    private void Start()
-    {
+        
         if (!ability.isFollowingCaster)
         {
             transform.position = caster.transform.position;
-            transform.right = playerAction.lastFacing;
+            if (playerAction != null)
+            {
+                transform.right = playerAction.lastFacing;
+            }
         }
         
         SetReady();
