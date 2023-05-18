@@ -20,7 +20,7 @@ public class GungnirPickUp : MonoBehaviour
     {
         gungnir = GetComponentInParent<Gungnir>();
         throwGungnirScript = GameObject.Find("GungnirThrow").GetComponent<ThrowGungnir>();
-        weaponCDs = GameObject.Find("CD's").GetComponent<WeaponCDs>();
+        weaponCDs = GameObject.Find("CDs").GetComponent<WeaponCDs>();
         player = GameObject.Find("Player");
     }
 

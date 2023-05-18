@@ -18,7 +18,7 @@ public class Dash : Ability, IUpgradeable
     private PlayerAction player;
     private WeaponCDs weaponCDs;
     private GameObject playerGO;
-    public GameObject playerTrail;
+    //public GameObject playerTrail;
 
     [Header("Fire Dash")]
     public bool hasUpgrade1;
@@ -56,7 +56,7 @@ public class Dash : Ability, IUpgradeable
             // If the dash duration has not elapsed, move the player in the dash direction
             if (dashTime < dashDuration)
             {
-                playerTrail.SetActive(true);
+                //playerTrail.SetActive(true);
                 Camera.main.GetComponent<CameraScript>().StartLagBehindPlayer();
                 playerRb.MovePosition(playerRb.position + dashDirection * dashDistance / dashDuration * Time.fixedDeltaTime);
                 dashTime += Time.fixedDeltaTime;
@@ -109,7 +109,7 @@ public class Dash : Ability, IUpgradeable
         isDashing = false;
         playerGO.GetComponent<PlayerHealth>().RemoveInvulnerability(); // I frames
         slashDash.TurnAreaOff();
-        playerTrail.SetActive(false);
+        //playerTrail.SetActive(false);
     }
 
     private Vector2 GetDashDirection()
