@@ -591,6 +591,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 40040618040465577, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
+      propertyPath: deathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 8641cc0723aa04f4bb401dcf8ccc53b4, type: 3}
+    - target: {fileID: 40040618040465577, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -602,6 +606,10 @@ PrefabInstance:
       propertyPath: baseMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 4c9a87858e2754648b8f0d5143303072, type: 2}
+    - target: {fileID: 40040618040465577, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
+      propertyPath: bossBloodSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
     - target: {fileID: 40040618040465577, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
       propertyPath: currentHealth
       value: 5

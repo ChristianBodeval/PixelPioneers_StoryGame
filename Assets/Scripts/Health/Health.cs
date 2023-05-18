@@ -6,16 +6,22 @@ using UnityEngine.Serialization;
 
 public class Health : MonoBehaviour
 {
+    [Header("SFX")]
+    [Range(0, 1)] public float sfxVolume = 1f;
+
     public float currentHealth;
     public float maxHealth;
     [SerializeField] protected Material blinkMaterial;
     [SerializeField] protected Material baseMaterial;
     [SerializeField] protected Material deathMaterial;
     [SerializeField] protected float deathAnimDuration;
+    [SerializeField] private AudioClip deathSFX;
+    [SerializeField] private AudioClip bossBloodSFX;
     protected Coroutine deathCoroutine;
     protected Coroutine blinkCoroutine;
     protected Coroutine shakeCoroutine;
     protected static readonly float freezeDurationOnDmgTaken = 0.15f;
+    private bool isBlinking = false;
 
     protected SpriteRenderer sr;
     public UnityEvent DamageTakenEvent;
@@ -60,6 +66,8 @@ public class Health : MonoBehaviour
 
                 if (Random.Range(0,2) == 0)
                 {
+                    SFXManager.singleton.PlaySound(bossBloodSFX, transform.position, sfxVolume);
+
                     // Create blood and pickup
                     HealthPickUp.pickUpPool.AddHealthPickUp(transform.position, 1f); // Spawn health pickup
                     GameObject blood = Pool.pool.DrawFromBloodPool();
@@ -70,6 +78,9 @@ public class Health : MonoBehaviour
                 }
             }
 
+            // Reset material
+            sr.material = baseMaterial;
+
             // Freeze frame enemies
             if (gameObject.CompareTag("Enemy")) GetComponent<Crowd_Control>().FreezeFrame(freezeDurationOnDmgTaken);
 
@@ -77,9 +88,11 @@ public class Health : MonoBehaviour
             GameObject bloodSplatter = Pool.pool.DrawFromBloodSpatterPool();
             bloodSplatter.transform.position = transform.position;
 
-            if (blinkCoroutine != null) StopCoroutine(blinkCoroutine); // Stops blink coroutine
+            // Blink white
+            if (blinkCoroutine != null && !isBlinking) StopCoroutine(blinkCoroutine); // Stops blink coroutine
             blinkCoroutine = StartCoroutine(BlinkOnDmgTaken(freezeDurationOnDmgTaken));
 
+            // Shake sprite
             if (shakeCoroutine != null) StopCoroutine(shakeCoroutine);
             shakeCoroutine = StartCoroutine(SpriteShake(0.12f, freezeDurationOnDmgTaken));
             //PrintDmgToScreen(damage, Color.red);
@@ -106,6 +119,7 @@ public class Health : MonoBehaviour
     public virtual IEnumerator BlinkOnDmgTaken(float duration = 0.15f)
     {
         if (deathCoroutine != null) yield break;
+        isBlinking = true;
 
         Material blinkMat = Instantiate(blinkMaterial);
         sr.material = blinkMat;
@@ -115,8 +129,7 @@ public class Health : MonoBehaviour
 
         sr.material = baseMaterial;
         sr.material.color = Color.white;
-
-        blinkCoroutine = null;
+        isBlinking = false;
     }
 
     // Removes enemy from active pool, plays death anim and spawns pickup
@@ -125,6 +138,8 @@ public class Health : MonoBehaviour
         Dead.Invoke();
         if (gameObject.CompareTag("Enemy"))
         {
+            SFXManager.singleton.PlaySound(deathSFX, transform.position);
+
             // Create blood and pickup
             HealthPickUp.pickUpPool.AddHealthPickUp(transform.position, maxHealth / 8); // Spawn health pickup
             GameObject blood = Pool.pool.DrawFromBloodPool();

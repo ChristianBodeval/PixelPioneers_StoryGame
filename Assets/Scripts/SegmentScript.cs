@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.Audio;
 
 public class SegmentScript : MonoBehaviour
 {
-    [SerializeField] private float alphaMaximum = 0.5f;
+    [Header("SFX")]
+    [Range(0, 1)] public float sfxVolume = 1f;
     [SerializeField] private AnimationCurve accelerationCurve;
+    [SerializeField] private AudioClip sfx;
+
+    [SerializeField] private float alphaMaximum = 0.5f;
     private GameObject parentBruiser;
     private SpriteRenderer sr;
     private Coroutine cr;
@@ -26,6 +31,8 @@ public class SegmentScript : MonoBehaviour
         r = sr.color.r;
         g = sr.color.g;
         b = sr.color.b;
+
+        SFXManager.singleton.PlaySound(sfx, transform.position, sfxVolume);
 
         // Slow increase of alpha
         while (a < 1f)

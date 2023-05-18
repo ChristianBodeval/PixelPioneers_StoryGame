@@ -13,8 +13,8 @@ public class Hermes_Pathing : MonoBehaviour
     private Animator animator;
 
     [Header("A*")]
-    [SerializeField] private LayerMask obstacleLayer;
-    [SerializeField] private LayerMask groundLayer;
+    private LayerMask obstacleLayer;
+    private LayerMask groundLayer;
     [SerializeField] private float updateInterval = 0.05f;
     [SerializeField] private float nextWayPointDistance = 2f;
     [SerializeField] private float offset = 0.2f;
@@ -34,6 +34,13 @@ public class Hermes_Pathing : MonoBehaviour
     private Coroutine movetoPositionCoroutine;
     private Coroutine sprintCDCoroutine;
 
+    [Header("Music")]
+    public AudioClip bossTrack;
+
+    [Header("SFX")]
+    [Range(0, 1)] public float sfxVolume = 1f;
+    [SerializeField] private AudioClip sprintSFX;
+
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -42,6 +49,10 @@ public class Hermes_Pathing : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         animator.SetBool("CanMove", true);
         attackRange = GetComponent<Hermes_Attack>().attackRange;
+        groundLayer = LayerMask.GetMask("Ground");
+        obstacleLayer = LayerMask.GetMask("Obstacles");
+
+        MusicManager.singleton.PlayMusic(bossTrack);
 
         StartCoroutine(UpdatePath()); // Updates pathfinding regularly
     }
@@ -56,7 +67,7 @@ public class Hermes_Pathing : MonoBehaviour
         PathFollow();
 
         // Is Hermes in attack range and not too close
-        if (!IsTargetNotAttackable() && !IsTargetTooClose())
+        if (!IsTargetTooFar() && !IsTargetTooClose())
         {
             animator.SetBool("InAttackRange", true);
         }
@@ -101,7 +112,7 @@ public class Hermes_Pathing : MonoBehaviour
         if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Ready")) // Only Move and Idle states are tagged 'Ready'
         {
             float modifier = (Vector2.Distance(transform.position, player.transform.position) > Hermes_Attack.waveRange + 2f) ? 1.5f : 1f; // Move faster when far from the player
-            modifier = (IsTargetNotAttackable() ? modifier : 0f); // Do not move if hermes is close enough
+            modifier = (IsTargetTooFar() ? modifier : 0f); // Do not move if hermes is close enough
             rb.velocity = speed * dir * modifier; // Movement
         }
     }
@@ -123,26 +134,32 @@ public class Hermes_Pathing : MonoBehaviour
 
     public void MoveOnHitTaken()
     {
-        Debug.Log("State good: " + animator.GetCurrentAnimatorStateInfo(0).IsTag("Ready") + " CD rdy: " + isSprintRDY);
+        if (animator.GetBool("IsFleeing")) return;
         if (!isSprintRDY || !animator.GetCurrentAnimatorStateInfo(0).IsTag("Ready"))
         {
             if (isSprintRDY && !isAwaiting) { StartCoroutine(WaitForNotBusy()); isAwaiting = true; }
             return;
         }
 
-        isSprintRDY = false;
+        animator.SetBool("IsFleeing", true);
         animator.Play("Sprint");
+
+        // Start cooldown
+        if (sprintCDCoroutine != null) StopCoroutine(sprintCDCoroutine);
+        sprintCDCoroutine = StartCoroutine(SprintCooldown());
 
         if (newPositionCoroutine != null) StopCoroutine(newPositionCoroutine);
         newPositionCoroutine = StartCoroutine(FindNewLocation());
     }
 
+    // If hermes was hit while doing something he will remember for a time and once he is ready to flee will do so
     private IEnumerator WaitForNotBusy()
     {
-        float expirationTime = Time.time + 1f;
+        float expirationTime = Time.time + 0.7f; 
 
         while (!isSprintRDY || !animator.GetCurrentAnimatorStateInfo(0).IsTag("Ready") || expirationTime > Time.time)
         {
+            if (animator.GetBool("IsFleeing")) { isAwaiting = false; yield break; }
             yield return new WaitForSeconds(0.1f);
         }
 
@@ -160,12 +177,14 @@ public class Hermes_Pathing : MonoBehaviour
         while (!isLocationFound)
         {
             // Random position around the player
-            Vector3 pos = (Vector3)((Vector2)Random.insideUnitSphere).normalized * (Hermes_Attack.waveRange - attackDeadZone / 4f) + player.transform.position;
+            Vector3 pos = (Vector3)(Random.insideUnitCircle).normalized * (Hermes_Attack.waveRange - attackDeadZone) + player.transform.position;
             distanceToPlayer = Vector2.Distance(player.transform.position, transform.position);
             distanceToPos = Vector2.Distance(pos, transform.position);
 
             // Position is valid if its further away than hermes is from the player
-            if (distanceToPos >= distanceToPlayer && distanceToPos > 2f && !Physics2D.Raycast(transform.position, pos - transform.position, (pos - player.transform.position).magnitude, obstacleLayer) && !Physics2D.OverlapPoint(pos, obstacleLayer) && Physics2D.OverlapPoint(pos, groundLayer))
+            if ((distanceToPos >= distanceToPlayer) /* Position is further away than player*/
+                && !Physics2D.Raycast(transform.position, pos - transform.position, Hermes_Attack.waveRange, obstacleLayer) /* Hermes can go in a straight line to the position */
+                && !Physics2D.OverlapPoint(pos, obstacleLayer) && Physics2D.OverlapPoint(pos, groundLayer)) /* Position is walkable */
             {
                 // Call coroutine to move hermes
                 if (movetoPositionCoroutine != null) StopCoroutine(movetoPositionCoroutine);
@@ -186,12 +205,14 @@ public class Hermes_Pathing : MonoBehaviour
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         float start = Time.time;
 
+        SFXManager.singleton.PlaySound(sprintSFX, transform.position, sfxVolume, transform);
+
         // Move to new position
         while (distance > 1.5f)
         {
             // Move through obstacles if any are encountered
             float t = 0;
-            while (Physics2D.CircleCast(transform.position, 0.6f, dir, 0.6f, LayerMask.GetMask("Obstacles")))
+            while (Physics2D.CircleCast(transform.position, 0.6f, dir, 0.6f, obstacleLayer))
             {
                 t += 0.1f;
                 transform.position = Vector3.Lerp(startPos, newPos, t);
@@ -208,10 +229,8 @@ public class Hermes_Pathing : MonoBehaviour
             distance = Vector2.Distance(transform.position, newPos); 
         }
 
-        if (sprintCDCoroutine != null) StopCoroutine(sprintCDCoroutine);
-        sprintCDCoroutine = StartCoroutine(SprintCooldown());
-
-        // Animator
+        // Stop
+        rb.velocity = Vector2.zero;
         animator.SetBool("IsFleeing", false);
     }
 
@@ -219,6 +238,11 @@ public class Hermes_Pathing : MonoBehaviour
     {
         rb.velocity = Vector2.zero;
         isSprintRDY = false;
+
+        while (animator.GetBool("IsFleeing"))
+        {
+            yield return null;
+        }
 
         yield return new WaitForSeconds(sprintAwayCD);
 
@@ -241,7 +265,7 @@ public class Hermes_Pathing : MonoBehaviour
         }
     }
 
-    private bool IsTargetNotAttackable()
+    private bool IsTargetTooFar()
     {
         float dis = Mathf.Abs(Vector2.Distance(player.transform.position, transform.position));
 
@@ -251,7 +275,7 @@ public class Hermes_Pathing : MonoBehaviour
             return true;
         }
 
-        return dis > Hermes_Attack.waveRange - 0.5f; // Return true if we are not in attackrange
+        return dis > Hermes_Attack.waveRange / 2f; // Return true if we are not in attackrange
     }
 
     private bool IsTargetTooClose()
@@ -274,25 +298,6 @@ public class Hermes_Pathing : MonoBehaviour
             return false;
         }
     }
-
-    /*
-    private IEnumerator WaitBeforeMovingAway(float waitDuration)
-    {
-        float wait = waitDuration + Time.time;
-
-        // While not fleeing
-        while (!animator.GetBool("IsFleeing"))
-        {
-            yield return new WaitForSeconds(0.1f);
-            if (wait < Time.time)
-            {
-                animator.SetBool("IsFleeing", true);
-            }
-        }
-
-        isCountingDown = false;
-    }
-    */
 
     private void OnPathComplete(Path p)
     {

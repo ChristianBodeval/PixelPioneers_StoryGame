@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class WaveVisual : MonoBehaviour
 {
+    [Header("SFX")]
+    [Range(0, 1)] public float sfxVolume = 1f;
+    [SerializeField] private AudioClip startCombatSFX;
+    [SerializeField] private AudioClip breakCrystalSFX;
+
     [SerializeField] private GameObject prefab;
     [SerializeField] private GameObject chainPrefab;
     private List<GameObject> inUseWaveIndicators = new();
