@@ -67,7 +67,7 @@ public class Hermes_Pathing : MonoBehaviour
         PathFollow();
 
         // Is Hermes in attack range and not too close
-        if (!IsTargetNotAttackable() && !IsTargetTooClose())
+        if (!IsTargetTooFar() && !IsTargetTooClose())
         {
             animator.SetBool("InAttackRange", true);
         }
@@ -112,7 +112,7 @@ public class Hermes_Pathing : MonoBehaviour
         if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Ready")) // Only Move and Idle states are tagged 'Ready'
         {
             float modifier = (Vector2.Distance(transform.position, player.transform.position) > Hermes_Attack.waveRange + 2f) ? 1.5f : 1f; // Move faster when far from the player
-            modifier = (IsTargetNotAttackable() ? modifier : 0f); // Do not move if hermes is close enough
+            modifier = (IsTargetTooFar() ? modifier : 0f); // Do not move if hermes is close enough
             rb.velocity = speed * dir * modifier; // Movement
         }
     }
@@ -135,8 +135,6 @@ public class Hermes_Pathing : MonoBehaviour
     public void MoveOnHitTaken()
     {
         if (animator.GetBool("IsFleeing")) return;
-
-        Debug.Log("State good: " + animator.GetCurrentAnimatorStateInfo(0).IsTag("Ready") + " CD rdy: " + isSprintRDY);
         if (!isSprintRDY || !animator.GetCurrentAnimatorStateInfo(0).IsTag("Ready"))
         {
             if (isSprintRDY && !isAwaiting) { StartCoroutine(WaitForNotBusy()); isAwaiting = true; }
@@ -267,7 +265,7 @@ public class Hermes_Pathing : MonoBehaviour
         }
     }
 
-    private bool IsTargetNotAttackable()
+    private bool IsTargetTooFar()
     {
         float dis = Mathf.Abs(Vector2.Distance(player.transform.position, transform.position));
 
@@ -277,7 +275,7 @@ public class Hermes_Pathing : MonoBehaviour
             return true;
         }
 
-        return dis > Hermes_Attack.waveRange - 0.5f; // Return true if we are not in attackrange
+        return dis > Hermes_Attack.waveRange / 2f; // Return true if we are not in attackrange
     }
 
     private bool IsTargetTooClose()

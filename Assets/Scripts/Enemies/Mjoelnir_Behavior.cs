@@ -119,9 +119,11 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
     private void Move(Vector2 dir)
     {
+        float modifier = (Vector2.Distance(player.transform.position, transform.position) > maxCharge - 2f) ? 2.4f : 1f;
+
         if (!isCharging)
         {
-            rb.velocity = speed * dir; // Movement
+            rb.velocity = speed * dir * modifier; // Movement
         }
     }
 
@@ -185,17 +187,6 @@ public class Mjoelnir_Behavior : MonoBehaviour
         yield return new WaitForSeconds(collisionFreezeCD);
 
         onFreezeCD = false;
-    }
-
-    private bool IsPlayerReadyForHit()
-    {
-        if (canSpin)
-        {
-            bool isReady = timeOfPlayerHit + onCollisionFreezeDuration * 2f < Time.time; // Is still on not rdy to be hit again
-            if (isReady) timeOfPlayerHit = 0f;
-            return isReady;
-        }
-        return false;
     }
 
     private void EnableHammer()
@@ -440,8 +431,19 @@ public class Mjoelnir_Behavior : MonoBehaviour
         abilityRDY = true;
     }
 
+    private bool IsPlayerReadyForHit()
+    {
+        if (canSpin)
+        {
+            bool isReady = timeOfPlayerHit + onCollisionFreezeDuration * 2f < Time.time; // Is still on not rdy to be hit again
+            if (isReady) timeOfPlayerHit = 0f;
+            return isReady;
+        }
+        return false;
+    }
+
     // Damage player when colliding
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.CompareTag("Player") && IsPlayerReadyForHit())
         {

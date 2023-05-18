@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4777890625766839134}
   - component: {fileID: 8534639303852567746}
   - component: {fileID: 8534639303852567748}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: Parent_Mjoelnir
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,6 +101,10 @@ PrefabInstance:
     - target: {fileID: 644661609, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
       propertyPath: m_Parameters.colorGradient.key1.r
       value: 0.44313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 644661609, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.17169654
       objectReference: {fileID: 0}
     - target: {fileID: 146702678757508234, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
       propertyPath: m_Name

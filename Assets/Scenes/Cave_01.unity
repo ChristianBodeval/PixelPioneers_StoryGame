@@ -85124,7 +85124,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -107259,6 +107259,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 654972322511225865, guid: 696e257c191c18a47a87b91f16eaf3bd, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 4777890625766839134, guid: 696e257c191c18a47a87b91f16eaf3bd, type: 3}
       propertyPath: m_RootOrder
       value: 31
@@ -107306,6 +107310,14 @@ PrefabInstance:
     - target: {fileID: 5773579059583092043, guid: 696e257c191c18a47a87b91f16eaf3bd, type: 3}
       propertyPath: m_Name
       value: Parent_Mjoelnir
+      objectReference: {fileID: 0}
+    - target: {fileID: 5773579059583092043, guid: 696e257c191c18a47a87b91f16eaf3bd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011305717191019474, guid: 696e257c191c18a47a87b91f16eaf3bd, type: 3}
+      propertyPath: speed
+      value: 3.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 696e257c191c18a47a87b91f16eaf3bd, type: 3}
