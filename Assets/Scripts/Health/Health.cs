@@ -20,10 +20,12 @@ public class Health : MonoBehaviour
     protected SpriteRenderer sr;
     public UnityEvent DamageTakenEvent;
     [FormerlySerializedAs("DeathEvent")] [FormerlySerializedAs("ODeathEvent")] [FormerlySerializedAs("OnDeathEvent")] public UnityEvent Dead;
+    private bool canTakeDamage;
 
 
     private void Start()
     {
+        canTakeDamage = true;
         sr = gameObject.GetComponentInChildren<SpriteRenderer>();
     }
 
@@ -34,9 +36,20 @@ public class Health : MonoBehaviour
         this.maxHealth = maxHealth;
     }
 
+<<<<<<< Updated upstream
+=======
+    
+    public void SetCanTakeDamage(bool canTakeDamage)
+    {
+        this.canTakeDamage = canTakeDamage;
+    }
+
+
+   
+>>>>>>> Stashed changes
     public virtual void TakeDamage(float damage)
     {
-        if(this.isActiveAndEnabled)
+        if(this.isActiveAndEnabled && canTakeDamage)
         {
             this.currentHealth -= damage;
 

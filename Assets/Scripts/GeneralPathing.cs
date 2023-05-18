@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 using Unity.VisualScripting;
+using UnityEngine.Events;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class GeneralPathing : MonoBehaviour
@@ -17,10 +18,12 @@ public class GeneralPathing : MonoBehaviour
     private Path path;
     private int currentWayPoint = 0;
     private Seeker seeker;
-    
-    public float speed = 3f;
+
+    public float speed;
     public Vector3 direction;
 
+    public UnityEvent OnDirectionReached;
+    
     [SerializeField] private LayerMask obstacleLayer;
 
     
@@ -28,6 +31,12 @@ public class GeneralPathing : MonoBehaviour
     {
         UpdatePath();
         direction = dir;
+    }
+
+    public void StopMoving()
+    {
+        SetDirection(transform.position);
+        rb.velocity = Vector3.zero;
     }
     
     public void SetSpeed(float spd)
@@ -61,6 +70,7 @@ public class GeneralPathing : MonoBehaviour
         //If position is almost the same is the last point in path.vectorPath, then stop moving
         if (Vector2.Distance(rb.position, path.vectorPath[path.vectorPath.Count - 1]) < 0.1f)
         {
+            OnDirectionReached.Invoke();
             rb.velocity = Vector2.zero;
             return;
         }
@@ -118,17 +128,15 @@ public class GeneralPathing : MonoBehaviour
         }
     }
 
+    
     public bool IsObstacleBetweenPlayer()
     {
-        //Check if there is an obstacle between player and enemy
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, 
-            player.transform.position - transform.position, Vector2.Distance(transform.position, 
-                player.transform.position), 
-            LayerMask.GetMask(obstacleLayer.ToString()));
-        
+        float distance = Vector2.Distance(transform.position, player.transform.position);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, distance, obstacleLayer);
         if (hit.collider != null)
         {
             return true;
+            // If the ray hits a collider in the specified layer, do something
         }
         return false;
     }
