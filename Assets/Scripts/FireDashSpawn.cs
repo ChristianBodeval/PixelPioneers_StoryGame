@@ -14,12 +14,11 @@ public class FireDashSpawn : MonoBehaviour
         dash = GetComponent<Dash>();
     }
 
-    private IEnumerator SpawnFire()
+    public void SpawnFire()
     {
         if (dash.isDashing == true)
         {
             GameObject fireSpawn = Instantiate(firePrefab, playerTransform.position, Quaternion.identity);
-            yield return null;
         }
     }
 }

@@ -36,12 +36,13 @@ public class TriThrow : MonoBehaviour
         cameraShake = GameObject.Find("Camera").GetComponent<CameraShake>();
     }
 
-    public void SetDirection(Vector2 dir, float throwAngle)
-    {
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + throwAngle;                // Angle for pointing to player
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        direction = dir + GetDirectionFromAngle(throwAngle);
-    }
+    //public void SetDirection(Vector2 dir, float throwAngle)
+    //{
+    //    float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + throwAngle;                // Angle for pointing to player
+    //    transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    //    direction = dir + GetDirectionFromAngle(throwAngle);
+    //}
+
     //public void SetDirection(Vector2 dir, float angle)
     //{
     //    direction = dir;
@@ -50,11 +51,10 @@ public class TriThrow : MonoBehaviour
     //    direction = Quaternion.Euler(0f, 0f, angleInRadians) * dir;
     //}
 
-
-    private void FixedUpdate()
-    {
-        transform.position += (Vector3)(direction.normalized * speed * Time.deltaTime);
-    }
+    //private void FixedUpdate()
+    //{
+    //    transform.position += (Vector3)(direction.normalized * speed * Time.deltaTime);
+    //}
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -90,7 +90,6 @@ public class TriThrow : MonoBehaviour
         float angleInRadians = angle * Mathf.Deg2Rad;
         return new Vector2(Mathf.Cos(angleInRadians), Mathf.Sin(angleInRadians));
     }
-
 
     public void ResetCD()
     {
