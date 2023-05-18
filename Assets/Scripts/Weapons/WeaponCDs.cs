@@ -36,6 +36,10 @@ public class WeaponCDs : MonoBehaviour
         mjoelnirCDVisual.fillAmount = 1;
         gungnirCDVisual.fillAmount = 1;
 
+        dashScript = GameObject.Find("Dash").GetComponent<Dash>();
+        mjoelnirScript = GameObject.Find("Mjoelnir").GetComponent<Mjoelnir>();
+        gungnirScript = GameObject.Find("GungnirThrow").GetComponent<Gungnir>();
+
         //TODO Fix this - Christian ability system (Get info from Ability SO's instead)
         //baseMeleeCooldownTime = playerActionScript.baseMeleeCooldown;
         /*Cheated for now: */

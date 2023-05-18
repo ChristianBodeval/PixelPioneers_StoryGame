@@ -4,18 +4,13 @@ using UnityEngine;
 
 public class ConeAttack : MonoBehaviour
 {
-    PolygonCollider2D coneAttack;
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        Invoke("Destroy", 0.15f);
     }
 
-    void OntriggerEnter2D(Collider2D other)
+    private void Destroy()
     {
-        if (other.gameObject.tag == "Enemy")
-        {
-            Destroy(other.gameObject);
-        }
+        Destroy(gameObject);
     }
 }

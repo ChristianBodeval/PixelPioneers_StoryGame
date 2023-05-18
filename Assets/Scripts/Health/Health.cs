@@ -41,9 +41,6 @@ public class Health : MonoBehaviour
         this.currentHealth = health;
         this.maxHealth = maxHealth;
     }
-
-<<<<<<< Updated upstream
-=======
     
     public void SetCanTakeDamage(bool canTakeDamage)
     {
@@ -51,8 +48,6 @@ public class Health : MonoBehaviour
     }
 
 
-   
->>>>>>> Stashed changes
     public virtual void TakeDamage(float damage)
     {
         if(this.isActiveAndEnabled && canTakeDamage)

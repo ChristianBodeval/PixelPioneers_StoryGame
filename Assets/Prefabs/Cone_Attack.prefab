@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5329026731082029810}
   - component: {fileID: 5329026731082029811}
   - component: {fileID: 7942341646413057959}
-  - component: {fileID: -2515124659397358047}
+  - component: {fileID: 5586234409881356327}
   m_Layer: 0
   m_Name: Cone_Attack
   m_TagString: Untagged
@@ -107,7 +107,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-2515124659397358047
+--- !u!114 &5586234409881356327
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,7 +116,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5329026731082029813}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d9df4c4bbd3f2140bed02f47b325785, type: 3}
+  m_Script: {fileID: 11500000, guid: 90b133a0beff6794c9673d396518d221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdownDuration: 0

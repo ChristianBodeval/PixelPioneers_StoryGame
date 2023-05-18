@@ -29,7 +29,7 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
     // Start is called before the first frame update
     private void Start()
     {
-        weaponCDVisual = GameObject.Find("CD's").GetComponent<WeaponCDs>();
+        weaponCDVisual = GameObject.Find("CDs").GetComponent<WeaponCDs>();
         playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
         player = GameObject.Find("Player");
         gungnirCDCoroutine = GungnirCD();
