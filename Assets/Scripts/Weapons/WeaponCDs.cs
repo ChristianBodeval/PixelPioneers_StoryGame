@@ -11,7 +11,7 @@ public class WeaponCDs : MonoBehaviour
 
     public Dash dashScript;
     public Mjoelnir mjoelnirScript;
-    public Gungnir gungnirScript;
+    public ThrowGungnir gungnirScript;
 
     public GameObject eyeCatcherMjoelnir;
     public GameObject eyeCatcherDash;
@@ -36,6 +36,10 @@ public class WeaponCDs : MonoBehaviour
         mjoelnirCDVisual.fillAmount = 1;
         gungnirCDVisual.fillAmount = 1;
 
+        dashScript = GameObject.Find("Dash").GetComponent<Dash>();
+        mjoelnirScript = GameObject.Find("Mjoelnir").GetComponent<Mjoelnir>();
+        gungnirScript = GameObject.Find("GungnirThrow").GetComponent<ThrowGungnir>();
+
         //TODO Fix this - Christian ability system (Get info from Ability SO's instead)
         //baseMeleeCooldownTime = playerActionScript.baseMeleeCooldown;
         /*Cheated for now: */
@@ -45,7 +49,7 @@ public class WeaponCDs : MonoBehaviour
         gungnirCooldownTime = gungnirScript.CD;
     }
 
-    // Update is called once per frame
+    // StateUpdate is called once per frame
     private void Update()
     {
         baseMeleeCDVisual.fillAmount = baseMeleeCooldownRemaining / baseMeleeCooldownTime;

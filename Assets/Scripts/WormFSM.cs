@@ -73,9 +73,13 @@ public class WormFSM : MonoBehaviour
     public Color chaseColor;
 
     // Start is called before the first frame update
+    
+    
+    
     void Start()
     {
         //Initialize all the states
+        
         idleState = this.gameObject.AddComponent<IdleState>();
         patrolState = this.gameObject.AddComponent<PatrolState>();
         searchingState = this.gameObject.AddComponent<SearchingState>();
@@ -99,7 +103,10 @@ public class WormFSM : MonoBehaviour
     }
    void Update()
     {
-        currentState.Update(this);
+        if (currentState == null)
+            return;
+        
+        currentState.StateUpdate(this);
         
         //Log currentState
         Debug.Log("Current state: " + currentState);
@@ -165,7 +172,7 @@ public abstract class EnemyState : MonoBehaviour
 {
     public abstract void Enter(WormFSM enemy);
     public abstract void Exit(WormFSM enemy);
-    public abstract void Update(WormFSM enemy);
+    public abstract void StateUpdate(WormFSM enemy);
 }
 
 public class IdleState : EnemyState
@@ -195,7 +202,7 @@ public class IdleState : EnemyState
     }
     
     // Check if player is in sightRange and the view is not blocked by an obstacle
-    public override void Update(WormFSM enemy)
+    public override void StateUpdate(WormFSM enemy)
     {
         //If player is in sightRange
         if (enemy.aStarPathing.GetDistanceToPlayer() < enemy.sightRange && !enemy.aStarPathing.IsObstacleBetweenPlayer())
@@ -231,7 +238,7 @@ public class PatrolState : EnemyState
 
     }
 
-    public override void Update(WormFSM enemy)
+    public override void StateUpdate(WormFSM enemy)
     {
         //If player is in sightRange and no obstacle is blocking the view, then change state to chase
         if (enemy.aStarPathing.GetDistanceToPlayer() < enemy.sightRange && !enemy.aStarPathing.IsObstacleBetweenPlayer())
@@ -256,7 +263,7 @@ public class SearchingState : EnemyState
     {
     }
 
-    public override void Update(WormFSM enemy)
+    public override void StateUpdate(WormFSM enemy)
     {
         if (enemy.aStarPathing.GetDistanceToPlayer() < enemy.sightRange && !enemy.aStarPathing.IsObstacleBetweenPlayer())
         {
@@ -282,7 +289,7 @@ public class ChaseState : EnemyState
     {
     }
 
-    public override void Update(WormFSM enemy)
+    public override void StateUpdate(WormFSM enemy)
     {
         
         //If player is in attackRange, and no obstacle is blocking the view, then change state to attack
@@ -348,7 +355,7 @@ public class AttackState : EnemyState
         return;
     }
 
-    public override void Update(WormFSM enemy)
+    public override void StateUpdate(WormFSM enemy)
     {
         return;
     }
@@ -372,7 +379,7 @@ public class StunnedState : EnemyState
         return;
     }
 
-    public override void Update(WormFSM enemy)
+    public override void StateUpdate(WormFSM enemy)
     {
         //Call log on pressing space
         if (Input.GetKeyDown(KeyCode.Space))
@@ -434,7 +441,7 @@ public class DiggingState : EnemyState
         isDigging = false;
     }
 
-    public override void Update(WormFSM enemy)
+    public override void StateUpdate(WormFSM enemy)
     {
         //If the currentPlayerPosition is reached, then change state to chase and reset cooldown
         if (Vector2.Distance(enemy.transform.position, currentPlayerPosition) < 0.1f)
@@ -456,7 +463,7 @@ public class DeadState : EnemyState
         return;
     }
 
-    public override void Update(WormFSM enemy)
+    public override void StateUpdate(WormFSM enemy)
     {
         return;
     }

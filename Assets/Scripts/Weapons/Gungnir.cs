@@ -6,7 +6,6 @@ public class Gungnir : Ability
     public float damage = 10;
     public float speed;
     public float stunDuration = 2f;
-    public float CD;
 
     private Rigidbody2D rb;
     private bool isDragging;
@@ -135,12 +134,6 @@ public class Gungnir : Ability
     public void StartMove()
     {
         canMove = true;
-    }
-
-    public void ResetCD()
-    {
-        CD = 0;
-        Debug.Log("RESET CD on GUNGNIR");
     }
 
     private IEnumerator PickUpBuffer()

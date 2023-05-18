@@ -10,7 +10,7 @@ public class HealthBarGradient : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+    // StateUpdate is called once per frame
     void Update()
     {
         

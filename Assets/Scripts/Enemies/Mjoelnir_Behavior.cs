@@ -334,7 +334,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
             yield return new WaitForSeconds(chargeUpdateInterval); // Time between steps
 
-            distance = Vector2.Distance(transform.position, targetPos); // Update distance for next loop iteration
+            distance = Vector2.Distance(transform.position, targetPos); // StateUpdate distance for next loop iteration
         }
 
         // Reset variables

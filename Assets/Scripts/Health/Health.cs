@@ -41,16 +41,12 @@ public class Health : MonoBehaviour
         this.currentHealth = health;
         this.maxHealth = maxHealth;
     }
-
-
     
     public void SetCanTakeDamage(bool canTakeDamage)
     {
         this.canTakeDamage = canTakeDamage;
     }
 
-
-   
 
     public virtual void TakeDamage(float damage)
     {
