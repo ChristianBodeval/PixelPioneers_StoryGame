@@ -45,7 +45,7 @@ public class WeaponCDs : MonoBehaviour
         gungnirCooldownTime = gungnirScript.CD;
     }
 
-    // Update is called once per frame
+    // StateUpdate is called once per frame
     private void Update()
     {
         baseMeleeCDVisual.fillAmount = baseMeleeCooldownRemaining / baseMeleeCooldownTime;

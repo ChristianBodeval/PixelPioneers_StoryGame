@@ -40,7 +40,7 @@ public class PlayerAction : MonoBehaviour
 
     private void Update()
     {
-        // Update player input
+        // StateUpdate player input
         moveVector.x = Input.GetAxis("Horizontal");
         moveVector.y = Input.GetAxis("Vertical");
         moveVector = moveVector.normalized; // As to not have faster movement when going diagonal

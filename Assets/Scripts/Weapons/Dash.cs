@@ -35,7 +35,7 @@ public class Dash : Ability, IUpgradeable
         fireSpawn = GetComponent<FireDashSpawn>();
     }
 
-    // Update is called once per frame
+    // StateUpdate is called once per frame
     private void Update()
     {
         StartDash();

@@ -19,7 +19,7 @@ public class FSM_BruiserChargeUp : StateMachineBehaviour
         // TODO Set waitduration from attack script
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    // OnStateUpdate is called on each StateUpdate frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (waitDuration < Time.time) animator.SetBool("IsChargedUp", true);

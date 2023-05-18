@@ -105,7 +105,7 @@ public class RangePathing : MonoBehaviour
     {
         while (gameObject.activeSelf)
         {
-            if (seeker.IsDone()) { seeker.StartPath(transform.position, PathingTarget(), OnPathComplete); } // Update path
+            if (seeker.IsDone()) { seeker.StartPath(transform.position, PathingTarget(), OnPathComplete); } // StateUpdate path
 
             yield return new WaitForSeconds(updateInterval);
         }
