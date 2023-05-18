@@ -47,7 +47,6 @@ public class GeneralPathing : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindWithTag("Player");
-        seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
     }
     
@@ -55,10 +54,11 @@ public class GeneralPathing : MonoBehaviour
     
     private void Start()
     {
+        seeker = GetComponent<Seeker>();
         InvokeRepeating("UpdatePath", 0f, updateInterval); // Updates pathfinding regularly
     }
     
-    //Update when changes inspector
+    //StateUpdate when changes inspector
 
     private void FixedUpdate()
     {

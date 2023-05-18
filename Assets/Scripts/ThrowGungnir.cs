@@ -37,7 +37,7 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
         triThrowScript = triThrow.GetComponent<TriThrow>();
     }
 
-    // Update is called once per frame
+    // StateUpdate is called once per frame
     private void Update()
     {
         StartThrow();

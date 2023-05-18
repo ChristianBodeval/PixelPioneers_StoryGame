@@ -17,5 +17,4 @@ public class SweepingDash : MonoBehaviour
         slashCollider.SetActive(false);
 
     }
-
 }

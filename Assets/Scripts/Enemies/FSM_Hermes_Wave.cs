@@ -17,7 +17,7 @@ public class FSM_Hermes_Wave : StateMachineBehaviour
         waitDuration = Time.time + script.chargeDelay;
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    // OnStateUpdate is called on each StateUpdate frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (waitDuration > Time.time) return;

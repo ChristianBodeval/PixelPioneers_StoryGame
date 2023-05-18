@@ -16,7 +16,7 @@ public class BigEnemyHPBar : MonoBehaviour
         HPFill.color = gradient.Evaluate(HP.normalizedValue);
     }
 
-    // Update is called once per frame
+    // StateUpdate is called once per frame
      private void Update()
     {
         HP.value = health.currentHealth;

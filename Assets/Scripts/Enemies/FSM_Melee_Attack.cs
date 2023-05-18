@@ -13,7 +13,7 @@ public class FSM_Melee_Attack : StateMachineBehaviour
         animator.GetComponentInParent<Melee_Attack>().Attack(); // Attack
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    // OnStateUpdate is called on each StateUpdate frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (!animator.GetBool("AttackRDY") || animator.GetBool("IsStunned") || animator.GetBool("CannotTransitionState")) { return; } // Guard clause
