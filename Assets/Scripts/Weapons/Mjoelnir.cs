@@ -52,6 +52,7 @@ public class Mjoelnir : Ability, IUpgradeable
     [SerializeField] private GameObject aoeIndicator;
 
     private LayerMask obstacleLayer;
+    private LayerMask pitLayer;
 
     private bool abilityRDY = true;
     private Coroutine abilityCDFunction;
@@ -68,6 +69,7 @@ public class Mjoelnir : Ability, IUpgradeable
         dash = GameObject.Find("Dash").GetComponent<Dash>();
 
         obstacleLayer = LayerMask.GetMask("Obstacles");
+        pitLayer = LayerMask.GetMask("Pit");
     }
 
     private void Update()
@@ -247,7 +249,7 @@ public class Mjoelnir : Ability, IUpgradeable
         // Enable particles
         chargeParticles.SetActive(true);
 
-        while (distance > 0.8f && !Physics2D.Raycast(player.transform.position, dir, 0.5f, obstacleLayer))
+        while (distance > 0.8f && !Physics2D.Raycast(player.transform.position, dir, 0.5f, obstacleLayer) && !Physics2D.Raycast(player.transform.position, dir, 0.5f, pitLayer))
         {
             dir = (targetPos - player.transform.position).normalized;
 

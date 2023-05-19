@@ -14,7 +14,7 @@ public class SpawnSystem : MonoBehaviour
     private List<int> randomizingList = new List<int>();
     private Coroutine waveAliveCoroutine = null;
     private bool isSpawning = false;
-    private bool isWaitingForWaveToDie = false;
+    private float postWaveWaitTime = 0f;
     private Coroutine awaitAddWaveCoroutine;
     [HideInInspector] public static bool waveAlive = false;
     [HideInInspector] public static int totalWaves;
@@ -55,7 +55,7 @@ public class SpawnSystem : MonoBehaviour
         while (true)
         {
             // Suspend execution of function until wave is dead if enabled on previous wave
-            while (isWaitingForWaveToDie && waveAlive || wavesToSpawn.Count < 1)
+            while (waveAlive || wavesToSpawn.Count < 1)
             {
                 yield return new WaitForSeconds(0.1f);
             }
@@ -80,7 +80,7 @@ public class SpawnSystem : MonoBehaviour
             // Spawn wave > remove it from waiting list > tell UI its the next wave
             if (wavesToSpawn.Count > 0)
             {
-                if (wavesToSpawn.Count > 0) isWaitingForWaveToDie = wavesToSpawn[0].waitForWaveToBeDead; // Are we waiting on wave being dead before spawning the next one
+                postWaveWaitTime = wavesToSpawn[0].waitTimeAfterWave;
                 yield return StartCoroutine(IterateListRandomly(wavesToSpawn[0].timeBetweenMobs)); // Spawn the enemies in a random order
                 if (wavesToSpawn.Count > 0) wavesToSpawn.Remove(wavesToSpawn[0]); // Remove waves we have already used
             }
@@ -112,6 +112,7 @@ public class SpawnSystem : MonoBehaviour
             {
                 currentWave++; // UI knows its the next wave - only true if wave was alive and now is dead
                 if (waitingDeathList.Count < 1) waveAlive = false;
+                yield return new WaitForSeconds(postWaveWaitTime);
             }
 
             yield return new WaitForSeconds(0.1f);
@@ -142,7 +143,7 @@ public class SpawnSystem : MonoBehaviour
         GameObject enemy = Pool.pool.DrawFromEnemyPool(type);
         enemy.transform.position = FindSpawnPoint();
         enemy.transform.rotation = Quaternion.Euler(-45f, 0f, 0f);
-        if (isWaitingForWaveToDie) waitingDeathList.Add(enemy);
+        waitingDeathList.Add(enemy);
     }
 
     // Returns a point eligible for spawning an enemy outside of the screen

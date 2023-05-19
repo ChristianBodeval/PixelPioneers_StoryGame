@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
 
 public class Health : MonoBehaviour
@@ -74,7 +75,7 @@ public class Health : MonoBehaviour
             }
 
             // Reset material
-            sr.material = baseMaterial;
+            if (this.currentHealth > 0) sr.material = baseMaterial;
 
             // Freeze frame enemies
             if (gameObject.CompareTag("Enemy")) GetComponent<Crowd_Control>().FreezeFrame(freezeDurationOnDmgTaken);
@@ -149,23 +150,32 @@ public class Health : MonoBehaviour
             gameObject.GetComponent<Collider2D>().enabled = false;
 
             // Stop animation and play dissipation shader
+            ShadowCaster2D shadow = gameObject.GetComponentInChildren<ShadowCaster2D>();
+            shadow.enabled = false;
             GetComponentInChildren<Animator>().speed = 0f;
             Material deathMat = Instantiate(deathMaterial);
             sr.material = deathMat;
             sr.material.color = Color.white;
 
+            SpriteRenderer shadowSr = shadow.GetComponent<SpriteRenderer>();
+            Color color = shadow.GetComponent<SpriteRenderer>().color;
+            float alpha = color.a;
             float timeStep = deathAnimDuration / 4;
             float t = 1f;
 
             while (sr.material.GetFloat("_FadeTime") > 0f)
             {
                 t -= timeStep;
+                alpha -= timeStep;
+                shadow.GetComponent<SpriteRenderer>().color = new Color(shadowSr.color.r, shadowSr.color.g, shadowSr.color.b, alpha);
                 sr.material.SetFloat("_FadeTime", t);
                 yield return new WaitForSeconds(timeStep);
             }
 
             // Deactivate enemy and return to pool
-            GameObject.Find("EnemyFactory").GetComponent<SpawnSystem>().RemoveFromWaitDeathList(gameObject);
+            GameObject.Find("GameManager").GetComponent<SpawnSystem>().RemoveFromWaitDeathList(gameObject);
+            shadowSr.color = color;
+            shadow.GetComponent<ShadowCaster2D>().enabled = true;
             Pool.pool.ReturnToEnemyPool(gameObject);
         }
     }

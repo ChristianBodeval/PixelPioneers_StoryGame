@@ -169,13 +169,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b601c409a0b1b46a23c40df8cc3a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxVolume: 0
   currentHealth: 100
   maxHealth: 100
   blinkMaterial: {fileID: 2100000, guid: a8af1c8b3ad351b4b8c015c0516f7fc9, type: 2}
   baseMaterial: {fileID: 2100000, guid: 4c9a87858e2754648b8f0d5143303072, type: 2}
   deathMaterial: {fileID: 2100000, guid: bc4b0c691a23bd747b4d5cbd517df6fe, type: 2}
   deathAnimDuration: 0.5
+  deathSFX: {fileID: 8300000, guid: 8641cc0723aa04f4bb401dcf8ccc53b4, type: 3}
+  bossBloodSFX: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
   DamageTakenEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  Dead:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &979528337
@@ -191,12 +197,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 512
   updateInterval: 0.05
   nextWayPointDistance: 0.3
   offset: 0.3
@@ -204,7 +204,11 @@ MonoBehaviour:
   isFollowing: 1
   newPositionRange: 2
   newPositionSpeed: 18
-  waitDurationRunAway: 1
+  sprintAwayCD: 1
+  isSprintRDY: 1
+  bossTrack: {fileID: 8300000, guid: 9a96f3d083dee81418f119ef6cd05182, type: 3}
+  sfxVolume: 1
+  sprintSFX: {fileID: 8300000, guid: 18fb383f3c8da5348989aac30e881bef, type: 3}
 --- !u!114 &979528338
 MonoBehaviour:
   m_ObjectHideFlags: 0

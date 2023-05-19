@@ -2,9 +2,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class SoundManager : MonoBehaviour
+public class SFXManager : MonoBehaviour
 {
-    public static SoundManager singleton;
+    public static SFXManager singleton;
 
     public float masterVolume = 0.5f; // Should be changed from settings
     public AudioMixer masterMixer;
@@ -22,11 +22,15 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlaySound(AudioClip clip, float volume)
+    public void PlaySound(AudioClip clip, Vector2 pos, float volume = 1f, bool isLooping = false, Transform parent = null)
     {
         GameObject obj = Pool.pool.DrawFromSFXPool();
         AudioSource source = obj.GetComponent<AudioSource>();
 
+        obj.transform.position = pos;
+        obj.transform.parent = parent ?? null; // If parent isn't null, set parent to parent transform
+
+        source.loop = isLooping;
         source.clip = clip;
         source.volume = volume * masterVolume;
         source.pitch = GetUniqueRandomPitch();

@@ -12,6 +12,8 @@ TagManager:
   - CameraBounds
   - CMCamera
   - EyecatchGungnir
+  - Boss
+  - Shadow
   layers:
   - Default
   - TransparentFX

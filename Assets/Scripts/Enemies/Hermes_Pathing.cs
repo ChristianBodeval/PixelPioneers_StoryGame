@@ -111,7 +111,7 @@ public class Hermes_Pathing : MonoBehaviour
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Ready")) // Only Move and Idle states are tagged 'Ready'
         {
-            float modifier = (Vector2.Distance(transform.position, player.transform.position) > Hermes_Attack.waveRange + 2f) ? 1.5f : 1f; // Move faster when far from the player
+            float modifier = (Vector2.Distance(transform.position, player.transform.position) > Hermes_Attack.waveRange + 2f) ? (player.transform.position - transform.position).magnitude : 1f; // Move faster when far from the player
             modifier = (IsTargetTooFar() ? modifier : 0f); // Do not move if hermes is close enough
             rb.velocity = speed * dir * modifier; // Movement
         }
@@ -207,11 +207,12 @@ public class Hermes_Pathing : MonoBehaviour
 
         SFXManager.singleton.PlaySound(sprintSFX, transform.position, sfxVolume, transform);
 
+        float t = 0;
+
         // Move to new position
         while (distance > 1.5f)
         {
             // Move through obstacles if any are encountered
-            float t = 0;
             while (Physics2D.CircleCast(transform.position, 0.6f, dir, 0.6f, obstacleLayer))
             {
                 t += 0.1f;

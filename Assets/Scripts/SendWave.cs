@@ -6,7 +6,6 @@ using UnityEngine;
 public class SendWave : MonoBehaviour
 {
     [SerializeField] private WaveObject[] waves;
-    [SerializeField] private float timeBetweenWaves;
     private SpawnSystem spawnSystem;
     private Coroutine sendWavesCoroutine = null;
     private int currentWave;

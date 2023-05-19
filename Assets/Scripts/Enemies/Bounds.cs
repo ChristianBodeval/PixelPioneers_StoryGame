@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class Bounds : MonoBehaviour
 {
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private LayerMask obstacleLayer;
-    [SerializeField] private LayerMask enemyLayers;
+    private LayerMask groundLayer;
+    private LayerMask obstacleLayer;
+    private LayerMask pitLayer;
+    private LayerMask enemyLayers;
     private RaycastHit2D[] enemies;
     private GameObject player;
 
     private void Start()
     {
+        groundLayer = LayerMask.GetMask("Ground");
+        obstacleLayer = LayerMask.GetMask("Obstacles");
+        pitLayer = LayerMask.GetMask("Pit");
+        enemyLayers = LayerMask.GetMask("Enemy");
+
         player = GameObject.Find("Player");
         StartCoroutine(CheckMobBounds()); 
     }
@@ -27,7 +33,7 @@ public class Bounds : MonoBehaviour
 
             foreach (RaycastHit2D e in enemies)
             {
-                if (!Physics2D.OverlapPoint(e.transform.position, groundLayer) || Physics2D.OverlapPoint(e.transform.position, obstacleLayer))
+                if (!Physics2D.OverlapPoint(e.transform.position, groundLayer) || Physics2D.OverlapPoint(e.transform.position, obstacleLayer) || Physics2D.OverlapPoint(e.transform.position, pitLayer))
                 {
                     if (e.transform.CompareTag("Boss") && e.transform.GetComponentInChildren<Animator>().GetBool("IsFleeing")) // Is hermes and is fleeing)
                     {
@@ -43,7 +49,7 @@ public class Bounds : MonoBehaviour
             }
 
             // Check if player is out of bounds
-            if (!Physics2D.OverlapPoint(player.transform.position, groundLayer) || Physics2D.OverlapPoint(player.transform.position, obstacleLayer))
+            if (!Physics2D.OverlapPoint(player.transform.position, groundLayer) || Physics2D.OverlapPoint(player.transform.position, obstacleLayer) || Physics2D.OverlapPoint(player.transform.position, pitLayer))
             {
                 StartCoroutine(FindClosestValidPosition(player));
             }

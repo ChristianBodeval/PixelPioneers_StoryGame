@@ -116,7 +116,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5329026731082029813}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d9df4c4bbd3f2140bed02f47b325785, type: 3}
+  m_Script: {fileID: 11500000, guid: d3d728b75bda1ec4aa4317c13b5d07ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdownDuration: 0.5
+  countdownDuration: 0.24
