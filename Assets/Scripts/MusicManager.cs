@@ -4,6 +4,7 @@ public class MusicManager : MonoBehaviour
 {
     public static MusicManager singleton;
 
+    [Range(0f, 1f)] public float masterVolume = 1f;
     public AudioSource audioSource;
     public float fadeDuration = 1.0f;
     private AudioClip currentClip;
@@ -38,6 +39,7 @@ public class MusicManager : MonoBehaviour
     {
         currentClip = clip;
         audioSource.clip = clip;
+        audioSource.volume = masterVolume;
         audioSource.Play();
     }
 

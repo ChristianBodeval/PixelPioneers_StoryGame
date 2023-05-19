@@ -55,6 +55,8 @@ public class Health : MonoBehaviour
         {
             this.currentHealth -= damage;
 
+            if (this.currentHealth <= 0) return;
+
             // Hermes moves when haven taken damage
             if (gameObject.CompareTag("Boss"))
             {
@@ -73,9 +75,6 @@ public class Health : MonoBehaviour
                     blood.transform.localScale = new Vector3(size, size, 1f);
                 }
             }
-
-            // Reset material
-            if (this.currentHealth > 0) sr.material = baseMaterial;
 
             // Freeze frame enemies
             if (gameObject.CompareTag("Enemy")) GetComponent<Crowd_Control>().FreezeFrame(freezeDurationOnDmgTaken);
@@ -149,20 +148,25 @@ public class Health : MonoBehaviour
             GetComponentInChildren<Animator>().SetBool("CanMove", false);
             gameObject.GetComponent<Collider2D>().enabled = false;
 
-            // Stop animation and play dissipation shader
-            ShadowCaster2D shadow = gameObject.GetComponentInChildren<ShadowCaster2D>();
-            shadow.enabled = false;
+            // Stop animation
             GetComponentInChildren<Animator>().speed = 0f;
+
+            // Set material
+            if (blinkCoroutine != null && !isBlinking) StopCoroutine(blinkCoroutine); // Stops blink coroutine
             Material deathMat = Instantiate(deathMaterial);
             sr.material = deathMat;
             sr.material.color = Color.white;
 
+            // Lerp out shadow
+            ShadowCaster2D shadow = gameObject.GetComponentInChildren<ShadowCaster2D>();
+            shadow.enabled = false;
             SpriteRenderer shadowSr = shadow.GetComponent<SpriteRenderer>();
             Color color = shadow.GetComponent<SpriteRenderer>().color;
             float alpha = color.a;
             float timeStep = deathAnimDuration / 4;
             float t = 1f;
 
+            // Play dissipation shader
             while (sr.material.GetFloat("_FadeTime") > 0f)
             {
                 t -= timeStep;

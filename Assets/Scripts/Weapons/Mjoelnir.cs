@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class Mjoelnir : Ability, IUpgradeable
 {
+    [Header("SFX")]
+    [Range(0f, 1f)][SerializeField] private float volume;
+    [SerializeField] private AudioClip spinImpact;
+
+
     [Header("Hammer Movement")]
     [SerializeField] private float spinDMG;
     [SerializeField] private float spinRadius;
@@ -18,8 +23,6 @@ public class Mjoelnir : Ability, IUpgradeable
     private bool onFreezeCD = false;
     private Vector3 freezeLocation;
     private GameObject player;
-    
-    
     
     [Header("Charge Upgrade")]
     public bool hasChargeUpgrade = true;
@@ -391,17 +394,19 @@ public class Mjoelnir : Ability, IUpgradeable
             cannotHitList.Remove(col.gameObject);
         }
 
-        if (col.CompareTag("Enemy") || col.CompareTag("Boss") && !cannotHitList.ContainsKey(col.gameObject))
+        if ((col.CompareTag("Enemy") || col.CompareTag("Boss")) && !cannotHitList.ContainsKey(col.gameObject))
         {
             //TODO rettes til et egentlig Knockback script eller metode paa enemy. Kald derfra metoden her. 
             //col.transform.position += (col.transform.position - player.transform.position).normalized * 0.3f; // Slight knockback
             col.gameObject.GetComponent<Health>().TakeDamage(spinDMG);
             if (!onFreezeCD) StartCoroutine(FreezeSpin());
             AddToSpinCDList(col.gameObject);
+
+            SFXManager.singleton.PlaySound(spinImpact, col.transform.position, volume);
         }
         else if (col.CompareTag("Projectile"))
         {
-            Destroy(col.gameObject);
+            Pool.pool.ReturnToProjectilePool(col.gameObject);
         }
     }
 

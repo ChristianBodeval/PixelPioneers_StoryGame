@@ -9,7 +9,13 @@ public class PlayerAction : MonoBehaviour
     private float slowAmount;
     private Rigidbody2D rb;
     public Vector3 moveVector;
-    private bool canMove = true; 
+    private bool canMove = true;
+
+    [Header("SFX")]
+    [Range(0f, 1f)][SerializeField] private float volume;
+    [SerializeField] private AudioClip footstepSFX;
+    [SerializeField] private float footstepDelay = 0.12f;
+    private float lastSFX;
 
     public bool canMoveAccessor
     {
@@ -69,6 +75,13 @@ public class PlayerAction : MonoBehaviour
         if (moveVector.magnitude > 0f && canMove) // Horizontal movement
         {
             rb.velocity = moveVector * speed * (1 - slowAmount);
+
+            // Footsteps
+            if (footstepDelay + lastSFX < Time.time)
+            {
+                lastSFX = Time.time + footstepDelay;
+                SFXManager.singleton.PlaySound(footstepSFX, transform.position, volume, false, transform);
+            }
         }
         else if (moveVector.magnitude < 0.1f && canMove)
         {
