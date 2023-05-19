@@ -277,7 +277,7 @@ MonoBehaviour:
   activeColor: {r: 0.9245283, g: 0.8591136, b: 0.8591136, a: 0.77254903}
   cooldownColor: {r: 0.8207547, g: 0.2516465, b: 0.2516465, a: 0}
   nextAbility: {fileID: 0}
-  hitCollider: {fileID: 0}
+  hitCollider: {fileID: 1019147408074125075}
   colliderStat: {fileID: 11400000, guid: 5e269b22577be486fa851899f4cf3e37, type: 2}
   spawnPoint: {fileID: 0}
   upgradeOption1: {fileID: 0}

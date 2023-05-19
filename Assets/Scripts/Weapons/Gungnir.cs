@@ -33,6 +33,9 @@ public class Gungnir : Ability
 
     private GungnirPickUp gungnirPickUp;
 
+    [SerializeField] private LayerMask enemyLayer;
+
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -42,6 +45,9 @@ public class Gungnir : Ability
         gungnirPickUp.enabled = false;
         cameraShake = GameObject.Find("Camera").GetComponent<CameraShake>();
         throwGungnir = GameObject.Find("GungnirThrow").GetComponent<ThrowGungnir>();
+
+        enemyLayer = LayerMask.GetMask("Enemy");
+
     }
 
     private void FixedUpdate()
@@ -60,7 +66,7 @@ public class Gungnir : Ability
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Enemy") && !isStuck && !throwGungnir.hasUpgrade2)
+        if (!isStuck && !throwGungnir.hasUpgrade2 && enemyLayer == (enemyLayer | (1 << col.gameObject.layer)))
         {
             pierceAmount++;
             //speed = speed - 5 * pierceAmount;

@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: BouncingLightning
   m_EditorClassIdentifier: 
   name: BouncingLightning
+  description: 
   damage: 1.5
   duration: 5
   cooldownTime: 7
   keyTrigger: 0
+  sprite: {fileID: 0}
   isFollowingCaster: 0
   canChangeColors: 0
-  range: 1.5
+  range: 3
   timeBetweenEachBounce: 0.3
   bounces: 20
