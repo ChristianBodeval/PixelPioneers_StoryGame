@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b601c409a0b1b46a23c40df8cc3a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxVolume: 0
+  sfxVolume: 0.5
   currentHealth: 100
   maxHealth: 100
   blinkMaterial: {fileID: 2100000, guid: a8af1c8b3ad351b4b8c015c0516f7fc9, type: 2}
@@ -196,18 +196,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961a527e63b3590438a40f43881a7706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 5
   updateInterval: 0.05
-  nextWayPointDistance: 0.3
+  nextWayPointDistance: 2
   offset: 0.3
   attackDeadZone: 1
   isFollowing: 1
   newPositionRange: 2
-  newPositionSpeed: 18
-  sprintAwayCD: 1
+  newPositionSpeed: 22
+  sprintAwayCD: 0.5
   isSprintRDY: 1
+  mjoelnir: {fileID: 5773579059583092043, guid: 696e257c191c18a47a87b91f16eaf3bd, type: 3}
   bossTrack: {fileID: 8300000, guid: 9a96f3d083dee81418f119ef6cd05182, type: 3}
-  sfxVolume: 1
+  sfxVolume: 0.5
   sprintSFX: {fileID: 8300000, guid: 18fb383f3c8da5348989aac30e881bef, type: 3}
 --- !u!114 &979528338
 MonoBehaviour:
@@ -222,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 1
-  attackCD: 7
+  attackCD: 5
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -230,14 +231,14 @@ MonoBehaviour:
   attackTelegraphTime: 0.2
   segmentPrefab: {fileID: 2110713007026889626, guid: b51f3005dbd6eaf4c8aef9280eeea043, type: 3}
   segmentLength: 2
-  segmentWidth: 3.4
-  segmentGrowthRate: 0.3
+  segmentWidth: 0.5
+  segmentGrowthRate: 4.5
   segmentAmounts: 3
   segmentSpawnDelay: 0.15
   waveDamage: 3
   waveCooldown: 3
-  chargeDelay: 0.1
-  postFireDelay: 0.2
+  chargeDelay: 0.2
+  postFireDelay: 0
 --- !u!1 &157113165350864262
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,6 +250,7 @@ GameObject:
   - component: {fileID: 157113165350864260}
   - component: {fileID: 157113165350864263}
   - component: {fileID: 655225896606528644}
+  - component: {fileID: 1716942472}
   m_Layer: 0
   m_Name: EnemySprite
   m_TagString: Untagged
@@ -344,6 +346,105 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!96 &1716942472
+TrailRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157113165350864262}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 7bf3fff8519a75d4cb8dc5a01bb705eb, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Time: 0.2
+  m_Parameters:
+    serializedVersion: 3
+    widthMultiplier: 0.99
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.2
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    colorGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 0.47058824}
+      key1: {r: 1, g: 1, b: 1, a: 0.47058824}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 42405
+      atime2: 65535
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 3
+    numCornerVertices: 0
+    numCapVertices: 0
+    alignment: 1
+    textureMode: 1
+    shadowBias: 0.5
+    generateLightingData: 0
+  m_MinVertexDistance: 0.1
+  m_Autodestruct: 0
+  m_Emitting: 1
 --- !u!1 &7719931192909279520
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,7 +504,7 @@ MonoBehaviour:
   - {x: 0.4707036, y: -0.017021198, z: 0.00000018483634}
   m_ShapePathHash: 96680608
   m_Mesh: {fileID: 0}
-  m_InstanceId: 78362
+  m_InstanceId: -1466
   m_LocalBounds:
     m_Center: {x: -0.009998858, y: 0.0018541366, z: 0}
     m_Extent: {x: 0.48070246, y: 0.20846152, z: 0}

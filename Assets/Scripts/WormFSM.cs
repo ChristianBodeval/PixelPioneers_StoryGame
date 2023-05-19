@@ -79,7 +79,8 @@ public class WormFSM : MonoBehaviour
     void Start()
     {
         //Initialize all the states
-        
+
+        player = GameObject.Find("Player");
         idleState = this.gameObject.AddComponent<IdleState>();
         patrolState = this.gameObject.AddComponent<PatrolState>();
         searchingState = this.gameObject.AddComponent<SearchingState>();

@@ -34,6 +34,8 @@ public class Hermes_Pathing : MonoBehaviour
     private Coroutine movetoPositionCoroutine;
     private Coroutine sprintCDCoroutine;
 
+    public GameObject mjoelnir;
+
     [Header("Music")]
     public AudioClip bossTrack;
 
@@ -60,6 +62,7 @@ public class Hermes_Pathing : MonoBehaviour
     private void OnEnable()
     {
         if (animator != null) animator.SetBool("CanMove", true);
+        Instantiate(mjoelnir);
     }
 
     private void FixedUpdate()
