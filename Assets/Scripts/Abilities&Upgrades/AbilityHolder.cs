@@ -24,6 +24,8 @@ public class AbilityHolder : Ability, IUpgradeable
 
     public AbilityHolder nextAbility;
 
+    public GameObject slashAnimation;
+
     [FormerlySerializedAs("collider")] [SerializeField] public ColliderDrawer hitCollider;
     [SerializeField] private SlashCone colliderStat;
     private Vector2 movement;
@@ -118,6 +120,9 @@ public class AbilityHolder : Ability, IUpgradeable
 
     public void SetActive()
     {
+        //If AbilitySO is SlashAbility
+        
+
         Debug.Log("this.gameObject = " + this.gameObject);
         if(spawnPoint != null)
             transform.position = spawnPoint.transform.position;
@@ -143,6 +148,16 @@ public class AbilityHolder : Ability, IUpgradeable
         if (nextAbility != null)
         {
             nextAbility.SetActive();
+        }
+
+        //
+
+        if (abilitySO.name == "MeleeAttack")
+        {
+            Debug.Log("Spawn");
+            //GameObject slash = Instantiate(slashAnimation, playerAction.transform.position, playerAction.lastFacing.rotation);
+            //Instantiate Slashanimation
+
         }
     }
     

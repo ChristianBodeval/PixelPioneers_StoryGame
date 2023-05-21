@@ -13,7 +13,7 @@ public class DestroyAnim : MonoBehaviour
 
     private IEnumerator DestroyAfterDuration()
     {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(countdownDuration);
 
         Destroy(gameObject);
     }
