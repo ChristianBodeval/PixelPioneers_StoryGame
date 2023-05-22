@@ -37,7 +37,7 @@ public class PlayerAction : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         Physics2D.IgnoreLayerCollision(3, 7);
-        dashDirection = GetDashDirection();
+        //dashDirection = GetDashDirection();
         healthScript = GetComponent<Health>();
     }
 
@@ -57,7 +57,7 @@ public class PlayerAction : MonoBehaviour
             BufferCountdown -= Time.deltaTime;
         }
 
-        Dash();
+        //Dash();
 
         Facing();
     }
@@ -79,7 +79,7 @@ public class PlayerAction : MonoBehaviour
             else
             {
                 Camera.main.GetComponent<CameraScript>().StopLagBehindPlayer();
-                EndDash();
+                //EndDash();
             }
         }
     }
@@ -137,48 +137,48 @@ public class PlayerAction : MonoBehaviour
         slowAmount = 0f;
     }
 
-    private void Dash()
-    {
-        // Check if the player is not currently dashing and if they can dash
-        if (!isDashing && Input.GetButton("Dash") && canDash) // Dash is on 'not k'
-        {
-            GetComponent<PlayerHealth>().AddInvulnerability();
+    //private void Dash()
+    //{
+    //    // Check if the player is not currently dashing and if they can dash
+    //    if (!isDashing && Input.GetButton("Dash") && canDash) // Dash is on 'not k'
+    //    {
+    //        GetComponent<PlayerHealth>().AddInvulnerability();
 
-            // Set the player to dashing state
-            isDashing = true;
-            dashTime = 0f;
+    //        // Set the player to dashing state
+    //        isDashing = true;
+    //        dashTime = 0f;
 
-            // Set the dash direction to the last facing direction of the player
-            dashDirection = lastFacing;
+    //        // Set the dash direction to the last facing direction of the player
+    //        dashDirection = lastFacing;
 
-            // Start the dash cooldown coroutine
-            weaponCDVisual.StartCoroutine("DashCD");
-            StartCoroutine(DashCD());
-        }
-    }
+    //        // Start the dash cooldown coroutine
+    //        weaponCDVisual.StartCoroutine("DashCD");
+    //        StartCoroutine(DashCD());
+    //    }
+    //}
 
-    public void CanDash()
-    {
-        canDash = true;
-    }
+    //public void CanDash()
+    //{
+    //    canDash = true;
+    //}
 
-    public void CannotDash()
-    {
-        canDash = false;
-    }
+    //public void CannotDash()
+    //{
+    //    canDash = false;
+    //}
 
-    // Coroutine that controls the dash cooldown time
-    private IEnumerator DashCD()
-    {
-        canDash = false; // Set the player to be unable to dash
-        dashCooldownRemaining = dashCooldownTime; // Reset the remaining cooldown time
-        while (dashCooldownRemaining > 0f) // Count down the cooldown time
-        {
-            dashCooldownRemaining -= Time.deltaTime;
-            yield return null; // Wait for the end of the frame
-        }
-        canDash = true; // Set the player to be able to dash again
-    }
+    //// Coroutine that controls the dash cooldown time
+    //private IEnumerator DashCD()
+    //{
+    //    canDash = false; // Set the player to be unable to dash
+    //    dashCooldownRemaining = dashCooldownTime; // Reset the remaining cooldown time
+    //    while (dashCooldownRemaining > 0f) // Count down the cooldown time
+    //    {
+    //        dashCooldownRemaining -= Time.deltaTime;
+    //        yield return null; // Wait for the end of the frame
+    //    }
+    //    canDash = true; // Set the player to be able to dash again
+    //}
 
     private void Facing()
     {
@@ -189,18 +189,18 @@ public class PlayerAction : MonoBehaviour
         }
     }
 
-    private void EndDash()
-    {
-        isDashing = false;
-        GetComponent<PlayerHealth>().RemoveInvulnerability(); // I frames
-    }
+    //private void EndDash()
+    //{
+    //    isDashing = false;
+    //    GetComponent<PlayerHealth>().RemoveInvulnerability(); // I frames
+    //}
 
-    private Vector2 GetDashDirection()
-    {
-        // Get the direction the player is facing
-        float angle = transform.eulerAngles.y;
-        Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+    //private Vector2 GetDashDirection()
+    //{
+    //    // Get the direction the player is facing
+    //    float angle = transform.eulerAngles.y;
+    //    Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
 
-        return direction.normalized;
-    }
+    //    return direction.normalized;
+    //}
 }

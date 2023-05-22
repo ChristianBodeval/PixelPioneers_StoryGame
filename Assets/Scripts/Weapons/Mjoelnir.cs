@@ -159,7 +159,7 @@ public class Mjoelnir : MonoBehaviour
             if (initCharge != null) StopCoroutine(initCharge);
             initCharge =  StartCoroutine(InitialCharging());
             player.GetComponent<PlayerAction>().StartSlow(slowAmountWhileCharging); // Root the player while casting
-            player.GetComponent<PlayerAction>().CannotDash();
+            //player.GetComponent<PlayerAction>().CannotDash();
 
             // Position the hammer on player
             transform.position = player.transform.position;
@@ -278,7 +278,7 @@ public class Mjoelnir : MonoBehaviour
 
         player.GetComponent<PlayerAction>().StartMove(); // Allow player to move again
         player.GetComponent<PlayerAction>().StopSlow();
-        player.GetComponent<PlayerAction>().CanDash();
+        //player.GetComponent<PlayerAction>().CanDash();
         player.GetComponent<PlayerHealth>().RemoveInvulnerability();
 
         EnableHammer(); // Hammer can hit enemies again
