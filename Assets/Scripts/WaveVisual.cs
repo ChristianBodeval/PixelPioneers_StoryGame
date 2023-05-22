@@ -13,10 +13,10 @@ public class WaveVisual : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject prefab;
     [SerializeField] private GameObject chainPrefab;
-    private List<GameObject> inUseWaveIndicators = new();
-    private List<GameObject> waveIndicatorsPool = new();
-    private List<GameObject> inUseWaveChain = new ();
-    private List<GameObject> waveChainPool = new ();
+    private List<GameObject> inUseWaveIndicators = new List<GameObject>();
+    private List<GameObject> waveIndicatorsPool = new List<GameObject>();
+    private List<GameObject> inUseWaveChain = new List<GameObject>();
+    private List<GameObject> waveChainPool = new List<GameObject>();
     private float crystalWidth;
     private float spacing = 60f;
     private float waveUIWidth;

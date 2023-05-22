@@ -55,6 +55,7 @@ public class Crowd_Control : MonoBehaviour
 
     public void RemoveStun()
     {
+        if (stunCoroutine != null) StopCoroutine(stunCoroutine); // Replace old stun if new is longer
         animator.SetBool("CannotTransitionState", false);
         animator.SetBool("IsStunned", false);
         animator.SetBool("AttackRDY", true);

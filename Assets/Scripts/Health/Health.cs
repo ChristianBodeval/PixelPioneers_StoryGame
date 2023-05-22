@@ -22,21 +22,11 @@ public class Health : MonoBehaviour
     protected Coroutine shakeCoroutine;
     protected static readonly float freezeDurationOnDmgTaken = 0.15f;
     private bool isBlinking = false;
+    public bool canTakeDamage = true;
 
-    protected SpriteRenderer sr;
+    [SerializeField] protected SpriteRenderer sr;
     public UnityEvent DamageTakenEvent;
-
-
-    private void Start()
-    {
-<<<<<<< Updated upstream
-        sr = gameObject.GetComponentInChildren<SpriteRenderer>();
-=======
-        canTakeDamage = true;
-        Animator temp = GetComponentInChildren<Animator>();
-        sr = temp.GetComponent<SpriteRenderer>();
->>>>>>> Stashed changes
-    }
+    public UnityEvent Dead;
 
     // Constructor
     public Health(float health, float maxHealth)
@@ -49,6 +39,8 @@ public class Health : MonoBehaviour
     {
         if(this.isActiveAndEnabled)
         {
+            if (!canTakeDamage) return;
+            
             this.currentHealth -= damage;
 
             // Hermes moves when haven taken damage
@@ -146,26 +138,18 @@ public class Health : MonoBehaviour
 
             // Stop animation and play dissipation shader
             GetComponentInChildren<Animator>().speed = 0f;
-<<<<<<< Updated upstream
-=======
 
             // Set material
             if (blinkCoroutine != null || isBlinking) StopCoroutine(blinkCoroutine); // Stops blink coroutine
->>>>>>> Stashed changes
             Material deathMat = Instantiate(deathMaterial);
             sr.material = deathMat;
             sr.material.color = Color.white;
+            SpriteRenderer srShadow = GetComponentInChildren<UnityEngine.Rendering.Universal.ShadowCaster2D>().GetComponent<SpriteRenderer>();
 
             float timeStep = deathAnimDuration / 4;
             float t = 1f;
+            float alpha = srShadow.color.a;
 
-<<<<<<< Updated upstream
-            while (sr.material.GetFloat("_FadeTime") > 0f)
-            {
-                t -= timeStep;
-                sr.material.SetFloat("_FadeTime", t);
-                yield return new WaitForSeconds(timeStep);
-=======
             // Play dissipation shader
             if (MaterialHasShader(sr.material, dissolve))
             {
@@ -173,17 +157,21 @@ public class Health : MonoBehaviour
                 {
                     t -= timeStep;
                     alpha -= timeStep;
-                    shadow.GetComponent<SpriteRenderer>().color = new Color(shadowSr.color.r, shadowSr.color.g, shadowSr.color.b, alpha);
+                    srShadow.color = new Color(srShadow.color.r, srShadow.color.g, srShadow.color.b, alpha);
                     sr.material.SetFloat("_FadeTime", t);
                     yield return new WaitForSeconds(timeStep);
                 }
->>>>>>> Stashed changes
             }
 
             // Deactivate enemy and return to pool
-            GameObject.Find("EnemyFactory").GetComponent<SpawnSystem>().RemoveFromWaitDeathList(gameObject);
+            GameObject.Find("GameManager").GetComponent<SpawnSystem>().RemoveFromWaitDeathList(gameObject);
             Pool.pool.ReturnToEnemyPool(gameObject);
         }
+    }
+
+    public void SetCanTakeDamage(bool b)
+    {
+        canTakeDamage = b;
     }
 
     public bool MaterialHasShader(Material material, Shader desiredShader)
@@ -225,6 +213,7 @@ public class Health : MonoBehaviour
 
     private void OnEnable()
     {
+        canTakeDamage = true;
         this.currentHealth = maxHealth;
     }
 
