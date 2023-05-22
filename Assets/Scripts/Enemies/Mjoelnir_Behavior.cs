@@ -119,11 +119,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
     private void Move(Vector2 dir)
     {
-<<<<<<< Updated upstream
-        float modifier = (Vector2.Distance(player.transform.position, transform.position) > maxCharge - 2f) ? 2.4f : 1f;
-=======
-        float modifier = (Vector2.Distance(player.transform.position, transform.position) > maxCharge - 2f) ? (player.transform.position - transform.position).magnitude / 1.4f : 1f;
->>>>>>> Stashed changes
+        float modifier = (Vector2.Distance(player.transform.position, transform.position) > maxCharge - 2f) ? ((player.transform.position - transform.position).magnitude / 1.4f) + 1f : 1f;
 
         if (!isCharging)
         {
@@ -209,30 +205,6 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
     private void UseSpecial()
     {
-        // Random between charge and aoe ability
-        /*switch (Random.Range(0,2))
-        {
-            case 0: // Charge ability, is it in range
-                if (Physics2D.Raycast(parentTransform.position, player.transform.position - parentTransform.position, maxCharge - 1f, obstacleLayer))
-                {
-                    StartCoroutine(AbilityCD(specialCooldown));
-                    StartCoroutine(ChargeAbility());
-                }
-                break;
-
-            case 1: // Aoe abilitym, is it in range
-                if (Physics2D.Raycast(parentTransform.position, player.transform.position - parentTransform.position, aoeRadius - 1f, obstacleLayer))
-                {
-                    StartCoroutine(AbilityCD(specialCooldown));
-                    StartCoroutine(AOEAbility());
-                }
-                break;
-
-            default:
-                break;
-        }
-        */
-
         if (Physics2D.Raycast(transform.position, player.transform.position - transform.position, maxCharge - (maxCharge / 4), obstacleLayer))
         {
             StartCoroutine(AbilityCD(specialCooldown));

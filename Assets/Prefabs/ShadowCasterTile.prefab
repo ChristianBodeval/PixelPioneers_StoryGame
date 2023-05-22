@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5905341159674801438}
   - component: {fileID: -5219563947867941691}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: ShadowCasterTile
-  m_TagString: Untagged
+  m_TagString: Shadow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,7 +58,7 @@ MonoBehaviour:
   - {x: 0, y: -0.5, z: 0}
   m_ShapePathHash: -443157227
   m_Mesh: {fileID: 0}
-  m_InstanceId: 74232
+  m_InstanceId: 56156
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}

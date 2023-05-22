@@ -409,6 +409,8 @@ MonoBehaviour:
   deathAnimDuration: 0.25
   deathSFX: {fileID: 8300000, guid: 8641cc0723aa04f4bb401dcf8ccc53b4, type: 3}
   bossBloodSFX: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
+  canTakeDamage: 0
+  sr: {fileID: 2667928336342201540}
   DamageTakenEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -821,7 +823,7 @@ MonoBehaviour:
   - {x: 0.4707036, y: -0.017021198, z: 0.00000018483634}
   m_ShapePathHash: 96680608
   m_Mesh: {fileID: 0}
-  m_InstanceId: 57590
+  m_InstanceId: 54108
   m_LocalBounds:
     m_Center: {x: -0.009998858, y: 0.0018541366, z: 0}
     m_Extent: {x: 0.48070246, y: 0.20846152, z: 0}

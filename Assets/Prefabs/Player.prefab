@@ -173,6 +173,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   moveVector: {x: 0, y: 0, z: 0}
+  volume: 0
+  footstepSFX: {fileID: 8300000, guid: 3f843ee3020f31c4d83cb520814b0ef2, type: 3}
+  footstepDelay: 0.12
   inputBuffer: 0.1
   lastFacing: {x: 1, y: 0}
   weaponCDVisual: {fileID: 924234450459542865}
@@ -279,12 +282,14 @@ MonoBehaviour:
   sfxVolume: 0
   currentHealth: 10
   maxHealth: 10
+  dissolve: {fileID: 0}
   blinkMaterial: {fileID: 2100000, guid: a8af1c8b3ad351b4b8c015c0516f7fc9, type: 2}
   baseMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   deathMaterial: {fileID: 2100000, guid: bc4b0c691a23bd747b4d5cbd517df6fe, type: 2}
   deathAnimDuration: 0
   deathSFX: {fileID: 0}
   bossBloodSFX: {fileID: 0}
+  canTakeDamage: 0
   DamageTakenEvent:
     m_PersistentCalls:
       m_Calls: []

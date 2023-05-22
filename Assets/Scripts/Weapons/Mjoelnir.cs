@@ -247,7 +247,7 @@ public class Mjoelnir : Ability, IUpgradeable
         float distance = Vector2.Distance((Vector2)player.transform.position, targetPos);
         Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
         RaycastHit2D[] enemies;
-        List<GameObject> alreadyHit = new(); // new() is apparantly a thing - VS suggested it
+        List<GameObject> alreadyHit = new List<GameObject>(); // new() is apparantly a thing - VS suggested it
 
         // Enable particles
         chargeParticles.SetActive(true);

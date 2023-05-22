@@ -6,8 +6,8 @@ public interface IInteractable
     Transform transform { get; set; }
     InteractablesManager interactablesManager { get; set; }
     
-    public event EventHandler<IInteractable> OnInRange;
-    public event EventHandler<IInteractable> OnOutOfRange;
+    event EventHandler<IInteractable> OnInRange;
+    event EventHandler<IInteractable> OnOutOfRange;
     
     void Subscribe(InteractablesManager interactablesManager);
     void UnSubscribe(InteractablesManager interactablesManager);

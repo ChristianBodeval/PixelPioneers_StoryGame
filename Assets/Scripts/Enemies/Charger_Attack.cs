@@ -17,7 +17,6 @@ public class Charger_Attack : Enemy_Attack
     [SerializeField] private float chargeSpeed;
     [SerializeField] private float chargeUpdateInterval;
     [SerializeField] private float chargeCD;
-    [SerializeField] private GameObject rangeIndicator;
     [SerializeField] private LineRenderer lr;
     private bool canCharge = true;
     private Coroutine chargeCoroutine;
@@ -81,7 +80,7 @@ public class Charger_Attack : Enemy_Attack
 
         Color lowAlphaRed = new Color(1f, 0f, 0f, 0f);
         Color highAlphaRed = new Color(1f, 0f, 0f, 0.7f);
-        float totalTicks = 20f;
+        float totalTicks = 10f;
         float yieldDuration = (chargeUpTime - 0.1f) / totalTicks;
         float t = 0f;
         Vector3 direction = (player.transform.position - transform.position).normalized;
@@ -144,8 +143,15 @@ public class Charger_Attack : Enemy_Attack
         t = 0; // Reset value of t
         bool isPlayerHit = false;
 
-        while (distance > 1.5f && !Physics2D.CircleCast(transform.position, 0.4f, direction, 0.4f, LayerMask.GetMask("Obstacles")) && !Physics2D.CircleCast(transform.position, 0.4f, direction, 0.4f, LayerMask.GetMask("Pit")))
+        while (distance > 1.5f && !Physics2D.CircleCast(transform.position, 0.4f, direction, 0.4f, LayerMask.GetMask("Pit")))
         {
+            if (Physics2D.CircleCast(transform.position, 0.4f, direction, 0.4f, LayerMask.GetMask("Obstacles")))
+            {
+                animator.SetBool("CanMove", true);
+                GetComponent<Crowd_Control>().Stun(1.5f);
+                yield break;
+            }
+
             // Updates direction and movement
             t += 0.25f;
             direction = (targetPos - transform.position).normalized;
