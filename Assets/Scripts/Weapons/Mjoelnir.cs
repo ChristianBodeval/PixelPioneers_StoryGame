@@ -243,7 +243,9 @@ public class Mjoelnir : MonoBehaviour
 
         while (distance > 0.8f && !Physics2D.Raycast(player.transform.position, dir, 0.5f, obstacleLayer))
         {
+            Vector2 previousDir = dir;
             dir = (targetPos - player.transform.position).normalized;
+            if ((dir + previousDir).magnitude < 1.95f) break; // The vectors were not in the same direction
 
             float speed = 1f; // Default of 1 such that it has no effect if we are beyond accelerating
             float elapsed = 0f;

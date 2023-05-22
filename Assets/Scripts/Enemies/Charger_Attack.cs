@@ -11,22 +11,17 @@ public class Charger_Attack : Enemy_Attack
     [Header("Charge Attack")]
     [SerializeField] private GameObject dangerIndicator;
     [SerializeField] private float chargeDmg;
-    [SerializeField] private float chargeRange;
+    public float chargeRange = 7f;
     [SerializeField] private float chargeUpTime;
     [SerializeField] private float chargeHitBox;
     [SerializeField] private float chargeSpeed;
     [SerializeField] private float chargeUpdateInterval;
     [SerializeField] private float chargeCD;
+    [SerializeField] private GameObject rangeIndicator;
+    [SerializeField] private LineRenderer lr;
     private bool canCharge = true;
     private Coroutine chargeCoroutine;
     private Collider2D col;
-
-    private void FixedUpdate()
-    {
-        StartCharge(player);
-        InAttackRange(player); // Player variable is inherited from IEnemyAttack
-        StopCharge();
-    }
 
     private void Start()
     {
@@ -34,6 +29,14 @@ public class Charger_Attack : Enemy_Attack
         animator = GetComponentInChildren<Animator>();
         animator.SetBool("AttackRDY", true); // Make sure we can attack
         col = GetComponent<Collider2D>();
+        lr = GetComponent<LineRenderer>();
+    }
+
+    private void FixedUpdate()
+    {
+        StartCharge(player);
+        InAttackRange(player); // Player variable is inherited from IEnemyAttack
+        StopCharge();
     }
 
     private void OnEnable()
@@ -72,42 +75,87 @@ public class Charger_Attack : Enemy_Attack
     {
         GetComponent<Crowd_Control>().isStunImmune = true;
         animator.SetBool("CanMove", false);
+        Physics2D.IgnoreLayerCollision(12, 3);
+        Physics2D.IgnoreLayerCollision(12, 7);
         dangerIndicator.SetActive(true);
 
-        float countdown = Time.time + chargeUpTime;
+        Color lowAlphaRed = new Color(1f, 0f, 0f, 0f);
+        Color highAlphaRed = new Color(1f, 0f, 0f, 0.7f);
+        float totalTicks = 20f;
+        float yieldDuration = (chargeUpTime - 0.1f) / totalTicks;
+        float t = 0f;
+        Vector3 direction = (player.transform.position - transform.position).normalized;
+        Vector3 targetPos = transform.position + 2f * chargeRange * direction;
 
-        while (countdown > Time.time)   // Gives player a headsup
+        // Slow increase of alpha and size of line
+        while (t < 1f)
         {
-            if (!IsInLineOfSight(player, animator)) { animator.SetBool("CanMove", true); yield break; }
-            // ** Implement visual element
-            yield return null; 
+            t += 1f / totalTicks;
+
+            // Alpha of line renderer
+            lr.startColor = Color.Lerp(lowAlphaRed, highAlphaRed, t);
+            lr.endColor = Color.Lerp(lowAlphaRed, highAlphaRed, t);
+
+            // Set start & end pos of line renderer
+            direction = (player.transform.position - transform.position).normalized;
+            targetPos = transform.position + direction * (2f * chargeRange);
+            lr.SetPosition(0, transform.position);
+            lr.SetPosition(1, Vector3.Lerp(transform.position, targetPos, t));
+
+            // Set width
+            lr.widthMultiplier = 0.1f + t * 0.02f;
+
+            if (!IsInLineOfSight(player, animator)) 
+            { 
+                animator.SetBool("CanMove", true);
+                //Enable collisions
+                Physics2D.IgnoreLayerCollision(12, 3, false);
+                Physics2D.IgnoreLayerCollision(12, 7, false);
+                lr.startColor = lowAlphaRed;
+                lr.endColor = lowAlphaRed;
+                yield break; 
+            }
+
+            yield return new WaitForSeconds(yieldDuration);
         }
 
+        t = 0f; // Resets value of t
+
+        // Lerp color to white
+        while (t < 1f)
+        {
+            t += 0.15f;
+
+            lr.startColor = Color.Lerp(highAlphaRed, Color.white, t);
+            lr.endColor = Color.Lerp(highAlphaRed, Color.white, t);
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        // Disable icon, collision and set bool to true
         dangerIndicator.SetActive(false);
         animator.SetBool("IsCharging", true);
 
-        // Turn off collisions between charger and enemies + player
-        Physics2D.IgnoreLayerCollision(12, 3);
-        Physics2D.IgnoreLayerCollision(12, 7);
-
-        Vector3 dir = (player.transform.position - transform.position).normalized; // Direction of player
-        Vector3 targetPos = transform.position + 2f * chargeRange * dir;
         float distance = Vector2.Distance(transform.position, targetPos);
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        lr.SetPosition(0, transform.position);
+        lr.SetPosition(1, targetPos);
 
-        float t = 0;
+        t = 0; // Reset value of t
         bool isPlayerHit = false;
 
-        while (distance > 1.5f && !Physics2D.Raycast(transform.position, dir, 0.5f, LayerMask.GetMask("Obstacles")))
+        while (distance > 1.5f && !Physics2D.CircleCast(transform.position, 0.4f, direction, 0.4f, LayerMask.GetMask("Obstacles")) && !Physics2D.CircleCast(transform.position, 0.4f, direction, 0.4f, LayerMask.GetMask("Pit")))
         {
             // Updates direction and movement
-            t += 0.3f;
-            dir = (targetPos - transform.position).normalized;
-            //rb.velocity = dir * (chargeSpeed + chargeRange / Mathf.Clamp(distance, 1f, chargeRange)); // Old version
-            //rb.velocity = dir * Mathf.SmoothDamp(1f, chargeSpeed, ref velocity, 0.2f, chargeSpeed);
-            rb.velocity = dir * Mathf.SmoothStep(1f, chargeSpeed, t);
+            t += 0.25f;
+            direction = (targetPos - transform.position).normalized;
+            rb.velocity = direction * Mathf.SmoothStep(1f, chargeSpeed, t);
 
-            RaycastHit2D playerHit = Physics2D.CircleCast(transform.position, chargeHitBox, dir, LayerMask.GetMask("Player")); // Check for player around enemy
+            // Alpha of line renderer
+            lr.startColor = Color.Lerp(Color.white, lowAlphaRed, t);
+            lr.endColor = Color.Lerp(Color.white, lowAlphaRed, t);
+
+            RaycastHit2D playerHit = Physics2D.CircleCast(transform.position, chargeHitBox, direction, LayerMask.GetMask("Player")); // Check for player around enemy
 
             if (playerHit.collider.CompareTag("Player") && !isPlayerHit && playerHit.collider != null)
             {
@@ -141,7 +189,8 @@ public class Charger_Attack : Enemy_Attack
     // Starts the charge ability if player is in los and range + has ChargeCD rdy
     private void StartCharge(GameObject player)
     {
-        if (Vector2.Distance(player.transform.position, transform.position) <= chargeRange && IsInLineOfSight(player, animator) && canCharge)
+        Debug.Log($"{Vector2.Distance(player.transform.position, transform.position) <= (chargeRange / 4) * 3} && {IsInLineOfSight(player, animator)} && {canCharge}");
+        if (Vector2.Distance(player.transform.position, transform.position) <= (chargeRange / 4) * 3 && IsInLineOfSight(player, animator) && canCharge)
         {
             animator.Play("Charge");
         }
@@ -168,6 +217,9 @@ public class Charger_Attack : Enemy_Attack
             animator.SetBool("IsCharging", false);
             if (GetComponent<Health>().currentHealth > 0f) animator.SetBool("CanMove", true);
             dangerIndicator.SetActive(false);
+
+            lr.startColor = new Color(0f, 0f, 0f, 0f);
+            lr.endColor = new Color(0f, 0f, 0f, 0f);
         }
     }
 }

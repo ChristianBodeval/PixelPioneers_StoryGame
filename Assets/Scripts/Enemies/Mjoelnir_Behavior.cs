@@ -119,7 +119,11 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
     private void Move(Vector2 dir)
     {
+<<<<<<< Updated upstream
         float modifier = (Vector2.Distance(player.transform.position, transform.position) > maxCharge - 2f) ? 2.4f : 1f;
+=======
+        float modifier = (Vector2.Distance(player.transform.position, transform.position) > maxCharge - 2f) ? (player.transform.position - transform.position).magnitude / 1.4f : 1f;
+>>>>>>> Stashed changes
 
         if (!isCharging)
         {

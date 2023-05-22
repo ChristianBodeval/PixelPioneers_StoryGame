@@ -10,6 +10,7 @@ public class Health : MonoBehaviour
 
     public float currentHealth;
     public float maxHealth;
+    [SerializeField] private Shader dissolve;
     [SerializeField] protected Material blinkMaterial;
     [SerializeField] protected Material baseMaterial;
     [SerializeField] protected Material deathMaterial;
@@ -28,7 +29,13 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
+<<<<<<< Updated upstream
         sr = gameObject.GetComponentInChildren<SpriteRenderer>();
+=======
+        canTakeDamage = true;
+        Animator temp = GetComponentInChildren<Animator>();
+        sr = temp.GetComponent<SpriteRenderer>();
+>>>>>>> Stashed changes
     }
 
     // Constructor
@@ -139,6 +146,12 @@ public class Health : MonoBehaviour
 
             // Stop animation and play dissipation shader
             GetComponentInChildren<Animator>().speed = 0f;
+<<<<<<< Updated upstream
+=======
+
+            // Set material
+            if (blinkCoroutine != null || isBlinking) StopCoroutine(blinkCoroutine); // Stops blink coroutine
+>>>>>>> Stashed changes
             Material deathMat = Instantiate(deathMaterial);
             sr.material = deathMat;
             sr.material.color = Color.white;
@@ -146,17 +159,41 @@ public class Health : MonoBehaviour
             float timeStep = deathAnimDuration / 4;
             float t = 1f;
 
+<<<<<<< Updated upstream
             while (sr.material.GetFloat("_FadeTime") > 0f)
             {
                 t -= timeStep;
                 sr.material.SetFloat("_FadeTime", t);
                 yield return new WaitForSeconds(timeStep);
+=======
+            // Play dissipation shader
+            if (MaterialHasShader(sr.material, dissolve))
+            {
+                while (sr.material.GetFloat("_FadeTime") > 0f)
+                {
+                    t -= timeStep;
+                    alpha -= timeStep;
+                    shadow.GetComponent<SpriteRenderer>().color = new Color(shadowSr.color.r, shadowSr.color.g, shadowSr.color.b, alpha);
+                    sr.material.SetFloat("_FadeTime", t);
+                    yield return new WaitForSeconds(timeStep);
+                }
+>>>>>>> Stashed changes
             }
 
             // Deactivate enemy and return to pool
             GameObject.Find("EnemyFactory").GetComponent<SpawnSystem>().RemoveFromWaitDeathList(gameObject);
             Pool.pool.ReturnToEnemyPool(gameObject);
         }
+    }
+
+    public bool MaterialHasShader(Material material, Shader desiredShader)
+    {
+        if (material != null && desiredShader != null)
+        {
+            return material.shader == desiredShader;
+        }
+
+        return false;
     }
 
     private void PrintDmgToScreen(float number, Color color)
@@ -200,7 +237,7 @@ public class Health : MonoBehaviour
         sr.color = Color.white;
         gameObject.GetComponent<Collider2D>().enabled = true;
         GetComponentInChildren<SpriteRenderer>().gameObject.transform.localPosition = Vector3.zero; // Resets sprite position
-        if (CompareTag("Enemy")) GetComponentInChildren<Animator>().speed = 1f;
+        if (CompareTag("Enemy") && GetComponentInChildren<Animator>() != null) GetComponentInChildren<Animator>().speed = 1f;
     }
 
     protected virtual void Update()
