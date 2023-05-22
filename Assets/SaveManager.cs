@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class SaveManager : MonoBehaviour
+public class PlayerSaveManager : MonoBehaviour
 {
     public Transform playerTransform;
     public string currentScene;
 
     // Booleans for weapons and upgrades
+    public bool weapon1;
     public bool weapon1Upgrade1;
     public bool weapon1Upgrade2;
     public bool weapon2;
@@ -35,7 +36,6 @@ public class SaveManager : MonoBehaviour
         // Save player position
         PlayerPrefs.SetFloat("PlayerPosX", playerTransform.position.x);
         PlayerPrefs.SetFloat("PlayerPosY", playerTransform.position.y);
-        PlayerPrefs.SetFloat("PlayerPosZ", playerTransform.position.z);
 
         // Save current scene
         PlayerPrefs.SetString("CurrentScene", currentScene);
@@ -65,8 +65,7 @@ public class SaveManager : MonoBehaviour
         // Load player position
         float posX = PlayerPrefs.GetFloat("PlayerPosX");
         float posY = PlayerPrefs.GetFloat("PlayerPosY");
-        float posZ = PlayerPrefs.GetFloat("PlayerPosZ");
-        playerTransform.position = new Vector3(posX, posY, posZ);
+        playerTransform.position = new Vector2(posX, posY);
 
         // Load current scene
         currentScene = PlayerPrefs.GetString("CurrentScene");
