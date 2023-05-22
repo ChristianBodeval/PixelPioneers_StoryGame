@@ -5,6 +5,7 @@ using Pathfinding;
 using Unity.VisualScripting;
 using UnityEngine.Events;
 using static UnityEngine.RuleTile.TilingRuleOutput;
+using UnityEngine.UI;
 
 public class GeneralPathing : MonoBehaviour
 {
@@ -25,8 +26,8 @@ public class GeneralPathing : MonoBehaviour
     public UnityEvent OnDirectionReached;
     
     [SerializeField] private LayerMask obstacleLayer;
+    private Slider hpBar;
 
-    
     public void SetDirection(Vector3 dir)
     {
         UpdatePath();
@@ -54,6 +55,9 @@ public class GeneralPathing : MonoBehaviour
     
     private void Start()
     {
+        hpBar = GetComponentInChildren<Slider>();
+        hpBar.maxValue = GetComponent<Health>().maxHealth;
+        hpBar.value = GetComponent<Health>().currentHealth;
         seeker = GetComponent<Seeker>();
         InvokeRepeating("UpdatePath", 0f, updateInterval); // Updates pathfinding regularly
     }
@@ -76,8 +80,10 @@ public class GeneralPathing : MonoBehaviour
         }
         
         Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
-        
-        rb.velocity = speed * direction; // Movement
+
+        float modifier = Vector2.Distance(player.transform.position, transform.position) > 14f ? ((player.transform.position - transform.position).magnitude / 3f) + 1f : 1f;
+
+        rb.velocity = speed * direction * modifier; // Movement
     }
 
     private void UpdatePath()
@@ -112,10 +118,12 @@ public class GeneralPathing : MonoBehaviour
         if (dir.x > 0.24f) // Right
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
+            hpBar.transform.localScale = new Vector3(Mathf.Abs(hpBar.transform.localScale.x) * 1f, hpBar.transform.localScale.y, hpBar.transform.localScale.z);
         }
         else if (dir.x < -0.24f) // Left
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
+            hpBar.transform.localScale = new Vector3(Mathf.Abs(hpBar.transform.localScale.x) * -1f, hpBar.transform.localScale.y, hpBar.transform.localScale.z);
         }
     }
     

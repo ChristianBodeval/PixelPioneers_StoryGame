@@ -27,12 +27,11 @@ public class SendWave : MonoBehaviour
 
     private IEnumerator SendWaves()
     {
+        yield return null;
         while (currentWave < waves.Length)
         {
             spawnSystem.AddWave(waves[currentWave]); // Add wave to spawnsystem
             currentWave++;
-
-            yield return null;
         }
     }
 }

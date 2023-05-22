@@ -10,6 +10,7 @@ public class WaveVisual : MonoBehaviour
     [SerializeField] private AudioClip startCombatSFX;
     [SerializeField] private AudioClip breakCrystalSFX;
 
+    [Header("UI")]
     [SerializeField] private GameObject prefab;
     [SerializeField] private GameObject chainPrefab;
     private List<GameObject> inUseWaveIndicators = new();
@@ -25,6 +26,7 @@ public class WaveVisual : MonoBehaviour
 
     public Sprite currentWave;
     public Sprite unbrokenCrystal;
+    public Sprite questionSprite;
 
     [SerializeField] private ParticleSystem particleSystem;
 
@@ -76,13 +78,13 @@ public class WaveVisual : MonoBehaviour
 
             // Width of UI
             waveUIWidth = maxWaves * crystalWidth + (maxWaves - 1) * spacing;
-            float x = waveUIWidth / 2;
+            float x = waveUIWidth / 2; // Start from the right side (centered x position)
             int i = 0;
 
             // Set position of each indicator
             foreach (GameObject indicator in inUseWaveIndicators)
             {
-                float objX = (i * spacing) - (x);
+                float objX = x - (i * spacing);
                 indicator.transform.localPosition = new Vector3(objX, 224f, indicator.transform.localPosition.z);
                 i++;
             }
@@ -92,12 +94,15 @@ public class WaveVisual : MonoBehaviour
             // Set position of each chain
             foreach (GameObject chain in inUseWaveChain)
             {
-                float objX = (i * spacing) - (x) + spacing * 0.5f;
+                float objX = x - (i * spacing) - spacing * 0.5f;
                 chain.transform.localPosition = new Vector3(objX, 224f, chain.transform.localPosition.z);
                 i++;
             }
         }
     }
+
+
+
 
     private GameObject DrawFromIndicatorPool()
     {
@@ -152,7 +157,7 @@ public class WaveVisual : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
 
             if (inUseWaveIndicators.Count < 1) continue; // Skip this loop iteration
 
@@ -164,26 +169,42 @@ public class WaveVisual : MonoBehaviour
                 {
                     i++;
 
-                    if (i == wavesLeft)
+                    Image image = wave.GetComponentInChildren<RemoveFill>().GetImageComponent();
+                    Image backDrop = wave.GetComponent<Image>();
+
+                    // Reset wave variables
+                    image.sprite = questionSprite;
+                    backDrop.enabled = true;
+                    RectTransform rt = image.GetComponent<RectTransform>();
+                    rt.sizeDelta = new Vector2(80f, 20f);
+                    wave.SetActive(true);
+
+                    // Last wave / boss
+                    if (i == 1)
                     {
-                        Image image = wave.GetComponentInChildren<RemoveFill>().GetImageComponent();
+                        // Assign your unique image sprite here
+                        image.sprite = questionSprite;
+                        backDrop.enabled = false;
+                        rt.sizeDelta = new Vector2(50f, 50f);
+                    }
+                    // Current wave
+                    else if (i == wavesLeft)
+                    {
                         image.sprite = currentWave;
                         image.color = Color.yellow;
-                        wave.SetActive(true);
                     }
+                    // Coming wave
                     else if (i < wavesLeft)
                     {
-                        Image image = wave.GetComponentInChildren<RemoveFill>().GetImageComponent();
                         image.sprite = unbrokenCrystal;
                         image.color = Color.red;
-                        wave.SetActive(true);
                     }
+                    // Completed wave
                     else if (i > wavesLeft)
                     {
                         var script = wave.GetComponentInChildren<RemoveFill>();
                         if (script.IsActive()) ExplodeCrystal(wave);
                         script.Remove(); // Deactivates fill for indicator
-                        wave.SetActive(true);
                     }
                 }
 
@@ -191,6 +212,7 @@ public class WaveVisual : MonoBehaviour
             }
         }
     }
+
 
     private void ExplodeCrystal(GameObject obj)
     {

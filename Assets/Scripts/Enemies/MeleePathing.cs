@@ -51,7 +51,9 @@ public class MeleePathing : MonoBehaviour
     {
         if (!animator.GetBool("CanMove") || animator.GetBool("IsStunned")) { rb.velocity = Vector2.zero; return; } // Guard clause - can we move
 
-        rb.velocity = speed * dir; // Movement
+        float modifier = Vector2.Distance(player.transform.position, transform.position) > 14f ? ((player.transform.position - transform.position).magnitude / 3f) + 1f : 1f;
+
+        rb.velocity = speed * dir * modifier; // Movement
     }
 
     private void UpdatePath()

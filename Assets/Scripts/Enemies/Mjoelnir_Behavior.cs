@@ -13,10 +13,9 @@ public class Mjoelnir_Behavior : MonoBehaviour
     private Rigidbody2D rb;
 
     [Header("A*")]
+    [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private float updateInterval = 0.1f;
     [SerializeField] private float nextWayPointDistance = 2f;
-    private LayerMask obstacleLayer;
-    private LayerMask pitLayer;
     private Path path;
     private int currentWayPoint = 0;
     private Seeker seeker;
@@ -24,7 +23,6 @@ public class Mjoelnir_Behavior : MonoBehaviour
     [Header("Custom Behavior")]
     [SerializeField] private float specialCooldown;
     [SerializeField] private float castTime = 0.3f;
-    private bool isCasting = false;
     private bool abilityRDY = false;
     private Coroutine abilityCDFunction;
     private bool canSpin = true;
@@ -67,7 +65,6 @@ public class Mjoelnir_Behavior : MonoBehaviour
     {
         mjoelnirSprite = GetComponentInChildren<SpriteRenderer>().gameObject;
         obstacleLayer = LayerMask.GetMask("Obstacles");
-        pitLayer = LayerMask.GetMask("Pit");
         player = GameObject.FindWithTag("Player");
         seeker = GetComponent<Seeker>();
         rb = GetComponentInParent<Rigidbody2D>();
@@ -122,7 +119,11 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
     private void Move(Vector2 dir)
     {
-        float modifier = (Vector2.Distance(player.transform.position, transform.position) > maxCharge) ? (player.transform.position - transform.position).magnitude / 2f : 1f;
+<<<<<<< Updated upstream
+        float modifier = (Vector2.Distance(player.transform.position, transform.position) > maxCharge - 2f) ? 2.4f : 1f;
+=======
+        float modifier = (Vector2.Distance(player.transform.position, transform.position) > maxCharge - 2f) ? (player.transform.position - transform.position).magnitude / 1.4f : 1f;
+>>>>>>> Stashed changes
 
         if (!isCharging)
         {
@@ -194,7 +195,6 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
     private void EnableHammer()
     {
-        isCasting = false;
         isCharging = false;
         canSpin = true;    // Allow the hammer to spin again
         GetComponent<CircleCollider2D>().enabled = true;    // Player can move again
@@ -202,7 +202,6 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
     private void DisableHammer()
     {
-        isCasting = true;
         isCharging = true;
         canSpin = false;    // Stop hammer's spin
         GetComponent<CircleCollider2D>().enabled = false;   // Cannot hit enemies with hammer sprite
@@ -210,8 +209,33 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
     private void UseSpecial()
     {
-        if (!isCasting && !Physics2D.Raycast(transform.position, player.transform.position - transform.position, maxCharge - (maxCharge / 4), obstacleLayer) && !Physics2D.Raycast(transform.position, player.transform.position - transform.position, maxCharge - (maxCharge / 4), pitLayer))
+        // Random between charge and aoe ability
+        /*switch (Random.Range(0,2))
         {
+            case 0: // Charge ability, is it in range
+                if (Physics2D.Raycast(parentTransform.position, player.transform.position - parentTransform.position, maxCharge - 1f, obstacleLayer))
+                {
+                    StartCoroutine(AbilityCD(specialCooldown));
+                    StartCoroutine(ChargeAbility());
+                }
+                break;
+
+            case 1: // Aoe abilitym, is it in range
+                if (Physics2D.Raycast(parentTransform.position, player.transform.position - parentTransform.position, aoeRadius - 1f, obstacleLayer))
+                {
+                    StartCoroutine(AbilityCD(specialCooldown));
+                    StartCoroutine(AOEAbility());
+                }
+                break;
+
+            default:
+                break;
+        }
+        */
+
+        if (Physics2D.Raycast(transform.position, player.transform.position - transform.position, maxCharge - (maxCharge / 4), obstacleLayer))
+        {
+            StartCoroutine(AbilityCD(specialCooldown));
             if (chargeCoroutine != null) StopCoroutine(chargeCoroutine);
             chargeCoroutine = StartCoroutine(ChargeAbility());
         }
@@ -236,12 +260,12 @@ public class Mjoelnir_Behavior : MonoBehaviour
         // Slow increase of alpha and size of indicator
         while (a < 1f)
         {
-            canSpin = false;
             charge += maxCharge / 50;
             a += 1f / 50;
 
             // Alpha
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, accelerationCurve.Evaluate(a) * 0.3f);
+            
 
             // Charge range indicator - change its size and rotation
             rangeIndicator.transform.localScale = new Vector3(charge, baseHitboxSize + (charge * hitboxWidthMultiplier) - 0.3f, 1f); // Sets the length - chargeHitbox * 2 - 0.2f is the diameter of the indicator -0.2f is such that the player feels cheated of a hit less often
@@ -251,22 +275,12 @@ public class Mjoelnir_Behavior : MonoBehaviour
             rangeIndicator.gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
             // Mjoelnir sprite
-            mjoelnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -90f, Vector3.forward);   // Point hammer away from player
+            mjoelnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -135f, Vector3.forward);   // Point hammer away from player
 
-            yield return new WaitForSeconds((castTime - 0.2f) / 50f);
+            yield return new WaitForSeconds(castTime/1.4f / 50f);
         }
 
-        float t = 0f;
-        Color c = sr.color;
-
-        while (t < 1)
-        {
-            t += 0.1f;
-            sr.color = Color.Lerp(c, Color.white, t);
-            yield return new WaitForSeconds(0.01f);
-        }
-
-        sr.color = c;
+        yield return new WaitForSeconds(0.05f);
 
         rangeIndicator.transform.SetParent(null);
 
@@ -297,8 +311,6 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
         while (distance > 1f && !Physics2D.CircleCast(parentTransform.position, 0.3f, dir, 0.3f, obstacleLayer))
         {
-            canSpin = false;
-
             dir = (targetPos - transform.position).normalized;
 
             if (elapsed < 0.2f)
@@ -315,7 +327,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
             if (!isPlayerHit)
             {
-                isPlayerHit = CheckForPlayer((Vector2)transform.position, baseHitboxSize, dir);
+                isPlayerHit = CheckForPlayer((Vector2)transform.position, baseHitboxSize + hitboxWidthMultiplier * maxCharge - 0.3f, dir);
                 if (isPlayerHit)
                 {
                     player.GetComponent<PlayerHealth>().TakeDamage(chargeDMG);
@@ -326,7 +338,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
             yield return new WaitForSeconds(chargeUpdateInterval); // Time between steps
 
-            distance = Vector2.Distance(transform.position, targetPos); // StateUpdate distance for next loop iteration
+            distance = Vector2.Distance(transform.position, targetPos); // Update distance for next loop iteration
         }
 
         // Reset variables
@@ -337,13 +349,18 @@ public class Mjoelnir_Behavior : MonoBehaviour
         chargeParticles.SetActive(false);
         isCharging = false;
 
+        /*
+        // Enable movement and spin
+        
+        EnableHammer(); // Hammer can hit enemies again
+        */
         StartCoroutine(AOEAbility(dir));
     }
 
     private void PointHammerForwards(Vector2 dir)
     {
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;                // Angle for pointing to player
-        mjoelnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -90f, Vector3.forward);   // Point hammer away from player
+        mjoelnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -135f, Vector3.forward);   // Point hammer away from player
     }
 
     // AoE ability
@@ -385,7 +402,6 @@ public class Mjoelnir_Behavior : MonoBehaviour
         yield return new WaitForSeconds(castTime);
 
         EnableHammer();
-        StartCoroutine(AbilityCD(specialCooldown));
         StartCoroutine(LerpToSpinRadius());
     }
 

@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Rendering.Universal;
-using UnityEngine.Serialization;
 
 public class Health : MonoBehaviour
 {
@@ -12,6 +10,7 @@ public class Health : MonoBehaviour
 
     public float currentHealth;
     public float maxHealth;
+    [SerializeField] private Shader dissolve;
     [SerializeField] protected Material blinkMaterial;
     [SerializeField] protected Material baseMaterial;
     [SerializeField] protected Material deathMaterial;
@@ -26,14 +25,17 @@ public class Health : MonoBehaviour
 
     protected SpriteRenderer sr;
     public UnityEvent DamageTakenEvent;
-    [FormerlySerializedAs("DeathEvent")] [FormerlySerializedAs("ODeathEvent")] [FormerlySerializedAs("OnDeathEvent")] public UnityEvent Dead;
-    private bool canTakeDamage;
 
 
     private void Start()
     {
-        canTakeDamage = true;
+<<<<<<< Updated upstream
         sr = gameObject.GetComponentInChildren<SpriteRenderer>();
+=======
+        canTakeDamage = true;
+        Animator temp = GetComponentInChildren<Animator>();
+        sr = temp.GetComponent<SpriteRenderer>();
+>>>>>>> Stashed changes
     }
 
     // Constructor
@@ -42,20 +44,12 @@ public class Health : MonoBehaviour
         this.currentHealth = health;
         this.maxHealth = maxHealth;
     }
-    
-    public void SetCanTakeDamage(bool canTakeDamage)
-    {
-        this.canTakeDamage = canTakeDamage;
-    }
-
 
     public virtual void TakeDamage(float damage)
     {
-        if(this.isActiveAndEnabled && canTakeDamage)
+        if(this.isActiveAndEnabled)
         {
             this.currentHealth -= damage;
-
-            if (this.currentHealth <= 0) return;
 
             // Hermes moves when haven taken damage
             if (gameObject.CompareTag("Boss"))
@@ -75,6 +69,9 @@ public class Health : MonoBehaviour
                     blood.transform.localScale = new Vector3(size, size, 1f);
                 }
             }
+
+            // Reset material
+            sr.material = baseMaterial;
 
             // Freeze frame enemies
             if (gameObject.CompareTag("Enemy")) GetComponent<Crowd_Control>().FreezeFrame(freezeDurationOnDmgTaken);
@@ -130,7 +127,6 @@ public class Health : MonoBehaviour
     // Removes enemy from active pool, plays death anim and spawns pickup
     public virtual IEnumerator Die()
     {
-        Dead.Invoke();
         if (gameObject.CompareTag("Enemy"))
         {
             SFXManager.singleton.PlaySound(deathSFX, transform.position);
@@ -148,40 +144,56 @@ public class Health : MonoBehaviour
             GetComponentInChildren<Animator>().SetBool("CanMove", false);
             gameObject.GetComponent<Collider2D>().enabled = false;
 
-            // Stop animation
+            // Stop animation and play dissipation shader
             GetComponentInChildren<Animator>().speed = 0f;
+<<<<<<< Updated upstream
+=======
 
             // Set material
-            if (blinkCoroutine != null && !isBlinking) StopCoroutine(blinkCoroutine); // Stops blink coroutine
+            if (blinkCoroutine != null || isBlinking) StopCoroutine(blinkCoroutine); // Stops blink coroutine
+>>>>>>> Stashed changes
             Material deathMat = Instantiate(deathMaterial);
             sr.material = deathMat;
             sr.material.color = Color.white;
 
-            // Lerp out shadow
-            ShadowCaster2D shadow = gameObject.GetComponentInChildren<ShadowCaster2D>();
-            shadow.enabled = false;
-            SpriteRenderer shadowSr = shadow.GetComponent<SpriteRenderer>();
-            Color color = shadow.GetComponent<SpriteRenderer>().color;
-            float alpha = color.a;
             float timeStep = deathAnimDuration / 4;
             float t = 1f;
 
-            // Play dissipation shader
+<<<<<<< Updated upstream
             while (sr.material.GetFloat("_FadeTime") > 0f)
             {
                 t -= timeStep;
-                alpha -= timeStep;
-                shadow.GetComponent<SpriteRenderer>().color = new Color(shadowSr.color.r, shadowSr.color.g, shadowSr.color.b, alpha);
                 sr.material.SetFloat("_FadeTime", t);
                 yield return new WaitForSeconds(timeStep);
+=======
+            // Play dissipation shader
+            if (MaterialHasShader(sr.material, dissolve))
+            {
+                while (sr.material.GetFloat("_FadeTime") > 0f)
+                {
+                    t -= timeStep;
+                    alpha -= timeStep;
+                    shadow.GetComponent<SpriteRenderer>().color = new Color(shadowSr.color.r, shadowSr.color.g, shadowSr.color.b, alpha);
+                    sr.material.SetFloat("_FadeTime", t);
+                    yield return new WaitForSeconds(timeStep);
+                }
+>>>>>>> Stashed changes
             }
 
             // Deactivate enemy and return to pool
-            GameObject.Find("GameManager").GetComponent<SpawnSystem>().RemoveFromWaitDeathList(gameObject);
-            shadowSr.color = color;
-            shadow.GetComponent<ShadowCaster2D>().enabled = true;
+            GameObject.Find("EnemyFactory").GetComponent<SpawnSystem>().RemoveFromWaitDeathList(gameObject);
             Pool.pool.ReturnToEnemyPool(gameObject);
         }
+    }
+
+    public bool MaterialHasShader(Material material, Shader desiredShader)
+    {
+        if (material != null && desiredShader != null)
+        {
+            return material.shader == desiredShader;
+        }
+
+        return false;
     }
 
     private void PrintDmgToScreen(float number, Color color)
@@ -225,7 +237,7 @@ public class Health : MonoBehaviour
         sr.color = Color.white;
         gameObject.GetComponent<Collider2D>().enabled = true;
         GetComponentInChildren<SpriteRenderer>().gameObject.transform.localPosition = Vector3.zero; // Resets sprite position
-        if (CompareTag("Enemy")) GetComponentInChildren<Animator>().speed = 1f;
+        if (CompareTag("Enemy") && GetComponentInChildren<Animator>() != null) GetComponentInChildren<Animator>().speed = 1f;
     }
 
     protected virtual void Update()

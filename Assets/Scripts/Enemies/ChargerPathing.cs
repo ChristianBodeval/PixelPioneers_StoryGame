@@ -36,6 +36,8 @@ public class ChargerPathing : MonoBehaviour
         animator.SetBool("CanMove", true);
         attackRange = GetComponent<Charger_Attack>().attackRange;
         hpBar = GetComponentInChildren<Slider>();
+        hpBar.maxValue = GetComponent<Health>().maxHealth;
+        hpBar.value = GetComponent<Health>().currentHealth;
 
         StartCoroutine(UpdatePath()); // Updates pathfinding regularly
     }
@@ -108,7 +110,9 @@ public class ChargerPathing : MonoBehaviour
     {
         if (animator.GetBool("CanMove") && !animator.GetBool("IsStunned") && !animator.GetBool("IsCharging"))
         {
-            rb.velocity = dir * speed; // Movement
+            float modifier = Vector2.Distance(player.transform.position, transform.position) > 14f ? ((player.transform.position - transform.position).magnitude / 3f) + 1f : 1f;
+
+            rb.velocity = dir * speed * modifier; // Movement
         }
         else if (animator.GetBool("IsStunned") || (!animator.GetBool("CanMove") && !animator.GetBool("IsCharging")) )
         {

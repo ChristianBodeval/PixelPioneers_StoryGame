@@ -9,6 +9,7 @@ public class FSM_BruiserFireAbility : StateMachineBehaviour
     {
         animator.gameObject.GetComponentInParent<Bruiser_Attack>().ThrowWave();
     }
+<<<<<<< Updated upstream
 
     // OnStateUpdate is called on each StateUpdate frame between OnStateEnter and OnStateExit callbacks
     //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -33,4 +34,6 @@ public class FSM_BruiserFireAbility : StateMachineBehaviour
     //{
     //    // Implement code that sets up animation IK (inverse kinematics)
     //}
+=======
+>>>>>>> Stashed changes
 }

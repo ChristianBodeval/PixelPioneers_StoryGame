@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Bruiser_Attack : Enemy_Attack
 {
-    [SerializeField] private float attackDMG;
-    [SerializeField] private float attackTelegraphTime;
-
     [Header("Wave Ability")]
     [SerializeField] private GameObject segmentPrefab;
     [SerializeField] private float segmentLength;
@@ -20,9 +17,9 @@ public class Bruiser_Attack : Enemy_Attack
     public float postFireDelay;
     private int currentSegment = 1;
     private bool isWaveRDY = true;
+    private bool isWaveRDYCloseQuaters = false; // Used to get a quicker attack if we are very close to the player
     private Coroutine waveCDCoroutine;
-    private float waveRange;
-    private float waveRangeBuffer = 4f;
+    public float waveRange { get; private set; }
     private Vector3 startLocation;
     private Vector3 dir = Vector3.zero;
 
@@ -42,9 +39,7 @@ public class Bruiser_Attack : Enemy_Attack
 
     private void FixedUpdate()
     {
-        IsInAttackRange(player); // Player variable is inherited from IEnemyAttack
-
-        if (WaveUsable() && !(animator.GetBool("AttackRDY") && animator.GetBool("InAttackRange")) )
+        if (WaveUsable())
         {
             if (waveCDCoroutine != null) StopCoroutine(waveCDCoroutine);
             waveCDCoroutine = StartCoroutine(WaveCooldown(0.5f));
@@ -52,33 +47,13 @@ public class Bruiser_Attack : Enemy_Attack
         }
     }
 
-    public override void Attack() // Called from animator
+    public bool WaveUsable()
     {
-        StartCoroutine(AttackCD(attackCD)); // Starts cooldown for the attack
-        StartCoroutine(TelegraphAttack());
-    }
+        bool isRDYCloseQuaters = (Vector2.Distance(player.transform.position, transform.position) < 1f && isWaveRDYCloseQuaters) ? true : false;
+        if (isRDYCloseQuaters) return true;
 
-    private IEnumerator TelegraphAttack()
-    {
-        yield return new WaitForSeconds(attackTelegraphTime);
-        if (Vector3.Distance(player.transform.position, transform.position) <= attackRange) player.GetComponent<PlayerHealth>().TakeDamage(attackDMG); // Deal damage
-    }
-
-    private bool IsInAttackRange(GameObject player)
-    {
-        bool inRange = Vector2.Distance(player.transform.position, transform.position) <= attackRange && IsInLineOfSight(player, animator); // In attack range & los
-        animator.SetBool("InAttackRange", inRange);
-        return inRange;
-    }
-
-    
-    public bool WaveUsable(bool isWaveBeingCharged = false)
-    {
-        // In range, los and not stunned
-        if (isWaveBeingCharged) return Vector2.Distance(player.transform.position, transform.position) <= waveRange + waveRangeBuffer && IsInLineOfSight(player, animator) && !animator.GetBool("IsStunned");
-
-        // In In range, los, not stunned and ability rdy
-        return Vector2.Distance(player.transform.position, transform.position) <= waveRange && IsInLineOfSight(player, animator) && !animator.GetBool("IsStunned") && isWaveRDY;
+        // In range, los and and has CD
+        return Vector2.Distance(player.transform.position, transform.position) <= waveRange / 2 && IsInLineOfSight(player, animator) && isWaveRDY;
     }
 
     public void ThrowWave()
@@ -109,7 +84,7 @@ public class Bruiser_Attack : Enemy_Attack
     private IEnumerator SegmentDelay()
     {
         if (currentSegment > segmentAmounts) { ResetVariables(); yield break; } // Guard clause
-        yield return new WaitForSeconds(attackTelegraphTime);
+        yield return new WaitForSeconds(segmentSpawnDelay);
         currentSegment++;
         ThrowWave();
     }
@@ -117,8 +92,13 @@ public class Bruiser_Attack : Enemy_Attack
     private IEnumerator WaveCooldown(float multiplier = 1f)
     {
         isWaveRDY = false;
+        isWaveRDYCloseQuaters = false;
 
-        yield return new WaitForSeconds(waveCooldown * multiplier);
+        yield return new WaitForSeconds((waveCooldown / 4) * multiplier);
+
+        isWaveRDYCloseQuaters = true;
+
+        yield return new WaitForSeconds((waveCooldown / 4 ) * 3 * multiplier);
 
         isWaveRDY = true;
     }
