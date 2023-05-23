@@ -34,6 +34,7 @@ public class Hermes_Pathing : MonoBehaviour
     public GameObject mjoelnir;
 
     [Header("Music")]
+    [Range(0, 1)] public float musicVolume = 1f;
     public AudioClip bossTrack;
 
     [Header("SFX")]
@@ -51,7 +52,11 @@ public class Hermes_Pathing : MonoBehaviour
         groundLayer = LayerMask.GetMask("Ground");
         obstacleLayer = LayerMask.GetMask("Obstacles");
 
-        MusicManager.singleton.PlayMusic(bossTrack);
+        MusicManager.singleton.PlayMusic(bossTrack, musicVolume);
+
+        // Deactivate wave ui & trigger dialogue
+        GameObject.Find("WaveCounterCanvas").SetActive(false);
+        // TODO Trigger dialogue
 
         StartCoroutine(UpdatePath()); // Updates pathfinding regularly
     }
@@ -248,6 +253,11 @@ public class Hermes_Pathing : MonoBehaviour
         yield return new WaitForSeconds(sprintAwayCD);
 
         isSprintRDY = true;
+    }
+
+    public void CancelSprint()
+    {
+        if (newPositionCoroutine != null) StopCoroutine(newPositionCoroutine);
     }
 
     private void Flip()

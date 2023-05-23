@@ -33,9 +33,9 @@ public class Bounds : MonoBehaviour
 
             foreach (RaycastHit2D e in enemies)
             {
-                if (!Physics2D.OverlapPoint(e.transform.position, groundLayer) || Physics2D.OverlapPoint(e.transform.position, obstacleLayer) || Physics2D.OverlapPoint(e.transform.position, pitLayer))
+                if (e.transform == null || !Physics2D.OverlapPoint(e.transform.position, groundLayer) || Physics2D.OverlapPoint(e.transform.position, obstacleLayer) || Physics2D.OverlapPoint(e.transform.position, pitLayer))
                 {
-                    if (e.transform.CompareTag("Boss") && e.transform.GetComponentInChildren<Animator>().GetBool("IsFleeing")) // Is hermes and is fleeing)
+                    if (e.transform.CompareTag("Boss")) // Is hermes and is fleeing)
                     {
                         
                     }

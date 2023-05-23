@@ -1,8 +1,14 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Gungnir : Ability
 {
+    [Header("SFX")]
+    [Range(0, 1)] public float sfxVolume = 1f;
+    [SerializeField] private AudioClip wallImpactSFX;
+    [SerializeField] private AudioClip penetrationSFX;
+
     public float damage = 10;
     public float speed;
     public float stunDuration = 2f;
@@ -20,6 +26,7 @@ public class Gungnir : Ability
 
     private float pierceAmount = 0f;
     public float maxPierceAmount;
+    private List<GameObject> piercedEnemies = new List<GameObject>();
 
     private CameraShake cameraShake;
     private bool isStuck;
@@ -86,6 +93,8 @@ public class Gungnir : Ability
         }
         if (col.CompareTag("Obstacles") && !isStuck)
         {
+            SFXManager.singleton.PlaySound(wallImpactSFX, transform.position, sfxVolume);
+
             StopMove();
             StartCoroutine(DieAfterTime(20f));
             //if (!throwGungnir.hasUpgrade2)
@@ -99,19 +108,26 @@ public class Gungnir : Ability
         {
             if (col.CompareTag("Enemy"))
             {
+                SFXManager.singleton.PlaySound(penetrationSFX, transform.position, sfxVolume);
+
                 Health enemy = col.GetComponent<Health>();
 
                 if (enemy != null)
                 {
                     enemy.TakeDamage(damage);
                 }
+
                 isPinned = true;
+
                 col.transform.SetParent(transform);
+                piercedEnemies.Add(col.gameObject);
+                if (col.GetComponent<Hermes_Pathing>() != null) col.GetComponent<Hermes_Pathing>().CancelSprint();
+                if (col.GetComponent<Charger_Attack>() != null) col.GetComponent<Charger_Attack>().StopCharge();
             }
         }
         if (isStuck && isPinned)
         {
-            col.GetComponent<Crowd_Control>().Stun(stunDuration);
+            if (col.GetComponent<Crowd_Control>() != null) col.GetComponent<Crowd_Control>().Stun(stunDuration);
         }
     }
 
@@ -135,6 +151,11 @@ public class Gungnir : Ability
         isStuck = true;
         gungnirPickUp.enabled = true;
         StartCoroutine("PickUpBuffer");
+
+        foreach (GameObject e in piercedEnemies)
+        {
+            e.transform.SetParent(null);
+        }
     }
 
     public void StartMove()

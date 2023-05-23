@@ -239,13 +239,11 @@ MonoBehaviour:
   angleOfSpear: 0
   maxPierceAmount: 3
   canPickUp: 0
-  bounceForce: 0.5
-  bounceDuration: 2
   hasUpgrade1: 0
   isTriSpear: 0
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4224
 --- !u!61 &5219900702103602635
 BoxCollider2D:
   m_ObjectHideFlags: 0

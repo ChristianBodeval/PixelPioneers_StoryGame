@@ -184,6 +184,8 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 262208
+  volume: 0.2
+  fireSFX: {fileID: 8300000, guid: e3bb2853de7c4574ba24fe8da9d2f3b9, type: 3}
   projectile: {fileID: 2191891527132068989, guid: ec1d677d95de0c7409e0c489421ff1f2, type: 3}
   projectileSpeed: 7
   attackDMG: 1

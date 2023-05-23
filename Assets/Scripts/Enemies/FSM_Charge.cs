@@ -14,6 +14,6 @@ public class FSM_Charge : StateMachineBehaviour
     //OnStateUpdate is called on each StateUpdate frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (!animator.GetBool("IsStunned")) animator.gameObject.GetComponentInParent<Charger_Attack>().Charge();
+        if (!animator.GetBool("IsStunned") && animator.GetComponentInParent<Crowd_Control>().gameObject.transform.parent == null) animator.gameObject.GetComponentInParent<Charger_Attack>().Charge();
     }
 }

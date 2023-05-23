@@ -7,8 +7,12 @@ public class Mjoelnir : Ability, IUpgradeable
 {
     [Header("SFX")]
     [Range(0f, 1f)][SerializeField] private float volume;
-    [SerializeField] private AudioClip spinImpact;
-
+    [SerializeField] private AudioClip spinImpactSFX;
+    [SerializeField] private AudioClip chargeUpLoopSFX;
+    [SerializeField] private AudioClip chargeSFX;
+    [SerializeField] private AudioClip slamSFX;
+    private GameObject sound = null;
+    private bool isPlaying = false;
 
     [Header("Hammer Movement")]
     [SerializeField] private float spinDMG;
@@ -73,6 +77,7 @@ public class Mjoelnir : Ability, IUpgradeable
 
         obstacleLayer = LayerMask.GetMask("Obstacles");
         pitLayer = LayerMask.GetMask("Pit");
+        isPlaying = false;
     }
 
     private void Update()
@@ -172,6 +177,8 @@ public class Mjoelnir : Ability, IUpgradeable
             player.GetComponent<PlayerAction>().StartSlow(slowAmountWhileCharging); // Root the player while casting
             dash.CannotDash();
 
+            if (!isPlaying) { isPlaying = true; sound = SFXManager.singleton.PlayLoop(chargeUpLoopSFX, transform.position, volume, true, transform); }
+
             // Position the hammer on player
             transform.position = player.transform.position;
             mjoelnirSprite.transform.Rotate(0f, 0f, spriteRotationSpeed);
@@ -214,6 +221,9 @@ public class Mjoelnir : Ability, IUpgradeable
     private IEnumerator ReleaseCharge()
     {
         while (isCharghingCharge) { yield return null; } // Suspends charge until we have charged for a minimum amount
+
+        Pool.pool.ReturnToSFXPool(sound);
+        SFXManager.singleton.PlaySound(chargeSFX, transform.position, volume, false, transform);
 
         player.GetComponent<PlayerAction>().StopMove();
         player.GetComponent<PlayerHealth>().AddInvulnerability(); // Cannot be hit during charge
@@ -331,13 +341,15 @@ public class Mjoelnir : Ability, IUpgradeable
     {
         if (!hasAreaOfEffectUpgrade) { return; }                  // Checks if we have the upgrade
 
-        if (Input.GetButton("Fire2") && abilityRDY)         // 'K' button held charges the ability, note you also need to have the cd ready
+        if (Input.GetButton("Fire2") && abilityRDY)         
         {
             DisableHammer();
 
             // Toggle aoe indicator
             GameObject indicator = Instantiate(aoeIndicator, player.transform);
             Vector2 direction = player.GetComponent<PlayerAction>().lastFacing;
+
+            SFXManager.singleton.PlaySound(slamSFX, player.transform.position);
 
             StartCoroutine(AbilityCD(areaOfEffectCD));
             StartCoroutine(AreaOfEffect(direction, indicator));
@@ -372,6 +384,7 @@ public class Mjoelnir : Ability, IUpgradeable
     private void ResetCharge()
     {
         charge = 0f;
+        isPlaying = false;
 
         if (abilityCDFunction != null) { StopCoroutine(abilityCDFunction); } // If we already have a cooldown running, stop it
         abilityCDFunction = StartCoroutine(AbilityCD(chargeCD));
@@ -398,13 +411,11 @@ public class Mjoelnir : Ability, IUpgradeable
 
         if ((col.CompareTag("Enemy") || col.CompareTag("Boss")) && !cannotHitList.ContainsKey(col.gameObject))
         {
-            //TODO rettes til et egentlig Knockback script eller metode paa enemy. Kald derfra metoden her. 
-            //col.transform.position += (col.transform.position - player.transform.position).normalized * 0.3f; // Slight knockback
             col.gameObject.GetComponent<Health>().TakeDamage(spinDMG);
             if (!onFreezeCD) StartCoroutine(FreezeSpin());
             AddToSpinCDList(col.gameObject);
 
-            SFXManager.singleton.PlaySound(spinImpact, col.transform.position, volume);
+            SFXManager.singleton.PlaySound(spinImpactSFX, col.transform.position, volume);
         }
         else if (col.CompareTag("Projectile"))
         {

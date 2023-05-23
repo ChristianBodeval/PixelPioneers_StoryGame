@@ -212,7 +212,6 @@ MonoBehaviour:
     m_Bits: 64
   updateInterval: 0.1
   nextWayPointDistance: 0.3
-  isFollowing: 1
 --- !u!114 &4020096897058174604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +294,8 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 262208
+  volume: 0.2
+  swingSFX: {fileID: 8300000, guid: 108aa14c543847942b83844de1743c72, type: 3}
   attackDMG: 1.5
   attackTelegraphTime: 0.2
 --- !u!114 &1174431493

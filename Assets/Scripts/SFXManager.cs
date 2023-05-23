@@ -6,7 +6,7 @@ public class SFXManager : MonoBehaviour
 {
     public static SFXManager singleton;
 
-    public float masterVolume = 0.5f; // Should be changed from settings
+    [Range(0f, 1f)] public float masterVolume = 0.5f;
     public AudioMixer masterMixer;
     private float previousPitch;
 
@@ -20,6 +20,24 @@ public class SFXManager : MonoBehaviour
         {
             singleton = this;
         }
+    }
+
+    public IEnumerator PlaySoundWithDelay(AudioClip clip, Vector2 pos, float volume = 1f, float delay = 0f)
+    {
+        yield return new WaitForSeconds(delay);
+
+        GameObject obj = Pool.pool.DrawFromSFXPool();
+        AudioSource source = obj.GetComponent<AudioSource>();
+
+        obj.transform.position = pos;
+
+        source.clip = clip;
+        source.volume = volume * masterVolume;
+        source.pitch = GetUniqueRandomPitch();
+        source.outputAudioMixerGroup = masterMixer.FindMatchingGroups("Master")[0]; // Set the output AudioMixer group
+        source.Play();
+
+        obj.GetComponent<SFX>().ReturnToPool(clip.length);
     }
 
     public void PlaySound(AudioClip clip, Vector2 pos, float volume = 1f, bool isLooping = false, Transform parent = null)

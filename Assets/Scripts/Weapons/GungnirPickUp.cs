@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class GungnirPickUp : MonoBehaviour
 {
+    [Header("SFX")]
+    [Range(0, 1)] public float sfxVolume = 1f;
+    [SerializeField] private AudioClip pickUpSFX;
+
     private Gungnir gungnir;
     private ThrowGungnir throwGungnirScript;
     private WeaponCDs weaponCDs;
@@ -18,7 +22,7 @@ public class GungnirPickUp : MonoBehaviour
 
     private void Start()
     {
-        gungnir = GetComponentInParent<Gungnir>();
+        gungnir = GetComponent<Gungnir>();
         throwGungnirScript = GameObject.Find("GungnirThrow").GetComponent<ThrowGungnir>();
         weaponCDs = GameObject.Find("CDs").GetComponent<WeaponCDs>();
         player = GameObject.Find("Player");
@@ -45,8 +49,10 @@ public class GungnirPickUp : MonoBehaviour
             // Pickup is close enough to player to be used
             if (Vector3.Distance(player.transform.position, transform.position) <= consumeDistance)
             {
+                SFXManager.singleton.PlaySound(pickUpSFX, transform.position, sfxVolume);
+
                 ResetCD();
-                Destroy(gungnir.gameObject);
+                Destroy(gameObject);
             }
         }
     }

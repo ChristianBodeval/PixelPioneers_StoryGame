@@ -4,10 +4,11 @@ public class MusicManager : MonoBehaviour
 {
     public static MusicManager singleton;
 
-    [Range(0f, 1f)] public float masterVolume = 1f;
+    [Range(0f, 1f)] public float masterVolume = 0.5f;
     public AudioSource audioSource;
-    public float fadeDuration = 1.0f;
+    public float fadeDuration = 1f;
     private AudioClip currentClip;
+    private float clipVolume = 1f;
     private float targetVolume;
     private bool isFading;
 
@@ -23,14 +24,17 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    public void PlayMusic(AudioClip clip)
+    public void PlayMusic(AudioClip clip, float volume)
     {
+        clipVolume = volume;
+
         if (audioSource.isPlaying)
         {
             FadeOutAndPlayNew(clip);
         }
         else
         {
+            audioSource.volume = clipVolume * masterVolume;
             PlayNew(clip);
         }
     }
@@ -39,7 +43,6 @@ public class MusicManager : MonoBehaviour
     {
         currentClip = clip;
         audioSource.clip = clip;
-        audioSource.volume = masterVolume;
         audioSource.Play();
     }
 
@@ -68,7 +71,7 @@ public class MusicManager : MonoBehaviour
 
     private void FadeIn()
     {
-        targetVolume = 1.0f;
+        targetVolume = masterVolume * clipVolume;
         isFading = true;
     }
 

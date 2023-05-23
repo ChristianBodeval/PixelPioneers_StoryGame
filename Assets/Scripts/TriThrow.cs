@@ -18,16 +18,12 @@ public class TriThrow : MonoBehaviour
     private bool isStuck;
     public bool canPickUp;
 
-    private Gungnir gungnir;
-
     private PlayerAction playerAction;
 
     [Header("Upgrade")]
     public bool hasUpgrade1;
 
     public bool isTriSpear;
-
-
 
     [SerializeField] private LayerMask enemyLayer;
 
@@ -38,11 +34,6 @@ public class TriThrow : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
         cameraShake = GameObject.Find("Camera").GetComponent<CameraShake>();
-        gungnir = GameObject.Find("Gungnir").GetComponent<Gungnir>();
-    }
-    private void Update()
-    {
-        damage = gungnir.damage;
     }
 
     //public void SetDirection(Vector2 dir, float throwAngle)

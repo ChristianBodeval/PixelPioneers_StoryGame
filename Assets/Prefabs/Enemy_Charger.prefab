@@ -802,12 +802,14 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 270400
+  volume: 0.2
+  chargeSFX: {fileID: 8300000, guid: a693e58df7dcaed4794f16375d8eeb11, type: 3}
   attackTelegraphTime: 0.2
   attackDMG: 2
   dangerIndicator: {fileID: 1629126486}
   chargeDmg: 4
   chargeRange: 7
-  chargeUpTime: 0.5
+  chargeUpTime: 1.2
   chargeHitBox: 1
   chargeSpeed: 30
   chargeUpdateInterval: 0.1
