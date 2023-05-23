@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Melee_Attack : Enemy_Attack
 {
+    [Header("SFX")]
+    [Range(0f, 1f)] [SerializeField] private float volume;
+    [SerializeField] private AudioClip swingSFX;
+
     [SerializeField] private float attackDMG;
     [SerializeField] private float attackTelegraphTime;
 
@@ -32,6 +36,7 @@ public class Melee_Attack : Enemy_Attack
 
     private IEnumerator TelegraphAttack()
     {
+        SFXManager.singleton.PlaySound(swingSFX, transform.position, volume);
         yield return new WaitForSeconds(attackTelegraphTime);
         if (Vector3.Distance(player.transform.position, transform.position) <= attackRange) player.GetComponent<PlayerHealth>().TakeDamage(attackDMG); // Deal damage
     }

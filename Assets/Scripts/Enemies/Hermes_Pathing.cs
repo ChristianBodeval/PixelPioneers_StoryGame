@@ -17,15 +17,12 @@ public class Hermes_Pathing : MonoBehaviour
     private LayerMask groundLayer;
     [SerializeField] private float updateInterval = 0.05f;
     [SerializeField] private float nextWayPointDistance = 2f;
-    [SerializeField] private float offset = 0.2f;
     private Path path;
     private int currentWayPoint = 0;
     private Seeker seeker;
 
     [Header("Custom Behavior")]
     [SerializeField] private float attackDeadZone = 0.8f;
-    [SerializeField] private bool isFollowing = true;
-    [SerializeField] private float newPositionRange = 2f;
     [SerializeField] private float newPositionSpeed = 15f;
     [SerializeField] private float sprintAwayCD = 1f;
     [HideInInspector] public bool isSprintRDY = true;

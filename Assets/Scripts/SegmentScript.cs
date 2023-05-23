@@ -32,11 +32,10 @@ public class SegmentScript : MonoBehaviour
         g = sr.color.g;
         b = sr.color.b;
 
-        SFXManager.singleton.PlaySound(sfx, transform.position, sfxVolume);
-
         // Slow increase of alpha
         while (a < 1f)
         {
+            if (a > 0.2f) SFXManager.singleton.PlaySound(sfx, transform.position, sfxVolume);
             a += 0.1f;
             sr.color = new Color(r, g, b, accelerationCurve.Evaluate(a) * alphaMaximum);
             yield return new WaitForSeconds(0.05f);

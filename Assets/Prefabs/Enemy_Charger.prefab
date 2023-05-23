@@ -665,7 +665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8798007897952269159, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
       propertyPath: m_InstanceId
-      value: -23776
+      value: -140950
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 254720778, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
@@ -802,6 +802,8 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8256
+  volume: 0.3
+  chargeSFX: {fileID: 8300000, guid: a693e58df7dcaed4794f16375d8eeb11, type: 3}
   attackTelegraphTime: 0.2
   attackDMG: 2
   dangerIndicator: {fileID: 1629126486}

@@ -215,6 +215,7 @@ public class Pool : MonoBehaviour
     public void ReturnToSFXPool(GameObject sfx)
     {
         sfx.SetActive(false);
+        sfx.GetComponent<AudioSource>().loop = false;
 
         if (inUseSFX.Contains(sfx)) inUseSFX.Remove(sfx);
         storageSFX.Add(sfx);

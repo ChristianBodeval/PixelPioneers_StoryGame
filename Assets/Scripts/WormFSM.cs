@@ -72,10 +72,15 @@ public class WormFSM : MonoBehaviour
     public Color suspiciousColor;
     public Color chaseColor;
 
+    [Header("SFX")]
+    [Range(0f, 1f)] public float volume;
+    public AudioClip diggingSFX;
+    public GameObject obj;
+
     // Start is called before the first frame update
-    
-    
-    
+
+
+
     void Start()
     {
         //Initialize all the states
@@ -392,6 +397,7 @@ public class StunnedState : EnemyState
 
 public class DiggingState : EnemyState
 {
+    [Header("Digging")]
     public bool isOnCooldown;
     public bool isDigging;
 
@@ -408,6 +414,9 @@ public class DiggingState : EnemyState
 
         if (!isOnCooldown)
         {
+            WormFSM temp = gameObject.GetComponent<WormFSM>();
+            temp.obj = SFXManager.singleton.PlayLoop(temp.diggingSFX, transform.position, temp.volume, true, transform);
+
             //Start cooldown
             isOnCooldown = true;
             isDigging = true;
@@ -431,6 +440,7 @@ public class DiggingState : EnemyState
             enemy.ChangeState(State.Chase);
         }
 
+        Pool.pool.ReturnToSFXPool(gameObject.GetComponent<WormFSM>().obj);
     }
     
     public override void Exit(WormFSM enemy)

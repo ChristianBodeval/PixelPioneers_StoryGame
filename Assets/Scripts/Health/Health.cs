@@ -7,6 +7,9 @@ public class Health : MonoBehaviour
 {
     [Header("SFX")]
     [Range(0, 1)] public float sfxVolume = 1f;
+    [SerializeField] private AudioClip deathSFX;
+    [SerializeField] private AudioClip bossBloodSFX;
+    [SerializeField] private AudioClip minotaurDeath;
 
     public float currentHealth;
     public float maxHealth;
@@ -15,8 +18,6 @@ public class Health : MonoBehaviour
     [SerializeField] protected Material baseMaterial;
     [SerializeField] protected Material deathMaterial;
     [SerializeField] protected float deathAnimDuration;
-    [SerializeField] private AudioClip deathSFX;
-    [SerializeField] private AudioClip bossBloodSFX;
     protected Coroutine deathCoroutine;
     protected Coroutine blinkCoroutine;
     protected Coroutine shakeCoroutine;
@@ -121,7 +122,14 @@ public class Health : MonoBehaviour
     {
         if (gameObject.CompareTag("Enemy"))
         {
-            SFXManager.singleton.PlaySound(deathSFX, transform.position);
+            if (GetComponent<Bruiser_Attack>() != null)
+            {
+                SFXManager.singleton.PlaySound(minotaurDeath, transform.position, sfxVolume);
+            }
+            else
+            {
+                SFXManager.singleton.PlaySound(deathSFX, transform.position, sfxVolume);
+            }
 
             // Create blood and pickup
             HealthPickUp.pickUpPool.AddHealthPickUp(transform.position, maxHealth / 8); // Spawn health pickup
@@ -158,7 +166,7 @@ public class Health : MonoBehaviour
                     t -= timeStep;
                     alpha -= timeStep;
                     srShadow.color = new Color(srShadow.color.r, srShadow.color.g, srShadow.color.b, alpha);
-                    sr.material.SetFloat("_FadeTime", t);
+                    if (MaterialHasShader(sr.material, dissolve)) sr.material.SetFloat("_FadeTime", t);
                     yield return new WaitForSeconds(timeStep);
                 }
             }

@@ -40,6 +40,24 @@ public class SFXManager : MonoBehaviour
         obj.GetComponent<SFX>().ReturnToPool(clip.length);
     }
 
+    public GameObject PlayLoop(AudioClip clip, Vector2 pos, float volume = 1f, bool isLooping = false, Transform parent = null)
+    {
+        GameObject obj = Pool.pool.DrawFromSFXPool();
+        AudioSource source = obj.GetComponent<AudioSource>();
+
+        obj.transform.position = pos;
+        obj.transform.parent = parent ?? null; // If parent isn't null, set parent to parent transform
+
+        source.loop = isLooping;
+        source.clip = clip;
+        source.volume = volume * masterVolume;
+        source.pitch = GetUniqueRandomPitch();
+        source.outputAudioMixerGroup = masterMixer.FindMatchingGroups("Master")[0]; // Set the output AudioMixer group
+        source.Play();
+
+        return obj;
+    }
+
     private float GetUniqueRandomPitch()
     {
         float pitch;

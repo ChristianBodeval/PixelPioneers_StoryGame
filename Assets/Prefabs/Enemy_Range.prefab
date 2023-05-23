@@ -184,6 +184,8 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
+  volume: 0.3
+  fireSFX: {fileID: 8300000, guid: e3bb2853de7c4574ba24fe8da9d2f3b9, type: 3}
   projectile: {fileID: 2191891527132068989, guid: ec1d677d95de0c7409e0c489421ff1f2, type: 3}
   projectileSpeed: 7
   attackDMG: 1
@@ -213,6 +215,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxVolume: 0
+  deathSFX: {fileID: 8300000, guid: 8641cc0723aa04f4bb401dcf8ccc53b4, type: 3}
+  bossBloodSFX: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
+  minotaurDeath: {fileID: 0}
   currentHealth: 2
   maxHealth: 2
   dissolve: {fileID: -6465566751694194690, guid: 535e27e45a183fc41945a226bbe7618c, type: 3}
@@ -220,8 +225,6 @@ MonoBehaviour:
   baseMaterial: {fileID: 2100000, guid: 4c9a87858e2754648b8f0d5143303072, type: 2}
   deathMaterial: {fileID: 2100000, guid: bc4b0c691a23bd747b4d5cbd517df6fe, type: 2}
   deathAnimDuration: 0.4
-  deathSFX: {fileID: 8300000, guid: 8641cc0723aa04f4bb401dcf8ccc53b4, type: 3}
-  bossBloodSFX: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
   canTakeDamage: 0
   sr: {fileID: 4020096898732813613}
   DamageTakenEvent:
@@ -395,7 +398,7 @@ MonoBehaviour:
   - {x: 0.4707036, y: -0.017021198, z: 0.00000018483634}
   m_ShapePathHash: 96680608
   m_Mesh: {fileID: 0}
-  m_InstanceId: 54502
+  m_InstanceId: 66736
   m_LocalBounds:
     m_Center: {x: -0.009998858, y: 0.0018541366, z: 0}
     m_Extent: {x: 0.48070246, y: 0.20846152, z: 0}

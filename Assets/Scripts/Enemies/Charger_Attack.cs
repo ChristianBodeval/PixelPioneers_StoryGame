@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class Charger_Attack : Enemy_Attack
 {
+    [Header("SFX")]
+    [Range(0f, 1f)] [SerializeField] private float volume;
+    [SerializeField] private AudioClip chargeSFX;
+
     [SerializeField] private float attackTelegraphTime;
     [SerializeField] private float attackDMG;
 
@@ -86,6 +90,8 @@ public class Charger_Attack : Enemy_Attack
         Vector3 direction = (player.transform.position - transform.position).normalized;
         Vector3 targetPos = transform.position + 2f * chargeRange * direction;
 
+        SFXManager.singleton.PlaySound(chargeSFX, transform.position, volume);
+
         // Slow increase of alpha and size of line
         while (t < 1f)
         {
@@ -103,17 +109,6 @@ public class Charger_Attack : Enemy_Attack
 
             // Set width
             lr.widthMultiplier = 0.1f + t * 0.02f;
-
-            if (!IsInLineOfSight(player, animator)) 
-            { 
-                animator.SetBool("CanMove", true);
-                //Enable collisions
-                Physics2D.IgnoreLayerCollision(12, 3, false);
-                Physics2D.IgnoreLayerCollision(12, 7, false);
-                lr.startColor = lowAlphaRed;
-                lr.endColor = lowAlphaRed;
-                yield break; 
-            }
 
             yield return new WaitForSeconds(yieldDuration);
         }
@@ -179,8 +174,8 @@ public class Charger_Attack : Enemy_Attack
         Physics2D.IgnoreLayerCollision(12, 7, false);
 
         GetComponent<Crowd_Control>().isStunImmune = false;
-        GetComponent<Crowd_Control>().Stun(0.2f);
         animator.SetBool("IsCharging", false);
+        animator.SetBool("CanMove", true);
     }
 
     private IEnumerator ChargeCD()
@@ -217,7 +212,7 @@ public class Charger_Attack : Enemy_Attack
 
     public void StopCharge()
     {
-        if (animator.GetBool("IsStunned") || GetComponent<Health>().currentHealth <= 0f)
+        if (GetComponent<Health>().currentHealth <= 0f)
         {
             if (chargeCoroutine != null) StopCoroutine(chargeCoroutine);
             animator.SetBool("IsCharging", false);

@@ -20,9 +20,6 @@ public class MeleePathing : MonoBehaviour
     private int currentWayPoint = 0;
     private Seeker seeker;
 
-    [Header("Custom Behavior")]
-    [SerializeField] private bool isFollowing = true;
-
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -106,7 +103,7 @@ public class MeleePathing : MonoBehaviour
         float dis = Vector2.Distance(transform.position, player.transform.position);
 
         // Return true if terrain is in the way
-        if (Physics2D.Raycast(transform.position, player.transform.position - transform.position, attackRange, obstacleLayer) && dis > attackRange)
+        if (Physics2D.Raycast(transform.position, player.transform.position - transform.position, attackRange, LayerMask.GetMask("Obstacles")) && dis > attackRange)
         {
             return true;
         }

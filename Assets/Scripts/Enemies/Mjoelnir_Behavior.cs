@@ -45,7 +45,6 @@ public class Mjoelnir_Behavior : MonoBehaviour
     public AnimationCurve accelerationCurve;
     [SerializeField] private float baseHitboxSize;
     [SerializeField] private float hitboxWidthMultiplier = 0.1f;
-    [SerializeField] private float buttonChargeUpRate = 10;
     [SerializeField] private float chargeUpdateInterval = 0.05f;
     [SerializeField] private float maxCharge;
     [SerializeField] private GameObject rangeIndicator;

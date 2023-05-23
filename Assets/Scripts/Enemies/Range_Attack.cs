@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Range_Attack : Enemy_Attack
 {
+    [Header("SFX")]
+    [Range(0f, 1f)] [SerializeField] private float volume;
+    [SerializeField] private AudioClip fireSFX;
+
     public GameObject projectile;
     [SerializeField] private float projectileSpeed;
     [SerializeField] private float attackDMG;
@@ -30,6 +34,8 @@ public class Range_Attack : Enemy_Attack
     /// </summary>
     public override void Attack()
     {
+        SFXManager.singleton.PlaySound(fireSFX, transform.position, volume);
+
         StartCoroutine(AttackCD(attackCD)); // Starts cooldown for the attack
 
         Vector3 direction = (player.transform.position - transform.position).normalized; // Direction of player
