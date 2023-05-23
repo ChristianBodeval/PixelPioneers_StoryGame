@@ -8,6 +8,11 @@ public class DialogueBoxAnim : MonoBehaviour
 
     private Animator anim;
 
+    private void Awake()
+    {
+        dialogueManager = FindObjectOfType<DialogueManager>();
+    }
+    
     private void Start()
     {
         anim = GetComponent<Animator>();

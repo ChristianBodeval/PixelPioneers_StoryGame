@@ -20,6 +20,7 @@ public class SlashUpgrade2 : AbilitySO
         chainEffect.range = range;
         chainEffect.timeBetweenEachBounce = timeBetweenEachBounce;
         chainEffect.bounces = bounces;
+        chainEffect.damage = damage;
     }
 
     public override void ActivateEffect(ColliderDrawer colliderDrawer)

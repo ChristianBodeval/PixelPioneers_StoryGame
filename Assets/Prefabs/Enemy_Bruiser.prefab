@@ -452,7 +452,7 @@ MonoBehaviour:
   attackCD: 0.3
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 8256
+    m_Bits: 270400
   segmentPrefab: {fileID: 2110713007026889626, guid: b51f3005dbd6eaf4c8aef9280eeea043, type: 3}
   segmentLength: 2
   segmentWidth: 3

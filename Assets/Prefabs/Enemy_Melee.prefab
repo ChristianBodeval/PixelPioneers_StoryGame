@@ -294,7 +294,7 @@ MonoBehaviour:
   attackCD: 1.2
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 262208
   attackDMG: 1.5
   attackTelegraphTime: 0.2
 --- !u!114 &1174431493

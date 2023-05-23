@@ -85,6 +85,7 @@ public class Health : MonoBehaviour
         }
     }
 
+    
     public virtual void HealDamage(float heal)
     {
         if (currentHealth + heal > maxHealth)
@@ -121,8 +122,10 @@ public class Health : MonoBehaviour
     {
         if (gameObject.CompareTag("Enemy"))
         {
+            
             SFXManager.singleton.PlaySound(deathSFX, transform.position);
 
+            Dead.Invoke();
             // Create blood and pickup
             HealthPickUp.pickUpPool.AddHealthPickUp(transform.position, maxHealth / 8); // Spawn health pickup
             GameObject blood = Pool.pool.DrawFromBloodPool();

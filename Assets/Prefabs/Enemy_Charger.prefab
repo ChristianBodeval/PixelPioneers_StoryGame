@@ -801,7 +801,7 @@ MonoBehaviour:
   attackCD: 1
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 8256
+    m_Bits: 270400
   attackTelegraphTime: 0.2
   attackDMG: 2
   dangerIndicator: {fileID: 1629126486}
