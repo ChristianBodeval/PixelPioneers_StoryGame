@@ -5037,6 +5037,8 @@ MonoBehaviour:
   upgrades:
   - {fileID: 11400000, guid: eeeda3fa93a3945b38bab81e1f385f3c, type: 2}
   - {fileID: 11400000, guid: 22241782dac5f4bbc8fb0f7e39d0cccf, type: 2}
+  volume: 0
+  spinImpact: {fileID: 8300000, guid: 466dfb29a71856343a2e9610845291f3, type: 3}
   spinDMG: 1
   spinRadius: 1
   spinSpeed: 10

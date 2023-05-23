@@ -69,7 +69,7 @@ public class ChainEffect : Effect
         }
         
         lineRenderer.ResetLine();
-
+    
         yield return null;
     }
 }

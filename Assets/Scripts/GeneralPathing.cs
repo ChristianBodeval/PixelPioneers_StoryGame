@@ -59,7 +59,7 @@ public class GeneralPathing : MonoBehaviour
         hpBar.maxValue = GetComponent<Health>().maxHealth;
         hpBar.value = GetComponent<Health>().currentHealth;
         seeker = GetComponent<Seeker>();
-        InvokeRepeating("UpdatePath", 0f, updateInterval); // Updates pathfinding regularly
+        //InvokeRepeating("UpdatePath", 0f, updateInterval); // Updates pathfinding regularly
     }
     
     //StateUpdate when changes inspector
@@ -67,6 +67,12 @@ public class GeneralPathing : MonoBehaviour
     private void FixedUpdate()
     {
         PathFollow();
+        
+        //When pressing space the the direction to 300,0,0
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SetDirection(new Vector3(300, 0, 0));
+        }
     }
 
     private void Move()

@@ -12,14 +12,18 @@ namespace TilemapShadowCaster.Runtime
         [SerializeField] private uint colliderHash;
         [SerializeField] private bool m_SelfShadows = false;
         [SerializeField] private int m_ApplyToSortingLayers = -1;
+        [SerializeField] private bool isCastingShadows = false;
             
         private void Update()
         {
-            CompositeCollider2D collider = GetComponent<CompositeCollider2D>();
-            uint shapeHash = collider.GetShapeHash();
-            if (shapeHash == colliderHash) return;
-            colliderHash = shapeHash;
-            ReinitializeShapes(collider);
+            if (isCastingShadows)
+            {
+                CompositeCollider2D collider = GetComponent<CompositeCollider2D>();
+                uint shapeHash = collider.GetShapeHash();
+                if (shapeHash == colliderHash) return;
+                colliderHash = shapeHash;
+                ReinitializeShapes(collider);
+            }
         }
 
         private int[] getLayers(){

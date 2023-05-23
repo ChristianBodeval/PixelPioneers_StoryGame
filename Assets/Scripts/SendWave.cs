@@ -14,6 +14,8 @@ public class SendWave : MonoBehaviour
     {
         spawnSystem = GameObject.Find("GameManager").GetComponent<SpawnSystem>();
     }
+    
+    
 
     public void StartWaves()
     {

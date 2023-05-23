@@ -225,7 +225,7 @@ MonoBehaviour:
   - {x: 0.4707036, y: -0.017021198, z: 0.00000018483634}
   m_ShapePathHash: 96680608
   m_Mesh: {fileID: 0}
-  m_InstanceId: 67810
+  m_InstanceId: 110692
   m_LocalBounds:
     m_Center: {x: -0.009998858, y: 0.0018541366, z: 0}
     m_Extent: {x: 0.48070246, y: 0.20846152, z: 0}
@@ -5354,17 +5354,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b601c409a0b1b46a23c40df8cc3a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxVolume: 0.2
-  deathSFX: {fileID: 8300000, guid: 8641cc0723aa04f4bb401dcf8ccc53b4, type: 3}
-  bossBloodSFX: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
-  minotaurDeath: {fileID: 0}
-  currentHealth: 5
-  maxHealth: 5
+  sfxVolume: 0
+  currentHealth: 4
+  maxHealth: 4
   dissolve: {fileID: -6465566751694194690, guid: 535e27e45a183fc41945a226bbe7618c, type: 3}
   blinkMaterial: {fileID: 2100000, guid: a8af1c8b3ad351b4b8c015c0516f7fc9, type: 2}
   baseMaterial: {fileID: 2100000, guid: 4c9a87858e2754648b8f0d5143303072, type: 2}
   deathMaterial: {fileID: 2100000, guid: bc4b0c691a23bd747b4d5cbd517df6fe, type: 2}
   deathAnimDuration: 0.2
+  deathSFX: {fileID: 8300000, guid: 8641cc0723aa04f4bb401dcf8ccc53b4, type: 3}
+  bossBloodSFX: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
   canTakeDamage: 0
   sr: {fileID: 3084438981890198278}
   DamageTakenEvent:
@@ -5409,7 +5408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diggingState: {fileID: 0}
   player: {fileID: 0}
-  speed: 3.4
+  speed: 2.3
   aStarPathing: {fileID: 0}
   healthScript: {fileID: 0}
   rb: {fileID: 0}
@@ -5422,21 +5421,19 @@ MonoBehaviour:
   sightRange: 500
   patrolTime: 2
   patrolRadius: 5
-  attackRange: 1
-  attackTime: 0.5
-  attackDamage: 1
+  attackRange: 0.1
+  attackTime: 0.3
+  attackDamage: 0.2
   stunTime: 1
   diggingCooldown: 3
   diggingEffect: {fileID: 3084438979967885737}
   sprite: {fileID: 3084438981890198283}
-  diggingSpeed: 5
+  diggingSpeed: 6
+  diggingTime: 2
   icon: {fileID: 3084438981922080240}
   cluelessColor: {r: 0.44778982, g: 0.8584906, b: 0.376602, a: 1}
   suspiciousColor: {r: 0.82249635, g: 0.8773585, b: 0.23589355, a: 1}
   chaseColor: {r: 0.9245283, g: 0.3009078, b: 0.3009078, a: 1}
-  volume: 0.2
-  diggingSFX: {fileID: 8300000, guid: c4fc3ce889ec12c4189894f350d58fdc, type: 3}
-  obj: {fileID: 0}
 --- !u!331 &3084438981571517267
 SpriteMask:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: BouncingLightning
   description: 
-  damage: 1.5
+  damage: 0.5
   duration: 5
   cooldownTime: 7
   keyTrigger: 0
