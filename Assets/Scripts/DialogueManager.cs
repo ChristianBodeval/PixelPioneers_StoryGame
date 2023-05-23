@@ -12,9 +12,12 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialogueBox;
-    [SerializeField] private GameObject SpeechbubbleBox;
+
+    [SerializeField] private GameObject Speechbubble1;
+    [SerializeField] private GameObject Speechbubble2;
 
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI dialogueTextHolder;
     [SerializeField] private TextMeshProUGUI SpeechBubbleTextZeus;
     [SerializeField] private TextMeshProUGUI SpeechBubbleTextOdin;
     private bool usesSpeechBubble;
@@ -78,9 +81,20 @@ public class DialogueManager : MonoBehaviour
             ingridAndAstridTL = GameObject.Find("AstridAndIngridTL").GetComponent<PlayableDirector>();
             swordPickUpTL = GameObject.Find("SwordPickUpTL").GetComponent<PlayableDirector>();
             tutorialTL = GameObject.Find("TutorialTL").GetComponent<PlayableDirector>();
-            SpeechbubbleBox = GameObject.Find("SpeechBubble1").gameObject;
-            SpeechBubbleTextZeus = GameObject.Find("SpeechBubbleTextZeus").GetComponent<TextMeshProUGUI>();
-            SpeechBubbleTextOdin = GameObject.Find("SpeechBubbleTextOdin").GetComponent<TextMeshProUGUI>();
+        }
+    }
+
+    public void SpeechBubbleSwitch()
+    {
+        if (Speechbubble2.activeSelf)
+        {
+            Speechbubble1.SetActive(true);
+            Speechbubble2.SetActive(false);
+        }
+        if (Speechbubble1.activeSelf)
+        {
+            Speechbubble1.SetActive(false);
+            Speechbubble2.SetActive(true);
         }
     }
 
@@ -170,10 +184,12 @@ public class DialogueManager : MonoBehaviour
                 break;
         }
     }
+
     public void UsesSpeechBubble()
     {
         usesSpeechBubble = true;
-    } 
+    }
+
     public void DoesntUsesSpeechBubble()
     {
         usesSpeechBubble = false;
@@ -205,15 +221,9 @@ public class DialogueManager : MonoBehaviour
     private IEnumerator ShowText(string line)
     {
         isShowingText = true;
-        if (!usesSpeechBubble)
-        {
+
         //Empty the Dialogue text
         dialogueText.text = "";
-        }
-        else
-        {
-            //TODO..
-        }
 
         //For each letter in the dialogue
         foreach (char letter in line.ToCharArray())
