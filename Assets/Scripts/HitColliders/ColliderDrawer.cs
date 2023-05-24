@@ -63,17 +63,7 @@ public class ColliderDrawer : MonoBehaviour
     //Attributes
     private float range, width, angle;
     private int corners;
-
-    private void Awake()
-    {
-    }
-
     
-
-    private void Update()
-    {
-        //UpdateCollider();
-    }
 
     public void UpdateCollider()
     {
@@ -147,7 +137,7 @@ public class ColliderDrawer : MonoBehaviour
             for (int i = 0; i < colliderStat.corners; i++)
             {
                 Vector3 start = Vector3.up * currentPointDistance;                                //Gets start position by moving the point a little up or down dependenet on currentPointDistance
-                Vector3 direction = GetVectorFromAngle(currentAngle);                               //Vector from the angle
+                Vector3 direction = HelperMethods.GetVectorFromAngle(currentAngle);                               //Vector from the angle
                 Vector3 target = direction * colliderStat.range + start;                                         //Ending of the line
 
                 endPoints.Add(target);
@@ -186,24 +176,6 @@ public class ColliderDrawer : MonoBehaviour
             returnList.Add(Vector3.zero);
         }
         return returnList;
-    }
-
-
-    //Helper function to get an angle from any vector
-    public static float GetAngleFromVector(Vector3 dir)
-    {
-        dir = dir.normalized;
-        float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        if (n < 0) n += 360;
-        float angle = n;
-
-        return angle;
-    }
-    //Helper function to get a vector from any angle. -> Angle is between 0 and 360
-    public static Vector3 GetVectorFromAngle(float angle)
-    {
-        float angleRad = angle * (Mathf.PI / 180f);
-        return new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
     }
     
 }

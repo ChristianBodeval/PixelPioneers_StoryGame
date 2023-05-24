@@ -21,6 +21,8 @@ public class SlashUpgrade1 : AbilitySO
 
     public override void ActivateEffect(ColliderDrawer colliderDrawer)
     {
+        if (colliderDrawer.targets.Count == 0)
+            return;
         effect.Activate(colliderDrawer);
     }
 }

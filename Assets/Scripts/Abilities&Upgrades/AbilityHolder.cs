@@ -42,24 +42,11 @@ public class AbilityHolder : Ability, IUpgradeable
         cooldown
     }
     
-    //Calling in IEnumerator to wait for next frame, since the SpriteShapeRenderer is not updated in the same frame
-    private IEnumerator ActivateNextAbility()
-    {
-        if (nextAbility != null)
-        {
-            nextAbility.SetActive();
-        }
-        yield return null;
-    }
     
     private IEnumerator ActivateEffect()
     {
         yield return new WaitForSeconds(00.1f);
-        if (hitCollider.targets.Count > 0)
-        {
-            ability.ActivateEffect(hitCollider);
-        }
-
+        ability.ActivateEffect(hitCollider);
         yield return null;
     }
 
@@ -89,7 +76,7 @@ public class AbilityHolder : Ability, IUpgradeable
             transform.position = caster.transform.position;
             if (playerAction != null)
             {
-                transform.right = playerAction.lastFacing;
+                transform.right = new Vector3(playerAction.lastFacing.x, 0, playerAction.lastFacing.y);
             }
         }
         
@@ -129,7 +116,7 @@ public class AbilityHolder : Ability, IUpgradeable
         else if (!ability.isFollowingCaster)
         {
             transform.position = caster.transform.position;
-            transform.right = playerAction.lastFacing;
+            transform.right = new Vector3(playerAction.lastFacing.x, 0, playerAction.lastFacing.y);
         }
 
         Debug.Log("this.gameObject = " + this.gameObject);
@@ -177,7 +164,12 @@ public class AbilityHolder : Ability, IUpgradeable
         
         if (ability.isFollowingCaster)
         {
-            transform.right = playerAction.lastFacing;
+            //Calculate angle with HelperMethods from the playerAction.lastFacing
+            float angle = HelperMethods.GetAngleFromVector(playerAction.lastFacing);
+            
+            //Set z rotation to angle
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+            //transform.right = new Vector3(playerAction.lastFacing.x, playerAction.lastFacing.y, 0);
         }
 
         switch (state)

@@ -25,6 +25,8 @@ public class SlashUpgrade2 : AbilitySO
 
     public override void ActivateEffect(ColliderDrawer colliderDrawer)
     {
+        if (colliderDrawer.targets.Count == 0)
+            return;
         //Pick random target
         //Todo make this an Generic ScriptableObject function
         //Random target

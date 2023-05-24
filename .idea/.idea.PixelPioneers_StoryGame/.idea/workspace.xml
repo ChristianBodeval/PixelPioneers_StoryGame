@@ -5,8 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31ee322b-587a-4c99-afc9-1b2b30998f9e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Ink/Demos/Basic Demo.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Anim/Cone_Attack_0.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Anim/Cone_Attack_0.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Cone_Attack.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Cone_Attack.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_02.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_02.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitiesSO's/MeleeAttack.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitiesSO's/MeleeAttack.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashAbility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashAbility.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashUpgrade1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashUpgrade1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashUpgrade2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashUpgrade2.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Health/Health.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Health/Health.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HelperMethods.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HelperMethods.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HitColliders/ColliderDrawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HitColliders/ColliderDrawer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tiles/RuleTiles/RuleTiles.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tiles/RuleTiles/RuleTiles.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +40,10 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder_UI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitySO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Enemies/WormFSM.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Health/LaveScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HelperMethods.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/TriggerWavesCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Image.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.8.0/Runtime/VisualScripting.Core/Utilities/LinqUtility.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -115,6 +131,8 @@
       <workItem from="1683374907869" duration="21905000" />
       <workItem from="1684407439002" duration="3955000" />
       <workItem from="1684759864389" duration="1283000" />
+      <workItem from="1684762182853" duration="16881000" />
+      <workItem from="1684924633583" duration="5691000" />
     </task>
     <servers />
   </component>
@@ -137,42 +155,16 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashUpgrade2.cs</url>
-          <line>30</line>
+          <line>33</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashUpgrade2.cs" initialLine="30" containingFunctionPresentation="Method 'ActivateEffect'">
             <startOffsets>
-              <option value="829" />
+              <option value="933" />
             </startOffsets>
             <endOffsets>
-              <option value="866" />
+              <option value="970" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs</url>
-          <line>124</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" initialLine="105" containingFunctionPresentation="Method 'SetActive'">
-            <startOffsets>
-              <option value="3246" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3275" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs</url>
-          <line>119</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" initialLine="115" containingFunctionPresentation="Method 'SetActive'">
-            <startOffsets>
-              <option value="3116" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3158" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/UpgradeUI.cs</url>

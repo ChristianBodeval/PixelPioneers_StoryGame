@@ -29,6 +29,22 @@ public static class HelperMethods
         return GetRandomPointInRadiusOnGround(radius, center, recursionCount + 1);
     }
     
+    public static float GetAngleFromVector(Vector3 dir)
+    {
+        dir = dir.normalized;
+        float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        if (n < 0) n += 360;
+        float angle = n;
+
+        return angle;
+    }
+    //Helper function to get a vector from any angle. -> Angle is between 0 and 360
+    public static Vector3 GetVectorFromAngle(float angle)
+    {
+        float angleRad = angle * (Mathf.PI / 180f);
+        return new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
+    }
+    
     
     
 }

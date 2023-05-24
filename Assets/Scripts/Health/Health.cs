@@ -147,7 +147,11 @@ public class Health : MonoBehaviour
             Material deathMat = Instantiate(deathMaterial);
             sr.material = deathMat;
             sr.material.color = Color.white;
-            SpriteRenderer srShadow = GetComponentInChildren<UnityEngine.Rendering.Universal.ShadowCaster2D>().GetComponent<SpriteRenderer>();
+            
+            SpriteRenderer srShadow = null;
+            
+            if(GetComponentInChildren<UnityEngine.Rendering.Universal.ShadowCaster2D>().GetComponent<SpriteRenderer>() != null)
+                srShadow = GetComponentInChildren<UnityEngine.Rendering.Universal.ShadowCaster2D>().GetComponent<SpriteRenderer>();
 
             float timeStep = deathAnimDuration / 4;
             float t = 1f;
@@ -170,6 +174,7 @@ public class Health : MonoBehaviour
             GameObject.Find("GameManager").GetComponent<SpawnSystem>().RemoveFromWaitDeathList(gameObject);
             Pool.pool.ReturnToEnemyPool(gameObject);
         }
+        yield return null;
     }
 
     public void SetCanTakeDamage(bool b)
