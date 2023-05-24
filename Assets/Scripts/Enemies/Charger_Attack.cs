@@ -55,13 +55,6 @@ public class Charger_Attack : Enemy_Attack
         dangerIndicator.SetActive(false);
     }
 
-    //TODO Unoedvendig, hvis den gør det samme som parentklassen
-    public override void Attack()
-    {
-        StartCoroutine(AttackCD(attackCD)); // Starts cooldown for the attack
-        StartCoroutine(TelegraphAttack());
-    }
-
     private IEnumerator TelegraphAttack()
     {
         yield return new WaitForSeconds(attackTelegraphTime);
@@ -188,7 +181,6 @@ public class Charger_Attack : Enemy_Attack
     // Starts the charge ability if player is in los and range + has ChargeCD rdy
     private void StartCharge(GameObject player)
     {
-        Debug.Log($"{Vector2.Distance(player.transform.position, transform.position) <= (chargeRange / 4) * 3} && {IsInLineOfSight(player, animator)} && {canCharge}");
         if (Vector2.Distance(player.transform.position, transform.position) <= (chargeRange / 4) * 3 && IsInLineOfSight(player, animator) && canCharge)
         {
             animator.Play("Charge");
@@ -238,6 +230,7 @@ public class Charger_Attack : Enemy_Attack
         lr.startColor = new Color(0f, 0f, 0f, 0f);
         lr.endColor = new Color(0f, 0f, 0f, 0f);
 
+        animator.Play("Idle");
         isCharging = false;
     }
 }

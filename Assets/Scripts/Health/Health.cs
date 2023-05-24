@@ -5,15 +5,19 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
+    [Header("Music")]
+    [Range(0, 1)] public float musicVolume = 0.5f;
+    [SerializeField] protected AudioClip casualTrack;
+
     [Header("SFX")]
     [Range(0, 1)] public float sfxVolume = 1f;
+    [SerializeField] protected AudioClip deathSFX;
+    [SerializeField] protected AudioClip bossBloodSFX;
 
     public float currentHealth;
     public float maxHealth;
     [SerializeField] private Shader dissolve;
     [SerializeField] protected float deathAnimDuration;
-    [SerializeField] private AudioClip deathSFX;
-    [SerializeField] private AudioClip bossBloodSFX;
     protected Coroutine deathCoroutine;
     protected Coroutine blinkCoroutine;
     protected Coroutine shakeCoroutine;
@@ -118,7 +122,7 @@ public class Health : MonoBehaviour
     {
         if (gameObject.CompareTag("Enemy"))
         {
-            
+
             SFXManager.singleton.PlaySound(deathSFX, transform.position);
 
             Dead.Invoke();
@@ -165,6 +169,14 @@ public class Health : MonoBehaviour
             // Deactivate enemy and return to pool
             GameObject.Find("GameManager").GetComponent<SpawnSystem>().RemoveFromWaitDeathList(gameObject);
             Pool.pool.ReturnToEnemyPool(gameObject);
+        }
+        else if (gameObject.CompareTag("Boss"))
+        {
+            if (GetComponent<Hermes_Pathing>().bossHealthBar != null) GetComponent<Hermes_Pathing>().bossHealthBar.SetActive(false);
+            gameObject.SetActive(false);
+            Destroy(GameObject.Find("Parent_Mjoelnir(Clone)"));
+            MusicManager.singleton.PlayMusic(casualTrack, musicVolume);
+            // TODO Trigger cutscene 
         }
     }
 

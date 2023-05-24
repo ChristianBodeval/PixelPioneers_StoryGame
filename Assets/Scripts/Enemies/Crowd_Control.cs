@@ -56,6 +56,7 @@ public class Crowd_Control : MonoBehaviour
     public void RemoveStun()
     {
         if (stunCoroutine != null) StopCoroutine(stunCoroutine); // Replace old stun if new is longer
+        if (freezeCoroutine != null) StopCoroutine(freezeCoroutine);
         animator.SetBool("CannotTransitionState", false);
         animator.SetBool("IsStunned", false);
         animator.SetBool("AttackRDY", true);
@@ -90,6 +91,7 @@ public class Crowd_Control : MonoBehaviour
 
     public void FreezeFrame(float duration)
     {
+        if (isStunImmune) return;
         if (remainingStunDuration < duration) RemoveStun();
         if (freezeCoroutine != null) StopCoroutine(freezeCoroutine);
         freezeCoroutine = StartCoroutine(FreezeFrameCoroutine(duration));

@@ -51,12 +51,15 @@ MonoBehaviour:
   upgrades:
   - {fileID: 11400000, guid: 0c76cefc0109a4291a34e94e703dbedb, type: 2}
   - {fileID: 11400000, guid: fda63ece2b33b4bb5bc508f0077d70a0, type: 2}
+  volume: 0.2
+  dashSFX: {fileID: 8300000, guid: 997166a78437d2c4cb80dd9b43c99f2e, type: 3}
+  fireSFX: {fileID: 8300000, guid: 2d5a675c8bb6651419f26ad8dafe3fa2, type: 3}
+  slashSFX: {fileID: 8300000, guid: 81e2d50aea30eb94c932927a5fc70607, type: 3}
   dashDistance: 8
   dashDuration: 0.4
   dashCooldownTime: 1.8
   isDashing: 0
   dashCooldownRemaining: 0
-  playerTrail: {fileID: 0}
   hasUpgrade1: 0
   hasUpgrade2: 1
 --- !u!114 &4607218378068542103

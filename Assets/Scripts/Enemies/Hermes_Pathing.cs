@@ -32,10 +32,12 @@ public class Hermes_Pathing : MonoBehaviour
     private Coroutine sprintCDCoroutine;
 
     public GameObject mjoelnir;
+    public GameObject bossHealthBar;
 
     [Header("Music")]
     [Range(0, 1)] public float musicVolume = 1f;
     public AudioClip bossTrack;
+    private bool isPlaying = false;
 
     [Header("SFX")]
     [Range(0, 1)] public float sfxVolume = 1f;
@@ -43,6 +45,8 @@ public class Hermes_Pathing : MonoBehaviour
 
     private void Start()
     {
+        isPlaying = false;
+
         player = GameObject.FindWithTag("Player");
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
@@ -52,11 +56,10 @@ public class Hermes_Pathing : MonoBehaviour
         groundLayer = LayerMask.GetMask("Ground");
         obstacleLayer = LayerMask.GetMask("Obstacles");
 
-        MusicManager.singleton.PlayMusic(bossTrack, musicVolume);
-
         // Deactivate wave ui & trigger dialogue
         GameObject.Find("WaveCounterCanvas").SetActive(false);
         // TODO Trigger dialogue
+        if (bossHealthBar != null) bossHealthBar.SetActive(true);
 
         StartCoroutine(UpdatePath()); // Updates pathfinding regularly
     }
@@ -64,7 +67,7 @@ public class Hermes_Pathing : MonoBehaviour
     private void OnEnable()
     {
         if (animator != null) animator.SetBool("CanMove", true);
-        Instantiate(mjoelnir);
+        Instantiate(mjoelnir, transform.position, transform.rotation);
     }
 
     private void FixedUpdate()
@@ -80,6 +83,8 @@ public class Hermes_Pathing : MonoBehaviour
         {
             animator.SetBool("InAttackRange", false);
         }
+
+        if (!isPlaying) { isPlaying = true; MusicManager.singleton.PlayMusic(bossTrack, musicVolume); }
     }
 
     private void PathFollow()

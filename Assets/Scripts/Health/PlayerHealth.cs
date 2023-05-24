@@ -95,13 +95,12 @@ public class PlayerHealth : Health
 
     protected override void Update()
     {
-
         // Use this for the Boss Healthbar aswell
         HP.value = currentHealth;
         HPFill.color = gradient.Evaluate(HP.normalizedValue);
         if (this.currentHealth <= 0)
         {
-            Die();
+            StartCoroutine(Die());
         }
         damagedHealthShrinkTimer -= Time.deltaTime;
         if (damagedHealthShrinkTimer < 0)
@@ -112,12 +111,13 @@ public class PlayerHealth : Health
             }
         }
     }
+
     public override IEnumerator Die()
     {
-        if(this.currentHealth <= 0)
-            gameObject.SetActive(false);
+        SFXManager.singleton.PlaySound(deathSFX, transform.position, sfxVolume);
+        MusicManager.singleton.StopMusic();
+        gameObject.SetActive(false);
         //.. play deathscreen
         yield return new WaitForEndOfFrame();
     }
-    
 }

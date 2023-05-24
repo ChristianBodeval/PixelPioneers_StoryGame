@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 157113163669937723}
   - component: {fileID: 157113163669937722}
   - component: {fileID: 157113163669937702}
-  - component: {fileID: 157113163669937703}
   - component: {fileID: 6645613609091556230}
   - component: {fileID: 3883348914704256943}
   - component: {fileID: 6594669849559183237}
@@ -107,21 +106,6 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!114 &157113163669937703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 157113163669937724}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77f586f285b3847808d79083bd19ef1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  unwrap: 1
-  splitAtEveryPortal: 0
 --- !u!114 &6645613609091556230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +113,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157113163669937724}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
   m_Name: 
@@ -169,16 +153,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b601c409a0b1b46a23c40df8cc3a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicVolume: 0.3
+  casualTrack: {fileID: 8300000, guid: 9ec30913087bf444198163977fbf6827, type: 3}
   sfxVolume: 0.5
+  deathSFX: {fileID: 8300000, guid: 8641cc0723aa04f4bb401dcf8ccc53b4, type: 3}
+  bossBloodSFX: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
   currentHealth: 100
   maxHealth: 100
   dissolve: {fileID: 0}
-  blinkMaterial: {fileID: 2100000, guid: a8af1c8b3ad351b4b8c015c0516f7fc9, type: 2}
-  baseMaterial: {fileID: 2100000, guid: 4c9a87858e2754648b8f0d5143303072, type: 2}
-  deathMaterial: {fileID: 2100000, guid: bc4b0c691a23bd747b4d5cbd517df6fe, type: 2}
   deathAnimDuration: 0.5
-  deathSFX: {fileID: 8300000, guid: 8641cc0723aa04f4bb401dcf8ccc53b4, type: 3}
-  bossBloodSFX: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
   canTakeDamage: 0
   sr: {fileID: 157113165350864263}
   DamageTakenEvent:
@@ -202,14 +185,13 @@ MonoBehaviour:
   speed: 5
   updateInterval: 0.05
   nextWayPointDistance: 2
-  offset: 0.3
   attackDeadZone: 1
-  isFollowing: 1
-  newPositionRange: 2
   newPositionSpeed: 22
   sprintAwayCD: 0.5
   isSprintRDY: 1
   mjoelnir: {fileID: 5773579059583092043, guid: 696e257c191c18a47a87b91f16eaf3bd, type: 3}
+  bossHealthBar: {fileID: 0}
+  musicVolume: 0.8
   bossTrack: {fileID: 8300000, guid: 9a96f3d083dee81418f119ef6cd05182, type: 3}
   sfxVolume: 0.5
   sprintSFX: {fileID: 8300000, guid: 18fb383f3c8da5348989aac30e881bef, type: 3}
@@ -229,7 +211,7 @@ MonoBehaviour:
   attackCD: 5
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 8256
   attackDMG: 1.5
   attackTelegraphTime: 0.2
   segmentPrefab: {fileID: 2110713007026889626, guid: b51f3005dbd6eaf4c8aef9280eeea043, type: 3}
@@ -507,7 +489,7 @@ MonoBehaviour:
   - {x: 0.4707036, y: -0.017021198, z: 0.00000018483634}
   m_ShapePathHash: 96680608
   m_Mesh: {fileID: 0}
-  m_InstanceId: 54838
+  m_InstanceId: 53990
   m_LocalBounds:
     m_Center: {x: -0.009998858, y: 0.0018541366, z: 0}
     m_Extent: {x: 0.48070246, y: 0.20846152, z: 0}

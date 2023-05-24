@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TriggerWavesCollider : MonoBehaviour
 {
+    /*
     public SendWave sendWave;
     public bool isTriggered = false;
     void OnTriggerEnter2D(Collider2D other)
@@ -16,4 +17,5 @@ public class TriggerWavesCollider : MonoBehaviour
             sendWave.StartWaves();
         }
     }
+    */
 }

@@ -429,7 +429,7 @@ MonoBehaviour:
   sfxVolume: 0.4
   wallImpactSFX: {fileID: 8300000, guid: f0f9f011d27e54f469c71de22ba2dea7, type: 3}
   penetrationSFX: {fileID: 8300000, guid: 0dc501b7838f1af4587745c77c321b18, type: 3}
-  damage: 0.5
+  damage: 4
   speed: 22
   stunDuration: 2
   maxPierceAmount: 3

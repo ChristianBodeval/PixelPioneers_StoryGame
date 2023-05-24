@@ -47,9 +47,8 @@ MonoBehaviour:
   gungnir: {fileID: 6239296000708971393, guid: 617f5ca0b97d61c448ad0c46d6406ba8, type: 3}
   CD: 20
   canThrowGungnir: 1
-  hasUpgrade1: 1
+  hasUpgrade1: 0
   triThrow: {fileID: 5494780652819236533, guid: fa15c06f4e052734b89959ab61400f71, type: 3}
-  hasUpgrade2: 0
+  hasUpgrade2: 1
   sfxVolume: 0.5
   throwSFX: {fileID: 8300000, guid: 89e9c3c7f67dd44428092cad63529bf2, type: 3}
-  baseSFX: {fileID: 8300000, guid: ab29a11c922e4954d970557f7a1baf59, type: 3}

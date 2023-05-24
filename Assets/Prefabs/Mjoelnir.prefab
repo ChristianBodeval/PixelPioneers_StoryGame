@@ -5037,11 +5037,11 @@ MonoBehaviour:
   upgrades:
   - {fileID: 11400000, guid: eeeda3fa93a3945b38bab81e1f385f3c, type: 2}
   - {fileID: 11400000, guid: 22241782dac5f4bbc8fb0f7e39d0cccf, type: 2}
-  volume: 0.3
+  volume: 0.5
   spinImpactSFX: {fileID: 8300000, guid: 466dfb29a71856343a2e9610845291f3, type: 3}
   chargeUpLoopSFX: {fileID: 8300000, guid: 67a35c1cfb5604049b436ac23af4abbc, type: 3}
   chargeSFX: {fileID: 8300000, guid: d46398afb96b55f408b4c6ac3e2debed, type: 3}
-  slamSFX: {fileID: 8300000, guid: 835acfbb1bfa57949a97755796b55a72, type: 3}
+  slamSFX: {fileID: 8300000, guid: f1e4c6224cdada34f99865440aea7138, type: 3}
   spinDMG: 1
   spinRadius: 1
   spinSpeed: 10
@@ -5052,8 +5052,8 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 4224
-  hasChargeUpgrade: 1
-  chargeDMG: 2
+  hasChargeUpgrade: 0
+  chargeDMG: 1.5
   chargeSpeed: 35
   slowAmountWhileCharging: 60
   accelerationCurve:
@@ -5100,7 +5100,7 @@ MonoBehaviour:
   rangeIndicator: {fileID: 1724249966}
   chargeParticles: {fileID: 626848064}
   weaponCDVisual: {fileID: 0}
-  hasAreaOfEffectUpgrade: 0
+  hasAreaOfEffectUpgrade: 1
   aoeDMG: 3
   castTime: 0.3
   aoeRadius: 3
