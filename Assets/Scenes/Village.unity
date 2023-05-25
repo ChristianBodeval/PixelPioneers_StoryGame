@@ -233,6 +233,7 @@ MonoBehaviour:
   colliderHash: 2402751819
   m_SelfShadows: 0
   m_ApplyToSortingLayers: 2
+  isCastingShadows: 0
 --- !u!66 &29150972
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -37290,6 +37291,7 @@ MonoBehaviour:
   colliderHash: 2402751819
   m_SelfShadows: 0
   m_ApplyToSortingLayers: 2
+  isCastingShadows: 0
 --- !u!66 &67145555
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -38416,16 +38418,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a84d08923237a04484255095f626fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicVolume: 0
+  casualTrack: {fileID: 0}
   sfxVolume: 0
-  currentHealth: 10
-  maxHealth: 10
-  blinkMaterial: {fileID: 2100000, guid: a8af1c8b3ad351b4b8c015c0516f7fc9, type: 2}
-  baseMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  deathMaterial: {fileID: 2100000, guid: bc4b0c691a23bd747b4d5cbd517df6fe, type: 2}
-  deathAnimDuration: 0
   deathSFX: {fileID: 0}
   bossBloodSFX: {fileID: 0}
+  currentHealth: 10
+  maxHealth: 10
+  dissolve: {fileID: 0}
+  deathAnimDuration: 0
+  canTakeDamage: 0
+  sr: {fileID: 0}
   DamageTakenEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  Dead:
     m_PersistentCalls:
       m_Calls: []
   HP: {fileID: 1420835855}
@@ -38461,6 +38468,7 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   HPFill: {fileID: 1671869495}
+  damageTaken: {fileID: 0}
 --- !u!331 &207764890
 SpriteMask:
   m_ObjectHideFlags: 0
@@ -39524,8 +39532,12 @@ MonoBehaviour:
   dashCDVisual: {fileID: 1672529384}
   mjoelnirCDVisual: {fileID: 334648761}
   gungnirCDVisual: {fileID: 1294175758}
-  playerActionScript: {fileID: 207764893}
+  dashScript: {fileID: 0}
   mjoelnirScript: {fileID: 0}
+  gungnirScript: {fileID: 0}
+  eyeCatcherMjoelnir: {fileID: 0}
+  eyeCatcherDash: {fileID: 0}
+  eyeCatcherGungnir: {fileID: 0}
 --- !u!1 &679141360
 GameObject:
   m_ObjectHideFlags: 0
@@ -46409,6 +46421,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  takesDamage: 0
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  smallCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1292307328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49133,6 +49158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2113914544}
   - component: {fileID: 2113914545}
+  - component: {fileID: 2113914546}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -49207,3 +49233,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2113914546
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113914543}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e448f76a49695fb45a528ad9695247e7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
