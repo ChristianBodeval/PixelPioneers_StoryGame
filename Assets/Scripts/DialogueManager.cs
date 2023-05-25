@@ -47,6 +47,12 @@ public class DialogueManager : MonoBehaviour
     public Image continueButton;
 
     private Animator dialogBoxAnim;
+    private Sprite brokkrFace;
+    private Sprite scryerFace;
+    private Sprite lokiFace;
+
+    public Image potraitLeft;
+    public Image potraitRight;
 
     private PlayableDirector ingridAndAstridTL;
     private PlayableDirector swordPickUpTL;
@@ -75,26 +81,21 @@ public class DialogueManager : MonoBehaviour
         dialogueTarget = GameObject.FindGameObjectsWithTag("NPC");
         dialogBoxAnim = dialogueBox.GetComponent<Animator>();
 
+        brokkrFace = Resources.Load<Sprite>("Sprites/Brokkr");
+        scryerFace = Resources.Load<Sprite>("Sprites/ScryerFace");
+        lokiFace = Resources.Load<Sprite>("Sprites/LokiFace");
+
+
+
+        
+
+
         if (SceneManager.GetActiveScene().name == "Village" || SceneManager.GetActiveScene().name == "VillageWithTL")
         {
             Debug.Log("Current scene is Village");
             ingridAndAstridTL = GameObject.Find("AstridAndIngridTL").GetComponent<PlayableDirector>();
             swordPickUpTL = GameObject.Find("SwordPickUpTL").GetComponent<PlayableDirector>();
             tutorialTL = GameObject.Find("TutorialTL").GetComponent<PlayableDirector>();
-        }
-    }
-
-    public void SpeechBubbleSwitch()
-    {
-        if (Speechbubble2.activeSelf)
-        {
-            Speechbubble1.SetActive(true);
-            Speechbubble2.SetActive(false);
-        }
-        if (Speechbubble1.activeSelf)
-        {
-            Speechbubble1.SetActive(false);
-            Speechbubble2.SetActive(true);
         }
     }
 
@@ -115,6 +116,10 @@ public class DialogueManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         isButtonOnCD = false;
+    }
+
+    public void CheckCurrentFaceIcon()
+    {
     }
 
     public void EnterDialogueMode(TextAsset inkJson)
@@ -224,7 +229,30 @@ public class DialogueManager : MonoBehaviour
 
         //Empty the Dialogue text
         dialogueText.text = "";
+        if (line.StartsWith("Brokkr"))
+        {
+            potraitLeft.enabled = true;
+            potraitLeft.sprite = brokkrFace;
+            potraitRight.enabled = false;
 
+        }
+        else if (line.StartsWith("Scryer"))
+        {
+            potraitRight.enabled = true;
+            potraitRight.sprite = scryerFace;
+            potraitLeft.enabled = false;
+        }
+        else if (line.StartsWith("Loki"))
+        {
+            potraitRight.enabled = true;
+            potraitRight.sprite = lokiFace;
+            potraitLeft.enabled = false;
+        }
+        else
+        {
+            potraitLeft.enabled = false;
+            potraitRight.enabled = false;
+        }
         //For each letter in the dialogue
         foreach (char letter in line.ToCharArray())
         {
