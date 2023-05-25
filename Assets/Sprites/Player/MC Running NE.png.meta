@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f2bfa0dcc0aec1498e4e988a5e4a90d
-      internalID: -493715452
+      spriteID: 54f1762f9edb0044095b6cfc9a3b9fa0
+      internalID: 617542865
       vertices: []
       indices: 
       edges: []
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ce434328f9fe3f4dafdb37d42aadd65
-      internalID: 2119612930
+      spriteID: f7b794e32f56c3f4d960d95da552f3a8
+      internalID: 1197213834
       vertices: []
       indices: 
       edges: []
@@ -161,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 412c0b8fe71df984fbc44bc2a6125f97
-      internalID: 1611099843
+      spriteID: 45a5549706935b04dae22fff2d24b311
+      internalID: 931091319
       vertices: []
       indices: 
       edges: []
@@ -182,8 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 890cc9a8e8e968a4c8137e772279d45b
-      internalID: -1202427480
+      spriteID: 81bd73a003e0c194d96f38ad89acc93d
+      internalID: -2051925655
       vertices: []
       indices: 
       edges: []
@@ -203,8 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 687add7f06ea04c47988a6eaf0a2518e
-      internalID: -1288350782
+      spriteID: fe093063b98a7894888ce622ea4b3376
+      internalID: -1094477634
       vertices: []
       indices: 
       edges: []
@@ -224,8 +224,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23c056595c584b3408768415a8b7058b
-      internalID: 1383242285
+      spriteID: 37a5384469af94b47b034a2864901a3a
+      internalID: 110524916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC Running NE_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9adc1a800bcd85a4384de16cf987d7c0
+      internalID: 774834533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC Running NE_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17b0795db3103c346981b6f729c3e563
+      internalID: 624369258
       vertices: []
       indices: 
       edges: []
@@ -241,12 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MC Running NE_0: -493715452
-      MC Running NE_1: 2119612930
-      MC Running NE_2: 1611099843
-      MC Running NE_3: -1202427480
-      MC Running NE_4: -1288350782
-      MC Running NE_5: 1383242285
+      MC Running NE_0: 617542865
+      MC Running NE_1: 1197213834
+      MC Running NE_2: 931091319
+      MC Running NE_3: -2051925655
+      MC Running NE_4: -1094477634
+      MC Running NE_5: 110524916
+      MC Running NE_6: 774834533
+      MC Running NE_7: 624369258
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

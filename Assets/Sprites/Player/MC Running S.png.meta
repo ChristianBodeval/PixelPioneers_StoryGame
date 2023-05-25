@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b6deb5521d83331419148952f9972d98
+guid: f56d12d3701fba3468e6bed77fcde560
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MC Running NW_0
+      name: MC Running S_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a560bfe4721b9d94ea06ad74506a8c4a
-      internalID: -1624664554
+      spriteID: 35710432d98e3be46b8a6aa40d4a4575
+      internalID: -1092140716
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running NW_1
+      name: MC Running S_1
       rect:
         serializedVersion: 2
         x: 64
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71346de23e0cb564e91e3624836e80ab
-      internalID: 1141998982
+      spriteID: c9921fba1f3830b4eb19d72da582a56c
+      internalID: 4887105
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running NW_2
+      name: MC Running S_2
       rect:
         serializedVersion: 2
         x: 128
@@ -161,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da97f147d55f192498c9f1e19c84d13e
-      internalID: -2087365280
+      spriteID: 85c4e471abd524e47ae57b378282cff0
+      internalID: 931523825
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running NW_3
+      name: MC Running S_3
       rect:
         serializedVersion: 2
         x: 192
@@ -182,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6da69b87098b1a44381a6f7325588a26
-      internalID: 1935390755
+      spriteID: 1a9e394b009a39b42821d7779edc00e1
+      internalID: 65127974
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running NW_4
+      name: MC Running S_4
       rect:
         serializedVersion: 2
         x: 256
@@ -203,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0fee51a01faffa6429e61032cf806e00
-      internalID: 367985199
+      spriteID: 194d5c0941ba73740a84f83c86411f59
+      internalID: 1505935097
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running NW_5
+      name: MC Running S_5
       rect:
         serializedVersion: 2
         x: 320
@@ -224,14 +224,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95b7836b84734c4468ec2f270993747e
-      internalID: 675401779
+      spriteID: bc759d3feecd11f40ac713870d886dfc
+      internalID: 584918649
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running NW_6
+      name: MC Running S_6
       rect:
         serializedVersion: 2
         x: 384
@@ -245,14 +245,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4950509df9fd80944a1aa851ab905eef
-      internalID: -593238011
+      spriteID: f93c52dacbab874429ca91028522273e
+      internalID: -890851227
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running NW_7
+      name: MC Running S_7
       rect:
         serializedVersion: 2
         x: 448
@@ -266,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecd3cec6ba4385a4988401070994d65a
-      internalID: -1038363168
+      spriteID: 0bd419619d1e8864ea5792899ec59396
+      internalID: 1179363734
       vertices: []
       indices: 
       edges: []
@@ -283,14 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MC Running NW_0: -1624664554
-      MC Running NW_1: 1141998982
-      MC Running NW_2: -2087365280
-      MC Running NW_3: 1935390755
-      MC Running NW_4: 367985199
-      MC Running NW_5: 675401779
-      MC Running NW_6: -593238011
-      MC Running NW_7: -1038363168
+      MC Running S_0: -1092140716
+      MC Running S_1: 4887105
+      MC Running S_2: 931523825
+      MC Running S_3: 65127974
+      MC Running S_4: 1505935097
+      MC Running S_5: 584918649
+      MC Running S_6: -890851227
+      MC Running S_7: 1179363734
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

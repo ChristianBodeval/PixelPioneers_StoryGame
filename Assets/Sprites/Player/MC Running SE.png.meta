@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e73240b856d8fbe46879e3c6c78566db
+guid: 44e49a47a4b595e42bc70b44867e27f0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MC Running E Spritesheet_0
+      name: MC Running SE_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0128c5ec67173c24abdbd6b61c56aa5c
-      internalID: -1967099
+      spriteID: 43f35356800917d4b806741630354f44
+      internalID: 2100990280
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running E Spritesheet_1
+      name: MC Running SE_1
       rect:
         serializedVersion: 2
         x: 64
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77e4a86d65e21164692d1b0731b0c83d
-      internalID: -1389201424
+      spriteID: eb29ad136bd636943a5ded682361b0b1
+      internalID: 1016860773
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running E Spritesheet_2
+      name: MC Running SE_2
       rect:
         serializedVersion: 2
         x: 128
@@ -161,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 508b496119ee79d42943c2d43701b56d
-      internalID: -1437490455
+      spriteID: 7d7acafdc58581e43a406fdd83af5231
+      internalID: -750096656
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running E Spritesheet_3
+      name: MC Running SE_3
       rect:
         serializedVersion: 2
         x: 192
@@ -182,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2078c79bda8655546bcee8bb073a6dfb
-      internalID: 634016169
+      spriteID: f7168a0941671b74f9e2b9396449fb4e
+      internalID: -1393953518
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running E Spritesheet_4
+      name: MC Running SE_4
       rect:
         serializedVersion: 2
         x: 256
@@ -203,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d37c345d16c90e4f978d259479b169b
-      internalID: -742888666
+      spriteID: 2bee305cebada3f459f1dbfc698d1103
+      internalID: 1644647147
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running E Spritesheet_5
+      name: MC Running SE_5
       rect:
         serializedVersion: 2
         x: 320
@@ -224,14 +224,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7612c69129135440b2263f563f59b19
-      internalID: 1120670675
+      spriteID: 64af0ab1f9a8e2d4f935051223f2204e
+      internalID: -821544216
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running E Spritesheet_6
+      name: MC Running SE_6
       rect:
         serializedVersion: 2
         x: 384
@@ -245,14 +245,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 036c2ea336a5d4642a048ad898c79710
-      internalID: -873354792
+      spriteID: 4e1a1cc4326740246b76d7212427cb76
+      internalID: -354846821
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running E Spritesheet_7
+      name: MC Running SE_7
       rect:
         serializedVersion: 2
         x: 448
@@ -266,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e92d752a57ba7e64382d8ea63933d7d3
-      internalID: -1441411241
+      spriteID: c422d87e1b5cbc7408789f29be9ff2ca
+      internalID: 553355678
       vertices: []
       indices: 
       edges: []
@@ -283,14 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MC Running E Spritesheet_0: -1967099
-      MC Running E Spritesheet_1: -1389201424
-      MC Running E Spritesheet_2: -1437490455
-      MC Running E Spritesheet_3: 634016169
-      MC Running E Spritesheet_4: -742888666
-      MC Running E Spritesheet_5: 1120670675
-      MC Running E Spritesheet_6: -873354792
-      MC Running E Spritesheet_7: -1441411241
+      MC Running SE_0: 2100990280
+      MC Running SE_1: 1016860773
+      MC Running SE_2: -750096656
+      MC Running SE_3: -1393953518
+      MC Running SE_4: 1644647147
+      MC Running SE_5: -821544216
+      MC Running SE_6: -354846821
+      MC Running SE_7: 553355678
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

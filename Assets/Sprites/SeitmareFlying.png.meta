@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9f7fe8a118d3b4e408b47fe4105ed60b
+guid: 4bd3906eea7ae21448666c81731ad823
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MC Running SE Spritesheet_0
+      name: SeitmareFlying_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 351f4130c84717f4289a7353a01c0c0a
-      internalID: -656135085
+      spriteID: 6765a0f9af4d175478e25a85341e8462
+      internalID: 387923156
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running SE Spritesheet_1
+      name: SeitmareFlying_1
       rect:
         serializedVersion: 2
         x: 64
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4cedef2e65a891f47b1e7ac562d78b57
-      internalID: -466624369
+      spriteID: 91ec72b921f6993488841accf7cdbde6
+      internalID: -850198408
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running SE Spritesheet_2
+      name: SeitmareFlying_2
       rect:
         serializedVersion: 2
         x: 128
@@ -161,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09a6f7e1011f9f04f82f448dc5bd7a06
-      internalID: -1605683873
+      spriteID: 85b70d52935a93e4c91d5e0c6ba9d59a
+      internalID: 430004779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running SE Spritesheet_3
+      name: SeitmareFlying_3
       rect:
         serializedVersion: 2
         x: 192
@@ -182,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 973be22efb2cadd4287b26af93c1e845
-      internalID: -826582615
+      spriteID: 8baec9b891b53e04a9a88160eac83b0d
+      internalID: 1861459013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC Running SE Spritesheet_4
+      name: SeitmareFlying_4
       rect:
         serializedVersion: 2
         x: 256
@@ -203,71 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90b41d812a4470449b1ac50e7f2c57b2
-      internalID: -1112125219
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MC Running SE Spritesheet_5
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c42eb83e460036a44848032622f1180f
-      internalID: -114371058
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MC Running SE Spritesheet_6
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 615d6b47e6b71f04db324e2d4fbacbeb
-      internalID: 789412317
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MC Running SE Spritesheet_7
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6489a92dcc50e3c43b1ed561ae6d477d
-      internalID: 700245439
+      spriteID: cbc39925991141540abae45d80d9b090
+      internalID: -1675933195
       vertices: []
       indices: 
       edges: []
@@ -283,14 +220,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MC Running SE Spritesheet_0: -656135085
-      MC Running SE Spritesheet_1: -466624369
-      MC Running SE Spritesheet_2: -1605683873
-      MC Running SE Spritesheet_3: -826582615
-      MC Running SE Spritesheet_4: -1112125219
-      MC Running SE Spritesheet_5: -114371058
-      MC Running SE Spritesheet_6: 789412317
-      MC Running SE Spritesheet_7: 700245439
+      SeitmareFlying_0: 387923156
+      SeitmareFlying_1: -850198408
+      SeitmareFlying_2: 430004779
+      SeitmareFlying_3: 1861459013
+      SeitmareFlying_4: -1675933195
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
