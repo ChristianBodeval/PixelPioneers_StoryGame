@@ -85,11 +85,6 @@ public class DialogueManager : MonoBehaviour
         scryerFace = Resources.Load<Sprite>("Sprites/ScryerFace");
         lokiFace = Resources.Load<Sprite>("Sprites/LokiFace");
 
-
-
-        
-
-
         if (SceneManager.GetActiveScene().name == "Village" || SceneManager.GetActiveScene().name == "VillageWithTL")
         {
             Debug.Log("Current scene is Village");
@@ -118,9 +113,7 @@ public class DialogueManager : MonoBehaviour
         isButtonOnCD = false;
     }
 
-    public void CheckCurrentFaceIcon()
-    {
-    }
+   
 
     public void EnterDialogueMode(TextAsset inkJson)
     {
@@ -234,7 +227,6 @@ public class DialogueManager : MonoBehaviour
             potraitLeft.enabled = true;
             potraitLeft.sprite = brokkrFace;
             potraitRight.enabled = false;
-
         }
         else if (line.StartsWith("Scryer"))
         {
