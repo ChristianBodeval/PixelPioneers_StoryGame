@@ -51,7 +51,6 @@ public class Hermes_Gungnir_Side : MonoBehaviour
         else if (col.CompareTag("Player"))
         {
             SFXManager.singleton.PlaySound(penetrationSFX, transform.position, sfxVolume);
-            col.transform.SetParent(transform);
             col.transform.GetComponent<PlayerHealth>().TakeDamage(damage);
             StartCoroutine(StopMove());
         }
@@ -69,8 +68,6 @@ public class Hermes_Gungnir_Side : MonoBehaviour
         yield return new WaitForSeconds(0.2f * multiplier);
 
         rb.velocity = Vector2.zero;
-        GameObject player = GameObject.FindWithTag("Player");
-        if (player.activeSelf) { player.transform.SetParent(null); player.GetComponent<PlayerAction>().StartMove(); }
         Destroy(gameObject);
     }
 }

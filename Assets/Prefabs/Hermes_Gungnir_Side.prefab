@@ -264,7 +264,7 @@ MonoBehaviour:
   wallImpactSFX: {fileID: 8300000, guid: f0f9f011d27e54f469c71de22ba2dea7, type: 3}
   penetrationSFX: {fileID: 8300000, guid: 0dc501b7838f1af4587745c77c321b18, type: 3}
   damage: 2.5
-  speed: 15
+  speed: 20
   waitDuration: 2
 --- !u!1 &3571452712031017603
 GameObject:

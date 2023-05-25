@@ -67,8 +67,7 @@ public class WeaponAbility : MonoBehaviour
         switch (ExtractNumberFromName(SceneManager.GetActiveScene().name))
         {
             case 1:
-                hasGungnir = true;
-                //hasDash = true;
+                hasDash = true;
                 break;
             case 2:
                 cleanUpOnDeathList.Add(Instantiate(mjoelnir, transform.position, transform.rotation));

@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   moveVector: {x: 0, y: 0, z: 0}
-  volume: 0
+  volume: 0.1
   footstepSFX: {fileID: 8300000, guid: 3f843ee3020f31c4d83cb520814b0ef2, type: 3}
   footstepDelay: 0.12
   inputBuffer: 0.1
@@ -276,11 +276,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicVolume: 0
   casualTrack: {fileID: 0}
-  sfxVolume: 0
-  deathSFX: {fileID: 0}
+  sfxVolume: 0.7
+  deathSFX: {fileID: 8300000, guid: 8840f5693a128d8479743a1da433cce2, type: 3}
   bossBloodSFX: {fileID: 0}
-  currentHealth: 10
-  maxHealth: 10
+  currentHealth: 1000000
+  maxHealth: 1000000
   dissolve: {fileID: 0}
   deathAnimDuration: 0
   canTakeDamage: 0
@@ -324,7 +324,7 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   HPFill: {fileID: 5205308680662958415}
-  damageTaken: {fileID: 0}
+  damageTaken: {fileID: 8300000, guid: a13193ab802fa2e40880eaddfad265d1, type: 3}
 --- !u!82 &5205308680910767317
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2428,6 +2428,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4967315354297645191, guid: 936e4f2917074a743965431c39135a24, type: 3}
+      propertyPath: m_Name
+      value: MjoelnirCD
+      objectReference: {fileID: 0}
     - target: {fileID: 4967315355038190069, guid: 936e4f2917074a743965431c39135a24, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2515,6 +2519,14 @@ PrefabInstance:
     - target: {fileID: 4967315355038190070, guid: 936e4f2917074a743965431c39135a24, type: 3}
       propertyPath: m_Name
       value: CDs
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967315355204058666, guid: 936e4f2917074a743965431c39135a24, type: 3}
+      propertyPath: m_Name
+      value: DashCD
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967315355684957783, guid: 936e4f2917074a743965431c39135a24, type: 3}
+      propertyPath: m_Name
+      value: GungnirCD
       objectReference: {fileID: 0}
     - target: {fileID: 5112250167957704416, guid: 936e4f2917074a743965431c39135a24, type: 3}
       propertyPath: m_IsActive
