@@ -22,8 +22,10 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
 
     [Header("Pin Upgrade")]
     public bool hasUpgrade2;
-    
 
+    [Header("SFX")]
+    [Range(0, 1)] public float sfxVolume = 1f;
+    [SerializeField] private AudioClip throwSFX;
 
     private Vector3 lastDirection = Vector3.right;
 
@@ -64,6 +66,8 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
     {
         if (Input.GetButtonDown("Fire3") && canThrowGungnir)
         {
+            SFXManager.singleton.PlaySound(throwSFX, transform.position, sfxVolume);
+
             Gungnir spear = Instantiate(gungnirScript, playerAction.transform.position, Quaternion.identity);
             spear.SetDirection(playerAction.lastFacing);
 
@@ -74,21 +78,23 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
            
             if (hasUpgrade1)
             {
+                StartCoroutine(SFXManager.singleton.PlaySoundWithDelay(throwSFX, transform.position, sfxVolume, 0.05f));
+
                 // Calculate angles for the additional spears
                 float angle1 = GetThrowAngle() + 20f;
                 float angle2 = GetThrowAngle() - 20f;
 
                 // Instantiate and throw the additional spears
                 GameObject spear1 = Instantiate(triThrow, playerAction.transform.position, Quaternion.identity);
+                spear1.GetComponent<TriThrow>().damage = gungnir.GetComponent<Gungnir>().damage;
                 spear1.transform.rotation = Quaternion.Euler(0f, 0f, angle1);
                 spear1.GetComponent<Rigidbody2D>().AddForce(GetThrowDirection(angle1) * gungnirScript.speed, ForceMode2D.Impulse);
 
                 GameObject spear2 = Instantiate(triThrow, playerAction.transform.position, Quaternion.identity);
+                spear2.GetComponent<TriThrow>().damage = gungnir.GetComponent<Gungnir>().damage;
                 spear2.transform.rotation = Quaternion.Euler(0f, 0f, angle2);
                 spear2.GetComponent<Rigidbody2D>().AddForce(GetThrowDirection(angle2) * gungnirScript.speed, ForceMode2D.Impulse);
             }
-            
-         
         }
     }
 

@@ -16,12 +16,14 @@ public class SpawnSystem : MonoBehaviour
     private bool isSpawning = false;
     private float postWaveWaitTime = 0f;
     private Coroutine awaitAddWaveCoroutine;
+    private GameObject player;
     [HideInInspector] public static bool waveAlive = false;
     [HideInInspector] public static int totalWaves;
     [HideInInspector] public static int currentWave;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(SpawnWaves());
         StartCoroutine(CheckIfWaveIsDead()); // Function checks if wave is alive during play
     }
@@ -149,7 +151,7 @@ public class SpawnSystem : MonoBehaviour
     // Returns a point eligible for spawning an enemy outside of the screen
     private Vector2 FindSpawnPoint()
     {
-        Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+        Vector3 playerPosition = player.transform.position;
         Vector3 point = Vector2.zero;
 
         int recursionCount = 0;

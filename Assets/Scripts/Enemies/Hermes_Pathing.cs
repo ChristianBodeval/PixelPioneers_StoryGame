@@ -17,15 +17,12 @@ public class Hermes_Pathing : MonoBehaviour
     private LayerMask groundLayer;
     [SerializeField] private float updateInterval = 0.05f;
     [SerializeField] private float nextWayPointDistance = 2f;
-    [SerializeField] private float offset = 0.2f;
     private Path path;
     private int currentWayPoint = 0;
     private Seeker seeker;
 
     [Header("Custom Behavior")]
     [SerializeField] private float attackDeadZone = 0.8f;
-    [SerializeField] private bool isFollowing = true;
-    [SerializeField] private float newPositionRange = 2f;
     [SerializeField] private float newPositionSpeed = 15f;
     [SerializeField] private float sprintAwayCD = 1f;
     [HideInInspector] public bool isSprintRDY = true;
@@ -33,11 +30,6 @@ public class Hermes_Pathing : MonoBehaviour
     private Coroutine newPositionCoroutine;
     private Coroutine movetoPositionCoroutine;
     private Coroutine sprintCDCoroutine;
-
-    public GameObject mjoelnir;
-
-    [Header("Music")]
-    public AudioClip bossTrack;
 
     [Header("SFX")]
     [Range(0, 1)] public float sfxVolume = 1f;
@@ -54,7 +46,9 @@ public class Hermes_Pathing : MonoBehaviour
         groundLayer = LayerMask.GetMask("Ground");
         obstacleLayer = LayerMask.GetMask("Obstacles");
 
-        MusicManager.singleton.PlayMusic(bossTrack);
+        // Deactivate wave ui & trigger dialogue
+        GameObject.Find("WaveCounterCanvas").SetActive(false);
+        // TODO Trigger dialogue
 
         StartCoroutine(UpdatePath()); // Updates pathfinding regularly
     }
@@ -62,7 +56,6 @@ public class Hermes_Pathing : MonoBehaviour
     private void OnEnable()
     {
         if (animator != null) animator.SetBool("CanMove", true);
-        Instantiate(mjoelnir);
     }
 
     private void FixedUpdate()
@@ -251,6 +244,11 @@ public class Hermes_Pathing : MonoBehaviour
         yield return new WaitForSeconds(sprintAwayCD);
 
         isSprintRDY = true;
+    }
+
+    public void CancelSprint()
+    {
+        if (newPositionCoroutine != null) StopCoroutine(newPositionCoroutine);
     }
 
     private void Flip()

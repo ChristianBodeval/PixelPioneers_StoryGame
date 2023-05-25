@@ -26,6 +26,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
     private bool abilityRDY = false;
     private Coroutine abilityCDFunction;
     private bool canSpin = true;
+    private bool isBusy = false;
 
     [Header("Hammer Movement")]
     [SerializeField] private float spinDMG;
@@ -45,7 +46,6 @@ public class Mjoelnir_Behavior : MonoBehaviour
     public AnimationCurve accelerationCurve;
     [SerializeField] private float baseHitboxSize;
     [SerializeField] private float hitboxWidthMultiplier = 0.1f;
-    [SerializeField] private float buttonChargeUpRate = 10;
     [SerializeField] private float chargeUpdateInterval = 0.05f;
     [SerializeField] private float maxCharge;
     [SerializeField] private GameObject rangeIndicator;
@@ -191,6 +191,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
     private void EnableHammer()
     {
+        isBusy = true;
         isCharging = false;
         canSpin = true;    // Allow the hammer to spin again
         GetComponent<CircleCollider2D>().enabled = true;    // Player can move again
@@ -198,6 +199,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
     private void DisableHammer()
     {
+        isBusy = false;
         isCharging = true;
         canSpin = false;    // Stop hammer's spin
         GetComponent<CircleCollider2D>().enabled = false;   // Cannot hit enemies with hammer sprite
@@ -205,7 +207,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
     private void UseSpecial()
     {
-        if (Physics2D.Raycast(transform.position, player.transform.position - transform.position, maxCharge - (maxCharge / 4), obstacleLayer))
+        if (Physics2D.Raycast(transform.position, player.transform.position - transform.position, maxCharge - (maxCharge / 4), obstacleLayer) && !isBusy)
         {
             StartCoroutine(AbilityCD(specialCooldown));
             if (chargeCoroutine != null) StopCoroutine(chargeCoroutine);

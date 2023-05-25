@@ -11,29 +11,19 @@ public class FireTrail : MonoBehaviour
     private void Start()
     {
         StartCoroutine(DieAfterTime(timeToDie));
-    
-    
     }
+
     private RaycastHit2D[] CheckForEnemies(float radius, Vector2 direction)
     {
         return Physics2D.CircleCastAll(transform.position, radius, direction, radius, enemyLayers);
     }
+
     private IEnumerator DieAfterTime(float time)
     {
         yield return new WaitForSeconds(time);
         Destroy(gameObject);
     }
-    //private void OnCollisionStay2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Enemy"))
-    //    {
-    //        Health enemy = collision.gameObject.GetComponent<Health>();
-    //        if (enemy != null)
-    //        {
-    //            enemy.TakeDamage(damage);
-    //        }
-    //    }
-    //}
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
@@ -43,7 +33,6 @@ public class FireTrail : MonoBehaviour
             {
                 enemy.TakeDamage(damage);
             }
-
         }
     }
 }

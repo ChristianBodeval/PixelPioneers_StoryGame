@@ -3,6 +3,13 @@ using UnityEngine;
 
 public class Dash : Ability, IUpgradeable
 {
+    [Header("SFX")]
+    [Range(0f, 1f)] [SerializeField] private float volume;
+    [SerializeField] private AudioClip dashSFX;
+    [SerializeField] private AudioClip fireSFX;
+    [SerializeField] private AudioClip slashSFX;
+    private bool isPlaying = false;
+
     [Header("Dash")]
     public float dashDistance = 5f; // Distance of the dash
 
@@ -63,14 +70,17 @@ public class Dash : Ability, IUpgradeable
                 if (hasUpgrade1)
                 {
                     fireSpawn.SpawnFire();
+                    if (!isPlaying) { isPlaying = true; SFXManager.singleton.PlaySound(fireSFX, transform.position, volume); }
                 }
                 if (hasUpgrade2)
                 {
                     slashDash.TurnAreaOn();
+                    if (!isPlaying) { isPlaying = true; SFXManager.singleton.PlaySound(slashSFX, transform.position, volume); }
                 }
                 else
                 {
                     slashDash.TurnAreaOff();
+                    if (!isPlaying) { isPlaying = true; SFXManager.singleton.PlaySound(dashSFX, transform.position, volume); }
                 }
             }
             // Otherwise, end the dash
@@ -106,6 +116,7 @@ public class Dash : Ability, IUpgradeable
 
     private void EndDash()
     {
+        isPlaying = false;
         isDashing = false;
         playerGO.GetComponent<PlayerHealth>().RemoveInvulnerability(); // I frames
         slashDash.TurnAreaOff();

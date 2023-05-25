@@ -11,6 +11,7 @@ public class SFX : MonoBehaviour
 
     private void Return()
     {
+        gameObject.transform.parent = null;
         Pool.pool.ReturnToSFXPool(gameObject);
     }
 }

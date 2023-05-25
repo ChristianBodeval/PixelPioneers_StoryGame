@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 5980401796314083277}
   - component: {fileID: 5980401796314083278}
   - component: {fileID: 5980401796314083279}
+  - component: {fileID: 1717142525}
+  - component: {fileID: 1518463961}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -75,7 +77,7 @@ MonoBehaviour:
     m_Bits: 512
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 8256
+    m_Bits: 270400
   spawnApartDistance: 2
 --- !u!114 &5980401796314083277
 MonoBehaviour:
@@ -126,6 +128,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 087bd1db6c979b244b2fc557a600afa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1717142525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5980401796314083280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b46f5b0bd1596d2448613d40dd872d94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  currentScene: 
+  weapon1: 0
+  weapon1Upgrade1: 0
+  weapon1Upgrade2: 0
+  weapon2: 0
+  weapon2Upgrade1: 0
+  weapon2Upgrade2: 0
+  weapon3: 0
+  weapon3Upgrade1: 0
+  weapon3Upgrade2: 0
+  weapon4: 0
+  weapon4Upgrade1: 0
+  weapon4Upgrade2: 0
+--- !u!114 &1518463961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5980401796314083280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b81adbb666076544fb646a84a772d727, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkMaterial: {fileID: 2100000, guid: 8126747e4e031e94fa7e20781f5b669c, type: 2}
+  baseMaterial: {fileID: 2100000, guid: 4c9a87858e2754648b8f0d5143303072, type: 2}
+  deathMaterial: {fileID: 2100000, guid: bc4b0c691a23bd747b4d5cbd517df6fe, type: 2}
 --- !u!1 &5980401797467247375
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,6 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterVolume: 0.5
+  enterCaveSFX: {fileID: 8300000, guid: 6b66bfd880a87a64aae30d106e743acb, type: 3}
   masterMixer: {fileID: 24100000, guid: f45db753e1178b54a85b575e7bc51df4, type: 2}
 --- !u!1 &5980401797846314893
 GameObject:
@@ -216,5 +260,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf65a43051a256418944632af0d81fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterVolume: 0.5
   audioSource: {fileID: 0}
   fadeDuration: 1

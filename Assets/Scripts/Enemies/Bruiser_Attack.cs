@@ -106,6 +106,6 @@ public class Bruiser_Attack : Enemy_Attack
     private void ResetVariables()
     {
         currentSegment = 1;
-        if (animator != null) { animator.SetBool("AttackRDY", true); animator.SetBool("CanMove", true); } // Resets variable when respawning
+        if (animator != null && GetComponent<Health>().currentHealth > 0) { animator.SetBool("AttackRDY", true); animator.SetBool("CanMove", true); } // Resets variable when respawning
     }
 }

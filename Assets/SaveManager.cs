@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class PlayerSaveManager : MonoBehaviour
+public class SaveManager : MonoBehaviour
 {
     public Transform playerTransform;
     public string currentScene;
@@ -23,6 +24,8 @@ public class PlayerSaveManager : MonoBehaviour
 
     private void Start()
     {
+        playerTransform = GameObject.Find("Player").transform;
+        currentScene = SceneManager.GetActiveScene().name;
         LoadPlayerData();
     }
 

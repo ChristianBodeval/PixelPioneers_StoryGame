@@ -5,10 +5,15 @@ using UnityEngine.UI;
 
 public class WaveVisual : MonoBehaviour
 {
+    [Header("Music")]
+    [Range(0, 1)] public float musicVolume = 1f;
+    [SerializeField] private AudioClip combatTrack;
+
     [Header("SFX")]
     [Range(0, 1)] public float sfxVolume = 1f;
     [SerializeField] private AudioClip startCombatSFX;
     [SerializeField] private AudioClip breakCrystalSFX;
+    private bool isInCombat = false;
 
     [Header("UI")]
     [SerializeField] private GameObject prefab;
@@ -32,6 +37,7 @@ public class WaveVisual : MonoBehaviour
 
     private void Start()
     {
+        isInCombat = false;
         maxWaves = SpawnSystem.totalWaves;
         wavesLeft = maxWaves - SpawnSystem.currentWave;
 
@@ -101,9 +107,6 @@ public class WaveVisual : MonoBehaviour
         }
     }
 
-
-
-
     private GameObject DrawFromIndicatorPool()
     {
         if (waveIndicatorsPool.Count > 0)
@@ -157,6 +160,15 @@ public class WaveVisual : MonoBehaviour
     {
         while (true)
         {
+            if (wavesLeft > 0 && !isInCombat)
+            {
+                isInCombat = true;
+
+                Transform t = GameObject.Find("Player").transform;
+                SFXManager.singleton.PlaySound(startCombatSFX, t.position, sfxVolume, false, t);
+                MusicManager.singleton.PlayMusic(combatTrack, musicVolume);
+            }
+
             yield return new WaitForSeconds(0.05f);
 
             if (inUseWaveIndicators.Count < 1) continue; // Skip this loop iteration
@@ -219,5 +231,6 @@ public class WaveVisual : MonoBehaviour
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(obj.transform.position);
         GameObject player = GameObject.Find("Player");
         ParticleSystem ps = Instantiate(particleSystem, worldPosition, player.transform.rotation, player.transform);
+        SFXManager.singleton.PlaySound(breakCrystalSFX, player.transform.position, sfxVolume, false, player.transform);
     }
 }

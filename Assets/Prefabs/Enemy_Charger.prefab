@@ -493,7 +493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40040618040465577, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
       propertyPath: maxHealth
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 40040618040465577, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
       propertyPath: baseMaterial
@@ -505,7 +505,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
     - target: {fileID: 40040618040465577, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
       propertyPath: currentHealth
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 40040618040465577, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
       propertyPath: deathAnimDuration
@@ -659,6 +659,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 7628423892788284204, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8492164149219644896, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -802,12 +806,14 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 270400
+  volume: 0.2
+  chargeSFX: {fileID: 8300000, guid: a693e58df7dcaed4794f16375d8eeb11, type: 3}
   attackTelegraphTime: 0.2
   attackDMG: 2
   dangerIndicator: {fileID: 1629126486}
   chargeDmg: 4
   chargeRange: 7
-  chargeUpTime: 0.5
+  chargeUpTime: 1.2
   chargeHitBox: 1
   chargeSpeed: 30
   chargeUpdateInterval: 0.1

@@ -27,24 +27,18 @@ public class Bounds : MonoBehaviour
     {
         while (true)
         {
-            enemies = Physics2D.CircleCastAll(Vector2.zero, 500f, Vector2.zero, 500f, enemyLayers);
-
             yield return new WaitForSeconds(0.4f);
+
+            enemies = Physics2D.CircleCastAll(Vector2.zero, 500f, Vector2.zero, 500f, enemyLayers);
 
             foreach (RaycastHit2D e in enemies)
             {
-                if (!Physics2D.OverlapPoint(e.transform.position, groundLayer) || Physics2D.OverlapPoint(e.transform.position, obstacleLayer) || Physics2D.OverlapPoint(e.transform.position, pitLayer))
+                Debug.Log($"{Physics2D.OverlapPoint(e.transform.position, obstacleLayer)} & {Physics2D.OverlapPoint(e.transform.position, pitLayer)}");
+                if (e.transform != null && ( !Physics2D.OverlapPoint(e.transform.position, groundLayer) || Physics2D.OverlapPoint(e.transform.position, obstacleLayer) || Physics2D.OverlapPoint(e.transform.position, pitLayer)) )
                 {
-                    if (e.transform.CompareTag("Boss") && e.transform.GetComponentInChildren<Animator>().GetBool("IsFleeing")) // Is hermes and is fleeing)
-                    {
-                        
-                    }
-                    else
-                    {
-                        StartCoroutine(FindClosestValidPosition(e.transform.gameObject));
-                    }
-                     
+                    if (!e.transform.CompareTag("Boss")) StartCoroutine(FindClosestValidPosition(e.transform.gameObject));               
                 }
+
                 yield return null;
             }
 

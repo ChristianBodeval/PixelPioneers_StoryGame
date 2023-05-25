@@ -5,18 +5,19 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
+    [Header("Music")]
+    [Range(0, 1)] public float musicVolume = 0.5f;
+    [SerializeField] protected AudioClip casualTrack;
+
     [Header("SFX")]
     [Range(0, 1)] public float sfxVolume = 1f;
+    [SerializeField] protected AudioClip deathSFX;
+    [SerializeField] protected AudioClip bossBloodSFX;
 
     public float currentHealth;
     public float maxHealth;
     [SerializeField] private Shader dissolve;
-    [SerializeField] protected Material blinkMaterial;
-    [SerializeField] protected Material baseMaterial;
-    [SerializeField] protected Material deathMaterial;
     [SerializeField] protected float deathAnimDuration;
-    [SerializeField] private AudioClip deathSFX;
-    [SerializeField] private AudioClip bossBloodSFX;
     protected Coroutine deathCoroutine;
     protected Coroutine blinkCoroutine;
     protected Coroutine shakeCoroutine;
@@ -43,6 +44,8 @@ public class Health : MonoBehaviour
             
             this.currentHealth -= damage;
 
+            if (this.currentHealth <= 0) return;
+
             // Hermes moves when haven taken damage
             if (gameObject.CompareTag("Boss"))
             {
@@ -62,9 +65,6 @@ public class Health : MonoBehaviour
                 }
             }
 
-            // Reset material
-            sr.material = baseMaterial;
-
             // Freeze frame enemies
             if (gameObject.CompareTag("Enemy")) GetComponent<Crowd_Control>().FreezeFrame(freezeDurationOnDmgTaken);
 
@@ -73,7 +73,7 @@ public class Health : MonoBehaviour
             bloodSplatter.transform.position = transform.position;
 
             // Blink white
-            if (blinkCoroutine != null && !isBlinking) StopCoroutine(blinkCoroutine); // Stops blink coroutine
+            if (blinkCoroutine != null || isBlinking) StopCoroutine(blinkCoroutine); // Stops blink coroutine
             blinkCoroutine = StartCoroutine(BlinkOnDmgTaken(freezeDurationOnDmgTaken));
 
             // Shake sprite
@@ -106,13 +106,13 @@ public class Health : MonoBehaviour
         if (deathCoroutine != null) yield break;
         isBlinking = true;
 
-        Material blinkMat = Instantiate(blinkMaterial);
+        Material blinkMat = Instantiate(MaterialManager.singleton.blinkMaterial);
         sr.material = blinkMat;
         sr.material.color = Color.white;
 
         yield return new WaitForSeconds(duration);
 
-        sr.material = baseMaterial;
+        sr.material = MaterialManager.singleton.baseMaterial;
         sr.material.color = Color.white;
         isBlinking = false;
     }
@@ -122,7 +122,7 @@ public class Health : MonoBehaviour
     {
         if (gameObject.CompareTag("Enemy"))
         {
-            
+
             SFXManager.singleton.PlaySound(deathSFX, transform.position);
 
             Dead.Invoke();
@@ -144,7 +144,7 @@ public class Health : MonoBehaviour
 
             // Set material
             if (blinkCoroutine != null || isBlinking) StopCoroutine(blinkCoroutine); // Stops blink coroutine
-            Material deathMat = Instantiate(deathMaterial);
+            Material deathMat = Instantiate(MaterialManager.singleton.deathMaterial);
             sr.material = deathMat;
             sr.material.color = Color.white;
             
@@ -153,7 +153,7 @@ public class Health : MonoBehaviour
             if(GetComponentInChildren<UnityEngine.Rendering.Universal.ShadowCaster2D>().GetComponent<SpriteRenderer>() != null)
                 srShadow = GetComponentInChildren<UnityEngine.Rendering.Universal.ShadowCaster2D>().GetComponent<SpriteRenderer>();
 
-            float timeStep = deathAnimDuration / 4;
+            float timeStep = deathAnimDuration / 6;
             float t = 1f;
             float alpha = srShadow.color.a;
 
@@ -174,7 +174,14 @@ public class Health : MonoBehaviour
             GameObject.Find("GameManager").GetComponent<SpawnSystem>().RemoveFromWaitDeathList(gameObject);
             Pool.pool.ReturnToEnemyPool(gameObject);
         }
-        yield return null;
+        else if (gameObject.CompareTag("Boss"))
+        {
+            if (GetComponent<WeaponAbility>().bossHealthBar != null) GetComponent<WeaponAbility>().bossHealthBar.SetActive(false);
+            gameObject.SetActive(false);
+            Destroy(GameObject.Find("Parent_Mjoelnir(Clone)"));
+            MusicManager.singleton.PlayMusic(casualTrack, musicVolume);
+            // TODO Trigger cutscene 
+        }
     }
 
     public void SetCanTakeDamage(bool b)
@@ -223,6 +230,10 @@ public class Health : MonoBehaviour
     {
         canTakeDamage = true;
         this.currentHealth = maxHealth;
+
+        if (sr == null) return;
+        sr.material = MaterialManager.singleton.baseMaterial;
+        sr.color = Color.white;
     }
 
     private void OnDisable()
@@ -230,8 +241,6 @@ public class Health : MonoBehaviour
         Mjoelnir.cannotHitList.Remove(gameObject); // Remove this enemy from the list
         if (deathCoroutine != null) StopCoroutine(deathCoroutine);
         deathCoroutine = null;
-        sr.material = baseMaterial;
-        sr.color = Color.white;
         gameObject.GetComponent<Collider2D>().enabled = true;
         GetComponentInChildren<SpriteRenderer>().gameObject.transform.localPosition = Vector3.zero; // Resets sprite position
         if (CompareTag("Enemy") && GetComponentInChildren<Animator>() != null) GetComponentInChildren<Animator>().speed = 1f;

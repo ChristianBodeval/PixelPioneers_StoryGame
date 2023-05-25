@@ -26,17 +26,22 @@ public class SegmentScript : MonoBehaviour
 
     public IEnumerator LerpAlphaIn(float angle, float damage, GameObject parent)
     {
+        bool hasPlayed = false;
         parentBruiser = parent;
         sr = GetComponent<SpriteRenderer>();
         r = sr.color.r;
         g = sr.color.g;
         b = sr.color.b;
 
-        SFXManager.singleton.PlaySound(sfx, transform.position, sfxVolume);
-
         // Slow increase of alpha
         while (a < 1f)
         {
+            if (a > 0.2f && !hasPlayed)
+            {
+                SFXManager.singleton.PlaySound(sfx, transform.position, sfxVolume);
+                hasPlayed = true;
+            }
+
             a += 0.1f;
             sr.color = new Color(r, g, b, accelerationCurve.Evaluate(a) * alphaMaximum);
             yield return new WaitForSeconds(0.05f);

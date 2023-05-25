@@ -129,7 +129,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4020096897058174614}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
   m_Name: 
@@ -184,6 +184,8 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 262208
+  volume: 0.2
+  fireSFX: {fileID: 8300000, guid: e3bb2853de7c4574ba24fe8da9d2f3b9, type: 3}
   projectile: {fileID: 2191891527132068989, guid: ec1d677d95de0c7409e0c489421ff1f2, type: 3}
   projectileSpeed: 7
   attackDMG: 1
@@ -213,15 +215,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxVolume: 0
+  deathSFX: {fileID: 8300000, guid: 8641cc0723aa04f4bb401dcf8ccc53b4, type: 3}
+  bossBloodSFX: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
   currentHealth: 2
   maxHealth: 2
   dissolve: {fileID: -6465566751694194690, guid: 535e27e45a183fc41945a226bbe7618c, type: 3}
-  blinkMaterial: {fileID: 2100000, guid: a8af1c8b3ad351b4b8c015c0516f7fc9, type: 2}
-  baseMaterial: {fileID: 2100000, guid: 4c9a87858e2754648b8f0d5143303072, type: 2}
-  deathMaterial: {fileID: 2100000, guid: bc4b0c691a23bd747b4d5cbd517df6fe, type: 2}
   deathAnimDuration: 0.4
-  deathSFX: {fileID: 8300000, guid: 8641cc0723aa04f4bb401dcf8ccc53b4, type: 3}
-  bossBloodSFX: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
   canTakeDamage: 0
   sr: {fileID: 4020096898732813613}
   DamageTakenEvent:

@@ -15,6 +15,8 @@ public class PlayerHealth : Health
     public Gradient gradient;
     public Image HPFill;
 
+    [SerializeField] private AudioClip damageTaken;
+
     // Constructor
     public PlayerHealth(float startingHealth, float maxHealth) : base(startingHealth, maxHealth)
     {
@@ -33,6 +35,8 @@ public class PlayerHealth : Health
         damagedHealthShrinkTimer = DAMAGED_HEALTH_SHRINK_TIMER_MAX;
         if (!invulnerable)
         {
+            SFXManager.singleton.PlaySound(damageTaken, transform.position, sfxVolume);
+
             cameraShake.TakesDamage();
             this.currentHealth -= damage;
             if (invulnerableCoroutine != null) StopCoroutine(invulnerableCoroutine);
@@ -48,13 +52,13 @@ public class PlayerHealth : Health
     {
         if (deathCoroutine != null) yield break;
 
-        Material blinkMat = Instantiate(blinkMaterial);
+        Material blinkMat = Instantiate(MaterialManager.singleton.blinkMaterial);
         sr.material = blinkMat;
         sr.material.color = Color.white;
 
         yield return new WaitForSeconds(duration);
 
-        sr.material = baseMaterial;
+        sr.material = MaterialManager.singleton.baseMaterial;
         sr.material.color = Color.white;
 
         blinkCoroutine = null;
@@ -91,13 +95,12 @@ public class PlayerHealth : Health
 
     protected override void Update()
     {
-
         // Use this for the Boss Healthbar aswell
         HP.value = currentHealth;
         HPFill.color = gradient.Evaluate(HP.normalizedValue);
         if (this.currentHealth <= 0)
         {
-            Die();
+            StartCoroutine(Die());
         }
         damagedHealthShrinkTimer -= Time.deltaTime;
         if (damagedHealthShrinkTimer < 0)
@@ -108,12 +111,13 @@ public class PlayerHealth : Health
             }
         }
     }
+
     public override IEnumerator Die()
     {
-        if(this.currentHealth <= 0)
-            gameObject.SetActive(false);
+        SFXManager.singleton.PlaySound(deathSFX, transform.position, sfxVolume);
+        MusicManager.singleton.StopMusic();
+        gameObject.SetActive(false);
         //.. play deathscreen
         yield return new WaitForEndOfFrame();
     }
-    
 }

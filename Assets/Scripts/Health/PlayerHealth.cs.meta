@@ -3,7 +3,16 @@ guid: 6a84d08923237a04484255095f626fd4
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - dissolve: {instanceID: 0}
+  - deathSFX: {fileID: 8300000, guid: 8840f5693a128d8479743a1da433cce2, type: 3}
+  - bossBloodSFX: {instanceID: 0}
+  - sr: {instanceID: 0}
+  - HP: {instanceID: 0}
+  - DamagedBar: {instanceID: 0}
+  - cameraShake: {instanceID: 0}
+  - HPFill: {instanceID: 0}
+  - damageTaken: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

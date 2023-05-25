@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class Charger_Attack : Enemy_Attack
 {
+    [Header("SFX")]
+    [Range(0f, 1f)] [SerializeField] private float volume;
+    [SerializeField] private AudioClip chargeSFX;
+
     [SerializeField] private float attackTelegraphTime;
     [SerializeField] private float attackDMG;
 
@@ -19,6 +23,7 @@ public class Charger_Attack : Enemy_Attack
     [SerializeField] private float chargeCD;
     [SerializeField] private LineRenderer lr;
     private bool canCharge = true;
+    private bool isCharging = false;
     private Coroutine chargeCoroutine;
     private Collider2D col;
 
@@ -35,7 +40,7 @@ public class Charger_Attack : Enemy_Attack
     {
         StartCharge(player);
         InAttackRange(player); // Player variable is inherited from IEnemyAttack
-        StopCharge();
+        if (GetComponent<Health>().currentHealth <= 0f) StopCharge();
     }
 
     private void OnEnable()
@@ -50,13 +55,6 @@ public class Charger_Attack : Enemy_Attack
         dangerIndicator.SetActive(false);
     }
 
-    //TODO Unoedvendig, hvis den gør det samme som parentklassen
-    public override void Attack()
-    {
-        StartCoroutine(AttackCD(attackCD)); // Starts cooldown for the attack
-        StartCoroutine(TelegraphAttack());
-    }
-
     private IEnumerator TelegraphAttack()
     {
         yield return new WaitForSeconds(attackTelegraphTime);
@@ -65,26 +63,32 @@ public class Charger_Attack : Enemy_Attack
 
     public void Charge()
     {
-        StartCoroutine(ChargeCD());
-        if (chargeCoroutine != null) StopCoroutine(chargeCoroutine);
-        chargeCoroutine = StartCoroutine(ChargeCoroutine());
+        if (!isCharging)
+        {
+            isCharging = true;
+            StartCoroutine(ChargeCD());
+            if (chargeCoroutine != null) StopCoroutine(chargeCoroutine);
+            chargeCoroutine = StartCoroutine(ChargeCoroutine());
+        }
+        else
+        {
+            return;
+        }
     }
 
     private IEnumerator ChargeCoroutine()
     {
-        GetComponent<Crowd_Control>().isStunImmune = true;
-        animator.SetBool("CanMove", false);
-        Physics2D.IgnoreLayerCollision(12, 3);
-        Physics2D.IgnoreLayerCollision(12, 7);
-        dangerIndicator.SetActive(true);
+        StartCharge();
 
         Color lowAlphaRed = new Color(1f, 0f, 0f, 0f);
         Color highAlphaRed = new Color(1f, 0f, 0f, 0.7f);
-        float totalTicks = 10f;
+        float totalTicks = 60f;
         float yieldDuration = (chargeUpTime - 0.1f) / totalTicks;
         float t = 0f;
         Vector3 direction = (player.transform.position - transform.position).normalized;
         Vector3 targetPos = transform.position + 2f * chargeRange * direction;
+
+        SFXManager.singleton.PlaySound(chargeSFX, transform.position, volume);
 
         // Slow increase of alpha and size of line
         while (t < 1f)
@@ -103,17 +107,6 @@ public class Charger_Attack : Enemy_Attack
 
             // Set width
             lr.widthMultiplier = 0.1f + t * 0.02f;
-
-            if (!IsInLineOfSight(player, animator)) 
-            { 
-                animator.SetBool("CanMove", true);
-                //Enable collisions
-                Physics2D.IgnoreLayerCollision(12, 3, false);
-                Physics2D.IgnoreLayerCollision(12, 7, false);
-                lr.startColor = lowAlphaRed;
-                lr.endColor = lowAlphaRed;
-                yield break; 
-            }
 
             yield return new WaitForSeconds(yieldDuration);
         }
@@ -147,8 +140,7 @@ public class Charger_Attack : Enemy_Attack
         {
             if (Physics2D.CircleCast(transform.position, 0.4f, direction, 0.4f, LayerMask.GetMask("Obstacles")))
             {
-                animator.SetBool("CanMove", true);
-                GetComponent<Crowd_Control>().Stun(1.5f);
+                StopCharge();
                 yield break;
             }
 
@@ -174,13 +166,7 @@ public class Charger_Attack : Enemy_Attack
             distance = Vector2.Distance(transform.position, targetPos); // Updates distance for the next while loop iteration
         }
 
-        //Enable collisions
-        Physics2D.IgnoreLayerCollision(12, 3, false);
-        Physics2D.IgnoreLayerCollision(12, 7, false);
-
-        GetComponent<Crowd_Control>().isStunImmune = false;
-        GetComponent<Crowd_Control>().Stun(0.2f);
-        animator.SetBool("IsCharging", false);
+        StopCharge();
     }
 
     private IEnumerator ChargeCD()
@@ -195,7 +181,6 @@ public class Charger_Attack : Enemy_Attack
     // Starts the charge ability if player is in los and range + has ChargeCD rdy
     private void StartCharge(GameObject player)
     {
-        Debug.Log($"{Vector2.Distance(player.transform.position, transform.position) <= (chargeRange / 4) * 3} && {IsInLineOfSight(player, animator)} && {canCharge}");
         if (Vector2.Distance(player.transform.position, transform.position) <= (chargeRange / 4) * 3 && IsInLineOfSight(player, animator) && canCharge)
         {
             animator.Play("Charge");
@@ -215,17 +200,37 @@ public class Charger_Attack : Enemy_Attack
         }
     }
 
+    private void StartCharge()
+    {
+        Physics2D.IgnoreLayerCollision(12, 3);
+        Physics2D.IgnoreLayerCollision(12, 7);
+
+        GetComponent<Crowd_Control>().isStunImmune = true;
+
+        animator.SetBool("CanMove", false);
+
+        dangerIndicator.SetActive(true);
+    }
+
     public void StopCharge()
     {
-        if (animator.GetBool("IsStunned") || GetComponent<Health>().currentHealth <= 0f)
-        {
-            if (chargeCoroutine != null) StopCoroutine(chargeCoroutine);
-            animator.SetBool("IsCharging", false);
-            if (GetComponent<Health>().currentHealth > 0f) animator.SetBool("CanMove", true);
-            dangerIndicator.SetActive(false);
+        //Enable collisions
+        Physics2D.IgnoreLayerCollision(12, 3, false);
+        Physics2D.IgnoreLayerCollision(12, 7, false);
 
-            lr.startColor = new Color(0f, 0f, 0f, 0f);
-            lr.endColor = new Color(0f, 0f, 0f, 0f);
-        }
+        GetComponent<Crowd_Control>().isStunImmune = false;
+
+        // Stop charge + enable movement
+        if (chargeCoroutine != null) StopCoroutine(chargeCoroutine);
+        animator.SetBool("IsCharging", false);
+        if (GetComponent<Health>().currentHealth > 0f) animator.SetBool("CanMove", true);
+
+        // Disable indicators
+        dangerIndicator.SetActive(false);
+        lr.startColor = new Color(0f, 0f, 0f, 0f);
+        lr.endColor = new Color(0f, 0f, 0f, 0f);
+
+        animator.Play("Idle");
+        isCharging = false;
     }
 }
