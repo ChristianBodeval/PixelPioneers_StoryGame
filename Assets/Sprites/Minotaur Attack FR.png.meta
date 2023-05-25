@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4bd3906eea7ae21448666c81731ad823
+guid: 7726d3bf5da50334d84c43047ddd0372
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 220
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,106 +105,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SeitmareFlying_0
+      name: Minotaur Attack FR_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 250
+        height: 200
+      alignment: 9
+      pivot: {x: 0.32, y: 0.099999994}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 89d56d8dc8da32f42937abde02ea993e
-      internalID: -1157283938
+      spriteID: af616f9f4b040cc49b71cf65cc43e4bf
+      internalID: 1774278855
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SeitmareFlying_1
+      name: Minotaur Attack FR_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 247
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 250
+        height: 200
+      alignment: 9
+      pivot: {x: 0.32, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f57747f886b0ff843b3425cc459273c8
-      internalID: 1200600584
+      spriteID: 48eef32ff3169ad47baf74105db8e854
+      internalID: 76742925
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SeitmareFlying_2
+      name: Minotaur Attack FR_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 500
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 250
+        height: 200
+      alignment: 9
+      pivot: {x: 0.32, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be8e75fdc6693b04baaf29dfa2d91caa
-      internalID: 1413847990
+      spriteID: f58b7088de79be540ba4b506c3ab3f51
+      internalID: -1339146206
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SeitmareFlying_3
+      name: Minotaur Attack FR_3
       rect:
         serializedVersion: 2
-        x: 192
+        x: 750
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 250
+        height: 200
+      alignment: 9
+      pivot: {x: 0.32, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f0bfc44b579d9843b6c0fc9b0b42da6
-      internalID: -1523823705
+      spriteID: 6b1d7facbb0d5314cb276b1712885dd9
+      internalID: -692859016
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SeitmareFlying_4
+      name: Minotaur Attack FR_4
       rect:
         serializedVersion: 2
-        x: 256
+        x: 1000
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 250
+        height: 200
+      alignment: 9
+      pivot: {x: 0.32000002, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f671e8c7c948d0d46bfc6d8182cae656
-      internalID: 74429033
+      spriteID: 968b71744c013594a9210613fae8492e
+      internalID: -1357659084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Minotaur Attack FR_5
+      rect:
+        serializedVersion: 2
+        x: 1250
+        y: 0
+        width: 250
+        height: 200
+      alignment: 9
+      pivot: {x: 0.32, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd3c80f7e209cc741b4aef51aa8c9355
+      internalID: 1555714424
       vertices: []
       indices: 
       edges: []
@@ -220,11 +241,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SeitmareFlying_0: -1157283938
-      SeitmareFlying_1: 1200600584
-      SeitmareFlying_2: 1413847990
-      SeitmareFlying_3: -1523823705
-      SeitmareFlying_4: 74429033
+      Minotaur Attack FR_0: 1774278855
+      Minotaur Attack FR_1: 76742925
+      Minotaur Attack FR_2: -1339146206
+      Minotaur Attack FR_3: -692859016
+      Minotaur Attack FR_4: -1357659084
+      Minotaur Attack FR_5: 1555714424
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
