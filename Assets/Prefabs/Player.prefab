@@ -121,7 +121,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5205308680910767323}
+  - component: {fileID: 422287907800921721}
   - component: {fileID: 5205308680910767322}
   - component: {fileID: 5205308680910767318}
   - component: {fileID: 5205308680910767319}
@@ -135,15 +135,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &5205308680910767323
-RectTransform:
+--- !u!4 &422287907800921721
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5205308680910767324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 21.6, y: -45.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -154,11 +154,6 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8, y: 1}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5205308680910767322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,17 +274,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a84d08923237a04484255095f626fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicVolume: 0
+  casualTrack: {fileID: 0}
   sfxVolume: 0
+  deathSFX: {fileID: 0}
+  bossBloodSFX: {fileID: 0}
   currentHealth: 10
   maxHealth: 10
   dissolve: {fileID: 0}
-  blinkMaterial: {fileID: 2100000, guid: a8af1c8b3ad351b4b8c015c0516f7fc9, type: 2}
-  baseMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  deathMaterial: {fileID: 2100000, guid: bc4b0c691a23bd747b4d5cbd517df6fe, type: 2}
   deathAnimDuration: 0
-  deathSFX: {fileID: 0}
-  bossBloodSFX: {fileID: 0}
   canTakeDamage: 0
+  sr: {fileID: 0}
   DamageTakenEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -329,6 +324,7 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   HPFill: {fileID: 5205308680662958415}
+  damageTaken: {fileID: 0}
 --- !u!82 &5205308680910767317
 AudioSource:
   m_ObjectHideFlags: 0
@@ -530,7 +526,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5205308680910767323}
+  m_Father: {fileID: 422287907800921721}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1609,7 +1605,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5205308680910767323}
+  m_Father: {fileID: 422287907800921721}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
 --- !u!212 &5205308682077945211
@@ -1693,7 +1689,7 @@ RectTransform:
   m_LocalScale: {x: 5.5, y: 5.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5205308680910767323}
+  m_Father: {fileID: 422287907800921721}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1862,7 +1858,7 @@ RectTransform:
   - {fileID: 5205308682241249587}
   - {fileID: 5205308682623548276}
   - {fileID: 924234450459542864}
-  m_Father: {fileID: 5205308680910767323}
+  m_Father: {fileID: 422287907800921721}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

@@ -172,7 +172,7 @@ public class Health : MonoBehaviour
         }
         else if (gameObject.CompareTag("Boss"))
         {
-            if (GetComponent<Hermes_Pathing>().bossHealthBar != null) GetComponent<Hermes_Pathing>().bossHealthBar.SetActive(false);
+            if (GetComponent<WeaponAbility>().bossHealthBar != null) GetComponent<WeaponAbility>().bossHealthBar.SetActive(false);
             gameObject.SetActive(false);
             Destroy(GameObject.Find("Parent_Mjoelnir(Clone)"));
             MusicManager.singleton.PlayMusic(casualTrack, musicVolume);

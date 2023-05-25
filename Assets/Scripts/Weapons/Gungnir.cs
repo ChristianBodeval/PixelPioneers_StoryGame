@@ -131,19 +131,6 @@ public class Gungnir : Ability
         }
     }
 
-    //private IEnumerator Bounce()
-    //{
-    //    float CooldownRemaining; // The remaining cooldown time
-
-    //    CooldownRemaining = bounceDuration; // Reset the remaining cooldown time
-    //    while (CooldownRemaining > 0f) // Count down the cooldown time
-    //    {
-    //        transform.position += (Vector3)(-direction * bounceForce);
-    //        CooldownRemaining -= Time.deltaTime;
-    //        yield return null; // Wait for the end of the frame
-    //    }
-    //}
-
     public void StopMove()
     {
         canMove = false;
