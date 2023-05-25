@@ -76,7 +76,7 @@ public class Dialogue : MonoBehaviour
         {
             isPlayerInRange = true;
             dialogueNPCName.text = gameObject.name;
-            dialogueManager.NPCname = gameObject.name;
+            //dialogueManager.NPCname = gameObject.name;
         }
     }
 
@@ -86,7 +86,7 @@ public class Dialogue : MonoBehaviour
         {
             isPlayerInRange = false;
             dialogueNPCName.text = "";
-            dialogueManager.NPCname = "";
+            //dialogueManager.NPCname = "";
 
         }
     }

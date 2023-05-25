@@ -75,7 +75,7 @@ public class DialogueManager : MonoBehaviour
         dialogueTarget = GameObject.FindGameObjectsWithTag("NPC");
         dialogBoxAnim = dialogueBox.GetComponent<Animator>();
 
-        if (SceneManager.GetActiveScene().name == "Village")
+        if (SceneManager.GetActiveScene().name == "Village" || SceneManager.GetActiveScene().name == "VillageWithTL")
         {
             Debug.Log("Current scene is Village");
             ingridAndAstridTL = GameObject.Find("AstridAndIngridTL").GetComponent<PlayableDirector>();
