@@ -102,7 +102,16 @@ public class PlayerAction : MonoBehaviour
         animator.SetFloat("XInput", lastFacing.x);
         animator.SetFloat("YInput", lastFacing.y);
 
-        animator.SetBool("IsRunning", true);
+
+        if(moveVector.magnitude > 0.1f)
+        {
+
+            animator.SetBool("IsRunning", true);
+        }
+        else
+        {
+            animator.SetBool("IsRunning", false);
+        }
 
         Debug.Log("XInput" + animator.GetFloat("XInput") + lastFacing.x);
         Debug.Log("YInput" + animator.GetFloat("YInput") + lastFacing.y);
