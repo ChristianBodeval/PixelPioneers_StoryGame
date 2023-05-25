@@ -1,8 +1,11 @@
+using Ink.Runtime;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TestTools;
+using Debug = UnityEngine.Debug;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -13,6 +16,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 lastFacing = new Vector2();
     private float coneRange = 2f;
 
+    // Sprite
+    private Vector2 moveInput;
+    public SpriteRenderer MC_Sprite;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +30,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-      Move();
+        animator = GetComponent<Animator>();
+        Move();
         Facing();
     }
     private void Move()
@@ -31,6 +39,9 @@ public class PlayerMovement : MonoBehaviour
         moveVector.x = Input.GetAxis("Horizontal");
         moveVector.y = Input.GetAxis("Vertical") * 0.5f;
         moveVector = moveVector.normalized; //as to not have faster movement when going diagonal
+
+        Debug.Log(moveVector.x);
+        Debug.Log(moveVector.y);
 
         //horizontal movement
         if (moveVector.x != 0)
@@ -51,6 +62,9 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector3(rb.velocity.x, 0f, 0f); //stops the player
         }
+
+        animator.SetFloat("XInput", moveVector.x);
+        animator.SetFloat("YInput", moveVector.y);
     }
     private void Facing()
     {
