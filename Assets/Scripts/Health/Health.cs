@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -181,6 +182,12 @@ public class Health : MonoBehaviour
             Destroy(GameObject.Find("Parent_Mjoelnir(Clone)"));
             MusicManager.singleton.PlayMusic(casualTrack, musicVolume);
             // TODO Trigger cutscene 
+        }
+
+        TimelineManager timelineManager = TimelineManager.timelineManager;
+        if (timelineManager.tutorialIsStarted && timelineManager.T1Done && timelineManager.T2Done && !timelineManager.T3Done && !timelineManager.T4Done && !timelineManager.T5Done)
+        {
+            TimelineManager.timelineManager.ResumeTL();
         }
     }
 
