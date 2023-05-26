@@ -20,7 +20,21 @@ public class SaveManager : MonoBehaviour
     public bool weapon4Upgrade1;
     public bool weapon4Upgrade2;
 
+    public static SaveManager singleton { get; private set; }
+
     private const string PlayerPrefsKey = "PlayerData";
+
+    private void Awake()
+    {
+        if (singleton != null && singleton != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            singleton = this;
+        }
+    }
 
     private void Start()
     {

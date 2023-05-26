@@ -176,11 +176,15 @@ public class Health : MonoBehaviour
         }
         else if (gameObject.CompareTag("Boss"))
         {
+            GameObject player = GameObject.FindWithTag("Player");
+            if (Vector2.Distance(player.transform.position, transform.position) < 1.5f) player.transform.position += (player.transform.position - transform.position).normalized * 2f;
+
             if (GetComponent<WeaponAbility>().bossHealthBar != null) GetComponent<WeaponAbility>().bossHealthBar.SetActive(false);
             gameObject.SetActive(false);
             Destroy(GameObject.Find("Parent_Mjoelnir(Clone)"));
             MusicManager.singleton.PlayMusic(casualTrack, musicVolume);
-            // TODO Trigger cutscene 
+            GetComponentInChildren<ParticleSystem>().Play();
+            Instantiate(GetComponent<WeaponAbility>().weaponPickUp, transform.position, transform.rotation);
         }
     }
 
