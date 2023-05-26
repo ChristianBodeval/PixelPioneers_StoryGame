@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: CrystalRuleTile
+  m_EditorClassIdentifier: Assembly-CSharp::CystalRuleTile
+  m_DefaultSprite: {fileID: 0}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 0
+  m_TilingRules:
+  - m_Id: 0
+    m_Sprites:
+    - {fileID: -2064103618, guid: 34cb99c7fabd44c799e7fd33bf7d520b, type: 3}
+    m_GameObject: {fileID: 0}
+    m_MinAnimationSpeed: 1
+    m_MaxAnimationSpeed: 1
+    m_PerlinScale: 0.5
+    m_Output: 0
+    m_ColliderType: 1
+    m_RandomTransform: 0
+    m_Neighbors: 
+    m_NeighborPositions:
+    - {x: -1, y: 1, z: 0}
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 1, z: 0}
+    - {x: -1, y: 0, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: -1, y: -1, z: 0}
+    - {x: 0, y: -1, z: 0}
+    - {x: 1, y: -1, z: 0}
+    m_RuleTransform: 0
+  customField: 0
+  randomTiles:
+  - {fileID: 11400000, guid: 31045d8f05ef4444e863b3ec27959c29, type: 2}
+  - {fileID: 11400000, guid: a880e6161f68d864db0eb1d189978a7a, type: 2}
+  - {fileID: 11400000, guid: aa48ac36292ecc0418d3b15e7f16513e, type: 2}
+  - {fileID: 11400000, guid: d6d370393b075b947b9807ff43f78c94, type: 2}
+  - {fileID: 11400000, guid: 8d8d07431970ca54a982ae214ae5067b, type: 2}
+  - {fileID: 11400000, guid: 34a1406312bdee241ad9b4125dfd3e83, type: 2}
+  - {fileID: 11400000, guid: 9a9fa52483484074dba7d9f00154927f, type: 2}
+  - {fileID: 11400000, guid: 531f9736da12d894caea57d1aec7ee66, type: 2}
+  - {fileID: 11400000, guid: 9a9fa52483484074dba7d9f00154927f, type: 2}
