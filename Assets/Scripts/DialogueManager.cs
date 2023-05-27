@@ -75,6 +75,7 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         isDialoguePlaying = false;
+        dialogueBox = GameObject.Find("DialogueBox");
         dialogueBox.SetActive(false);
         playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
         //mjoelnir = GameObject.Find("Mjoelnir").GetComponent<Mjoelnir>();

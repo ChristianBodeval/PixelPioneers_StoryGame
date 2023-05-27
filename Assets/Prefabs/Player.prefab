@@ -1445,7 +1445,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -57.93396, y: 34.158}
   m_SizeDelta: {x: 24.333, y: -31.211}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1694,9 +1694,10 @@ MonoBehaviour:
   sfxVolume: 0.7
   deathSFX: {fileID: 8300000, guid: 8840f5693a128d8479743a1da433cce2, type: 3}
   bossBloodSFX: {fileID: 0}
-  currentHealth: 1000000
-  maxHealth: 1000000
+  currentHealth: 10
+  maxHealth: 10
   dissolve: {fileID: 0}
+  hermesDeathParticles: {fileID: 0}
   deathAnimDuration: 0
   canTakeDamage: 0
   sr: {fileID: 0}
@@ -2705,7 +2706,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -0.000025749, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3142,7 +3143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5205308682241249587
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4285,14 +4286,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5205308682227158351}
     m_Modifications:
-    - target: {fileID: 4219992559177179638, guid: 936e4f2917074a743965431c39135a24, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4967315354297645191, guid: 936e4f2917074a743965431c39135a24, type: 3}
-      propertyPath: m_Name
-      value: MjoelnirCD
-      objectReference: {fileID: 0}
     - target: {fileID: 4967315355038190069, guid: 936e4f2917074a743965431c39135a24, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4359,11 +4352,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4967315355038190069, guid: 936e4f2917074a743965431c39135a24, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 232.4
+      value: 232
       objectReference: {fileID: 0}
     - target: {fileID: 4967315355038190069, guid: 936e4f2917074a743965431c39135a24, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -121.8
+      value: -121
       objectReference: {fileID: 0}
     - target: {fileID: 4967315355038190069, guid: 936e4f2917074a743965431c39135a24, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4380,26 +4373,6 @@ PrefabInstance:
     - target: {fileID: 4967315355038190070, guid: 936e4f2917074a743965431c39135a24, type: 3}
       propertyPath: m_Name
       value: CDs
-      objectReference: {fileID: 0}
-    - target: {fileID: 4967315355038190070, guid: 936e4f2917074a743965431c39135a24, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4967315355204058666, guid: 936e4f2917074a743965431c39135a24, type: 3}
-      propertyPath: m_Name
-      value: DashCD
-      objectReference: {fileID: 0}
-    - target: {fileID: 4967315355684957783, guid: 936e4f2917074a743965431c39135a24, type: 3}
-      propertyPath: m_Name
-      value: GungnirCD
-      objectReference: {fileID: 0}
-    - target: {fileID: 5112250167957704416, guid: 936e4f2917074a743965431c39135a24, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8274526705347956668, guid: 936e4f2917074a743965431c39135a24, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 936e4f2917074a743965431c39135a24, type: 3}

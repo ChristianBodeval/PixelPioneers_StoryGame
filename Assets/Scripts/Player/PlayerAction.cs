@@ -172,8 +172,11 @@ public class PlayerAction : MonoBehaviour
             dashDirection = lastFacing;
 
             // Start the dash cooldown coroutine
-            weaponCDVisual.StartCoroutine("DashCD");
-            StartCoroutine(DashCD());
+            if (weaponCDVisual != null)
+            {
+                weaponCDVisual.StartCoroutine("DashCD");
+                StartCoroutine(DashCD());
+            }
         }
     }
 

@@ -17,6 +17,7 @@ public class Bruiser_Pathing : MonoBehaviour
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private float updateInterval = 0.1f;
     [SerializeField] private float nextWayPointDistance = 2f;
+    [SerializeField] private float unitRadius;
     private Path path;
     private int currentWayPoint = 0;
     private Seeker seeker;
@@ -24,6 +25,10 @@ public class Bruiser_Pathing : MonoBehaviour
     [Header("Custom Behavior")]
     [SerializeField] private bool isFollowing = true;
     private Slider hpBar;
+    private object normalized;
+
+    private List<Vector2> debug1 = new List<Vector2>();
+    private List<Vector2> debug2 = new List<Vector2>();
 
     private void Start()
     {
@@ -69,14 +74,31 @@ public class Bruiser_Pathing : MonoBehaviour
         }
     }
 
+    public Vector3 FindClosestPointOnLineAndGetVectorAway(Vector3 pointA, Vector3 pointB, Vector3 thirdPoint)
+    {
+        Vector3 lineVector = pointB - pointA;
+        float lineLengthSquared = Vector3.SqrMagnitude(lineVector);
+
+        if (lineLengthSquared == 0f)
+        {
+            // If the line has no length, return pointA as the closest point
+            return pointA;
+        }
+
+        float t = Vector3.Dot(thirdPoint - pointA, lineVector) / lineLengthSquared;
+        t = Mathf.Clamp01(t);
+
+        Vector3 closestPoint = pointA + t * lineVector;
+
+        return (closestPoint - thirdPoint).normalized;
+    }
+
     private void PathFollow()
     {
         Flip(); // Flips sprite
 
         // Guard clause
         if (path == null || currentWayPoint >= path.vectorPath.Count || false ) { return; } // Is not there yet and has a path && is not Digging
-        // animator.GetBool("IsDigging")) was removed for debugging purposes
-
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
 
@@ -127,8 +149,58 @@ public class Bruiser_Pathing : MonoBehaviour
     {
         if (!p.error)
         {
-            path = p;
             currentWayPoint = 2;
+
+            // Get the calculated path
+            Vector3[] waypoints = p.vectorPath.ToArray();
+            p.vectorPath.Clear();
+
+            // Adjust the waypoints to account for unit's collider size
+            for (int i = 0; i < waypoints.Length; i++)
+            {
+                Vector3 temp = CheckCollision(waypoints[i]);
+                debug1.Add(temp);
+                debug2.Add(waypoints[i] + (waypoints[i] - temp).normalized * unitRadius);
+                p.vectorPath.Add(waypoints[i] + (waypoints[i] - temp).normalized * unitRadius);
+            }
+
+            path = p;
         }
+    }
+
+    private Vector2 CheckCollision(Vector2 position)
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(position, unitRadius);
+        Vector2 dir = Vector3.zero;
+
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Obstacles"))
+            {
+                dir += collider.ClosestPoint(position);
+                return collider.ClosestPoint(position);
+            }
+        }
+        return position;
+    }
+
+
+    void OnDrawGizmos()
+    {
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.yellow;
+
+        foreach (var item in debug1)
+        {
+            Gizmos.DrawSphere(item, 0.1f);
+        }
+
+        foreach (var item in debug2)
+        {
+            Gizmos.DrawCube(item, new Vector3(0.1f, 0.1f, 0.1f));
+        }
+
+        debug1.Clear();
+        debug2.Clear();
     }
 }

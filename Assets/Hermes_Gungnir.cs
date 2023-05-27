@@ -86,8 +86,9 @@ public class Hermes_Gungnir : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
+        time = Time.time + time;
         // Moves towards hermes
-        while (true)
+        while (true && time > Time.time)
         {
             dir = hermes.transform.position - transform.position;
             rb.velocity = dir * 2f + dir.normalized * 5f; // Moves faster when further away

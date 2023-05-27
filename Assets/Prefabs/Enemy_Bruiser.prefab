@@ -240,7 +240,6 @@ GameObject:
   - component: {fileID: 2667928335869489016}
   - component: {fileID: 2667928335869489017}
   - component: {fileID: 2667928335869488997}
-  - component: {fileID: 2667928335869488996}
   - component: {fileID: 8868072992157061829}
   - component: {fileID: 1354495503777021676}
   - component: {fileID: 8983755954995764934}
@@ -306,7 +305,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.7}
+  m_Offset: {x: 0, y: 0.3}
   serializedVersion: 2
   m_Radius: 0.5
 --- !u!114 &2667928335869488997
@@ -337,21 +336,6 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!114 &2667928335869488996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2667928335869489023}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77f586f285b3847808d79083bd19ef1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  unwrap: 1
-  splitAtEveryPortal: 0
 --- !u!114 &8868072992157061829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +418,7 @@ MonoBehaviour:
     m_Bits: 8256
   updateInterval: 0.1
   nextWayPointDistance: 2
+  unitRadius: 0.6
   isFollowing: 1
 --- !u!114 &1475468795
 MonoBehaviour:
@@ -822,7 +807,7 @@ MonoBehaviour:
   - {x: 0.4707036, y: -0.017021198, z: 0.00000018483634}
   m_ShapePathHash: 96680608
   m_Mesh: {fileID: 0}
-  m_InstanceId: 69188
+  m_InstanceId: 84702
   m_LocalBounds:
     m_Center: {x: -0.009998858, y: 0.0018541366, z: 0}
     m_Extent: {x: 0.48070246, y: 0.20846152, z: 0}
