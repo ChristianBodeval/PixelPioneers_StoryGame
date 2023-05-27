@@ -24,7 +24,21 @@ public class SaveManager : MonoBehaviour
     public bool cave3Cleared;
     public bool cave4Cleared;
 
+    public static SaveManager singleton { get; private set; }
+
     private const string PlayerPrefsKey = "PlayerData";
+
+    private void Awake()
+    {
+        if (singleton != null && singleton != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            singleton = this;
+        }
+    }
 
     private void Start()
     {

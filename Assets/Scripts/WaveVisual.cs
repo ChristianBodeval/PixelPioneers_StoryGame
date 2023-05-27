@@ -181,8 +181,8 @@ public class WaveVisual : MonoBehaviour
                 {
                     i++;
 
-                    Image image = wave.GetComponentInChildren<RemoveFill>().GetImageComponent();
-                    Image backDrop = wave.GetComponent<Image>();
+                    Image image = wave.activeSelf ? wave.GetComponentInChildren<RemoveFill>().GetImageComponent() : null;
+                    Image backDrop = wave.activeSelf ? wave.GetComponent<Image>() : null;
 
                     // Reset wave variables
                     image.sprite = questionSprite;
