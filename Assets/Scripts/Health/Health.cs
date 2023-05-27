@@ -17,6 +17,7 @@ public class Health : MonoBehaviour
     public float currentHealth;
     public float maxHealth;
     [SerializeField] private Shader dissolve;
+    [SerializeField] private GameObject hermesDeathParticles;
     [SerializeField] protected float deathAnimDuration;
     protected Coroutine deathCoroutine;
     protected Coroutine blinkCoroutine;
@@ -183,7 +184,7 @@ public class Health : MonoBehaviour
             gameObject.SetActive(false);
             Destroy(GameObject.Find("Parent_Mjoelnir(Clone)"));
             MusicManager.singleton.PlayMusic(casualTrack, musicVolume);
-            GetComponentInChildren<ParticleSystem>().Play();
+            Instantiate(hermesDeathParticles, transform.position, transform.rotation);
             Instantiate(GetComponent<WeaponAbility>().weaponPickUp, transform.position, transform.rotation);
         }
     }
@@ -235,7 +236,7 @@ public class Health : MonoBehaviour
         canTakeDamage = true;
         this.currentHealth = maxHealth;
 
-        if (sr == null) return;
+        if (sr == null || MaterialManager.singleton == null) return;
         sr.material = MaterialManager.singleton.baseMaterial;
         sr.color = Color.white;
     }

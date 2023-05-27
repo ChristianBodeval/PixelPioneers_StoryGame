@@ -14,6 +14,7 @@ public class PlayerHealth : Health
     public CameraShake cameraShake;
     public Gradient gradient;
     public Image HPFill;
+    private GameObject deathScreen;
 
     [SerializeField] private AudioClip damageTaken;
 
@@ -28,6 +29,11 @@ public class PlayerHealth : Health
     {
         sr = GetComponentInChildren<SpriteRenderer>();
         DamagedBar.value = HP.value;
+
+        foreach (var button in FindObjectsOfType<Button>(true))
+        {
+            if (button.gameObject.name == "PlayerDeath") deathScreen = button.gameObject;
+        }
     }
 
     public override void TakeDamage(float damage)
@@ -117,7 +123,8 @@ public class PlayerHealth : Health
         SFXManager.singleton.PlaySound(deathSFX, transform.position, sfxVolume);
         MusicManager.singleton.StopMusic();
         gameObject.SetActive(false);
-        //.. play deathscreen
+        deathScreen.SetActive(true);
+        Time.timeScale = 0f;
         yield return new WaitForEndOfFrame();
     }
 }

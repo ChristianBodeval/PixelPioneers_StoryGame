@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
-    public Transform playerTransform;
+    public Vector2 playerPosition;
     public string currentScene;
 
     // Booleans for weapons and upgrades
@@ -38,7 +38,7 @@ public class SaveManager : MonoBehaviour
 
     private void Start()
     {
-        playerTransform = GameObject.Find("Player").transform;
+        playerPosition = GameObject.Find("Player").transform.position;
         currentScene = SceneManager.GetActiveScene().name;
         LoadPlayerData();
     }
@@ -51,8 +51,8 @@ public class SaveManager : MonoBehaviour
     public void SavePlayerData()
     {
         // Save player position
-        PlayerPrefs.SetFloat("PlayerPosX", playerTransform.position.x);
-        PlayerPrefs.SetFloat("PlayerPosY", playerTransform.position.y);
+        PlayerPrefs.SetFloat("PlayerPosX", playerPosition.x);
+        PlayerPrefs.SetFloat("PlayerPosY", playerPosition.y);
 
         // Save current scene
         PlayerPrefs.SetString("CurrentScene", currentScene);
@@ -82,7 +82,7 @@ public class SaveManager : MonoBehaviour
         // Load player position
         float posX = PlayerPrefs.GetFloat("PlayerPosX");
         float posY = PlayerPrefs.GetFloat("PlayerPosY");
-        playerTransform.position = new Vector2(posX, posY);
+        playerPosition = new Vector2(posX, posY);
 
         // Load current scene
         currentScene = PlayerPrefs.GetString("CurrentScene");

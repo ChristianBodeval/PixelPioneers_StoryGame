@@ -219,9 +219,10 @@ public class Hermes_Pathing : MonoBehaviour
         SFXManager.singleton.PlaySound(sprintSFX, transform.position, sfxVolume, transform);
 
         float t = 0;
+        float maxDuration = Time.time + 2f;
 
         // Move to new position
-        while (distance > 1.5f)
+        while (distance > 1.5f && maxDuration > Time.time)
         {
             // Move through obstacles if any are encountered
             while (Physics2D.CircleCast(transform.position, 0.6f, dir, 0.6f, obstacleLayer) || Physics2D.CircleCast(transform.position, 0.6f, dir, 0.6f, pitLayer))
