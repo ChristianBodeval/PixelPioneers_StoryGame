@@ -5,16 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/StartMenu.unity
-    guid: 45e793f8469778f42b0d2eff86d3d488
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/GungnirETC.unity
-    guid: de4124969bb21374d82197a3836e50f2
+    path: Assets/Scenes/CaveEntranceTesting.unity
+    guid: 21b4c22e44b8046bb81ddba2dcc61168
+  - enabled: 1
+    path: Assets/Scenes/CaveHub.unity
+    guid: a2e5ebb1fb7ef450ea360b9c533b4ebe
+  - enabled: 1
+    path: Assets/Scenes/Cave_01.unity
+    guid: 690d2e7a71df09c4d99f1cd2a6f2a807
+  - enabled: 1
+    path: Assets/Scenes/Cave_02.unity
+    guid: aff3a3a040a28449791f6a8c1b3d4779
   m_configObjects: {}
