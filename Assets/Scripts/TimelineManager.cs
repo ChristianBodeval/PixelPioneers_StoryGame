@@ -138,5 +138,8 @@ public class TimelineManager : MonoBehaviour
         }
 
         #endregion T2
+        #region T3
+        //Enemy dies
+        #endregion T3
     }
 }
