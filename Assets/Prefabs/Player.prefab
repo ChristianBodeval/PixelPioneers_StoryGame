@@ -1581,6 +1581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   moveVector: {x: 0, y: 0, z: 0}
+  animator: {fileID: 2062039471}
   inputBuffer: 0.1
   lastFacing: {x: 1, y: 0}
   lastFacing2: {x: 0, y: 0}
@@ -1740,7 +1741,11 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   HPFill: {fileID: 5205308680662958415}
+  deathScreen: {fileID: 0}
   damageTaken: {fileID: 8300000, guid: a13193ab802fa2e40880eaddfad265d1, type: 3}
+  playerDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!82 &5205308680910767317
 AudioSource:
   m_ObjectHideFlags: 0
