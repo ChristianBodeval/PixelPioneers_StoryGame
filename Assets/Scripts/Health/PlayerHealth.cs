@@ -15,6 +15,7 @@ public class PlayerHealth : Health
     public CameraShake cameraShake;
     public Gradient gradient;
     public Image HPFill;
+    [SerializeField] private GameObject deathScreen;
 
     [SerializeField] private AudioClip damageTaken;
     
@@ -124,7 +125,8 @@ public class PlayerHealth : Health
         SFXManager.singleton.PlaySound(deathSFX, transform.position, sfxVolume);
         MusicManager.singleton.StopMusic();
         gameObject.SetActive(false);
-        //.. play deathscreen
+        deathScreen.SetActive(true);
+        Time.timeScale = 0f;
         yield return new WaitForEndOfFrame();
     }
 }

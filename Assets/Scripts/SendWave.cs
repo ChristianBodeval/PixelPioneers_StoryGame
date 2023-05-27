@@ -29,7 +29,7 @@ public class SendWave : MonoBehaviour
     {
         if (!SpawnSystem.waveAlive && !isSent)
         {
-            MusicManager.singleton.PlayMusic(combatTrack, musicVolume);
+            if (combatTrack != null) MusicManager.singleton.PlayMusic(combatTrack, musicVolume);
             isSent = true;
             currentWave = 0;
             if (sendWavesCoroutine != null) StopCoroutine(sendWavesCoroutine);

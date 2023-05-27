@@ -98,7 +98,7 @@ public class PlayerAction : MonoBehaviour
         {
             rb.velocity = Vector2.zero; // Stops the player
         }
-        Debug.Log(animator);
+
         animator.SetFloat("XInput", lastFacing.x);
         animator.SetFloat("YInput", lastFacing.y);
 
