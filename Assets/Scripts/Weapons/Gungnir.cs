@@ -161,6 +161,11 @@ public class Gungnir : Ability
 
     private IEnumerator DieAfterTime(float time)
     {
+        foreach (GameObject e in piercedEnemies)
+        {
+            e.transform.SetParent(null);
+        }
+
         yield return new WaitForSeconds(time);
         Destroy(gameObject);
     }

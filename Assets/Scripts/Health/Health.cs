@@ -17,8 +17,6 @@ public class Health : MonoBehaviour
 
     public float currentHealth;
     public float maxHealth;
-    [SerializeField] private Shader dissolve;
-    [SerializeField] private GameObject hermesDeathParticles;
     [SerializeField] protected float deathAnimDuration;
     protected Coroutine deathCoroutine;
     protected Coroutine blinkCoroutine;
@@ -30,6 +28,11 @@ public class Health : MonoBehaviour
     [SerializeField] protected SpriteRenderer sr;
     public UnityEvent DamageTakenEvent;
     public UnityEvent Dead;
+
+    [Header("Hermes Only")]
+    [SerializeField] private Shader dissolve;
+    [SerializeField] private GameObject hermesSmol;
+    [SerializeField] private GameObject hermesDeathParticles;
 
     // Constructor
     public Health(float health, float maxHealth)
@@ -196,9 +199,8 @@ public class Health : MonoBehaviour
             MusicManager.singleton.PlayMusic(casualTrack, musicVolume);
             Instantiate(hermesDeathParticles, transform.position, transform.rotation);
             Instantiate(GetComponent<WeaponAbility>().weaponPickUp, transform.position, transform.rotation);
+            Instantiate(hermesSmol, transform.position, transform.rotation);
         }
-
-       
     }
 
     public void SetCanTakeDamage(bool b)

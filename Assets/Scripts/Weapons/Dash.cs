@@ -53,6 +53,15 @@ public class Dash : Ability, IUpgradeable
     private void Update()
     {
         StartDash();
+
+        if (isDashing)
+        {
+            player.GetComponent<TrailRenderer>().enabled = true;
+        }
+        else
+        {
+            player.GetComponent<TrailRenderer>().enabled = false;
+        }
     }
 
     private void FixedUpdate()
