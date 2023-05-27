@@ -58,7 +58,7 @@ public class DialogueManager : MonoBehaviour
     private PlayableDirector swordPickUpTL;
     private PlayableDirector tutorialTL;
 
-    private PlayableDirector currentTimeline;
+    public PlayableDirector currentTimeline;
 
     private void Awake()
     {
@@ -129,6 +129,8 @@ public class DialogueManager : MonoBehaviour
         //mjoelnir.enabled = false;
         ContinueStory();
         dialogBoxAnim.Play("FlyUp");
+
+        
     }
 
     public void ExitDialogueModeMethod()
@@ -140,8 +142,6 @@ public class DialogueManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         isDialoguePlaying = false;
-        //dialogueBox.SetActive(false);
-
         //resets the text
         dialogueText.text = "";
 
@@ -181,6 +181,10 @@ public class DialogueManager : MonoBehaviour
 
             default:
                 break;
+        }
+        if (currentTimeline != null && !TimelineManager.timelineManager.tutorialIsStarted)
+        {
+            TimelineManager.timelineManager.ResumeTL();
         }
     }
 

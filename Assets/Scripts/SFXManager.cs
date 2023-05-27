@@ -106,7 +106,7 @@ public class SFXManager : MonoBehaviour
         source.loop = isLooping;
         source.clip = clip;
         source.volume = volume * masterVolume;
-        source.pitch = GetUniqueRandomPitch();
+        //source.pitch = GetUniqueRandomPitch();
         source.outputAudioMixerGroup = masterMixer.FindMatchingGroups("Master")[0]; // Set the output AudioMixer group
         source.Play();
 

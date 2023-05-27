@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -171,9 +172,18 @@ public class Health : MonoBehaviour
                 }
             }
 
+            //TESTING if it works from waves
+            
+            //TimelineManager timelineManager = TimelineManager.timelineManager;
+            //if (timelineManager.tutorialIsStarted && timelineManager.T1Done && timelineManager.T2Done && !timelineManager.T3Done && !timelineManager.T4Done && !timelineManager.T5Done)
+            //{
+            //    timelineManager.ResumeTL();
+            //}
+
             // Deactivate enemy and return to pool
             GameObject.Find("GameManager").GetComponent<SpawnSystem>().RemoveFromWaitDeathList(gameObject);
             Pool.pool.ReturnToEnemyPool(gameObject);
+
         }
         else if (gameObject.CompareTag("Boss"))
         {
@@ -187,6 +197,8 @@ public class Health : MonoBehaviour
             Instantiate(hermesDeathParticles, transform.position, transform.rotation);
             Instantiate(GetComponent<WeaponAbility>().weaponPickUp, transform.position, transform.rotation);
         }
+
+       
     }
 
     public void SetCanTakeDamage(bool b)
