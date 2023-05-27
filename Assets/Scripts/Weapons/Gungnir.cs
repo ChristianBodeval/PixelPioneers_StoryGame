@@ -106,7 +106,7 @@ public class Gungnir : Ability
         }
         if (throwGungnir.hasUpgrade2)
         {
-            if (col.CompareTag("Enemy"))
+            if (col.CompareTag("Enemy") || col.CompareTag("Boss"))
             {
                 SFXManager.singleton.PlaySound(penetrationSFX, transform.position, sfxVolume);
 
@@ -119,9 +119,12 @@ public class Gungnir : Ability
 
                 isPinned = true;
 
-                col.transform.SetParent(transform);
-                piercedEnemies.Add(col.gameObject);
-                if (col.GetComponent<Hermes_Pathing>() != null) col.GetComponent<Hermes_Pathing>().CancelSprint();
+                if (col.CompareTag("Enemy")) 
+                {
+                    col.transform.SetParent(transform);
+                    piercedEnemies.Add(col.gameObject);
+                }
+
                 if (col.GetComponent<Charger_Attack>() != null) col.GetComponent<Charger_Attack>().StopCharge();
             }
         }

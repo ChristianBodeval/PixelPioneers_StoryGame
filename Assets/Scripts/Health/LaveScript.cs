@@ -12,6 +12,10 @@ using UnityEngine;
 
 public class LaveScript : MonoBehaviour
 {
+    [Header("SFX")]
+    [Range(0, 1)] public float sfxVolume = 0.5f;
+    [SerializeField] private AudioClip lavaTickSFX;
+
     public float damage;
     public float takeDamageEverySeconds;
 
@@ -70,6 +74,8 @@ public class LaveScript : MonoBehaviour
                 yield return new WaitForSeconds(takeDamageEverySeconds);
                 break;
             }
+
+            SFXManager.singleton.PlaySound(lavaTickSFX, health.transform.position, sfxVolume);
             health.TakeDamage(damage);
             yield return new WaitForSeconds(takeDamageEverySeconds);
         }

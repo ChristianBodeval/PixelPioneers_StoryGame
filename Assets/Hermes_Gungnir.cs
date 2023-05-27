@@ -49,7 +49,6 @@ public class Hermes_Gungnir : MonoBehaviour
         else if (col.CompareTag("Player") && !isStopped)
         {
             SFXManager.singleton.PlaySound(penetrationSFX, transform.position, sfxVolume);
-            col.transform.GetComponent<PlayerAction>().StopMove();
             col.transform.GetComponent<PlayerHealth>().TakeDamage(damage);
             StartCoroutine(StopMove());
         }
@@ -66,7 +65,6 @@ public class Hermes_Gungnir : MonoBehaviour
         yield return new WaitForSeconds(0.2f * multiplier);
 
         rb.velocity = Vector2.zero;
-        if (GameObject.FindWithTag("Player").activeSelf) GameObject.FindWithTag("Player").GetComponent<PlayerAction>().StartMove();
         StartCoroutine(ReturnToHermes(waitDuration));
     }
 

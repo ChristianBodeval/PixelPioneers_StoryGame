@@ -214,6 +214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b601c409a0b1b46a23c40df8cc3a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicVolume: 0
+  casualTrack: {fileID: 0}
   sfxVolume: 0
   deathSFX: {fileID: 8300000, guid: 8641cc0723aa04f4bb401dcf8ccc53b4, type: 3}
   bossBloodSFX: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
@@ -303,7 +305,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1785585863, guid: cc31e6a7f8b6f8d4aac77eeb4cd98d9c, type: 3}
+  m_Sprite: {fileID: -1157283938, guid: 4bd3906eea7ae21448666c81731ad823, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -394,7 +396,7 @@ MonoBehaviour:
   - {x: 0.4707036, y: -0.017021198, z: 0.00000018483634}
   m_ShapePathHash: 96680608
   m_Mesh: {fileID: 0}
-  m_InstanceId: 54502
+  m_InstanceId: 68126
   m_LocalBounds:
     m_Center: {x: -0.009998858, y: 0.0018541366, z: 0}
     m_Extent: {x: 0.48070246, y: 0.20846152, z: 0}

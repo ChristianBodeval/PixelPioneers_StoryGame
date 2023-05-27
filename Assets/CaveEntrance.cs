@@ -1,36 +1,35 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class CaveEntrance : MonoBehaviour
 {
-    private bool isActive;
+    private bool isAvailible;
     private CircleCollider2D circleCollider;
-    [SerializeField] private string sceneName;
-    
+    public string connectedToSceneName;
     private void Awake()
     {
-        isActive = true;
+        isAvailible = true;
         circleCollider = GetComponent<CircleCollider2D>();
     }
 
     public void SetActive(bool b)
     {
-        this.isActive = b;
+        this.isAvailible = b;
         circleCollider.enabled = b;
     }
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isActive && other.CompareTag("Player"))
+        if (isAvailible && other.CompareTag("Player"))
         {
             //Check if the scene exists
-            if (SceneManager.GetSceneByName(sceneName).IsValid())
+            if (SceneManager.GetSceneByName(connectedToSceneName).IsValid())
             {
-                Debug.LogError("Scene " + sceneName + " does not exist!");
+                Debug.LogError(connectedToSceneName + " does not exist!");
                 return;
             }
-            
-            SceneManager.LoadScene(sceneName);
+            SceneManager.LoadScene(connectedToSceneName);
         }
     }
 }

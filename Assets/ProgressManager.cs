@@ -6,8 +6,11 @@ public class ProgressManager : MonoBehaviour
     //Make a singleton
     public static ProgressManager Instance;
     
+    public int currentCaveAvailible = 0;
+
     private void Awake()
     {
+        currentCaveAvailible = 1;
         if (Instance == null)
             Instance = this;
         else
@@ -16,16 +19,11 @@ public class ProgressManager : MonoBehaviour
     
     public List<CaveEntrance> caveEntrances;
     
-    public void SetCaveActive(int caveIndex, bool isActive)
+    //Make a function that makes the next cave available
+    public void SetNextCaveActive()
     {
-        if (caveIndex >= 0 && caveIndex < caveEntrances.Count)
-        {
-            CaveEntrance caveEntrance = caveEntrances[caveIndex];
-            caveEntrance.SetActive(isActive);
-        }
-        else
-        {
-            Debug.LogError("Invalid cave index!");
-        }
+        //If all caves are available, return
+        if(currentCaveAvailible == caveEntrances.Count) return;
+        caveEntrances[currentCaveAvailible].SetActive(true);
     }
 }
