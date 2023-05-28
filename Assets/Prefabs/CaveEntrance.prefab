@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 6586156579023122346}
   - component: {fileID: 7289667607122211135}
   - component: {fileID: 1786492857}
+  - component: {fileID: 6576694314547523346}
   m_Layer: 0
   m_Name: CaveEntrance
   m_TagString: Untagged
@@ -353,7 +354,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.2}
   serializedVersion: 2
-  m_Radius: 0.80046546
+  m_Radius: 1
 --- !u!114 &7289667607122211135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,8 +409,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1969370545, guid: cf256ea695e023b4680c99ee6e12f3e5, type: 3}
-  m_Color: {r: 0.745283, g: 0.48162156, b: 0.48162156, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 5cc28f246eaa80f46815a3331e3ff6ec, type: 3}
+  m_Color: {r: 1, g: 0.75570965, b: 0.2783019, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -419,3 +420,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6576694314547523346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6586156579023122347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f0e271514ff4a8abe98933c45a44a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  caveEntrance: {fileID: 7289667607122211135}
+  playerSpawnTransform: {fileID: 0}

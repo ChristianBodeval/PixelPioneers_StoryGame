@@ -10,6 +10,7 @@ public class Bounds : MonoBehaviour
     private LayerMask enemyLayers;
     private RaycastHit2D[] enemies;
     private GameObject player;
+    private GameObject mjoelnir;
 
     private void Start()
     {
@@ -17,8 +18,10 @@ public class Bounds : MonoBehaviour
         obstacleLayer = LayerMask.GetMask("Obstacles");
         pitLayer = LayerMask.GetMask("Pit");
         enemyLayers = LayerMask.GetMask("Enemy");
-
         player = GameObject.Find("Player");
+
+        if (GameObject.FindWithTag("Mjoelnir") != null) mjoelnir = GameObject.FindWithTag("Mjoelnir");
+
         StartCoroutine(CheckMobBounds()); 
     }
 
@@ -45,6 +48,13 @@ public class Bounds : MonoBehaviour
             if (!Physics2D.OverlapPoint(player.transform.position, groundLayer) || Physics2D.OverlapPoint(player.transform.position, obstacleLayer) || Physics2D.OverlapPoint(player.transform.position, pitLayer))
             {
                 StartCoroutine(FindClosestValidPosition(player));
+            }
+
+            if (mjoelnir == null) continue;
+            // Check if player is out of bounds
+            if (!Physics2D.OverlapPoint(mjoelnir.transform.position, groundLayer) || Physics2D.OverlapPoint(mjoelnir.transform.position, obstacleLayer) || Physics2D.OverlapPoint(mjoelnir.transform.position, pitLayer))
+            {
+                StartCoroutine(FindClosestValidPosition(mjoelnir));
             }
         }
     }
@@ -89,10 +99,10 @@ public class Bounds : MonoBehaviour
         obj.transform.position = newPos;
     }
 
-    private Vector2 GetRandomDirection()
+    private Vector3 GetRandomDirection()
     {
         float x = Random.Range(-1, 2);
         float y = Random.Range(-1, 2);
-        return new Vector2(x, y).normalized;
+        return new Vector3(x, y, 0f).normalized;
     }
 }
