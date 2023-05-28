@@ -14,6 +14,7 @@ TagManager:
   - EyecatchGungnir
   - Boss
   - Shadow
+  - Mjoelnir
   layers:
   - Default
   - TransparentFX
