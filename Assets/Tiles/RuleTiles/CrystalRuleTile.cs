@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [CreateAssetMenu]
-public class CystalRuleTile : RuleTile<CystalRuleTile.Neighbor>
+public class CrystalRuleTile : RuleTile<CrystalRuleTile.Neighbor>
 {
     public bool customField;
 
