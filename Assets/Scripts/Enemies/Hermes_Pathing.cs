@@ -13,11 +13,12 @@ public class Hermes_Pathing : MonoBehaviour
     private Animator animator;
 
     [Header("A*")]
+    [SerializeField] private float unitRadius;
+    [SerializeField] private float updateInterval = 0.05f;
+    [SerializeField] private float nextWayPointDistance = 2f;
     private LayerMask obstacleLayer;
     private LayerMask groundLayer;
     private LayerMask pitLayer;
-    [SerializeField] private float updateInterval = 0.05f;
-    [SerializeField] private float nextWayPointDistance = 2f;
     private Path path;
     private int currentWayPoint = 0;
     private Seeker seeker;
@@ -328,8 +329,36 @@ public class Hermes_Pathing : MonoBehaviour
     {
         if (!p.error)
         {
-            path = p;
             currentWayPoint = 2;
+
+            // Get the calculated path
+            Vector3[] waypoints = p.vectorPath.ToArray();
+            p.vectorPath.Clear();
+
+            // Adjust the waypoints to account for unit's collider size
+            for (int i = 0; i < waypoints.Length; i++)
+            {
+                Vector3 temp = CheckCollision(waypoints[i]);
+                p.vectorPath.Add(waypoints[i] + (waypoints[i] - temp).normalized * unitRadius);
+            }
+
+            path = p;
         }
+    }
+
+    private Vector2 CheckCollision(Vector2 position)
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(position, unitRadius);
+        Vector2 dir = Vector3.zero;
+
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Obstacles"))
+            {
+                dir += collider.ClosestPoint(position);
+                return collider.ClosestPoint(position);
+            }
+        }
+        return position;
     }
 }

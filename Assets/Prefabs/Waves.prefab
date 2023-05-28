@@ -1,0 +1,194 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8972003771193947301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8972003771193947309}
+  - component: {fileID: 8972003771193947298}
+  - component: {fileID: 8972003771193947299}
+  - component: {fileID: 8972003771193947296}
+  - component: {fileID: 8972003771193947297}
+  - component: {fileID: 8972003771193947302}
+  - component: {fileID: 8972003771193947303}
+  - component: {fileID: 8972003771193947300}
+  m_Layer: 5
+  m_Name: Waves
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8972003771193947309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8972003771193947301}
+  m_LocalRotation: {x: -0, y: -0, z: -0.37074763, w: 0.9287337}
+  m_LocalPosition: {x: -16.5, y: -7.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -43.523}
+--- !u!60 &8972003771193947298
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8972003771193947301}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 3.6626625, y: 11.653524}
+      - {x: -16.74305, y: -9.603697}
+      - {x: -11.825625, y: -14.111092}
+      - {x: 4.0798974, y: 4.15847}
+      - {x: 18.309477, y: -13.223434}
+      - {x: 23.371773, y: -8.608162}
+--- !u!114 &8972003771193947299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8972003771193947301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d449d72cd24be544c937ce96808a101a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicVolume: 0.6
+  combatTrack: {fileID: 8300000, guid: 8311f3a54a97e074b825acd1b4a3ad40, type: 3}
+  waves:
+  - {fileID: 8972003771193947296}
+  - {fileID: 8972003771193947297}
+  - {fileID: 8972003771193947302}
+  - {fileID: 8972003771193947303}
+  - {fileID: 8972003771193947300}
+  caveClearedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8972003771193947296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8972003771193947301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b4dbb9e91676e4dab0cbdc48efed40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTimeAfterWave: 5
+  timeBetweenMobs: 0.6
+  meleeAmount: 12
+  rangeAmount: 4
+  chargerAmount: 0
+  wurmAmount: 0
+  bruiserAmount: 0
+  bossAmount: 1
+--- !u!114 &8972003771193947297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8972003771193947301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b4dbb9e91676e4dab0cbdc48efed40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTimeAfterWave: 5
+  timeBetweenMobs: 0.5
+  meleeAmount: 12
+  rangeAmount: 7
+  chargerAmount: 1
+  wurmAmount: 0
+  bruiserAmount: 0
+  bossAmount: 0
+--- !u!114 &8972003771193947302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8972003771193947301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b4dbb9e91676e4dab0cbdc48efed40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTimeAfterWave: 5
+  timeBetweenMobs: 0.5
+  meleeAmount: 14
+  rangeAmount: 10
+  chargerAmount: 3
+  wurmAmount: 0
+  bruiserAmount: 1
+  bossAmount: 0
+--- !u!114 &8972003771193947303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8972003771193947301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b4dbb9e91676e4dab0cbdc48efed40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTimeAfterWave: 5
+  timeBetweenMobs: 0.4
+  meleeAmount: 14
+  rangeAmount: 10
+  chargerAmount: 5
+  wurmAmount: 0
+  bruiserAmount: 2
+  bossAmount: 0
+--- !u!114 &8972003771193947300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8972003771193947301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b4dbb9e91676e4dab0cbdc48efed40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTimeAfterWave: 5
+  timeBetweenMobs: 0
+  meleeAmount: 0
+  rangeAmount: 0
+  chargerAmount: 0
+  wurmAmount: 0
+  bruiserAmount: 0
+  bossAmount: 1
