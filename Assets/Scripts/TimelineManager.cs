@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -75,7 +76,10 @@ public class TimelineManager : MonoBehaviour
             {
                 case 3:
                 case 4:
-                    ResumeTL();
+                    StartCoroutine(ResumeTLCoroutine());
+                    break;
+                case 5:
+                    Debug.Log("Tutorial is done");
                     break;
 
                 default:
@@ -85,6 +89,11 @@ public class TimelineManager : MonoBehaviour
         Debug.Log("Current tutorial: " + currentTutorialState);
     }
 
+    private IEnumerator ResumeTLCoroutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+        ResumeTL();
+    }
     public void SetSoundVolume(float volume)
     {
         this.volume = volume;

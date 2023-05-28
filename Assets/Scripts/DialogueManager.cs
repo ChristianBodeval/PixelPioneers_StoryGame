@@ -64,7 +64,6 @@ public class DialogueManager : MonoBehaviour
 
     public static bool readyToSpawn = false;
 
-
     private SpawnSystem spawnSystem;
 
     public PlayableDirector currentTimeline;
@@ -198,23 +197,26 @@ public class DialogueManager : MonoBehaviour
         }
 
         StartCoroutine(SetReadyToSpawn());
-        
-        if (TimelineManager.timelineManager.tutorialIsStarted && !SpawnSystem.waveAlive && SpawnSystem.totalWaves <1 && readyToSpawn)
+
+        if (TimelineManager.timelineManager.tutorialIsStarted && !SpawnSystem.waveAlive && SpawnSystem.totalWaves < 1)
         {
             switch (TimelineManager.timelineManager.currentTutorialState)
             {
                 case 2:
                     T3.GetComponent<SendWave>().SendWaves();
-                    TimelineManager.timelineManager.AddToCurrentTutorialState();
+                    StartCoroutine(TutorialStateCoroutine());
                     break;
 
                 case 3:
                     T4.GetComponent<SendWave>().SendWaves();
-                    TimelineManager.timelineManager.AddToCurrentTutorialState();
+                    StartCoroutine(TutorialStateCoroutine());
+
                     break;
 
                 case 4:
                     T5.GetComponent<SendWave>().SendWaves();
+                    StartCoroutine(TutorialStateCoroutine());
+
                     break;
 
                 default:
@@ -222,6 +224,13 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
+
+    private IEnumerator TutorialStateCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        TimelineManager.timelineManager.AddToCurrentTutorialState();
+    }
+
     private IEnumerator SetReadyToSpawn()
     {
         yield return new WaitForSeconds(0.5f);

@@ -316,7 +316,7 @@ RectTransform:
   m_Children:
   - {fileID: 7531525514721835141}
   m_Father: {fileID: 5205308682227158351}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1356,7 +1356,7 @@ MonoBehaviour:
   m_margin: {x: -24.92971, y: 0, z: -29.654793, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &291949316906248568
@@ -1404,7 +1404,7 @@ RectTransform:
   - {fileID: 3885279381128091044}
   - {fileID: 7108152739107526885}
   m_Father: {fileID: 5205308682227158351}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1697,17 +1697,18 @@ MonoBehaviour:
   bossBloodSFX: {fileID: 0}
   currentHealth: 10
   maxHealth: 10
-  dissolve: {fileID: 0}
-  hermesDeathParticles: {fileID: 0}
   deathAnimDuration: 0
   canTakeDamage: 0
-  sr: {fileID: 0}
+  sr: {fileID: 5205308682077945211}
   DamageTakenEvent:
     m_PersistentCalls:
       m_Calls: []
   Dead:
     m_PersistentCalls:
       m_Calls: []
+  dissolve: {fileID: 0}
+  hermesSmol: {fileID: 0}
+  hermesDeathParticles: {fileID: 0}
   HP: {fileID: 5205308682241249585}
   DamagedBar: {fileID: 5205308682577693489}
   cameraShake: {fileID: 0}
@@ -1879,6 +1880,7 @@ MonoBehaviour:
     m_Signals:
     - {fileID: 11400000, guid: 1b4b1a338beda144988604e2bd73e011, type: 2}
     - {fileID: 11400000, guid: 303e01be35332ce48bcf48865131d58e, type: 2}
+    - {fileID: 11400000, guid: 08fc1ac19f86c1b45a661eea24a0f457, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -1896,7 +1898,7 @@ MonoBehaviour:
           m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 5205308680910767322}
           m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
           m_MethodName: set_enabled
           m_Mode: 6
@@ -1907,6 +1909,20 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 1
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5205308680910767322}
+          m_TargetAssemblyTypeName: PlayerAction, Assembly-CSharp
+          m_MethodName: StartMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &5205308680934039976
 GameObject:
@@ -3059,9 +3075,9 @@ RectTransform:
   - {fileID: 5762729899749661535}
   - {fileID: 6503024822840802412}
   - {fileID: 8566604063412993485}
-  - {fileID: 2824566153206153830}
   - {fileID: 2677050714896838234}
   - {fileID: 8857703427106075052}
+  - {fileID: 2824566153206153830}
   m_Father: {fileID: 422287907800921721}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3639,7 +3655,7 @@ MonoBehaviour:
   m_margin: {x: -24.92971, y: 0, z: -29.654793, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &7137891568159362702
@@ -3763,7 +3779,7 @@ RectTransform:
   - {fileID: 4175063957773013656}
   - {fileID: 5708696898818834226}
   m_Father: {fileID: 5205308682227158351}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4053,7 +4069,7 @@ MonoBehaviour:
   m_margin: {x: -24.92971, y: 0, z: -29.654793, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &1151847938496213629
@@ -4291,6 +4307,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5205308682227158351}
     m_Modifications:
+    - target: {fileID: 4967315354297645191, guid: 936e4f2917074a743965431c39135a24, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4967315355038190069, guid: 936e4f2917074a743965431c39135a24, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4378,6 +4398,18 @@ PrefabInstance:
     - target: {fileID: 4967315355038190070, guid: 936e4f2917074a743965431c39135a24, type: 3}
       propertyPath: m_Name
       value: CDs
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967315355204058666, guid: 936e4f2917074a743965431c39135a24, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967315355374779353, guid: 936e4f2917074a743965431c39135a24, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967315355684957783, guid: 936e4f2917074a743965431c39135a24, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 936e4f2917074a743965431c39135a24, type: 3}
