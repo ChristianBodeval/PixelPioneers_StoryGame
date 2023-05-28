@@ -41,6 +41,8 @@ public class WeaponAbility : MonoBehaviour
     private bool hasGungnir = false;
     private bool isAbilityReady = true;
 
+    public GameObject weaponPickUp;
+
     private List<GameObject> cleanUpOnDeathList = new List<GameObject>();
 
     private Animator animator;
@@ -214,6 +216,18 @@ public class WeaponAbility : MonoBehaviour
         // Slow increase of alpha and size of line
         while (t < 1f)
         {
+
+            Vector2 dir = (player.transform.position - transform.position).normalized; // Look to player
+
+            if (dir.x > 0.24f) // Right
+            {
+                transform.localScale = new Vector3(1f, 1f, 1f);
+            }
+            else if (dir.x < -0.24f) // Left
+            {
+                transform.localScale = new Vector3(-1f, 1f, 1f);
+            }
+
             t += 1f / totalTicks;
 
             // Alpha of line renderer

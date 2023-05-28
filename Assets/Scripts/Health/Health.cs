@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,7 +17,6 @@ public class Health : MonoBehaviour
 
     public float currentHealth;
     public float maxHealth;
-    [SerializeField] private Shader dissolve;
     [SerializeField] protected float deathAnimDuration;
     protected Coroutine deathCoroutine;
     protected Coroutine blinkCoroutine;
@@ -28,6 +28,11 @@ public class Health : MonoBehaviour
     [SerializeField] protected SpriteRenderer sr;
     public UnityEvent DamageTakenEvent;
     public UnityEvent Dead;
+
+    [Header("Hermes Only")]
+    [SerializeField] private Shader dissolve;
+    [SerializeField] private GameObject hermesSmol;
+    [SerializeField] private GameObject hermesDeathParticles;
 
     // Constructor
     public Health(float health, float maxHealth)
@@ -170,17 +175,31 @@ public class Health : MonoBehaviour
                 }
             }
 
+            //TESTING if it works from waves
+            
+            //TimelineManager timelineManager = TimelineManager.timelineManager;
+            //if (timelineManager.tutorialIsStarted && timelineManager.T1Done && timelineManager.T2Done && !timelineManager.T3Done && !timelineManager.T4Done && !timelineManager.T5Done)
+            //{
+            //    timelineManager.ResumeTL();
+            //}
+
             // Deactivate enemy and return to pool
             GameObject.Find("GameManager").GetComponent<SpawnSystem>().RemoveFromWaitDeathList(gameObject);
             Pool.pool.ReturnToEnemyPool(gameObject);
+
         }
         else if (gameObject.CompareTag("Boss"))
         {
+            GameObject player = GameObject.FindWithTag("Player");
+            if (Vector2.Distance(player.transform.position, transform.position) < 1.5f) player.transform.position += (player.transform.position - transform.position).normalized * 2f;
+
             if (GetComponent<WeaponAbility>().bossHealthBar != null) GetComponent<WeaponAbility>().bossHealthBar.SetActive(false);
             gameObject.SetActive(false);
             Destroy(GameObject.Find("Parent_Mjoelnir(Clone)"));
             MusicManager.singleton.PlayMusic(casualTrack, musicVolume);
-            // TODO Trigger cutscene 
+            Instantiate(hermesDeathParticles, transform.position, transform.rotation);
+            Instantiate(GetComponent<WeaponAbility>().weaponPickUp, transform.position, transform.rotation);
+            Instantiate(hermesSmol, transform.position, transform.rotation);
         }
     }
 
@@ -231,7 +250,7 @@ public class Health : MonoBehaviour
         canTakeDamage = true;
         this.currentHealth = maxHealth;
 
-        if (sr == null) return;
+        if (sr == null || MaterialManager.singleton == null) return;
         sr.material = MaterialManager.singleton.baseMaterial;
         sr.color = Color.white;
     }

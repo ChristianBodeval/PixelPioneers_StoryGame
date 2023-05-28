@@ -15,6 +15,7 @@ public class Hermes_Pathing : MonoBehaviour
     [Header("A*")]
     private LayerMask obstacleLayer;
     private LayerMask groundLayer;
+    private LayerMask pitLayer;
     [SerializeField] private float updateInterval = 0.05f;
     [SerializeField] private float nextWayPointDistance = 2f;
     private Path path;
@@ -30,6 +31,9 @@ public class Hermes_Pathing : MonoBehaviour
     private Coroutine newPositionCoroutine;
     private Coroutine movetoPositionCoroutine;
     private Coroutine sprintCDCoroutine;
+    private SpriteRenderer sr;
+    [SerializeField] private float bobbingSpeed;
+    [SerializeField] private float bobbingHeight;
 
     [Header("SFX")]
     [Range(0, 1)] public float sfxVolume = 1f;
@@ -40,11 +44,13 @@ public class Hermes_Pathing : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponentInChildren<Animator>().GetComponent<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();
         animator.SetBool("CanMove", true);
         attackRange = GetComponent<Hermes_Attack>().attackRange;
         groundLayer = LayerMask.GetMask("Ground");
         obstacleLayer = LayerMask.GetMask("Obstacles");
+        pitLayer = LayerMask.GetMask("pit");
 
         // Deactivate wave ui & trigger dialogue
         GameObject.Find("WaveCounterCanvas").SetActive(false);
@@ -59,7 +65,7 @@ public class Hermes_Pathing : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {       
+    {
         PathFollow();
 
         // Is Hermes in attack range and not too close
@@ -70,6 +76,15 @@ public class Hermes_Pathing : MonoBehaviour
         else
         {
             animator.SetBool("InAttackRange", false);
+        }
+
+        if (!animator.GetBool("IsBusy"))
+        {
+            BobSpriteUpDown();
+        }
+        else
+        {
+            sr.transform.localPosition = Vector2.zero;
         }
     }
 
@@ -180,7 +195,7 @@ public class Hermes_Pathing : MonoBehaviour
             // Position is valid if its further away than hermes is from the player
             if ((distanceToPos >= distanceToPlayer) /* Position is further away than player*/
                 && !Physics2D.Raycast(transform.position, pos - transform.position, Hermes_Attack.waveRange, obstacleLayer) /* Hermes can go in a straight line to the position */
-                && !Physics2D.OverlapPoint(pos, obstacleLayer) && Physics2D.OverlapPoint(pos, groundLayer)) /* Position is walkable */
+                && !Physics2D.CircleCast(pos, 0.7f, Vector2.right, 0.7f, obstacleLayer) && !Physics2D.CircleCast(pos, 0.7f, Vector2.right, 0.7f, LayerMask.GetMask("Lava")) && Physics2D.CircleCast(pos, 0.7f, Vector2.right, 0.7f, groundLayer)) /* Position is walkable */
             {
                 // Call coroutine to move hermes
                 if (movetoPositionCoroutine != null) StopCoroutine(movetoPositionCoroutine);
@@ -204,16 +219,17 @@ public class Hermes_Pathing : MonoBehaviour
         SFXManager.singleton.PlaySound(sprintSFX, transform.position, sfxVolume, transform);
 
         float t = 0;
+        float maxDuration = Time.time + 2f;
 
         // Move to new position
-        while (distance > 1.5f)
+        while (distance > 1.5f && maxDuration > Time.time)
         {
             // Move through obstacles if any are encountered
-            while (Physics2D.CircleCast(transform.position, 0.6f, dir, 0.6f, obstacleLayer))
+            while (Physics2D.CircleCast(transform.position, 0.6f, dir, 0.6f, obstacleLayer) || Physics2D.CircleCast(transform.position, 0.6f, dir, 0.6f, pitLayer))
             {
                 t += 0.1f;
-                transform.position = Vector3.Lerp(startPos, newPos, t);
-                yield return new WaitForSeconds(0.02f);
+                transform.position = Vector3.Lerp(transform.position, newPos, t);
+                yield return new WaitForSeconds(0.01f);
             }
 
             // Updates direction and movement
@@ -265,6 +281,13 @@ public class Hermes_Pathing : MonoBehaviour
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
+    }
+
+    private void BobSpriteUpDown()
+    {
+        float yOffset = Mathf.Sin(Time.time * bobbingSpeed) * bobbingHeight;
+        Vector3 newPosition = Vector2.zero + new Vector2(0f, yOffset);
+        sr.transform.localPosition = newPosition;
     }
 
     private bool IsTargetTooFar()

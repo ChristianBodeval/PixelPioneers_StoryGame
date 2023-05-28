@@ -462,7 +462,7 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: YInput
     m_Type: 1
-    m_DefaultFloat: 0
+    m_DefaultFloat: -1
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
@@ -617,7 +617,7 @@ AnimatorStateMachine:
     m_Position: {x: 660, y: 380, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7010440203997164623}
-    m_Position: {x: 695, y: 445, z: 0}
+    m_Position: {x: 700, y: 440, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5801343016368438268}
     m_Position: {x: 730, y: 510, z: 0}
@@ -632,7 +632,7 @@ AnimatorStateMachine:
     m_Position: {x: 260, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7654623173911170566}
-    m_Position: {x: 295, y: 305, z: 0}
+    m_Position: {x: 300, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7503114137391806330}
     m_Position: {x: 330, y: 370, z: 0}
@@ -650,7 +650,7 @@ AnimatorStateMachine:
     m_Position: {x: 470, y: 630, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2735140626606790893}
-    m_Position: {x: 505, y: 695, z: 0}
+    m_Position: {x: 510, y: 700, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

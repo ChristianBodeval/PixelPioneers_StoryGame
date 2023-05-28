@@ -33,10 +33,9 @@ public class Bounds : MonoBehaviour
 
             foreach (RaycastHit2D e in enemies)
             {
-                Debug.Log($"{Physics2D.OverlapPoint(e.transform.position, obstacleLayer)} & {Physics2D.OverlapPoint(e.transform.position, pitLayer)}");
                 if (e.transform != null && ( !Physics2D.OverlapPoint(e.transform.position, groundLayer) || Physics2D.OverlapPoint(e.transform.position, obstacleLayer) || Physics2D.OverlapPoint(e.transform.position, pitLayer)) )
                 {
-                    if (!e.transform.CompareTag("Boss")) StartCoroutine(FindClosestValidPosition(e.transform.gameObject));               
+                    if (!e.transform.gameObject.CompareTag("Boss")) StartCoroutine(FindClosestValidPosition(e.transform.gameObject));               
                 }
 
                 yield return null;

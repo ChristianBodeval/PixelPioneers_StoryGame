@@ -79,7 +79,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.9}
+  m_Offset: {x: 0, y: 0.77}
   serializedVersion: 2
   m_Radius: 0.7
 --- !u!114 &157113163669937702
@@ -164,7 +164,6 @@ MonoBehaviour:
   bossBloodSFX: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
   currentHealth: 100
   maxHealth: 100
-  dissolve: {fileID: 0}
   deathAnimDuration: 0.5
   canTakeDamage: 0
   sr: {fileID: 157113165350864263}
@@ -174,6 +173,9 @@ MonoBehaviour:
   Dead:
     m_PersistentCalls:
       m_Calls: []
+  dissolve: {fileID: 0}
+  hermesSmol: {fileID: 5346146237246326270, guid: 719bb6bd7d85514489b5366bd8f83bdc, type: 3}
+  hermesDeathParticles: {fileID: 9190634620285127154, guid: 91ab62390222a1c4d87151b79fc2c5ea, type: 3}
 --- !u!114 &979528337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,6 +195,8 @@ MonoBehaviour:
   newPositionSpeed: 22
   sprintAwayCD: 0.5
   isSprintRDY: 1
+  bobbingSpeed: 2
+  bobbingHeight: 0.4
   sfxVolume: 0.5
   sprintSFX: {fileID: 8300000, guid: 18fb383f3c8da5348989aac30e881bef, type: 3}
 --- !u!114 &979528338
@@ -262,6 +266,7 @@ MonoBehaviour:
   - {fileID: 8806155475755460354}
   - {fileID: 1621136235351953348}
   - {fileID: 556010833782236901}
+  weaponPickUp: {fileID: 685070612593646354, guid: 3ab5b23fbc1e140428a3fd0ef2b8a8c7, type: 3}
 --- !u!120 &8806155475755460354
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -436,8 +441,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1826417272, guid: 7121fae77af6e374bae68d4a60f9fc41, type: 3}
-  m_Color: {r: 1, g: 0.9813726, b: 0, a: 1}
+  m_Sprite: {fileID: -1530921986, guid: 3bc1ec37e95db6e4eade93481b9598ed, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -855,8 +860,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7719931192909279520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.36, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalPosition: {x: 0, y: -0.73, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 157113163669937725}
@@ -888,7 +893,7 @@ MonoBehaviour:
   - {x: 0.4707036, y: -0.017021198, z: 0.00000018483634}
   m_ShapePathHash: 96680608
   m_Mesh: {fileID: 0}
-  m_InstanceId: 60780
+  m_InstanceId: 59144
   m_LocalBounds:
     m_Center: {x: -0.009998858, y: 0.0018541366, z: 0}
     m_Extent: {x: 0.48070246, y: 0.20846152, z: 0}

@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class SendWave : MonoBehaviour
 {
@@ -14,6 +16,8 @@ public class SendWave : MonoBehaviour
     private Coroutine sendWavesCoroutine = null;
     private int currentWave;
     private bool isSent = false;
+    
+    [FormerlySerializedAs("cavesClearEvent")] public UnityEvent caveClearedEvent;
 
     private void Start()
     {
@@ -25,7 +29,7 @@ public class SendWave : MonoBehaviour
     {
         if (!SpawnSystem.waveAlive && !isSent)
         {
-            MusicManager.singleton.PlayMusic(combatTrack, musicVolume);
+            if (combatTrack != null) MusicManager.singleton.PlayMusic(combatTrack, musicVolume);
             isSent = true;
             currentWave = 0;
             if (sendWavesCoroutine != null) StopCoroutine(sendWavesCoroutine);
@@ -41,6 +45,9 @@ public class SendWave : MonoBehaviour
     private IEnumerator SendWavesCoroutine()
     {
         yield return null;
+        
+        if(currentWave == waves.Length) caveClearedEvent.Invoke();
+        
         while (currentWave < waves.Length)
         {
             spawnSystem.AddWave(waves[currentWave]); // Add wave to spawnsystem

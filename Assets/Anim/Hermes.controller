@@ -131,7 +131,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 58a7f286e9fc1204cae49bc17912da48, type: 2}
+  m_Motion: {fileID: 7400000, guid: 37286196f5f5f32439c7a218e9e5506f, type: 2}
   m_Tag: Special
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -243,7 +243,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 58a7f286e9fc1204cae49bc17912da48, type: 2}
+  m_Motion: {fileID: 7400000, guid: 37286196f5f5f32439c7a218e9e5506f, type: 2}
   m_Tag: Immobile
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -269,7 +269,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 58a7f286e9fc1204cae49bc17912da48, type: 2}
+  m_Motion: {fileID: 7400000, guid: 37286196f5f5f32439c7a218e9e5506f, type: 2}
   m_Tag: Special
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -352,7 +352,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 58a7f286e9fc1204cae49bc17912da48, type: 2}
+  m_Motion: {fileID: 7400000, guid: 37286196f5f5f32439c7a218e9e5506f, type: 2}
   m_Tag: Immobile
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -366,7 +366,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hermes_Walk
-  m_Speed: 0.4
+  m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5249434853152811029}
@@ -380,7 +380,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 5a8609b7253fea74783053f1f4cc302d, type: 2}
+  m_Motion: {fileID: 7400000, guid: 37286196f5f5f32439c7a218e9e5506f, type: 2}
   m_Tag: Ready
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -458,7 +458,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 5a8609b7253fea74783053f1f4cc302d, type: 2}
+  m_Motion: {fileID: 7400000, guid: 37286196f5f5f32439c7a218e9e5506f, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -516,7 +516,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Sprint
-  m_Speed: 1
+  m_Speed: 1.15
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4821853153842817111}
@@ -530,7 +530,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 5a8609b7253fea74783053f1f4cc302d, type: 2}
+  m_Motion: {fileID: 7400000, guid: 37286196f5f5f32439c7a218e9e5506f, type: 2}
   m_Tag: Special
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -544,7 +544,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hermes_Attack_ChargeUp
-  m_Speed: 0.1
+  m_Speed: 0.38
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7782673790752087104}
@@ -558,7 +558,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 58a7f286e9fc1204cae49bc17912da48, type: 2}
+  m_Motion: {fileID: 7400000, guid: 37286196f5f5f32439c7a218e9e5506f, type: 2}
   m_Tag: Immobile
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -572,7 +572,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ChargeUp
-  m_Speed: 0.2
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -584,7 +584,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 58a7f286e9fc1204cae49bc17912da48, type: 2}
+  m_Motion: {fileID: 7400000, guid: 37286196f5f5f32439c7a218e9e5506f, type: 2}
   m_Tag: Immobile
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -598,7 +598,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hermes_Attack
-  m_Speed: 0.8
+  m_Speed: 0.44
   m_CycleOffset: 0.2
   m_Transitions:
   - {fileID: 1708184541583400092}
@@ -612,7 +612,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 58a7f286e9fc1204cae49bc17912da48, type: 2}
+  m_Motion: {fileID: 7400000, guid: 37286196f5f5f32439c7a218e9e5506f, type: 2}
   m_Tag: Immobile
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -654,7 +654,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Idle
-  m_Speed: 0.01
+  m_Speed: 0.2
   m_CycleOffset: 0.2
   m_Transitions:
   - {fileID: -5970219064593426951}
@@ -669,7 +669,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 5a8609b7253fea74783053f1f4cc302d, type: 2}
+  m_Motion: {fileID: 7400000, guid: 37286196f5f5f32439c7a218e9e5506f, type: 2}
   m_Tag: Ready
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1078,7 +1078,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 58a7f286e9fc1204cae49bc17912da48, type: 2}
+  m_Motion: {fileID: 7400000, guid: 37286196f5f5f32439c7a218e9e5506f, type: 2}
   m_Tag: Immobile
   m_SpeedParameter: 
   m_MirrorParameter: 

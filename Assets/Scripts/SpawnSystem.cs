@@ -108,6 +108,15 @@ public class SpawnSystem : MonoBehaviour
                     totalWaves = 0;
                     currentWave = 0;
                 }
+
+                // If the tutorial is started we resume the timeline
+
+                TimelineManager timelineManager = TimelineManager.timelineManager;
+                if (timelineManager.tutorialIsStarted && timelineManager.T1Done && timelineManager.T2Done && !timelineManager.T3Done && !timelineManager.T4Done && !timelineManager.T5Done)
+                {
+                    timelineManager.ResumeTL();
+                }
+
             }
 
             if (waveAlive)

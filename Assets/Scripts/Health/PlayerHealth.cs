@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerHealth : Health
@@ -14,9 +15,12 @@ public class PlayerHealth : Health
     public CameraShake cameraShake;
     public Gradient gradient;
     public Image HPFill;
+    [SerializeField] private GameObject deathScreen;
 
     [SerializeField] private AudioClip damageTaken;
-
+    
+    public UnityEvent playerDeathEvent;
+    
     // Constructor
     public PlayerHealth(float startingHealth, float maxHealth) : base(startingHealth, maxHealth)
     {
@@ -27,7 +31,8 @@ public class PlayerHealth : Health
     private void Start()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
-        DamagedBar.value = HP.value;
+        if(DamagedBar != null)
+            DamagedBar.value = HP.value;
     }
 
     public override void TakeDamage(float damage)
@@ -96,12 +101,15 @@ public class PlayerHealth : Health
     protected override void Update()
     {
         // Use this for the Boss Healthbar aswell
-        HP.value = currentHealth;
-        HPFill.color = gradient.Evaluate(HP.normalizedValue);
         if (this.currentHealth <= 0)
         {
             StartCoroutine(Die());
         }
+        
+        if(HP == null) return;
+        HP.value = currentHealth;
+        HPFill.color = gradient.Evaluate(HP.normalizedValue);
+        
         damagedHealthShrinkTimer -= Time.deltaTime;
         if (damagedHealthShrinkTimer < 0)
         {
@@ -117,7 +125,8 @@ public class PlayerHealth : Health
         SFXManager.singleton.PlaySound(deathSFX, transform.position, sfxVolume);
         MusicManager.singleton.StopMusic();
         gameObject.SetActive(false);
-        //.. play deathscreen
+        deathScreen.SetActive(true);
+        Time.timeScale = 0f;
         yield return new WaitForEndOfFrame();
     }
 }
