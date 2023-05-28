@@ -58,6 +58,14 @@ public class DialogueManager : MonoBehaviour
     private PlayableDirector swordPickUpTL;
     private PlayableDirector tutorialTL;
 
+    private GameObject T3;
+    private GameObject T4;
+    private GameObject T5;
+
+    public static bool readyToSpawn = false;
+
+    private SpawnSystem spawnSystem;
+
     public PlayableDirector currentTimeline;
 
     private void Awake()
@@ -92,6 +100,11 @@ public class DialogueManager : MonoBehaviour
             ingridAndAstridTL = GameObject.Find("AstridAndIngridTL").GetComponent<PlayableDirector>();
             swordPickUpTL = GameObject.Find("SwordPickUpTL").GetComponent<PlayableDirector>();
             tutorialTL = GameObject.Find("TutorialTL").GetComponent<PlayableDirector>();
+
+            T3 = GameObject.Find("T3");
+            T4 = GameObject.Find("T4");
+            T5 = GameObject.Find("T5");
+            spawnSystem = GameObject.Find("GameManager").GetComponent<SpawnSystem>();
         }
     }
 
@@ -114,8 +127,6 @@ public class DialogueManager : MonoBehaviour
         isButtonOnCD = false;
     }
 
-   
-
     public void EnterDialogueMode(TextAsset inkJson)
     {
         isDialoguePlaying = true;
@@ -129,8 +140,6 @@ public class DialogueManager : MonoBehaviour
         //mjoelnir.enabled = false;
         ContinueStory();
         dialogBoxAnim.Play("FlyUp");
-
-        
     }
 
     public void ExitDialogueModeMethod()
@@ -186,16 +195,46 @@ public class DialogueManager : MonoBehaviour
         {
             TimelineManager.timelineManager.ResumeTL();
         }
+
+        StartCoroutine(SetReadyToSpawn());
+
+        if (TimelineManager.timelineManager.tutorialIsStarted && !SpawnSystem.waveAlive && SpawnSystem.totalWaves < 1)
+        {
+            switch (TimelineManager.timelineManager.currentTutorialState)
+            {
+                case 2:
+                    T3.GetComponent<SendWave>().SendWaves();
+                    StartCoroutine(TutorialStateCoroutine());
+                    break;
+
+                case 3:
+                    T4.GetComponent<SendWave>().SendWaves();
+                    StartCoroutine(TutorialStateCoroutine());
+
+                    break;
+
+                case 4:
+                    T5.GetComponent<SendWave>().SendWaves();
+                    StartCoroutine(TutorialStateCoroutine());
+
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 
-    public void UsesSpeechBubble()
+    private IEnumerator TutorialStateCoroutine()
     {
-        usesSpeechBubble = true;
+        yield return new WaitForSeconds(1f);
+        TimelineManager.timelineManager.AddToCurrentTutorialState();
     }
 
-    public void DoesntUsesSpeechBubble()
+    private IEnumerator SetReadyToSpawn()
     {
-        usesSpeechBubble = false;
+        yield return new WaitForSeconds(0.5f);
+        readyToSpawn = true;
     }
 
     public void ContinueStory()
