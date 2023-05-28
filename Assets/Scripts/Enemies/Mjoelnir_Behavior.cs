@@ -78,6 +78,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
         Spin();
 
         parentTransform.position = new Vector3(parentTransform.position.x, parentTransform.position.y, 0f);
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
 
     // Spins the hammer around
@@ -317,7 +318,6 @@ public class Mjoelnir_Behavior : MonoBehaviour
         rangeIndicator.SetActive(false);
         rangeIndicator.transform.SetParent(parentTransform);
         parentTransform.position = transform.position;
-        transform.position = parentTransform.position;
         chargeParticles.SetActive(false);
         isCharging = false;
 
@@ -341,7 +341,6 @@ public class Mjoelnir_Behavior : MonoBehaviour
         DisableHammer();
         rb.velocity = Vector2.zero;
         parentTransform.position = transform.position;
-        transform.position = parentTransform.position;
 
         // Instantiate circle
         SpriteRenderer sr = aoeIndicator.GetComponent<SpriteRenderer>();

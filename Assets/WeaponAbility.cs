@@ -72,14 +72,14 @@ public class WeaponAbility : MonoBehaviour
                 hasDash = true;
                 break;
             case 2:
-                cleanUpOnDeathList.Add(Instantiate(mjoelnir, new Vector3(transform.position.x, transform.position.y, 0f), transform.rotation));
+                cleanUpOnDeathList.Add(Instantiate(mjoelnir, new Vector3(transform.position.x, transform.position.y, 0f), Quaternion.Euler(0f, 0f, 0f)));
                 break;
             case 3:
                 hasGungnir = true;
                 break;
             case 4:
                 hasDash = true;
-                cleanUpOnDeathList.Add(Instantiate(mjoelnir, new Vector3(transform.position.x, transform.position.y, 0f), transform.rotation));
+                cleanUpOnDeathList.Add(Instantiate(mjoelnir, new Vector3(transform.position.x, transform.position.y, 0f), Quaternion.Euler(0f, 0f, 0f)));
                 hasGungnir = true;
                 break;
             default:
