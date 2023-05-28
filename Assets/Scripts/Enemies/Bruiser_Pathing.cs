@@ -183,24 +183,4 @@ public class Bruiser_Pathing : MonoBehaviour
         }
         return position;
     }
-
-
-    void OnDrawGizmos()
-    {
-        // Draw a yellow sphere at the transform's position
-        Gizmos.color = Color.yellow;
-
-        foreach (var item in debug1)
-        {
-            Gizmos.DrawSphere(item, 0.1f);
-        }
-
-        foreach (var item in debug2)
-        {
-            Gizmos.DrawCube(item, new Vector3(0.1f, 0.1f, 0.1f));
-        }
-
-        debug1.Clear();
-        debug2.Clear();
-    }
 }

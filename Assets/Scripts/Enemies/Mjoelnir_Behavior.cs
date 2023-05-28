@@ -51,7 +51,6 @@ public class Mjoelnir_Behavior : MonoBehaviour
     [SerializeField] private GameObject rangeIndicator;
     [SerializeField] private GameObject chargeParticles;
     private bool isCharging = false;
-    private bool isChargingCharge = false;
     private float charge = 0f;
     private Coroutine chargeCoroutine;
 
@@ -63,6 +62,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log(parentTransform.position);
         mjoelnirSprite = GetComponentInChildren<SpriteRenderer>().gameObject;
         obstacleLayer = LayerMask.GetMask("Obstacles");
         player = GameObject.FindWithTag("Player");
@@ -76,6 +76,8 @@ public class Mjoelnir_Behavior : MonoBehaviour
     private void Update()
     {
         Spin();
+
+        parentTransform.position = new Vector3(parentTransform.position.x, parentTransform.position.y, 0f);
     }
 
     // Spins the hammer around
@@ -98,17 +100,17 @@ public class Mjoelnir_Behavior : MonoBehaviour
     private void FixedUpdate()
     {       
         // Move closer if not in range
-        if (TargetNotAttackable() && !isChargingCharge && !isCharging)
+        if (TargetNotAttackable() && !isBusy)
         {
             PathFollow();
         }
-        else if (isChargingCharge || !isCharging)
+        else if (isBusy && !isCharging)
         {
             rb.velocity = Vector2.zero;
         }
 
         // Spin hammer around player
-        if (canSpin)
+        if (canSpin && !isBusy)
         {
             transform.RotateAround(parentTransform.position, new Vector3(0f, 0f, 1f) * spinRadius, spinSpeed);
             freezeLocation = transform.position;
@@ -178,11 +180,11 @@ public class Mjoelnir_Behavior : MonoBehaviour
     private IEnumerator FreezeSpin()
     {
         onFreezeCD = true;
-        canSpin = false;
+        if (!isBusy) canSpin = false;
 
         yield return new WaitForSeconds(onCollisionFreezeDuration);
 
-        canSpin = true;
+        if (!isBusy) canSpin = true;
 
         yield return new WaitForSeconds(collisionFreezeCD);
 
@@ -191,16 +193,15 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
     private void EnableHammer()
     {
-        isBusy = true;
-        isCharging = false;
+        isBusy = false;
         canSpin = true;    // Allow the hammer to spin again
         GetComponent<CircleCollider2D>().enabled = true;    // Player can move again
     }
 
     private void DisableHammer()
     {
-        isBusy = false;
-        isCharging = true;
+        isBusy = true;
+        rb.velocity = Vector2.zero;
         canSpin = false;    // Stop hammer's spin
         GetComponent<CircleCollider2D>().enabled = false;   // Cannot hit enemies with hammer sprite
     }
@@ -209,7 +210,6 @@ public class Mjoelnir_Behavior : MonoBehaviour
     {
         if (Physics2D.Raycast(transform.position, player.transform.position - transform.position, maxCharge - (maxCharge / 4), obstacleLayer) && !isBusy)
         {
-            StartCoroutine(AbilityCD(specialCooldown));
             if (chargeCoroutine != null) StopCoroutine(chargeCoroutine);
             chargeCoroutine = StartCoroutine(ChargeAbility());
         }
@@ -219,7 +219,6 @@ public class Mjoelnir_Behavior : MonoBehaviour
     {
         DisableHammer();
 
-        isChargingCharge = true;
         // Position the hammer on parent
         parentTransform.position = transform.position;
         Vector3 direction = Vector2.zero;
@@ -249,7 +248,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
             rangeIndicator.gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
             // Mjoelnir sprite
-            mjoelnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -135f, Vector3.forward);   // Point hammer away from player
+            mjoelnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -90f, Vector3.forward);   // Point hammer away from player
 
             yield return new WaitForSeconds(castTime/1.4f / 50f);
         }
@@ -259,7 +258,6 @@ public class Mjoelnir_Behavior : MonoBehaviour
         rangeIndicator.transform.SetParent(null);
 
         // Start charge
-        isChargingCharge = false;
         isCharging = true;
         PointHammerForwards(direction); // Faces hammer forward while player is charging forwards
         StartCoroutine(Charge(direction, maxCharge));
@@ -334,7 +332,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
     private void PointHammerForwards(Vector2 dir)
     {
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;                // Angle for pointing to player
-        mjoelnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -135f, Vector3.forward);   // Point hammer away from player
+        mjoelnirSprite.transform.rotation = Quaternion.AngleAxis(angle + -90, Vector3.forward);   // Point hammer away from player
     }
 
     // AoE ability
@@ -366,7 +364,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
         aoeIndicator.SetActive(false);
 
         // Toggle aoe anim
-        GameObject obj = Instantiate(aoeAnim, transform);
+        GameObject obj = Instantiate(aoeAnim, transform.position, transform.rotation);
         obj.SetActive(true);
 
         // Deal damage
@@ -375,6 +373,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
         yield return new WaitForSeconds(castTime);
 
+        StartCoroutine(AbilityCD(specialCooldown));
         EnableHammer();
         StartCoroutine(LerpToSpinRadius());
     }

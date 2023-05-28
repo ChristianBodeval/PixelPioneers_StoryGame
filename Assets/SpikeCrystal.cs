@@ -4,51 +4,28 @@ using UnityEngine;
 
 public class SpikeCrystal : MonoBehaviour
 {
+    [Header("SFX")]
+    [Range(0, 1)] public float sfxVolume = 1f;
+    [SerializeField] private AudioClip triggeredSFX;
+    [SerializeField] private AudioClip shatterSFX;
+
     // Health from other scripts
     private Health enemyHealth;
-    private PlayerHealth playerHealth;
-
-    // Collider attached to gameobject
-    private Collider2D collider;
 
     // Jank way of ensuring courotine stops
-    private bool stopCoroutine;
+    private bool isTriggered;
 
     // Changeable variables in inspector
     [SerializeField] private float damage = 10f;
     [SerializeField] private float aoe = 2f;
 
-    private void Update()
-    {
-        // Ensuring couroutine plays out and then disables coroutine - so it can start again
-        if (stopCoroutine = true)
-        {
-            StopCoroutine(CrystalShatter());
-
-            stopCoroutine = false;
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Establising collider
-        collider = collision;
+        if (isTriggered) return;
+
+        isTriggered = true;
 
         StartCoroutine(CrystalShatter());
-
-        // Getting player health
-
-        if (collision.gameObject.tag == "Player")
-        {
-            playerHealth = collision.GetComponent<PlayerHealth>();
-        }
-
-        // Getting enemy health
-
-        if (collision.gameObject.tag == "Enemy")
-        {
-            enemyHealth = collision.GetComponent<Health>();
-        }
     }
 
     // Coroutine will play out animations and wait accordingly, also call methods for specfic instances
@@ -59,59 +36,55 @@ public class SpikeCrystal : MonoBehaviour
 
         // Bunch of animation nonsense
         Animator animator = GetComponent<Animator>();
-
         animator.SetBool("IsTriggered", true);
+        SFXManager.singleton.PlaySound(triggeredSFX, transform.position, sfxVolume);
 
         yield return new WaitForSeconds(2);
-
-        animator.SetBool("IsTriggered", false);
-
+        
         animator.SetBool("IsShatter", true);
-
-        // Calling method
-        yield return new WaitForSeconds(1);
-
+        SFXManager.singleton.PlaySound(shatterSFX, transform.position, sfxVolume);
         DoDamage();
 
-        // Further animation nonsense
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.2f);
 
-        animator.SetBool("IsShatter", false);
+        GetComponent<ParticleSystem>().Stop();
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(7);
 
         animator.SetBool("IsReform", true);
 
         yield return new WaitForSeconds(1);
 
+        // Reset bools
+        animator.SetBool("IsTriggered", false);
+        animator.SetBool("IsShatter", false);
         animator.SetBool("IsReform", false);
 
         // Enable collider again
         GetComponent<Collider2D>().enabled = true;
-
         animator.SetBool("IsIdle", true);
 
-        // Stops coroutine as it ends
-        stopCoroutine = true;
+        yield return new WaitForSeconds(1f);
 
+        isTriggered = false;
     }
     
     // Method for doing damage in an aoe around crystal, both to player and enemy
     private void DoDamage()
     {
+        GetComponent<ParticleSystem>().Play();
 
-        Collider2D[] entitiesToDealDamageTo = Physics2D.OverlapCircleAll(gameObject.transform.position, aoe, LayerMask.GetMask("Player", "Enemy"));
-
+        Collider2D[] entitiesToDealDamageTo = Physics2D.OverlapCircleAll(transform.position, aoe);
 
         foreach (Collider2D entity in entitiesToDealDamageTo)
         {
-            if (collider.gameObject.tag == "Player")
+            if (entity.gameObject.tag == "Player")
             {
-                playerHealth.TakeDamage(damage);
+                entity.GetComponent<PlayerHealth>().TakeDamage(damage);
             }
-            if (collider.gameObject.tag == "Enemy")
+            if (entity.gameObject.tag == "Enemy" || entity.gameObject.tag == "Charger" || entity.gameObject.tag == "Boss")
             {
-                enemyHealth.TakeDamage(damage);
+                entity.GetComponent<Health>().TakeDamage(damage);
             }
         } 
     }
