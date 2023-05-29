@@ -25,7 +25,11 @@ public class CaveManager : MonoBehaviour
         sendWave = FindObjectOfType<SendWave>();
         caveEntrance = FindObjectOfType<CaveEntrance>();
         player = GameObject.FindWithTag("Player");
-        playerSpawnTransform = player.transform;
+        
+        
+        
+        //if(GameObject.Find("PlayerSpawnPoint").transform != null)
+        //    playerSpawnTransform = GameObject.Find("PlayerSpawnPoint").transform;
         sendWave.caveStartedEvent.AddListener(StartCave);
         
         //player.GetComponent<PlayerHealth>().playerDeathEvent.AddListener(RestartCave);
@@ -69,13 +73,7 @@ public class CaveManager : MonoBehaviour
     }
     
     //Endcave when pressing space
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            EndCave();
-        }
-    }
+    
     
     void OnTriggerEnter2D(Collider2D other)
     {
