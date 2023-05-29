@@ -84,7 +84,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &8104717961052179385
+--- !u!1 &5863966377410838845
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,41 +92,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8104717961052179397}
-  - component: {fileID: 8104717961052179396}
-  - component: {fileID: 8104717961052179387}
-  - component: {fileID: 8104717961052179398}
-  m_Layer: 10
-  m_Name: Anvil
-  m_TagString: NPC
+  - component: {fileID: 9014063831022471959}
+  - component: {fileID: 2746114359177252098}
+  m_Layer: 0
+  m_Name: Sprite
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8104717961052179397
+--- !u!4 &9014063831022471959
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8104717961052179385}
-  m_LocalRotation: {x: -0, y: -0, z: 0.00000028312203, w: -1}
-  m_LocalPosition: {x: -8.082348, y: 4.5285234, z: 0}
-  m_LocalScale: {x: 2, y: 3, z: 1}
+  m_GameObject: {fileID: 5863966377410838845}
+  m_LocalRotation: {x: 0.23975441, y: 0.000000067879746, z: -0.00000027486456, w: -0.9708336}
+  m_LocalPosition: {x: -0, y: 0.1, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.33333334, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8104717962992955071}
-  - {fileID: 9033515235050521611}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 360}
---- !u!212 &8104717961052179396
+  m_Children: []
+  m_Father: {fileID: 8104717961052179397}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: -27.744, y: 0, z: 0}
+--- !u!212 &2746114359177252098
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8104717961052179385}
+  m_GameObject: {fileID: 5863966377410838845}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -161,7 +157,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3e49ad679e791ab4d8c3ec01f5a0cfd3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1807486d9dcf24087beaeb5da2feb7c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -172,6 +168,42 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &8104717961052179385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8104717961052179397}
+  - component: {fileID: 8104717961052179387}
+  - component: {fileID: 8104717961052179398}
+  m_Layer: 10
+  m_Name: Anvil
+  m_TagString: NPC
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8104717961052179397
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8104717961052179385}
+  m_LocalRotation: {x: -0, y: -0, z: 0.00000028312203, w: -1}
+  m_LocalPosition: {x: -8.082348, y: 4.5285234, z: 0}
+  m_LocalScale: {x: 2, y: 3, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8104717962992955071}
+  - {fileID: 9033515235050521611}
+  - {fileID: 9014063831022471959}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 360}
 --- !u!58 &8104717961052179387
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -228,7 +260,7 @@ Transform:
   m_GameObject: {fileID: 8104717962992955070}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.002, y: 0.491, z: 0}
-  m_LocalScale: {x: 0.33209807, y: 0.31510875, z: 0.7191916}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8104717961052179397}
@@ -275,8 +307,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1e3a29adec0b6450dac2274ca46053ea, type: 3}
-  m_Color: {r: 0.62745094, g: 1, b: 0, a: 0.7529412}
+  m_Sprite: {fileID: 21300000, guid: b15c15eaeac0a47209f219b907fc5c9f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

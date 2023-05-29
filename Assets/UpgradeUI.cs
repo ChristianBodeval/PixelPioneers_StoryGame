@@ -181,9 +181,16 @@ public class UpgradeUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A) && currentSelectedNumber > 0)
             SelectLeft();
-        if (Input.GetKeyDown(KeyCode.D) && currentSelectedNumber < progressNumber - 1)
-            SelectRight();
-        
+        if (Input.GetKeyDown(KeyCode.D))
+            {
+                if(currentSelectedNumber < progressNumber - 1 && currentSelectedNumber < currentChoises.Count - 1)
+                    SelectRight();
+                else if (isUpgradeUIOpen && currentSelectedNumber < currentChoises.Count - 1 && progressNumber == 1)
+                    SelectRight();
+            }
+
+        if(currentSelectedNumber != 0)
+            currentChoises[0].SetOutline(false);
         
         
         if (Input.GetKeyDown(KeyCode.E) )
@@ -215,6 +222,13 @@ public class UpgradeUI : MonoBehaviour
         DeselectAll();
         SetIsUpgradeUIOpen(false);
         abilityUI.SetActive(false);
+        
+        //Deselect all abilities
+        foreach (var choise in currentChoises)
+        {
+            choise.SetOutline(false);
+        }
+        
         currentChoises.Clear();
         abilityGameObjects.Clear();
         currentAbility.SetOutline(false);
