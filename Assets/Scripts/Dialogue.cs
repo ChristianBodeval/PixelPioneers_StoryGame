@@ -112,4 +112,9 @@ public class Dialogue : MonoBehaviour
                 break;
         }
     }
+
+    public void StartDialogue()
+    {
+        dialogueManager.EnterDialogueMode(inkFileText);
+    }
 }

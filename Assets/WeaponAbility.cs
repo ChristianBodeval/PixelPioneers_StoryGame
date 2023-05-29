@@ -47,6 +47,11 @@ public class WeaponAbility : MonoBehaviour
 
     private Animator animator;
 
+    private void Awake()
+    {
+        if (GameObject.Find("HermesFightIntroDialogue") != null) GameObject.Find("HermesFightIntroDialogue").GetComponent<Dialogue>().StartDialogue();
+    }
+
     private void Start()
     {
         player = GameObject.Find("Player");
