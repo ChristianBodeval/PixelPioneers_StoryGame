@@ -194,12 +194,14 @@ public class DialogueManager : MonoBehaviour
         if (currentTimeline != null && !TimelineManager.timelineManager.tutorialIsStarted)
         {
             TimelineManager.timelineManager.ResumeTL();
+            Debug.Log("Resumed timeline but not in tutorial");
         }
 
         StartCoroutine(SetReadyToSpawn());
 
         if (TimelineManager.timelineManager.tutorialIsStarted && !SpawnSystem.waveAlive && SpawnSystem.totalWaves < 1)
         {
+            Debug.Log("End of dialog in tutorial");
             switch (TimelineManager.timelineManager.currentTutorialState)
             {
                 case 2:
