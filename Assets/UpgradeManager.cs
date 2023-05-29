@@ -17,6 +17,7 @@ public class UpgradeManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("Calling Awake");
         if (instance == null)
         {
             instance = this;
@@ -27,6 +28,11 @@ public class UpgradeManager : MonoBehaviour
         {
             upgradeableAbilities.Add(abilityGameObject.GetComponent<IUpgradeable>());
         });
+    }
+
+    public void UpdateProgress(int progressNumber)
+    {
+        upgradeUI.SetAbilitiesProgess(progressNumber);
     }
     
     //Write method for Get list of IUpgradeable
@@ -58,6 +64,7 @@ public class UpgradeManager : MonoBehaviour
     {
         if (upgradeUI.gameObject.activeSelf == false)
         {
+            upgradeUI.gameObject.SetActive(true);
             upgradeUI.OpenUpgradeUI();
         }
     }

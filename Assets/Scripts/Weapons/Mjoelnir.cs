@@ -431,27 +431,17 @@ public class Mjoelnir : Ability, IUpgradeable
 
     public void UpgradeOption1()
     {
-        if(!hasAreaOfEffectUpgrade)
-            hasChargeUpgrade = true;
+        hasChargeUpgrade = true;
+        hasAreaOfEffectUpgrade = false;
     }
 
     public void UpgradeOption2()
     {
-        if (!hasChargeUpgrade)
-            hasAreaOfEffectUpgrade = true;
+        
+        hasChargeUpgrade = false;
+        hasAreaOfEffectUpgrade = true;
     }
-
-    public void Upgrade(UpgradeSO upgradeSO)
-    {
-        if (upgradeSO.Equals(upgrades[0]))
-        {
-            UpgradeOption1();
-        }
-        if (upgradeSO.Equals(upgrades[1]))
-        {
-            UpgradeOption2();
-        }
-    }
+    
 
     public void Downgrade()
     {
