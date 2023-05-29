@@ -19,6 +19,11 @@ public class SendWave : MonoBehaviour
     
     [FormerlySerializedAs("cavesClearEvent")] public UnityEvent caveClearedEvent;
 
+    
+    public UnityEvent caveStartedEvent;
+    
+    
+    
     private void Start()
     {
         spawnSystem = GameObject.Find("GameManager").GetComponent<SpawnSystem>();
@@ -27,6 +32,7 @@ public class SendWave : MonoBehaviour
 
     public void SendWaves()
     {
+        CaveManager.instance.StartCave();
         if (!SpawnSystem.waveAlive && !isSent)
         {
             if (combatTrack != null) MusicManager.singleton.PlayMusic(combatTrack, musicVolume);

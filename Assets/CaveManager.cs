@@ -16,34 +16,53 @@ public class CaveManager : MonoBehaviour
     
     public Transform playerSpawnTransform;
     
+    //Make it a singleton
+    public static CaveManager instance;
+    
     private void Awake()
     {
-        player = GameObject.FindWithTag("Player");
-        player.GetComponent<PlayerHealth>().playerDeathEvent.AddListener(RestartCave);
+        
         sendWave = FindObjectOfType<SendWave>();
-        sendWave.caveClearedEvent.AddListener(EndCave);
+        caveEntrance = FindObjectOfType<CaveEntrance>();
+        player = GameObject.FindWithTag("Player");
+        playerSpawnTransform = player.transform;
+        sendWave.caveStartedEvent.AddListener(StartCave);
+        
+        //player.GetComponent<PlayerHealth>().playerDeathEvent.AddListener(RestartCave);
+        
+        
+        if (instance != null && instance != this)
+        {
+            Debug.Log("Destroying CaveManager");
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
     }
+    
+    
     
     private void Start()
     {
         player.transform.position = playerSpawnTransform.position;
     }
     
-    private void StartCave()
+    public void StartCave()
     {
         caveEntrance.SetAccessibility(false);
-        sendWave.SendWaves();
     }
     
     
     
-    
+    /*
     private void RestartCave()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    }*/
 
-    private void EndCave()
+    public void EndCave()
     {
         caveEntrance.SetAccessibility(true);
         ProgressManager.instance.SetNextCaveActive();
