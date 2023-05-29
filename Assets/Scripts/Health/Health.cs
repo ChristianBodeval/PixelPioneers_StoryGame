@@ -175,14 +175,6 @@ public class Health : MonoBehaviour
                 }
             }
 
-            //TESTING if it works from waves
-            
-            //TimelineManager timelineManager = TimelineManager.timelineManager;
-            //if (timelineManager.tutorialIsStarted && timelineManager.T1Done && timelineManager.T2Done && !timelineManager.T3Done && !timelineManager.T4Done && !timelineManager.T5Done)
-            //{
-            //    timelineManager.ResumeTL();
-            //}
-
             // Deactivate enemy and return to pool
             GameObject.Find("GameManager").GetComponent<SpawnSystem>().RemoveFromWaitDeathList(gameObject);
             Pool.pool.ReturnToEnemyPool(gameObject);

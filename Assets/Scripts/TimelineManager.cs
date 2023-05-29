@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,13 +14,10 @@ public class TimelineManager : MonoBehaviour
     public bool tutorialIsStarted;
     private List<(GameObject, string)> soundLoop = new List<(GameObject, string)>();
 
-    public bool T1Done = false;
-    public bool T2Done = false;
-    public bool T3Done = false;
-    public bool T4Done = false;
-    public bool T5Done = false;
+    
     private bool[] hasPressedWASDKeys = new bool[4];
     private bool hasPressedJ = false;
+    public int currentTutorialState = 0;
 
     private void Awake()
     {
@@ -67,8 +65,35 @@ public class TimelineManager : MonoBehaviour
 
         if (tutorialIsStarted)
             Tutorial();
+
+        // If the tutorial is started we resume the timeline
+
+        if (tutorialIsStarted && !SpawnSystem.waveAlive && SpawnSystem.totalWaves <1)
+        {
+            Debug.Log("Wave is done");
+
+            switch (currentTutorialState)
+            {
+                case 3:
+                case 4:
+                    StartCoroutine(ResumeTLCoroutine());
+                    break;
+                case 5:
+                    Debug.Log("Tutorial is done");
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        Debug.Log("Current tutorial: " + currentTutorialState);
     }
 
+    private IEnumerator ResumeTLCoroutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+        ResumeTL();
+    }
     public void SetSoundVolume(float volume)
     {
         this.volume = volume;
@@ -91,6 +116,11 @@ public class TimelineManager : MonoBehaviour
     }
 
     #endregion Pre Tutorial
+
+    public void AddToCurrentTutorialState()
+    {
+        currentTutorialState++;
+    }
 
     //TUTORIAL
     public void StartTutorial()
@@ -120,26 +150,29 @@ public class TimelineManager : MonoBehaviour
         }
 
         // Example: Check if all WASD keys are pressed
-        if (hasPressedWASDKeys[0] && hasPressedWASDKeys[1] && hasPressedWASDKeys[2] && hasPressedWASDKeys[3] && !T1Done)
+        if (hasPressedWASDKeys[0] && hasPressedWASDKeys[1] && hasPressedWASDKeys[2] && hasPressedWASDKeys[3] && currentTutorialState == 0)
         {
-            T1Done = true;
             ResumeTL();
+            AddToCurrentTutorialState();
         }
 
         #endregion T1
 
         #region T2
 
-        if (Input.GetKeyDown(KeyCode.J) && !hasPressedJ && T1Done)
+        if (Input.GetKeyDown(KeyCode.J) && !hasPressedJ && currentTutorialState == 1)
         {
             hasPressedJ = true;
             ResumeTL();
-            T2Done = true;
+            AddToCurrentTutorialState();
         }
 
         #endregion T2
+
         #region T3
+
         //Enemy dies
+
         #endregion T3
     }
 }
