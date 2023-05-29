@@ -74,8 +74,7 @@ public class TimelineManager : MonoBehaviour
 
             switch (currentTutorialState)
             {
-                case 3:
-                case 4:
+                case 3: case 4:
                     StartCoroutine(ResumeTLCoroutine());
                     break;
                 case 5:
@@ -102,6 +101,7 @@ public class TimelineManager : MonoBehaviour
     public void StartSoundLoop(AudioClip sound)
     {
         soundLoop.Add((SFXManager.singleton.PlayLoop(sound, transform.position, volume, true, null), sound.name));
+        //SFXManager.singleton.PlayLoop(sound, transform.position, volume, true, null);
     }
 
     public void StopSoundLoop(AudioClip sound)

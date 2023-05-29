@@ -41201,7 +41201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicVolume: 0.5
-  combatTrack: {fileID: 8300000, guid: 9ec30913087bf444198163977fbf6827, type: 3}
+  combatTrack: {fileID: 8300000, guid: 8311f3a54a97e074b825acd1b4a3ad40, type: 3}
   waves:
   - {fileID: 282442937}
   caveClearedEvent:
@@ -41288,54 +41288,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 71101670, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_Events.m_Events.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 71101670, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_Events.m_Signals.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 71101670, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_Events.m_Signals.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 08fc1ac19f86c1b45a661eea24a0f457, type: 2}
-    - target: {fileID: 71101670, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_Events.m_Events.Array.data[2].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 71101670, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_Events.m_Events.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 71101670, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_Events.m_Events.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1133501758}
-    - target: {fileID: 71101670, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_Events.m_Events.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1133501758}
-    - target: {fileID: 71101670, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_Events.m_Events.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 71101670, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_Events.m_Events.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: set_enabled
-      objectReference: {fileID: 0}
-    - target: {fileID: 71101670, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_Events.m_Events.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartMove
-      objectReference: {fileID: 0}
-    - target: {fileID: 71101670, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_Events.m_Events.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayerAction, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 71101670, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_Events.m_Events.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 422287907800921721, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -41380,38 +41332,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 559411182658302185, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 924234448515757090, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 924234449555763855, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 924234449585977212, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 924234449879900914, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 924234450459542867, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2677050714896838234, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2824566153206153830, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 5205308680662958416, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -41420,10 +41340,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5205308680910767321, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: sr
-      value: 
-      objectReference: {fileID: 783593278}
     - target: {fileID: 5205308680910767321, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
       propertyPath: cameraShake
       value: 
@@ -41439,14 +41355,6 @@ PrefabInstance:
     - target: {fileID: 5205308681617924680, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8857703427106075052, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 9057172468322598006, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
@@ -59092,7 +59000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicVolume: 0.5
-  combatTrack: {fileID: 8300000, guid: 9ec30913087bf444198163977fbf6827, type: 3}
+  combatTrack: {fileID: 0}
   waves:
   - {fileID: 562792331}
   caveClearedEvent:
@@ -59586,11 +59494,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!212 &783593278 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 5205308682077945211, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
-  m_PrefabInstance: {fileID: 313520352}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &784783812
 GameObject:
   m_ObjectHideFlags: 0
@@ -59728,7 +59631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicVolume: 0.5
-  combatTrack: {fileID: 8300000, guid: 9ec30913087bf444198163977fbf6827, type: 3}
+  combatTrack: {fileID: 0}
   waves:
   - {fileID: 807033657}
   caveClearedEvent:
