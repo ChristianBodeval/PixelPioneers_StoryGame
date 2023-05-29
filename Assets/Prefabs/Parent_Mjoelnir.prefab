@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8534639303852567748}
   m_Layer: 16
   m_Name: Parent_Mjoelnir
-  m_TagString: Untagged
+  m_TagString: Mjoelnir
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,6 +142,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8011305717191019474, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
+      propertyPath: slamSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: f1e4c6224cdada34f99865440aea7138, type: 3}
+    - target: {fileID: 8011305717191019474, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
+      propertyPath: chargeSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: d46398afb96b55f408b4c6ac3e2debed, type: 3}
+    - target: {fileID: 8011305717191019474, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
+      propertyPath: spinImpactSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 466dfb29a71856343a2e9610845291f3, type: 3}
+    - target: {fileID: 8011305717191019474, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
+      propertyPath: chargeUpLoopSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 67a35c1cfb5604049b436ac23af4abbc, type: 3}
     - target: {fileID: 8011305717191019474, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
       propertyPath: parentTransform
       value: 

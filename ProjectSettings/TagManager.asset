@@ -15,6 +15,7 @@ TagManager:
   - Boss
   - Shadow
   - CaveEntrance
+  - Mjoelnir
   layers:
   - Default
   - TransparentFX

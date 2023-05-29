@@ -13,11 +13,12 @@ public class Hermes_Pathing : MonoBehaviour
     private Animator animator;
 
     [Header("A*")]
+    [SerializeField] private float unitRadius;
+    [SerializeField] private float updateInterval = 0.05f;
+    [SerializeField] private float nextWayPointDistance = 2f;
     private LayerMask obstacleLayer;
     private LayerMask groundLayer;
     private LayerMask pitLayer;
-    [SerializeField] private float updateInterval = 0.05f;
-    [SerializeField] private float nextWayPointDistance = 2f;
     private Path path;
     private int currentWayPoint = 0;
     private Seeker seeker;
@@ -195,7 +196,7 @@ public class Hermes_Pathing : MonoBehaviour
             // Position is valid if its further away than hermes is from the player
             if ((distanceToPos >= distanceToPlayer) /* Position is further away than player*/
                 && !Physics2D.Raycast(transform.position, pos - transform.position, Hermes_Attack.waveRange, obstacleLayer) /* Hermes can go in a straight line to the position */
-                && !Physics2D.OverlapPoint(pos, obstacleLayer) && Physics2D.OverlapPoint(pos, groundLayer)) /* Position is walkable */
+                && !Physics2D.CircleCast(pos, 0.7f, Vector2.right, 0.7f, obstacleLayer) && !Physics2D.CircleCast(pos, 0.7f, Vector2.right, 0.7f, LayerMask.GetMask("Lava")) && Physics2D.CircleCast(pos, 0.7f, Vector2.right, 0.7f, groundLayer)) /* Position is walkable */
             {
                 // Call coroutine to move hermes
                 if (movetoPositionCoroutine != null) StopCoroutine(movetoPositionCoroutine);
@@ -228,8 +229,8 @@ public class Hermes_Pathing : MonoBehaviour
             while (Physics2D.CircleCast(transform.position, 0.6f, dir, 0.6f, obstacleLayer) || Physics2D.CircleCast(transform.position, 0.6f, dir, 0.6f, pitLayer))
             {
                 t += 0.1f;
-                transform.position = Vector3.Lerp(startPos, newPos, t);
-                yield return new WaitForSeconds(0.02f);
+                transform.position = Vector3.Lerp(transform.position, newPos, t);
+                yield return new WaitForSeconds(0.01f);
             }
 
             // Updates direction and movement
@@ -328,8 +329,36 @@ public class Hermes_Pathing : MonoBehaviour
     {
         if (!p.error)
         {
-            path = p;
             currentWayPoint = 2;
+
+            // Get the calculated path
+            Vector3[] waypoints = p.vectorPath.ToArray();
+            p.vectorPath.Clear();
+
+            // Adjust the waypoints to account for unit's collider size
+            for (int i = 0; i < waypoints.Length; i++)
+            {
+                Vector3 temp = CheckCollision(waypoints[i]);
+                p.vectorPath.Add(waypoints[i] + (waypoints[i] - temp).normalized * unitRadius);
+            }
+
+            path = p;
         }
+    }
+
+    private Vector2 CheckCollision(Vector2 position)
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(position, unitRadius);
+        Vector2 dir = Vector3.zero;
+
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Obstacles"))
+            {
+                dir += collider.ClosestPoint(position);
+                return collider.ClosestPoint(position);
+            }
+        }
+        return position;
     }
 }

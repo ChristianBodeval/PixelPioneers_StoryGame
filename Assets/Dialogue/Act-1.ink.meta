@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Dialogue/Start and tutorial/T1_movement.ink.meta
+guid: 32855e61b86dd5f43b6d24fafc57452c
+========
 guid: 383fc43f44ad14d51b2598913c09bd0d
+>>>>>>>> f0e3711cc032e052fcf6b6fe9a646f6b90a71a01:Assets/Dialogue/Act-1.ink.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

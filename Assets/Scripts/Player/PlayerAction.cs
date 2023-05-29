@@ -13,6 +13,7 @@ public class PlayerAction : MonoBehaviour
     private bool canMove = true;
 
     [Header("Input")]
+    [SerializeField] private Animator animator;
     [SerializeField] private float inputBuffer = 0.1f;
     [HideInInspector] public Vector2 lastFacing;
     [HideInInspector] public Vector2 lastFacing2;
@@ -31,7 +32,6 @@ public class PlayerAction : MonoBehaviour
     private Vector2 dashDirection; // Direction of the dash
     private bool canDash = true; //C Flag to check if the player can dash
     [HideInInspector] public float dashCooldownRemaining = 0f; // Initialize to 0 to allow dashing immediately
-    private Animator animator;
     private bool isRunning = false;
 
     public WeaponCDs weaponCDVisual;
@@ -47,7 +47,6 @@ public class PlayerAction : MonoBehaviour
         Physics2D.IgnoreLayerCollision(3, 7);
         dashDirection = GetDashDirection();
         healthScript = GetComponent<Health>();
-        animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -104,11 +103,11 @@ public class PlayerAction : MonoBehaviour
         {
             rb.velocity = Vector2.zero; // Stops the player
         }
+
         animator.SetFloat("XInput", lastFacing.x);
         animator.SetFloat("YInput", lastFacing.y);
 
-
-        if(moveVector.magnitude > 0.1f)
+        if (moveVector.magnitude > 0.1f)
         {
 
             animator.SetBool("IsRunning", true);

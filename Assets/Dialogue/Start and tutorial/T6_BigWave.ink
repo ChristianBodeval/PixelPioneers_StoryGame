@@ -1,0 +1,3 @@
+Scryer: That’s it! More incoming though, stay sharp, keep moving, slashing and picking up essence. I’ll be over here having my lunch… 
+Scryer: Try not to die.
+    -> END

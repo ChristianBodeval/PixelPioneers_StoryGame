@@ -7,6 +7,7 @@ public class SpawnSystem : MonoBehaviour
 {
     [Header("Pool")]
     [SerializeField] private LayerMask groundLayer;
+
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private float spawnApartDistance;
     private List<WaveObject> wavesToSpawn = new List<WaveObject>();
@@ -165,12 +166,15 @@ public class SpawnSystem : MonoBehaviour
                 case 0:
                     point = Camera.main.ViewportToWorldPoint(new Vector3(0f, UnityEngine.Random.Range(0f, 1f), 0f)); // Left
                     break;
+
                 case 1:
                     point = Camera.main.ViewportToWorldPoint(new Vector3(UnityEngine.Random.Range(0f, 1f), 1f, 0f)); // Top
                     break;
+
                 case 2:
                     point = Camera.main.ViewportToWorldPoint(new Vector3(1f, UnityEngine.Random.Range(0f, 1f), 0f)); // Right
                     break;
+
                 case 3:
                     point = Camera.main.ViewportToWorldPoint(new Vector3(UnityEngine.Random.Range(0f, 1f), 0f, 0f)); // Bottom
                     break;
@@ -193,5 +197,4 @@ public class SpawnSystem : MonoBehaviour
 
         return playerPosition; // Default case in case of recursion limit
     }
-
 }
