@@ -18,40 +18,59 @@ public class UpgradeUI : MonoBehaviour
     private bool isUpgradeUIOpen;
     private bool isAbilityUIOpen;
     
+    
     public Material outlineMaterial;
     
     [SerializeField] private List<UpgradeHolder> upgrades = new List<UpgradeHolder>();
     [SerializeField] private GameObject upgradeUI;
 
-    [SerializeField] private List<AbilityHolder_UI> abilitiesUIs = new List<AbilityHolder_UI>();
+    [FormerlySerializedAs("abilitiesUIs")] [SerializeField] private List<AbilityHolder_UI> abilitiesUis = new List<AbilityHolder_UI>();
     [SerializeField] private GameObject abilityUI;
     
     [SerializeField] private PlayerAction playerActions;
     [SerializeField] private Rigidbody2D playerRigidbody;
     
-    List<GameObject> abilityGameObjects = new List<GameObject>();
+    public List<GameObject> abilityGameObjects = new List<GameObject>();
 
+    public int progressNumber;
+    
+    public void Awake()
+    {
+        SetAbilitiesProgess(this.progressNumber);
+        ExitAnvil();
+    }
+    
+    //Set all abilities to the scriptable object unknown which is above a int. The int can maximum be 4.
+    public void SetAbilitiesProgess(int progressNumber)
+    {
+        this.progressNumber = progressNumber;
+        for (int i = 0; i < abilityGameObjects.Count; i++)
+        {
+            abilitiesUis[i].SetActive(i < progressNumber);
+        }
+        
+        
+    }
 
     public void OpenUpgradeUI()
-    {        
-        Debug.Log("Called open upgrade UI");
+    {
         this.gameObject.SetActive(true);
         for (int i = 0; i < abilityGameObjects.Count; i++)
         {
-            abilitiesUIs[i].abilitySO = abilityGameObjects[i].GetComponent<Ability>().GetAbilitySO();
+            abilitiesUis[i].abilitySO = abilityGameObjects[i].GetComponent<Ability>().GetAbilitySO();
         }
         
         abilityGameObjects.AddRange(UpgradeManager.instance.GetAbilitiesGameObjects());
-        UpdateAbilityUI();
-        
+        //UpdateAbilityUI();
+        SetAbilitiesProgess(progressNumber);
         playerActions.enabled = false;
         playerRigidbody.velocity = Vector2.zero;
         playerRigidbody.bodyType = RigidbodyType2D.Kinematic;
 
-        
         SetIsUpgradeUIOpen(false);
         currentAbility = currentChoises[0];
         currentAbility.SetOutline(true);
+        
     }
     
     void DeselectAll()
@@ -67,7 +86,11 @@ public class UpgradeUI : MonoBehaviour
     {
         for (int i = 0; i < abilityGameObjects.Count; i++)
         {
-            abilitiesUIs[i].abilitySO = abilityGameObjects[i].GetComponent<Ability>().GetAbilitySO();
+            GameObject abilityGO = abilityGameObjects[i];
+            Ability script = abilityGO.GetComponent<Ability>();
+            AbilitySO scriptableObjects = script.GetAbilitySO();
+            
+            abilitiesUis[i].abilitySO = scriptableObjects;
         }
     }
 
@@ -90,6 +113,7 @@ public class UpgradeUI : MonoBehaviour
     
     void SelectAbility()
     {
+        Debug.Log("Called select ability");
         List<UpgradeSO> abilityUpgradeSOs = abilityGameObjects[currentSelectedNumber].GetComponent<Ability>().GetUpgrades();
         
         upgrades[0].upgradeSO = abilityUpgradeSOs[0];
@@ -108,6 +132,8 @@ public class UpgradeUI : MonoBehaviour
 
     void SelectUpgrade()
     {
+        Debug.Log("Called select update");
+
         if (currentSelectedNumber == 0)
         {
             UpgradeManager.instance.UpgradeAbilityOption1(selectedAbility);
@@ -136,7 +162,7 @@ public class UpgradeUI : MonoBehaviour
         }
         else
         {
-            currentChoises.AddRange(abilitiesUIs);
+            currentChoises.AddRange(abilitiesUis);
         }
         
         currentSelectedNumber = 0;
@@ -148,10 +174,12 @@ public class UpgradeUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A) && currentSelectedNumber > 0)
             SelectLeft();
-        if (Input.GetKeyDown(KeyCode.D) && currentSelectedNumber < currentChoises.Count - 1)
+        if (Input.GetKeyDown(KeyCode.D) && currentSelectedNumber < progressNumber - 1)
             SelectRight();
         
-        if (Input.GetKeyDown(KeyCode.E))
+        
+        
+        if (Input.GetKeyDown(KeyCode.E) )
         {
             if (!isUpgradeUIOpen)
                 SelectAbility();
