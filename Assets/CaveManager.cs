@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class CaveManager : MonoBehaviour
 {
-    private SendWave sendWave;
+    public SendWave sendWave;
     private bool isTriggered;
     
     public GameObject player;
@@ -17,6 +18,7 @@ public class CaveManager : MonoBehaviour
     
     private void Awake()
     {
+        player = GameObject.FindWithTag("Player");
         player.GetComponent<PlayerHealth>().playerDeathEvent.AddListener(RestartCave);
         sendWave = FindObjectOfType<SendWave>();
         sendWave.caveClearedEvent.AddListener(EndCave);
@@ -29,10 +31,12 @@ public class CaveManager : MonoBehaviour
     
     private void StartCave()
     {
-        
-        caveEntrance.GetComponent<CircleCollider2D>().enabled = false;
+        caveEntrance.SetAccessibility(false);
         sendWave.SendWaves();
     }
+    
+    
+    
     
     private void RestartCave()
     {
@@ -41,10 +45,18 @@ public class CaveManager : MonoBehaviour
 
     private void EndCave()
     {
-        caveEntrance.GetComponent<CircleCollider2D>().enabled = true;
-        ProgressManager.Instance.SetNextCaveActive();
+        caveEntrance.SetAccessibility(true);
+        ProgressManager.instance.SetNextCaveActive();
     }
     
+    //Endcave when pressing space
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            EndCave();
+        }
+    }
     
     void OnTriggerEnter2D(Collider2D other)
     {

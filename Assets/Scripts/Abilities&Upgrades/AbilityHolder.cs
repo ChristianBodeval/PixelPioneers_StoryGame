@@ -13,7 +13,7 @@ public class AbilityHolder : Ability, IUpgradeable
 {
     public GameObject caster;
     
-    public PlayerAction playerAction;
+    private PlayerAction playerAction;
     public AbilitySO ability;
     private float cooldownTime;
     private float duration;
@@ -52,6 +52,13 @@ public class AbilityHolder : Ability, IUpgradeable
 
     private void Awake()
     {
+
+    }
+
+    private void Start()
+    {
+        playerAction = caster.GetComponent<PlayerAction>();
+        
         readyColor = GetComponent<SpriteShapeRenderer>().color;
         
         //Set caster to gameobject called player
@@ -59,11 +66,7 @@ public class AbilityHolder : Ability, IUpgradeable
         
         ability.Initialize(this.gameObject);
         duration = ability.duration;
-
-    }
-
-    private void Start()
-    {
+        
         if (ability.isFollowingCaster)
         {
             transform.parent = caster.transform;

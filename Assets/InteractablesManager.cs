@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class InteractablesManager : MonoBehaviour
 {
-    public List<Interactable> interactables;
+    private List<Interactable> interactables;
     private Transform playerTransform;
 
 

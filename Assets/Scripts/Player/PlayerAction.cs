@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -34,6 +35,11 @@ public class PlayerAction : MonoBehaviour
     private bool isRunning = false;
 
     public WeaponCDs weaponCDVisual;
+
+    private void Awake()
+    {
+        lastFacing = Vector2.down;
+    }
 
     private void Start()
     {
@@ -98,7 +104,6 @@ public class PlayerAction : MonoBehaviour
         {
             rb.velocity = Vector2.zero; // Stops the player
         }
-        Debug.Log(animator);
         animator.SetFloat("XInput", lastFacing.x);
         animator.SetFloat("YInput", lastFacing.y);
 
@@ -112,9 +117,6 @@ public class PlayerAction : MonoBehaviour
         {
             animator.SetBool("IsRunning", false);
         }
-
-        Debug.Log("XInput" + animator.GetFloat("XInput") + lastFacing.x);
-        Debug.Log("YInput" + animator.GetFloat("YInput") + lastFacing.y);
     }
 
     public void StartMove()

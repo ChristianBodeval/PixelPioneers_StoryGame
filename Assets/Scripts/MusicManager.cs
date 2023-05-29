@@ -63,7 +63,6 @@ public class MusicManager : MonoBehaviour
 
     public void PlayMusic(AudioClip clip, float volume)
     {
-        Debug.Log("Playing new" + " " + clip + " " + volume + " " + masterVolume);
         clipVolume = volume;
 
         if (audioSource.isPlaying)
