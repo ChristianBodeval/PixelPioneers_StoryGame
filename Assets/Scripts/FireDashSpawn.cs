@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,6 +8,11 @@ public class FireDashSpawn : MonoBehaviour
     public Transform playerTransform;
     private Dash dash;
     public float spawnDuration = 0.3f;
+
+    private void Awake()
+    {
+        playerTransform = GameObject.Find("Player").transform;
+    }
 
     // Start is called before the first frame update
     private void Start()
