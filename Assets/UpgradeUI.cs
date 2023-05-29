@@ -158,12 +158,19 @@ public class UpgradeUI : MonoBehaviour
         
         if(value)
         {
+            
             currentChoises.AddRange(upgrades);
+            
+            
+            
         }
         else
         {
             currentChoises.AddRange(abilitiesUis);
         }
+        /*
+        if(currentChoises.Count == 0)
+            return;*/
         
         currentSelectedNumber = 0;
         currentAbility = currentChoises[0];

@@ -32,6 +32,7 @@ public class ThrowGungnir : Ability, IUpgradeable
     // Start is called before the first frame update
     private void Awake()
     {
+        player = GameObject.Find("Player");
         weaponCDVisual = GameObject.Find("CDs").GetComponent<WeaponCDs>();
         playerAction = player.GetComponent<PlayerAction>();
         gungnirCDCoroutine = GungnirCD();
