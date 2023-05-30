@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49bbdc68e643626459520b95aab8b1b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alphaMaximum: 0.7
+  sfxVolume: 1
   accelerationCurve:
     serializedVersion: 2
     m_Curve:
@@ -134,8 +134,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  source: {fileID: 0}
   sfx: {fileID: 8300000, guid: ec4e01a3de8fa604eb7602a2cb2c7980, type: 3}
+  alphaMaximum: 0.7
 --- !u!82 &7186346890244220119
 AudioSource:
   m_ObjectHideFlags: 0
