@@ -6,52 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="31ee322b-587a-4c99-afc9-1b2b30998f9e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Anim/Cone_Attack.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Anim/Cone_Attack.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Anim/Cone_Attack_0.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Anim/Cone_Attack_0.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Anvil.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Anvil.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CaveEntrance.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/CaveEntrance.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Cone_Attack_v2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Cone_Attack_v2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ElectricLine.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/ElectricLine.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/FloorIsElectric.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/FloorIsElectric.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GungnirThrow.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/GungnirThrow.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/SlashAbility.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/SlashAbility.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UpgradeItemUI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UpgradeItemUI.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UpgradeSystemVisual.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UpgradeSystemVisual.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ProgressManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ProgressManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SaveManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/CaveChangeNameToCave_04.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/CaveChangeNameToCave_04.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/CaveHub.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/CaveHub.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_01.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_01.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_02.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_02.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_03.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_03.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects+MeleeUpgradesSO's/ElectricFloor.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects+MeleeUpgradesSO's/ElectricFloor.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects+MeleeUpgradesSO's/OverTimeEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects+MeleeUpgradesSO's/OverTimeEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/IUpgradeable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/IUpgradeable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeHolder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeHolder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Dash_Firewalk.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Dash_Firewalk.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Dash_Slash.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Dash_Slash.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Gungir_1Upgrade.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Gungir_1Upgrade.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Gungir_2Upgrade.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Gungir_2Upgrade.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Melee_BounchingLightning.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Melee_BounchingLightning.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Melee_BounchingLightning.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Melee_BounchingLightning.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Melee_ElectricFloor.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Melee_ElectricFloor.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Melee_ElectricFloor.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Melee_ElectricFloor.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Mjoelnir_Charge.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Mjoelnir_Charge.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DestroyAnim.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DestroyAnim.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ThrowGungnir.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ThrowGungnir.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/Dash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/Dash.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/Gungnir.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/Gungnir.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/Mjoelnir.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/Mjoelnir.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UpgradeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UpgradeManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UpgradeUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UpgradeUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +129,7 @@
       <workItem from="1685281296471" duration="465000" />
       <workItem from="1685283375351" duration="41110000" />
       <workItem from="1685388797048" duration="7575000" />
-      <workItem from="1685400538031" duration="3428000" />
+      <workItem from="1685400538031" duration="6491000" />
     </task>
     <servers />
   </component>
