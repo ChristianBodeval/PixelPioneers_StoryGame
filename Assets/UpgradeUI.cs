@@ -33,7 +33,8 @@ public class UpgradeUI : MonoBehaviour
     public List<GameObject> abilityGameObjects = new List<GameObject>();
 
     public int progressNumber;
-    
+    public GameObject playerDash;
+
     public void Awake()
     {
         SetAbilitiesProgess(this.progressNumber);
@@ -54,6 +55,8 @@ public class UpgradeUI : MonoBehaviour
 
     public void OpenUpgradeUI()
     {
+        
+        
         this.gameObject.SetActive(true);
         for (int i = 0; i < abilityGameObjects.Count; i++)
         {
@@ -64,12 +67,20 @@ public class UpgradeUI : MonoBehaviour
         //UpdateAbilityUI();
         SetAbilitiesProgess(progressNumber);
         playerActions.enabled = false;
+        playerDash.SetActive(false);
+        
+        
         playerRigidbody.velocity = Vector2.zero;
         playerRigidbody.bodyType = RigidbodyType2D.Kinematic;
 
         SetIsUpgradeUIOpen(false);
         currentAbility = currentChoises[0];
         currentAbility.SetOutline(true);
+        
+        foreach (var abilityGameObject in abilityGameObjects)
+        {
+            abilityGameObject.SetActive(false);
+        }
         
     }
     
@@ -219,6 +230,12 @@ public class UpgradeUI : MonoBehaviour
     }
     void ExitAnvil()
     {
+        //Enable all ability gameobjects
+        foreach (var abilityGameObject in abilityGameObjects)
+        {
+            abilityGameObject.SetActive(true);
+        }
+        
         DeselectAll();
         SetIsUpgradeUIOpen(false);
         abilityUI.SetActive(false);
@@ -229,10 +246,15 @@ public class UpgradeUI : MonoBehaviour
             choise.SetOutline(false);
         }
         
+        
+        
         currentChoises.Clear();
         abilityGameObjects.Clear();
         currentAbility.SetOutline(false);
         currentAbility = null;
+        
+        
+        
         playerActions.enabled = true;
         playerRigidbody.isKinematic = false;
         
@@ -240,7 +262,7 @@ public class UpgradeUI : MonoBehaviour
         playerRigidbody.velocity = Vector2.zero;
         //Set the playerRigidbody bodytype to dynamic
         
-
+        playerDash.SetActive(true);
 
         this.gameObject.SetActive(false);
     }

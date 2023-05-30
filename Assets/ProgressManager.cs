@@ -14,10 +14,15 @@ public class ProgressManager : MonoBehaviour
     private void Awake()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        
+        
+        
         if (instance != null && instance != this)
         {
-            Debug.Log("Destroying ProgressManager");
-            Destroy(this.gameObject);
+            Debug.Log("ProgressManager is existing, destroying this one");
+
+
+            // Destroy(this.gameObject);
         }
         else
         {
@@ -56,8 +61,8 @@ public class ProgressManager : MonoBehaviour
             //Activate the number of caves equal to currentCaveAvailible
             for (int i = 0; i < caveEntrances.Count; i++)
             {
-                caveEntrances[i].SetAccessibility(i < currentCaveAvailible);
-                Debug.Log("Setting cave " + i + " to: " + (i < currentCaveAvailible));
+                caveEntrances[i].SetAccessibility(i < currentCaveAvailible+1);
+                Debug.Log("Setting cave " + i + " to: " + (i < currentCaveAvailible+1));
             }
             Debug.Log("On Scene loaded");
             

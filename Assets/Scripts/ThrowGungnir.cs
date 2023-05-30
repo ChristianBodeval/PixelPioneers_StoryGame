@@ -39,6 +39,11 @@ public class ThrowGungnir : Ability, IUpgradeable
         gungnirScript = gungnir.GetComponent<Gungnir>();
         triThrowScript = triThrow.GetComponent<TriThrow>();
     }
+    
+    private new void Start()
+    {
+        base.Start();
+    }
 
     // StateUpdate is called once per frame
     private void Update()

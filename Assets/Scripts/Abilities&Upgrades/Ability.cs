@@ -1,16 +1,36 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ability : MonoBehaviour, IUpgradeable
+public enum CurrentUpgrade
+{
+    Upgrade1,
+    Upgrade2
+}
+
+public class Ability : MonoBehaviour
 {
     
     //Make a enum with Upgrade1 and Upgrade2
-    public enum CurrentUpgrade
+
+    protected void Start()
     {
-        Upgrade1,
-        Upgrade2
+        
+        
+        if (PlayerPrefs.GetInt(abilitySO.name+1) == 1)
+        {
+            //Upgrade from the childclass' IUpgradeable upgrade 1
+            GetComponent<IUpgradeable>().UpgradeOption1();
+        }
+        
+        if (PlayerPrefs.GetInt(abilitySO.name+2) == 1)
+        {
+            //Upgrade from the childclass' IUpgradeable upgrade 1
+            GetComponent<IUpgradeable>().UpgradeOption2();
+        }
     }
+
 
     private CurrentUpgrade currentUpgrade;
     
@@ -28,17 +48,13 @@ public class Ability : MonoBehaviour, IUpgradeable
     {
         return abilitySO;
     }
+    
 
-
-    public void UpgradeOption1()
+    public string GetAbilityName()
     {
-        currentUpgrade = CurrentUpgrade.Upgrade1;
+        return abilitySO.name;
     }
 
-    public void UpgradeOption2()
-    {
-        currentUpgrade = CurrentUpgrade.Upgrade2;
-    }
 
     public void Downgrade()
     {

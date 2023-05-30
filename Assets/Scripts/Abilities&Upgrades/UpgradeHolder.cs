@@ -17,6 +17,8 @@ public class UpgradeHolder : MonoBehaviour, ISelectable
     public Material outlineMaterial;
 
     public Image topBorder;
+    public Image eKey;
+    
     
     public bool isAvailable;
     private void OnEnable()
@@ -34,13 +36,13 @@ public class UpgradeHolder : MonoBehaviour, ISelectable
     //Run when varible is changed
     void OnValidate()
     {
-        //SetOutline(isSelected);
+        SetOutline(isSelected);
     }
     
     public void SetOutline(bool boolean)
     {
         topBorder.enabled = boolean;
-        
+        eKey.enabled = boolean;
     }
     
     

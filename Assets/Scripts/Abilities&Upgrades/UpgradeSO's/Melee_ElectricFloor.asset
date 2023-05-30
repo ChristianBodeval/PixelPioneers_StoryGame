@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Melee_ElectricFloor
   m_EditorClassIdentifier: 
   name: Electric floor
-  description: Your melee attack leaves the floor electrified, damaging enemies and
-    yourself, so WATCH OUT!
+  description: Your melee attack leaves an electric field on the floor deals damage
   sprite: {fileID: 21300000, guid: c3bb54478dacfd04db5acf2a986dfe76, type: 3}

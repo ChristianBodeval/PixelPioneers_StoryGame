@@ -10,6 +10,11 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private List<IUpgradeable> upgradeableAbilities = new List<IUpgradeable>();
 
     [SerializeField] private List<GameObject> abilityGameObjects = new List<GameObject>();
+    
+    [SerializeField] private List<Tuple<GameObject, CurrentUpgrade>> currentUpgrades = new List<Tuple<GameObject, CurrentUpgrade>>();
+    
+    
+    
     [SerializeField] private UpgradeUI upgradeUI;
 
     public static UpgradeManager instance { get; private set; }
@@ -48,10 +53,15 @@ public class UpgradeManager : MonoBehaviour
     public void UpgradeAbilityOption1(IUpgradeable upgradeable)
     {
         upgradeable.UpgradeOption1();
+        SaveManager.singleton.SaveAbilityUpgrade(upgradeable.GetAbilityName()+1, 1);
+        SaveManager.singleton.SaveAbilityUpgrade(upgradeable.GetAbilityName()+2, 0);
     }
     
     public void UpgradeAbilityOption2(IUpgradeable upgradeable)
     {
+        SaveManager.singleton.SaveAbilityUpgrade(upgradeable.GetAbilityName()+1, 0);
+        SaveManager.singleton.SaveAbilityUpgrade(upgradeable.GetAbilityName()+2, 1);
+
         upgradeable.UpgradeOption2();
     }
     
