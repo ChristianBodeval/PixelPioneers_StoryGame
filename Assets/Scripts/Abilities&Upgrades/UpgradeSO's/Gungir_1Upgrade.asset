@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da1dfd549f4347aa97f0cbcebebcfc7, type: 3}
   m_Name: Gungir_1Upgrade
   m_EditorClassIdentifier: 
-  name: Gungir Pin
+  name: Gungir pin
   description: Pins enemies hit
   sprite: {fileID: 21300000, guid: 044f287bebf4bf04993ed81c452b2ee3, type: 3}

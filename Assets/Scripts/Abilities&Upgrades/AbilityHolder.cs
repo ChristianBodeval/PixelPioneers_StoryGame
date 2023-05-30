@@ -49,14 +49,11 @@ public class AbilityHolder : Ability, IUpgradeable
         ability.ActivateEffect(hitCollider);
         yield return null;
     }
-
-    private void Awake()
+    
+    private new void Start()
     {
-
-    }
-
-    private void Start()
-    {
+        
+        base.Start();
         playerAction = caster.GetComponent<PlayerAction>();
         
         readyColor = GetComponent<SpriteShapeRenderer>().color;
@@ -221,11 +218,15 @@ public class AbilityHolder : Ability, IUpgradeable
     public void UpgradeOption1()
     {
         nextAbility = upgradeOption1;
+        SaveManager.singleton.weapon1Upgrade1 = true;
+        SaveManager.singleton.weapon1Upgrade2 = false;
     }
 
     public void UpgradeOption2()
     {
         nextAbility = upgradeOption2;
+        SaveManager.singleton.weapon1Upgrade2 = true;
+        SaveManager.singleton.weapon1Upgrade1 = false;
     }
 
     public void Downgrade()

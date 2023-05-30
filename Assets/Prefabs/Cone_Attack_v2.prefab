@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdownDuration: 0.5
+  animator: {fileID: 0}
 --- !u!1 &7073369080494233077
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,3 +167,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdownDuration: 0.3
+  animator: {fileID: 0}

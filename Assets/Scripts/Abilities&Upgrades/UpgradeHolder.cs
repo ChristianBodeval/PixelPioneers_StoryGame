@@ -16,6 +16,10 @@ public class UpgradeHolder : MonoBehaviour, ISelectable
     public Image imageComponent;
     public Material outlineMaterial;
 
+    public Image topBorder;
+    public Image eKey;
+    
+    
     public bool isAvailable;
     private void OnEnable()
     {
@@ -24,38 +28,24 @@ public class UpgradeHolder : MonoBehaviour, ISelectable
         imageComponent.sprite = upgradeSO.sprite;
     }
     
-    public void IsSelected(bool boolean)
-    {
-        if (boolean)
-        {   
-            //Make outlineMaterial transparent
-            outlineMaterial.color = Color.white;
-        }
-        else
-        {
-            outlineMaterial.color = Color.clear;
-        }
-        
-        isAvailable = boolean; 
-    }
+    
+    
+    
+    public bool isSelected;
 
+    //Run when varible is changed
+    void OnValidate()
+    {
+        SetOutline(isSelected);
+    }
+    
     public void SetOutline(bool boolean)
     {
-        if(boolean)
-            imageComponent.material = outlineMaterial;
-        else
-            imageComponent.material = null;
+        topBorder.enabled = boolean;
+        eKey.enabled = boolean;
     }
-
-    public ScriptableObject GetScriptableObject()
-    {
-        throw new NotImplementedException();
-    }
-
-    public ScriptableObject SelectThis()
-    {
-        return upgradeSO;
-    }
+    
+    
     
 }
 

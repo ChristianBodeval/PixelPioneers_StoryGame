@@ -39,6 +39,11 @@ public class ThrowGungnir : Ability, IUpgradeable
         gungnirScript = gungnir.GetComponent<Gungnir>();
         triThrowScript = triThrow.GetComponent<TriThrow>();
     }
+    
+    private new void Start()
+    {
+        base.Start();
+    }
 
     // StateUpdate is called once per frame
     private void Update()
@@ -179,18 +184,18 @@ public class ThrowGungnir : Ability, IUpgradeable
     public void UpgradeOption1()
     {
         hasUpgrade1 = true;
-        throw new System.NotImplementedException();
+        hasUpgrade2 = false;
     }
 
     public void UpgradeOption2()
     {
-        throw new System.NotImplementedException();
+        hasUpgrade1 = false;
+        hasUpgrade2 = true;
     }
 
     public void Downgrade()
     {
         hasUpgrade1 = false;
-        throw new System.NotImplementedException();
     }
 
     //public void ThrowTriSpear()

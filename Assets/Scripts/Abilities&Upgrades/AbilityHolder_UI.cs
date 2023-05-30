@@ -17,46 +17,48 @@ public class AbilityHolder_UI : MonoBehaviour, ISelectable
     public Image changeBorder;
     public Material outlineMaterial;
     public Sprite unavailibleSprite;
+    public Image border;
+    public Image eKey;
     
+    public bool isSelected;
+    public bool isActivated;
+    
+    //Run when varible is changed
+    void OnValidate()
+    {
+        
+        SetOutline(isSelected);
+        SetActive(isActivated);
+        
+    }
     
     public void SetActive(bool b)
     {
+        upgradeNameText.enabled = b;
+        currentUpgradeText.enabled = b;
+        
+        
         if (b)
         {
             Debug.Log("Called by" + this.gameObject.name);
             abilityNameText.text = "Change " + abilitySO.name + " Upgrade";
             imageComponent.sprite = abilitySO.sprite;
-            
-            upgradeNameText.enabled = true;
-            currentUpgradeText.enabled = true;
-
         }
         else
         {
             abilityNameText.text = "";
             imageComponent.sprite = unavailibleSprite;
-            
-            upgradeNameText.enabled = false;
-            currentUpgradeText.enabled = false;
         }
     }
+    
+    
+    
     public void SetOutline(bool boolean)
     {
-        if (boolean)
-        {
-            changeBorder.material = outlineMaterial;
-            imageComponent.material = outlineMaterial;
-        }
-        else
-        {
-            changeBorder.material = null;
-            imageComponent.material = null;
-        }
+        isSelected = boolean;
+        eKey.enabled = boolean;
+        border.enabled = boolean;
     }
 
-    public ScriptableObject GetScriptableObject()
-    {
-        throw new NotImplementedException();
-    }
 }
 

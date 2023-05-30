@@ -38,8 +38,9 @@ public class Dash : Ability, IUpgradeable
     private SweepingDash slashDash;
 
     // Start is called before the first frame update
-    private void Start()
+    private new void Start()
     {
+        base.Start();
         dashDirection = GetDashDirection();
         playerGO = GameObject.Find("Player");
         playerRb = GameObject.Find("Player").GetComponent<Rigidbody2D>();

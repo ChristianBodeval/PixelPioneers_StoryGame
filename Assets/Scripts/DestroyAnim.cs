@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,15 +7,22 @@ public class DestroyAnim : MonoBehaviour
 {
     [SerializeField] private float countdownDuration;
 
-    private void Start()
+    
+    public Animator animator;
+    public GameObject player;
+    
+    
+    private void Awake()
     {
-        StartCoroutine(DestroyAfterDuration());
+        player = GameObject.Find("Player");
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
     }
-
-    private IEnumerator DestroyAfterDuration()
+    
+    public void DestroyNow()
     {
-        yield return new WaitForSeconds(countdownDuration);
-
         Destroy(gameObject);
     }
 }

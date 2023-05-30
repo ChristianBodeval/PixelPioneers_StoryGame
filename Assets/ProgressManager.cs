@@ -14,10 +14,15 @@ public class ProgressManager : MonoBehaviour
     private void Awake()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        
+        
+        
         if (instance != null && instance != this)
         {
-            Debug.Log("Destroying ProgressManager");
-            Destroy(this.gameObject);
+            Debug.Log("ProgressManager is existing, destroying this one");
+
+
+            // Destroy(this.gameObject);
         }
         else
         {
@@ -36,7 +41,10 @@ public class ProgressManager : MonoBehaviour
             caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
             
             //Find all CaveEntrances with tag CaveEntrance
-            
+
+
+
+
             //Errase all caveEntrances from the list that are not tagged CaveEntrance
             for (int i = caveEntrances.Count - 1; i >= 0; i--)
             {
@@ -51,9 +59,10 @@ public class ProgressManager : MonoBehaviour
             caveEntrances.Sort((x, y) => x.gameObject.name.CompareTo(y.gameObject.name));
             
             //Activate the number of caves equal to currentCaveAvailible
-            for (int i = 0; i < currentCaveAvailible; i++)
+            for (int i = 0; i < caveEntrances.Count; i++)
             {
-                caveEntrances[i].SetAccessibility(true);
+                caveEntrances[i].SetAccessibility(i < currentCaveAvailible+1);
+                Debug.Log("Setting cave " + i + " to: " + (i < currentCaveAvailible+1));
             }
             Debug.Log("On Scene loaded");
             
@@ -70,6 +79,12 @@ public class ProgressManager : MonoBehaviour
     void UpdateUpgrades()
     {
         UpgradeManager.instance.UpdateProgress(currentCaveAvailible+1);
+        
+        for (int i = 0; i < currentCaveAvailible; i++)
+        {
+            caveEntrances[i].SetAccessibility(i < caveEntrances.Count);
+            Debug.Log("Setting cave " + i + " to: " + (i < caveEntrances.Count));
+        }
     }
     
     

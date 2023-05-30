@@ -276,7 +276,6 @@ MonoBehaviour:
   abilitySO: {fileID: 11400000, guid: 9904d66bfa7d04e859cd8157c6c65e19, type: 2}
   upgrades: []
   caster: {fileID: 0}
-  playerAction: {fileID: 0}
   ability: {fileID: 11400000, guid: 9904d66bfa7d04e859cd8157c6c65e19, type: 2}
   readyColor: {r: 0.41935158, g: 0.8301887, b: 0.3250267, a: 0}
   activeColor: {r: 0.87951994, g: 0.85882354, b: 0.9254902, a: 0}
@@ -295,7 +294,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8423785600306978787}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
