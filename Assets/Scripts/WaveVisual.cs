@@ -203,7 +203,8 @@ public class WaveVisual : MonoBehaviour
                     else if (i == wavesLeft)
                     {
                         image.sprite = currentWave;
-                        image.color = Color.yellow;
+                        Color orange = new Color(245,96,0);
+                        image.color = orange;
                     }
                     // Coming wave
                     else if (i < wavesLeft)

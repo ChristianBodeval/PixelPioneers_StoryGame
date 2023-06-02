@@ -38,10 +38,6 @@ public class DialogueManager : MonoBehaviour
 
     private PlayerAction playerAction;
 
-    //private Mjoelnir mjoelnir;
-
-    //public bool isPlayerInRange;
-
     private GameObject[] dialogueTarget;
 
     public Image continueButton;
@@ -57,6 +53,7 @@ public class DialogueManager : MonoBehaviour
     private PlayableDirector ingridAndAstridTL;
     private PlayableDirector swordPickUpTL;
     private PlayableDirector tutorialTL;
+    public PlayableDirector endTL;
 
     private GameObject T3;
     private GameObject T4;
@@ -100,6 +97,7 @@ public class DialogueManager : MonoBehaviour
             ingridAndAstridTL = GameObject.Find("AstridAndIngridTL").GetComponent<PlayableDirector>();
             swordPickUpTL = GameObject.Find("SwordPickUpTL").GetComponent<PlayableDirector>();
             tutorialTL = GameObject.Find("TutorialTL").GetComponent<PlayableDirector>();
+            endTL = GameObject.Find("EndTL").GetComponent<PlayableDirector>();
 
             T3 = GameObject.Find("T3");
             T4 = GameObject.Find("T4");
@@ -137,7 +135,6 @@ public class DialogueManager : MonoBehaviour
         isDialoguePlaying = true;
         playerAction.StopMove();
         playerAction.enabled = false;
-        //mjoelnir.enabled = false;
         ContinueStory();
         dialogBoxAnim.Play("FlyUp");
     }
@@ -186,11 +183,20 @@ public class DialogueManager : MonoBehaviour
                 break;
 
             case "TutorialTL":
+                //if (TimelineManager.timelineManager.currentTutorialState == 5)
+                //{
+                //    //endTL.Play();
+                //}
+                break;
+
+            case "EndTL":
+                TimelineManager.timelineManager.tutorialIsStarted = false;
                 break;
 
             default:
                 break;
         }
+        Debug.Log("Started: " + currentTimeline.name);
         if (currentTimeline != null && !TimelineManager.timelineManager.tutorialIsStarted)
         {
             TimelineManager.timelineManager.ResumeTL();
@@ -216,8 +222,9 @@ public class DialogueManager : MonoBehaviour
                     break;
 
                 case 4:
-                    T5.GetComponent<SendWave>().SendWaves();
-                    StartCoroutine(TutorialStateCoroutine());
+
+                    //T5.GetComponent<SendWave>().SendWaves();
+                    //StartCoroutine(TutorialStateCoroutine());
 
                     break;
 
@@ -229,7 +236,7 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator TutorialStateCoroutine()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
         TimelineManager.timelineManager.AddToCurrentTutorialState();
     }
 
@@ -299,24 +306,6 @@ public class DialogueManager : MonoBehaviour
         }
         isShowingText = false;
         continueButton.enabled = true;
-    }
-
-    public void StartAstridAndIngridTL()
-    {
-        ingridAndAstridTL.Play();
-        Debug.Log("Astrid and Ingrid TL started");
-    }
-
-    public void StartSwordPickUpTL()
-    {
-        swordPickUpTL.Play();
-        Debug.Log("SwordPickUp TL started");
-    }
-
-    public void StartTutorialTL()
-    {
-        tutorialTL.Play();
-        Debug.Log("Tutorial TL started");
     }
 
     public void SetCurrentTimeline(PlayableDirector timeline)

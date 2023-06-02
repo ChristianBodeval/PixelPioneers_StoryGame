@@ -14,10 +14,11 @@ public class TimelineManager : MonoBehaviour
     public bool tutorialIsStarted;
     private List<(GameObject, string)> soundLoop = new List<(GameObject, string)>();
 
-    
     private bool[] hasPressedWASDKeys = new bool[4];
     private bool hasPressedJ = false;
     public int currentTutorialState = 0;
+
+    private bool canContinue = true;
 
     private void Awake()
     {
@@ -67,32 +68,17 @@ public class TimelineManager : MonoBehaviour
             Tutorial();
 
         // If the tutorial is started we resume the timeline
-
-        if (tutorialIsStarted && !SpawnSystem.waveAlive && SpawnSystem.totalWaves <1)
-        {
-            Debug.Log("Wave is done");
-
-            switch (currentTutorialState)
-            {
-                case 3: case 4:
-                    StartCoroutine(ResumeTLCoroutine());
-                    break;
-                case 5:
-                    Debug.Log("Tutorial is done");
-                    break;
-
-                default:
-                    break;
-            }
-        }
-        Debug.Log("Current tutorial: " + currentTutorialState);
     }
 
     private IEnumerator ResumeTLCoroutine()
     {
-        yield return new WaitForSeconds(0.2f);
+        canContinue = false;
+
+        yield return new WaitForSeconds(3f);
         ResumeTL();
+        canContinue = true; ;
     }
+
     public void SetSoundVolume(float volume)
     {
         this.volume = volume;
@@ -141,7 +127,7 @@ public class TimelineManager : MonoBehaviour
             hasPressedWASDKeys[1] = true; // Set A key state to true
         }
         if (Input.GetKeyDown(KeyCode.S))
-        {
+        {   
             hasPressedWASDKeys[2] = true; // Set S key state to true
         }
         if (Input.GetKeyDown(KeyCode.D))
@@ -171,6 +157,39 @@ public class TimelineManager : MonoBehaviour
 
         #region T3
 
+        if (tutorialIsStarted && !SpawnSystem.waveAlive && SpawnSystem.totalWaves < 1)
+        {
+            Debug.Log("Wave is done");
+
+            switch (currentTutorialState)
+            {
+                case 3:
+
+                    if (canContinue)
+                    {
+                        StartCoroutine(ResumeTLCoroutine());
+                    }
+                    break;
+
+                case 4:
+                    if (canContinue)
+                    {
+                        AddToCurrentTutorialState();
+                        StartCoroutine(ResumeTLCoroutine());
+                    }
+                    break;
+
+                case 5:
+                    Debug.Log("Tutorial is done");
+                    dialogueManager.endTL.Play();
+                    tutorialIsStarted = false;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        Debug.Log("Current tutorial: " + currentTutorialState);
         //Enemy dies
 
         #endregion T3
