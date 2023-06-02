@@ -182,19 +182,21 @@ public class DialogueManager : MonoBehaviour
         if (dialogBoxAnim != null)
             dialogBoxAnim.Play("FlyDown");
 
-        switch (currentTimeline.name)
+        if (currentTimeline != null)
         {
-            case "StartTL":
-                ingridAndAstridTL.Play();
-                break;
+            switch (currentTimeline.name)
+            {
+                case "StartTL":
+                    ingridAndAstridTL.Play();
+                    break;
 
-            case "AstridAndIngridTL":
-                swordPickUpTL.Play();
-                break;
+                case "AstridAndIngridTL":
+                    swordPickUpTL.Play();
+                    break;
 
-            case "SwordPickUpTL":
-                tutorialTL.Play();
-                break;
+                case "SwordPickUpTL":
+                    tutorialTL.Play();
+                    break;
 
             case "TutorialTL":
                 //if (TimelineManager.timelineManager.currentTutorialState == 5)
@@ -247,7 +249,13 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        //Time.timeScale = 1f;
+        // Activate Hermes
+        GameObject hermes = GameObject.FindWithTag("Boss");
+        hermes.GetComponent<WeaponAbility>().enabled = true;
+        hermes.GetComponent<Hermes_Pathing>().enabled = true;
+        hermes.GetComponent<Hermes_Attack>().enabled = true;
+
+        Time.timeScale = 1f;
     }
 
     private IEnumerator TutorialStateCoroutine()
@@ -314,12 +322,18 @@ public class DialogueManager : MonoBehaviour
             potraitLeft.enabled = false;
             potraitRight.enabled = false;
         }
+
+        Debug.Log("DEBUG ANDREAS 1");
+
         //For each letter in the dialogue
         foreach (char letter in line.ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
+
+        Debug.Log("DEBUG ANDREAS 2");
+
         isShowingText = false;
         continueButton.enabled = true;
     }

@@ -26,7 +26,7 @@ public class HermesPathingSmol : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player");
-        targetPos = GameObject.Find("SpawnPoint").transform.position;
+        targetPos = GameObject.Find("PlayerSpawnPoint").transform.position;
 
         player.GetComponent<PlayerAction>().StopMove();
         player.GetComponent<PlayerHealth>().HealDamage(10f);

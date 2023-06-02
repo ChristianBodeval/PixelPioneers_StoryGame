@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  smoothType: 0
+  smoothType: 3
   subdivisions: 2
   iterations: 2
   strength: 0.5
@@ -221,7 +221,6 @@ MonoBehaviour:
   bossBloodSFX: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
   currentHealth: 2
   maxHealth: 2
-  dissolve: {fileID: -6465566751694194690, guid: 535e27e45a183fc41945a226bbe7618c, type: 3}
   deathAnimDuration: 0.4
   canTakeDamage: 0
   sr: {fileID: 4020096898732813613}
@@ -231,6 +230,9 @@ MonoBehaviour:
   Dead:
     m_PersistentCalls:
       m_Calls: []
+  dissolve: {fileID: -6465566751694194690, guid: 535e27e45a183fc41945a226bbe7618c, type: 3}
+  hermesSmol: {fileID: 0}
+  hermesDeathParticles: {fileID: 0}
 --- !u!1 &4020096898732813612
 GameObject:
   m_ObjectHideFlags: 0
