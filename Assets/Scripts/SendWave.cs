@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class SendWave : MonoBehaviour
@@ -32,7 +33,11 @@ public class SendWave : MonoBehaviour
 
     public void SendWaves()
     {
+       
+            
         CaveManager.instance.StartCave();
+        
+        
         if (!SpawnSystem.waveAlive && !isSent)
         {
             if (combatTrack != null) MusicManager.singleton.PlayMusic(combatTrack, musicVolume);

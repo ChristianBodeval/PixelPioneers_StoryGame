@@ -28,7 +28,7 @@ public class Dialogue : MonoBehaviour
     {
         playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
         dialogueManager = FindObjectOfType<DialogueManager>();
-        dialogueNPCName = dialogueManager.dialogueNPCName;
+        //dialogueNPCName = dialogueManager.dialogueNPCName;
     }
 
     private void Start()
