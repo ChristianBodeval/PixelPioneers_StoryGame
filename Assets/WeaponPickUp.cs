@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class WeaponPickUp : MonoBehaviour
@@ -11,6 +12,8 @@ public class WeaponPickUp : MonoBehaviour
         if (!col.CompareTag("Player")) return;
 
         SetAbilities();
+        
+        CaveManager.instance.EndCave();
 
         Destroy(gameObject);
     }

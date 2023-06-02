@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Melee_BounchingLightning
   m_EditorClassIdentifier: 
   name: Bouncing Lightning
-  description: 'Lightning jumps from enemy to enemy for (x) to (x) times. '
+  description: Hitting and starts a lightning that go from enemy to enemy and damages
+    them
   sprite: {fileID: 21300000, guid: c3bb54478dacfd04db5acf2a986dfe76, type: 3}

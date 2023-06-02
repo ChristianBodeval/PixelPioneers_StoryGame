@@ -5,6 +5,15 @@ using Pathfinding;
 
 public class Mjoelnir_Behavior : MonoBehaviour
 {
+    [Header("SFX")]
+    [Range(0f, 1f)][SerializeField] private float volume;
+    [SerializeField] private AudioClip spinImpactSFX;
+    [SerializeField] private AudioClip chargeUpLoopSFX;
+    [SerializeField] private AudioClip chargeSFX;
+    [SerializeField] private AudioClip slamSFX;
+    private GameObject sound = null;
+    private bool isPlaying = false;
+
     [Header("General for Pathfinding")]
     [SerializeField] private Transform parentTransform;
     [SerializeField] private float speed = 3f;
@@ -228,6 +237,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
         rangeIndicator.transform.localScale = new Vector2(1f, 1f);
         charge = 0f; // Resets value
         float a = 0f;
+        GameObject chargeUpLoopSFX = SFXManager.singleton.PlayLoop(spinImpactSFX, transform.position, volume, true, transform);
 
 
         // Slow increase of alpha and size of indicator
@@ -256,6 +266,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
 
         rangeIndicator.transform.SetParent(null);
+        Pool.pool.ReturnToSFXPool(chargeUpLoopSFX);
 
         // Start charge
         isCharging = true;
@@ -266,7 +277,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
     // CHARGE function
     private IEnumerator Charge(Vector2 dir, float chargedAmount)
     {
-        
+        SFXManager.singleton.PlaySound(chargeSFX, transform.position, volume, false, transform);
         float startTime = Time.time; // Used for acceleration curve
 
         Vector3 targetPos = (Vector2)transform.position + dir * chargedAmount;
@@ -342,6 +353,8 @@ public class Mjoelnir_Behavior : MonoBehaviour
         rb.velocity = Vector2.zero;
         parentTransform.position = transform.position;
         transform.position = parentTransform.position;
+
+        SFXManager.singleton.PlaySound(slamSFX, transform.position, volume, false, transform);
 
         // Instantiate circle
         SpriteRenderer sr = aoeIndicator.GetComponent<SpriteRenderer>();
@@ -424,6 +437,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player") && IsPlayerReadyForHit())
         {
+            SFXManager.singleton.PlaySound(spinImpactSFX, transform.position, volume);
             timeOfPlayerHit = Time.time;
             col.gameObject.GetComponent<PlayerHealth>().TakeDamage(spinDMG);
             if (!onFreezeCD && !isCharging) StartCoroutine(FreezeSpin());

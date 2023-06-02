@@ -45,6 +45,7 @@ public class Gungnir : Ability
 
     private void Start()
     {
+        
         rb = GetComponent<Rigidbody2D>();
         gungnirCollider = GetComponent<BoxCollider2D>();
         pickUpCollider = GameObject.Find("PickUp").GetComponent<Collider2D>();

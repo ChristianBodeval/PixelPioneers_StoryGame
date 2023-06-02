@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class CaveManager : MonoBehaviour
 {
-    private SendWave sendWave;
+    public SendWave sendWave;
     private bool isTriggered;
     
     public GameObject player;
@@ -15,35 +16,63 @@ public class CaveManager : MonoBehaviour
     
     public Transform playerSpawnTransform;
     
+    //Make it a singleton
+    public static CaveManager instance;
+    
     private void Awake()
     {
-        player.GetComponent<PlayerHealth>().playerDeathEvent.AddListener(RestartCave);
+        
         sendWave = FindObjectOfType<SendWave>();
-        sendWave.caveClearedEvent.AddListener(EndCave);
+        caveEntrance = FindObjectOfType<CaveEntrance>();
+        player = GameObject.FindWithTag("Player");
+        
+        
+        
+        //if(GameObject.Find("PlayerSpawnPoint").transform != null)
+        //    playerSpawnTransform = GameObject.Find("PlayerSpawnPoint").transform;
+        sendWave.caveStartedEvent.AddListener(StartCave);
+        
+        //player.GetComponent<PlayerHealth>().playerDeathEvent.AddListener(RestartCave);
+        
+        
+        if (instance != null && instance != this)
+        {
+            Debug.Log("Destroying CaveManager");
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
     }
+    
+    
     
     private void Start()
     {
         player.transform.position = playerSpawnTransform.position;
     }
     
-    private void StartCave()
+    public void StartCave()
     {
-        
-        caveEntrance.GetComponent<CircleCollider2D>().enabled = false;
-        sendWave.SendWaves();
+        caveEntrance.SetAccessibility(false);
     }
     
+    
+    
+    /*
     private void RestartCave()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    }*/
 
-    private void EndCave()
+    public void EndCave()
     {
-        caveEntrance.GetComponent<CircleCollider2D>().enabled = true;
-        ProgressManager.Instance.SetNextCaveActive();
+        caveEntrance.SetAccessibility(true);
+        ProgressManager.instance.SetNextCaveActive();
     }
+    
+    //Endcave when pressing space
     
     
     void OnTriggerEnter2D(Collider2D other)

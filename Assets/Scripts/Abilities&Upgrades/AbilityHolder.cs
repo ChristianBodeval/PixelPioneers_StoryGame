@@ -13,7 +13,7 @@ public class AbilityHolder : Ability, IUpgradeable
 {
     public GameObject caster;
     
-    public PlayerAction playerAction;
+    private PlayerAction playerAction;
     public AbilitySO ability;
     private float cooldownTime;
     private float duration;
@@ -49,9 +49,13 @@ public class AbilityHolder : Ability, IUpgradeable
         ability.ActivateEffect(hitCollider);
         yield return null;
     }
-
-    private void Awake()
+    
+    private new void Start()
     {
+        
+        base.Start();
+        playerAction = caster.GetComponent<PlayerAction>();
+        
         readyColor = GetComponent<SpriteShapeRenderer>().color;
         
         //Set caster to gameobject called player
@@ -59,11 +63,7 @@ public class AbilityHolder : Ability, IUpgradeable
         
         ability.Initialize(this.gameObject);
         duration = ability.duration;
-
-    }
-
-    private void Start()
-    {
+        
         if (ability.isFollowingCaster)
         {
             transform.parent = caster.transform;
@@ -218,11 +218,15 @@ public class AbilityHolder : Ability, IUpgradeable
     public void UpgradeOption1()
     {
         nextAbility = upgradeOption1;
+        SaveManager.singleton.weapon1Upgrade1 = true;
+        SaveManager.singleton.weapon1Upgrade2 = false;
     }
 
     public void UpgradeOption2()
     {
         nextAbility = upgradeOption2;
+        SaveManager.singleton.weapon1Upgrade2 = true;
+        SaveManager.singleton.weapon1Upgrade1 = false;
     }
 
     public void Downgrade()

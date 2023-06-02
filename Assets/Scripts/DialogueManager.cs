@@ -127,6 +127,8 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogueMode(TextAsset inkJson)
     {
+        Time.timeScale = 0f;
+
         isDialoguePlaying = true;
         dialogueBox.SetActive(true);
         currentStory = new Story(inkJson.text);
@@ -232,6 +234,8 @@ public class DialogueManager : MonoBehaviour
                     break;
             }
         }
+
+        Time.timeScale = 1f;
     }
 
     private IEnumerator TutorialStateCoroutine()

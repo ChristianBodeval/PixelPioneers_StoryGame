@@ -18,40 +18,70 @@ public class UpgradeUI : MonoBehaviour
     private bool isUpgradeUIOpen;
     private bool isAbilityUIOpen;
     
+    
     public Material outlineMaterial;
     
     [SerializeField] private List<UpgradeHolder> upgrades = new List<UpgradeHolder>();
     [SerializeField] private GameObject upgradeUI;
 
-    [SerializeField] private List<AbilityHolder_UI> abilitiesUIs = new List<AbilityHolder_UI>();
+    [FormerlySerializedAs("abilitiesUIs")] [SerializeField] private List<AbilityHolder_UI> abilitiesUis = new List<AbilityHolder_UI>();
     [SerializeField] private GameObject abilityUI;
     
     [SerializeField] private PlayerAction playerActions;
     [SerializeField] private Rigidbody2D playerRigidbody;
     
-    List<GameObject> abilityGameObjects = new List<GameObject>();
+    public List<GameObject> abilityGameObjects = new List<GameObject>();
 
+    public int progressNumber;
+    public GameObject playerDash;
+
+    public void Awake()
+    {
+        SetAbilitiesProgess(this.progressNumber);
+        ExitAnvil();
+    }
+    
+    //Set all abilities to the scriptable object unknown which is above a int. The int can maximum be 4.
+    public void SetAbilitiesProgess(int progressNumber)
+    {
+        this.progressNumber = progressNumber;
+        for (int i = 0; i < abilityGameObjects.Count; i++)
+        {
+            abilitiesUis[i].SetActive(i < progressNumber);
+        }
+        
+        
+    }
 
     public void OpenUpgradeUI()
-    {        
-        Debug.Log("Called open upgrade UI");
+    {
+        
+        
         this.gameObject.SetActive(true);
         for (int i = 0; i < abilityGameObjects.Count; i++)
         {
-            abilitiesUIs[i].abilitySO = abilityGameObjects[i].GetComponent<Ability>().GetAbilitySO();
+            abilitiesUis[i].abilitySO = abilityGameObjects[i].GetComponent<Ability>().GetAbilitySO();
         }
         
         abilityGameObjects.AddRange(UpgradeManager.instance.GetAbilitiesGameObjects());
-        UpdateAbilityUI();
-        
+        //UpdateAbilityUI();
+        SetAbilitiesProgess(progressNumber);
         playerActions.enabled = false;
+        playerDash.SetActive(false);
+        
+        
         playerRigidbody.velocity = Vector2.zero;
         playerRigidbody.bodyType = RigidbodyType2D.Kinematic;
 
-        
         SetIsUpgradeUIOpen(false);
         currentAbility = currentChoises[0];
         currentAbility.SetOutline(true);
+        
+        foreach (var abilityGameObject in abilityGameObjects)
+        {
+            abilityGameObject.SetActive(false);
+        }
+        
     }
     
     void DeselectAll()
@@ -67,7 +97,11 @@ public class UpgradeUI : MonoBehaviour
     {
         for (int i = 0; i < abilityGameObjects.Count; i++)
         {
-            abilitiesUIs[i].abilitySO = abilityGameObjects[i].GetComponent<Ability>().GetAbilitySO();
+            GameObject abilityGO = abilityGameObjects[i];
+            Ability script = abilityGO.GetComponent<Ability>();
+            AbilitySO scriptableObjects = script.GetAbilitySO();
+            
+            abilitiesUis[i].abilitySO = scriptableObjects;
         }
     }
 
@@ -90,6 +124,7 @@ public class UpgradeUI : MonoBehaviour
     
     void SelectAbility()
     {
+        Debug.Log("Called select ability");
         List<UpgradeSO> abilityUpgradeSOs = abilityGameObjects[currentSelectedNumber].GetComponent<Ability>().GetUpgrades();
         
         upgrades[0].upgradeSO = abilityUpgradeSOs[0];
@@ -108,6 +143,8 @@ public class UpgradeUI : MonoBehaviour
 
     void SelectUpgrade()
     {
+        Debug.Log("Called select update");
+
         if (currentSelectedNumber == 0)
         {
             UpgradeManager.instance.UpgradeAbilityOption1(selectedAbility);
@@ -132,12 +169,19 @@ public class UpgradeUI : MonoBehaviour
         
         if(value)
         {
+            
             currentChoises.AddRange(upgrades);
+            
+            
+            
         }
         else
         {
-            currentChoises.AddRange(abilitiesUIs);
+            currentChoises.AddRange(abilitiesUis);
         }
+        /*
+        if(currentChoises.Count == 0)
+            return;*/
         
         currentSelectedNumber = 0;
         currentAbility = currentChoises[0];
@@ -148,10 +192,19 @@ public class UpgradeUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A) && currentSelectedNumber > 0)
             SelectLeft();
-        if (Input.GetKeyDown(KeyCode.D) && currentSelectedNumber < currentChoises.Count - 1)
-            SelectRight();
+        if (Input.GetKeyDown(KeyCode.D))
+            {
+                if(currentSelectedNumber < progressNumber - 1 && currentSelectedNumber < currentChoises.Count - 1)
+                    SelectRight();
+                else if (isUpgradeUIOpen && currentSelectedNumber < currentChoises.Count - 1 && progressNumber == 1)
+                    SelectRight();
+            }
+
+        if(currentSelectedNumber != 0)
+            currentChoises[0].SetOutline(false);
         
-        if (Input.GetKeyDown(KeyCode.E))
+        
+        if (Input.GetKeyDown(KeyCode.E) )
         {
             if (!isUpgradeUIOpen)
                 SelectAbility();
@@ -177,13 +230,31 @@ public class UpgradeUI : MonoBehaviour
     }
     void ExitAnvil()
     {
+        //Enable all ability gameobjects
+        foreach (var abilityGameObject in abilityGameObjects)
+        {
+            abilityGameObject.SetActive(true);
+        }
+        
         DeselectAll();
         SetIsUpgradeUIOpen(false);
         abilityUI.SetActive(false);
+        
+        //Deselect all abilities
+        foreach (var choise in currentChoises)
+        {
+            choise.SetOutline(false);
+        }
+        
+        
+        
         currentChoises.Clear();
         abilityGameObjects.Clear();
         currentAbility.SetOutline(false);
         currentAbility = null;
+        
+        
+        
         playerActions.enabled = true;
         playerRigidbody.isKinematic = false;
         
@@ -191,7 +262,7 @@ public class UpgradeUI : MonoBehaviour
         playerRigidbody.velocity = Vector2.zero;
         //Set the playerRigidbody bodytype to dynamic
         
-
+        playerDash.SetActive(true);
 
         this.gameObject.SetActive(false);
     }

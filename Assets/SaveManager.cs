@@ -52,6 +52,11 @@ public class SaveManager : MonoBehaviour
         SavePlayerData();
     }
 
+    public void SaveAbilityUpgrade(string abilityName, int upgradeNumber)
+    {
+        PlayerPrefs.SetInt(abilityName, upgradeNumber);
+    }
+    
     public void SavePlayerData()
     {
         // Save player position
@@ -83,9 +88,13 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetInt("Cave3Cleared", cave3Cleared ? 1 : 0);
         PlayerPrefs.SetInt("Cave4Cleared", cave4Cleared ? 1 : 0);
         
+
+        
         PlayerPrefs.Save();
         
     }
+    
+    
 
     public void LoadPlayerData()
     {

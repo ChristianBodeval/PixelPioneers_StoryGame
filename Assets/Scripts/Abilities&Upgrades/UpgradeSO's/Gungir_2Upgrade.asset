@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Gungir_2Upgrade
   m_EditorClassIdentifier: 
   name: Gungir TriThrow
-  description: 
+  description: Throws 3 gungirs
   sprite: {fileID: 21300000, guid: 044f287bebf4bf04993ed81c452b2ee3, type: 3}

@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: ElectricFloor
   m_EditorClassIdentifier: 
   name: ElectricFloor
+  description: 
   damage: 5
   duration: 3
   cooldownTime: 5
   keyTrigger: 0
+  sprite: {fileID: 0}
   isFollowingCaster: 0
   canChangeColors: 0
-  tickEveryXSeconds: 0.5
+  tickEveryXSeconds: 0.3

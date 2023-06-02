@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 387248d043fefd649b0dcfbf6b7e8059
+<<<<<<<< HEAD:Assets/Scenes/Andreas.unity.meta
+guid: 112a4e3967ff8574eaad00431b8062a4
+========
+guid: 5ce8a7e2b096d0c489670680e233c798
+>>>>>>>> origin/Dialog:Assets/Scenes/Dialog and EnemyHPBar.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ThrowGungnir : MonoBehaviour, IUpgradeable
+public class ThrowGungnir : Ability, IUpgradeable
 {
     [Header("Gungnir")]
     public GameObject gungnir;
@@ -13,7 +13,7 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
     private float gungnirCD;
     private WeaponCDs weaponCDVisual;
     private PlayerAction playerAction;
-    private GameObject player;
+    public GameObject player;
 
     [Header("TriThrow Upgrade")]
     public bool hasUpgrade1;
@@ -30,14 +30,19 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
     private Vector3 lastDirection = Vector3.right;
 
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
-        weaponCDVisual = GameObject.Find("CDs").GetComponent<WeaponCDs>();
-        playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
         player = GameObject.Find("Player");
+        weaponCDVisual = GameObject.Find("CDs").GetComponent<WeaponCDs>();
+        playerAction = player.GetComponent<PlayerAction>();
         gungnirCDCoroutine = GungnirCD();
         gungnirScript = gungnir.GetComponent<Gungnir>();
         triThrowScript = triThrow.GetComponent<TriThrow>();
+    }
+    
+    private new void Start()
+    {
+        base.Start();
     }
 
     // StateUpdate is called once per frame
@@ -179,18 +184,18 @@ public class ThrowGungnir : MonoBehaviour, IUpgradeable
     public void UpgradeOption1()
     {
         hasUpgrade1 = true;
-        throw new System.NotImplementedException();
+        hasUpgrade2 = false;
     }
 
     public void UpgradeOption2()
     {
-        throw new System.NotImplementedException();
+        hasUpgrade1 = false;
+        hasUpgrade2 = true;
     }
 
     public void Downgrade()
     {
         hasUpgrade1 = false;
-        throw new System.NotImplementedException();
     }
 
     //public void ThrowTriSpear()

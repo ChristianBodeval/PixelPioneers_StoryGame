@@ -5,225 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31ee322b-587a-4c99-afc9-1b2b30998f9e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/MC Running E Spritesheet_0.controller" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/MC Running E Spritesheet_0.controller.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/MC Running E.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/MC Running E.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/AC_Player.controller" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/AC_Player.controller.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Idle.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Idle/PlayerIdleE.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Idle/PlayerIdleE.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Idle/PlayerIdleN.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Idle/PlayerIdleN.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Idle/PlayerIdleNE.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Idle/PlayerIdleNE.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Idle/PlayerIdleNW.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Idle/PlayerIdleNW.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Idle/PlayerIdleS.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Idle/PlayerIdleS.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Idle/PlayerIdleSE.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Idle/PlayerIdleSE.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Idle/PlayerIdleSW.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Idle/PlayerIdleSW.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Idle/PlayerIdleW.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Idle/PlayerIdleW.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Running.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Running/PlayerRunningE.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Running/PlayerRunningE.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Running/PlayerRunningN.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Running/PlayerRunningN.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Running/PlayerRunningNE.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Running/PlayerRunningNE.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Running/PlayerRunningNW.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Running/PlayerRunningNW.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Running/PlayerRunningS.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Running/PlayerRunningS.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Running/PlayerRunningSE.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Running/PlayerRunningSE.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Running/PlayerRunningSW.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Running/PlayerRunningSW.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Running/PlayerRunningW.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Anim/PlayerAnimation/Running/PlayerRunningW.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/Sound/Gemtrap_Explode.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/Sound/Gemtrap_Explode.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/Sound/Gemtrap_Player_Trigger.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/Sound/Gemtrap_Player_Trigger.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/Sound/Lava_Tick.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/Sound/Lava_Tick.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/BruiserAttack.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/BruiserAttack.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/BruiserWalk.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/BruiserWalk.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dialogue/Start and tutorial.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dialogue/Start and tutorial/BrokkrAndCurior.ink" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dialogue/Start and tutorial/BrokkrAndCurior.ink.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dialogue/Start and tutorial/BrokkrAndCurior.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dialogue/Start and tutorial/BrokkrAndCurior.json.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dialogue/Start and tutorial/BrokkrAndScryer1.ink" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dialogue/Start and tutorial/BrokkrAndScryer1.ink.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dialogue/Start and tutorial/BrokkrAndScryer1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dialogue/Start and tutorial/BrokkrAndScryer1.json.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dialogue/Start and tutorial/BrokkrPickSword.ink" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dialogue/Start and tutorial/BrokkrPickSword.ink.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dialogue/Start and tutorial/BrokkrPickSword.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dialogue/Start and tutorial/BrokkrPickSword.json.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dialogue/Start and tutorial/IngridAndAstrid.ink" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dialogue/Start and tutorial/IngridAndAstrid.ink.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dialogue/Start and tutorial/IngridAndAstrid.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Dialogue/Start and tutorial/IngridAndAstrid.json.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Minotaur Walk.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Minotaur Walk.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Sprites.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Sprites/Brokkr.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Sprites/Brokkr.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Sprites/LokiFace.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Sprites/LokiFace.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Sprites/ScryerFace.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Sprites/ScryerFace.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_03.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_03.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Fathers House.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Fathers House.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/VillageWithTL.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/VillageWithTL.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Dialogue/ShowText.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Dialogue/ShowText.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/LightScript.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/LightScript.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TimelineManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TimelineManager.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Loki.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Loki.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Minotaur Attack FR.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Minotaur Attack FR.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Minotaur Walk FR.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Minotaur Walk FR.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Idle Spritesheet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Idle Spritesheet.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Running E.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Running E.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Running N.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Running N.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Running NE.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Running NE.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Running NW.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Running NW.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Running S.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Running S.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Running SE.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Running SE.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Running SW.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Running SW.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Running W.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/MC Running W.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/SeitmareFlying.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/SeitmareFlying.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tree.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Tree.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tiles/Cave_OuterDiag.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tiles/Cave_OuterDiag.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tiles/Cave_Outer_Strai.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tiles/Cave_Outer_Strai.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tiles/Wall Tile Recolour.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tiles/Wall Tile Recolour.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tiles/Wall Tile Recolour.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tiles/Wall Tile Recolour.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tiles/Wall Tile.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tiles/Wall Tile.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tiles/Wall Tile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tiles/Wall Tile.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/BrokkrPickSword.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/BrokkrPickSword.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/CameraFollowOFF.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/CameraFollowOFF.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/CameraFollowON.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/CameraFollowON.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/ChangeTimelineAstridAndIngridTL.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/ChangeTimelineAstridAndIngridTL.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/ChangeTimelineStartTL.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/ChangeTimelineStartTL.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/ChangeTimelineSwordPickUpTL 1.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/ChangeTimelineSwordPickUpTL 1.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/ChangeTimelineSwordPickUpTL.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/ChangeTimelineSwordPickUpTL.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/CourierAndBrokkr1.playable" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/CourierAndBrokkr1.playable.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/CourierDialogueStart.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/CourierDialogueStart.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/EnemyFollow.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/EnemyFollow.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/GlobalLightTurnDown.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/GlobalLightTurnDown.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/IngridAndAstrid.playable" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/IngridAndAstrid.playable.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/IngridDialogueStart.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/IngridDialogueStart.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/PlayerActionEnable.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/PlayerActionEnable.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/PlayerMovementDisable.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/PlayerMovementDisable.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/PlayerMovementEnable.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/PlayerMovementEnable.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/ScryerDialogue1.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/ScryerDialogue1.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/SpeechBubble1Active.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/SpeechBubble1Active.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/SpeechBubbleSwitch.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/SpeechBubbleSwitch.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/StoryContinue.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/StoryContinue.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/StoryEnd.signal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/StoryEnd.signal.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/SwordPickUp.playable" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/SwordPickUp.playable.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/Tutorial.playable" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Timeline/Tutorial.playable.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Anim/Bat_Attack.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Anim/Bat_Attack.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Anim/Bat_Fly.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Anim/Bat_Fly.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Anim/Bruiser.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Anim/Bruiser.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Anim/DraugrWalk_0.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Anim/DraugrWalk_0.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Anim/FlyDown.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Anim/FlyDown.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Anim/FlyUp.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Anim/FlyUp.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/CaveEntrance.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CaveEntrance.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Hermes_Gungnir.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hermes_Gungnir.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Hermes_Gungnir_Side.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hermes_Gungnir_Side.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemy_Bruiser.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemy_Bruiser.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemy_Range.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemy_Range.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Hermes_Gungnir.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Hermes_Gungnir.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Hermes_Gungnir_Side.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Hermes_Gungnir_Side.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/WaveIndicator.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/WaveIndicator.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ProgressManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ProgressManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Andreas.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Andreas.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/CaveHub.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/CaveHub.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_01.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_01.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_02.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_02.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_02_Testing.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_02_Testing.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Village.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Village.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Village.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Village.unity.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Dialogue.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HasTalkedScipts/HasTalkedTo.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HasTalkedScipts/HasTalkedTo.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Health/LaveScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Health/LaveScript.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Health/PlayerHealth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Health/PlayerHealth.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SendWave.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SendWave.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/Gungnir.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/Gungnir.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/SpeechBubble.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/SpeechBubble.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tiles/TileMap.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tiles/TileMap.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/WeaponAbility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/WeaponAbility.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,6 +34,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Health/LaveScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HelperMethods.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/TriggerWavesCollider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.10/Runtime/2D/Light2DManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Image.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.8.0/Runtime/VisualScripting.Core/Utilities/LinqUtility.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -342,7 +125,11 @@
       <workItem from="1684762182853" duration="16881000" />
       <workItem from="1684924633583" duration="5691000" />
       <workItem from="1685097475380" duration="9020000" />
-      <workItem from="1685183715931" duration="1968000" />
+      <workItem from="1685183715931" duration="5531000" />
+      <workItem from="1685281296471" duration="465000" />
+      <workItem from="1685283375351" duration="41110000" />
+      <workItem from="1685388797048" duration="7575000" />
+      <workItem from="1685400538031" duration="6491000" />
     </task>
     <servers />
   </component>
@@ -378,29 +165,16 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/UpgradeUI.cs</url>
-          <line>112</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/UpgradeUI.cs" initialLine="91" containingFunctionPresentation="Method 'SelectUpgrade'">
+          <line>167</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/UpgradeUI.cs" initialLine="156" containingFunctionPresentation="Method 'SetIsUpgradeUIOpen'">
             <startOffsets>
-              <option value="3142" />
+              <option value="4674" />
             </startOffsets>
             <endOffsets>
-              <option value="3205" />
+              <option value="4697" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/UpgradeUI.cs</url>
-          <line>69</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/UpgradeUI.cs" initialLine="56" containingFunctionPresentation="Method 'UpdateAbilityUI'">
-            <startOffsets>
-              <option value="1993" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2082" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="32" />
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -3,40 +3,62 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 
 public class AbilityHolder_UI : MonoBehaviour, ISelectable
 {
     public AbilitySO abilitySO;
-    public TMP_Text nameText;
+    public TMP_Text currentUpgradeText;
+    public TMP_Text upgradeNameText;
+    public TMP_Text abilityNameText;
     public Image imageComponent;
     public Image changeBorder;
     public Material outlineMaterial;
+    public Sprite unavailibleSprite;
+    public Image border;
+    public Image eKey;
     
-    private void OnEnable()
+    public bool isSelected;
+    public bool isActivated;
+    
+    //Run when varible is changed
+    void OnValidate()
     {
-        Debug.Log("Called by" + this.gameObject.name);
-        nameText.text = "Change " + abilitySO.name + " Upgrade";
-        imageComponent.sprite = abilitySO.sprite;
+        
+        SetOutline(isSelected);
+        SetActive(isActivated);
+        
     }
-    public void SetOutline(bool boolean)
+    
+    public void SetActive(bool b)
     {
-        if (boolean)
+        upgradeNameText.enabled = b;
+        currentUpgradeText.enabled = b;
+        
+        
+        if (b)
         {
-            changeBorder.material = outlineMaterial;
-            imageComponent.material = outlineMaterial;
+            Debug.Log("Called by" + this.gameObject.name);
+            abilityNameText.text = "Change " + abilitySO.name + " Upgrade";
+            imageComponent.sprite = abilitySO.sprite;
         }
         else
         {
-            changeBorder.material = null;
-            imageComponent.material = null;
+            abilityNameText.text = "";
+            imageComponent.sprite = unavailibleSprite;
         }
     }
-
-    public ScriptableObject GetScriptableObject()
+    
+    
+    
+    public void SetOutline(bool boolean)
     {
-        throw new NotImplementedException();
+        isSelected = boolean;
+        eKey.enabled = boolean;
+        border.enabled = boolean;
     }
+
 }
 
