@@ -15,9 +15,11 @@ public class DestroyAnim : MonoBehaviour
     private void Awake()
     {
         player = GameObject.Find("Player");
-        if (animator == null)
+        if (GetComponent<Animator>() != null) animator = GetComponent<Animator>();
+
+        if (animator != null)
         {
-            animator = GetComponent<Animator>();
+            Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
         }
     }
     

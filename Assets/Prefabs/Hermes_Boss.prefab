@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  smoothType: 0
+  smoothType: 3
   subdivisions: 2
   iterations: 2
   strength: 0.5
@@ -183,12 +183,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157113163669937724}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 961a527e63b3590438a40f43881a7706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  unitRadius: 0
   updateInterval: 0.05
   nextWayPointDistance: 2
   attackDeadZone: 1
@@ -206,7 +207,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157113163669937724}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 024e3e9484b20c347a3095a787acd10c, type: 3}
   m_Name: 
@@ -235,7 +236,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157113163669937724}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18f97a945e66e8a45afbd3f98aa9523e, type: 3}
   m_Name: 

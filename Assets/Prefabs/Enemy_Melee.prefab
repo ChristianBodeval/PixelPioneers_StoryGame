@@ -128,7 +128,6 @@ GameObject:
   - component: {fileID: 4020096897058174608}
   - component: {fileID: 4020096897058174610}
   - component: {fileID: 4020096897058174604}
-  - component: {fileID: 4020096897058174605}
   - component: {fileID: 7628423892788284204}
   - component: {fileID: -8377009443630920324}
   - component: {fileID: 1174431493}
@@ -240,21 +239,6 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!114 &4020096897058174605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4020096897058174614}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77f586f285b3847808d79083bd19ef1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  unwrap: 1
-  splitAtEveryPortal: 0
 --- !u!114 &7628423892788284204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  smoothType: 0
+  smoothType: 3
   subdivisions: 2
   iterations: 2
   strength: 0.5
@@ -323,12 +307,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b601c409a0b1b46a23c40df8cc3a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicVolume: 0
+  casualTrack: {fileID: 0}
   sfxVolume: 0
   deathSFX: {fileID: 8300000, guid: 8641cc0723aa04f4bb401dcf8ccc53b4, type: 3}
   bossBloodSFX: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
   currentHealth: 3
   maxHealth: 3
-  dissolve: {fileID: -6465566751694194690, guid: 535e27e45a183fc41945a226bbe7618c, type: 3}
   deathAnimDuration: 0.2
   canTakeDamage: 0
   sr: {fileID: 4020096898732813613}
@@ -338,6 +323,9 @@ MonoBehaviour:
   Dead:
     m_PersistentCalls:
       m_Calls: []
+  dissolve: {fileID: -6465566751694194690, guid: 535e27e45a183fc41945a226bbe7618c, type: 3}
+  hermesSmol: {fileID: 0}
+  hermesDeathParticles: {fileID: 0}
 --- !u!1 &4020096898732813612
 GameObject:
   m_ObjectHideFlags: 0

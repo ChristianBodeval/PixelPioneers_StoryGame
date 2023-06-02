@@ -28,6 +28,8 @@ public class DeathScreen : MonoBehaviour
             vignette.intensity.Override(0.1f); // Set the intensity to 0.1
         }
 
+        GameObject.Find("GameManager").GetComponent<SpawnSystem>().wavesToSpawn.Clear();
+
         Time.timeScale = 1f;
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);

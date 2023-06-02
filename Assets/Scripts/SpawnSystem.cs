@@ -10,7 +10,7 @@ public class SpawnSystem : MonoBehaviour
 
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private float spawnApartDistance;
-    private List<WaveObject> wavesToSpawn = new List<WaveObject>();
+    [HideInInspector] public List<WaveObject> wavesToSpawn = new List<WaveObject>();
     private List<GameObject> waitingDeathList = new List<GameObject>();
     private List<int> randomizingList = new List<int>();
     private Coroutine waveAliveCoroutine = null;
