@@ -11,7 +11,6 @@ public class ThrowGungnir : Ability, IUpgradeable
     private Gungnir gungnirScript;
     [HideInInspector] public bool canThrowGungnir = true;
     private float gungnirCD;
-    private WeaponCDs weaponCDVisual;
     private PlayerAction playerAction;
     public GameObject player;
 
@@ -33,7 +32,6 @@ public class ThrowGungnir : Ability, IUpgradeable
     private void Awake()
     {
         player = GameObject.Find("Player");
-        weaponCDVisual = GameObject.Find("CDs").GetComponent<WeaponCDs>();
         playerAction = player.GetComponent<PlayerAction>();
         gungnirCDCoroutine = GungnirCD();
         gungnirScript = gungnir.GetComponent<Gungnir>();
@@ -61,6 +59,7 @@ public class ThrowGungnir : Ability, IUpgradeable
         }
     }
 
+    //TODO Bruges ikke, Slettes?
     public void ResetCD()
     {
         CD = 0;
@@ -76,9 +75,14 @@ public class ThrowGungnir : Ability, IUpgradeable
             Gungnir spear = Instantiate(gungnirScript, playerAction.transform.position, Quaternion.identity);
             spear.SetDirection(playerAction.lastFacing);
 
-            StartCoroutine("GungnirCD");
+            StartCoroutine(GungnirCD());
             Debug.Log("Threw gungnir");
-            weaponCDVisual.StartCoroutine("GungnirCD");
+            
+            
+            //Call by reference to GungirCD
+            
+            WeaponCDs.Instance.StartCoroutine(WeaponCDs.Instance.GungnirCD());
+            
 
            
             if (hasUpgrade1)

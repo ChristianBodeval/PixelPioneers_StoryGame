@@ -9,10 +9,12 @@ public class WeaponCDs : MonoBehaviour
     public Image mjoelnirCDVisual;
     public Image gungnirCDVisual;
 
+    public SlashAbility meleeScriptableObject;
     public Dash dashScript;
     public Mjoelnir mjoelnirScript;
     public ThrowGungnir gungnirScript;
 
+    public GameObject eyeCatcherMelee;
     public GameObject eyeCatcherMjoelnir;
     public GameObject eyeCatcherDash;
     public GameObject eyeCatcherGungnir;
@@ -30,23 +32,38 @@ public class WeaponCDs : MonoBehaviour
     private float gungnirCooldownTime;
 
     
+    //TODO Der er meget kode der gaar igen her, burde laves mere generisk
+    //TODO Scriptet boer tage hoejde for at der kan vaere forskellig cooldown paa hver upgrade, goer det ikke lige nu
+    //TODO Scriptet boer virke pr. runtime, saa skifter vi ability bliver cooldownTime opdateret ud fra hvilken upgrade man har, goer det ikke lige nu
     
     
+    // Generic singleton pattern
+    public static WeaponCDs Instance { get; private set; }
+    
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+    
+
     private void Start()
     {
         dashCDVisual.fillAmount = 1;
         baseMeleeCDVisual.fillAmount = 1;
         mjoelnirCDVisual.fillAmount = 1;
         gungnirCDVisual.fillAmount = 1;
-
+            
+        //Find the SlashAbility scriptable object in the resources folder
+        //meleeScriptableObject = Resources.Load<SlashAbility>("ScriptableObjects/AbilitiesSO's/MeleeAttack.asset");
+        Debug.Log("MeleeSO:" + meleeScriptableObject);
         dashScript = GameObject.Find("Dash").GetComponent<Dash>();
         mjoelnirScript = GameObject.Find("Mjoelnir").GetComponent<Mjoelnir>();
         gungnirScript = GameObject.Find("GungnirThrow").GetComponent<ThrowGungnir>();
-
-        //TODO Fix this - Christian ability system (Get info from Ability SO's instead)
-        //baseMeleeCooldownTime = playerActionScript.baseMeleeCooldown;
-        /*Cheated for now: */
-        baseMeleeCooldownTime = 4f;
+        
+        baseMeleeCooldownTime = meleeScriptableObject.cooldownTime;
         dashCooldownTime = dashScript.dashCooldownTime;
         mjoelnirCooldownTime = mjoelnirScript.chargeCD;
         gungnirCooldownTime = gungnirScript.CD;

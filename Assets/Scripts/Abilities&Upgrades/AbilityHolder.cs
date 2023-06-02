@@ -24,7 +24,7 @@ public class AbilityHolder : Ability, IUpgradeable
 
     public AbilityHolder nextAbility;
 
-    public GameObject slashAnimation;
+
 
     [FormerlySerializedAs("collider")] [SerializeField] public ColliderDrawer hitCollider;
     [SerializeField] private SlashCone colliderStat;
@@ -43,7 +43,7 @@ public class AbilityHolder : Ability, IUpgradeable
     }
     
     
-    private IEnumerator ActivateEffect()
+    public IEnumerator ActivateEffect()
     {
         yield return new WaitForSeconds(00.1f);
         ability.ActivateEffect(hitCollider);
@@ -77,6 +77,10 @@ public class AbilityHolder : Ability, IUpgradeable
             if (playerAction != null)
             {
                 transform.right = new Vector3(playerAction.lastFacing.x, 0, playerAction.lastFacing.y);
+                
+                Debug.Log("PlayerScript: " + playerAction);
+                Debug.Log("LastFacing: " + playerAction.lastFacing);
+                
             }
         }
         
@@ -109,8 +113,7 @@ public class AbilityHolder : Ability, IUpgradeable
     {
         //If AbilitySO is SlashAbility
         
-
-        Debug.Log("this.gameObject = " + this.gameObject);
+        
         if(spawnPoint != null)
             transform.position = spawnPoint.transform.position;
         else if (!ability.isFollowingCaster)
@@ -118,8 +121,7 @@ public class AbilityHolder : Ability, IUpgradeable
             transform.position = caster.transform.position;
             transform.right = new Vector3(playerAction.lastFacing.x, 0, playerAction.lastFacing.y);
         }
-
-        Debug.Log("this.gameObject = " + this.gameObject);
+        
         
         hitCollider.UpdateCollider();
 
@@ -136,16 +138,6 @@ public class AbilityHolder : Ability, IUpgradeable
         {
             nextAbility.SetActive();
         }
-
-        //
-
-        if (abilitySO.name == "MeleeAttack")
-        {
-            Debug.Log("Spawn");
-            //GameObject slash = Instantiate(slashAnimation, playerAction.transform.position, playerAction.lastFacing.rotation);
-            //Instantiate Slashanimation
-
-        }
     }
     
     public void SetCooldown()
@@ -158,6 +150,13 @@ public class AbilityHolder : Ability, IUpgradeable
 
     private void Update()
     {
+        
+        //If Pressing c-key
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            StartCoroutine(ActivateEffect());
+        }
+        
         //Change direction of the ability according to where the player is moving
         //if (ability.isFollowingCaster && casterRB.velocity.magnitude > 0)
         //    transform.right = casterRB.velocity;

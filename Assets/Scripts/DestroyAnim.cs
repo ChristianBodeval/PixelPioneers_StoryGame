@@ -7,22 +7,15 @@ public class DestroyAnim : MonoBehaviour
 {
     [SerializeField] private float countdownDuration;
 
-    
-    public Animator animator;
-    public GameObject player;
-    
-    
-    private void Awake()
+    private void Start()
     {
-        player = GameObject.Find("Player");
-        if (animator == null)
-        {
-            animator = GetComponent<Animator>();
-        }
+        StartCoroutine(DestroyAfterDuration());
     }
-    
-    public void DestroyNow()
+
+    private IEnumerator DestroyAfterDuration()
     {
+        yield return new WaitForSeconds(countdownDuration);
+
         Destroy(gameObject);
     }
 }

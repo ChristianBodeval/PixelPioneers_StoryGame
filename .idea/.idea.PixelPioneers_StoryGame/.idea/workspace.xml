@@ -6,6 +6,65 @@
   <component name="ChangeListManager">
     <list default="true" id="31ee322b-587a-4c99-afc9-1b2b30998f9e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Anim/Cone_Attack.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Anim/Cone_Attack.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Anim/Cone_Attack_0.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Anim/Cone_Attack_0.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CaveManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ink/Demos/Basic Demo.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CDs.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/CDs.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Cone_Attack_v2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Cone_Attack_v2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ProgressManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ProgressManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/CaveHub.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/CaveHub.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitiesSO's.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitiesSO's/Dash.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitiesSO's/Dash.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitiesSO's/Gungir.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitiesSO's/Gungir.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitiesSO's/MeleeAttack.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitiesSO's/MeleeAttack.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitiesSO's/Mjoelnir.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitiesSO's/Mjoelnir.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitiesSO's/Unavailiable.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitiesSO's/Unavailiable.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects+MeleeUpgradesSO's.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects+MeleeUpgradesSO's/BouncingLightning.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects+MeleeUpgradesSO's/BouncingLightning.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects+MeleeUpgradesSO's/ChainEffect.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects+MeleeUpgradesSO's/ChainEffect.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects+MeleeUpgradesSO's/Effect.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects+MeleeUpgradesSO's/Effect.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects+MeleeUpgradesSO's/ElectricFloor.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects+MeleeUpgradesSO's/ElectricFloor.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects+MeleeUpgradesSO's/OverTimeEffect.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Effects+MeleeUpgradesSO's/OverTimeEffect.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashAbility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashAbility.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Dash_Fire.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Dash_Fire.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Dash_SlashDash.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Dash_SlashDash.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Gungir_1Upgrade.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Gungir_1Upgrade.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Gungir_2Upgrade.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Gungir_2Upgrade.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Melee_BounchingLightning.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Melee_BounchingLightning.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Melee_ElectricFloor.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Melee_ElectricFloor.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Mjoelnir_Charge.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Mjoelnir_Charge.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Mjoelnir_ElectricField.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/UpgradeSO's/Mjoelnir_ElectricField.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DestroyAnim.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DestroyAnim.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SendWave.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SendWave.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ThrowGungnir.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ThrowGungnir.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/Dash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/Dash.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/Mjoelnir.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/Mjoelnir.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/SweepingDash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/SweepingDash.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponCDs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponCDs.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,10 +82,12 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff33ef4d15af4b21939284be593d47da159a00/d8/6ca89343/Scene.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CaveManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/CaveStateHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CharacterUI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/CooldownIcon.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DestroyFromAnimationEvent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Interactable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/bodeval/Spiludvikling_Og_Laeringsteknologi/Unity_Projekter_2.0/PixelPioneers_StoryGame/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder_UI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitySO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CharacterSO's/CharacterSO.cs" root0="FORCE_HIGHLIGHTING" />
@@ -38,32 +99,33 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Image.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.8.0/Runtime/VisualScripting.Core/Utilities/LinqUtility.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectId" id="2Oh536PqLqAike2semGs9PZcpFr" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.036827195&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "XThreadsFramesViewSplitterKey": "0.036827195",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.editor",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;/Users/bodeval/Library/Application Support/JetBrains/Rider2023.1/resharper-host/DecompilerCache&quot;,
-      &quot;/Users/bodeval/Library/Application Support/JetBrains/Rider2023.1/resharper-host/SourcesCache&quot;,
-      &quot;/Users/bodeval/.local/share/Symbols/src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "/Users/bodeval/Library/Application Support/JetBrains/Rider2023.1/resharper-host/DecompilerCache",
+      "/Users/bodeval/Library/Application Support/JetBrains/Rider2023.1/resharper-host/SourcesCache",
+      "/Users/bodeval/.local/share/Symbols/src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/2021.3.20f1/Unity.app/Contents/MacOS/Unity" />
@@ -130,14 +192,27 @@
       <workItem from="1685283375351" duration="41110000" />
       <workItem from="1685388797048" duration="7575000" />
       <workItem from="1685400538031" duration="6491000" />
+      <workItem from="1685705647049" duration="16176000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

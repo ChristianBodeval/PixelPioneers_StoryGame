@@ -88,6 +88,15 @@ public class Mjoelnir : Ability, IUpgradeable
         ChargeAbility();
 
         AOEAbility();
+        
+        //If c-key is pressed
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            WeaponCDs.Instance.StartCoroutine(WeaponCDs.Instance.MjoelnirCD());
+
+        }
+        
+        
     }
 
     private void FixedUpdate()
@@ -172,6 +181,8 @@ public class Mjoelnir : Ability, IUpgradeable
         // Hold button
         if ((Input.GetButton("Fire2") || isCharghingCharge) && abilityRDY)         // 'K' button held charges the ability, note you also need to have the cd ready
         {
+            WeaponCDs.Instance.StartCoroutine(WeaponCDs.Instance.GungnirCD());
+            
             DisableHammer();
             if (initCharge != null) StopCoroutine(initCharge);
             initCharge =  StartCoroutine(InitialCharging());
@@ -214,6 +225,7 @@ public class Mjoelnir : Ability, IUpgradeable
         // Release button
         if (Input.GetButtonUp("Fire2") && abilityRDY)
         {
+            StartCoroutine(WeaponCDs.Instance.GungnirCD());
             StartCoroutine(ReleaseCharge());
         }
     }
@@ -221,6 +233,8 @@ public class Mjoelnir : Ability, IUpgradeable
     // Coroutine for suspending execution in a while loop
     private IEnumerator ReleaseCharge()
     {
+
+        
         while (isCharghingCharge) { yield return null; } // Suspends charge until we have charged for a minimum amount
 
         Pool.pool.ReturnToSFXPool(sound);
@@ -252,6 +266,8 @@ public class Mjoelnir : Ability, IUpgradeable
     // CHARGE function
     private IEnumerator Charge(Vector2 dir, float chargedAmount)
     {
+        WeaponCDs.Instance.StartCoroutine(WeaponCDs.Instance.GungnirCD());
+        
         float startTime = Time.time;
 
         Vector3 targetPos = (Vector2)player.transform.position + dir * chargedAmount;
@@ -296,6 +312,8 @@ public class Mjoelnir : Ability, IUpgradeable
 
             distance = Vector2.Distance(player.transform.position, targetPos);
         }
+        
+
 
         // Disable particles
         chargeParticles.SetActive(false);
@@ -341,7 +359,7 @@ public class Mjoelnir : Ability, IUpgradeable
     private void AOEAbility()
     {
         if (!hasAreaOfEffectUpgrade) { return; }                  // Checks if we have the upgrade
-
+        
         if (Input.GetButton("Fire2") && abilityRDY)         
         {
             DisableHammer();
@@ -397,6 +415,9 @@ public class Mjoelnir : Ability, IUpgradeable
     {
         abilityRDY = false;
 
+        WeaponCDs.Instance.StartCoroutine(WeaponCDs.Instance.MjoelnirCD());
+
+        
         yield return new WaitForSeconds(cooldown);
 
         abilityRDY = true;  

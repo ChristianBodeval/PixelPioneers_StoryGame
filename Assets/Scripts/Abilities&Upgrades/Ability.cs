@@ -11,12 +11,12 @@ public enum CurrentUpgrade
 
 public class Ability : MonoBehaviour
 {
+    private float dashCooldownTime;
     
     //Make a enum with Upgrade1 and Upgrade2
 
     protected void Start()
     {
-        
         
         if (PlayerPrefs.GetInt(abilitySO.name+1) == 1)
         {

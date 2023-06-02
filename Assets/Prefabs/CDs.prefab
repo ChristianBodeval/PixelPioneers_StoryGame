@@ -676,9 +676,11 @@ MonoBehaviour:
   dashCDVisual: {fileID: 4967315355089954191}
   mjoelnirCDVisual: {fileID: 4967315355568338565}
   gungnirCDVisual: {fileID: 4967315353854717289}
+  meleeScriptableObject: {fileID: 11400000, guid: d5413daa01c80ac45bb41732acf51b7a, type: 2}
   dashScript: {fileID: 0}
   mjoelnirScript: {fileID: 0}
   gungnirScript: {fileID: 0}
+  eyeCatcherMelee: {fileID: 0}
   eyeCatcherMjoelnir: {fileID: 4219992559177179638}
   eyeCatcherDash: {fileID: 5112250167957704416}
   eyeCatcherGungnir: {fileID: 8274526705347956668}

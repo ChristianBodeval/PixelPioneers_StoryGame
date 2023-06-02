@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Dash : Ability, IUpgradeable
@@ -84,6 +85,9 @@ public class Dash : Ability, IUpgradeable
                 }
                 if (hasUpgrade2)
                 {
+                    
+                    
+                    
                     slashDash.TurnAreaOn();
                     if (!isPlaying) { isPlaying = true; SFXManager.singleton.PlaySound(slashSFX, transform.position, volume); }
                 }

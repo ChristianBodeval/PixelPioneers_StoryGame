@@ -40,11 +40,6 @@ public class ProgressManager : MonoBehaviour
         {
             caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
             
-            //Find all CaveEntrances with tag CaveEntrance
-
-
-
-
             //Errase all caveEntrances from the list that are not tagged CaveEntrance
             for (int i = caveEntrances.Count - 1; i >= 0; i--)
             {
@@ -62,17 +57,10 @@ public class ProgressManager : MonoBehaviour
             for (int i = 0; i < caveEntrances.Count; i++)
             {
                 caveEntrances[i].SetAccessibility(i < currentCaveAvailible+1);
-                Debug.Log("Setting cave " + i + " to: " + (i < currentCaveAvailible+1));
-            }
-            Debug.Log("On Scene loaded");
-            
-            //FindObjectOfType<UpgradeUI>().progressNumber = currentCaveAvailible;
-            
-            
 
+            }
             Invoke("UpdateUpgrades", 1f);
             
-            //UpgradeManager.instance.UpdateProgress(currentCaveAvailible);
         }
     }
 

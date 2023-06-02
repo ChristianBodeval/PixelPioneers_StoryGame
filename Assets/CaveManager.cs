@@ -8,33 +8,21 @@ using UnityEngine.Serialization;
 public class CaveManager : MonoBehaviour
 {
     public SendWave sendWave;
-    private bool isTriggered;
     
     public GameObject player;
     public CaveEntrance caveEntrance;
-    
-    
     public Transform playerSpawnTransform;
     
-    //Make it a singleton
     public static CaveManager instance;
     
     private void Awake()
     {
-        
         sendWave = FindObjectOfType<SendWave>();
         caveEntrance = FindObjectOfType<CaveEntrance>();
         player = GameObject.FindWithTag("Player");
-        
-        
-        
-        //if(GameObject.Find("PlayerSpawnPoint").transform != null)
-        //    playerSpawnTransform = GameObject.Find("PlayerSpawnPoint").transform;
         sendWave.caveStartedEvent.AddListener(StartCave);
-        
-        //player.GetComponent<PlayerHealth>().playerDeathEvent.AddListener(RestartCave);
-        
-        
+        sendWave.caveClearedEvent.AddListener(EndCave);
+
         if (instance != null && instance != this)
         {
             Debug.Log("Destroying CaveManager");
@@ -45,9 +33,7 @@ public class CaveManager : MonoBehaviour
             instance = this;
         }
     }
-    
-    
-    
+
     private void Start()
     {
         player.transform.position = playerSpawnTransform.position;
@@ -57,34 +43,10 @@ public class CaveManager : MonoBehaviour
     {
         caveEntrance.SetAccessibility(false);
     }
-    
-    
-    
-    /*
-    private void RestartCave()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }*/
 
     public void EndCave()
     {
         caveEntrance.SetAccessibility(true);
         ProgressManager.instance.SetNextCaveActive();
-    }
-    
-    //Endcave when pressing space
-    
-    
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        //Call only once
-        if(isTriggered) return;
-        
-        if (other.CompareTag("Player"))
-        {
-            isTriggered = true;
-            StartCave();
-            Debug.Log("Sending waves");
-        }
     }
 }
