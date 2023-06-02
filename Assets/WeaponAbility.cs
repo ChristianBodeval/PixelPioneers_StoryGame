@@ -49,7 +49,7 @@ public class WeaponAbility : MonoBehaviour
 
     private void Awake()
     {
-        if (GameObject.Find("HermesFightIntroDialogue") != null) GameObject.Find("HermesFightIntroDialogue").GetComponent<Dialogue>().StartDialogue();
+        if (GameObject.Find("HermesDialogue") != null) GameObject.Find("HermesDialogue").GetComponent<Dialogue>().StartDialogue();
     }
 
     private void Start()

@@ -11,20 +11,19 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager dialogManager { get; private set; } //singleton
 
     [Header("Dialogue UI")]
-    [SerializeField] private GameObject dialogueBox;
+    private GameObject dialogueBox;
 
-    [SerializeField] private GameObject Speechbubble1;
-    [SerializeField] private GameObject Speechbubble2;
+    private GameObject Speechbubble1;
+    private GameObject Speechbubble2;
 
-    [SerializeField] private TextMeshProUGUI dialogueText;
-    [SerializeField] private TextMeshProUGUI dialogueTextHolder;
-    [SerializeField] private TextMeshProUGUI SpeechBubbleTextZeus;
-    [SerializeField] private TextMeshProUGUI SpeechBubbleTextOdin;
-    private bool usesSpeechBubble;
+    private TextMeshProUGUI dialogueText;
+    private TextMeshProUGUI dialogueTextHolder;
+    private TextMeshProUGUI SpeechBubbleTextZeus;
+    private TextMeshProUGUI SpeechBubbleTextOdin;
 
     [SerializeField] public Story currentStory;
 
-    public TextMeshProUGUI dialogueNPCName;
+    //public TextMeshProUGUI dialogueNPCName;
 
     public bool isDialoguePlaying;
 
@@ -40,20 +39,21 @@ public class DialogueManager : MonoBehaviour
 
     private GameObject[] dialogueTarget;
 
-    public Image continueButton;
+    private Image continueButton;
 
+    private GameObject UI;
     private Animator dialogBoxAnim;
     private Sprite brokkrFace;
     private Sprite scryerFace;
     private Sprite lokiFace;
 
-    public Image potraitLeft;
-    public Image potraitRight;
+    private Image potraitLeft;
+    private Image potraitRight;
 
     private PlayableDirector ingridAndAstridTL;
     private PlayableDirector swordPickUpTL;
     private PlayableDirector tutorialTL;
-    public PlayableDirector endTL;
+    [HideInInspector] public PlayableDirector endTL;
 
     private GameObject T3;
     private GameObject T4;
@@ -79,17 +79,29 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
-        isDialoguePlaying = false;
-        dialogueBox = GameObject.Find("DialogueBox");
-        dialogueBox.SetActive(false);
-        playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
-        //mjoelnir = GameObject.Find("Mjoelnir").GetComponent<Mjoelnir>();
-        dialogueTarget = GameObject.FindGameObjectsWithTag("NPC");
-        dialogBoxAnim = dialogueBox.GetComponent<Animator>();
-
         brokkrFace = Resources.Load<Sprite>("Sprites/Brokkr");
         scryerFace = Resources.Load<Sprite>("Sprites/ScryerFace");
         lokiFace = Resources.Load<Sprite>("Sprites/LokiFace");
+
+        UI = GameObject.Find("UI");
+        dialogueBox = GameObject.Find("DialogueBox");
+        Speechbubble1 = GameObject.Find("SpeechBubble1");
+        Speechbubble1.SetActive(false);
+        Speechbubble2 = GameObject.Find("SpeechBubble2");
+        Speechbubble2.SetActive(false);
+        dialogueText = GameObject.Find("DialogueText").GetComponent<TextMeshProUGUI>();
+        continueButton = GameObject.Find("ContinueArrow").GetComponent<Image>();
+        potraitLeft = GameObject.Find("PotraitLeft").GetComponent<Image>();
+        potraitRight = GameObject.Find("PotraitRight").GetComponent<Image>();
+        playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
+        dialogueTarget = GameObject.FindGameObjectsWithTag("NPC");
+        dialogBoxAnim = dialogueBox.GetComponent<Animator>();
+
+        isDialoguePlaying = false;
+
+        dialogueBox = GameObject.Find("DialogueBox");
+        dialogueBox.SetActive(false);
+        endTL = GameObject.Find("EndTL").GetComponent<PlayableDirector>();
 
         if (SceneManager.GetActiveScene().name == "Village" || SceneManager.GetActiveScene().name == "VillageWithTL")
         {
@@ -127,7 +139,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogueMode(TextAsset inkJson)
     {
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
 
         isDialoguePlaying = true;
         dialogueBox.SetActive(true);
@@ -170,33 +182,36 @@ public class DialogueManager : MonoBehaviour
         if (dialogBoxAnim != null)
             dialogBoxAnim.Play("FlyDown");
 
-        switch (currentTimeline.name)
+        if (currentTimeline != null)
         {
-            case "StartTL":
-                ingridAndAstridTL.Play();
-                break;
+            switch (currentTimeline.name)
+            {
+                case "StartTL":
+                    ingridAndAstridTL.Play();
+                    break;
 
-            case "AstridAndIngridTL":
-                swordPickUpTL.Play();
-                break;
+                case "AstridAndIngridTL":
+                    swordPickUpTL.Play();
+                    break;
 
-            case "SwordPickUpTL":
-                tutorialTL.Play();
-                break;
+                case "SwordPickUpTL":
+                    tutorialTL.Play();
+                    break;
 
-            case "TutorialTL":
-                //if (TimelineManager.timelineManager.currentTutorialState == 5)
-                //{
-                //    //endTL.Play();
-                //}
-                break;
+                case "TutorialTL":
+                    //if (TimelineManager.timelineManager.currentTutorialState == 5)
+                    //{
+                    //    //endTL.Play();
+                    //}
+                    break;
 
-            case "EndTL":
-                TimelineManager.timelineManager.tutorialIsStarted = false;
-                break;
+                case "EndTL":
+                    TimelineManager.timelineManager.tutorialIsStarted = false;
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
         }
         Debug.Log("Started: " + currentTimeline.name);
         if (currentTimeline != null && !TimelineManager.timelineManager.tutorialIsStarted)
@@ -234,6 +249,12 @@ public class DialogueManager : MonoBehaviour
                     break;
             }
         }
+
+        // Activate Hermes
+        GameObject hermes = GameObject.FindWithTag("Boss");
+        hermes.GetComponent<WeaponAbility>().enabled = true;
+        hermes.GetComponent<Hermes_Pathing>().enabled = true;
+        hermes.GetComponent<Hermes_Attack>().enabled = true;
 
         Time.timeScale = 1f;
     }
@@ -302,12 +323,14 @@ public class DialogueManager : MonoBehaviour
             potraitLeft.enabled = false;
             potraitRight.enabled = false;
         }
+
         //For each letter in the dialogue
         foreach (char letter in line.ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
+
         isShowingText = false;
         continueButton.enabled = true;
     }

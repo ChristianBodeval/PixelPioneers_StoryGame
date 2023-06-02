@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class CaveManager : MonoBehaviour
 {
@@ -14,7 +10,7 @@ public class CaveManager : MonoBehaviour
     public Transform playerSpawnTransform;
     
     public static CaveManager instance;
-    
+
     private void Awake()
     {
         sendWave = FindObjectOfType<SendWave>();
@@ -38,10 +34,15 @@ public class CaveManager : MonoBehaviour
     {
         player.transform.position = playerSpawnTransform.position;
     }
-    
+
     public void StartCave()
     {
-        caveEntrance.SetAccessibility(false);
+        //TODO Setup with caves
+        if (SceneManager.GetActiveScene().name = "Village" || SceneManager.GetActiveScene().name != "VillageWithTL")
+        {
+            return;
+        }
+            caveEntrance.SetAccessibility(false);
     }
 
     public void EndCave()

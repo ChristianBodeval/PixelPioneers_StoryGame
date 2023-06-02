@@ -21,7 +21,7 @@ public class Charger_Attack : Enemy_Attack
     [SerializeField] private float chargeSpeed;
     [SerializeField] private float chargeUpdateInterval;
     [SerializeField] private float chargeCD;
-    [SerializeField] private LineRenderer lr;
+    private LineRenderer lr;
     private bool canCharge = true;
     private bool isCharging = false;
     private Coroutine chargeCoroutine;
@@ -153,9 +153,9 @@ public class Charger_Attack : Enemy_Attack
             lr.startColor = Color.Lerp(Color.white, lowAlphaRed, t);
             lr.endColor = Color.Lerp(Color.white, lowAlphaRed, t);
 
-            RaycastHit2D playerHit = Physics2D.CircleCast(transform.position, chargeHitBox, direction, LayerMask.GetMask("Player")); // Check for player around enemy
+            RaycastHit2D playerHit = Physics2D.CircleCast(transform.position, chargeHitBox, direction, chargeHitBox, LayerMask.GetMask("Player")); // Check for player around enemy
 
-            if (playerHit.collider.CompareTag("Player") && !isPlayerHit && playerHit.collider != null)
+            if (playerHit.collider != null && !isPlayerHit)
             {
                 playerHit.transform.gameObject.GetComponent<PlayerHealth>().TakeDamage(chargeDmg); // Deal damage
                 isPlayerHit = true;

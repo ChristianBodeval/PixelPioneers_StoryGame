@@ -28,12 +28,12 @@ public class Dialogue : MonoBehaviour
     {
         playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
         dialogueManager = FindObjectOfType<DialogueManager>();
-        dialogueNPCName = dialogueManager.dialogueNPCName;
+        //dialogueNPCName = dialogueManager.dialogueNPCName;
     }
 
     private void Start()
     {
-        visualCue.SetActive(false);
+        if (visualCue != null) visualCue.SetActive(false);
         isPlayerInRange = false;
         inkStory = new Story(inkFileText.text);
     }
@@ -47,7 +47,7 @@ public class Dialogue : MonoBehaviour
 
         if (isPlayerInRange && !isDialoguePlaying)
         {
-            visualCue.SetActive(true);
+            if (visualCue != null) visualCue.SetActive(true);
             if (Input.GetButtonDown("Interact"))
             {
                 isDialoguePlaying = true;
@@ -57,7 +57,7 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-            visualCue.SetActive(false);
+            if (visualCue != null) visualCue.SetActive(false);
         }
     }
     private void SetHasTalkedToArr()

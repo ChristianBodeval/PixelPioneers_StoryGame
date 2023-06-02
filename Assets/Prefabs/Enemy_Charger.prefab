@@ -669,7 +669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8798007897952269159, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
       propertyPath: m_InstanceId
-      value: -23776
+      value: -428328
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 254720778, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
@@ -811,14 +811,13 @@ MonoBehaviour:
   attackTelegraphTime: 0.2
   attackDMG: 2
   dangerIndicator: {fileID: 1629126486}
-  chargeDmg: 4
+  chargeDmg: 2
   chargeRange: 7
   chargeUpTime: 1.2
   chargeHitBox: 1
   chargeSpeed: 30
-  chargeUpdateInterval: 0.1
+  chargeUpdateInterval: 0.02
   chargeCD: 5
-  lr: {fileID: 0}
 --- !u!114 &724059292
 MonoBehaviour:
   m_ObjectHideFlags: 0
