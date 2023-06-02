@@ -186,19 +186,20 @@ public class DialogueManager : MonoBehaviour
                     tutorialTL.Play();
                     break;
 
-            case "TutorialTL":
-                //if (TimelineManager.timelineManager.currentTutorialState == 5)
-                //{
-                //    //endTL.Play();
-                //}
-                break;
+                case "TutorialTL":
+                    //if (TimelineManager.timelineManager.currentTutorialState == 5)
+                    //{
+                    //    //endTL.Play();
+                    //}
+                    break;
 
-            case "EndTL":
-                TimelineManager.timelineManager.tutorialIsStarted = false;
-                break;
+                case "EndTL":
+                    TimelineManager.timelineManager.tutorialIsStarted = false;
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
         }
         Debug.Log("Started: " + currentTimeline.name);
         if (currentTimeline != null && !TimelineManager.timelineManager.tutorialIsStarted)
@@ -311,16 +312,12 @@ public class DialogueManager : MonoBehaviour
             potraitRight.enabled = false;
         }
 
-        Debug.Log("DEBUG ANDREAS 1");
-
         //For each letter in the dialogue
         foreach (char letter in line.ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-
-        Debug.Log("DEBUG ANDREAS 2");
 
         isShowingText = false;
         continueButton.enabled = true;
