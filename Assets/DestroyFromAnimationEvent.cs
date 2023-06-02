@@ -10,19 +10,23 @@ public class DestroyFromAnimationEvent : MonoBehaviour
     
     private void Awake()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.FindWithTag("Player");
+
         if (animator == null)
         {
             animator = GetComponentInChildren<Animator>();
         }
+        else
+        {
+            animator = GetComponent<Animator>();
+            Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
+        }
         
-        transform.parent.parent = player.transform;
-        
+        transform.parent = player.transform;
     }
     
     public void DestroyNow()
     {
-        Destroy(gameObject.transform.parent.gameObject);
-        
+        Destroy(gameObject);
     }
 }

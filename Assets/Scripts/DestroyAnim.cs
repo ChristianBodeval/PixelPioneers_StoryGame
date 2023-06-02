@@ -6,15 +6,17 @@ using UnityEngine;
 public class DestroyAnim : MonoBehaviour
 {
     [SerializeField] private float countdownDuration;
+    private Animator animator;
 
     private void Start()
     {
+        TryGetComponent<Animator>(out animator);
         StartCoroutine(DestroyAfterDuration());
     }
 
     private IEnumerator DestroyAfterDuration()
     {
-        yield return new WaitForSeconds(countdownDuration);
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 
         Destroy(gameObject);
     }

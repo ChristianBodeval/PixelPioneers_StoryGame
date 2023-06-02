@@ -26,12 +26,10 @@ public class SlashAbility : AbilitySO
         rotation.eulerAngles = new Vector3(rotation.eulerAngles.x, rotation.eulerAngles.y, rotation.eulerAngles.z);
         
         Vector3 position = colliderDrawer.transform.position;
-
-        
         
         GameObject instance = Instantiate(prefab, position, rotation);
         
-        Animator animator = instance.GetComponentInChildren<Animator>();
+        Animator animator = instance.GetComponent<Animator>();
         
         //animator.Play("Cone_Attack", -1, 1f);
         
@@ -49,7 +47,7 @@ public class SlashAbility : AbilitySO
         //Play the animation called "Slash_RightToLeft"
         // animator.Play("Slash_RightToLeft", -1, 1f);
         
-        if(isSwingingFromLeftToRight)
+        if(animator != null && isSwingingFromLeftToRight)
             animator.SetTrigger("RightSwing");
         else 
             animator.SetTrigger("LeftSwing");

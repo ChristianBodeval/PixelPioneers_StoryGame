@@ -86,9 +86,9 @@ public class DialogueManager : MonoBehaviour
         UI = GameObject.Find("UI");
         dialogueBox = GameObject.Find("DialogueBox");
         Speechbubble1 = GameObject.Find("SpeechBubble1");
-        Speechbubble1.SetActive(false);
+        if (Speechbubble1 != null) Speechbubble1.SetActive(false);
         Speechbubble2 = GameObject.Find("SpeechBubble2");
-        Speechbubble2.SetActive(false);
+        if (Speechbubble2 != null) Speechbubble2.SetActive(false);
         dialogueText = GameObject.Find("DialogueText").GetComponent<TextMeshProUGUI>();
         continueButton = GameObject.Find("ContinueArrow").GetComponent<Image>();
         potraitLeft = GameObject.Find("PotraitLeft").GetComponent<Image>();
@@ -100,8 +100,8 @@ public class DialogueManager : MonoBehaviour
         isDialoguePlaying = false;
 
         dialogueBox = GameObject.Find("DialogueBox");
-        dialogueBox.SetActive(false);
-        endTL = GameObject.Find("EndTL").GetComponent<PlayableDirector>();
+        if (dialogueBox != null) dialogueBox.SetActive(false);
+        if (GameObject.Find("EndTL") != null) endTL = GameObject.Find("EndTL").GetComponent<PlayableDirector>();
 
         if (SceneManager.GetActiveScene().name == "Village" || SceneManager.GetActiveScene().name == "VillageWithTL")
         {
@@ -213,7 +213,7 @@ public class DialogueManager : MonoBehaviour
                     break;
             }
         }
-        Debug.Log("Started: " + currentTimeline.name);
+
         if (currentTimeline != null && !TimelineManager.timelineManager.tutorialIsStarted)
         {
             TimelineManager.timelineManager.ResumeTL();

@@ -46,7 +46,6 @@ public class Dash : Ability, IUpgradeable
         playerGO = GameObject.Find("Player");
         playerRb = GameObject.Find("Player").GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player").GetComponent<PlayerAction>();
-        weaponCDs = GameObject.Find("CDs").GetComponent<WeaponCDs>();
         fireSpawn = GetComponent<FireDashSpawn>();
         slashDash = GetComponent<SweepingDash>();
     }
@@ -162,7 +161,7 @@ public class Dash : Ability, IUpgradeable
             dashDirection = player.lastFacing;
 
             // Start the dash cooldown coroutine
-            weaponCDs.StartCoroutine("DashCD");
+            WeaponCDs.Instance.StartCoroutine("DashCD");
             StartCoroutine(DashCD());
         }
     }

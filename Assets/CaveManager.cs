@@ -7,7 +7,6 @@ public class CaveManager : MonoBehaviour
     
     public GameObject player;
     public CaveEntrance caveEntrance;
-    public Transform playerSpawnTransform;
     
     public static CaveManager instance;
 
@@ -32,13 +31,13 @@ public class CaveManager : MonoBehaviour
 
     private void Start()
     {
-        player.transform.position = playerSpawnTransform.position;
+        player.transform.position = GameObject.Find("PlayerSpawnPoint").transform.position;
     }
 
     public void StartCave()
     {
         //TODO Setup with caves
-        if (SceneManager.GetActiveScene().name = "Village" || SceneManager.GetActiveScene().name != "VillageWithTL")
+        if (SceneManager.GetActiveScene().name == "Village" || SceneManager.GetActiveScene().name != "VillageWithTL")
         {
             return;
         }
