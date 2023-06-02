@@ -9,13 +9,7 @@ public class DestroyAnim : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.Find("Player");
-        if (GetComponent<Animator>() != null) animator = GetComponent<Animator>();
-
-        if (animator != null)
-        {
-            Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
-        }
+        StartCoroutine(DestroyAfterDuration());
     }
 
     private IEnumerator DestroyAfterDuration()
