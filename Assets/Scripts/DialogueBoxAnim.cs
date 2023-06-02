@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class DialogueBoxAnim : MonoBehaviour
 {
-    public DialogueManager dialogueManager;
+    [HideInInspector] public DialogueManager dialogueManager;
 
     private Animator anim;
 
     private void Awake()
     {
-        dialogueManager = FindObjectOfType<DialogueManager>();
+        dialogueManager = GameObject.Find("GameManager").GetComponent<DialogueManager>();
     }
     
     private void Start()

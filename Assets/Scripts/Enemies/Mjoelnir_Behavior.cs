@@ -377,7 +377,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
         aoeIndicator.SetActive(false);
 
         // Toggle aoe anim
-        GameObject obj = Instantiate(aoeAnim, transform.position, transform.rotation);
+        GameObject obj = Instantiate(aoeAnim, transform.position, Quaternion.Euler(0f,0f,0f));
         obj.SetActive(true);
 
         // Deal damage

@@ -16,8 +16,17 @@ public class SpikeCrystal : MonoBehaviour
     private bool isTriggered;
 
     // Changeable variables in inspector
+    [SerializeField] private float castTime = 1.5f;
     [SerializeField] private float damage = 10f;
-    [SerializeField] private float aoe = 2f;
+    [SerializeField] private float aoeRadius = 2f;
+    [SerializeField] private GameObject aoeRadiusIndicator;
+    [SerializeField] private AnimationCurve animationCurve;
+    private Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -34,47 +43,73 @@ public class SpikeCrystal : MonoBehaviour
         // Disable collider so it can't trigger again during coroutine
         GetComponent<Collider2D>().enabled = false;
 
-        // Bunch of animation nonsense
-        Animator animator = GetComponent<Animator>();
-        animator.SetBool("IsTriggered", true);
+        animator.Play("Windup");
         SFXManager.singleton.PlaySound(triggeredSFX, transform.position, sfxVolume);
 
-        yield return new WaitForSeconds(2);
-        
-        animator.SetBool("IsShatter", true);
-        SFXManager.singleton.PlaySound(shatterSFX, transform.position, sfxVolume);
+        // Instantiate circle
+        Color lowAlphaRed = new Color(1f, 0f, 0f, 0f);
+        Color highAlphaRed = new Color(1f, 0f, 0f, 0.5f);
+        SpriteRenderer sr = aoeRadiusIndicator.GetComponent<SpriteRenderer>();
+        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0f); // Not visible
+        aoeRadiusIndicator.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        aoeRadiusIndicator.SetActive(true);
+        aoeRadiusIndicator.transform.localScale = new Vector2(1f, 1f);
+        float a = 0f;
+        float t = 0f;
+
+
+        // Slow increase of alpha and size of cirle
+        while (a < 1f)
+        {
+            a += 0.1f;
+            aoeRadiusIndicator.transform.localScale = new Vector2(a * aoeRadius * 2f, a * aoeRadius * 2f); // Scale size over time
+            t = animationCurve.Evaluate(a);
+            sr.color = Color.Lerp(lowAlphaRed, highAlphaRed, t);
+            yield return new WaitForSeconds(castTime / 10);
+        }
+
+        t = 0f; // Reset value
+
+        // Lerp color to white
+        while (t < 1f)
+        {
+            t += 0.2f;
+            sr.color = Color.Lerp(highAlphaRed, Color.white, t);
+            if (t > 0.7f)
+            {
+                animator.Play("Shatter");
+                SFXManager.singleton.PlaySound(shatterSFX, transform.position, sfxVolume);
+            }
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        aoeRadiusIndicator.SetActive(false);
         DoDamage();
 
         yield return new WaitForSeconds(0.2f);
 
         GetComponent<ParticleSystem>().Stop();
 
-        yield return new WaitForSeconds(7);
+        animator.Play("Reform");
 
-        animator.SetBool("IsReform", true);
-
-        yield return new WaitForSeconds(1);
-
-        // Reset bools
-        animator.SetBool("IsTriggered", false);
-        animator.SetBool("IsShatter", false);
-        animator.SetBool("IsReform", false);
+        yield return new WaitForSeconds(8);
 
         // Enable collider again
         GetComponent<Collider2D>().enabled = true;
-        animator.SetBool("IsIdle", true);
+        animator.Play("Idle");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
 
         isTriggered = false;
     }
     
-    // Method for doing damage in an aoe around crystal, both to player and enemy
+    // Method for doing damage in an aoeRadius around crystal, both to player and enemy
     private void DoDamage()
     {
         GetComponent<ParticleSystem>().Play();
 
-        Collider2D[] entitiesToDealDamageTo = Physics2D.OverlapCircleAll(transform.position, aoe);
+        Collider2D[] entitiesToDealDamageTo = Physics2D.OverlapCircleAll(transform.position, aoeRadius);
 
         foreach (Collider2D entity in entitiesToDealDamageTo)
         {
