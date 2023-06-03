@@ -19,13 +19,14 @@ public class SlashAbility : AbilitySO
         
         WeaponCDs.Instance.StartCoroutine(WeaponCDs.Instance.BaseMeleeCD());
         Quaternion rotation = colliderDrawer.transform.rotation;
-        //Add 90 degrees to the rotation
+
         rotation.eulerAngles = new Vector3(rotation.eulerAngles.x, rotation.eulerAngles.y, rotation.eulerAngles.z);
         
         Vector3 position = colliderDrawer.transform.position;
         GameObject instance = Instantiate(prefab, position, rotation);
         
         Animator animator = instance.GetComponentInChildren<Animator>();
+        Debug.Log(animator);
         
         if(isSwingingFromLeftToRight)
             animator.SetTrigger("RightSwing");
