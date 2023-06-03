@@ -7,10 +7,8 @@ public class HermesFireTrail : MonoBehaviour
     public float damage = 1f;
     public float tickRate = 0.2f;
     private Vector2 boxCastSize;
-    private static bool canHitPlayer = true;
     private static bool isPlayerHit = false;
     private static bool isCooldownActive = false;
-    private static float cooldownDuration = 5f;
 
     private void Start()
     {
@@ -38,7 +36,7 @@ public class HermesFireTrail : MonoBehaviour
 
     private IEnumerator ResetCooldown()
     {
-        yield return new WaitForSeconds(cooldownDuration);
+        yield return new WaitForSeconds(tickRate);
         isPlayerHit = false;
         isCooldownActive = false;
     }

@@ -8,21 +8,37 @@ using UnityEngine.SceneManagement;
 public class DeathScreen : MonoBehaviour
 {
     private GameObject postProcessing;
+    Vignette vignette;
 
-    private void Start()
+    private void Awake()
     {
-        postProcessing = GameObject.Find("PostProcessing");
+        postProcessing = GameObject.Find("GameManager");
+        postProcessing.GetComponent<Volume>().profile.TryGet(out vignette);
+    }
 
-        Vignette vignette;
-        if (postProcessing.GetComponent<Volume>().profile.TryGet(out vignette))
+    private void OnEnable()
+    {
+        if (vignette != null)
         {
             vignette.intensity.Override(1f); // Set the intensity to 1
         }
     }
 
+    private void OnDisable()
+    {
+        if (vignette != null)
+        {
+            vignette.intensity.Override(0.1f); // Set the intensity to 1
+        }
+        else
+        {
+            postProcessing.GetComponent<Volume>().profile.TryGet(out vignette);
+            vignette.intensity.Override(0.1f); // Set the intensity to 1
+        }
+    }
+
     public void ResetLevel()
     {
-        Vignette vignette;
         if (postProcessing.GetComponent<Volume>().profile.TryGet(out vignette))
         {
             vignette.intensity.Override(0.1f); // Set the intensity to 0.1

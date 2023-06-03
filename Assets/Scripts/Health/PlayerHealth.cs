@@ -16,7 +16,7 @@ public class PlayerHealth : Health
     public CameraShake cameraShake;
     public Gradient gradient;
     public Image HPFill;
-    [SerializeField] private GameObject deathScreen;
+    private GameObject deathScreen;
 
     [SerializeField] private AudioClip damageTaken;
     
@@ -32,7 +32,8 @@ public class PlayerHealth : Health
     private void Start()
     {
         cameraShake = GameObject.Find("Camera").GetComponent<CameraShake>();
-        
+        deathScreen = GameObject.Find("PlayerDeath");
+        if (deathScreen != null) deathScreen.SetActive(false);
         damagedSlider = GameObject.Find("DamagedSlider").GetComponent<Slider>();
         hpSlider = GameObject.Find("Healthbar").GetComponent<Slider>();
         

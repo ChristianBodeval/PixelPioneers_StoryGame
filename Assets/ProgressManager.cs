@@ -43,7 +43,8 @@ public class ProgressManager : MonoBehaviour
     private void Awake()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        
+        lastSceneName = SceneManager.GetActiveScene().name;
+
         slashUI = GameObject.Find("SlashCD");
         dashUI = GameObject.Find("DashCD");
         mjoelnirUI = GameObject.Find("MjoelnirCD");

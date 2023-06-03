@@ -14,8 +14,10 @@ public class CaveEntrance : MonoBehaviour
     
     [SerializeField]
     public Transform spawnPoint;
-    
-    
+
+    [SerializeField] private CircleCollider2D circleCollider;
+    public string connectedToSceneName;
+
     void OnValidate()
     {
         circleCollider = GetComponent<CircleCollider2D>();
@@ -33,12 +35,7 @@ public class CaveEntrance : MonoBehaviour
         {
             player.transform.position = spawnPoint.position;
         }
-    }
-
-    
-    [SerializeField] private CircleCollider2D circleCollider;
-    public string connectedToSceneName;
-    
+    }    
     
     public void SetAccessibility(bool isAccessible)
     {
