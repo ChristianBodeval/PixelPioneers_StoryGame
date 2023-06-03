@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gungnir : Ability
+public class Gungnir : MonoBehaviour
 {
     [Header("SFX")]
     [Range(0, 1)] public float sfxVolume = 1f;

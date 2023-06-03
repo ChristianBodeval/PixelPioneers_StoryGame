@@ -7,26 +7,21 @@ public class SweepingDash : MonoBehaviour
 {
     public GameObject slashCollider;
 
-    public AbilityHolder abilityHolder;
+    private AbilityHolder abilityHolder;
 
-    public bool isTurnedOn;
+    private bool isTurnedOn;
 
+    [SerializeField] private float slashEachSeconds = 0.1f;
     private void Start()
     {
-        //Set abilityHolder to gameobject called SlashAbility
         abilityHolder = GameObject.Find("SlashAbility").GetComponent<AbilityHolder>();
-        
-        
     }
-    // Make a function that calls AbilityHolder.ActivateEffect()
-
+    
     void ActivateMelee()
     {
         StartCoroutine(abilityHolder.ActivateEffect());
     }
-
-    //Make a Coroutines that calls AbilityHolder.ActivateEffect() 
-
+    
     public void TurnAreaOn()
     {
 
@@ -37,7 +32,7 @@ public class SweepingDash : MonoBehaviour
             if(abilityHolder == null)
                 abilityHolder = GameObject.Find("Player").GetComponentInChildren<AbilityHolder>();
         
-            InvokeRepeating("ActivateMelee", 0f, 0.05f);
+            InvokeRepeating("ActivateMelee", 0f, slashEachSeconds);
         }
     } 
     public void TurnAreaOff()

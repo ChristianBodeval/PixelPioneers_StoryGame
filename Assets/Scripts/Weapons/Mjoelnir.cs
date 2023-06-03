@@ -80,6 +80,16 @@ public class Mjoelnir : Ability, IUpgradeable
         pitLayer = LayerMask.GetMask("Pit");
         isPlaying = false;
     }
+    
+    void OnEnable()
+    {
+        EnableHammer();
+    }
+    
+    void OnDisable()
+    {
+        DisableHammer();
+    }
 
     private void Update()
     {
@@ -163,7 +173,6 @@ public class Mjoelnir : Ability, IUpgradeable
 
     private void EnableHammer()
     {
-        isCharging = false;
         canSpin = true;    // Allow the hammer to spin again
         GetComponent<CircleCollider2D>().enabled = true;    // Player can move again
     }
@@ -407,7 +416,7 @@ public class Mjoelnir : Ability, IUpgradeable
 
         if (abilityCDFunction != null) { StopCoroutine(abilityCDFunction); } // If we already have a cooldown running, stop it
         abilityCDFunction = StartCoroutine(AbilityCD(chargeCD));
-        weaponCDVisual.StartCoroutine("MjoelnirCD");
+        WeaponCDs.Instance.StartCoroutine(WeaponCDs.Instance.MjoelnirCD());
     }
 
     // Puts ability on cd and is reset after a duration
@@ -451,22 +460,24 @@ public class Mjoelnir : Ability, IUpgradeable
         throw new System.NotImplementedException();
     }
 
-    public void UpgradeOption1()
+    public override void UpgradeOption1()
     {
+        base.UpgradeOption1();
         hasChargeUpgrade = true;
         hasAreaOfEffectUpgrade = false;
     }
 
-    public void UpgradeOption2()
+    public override void UpgradeOption2()
     {
-        
+        base.UpgradeOption2();
         hasChargeUpgrade = false;
         hasAreaOfEffectUpgrade = true;
     }
     
 
-    public void Downgrade()
+    public override void Downgrade()
     {
+        base.Downgrade();
         hasAreaOfEffectUpgrade = false;
         hasChargeUpgrade = false;
     }

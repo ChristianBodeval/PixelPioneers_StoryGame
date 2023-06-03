@@ -6,17 +6,33 @@ using UnityEngine.Serialization;
 
 public class CaveEntrance : MonoBehaviour
 {
-    
+    public int caveNumber;
     
     //Make a custom setter for this and it should still be accessible from the inspector
     [SerializeField]
     private bool isAcessible;
+    
+    [SerializeField]
+    public Transform spawnPoint;
     
     
     void OnValidate()
     {
         circleCollider = GetComponent<CircleCollider2D>();
         SetAccessibility(isAcessible);
+    }
+    
+    GameObject player;
+    void Awake()
+    {
+        player = GameObject.FindWithTag("Player");
+    }
+    void Start()
+    {
+        if (connectedToSceneName.Equals(ProgressManager.instance.lastSceneName))
+        {
+            player.transform.position = spawnPoint.position;
+        }
     }
 
     

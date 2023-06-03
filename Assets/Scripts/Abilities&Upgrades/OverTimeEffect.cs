@@ -36,7 +36,6 @@ public class OverTimeEffect : Effect
         //TODO This is a quick fix needs to be updated
         Quaternion transformRotation = transform.gameObject.transform.rotation;
         
-        Debug.Log(transformRotation.y);
         if (transformRotation.y == 1)
             transformRotation.eulerAngles = new Vector3(0, 0, 180);
         else if (transformRotation.y > 0 && transformRotation.y < 90)

@@ -23,10 +23,7 @@ public class AbilityHolder : Ability, IUpgradeable
     public Color cooldownColor;
 
     public AbilityHolder nextAbility;
-
-
-
-    [FormerlySerializedAs("collider")] [SerializeField] public ColliderDrawer hitCollider;
+    [SerializeField] public ColliderDrawer hitCollider;
     [SerializeField] private SlashCone colliderStat;
     private Vector2 movement;
     
@@ -52,12 +49,9 @@ public class AbilityHolder : Ability, IUpgradeable
     
     private new void Start()
     {
-        
         base.Start();
         playerAction = caster.GetComponent<PlayerAction>();
-        
         readyColor = GetComponent<SpriteShapeRenderer>().color;
-        
         //Set caster to gameobject called player
         
         
@@ -214,22 +208,27 @@ public class AbilityHolder : Ability, IUpgradeable
         return ability;
     }
 
-    public void UpgradeOption1()
+    public override void UpgradeOption1()
     {
+        base.UpgradeOption1();
         nextAbility = upgradeOption1;
         SaveManager.singleton.weapon1Upgrade1 = true;
         SaveManager.singleton.weapon1Upgrade2 = false;
     }
 
-    public void UpgradeOption2()
+    public override void UpgradeOption2()
     {
+        base.UpgradeOption2();
         nextAbility = upgradeOption2;
         SaveManager.singleton.weapon1Upgrade2 = true;
         SaveManager.singleton.weapon1Upgrade1 = false;
     }
 
-    public void Downgrade()
+    public override void Downgrade()
     {
+        base.Downgrade();
+        
+        Debug.Log("Downgrade");
         nextAbility = null;
     }
 }
