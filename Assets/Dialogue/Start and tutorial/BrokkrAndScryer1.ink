@@ -12,7 +12,8 @@ Brokkr: Who stole them?
 Scryer: The son who shall not be named, apparently.
 Scryer: But what you have there… The sword, erm, can I have that?
 Brokkr: What? Why would you-
-Scryer: Ah, no wait! Forget I asked, I just like shiny stuff. - Anyway, hold that thing high now, trouble incoming.
+Scryer: Ah, no wait! Forget I asked, I just like shiny stuff. 
+Scryer: - Anyway, hold that thing high now, trouble incoming.
 Brokkr: Gods have mercy.
 
 
