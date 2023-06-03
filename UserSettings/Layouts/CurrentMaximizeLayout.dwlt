@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 64472
+  controlID: 67351
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 64473
+  controlID: 67352
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 64474
+  controlID: 67353
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -226,24 +226,24 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 3a810100
-      m_LastClickedID: 98618
-      m_ExpandedIDs: 2a0cfcff08c0fcffecd2fcff5ce5fcffb807feffbc10feff7e83feff5099fefff099feff209dfeff08a2feffe4a2feff10a6fefff8a6feffd4a7feff02abfeff0cfbfffff0710000bc720000ee24010084260100223001006c300100383101000432010036430100147001003a8101005a810100
+      scrollPos: {x: 0, y: 168}
+      m_SelectedIDs: 48420100
+      m_LastClickedID: 0
+      m_ExpandedIDs: 2a65fbff2a0cfcff08c0fcffecd2fcff5ce5fcffb807feffbc10feff7e83feff5099fefff099feff209dfeff08a2feffe4a2feff10a6fefff8a6feffd4a7feff02abfeff0cfbfffff0710000bc720000ee24010084260100223001006c300100383101000432010036430100147001003a8101005a8101006c8101001e910100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Main Camera
+        m_OriginalName: Main Camera
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 98678
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 5}
       m_SearchString: 
@@ -545,7 +545,7 @@ MonoBehaviour:
       containerId: overlay-toolbar__top
       floating: 0
       collapsed: 0
-      displayed: 0
+      displayed: 1
       snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
@@ -4011,7 +4011,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: TimelineWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -4020,15 +4020,15 @@ MonoBehaviour:
     y: 642
     width: 1486
     height: 297
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 14}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 14}
   - {fileID: 15}
   - {fileID: 16}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -4094,7 +4094,7 @@ MonoBehaviour:
     m_IsLocked: 0
   m_SequenceHierarchy: {fileID: 0}
   m_SequencePath:
-    m_SelectionRoot: 0
+    m_SelectionRoot: 102840
     m_SubElements: []
 --- !u!114 &16
 MonoBehaviour:
@@ -4152,7 +4152,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 64468
+  controlID: 67286
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -4172,8 +4172,8 @@ MonoBehaviour:
     y: 0
     width: 434
     height: 627
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -4326,22 +4326,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Sprites
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Sprites
+  - Assets/Scenes
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\mike1\OneDrive\Documents\GitHub\PixelPioneers_New\PixelPioneers_StoryGame
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 125}
-    m_SelectedIDs: 88970000
-    m_LastClickedID: 38792
-    m_ExpandedIDs: 000000003a9700003c9700003e9700004097000042970000fc98000002a100000811010000ca9a3b
+    scrollPos: {x: 0, y: 120}
+    m_SelectedIDs: 82970000
+    m_LastClickedID: 38786
+    m_ExpandedIDs: 000000003a9700003c9700003e97000040970000429700004497000070970000fc98000002a100000811010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -4394,8 +4394,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 3a810100
-    m_LastClickedInstanceID: 98618
+    m_SelectedInstanceIDs: 48420100
+    m_LastClickedInstanceID: 82504
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000948f0000fcd600004e2e0100346d0100d62c0100
     m_RenameOverlay:
@@ -4421,7 +4421,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 180}
     m_GridSize: 16
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 147

@@ -799,7 +799,7 @@ MonoBehaviour:
   _SortingLayerID: 0
   _SortingOrder: 0
   m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 813481244}
+  m_renderer: {fileID: 1008475264}
   m_maskType: 0
 --- !u!23 &1008475264
 MeshRenderer:
@@ -1562,7 +1562,7 @@ MonoBehaviour:
   _SortingLayerID: 0
   _SortingOrder: 0
   m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 813481244}
+  m_renderer: {fileID: 1805420957}
   m_maskType: 0
 --- !u!23 &1805420957
 MeshRenderer:
