@@ -46,6 +46,7 @@ public class DialogueManager : MonoBehaviour
     private Sprite brokkrFace;
     private Sprite scryerFace;
     private Sprite lokiFace;
+    private Sprite fatherFace;
 
     private Image potraitLeft;
     private Image potraitRight;
@@ -82,6 +83,7 @@ public class DialogueManager : MonoBehaviour
         brokkrFace = Resources.Load<Sprite>("Sprites/Brokkr");
         scryerFace = Resources.Load<Sprite>("Sprites/ScryerFace");
         lokiFace = Resources.Load<Sprite>("Sprites/LokiFace");
+        fatherFace = Resources.Load<Sprite>("Sprites/FatherFace");
 
         UI = GameObject.Find("UI");
         dialogueBox = GameObject.Find("DialogueBox");
@@ -199,13 +201,9 @@ public class DialogueManager : MonoBehaviour
                     break;
 
                 case "TutorialTL":
-                    //if (TimelineManager.timelineManager.currentTutorialState == 5)
-                    //{
-                    //    //endTL.Play();
-                    //}
                     break;
 
-                case "EndTL":
+                case "EndVillage":
                     TimelineManager.timelineManager.tutorialIsStarted = false;
                     break;
 
@@ -316,6 +314,12 @@ public class DialogueManager : MonoBehaviour
         {
             potraitRight.enabled = true;
             potraitRight.sprite = lokiFace;
+            potraitLeft.enabled = false;
+        }
+        else if (line.StartsWith("Father"))
+        {
+            potraitRight.enabled = true;
+            potraitRight.sprite = fatherFace;
             potraitLeft.enabled = false;
         }
         else
