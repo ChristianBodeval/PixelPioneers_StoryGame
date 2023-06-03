@@ -164,7 +164,8 @@ public class DialogueManager : MonoBehaviour
         ContinueStory();
         dialogBoxAnim.Play("FlyUp");
     }
-
+    
+    //made so it can be reached with events, buttons and signals etc.
     public void ExitDialogueModeMethod()
     {
         if (gameObject != null && isActiveAndEnabled)
@@ -215,11 +216,7 @@ public class DialogueManager : MonoBehaviour
                 case "SwordPickUpTL":
                     tutorialTL.Play();
                     break;
-
-                case "TutorialTL":
-                    break;
-
-                case "EndVillage":
+                case "EndTL":
                     TimelineManager.timelineManager.tutorialIsStarted = false;
                     break;
 
@@ -233,8 +230,6 @@ public class DialogueManager : MonoBehaviour
             TimelineManager.timelineManager.ResumeTL();
             Debug.Log("Resumed timeline but not in tutorial");
         }
-
-        StartCoroutine(SetReadyToSpawn());
 
         if (TimelineManager.timelineManager.tutorialIsStarted && !SpawnSystem.waveAlive && SpawnSystem.totalWaves < 1)
         {
@@ -277,12 +272,6 @@ public class DialogueManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         TimelineManager.timelineManager.AddToCurrentTutorialState();
-    }
-
-    private IEnumerator SetReadyToSpawn()
-    {
-        yield return new WaitForSeconds(0.5f);
-        readyToSpawn = true;
     }
 
     public void ContinueStory()
@@ -358,5 +347,10 @@ public class DialogueManager : MonoBehaviour
     public void SetCurrentTimeline(PlayableDirector timeline)
     {
         currentTimeline = timeline;
+        Debug.Log("Timeline is now: " + currentTimeline);
+    }
+    public void PauseTimeline()
+    {
+        currentTimeline.Pause();
     }
 }

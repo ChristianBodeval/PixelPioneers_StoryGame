@@ -33,8 +33,7 @@ public class PlayerAction : MonoBehaviour
     private bool canDash = true; //C Flag to check if the player can dash
     [HideInInspector] public float dashCooldownRemaining = 0f; // Initialize to 0 to allow dashing immediately
     private bool isRunning = false;
-
-    public WeaponCDs weaponCDVisual;
+    
 
     private void Awake()
     {
@@ -174,11 +173,9 @@ public class PlayerAction : MonoBehaviour
             dashDirection = lastFacing;
 
             // Start the dash cooldown coroutine
-            if (weaponCDVisual != null)
-            {
-                weaponCDVisual.StartCoroutine("DashCD");
-                StartCoroutine(DashCD());
-            }
+
+            WeaponCDs.Instance.StartCoroutine("DashCD");
+            StartCoroutine(DashCD());
         }
     }
 

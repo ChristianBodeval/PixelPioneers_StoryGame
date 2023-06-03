@@ -27,6 +27,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Cave_04.unity
     guid: 91a32fd712dc6914799603810ef32d63
   - enabled: 1
-    path: Assets/Scenes/VillageWithTL.unity
+    path: Assets/Scenes/Village.unity
     guid: 5933c3fef888ec241a2bbfb631990a4e
+  - enabled: 1
+    path: Assets/Scenes/Fathers House A09.unity
+    guid: fbc4f41f26494fc4ba94444aba61073e
+  - enabled: 1
+    path: Assets/Scenes/VillageRunToCaveHub.unity
+    guid: 324ca86c4d223fe44af2b42da731a3cb
+  - enabled: 1
+    path: Assets/Scenes/Fathers House.unity
+    guid: e428f9bd0df89474681f1f3ac8d2d78a
   m_configObjects: {}

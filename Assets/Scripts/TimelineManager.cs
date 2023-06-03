@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TimelineManager : MonoBehaviour
 {
@@ -69,12 +72,16 @@ public class TimelineManager : MonoBehaviour
 
         // If the tutorial is started we resume the timeline
     }
-
+    public void StartScene(SceneAsset scene)
+    {
+        SceneManager.LoadScene(scene.name);
+    }
+    
     private IEnumerator ResumeTLCoroutine()
     {
         canContinue = false;
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         ResumeTL();
         canContinue = true; ;
     }
@@ -175,14 +182,14 @@ public class TimelineManager : MonoBehaviour
                     if (canContinue)
                     {
                         AddToCurrentTutorialState();
-                        StartCoroutine(ResumeTLCoroutine());
+                        //StartCoroutine(ResumeTLCoroutine());
                     }
                     break;
 
                 case 5:
                     Debug.Log("Tutorial is done");
-                    dialogueManager.endTL.Play();
                     tutorialIsStarted = false;
+                    dialogueManager.endTL.Play();
                     break;
 
                 default:

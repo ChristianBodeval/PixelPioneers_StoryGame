@@ -9,10 +9,9 @@ public class StartMenu : MonoBehaviour
     private int input = 0;
 
     [Header("Menu Images")]
-    public Image newGame;
-
-    public Image loadGame;
-    public Image exit;
+    public SpriteRenderer newGame;
+    public SpriteRenderer loadGame;
+    public SpriteRenderer exit;
 
     public Material selected;
     public Material unSelected;
@@ -71,7 +70,7 @@ public class StartMenu : MonoBehaviour
             switch (menuState)
             {
                 case MenuState.NewGame:
-                    SceneManager.LoadScene("GungnirETC");
+                    SceneManager.LoadScene("Fathers House");
                     break;
 
                 case MenuState.LoadGame:

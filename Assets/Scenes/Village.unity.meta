@@ -1,10 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scenes/Village.unity.meta
-guid: 50a1489813afa6141a5cbb443c6f280d
-========
-guid: 8b81ade3609fb5a439a1e7e2f24d6ec7
-folderAsset: yes
->>>>>>>> SpriteMCInsert:Assets/Sprites/Player.meta
+guid: 5933c3fef888ec241a2bbfb631990a4e
 DefaultImporter:
   externalObjects: {}
   userData: 
