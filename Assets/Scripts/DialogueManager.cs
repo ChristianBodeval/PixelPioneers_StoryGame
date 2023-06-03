@@ -101,7 +101,10 @@ public class DialogueManager : MonoBehaviour
 
         dialogueBox = GameObject.Find("DialogueBox");
         dialogueBox.SetActive(false);
-        endTL = GameObject.Find("EndTL").GetComponent<PlayableDirector>();
+        
+        //TODO Delete, if this isn't existing
+        if(GameObject.Find("EndTL") != null)
+            endTL = GameObject.Find("EndTL").GetComponent<PlayableDirector>();
 
         if (SceneManager.GetActiveScene().name == "Village" || SceneManager.GetActiveScene().name == "VillageWithTL")
         {

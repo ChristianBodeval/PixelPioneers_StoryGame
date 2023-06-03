@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class Dash : Ability, IUpgradeable
+public class Dash : Ability
 {
     [Header("SFX")]
     [Range(0f, 1f)] [SerializeField] private float volume;
@@ -38,20 +39,39 @@ public class Dash : Ability, IUpgradeable
 
     private SweepingDash slashDash;
 
+
+    private void Awake()
+    {
+        playerGO = GameObject.Find("Player");
+        playerRb = playerGO.GetComponent<Rigidbody2D>();
+        player = playerGO.GetComponent<PlayerAction>();
+        weaponCDs = WeaponCDs.Instance;
+        fireSpawn = GetComponent<FireDashSpawn>();
+        slashDash = GetComponent<SweepingDash>();
+    }
+
     // Start is called before the first frame update
     private new void Start()
     {
         base.Start();
         dashDirection = GetDashDirection();
-        playerGO = GameObject.Find("Player");
-        playerRb = GameObject.Find("Player").GetComponent<Rigidbody2D>();
-        player = GameObject.Find("Player").GetComponent<PlayerAction>();
-        weaponCDs = GameObject.Find("CDs").GetComponent<WeaponCDs>();
-        fireSpawn = GetComponent<FireDashSpawn>();
-        slashDash = GetComponent<SweepingDash>();
+        canDash = true;
+    }
+    
+    private void OnEnable()
+    {
+        canDash = true;
+        dashDirection = GetDashDirection();
     }
 
     // StateUpdate is called once per frame
+
+    private void OnDisable()
+    {
+        isDashing = false;
+        player.GetComponent<TrailRenderer>().enabled = false;
+    }
+
     private void Update()
     {
         StartDash();
@@ -85,9 +105,6 @@ public class Dash : Ability, IUpgradeable
                 }
                 if (hasUpgrade2)
                 {
-                    
-                    
-                    
                     slashDash.TurnAreaOn();
                     if (!isPlaying) { isPlaying = true; SFXManager.singleton.PlaySound(slashSFX, transform.position, volume); }
                 }
@@ -163,24 +180,30 @@ public class Dash : Ability, IUpgradeable
 
             // Start the dash cooldown coroutine
             weaponCDs.StartCoroutine("DashCD");
+            
+            
             StartCoroutine(DashCD());
         }
     }
 
-    public void UpgradeOption1()
+    public override void UpgradeOption1()
     {
+        base.UpgradeOption1();
         hasUpgrade1 = true;
         hasUpgrade2 = false;
     }
 
-    public void UpgradeOption2()
+    public override void UpgradeOption2()
     {
+        base.UpgradeOption2();
         hasUpgrade1 = false;
         hasUpgrade2 = true;
     }
 
-    public void Downgrade()
+    public override void Downgrade()
     {
-        throw new System.NotImplementedException();
+        base.Downgrade();
+        hasUpgrade1 = false;
+        hasUpgrade2 = false;
     }
 }

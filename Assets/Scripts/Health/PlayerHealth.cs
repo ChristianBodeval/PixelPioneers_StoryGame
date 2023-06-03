@@ -2,13 +2,14 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerHealth : Health
 {
     private const float DAMAGED_HEALTH_SHRINK_TIMER_MAX = 0.5f;
-    public Slider HP;
-    public Slider DamagedBar;
+    [FormerlySerializedAs("HP")] public Slider hpSlider;
+    [FormerlySerializedAs("DamagedBar")] public Slider damagedSlider;
     private float damagedHealthShrinkTimer;
     private bool invulnerable = false;
     private Coroutine invulnerableCoroutine;
@@ -30,9 +31,16 @@ public class PlayerHealth : Health
 
     private void Start()
     {
+        cameraShake = GameObject.Find("Camera").GetComponent<CameraShake>();
+        
+        damagedSlider = GameObject.Find("DamagedSlider").GetComponent<Slider>();
+        hpSlider = GameObject.Find("Healthbar").GetComponent<Slider>();
+        
+        HPFill = GameObject.Find("Fill-HP").GetComponent<Image>();
+        
         sr = GetComponentInChildren<SpriteRenderer>();
-        if(DamagedBar != null)
-            DamagedBar.value = HP.value;
+        
+        damagedSlider.value = hpSlider.value;
     }
 
     public override void TakeDamage(float damage)
@@ -76,7 +84,7 @@ public class PlayerHealth : Health
         {
             this.currentHealth = maxHealth;
         }
-        DamagedBar.value = HP.value;
+        damagedSlider.value = hpSlider.value;
     }
 
     public void AddInvulnerability()
@@ -106,16 +114,16 @@ public class PlayerHealth : Health
             StartCoroutine(Die());
         }
         
-        if(HP == null) return;
-        HP.value = currentHealth;
-        HPFill.color = gradient.Evaluate(HP.normalizedValue);
+        if(hpSlider == null) return;
+        hpSlider.value = currentHealth;
+        HPFill.color = gradient.Evaluate(hpSlider.normalizedValue);
         
         damagedHealthShrinkTimer -= Time.deltaTime;
         if (damagedHealthShrinkTimer < 0)
         {
-            if (HP.value <= DamagedBar.value) {
+            if (hpSlider.value <= damagedSlider.value) {
                 float shrinkSpeed = 10f;
-                DamagedBar.value-= shrinkSpeed * Time.deltaTime;
+                damagedSlider.value-= shrinkSpeed * Time.deltaTime;
             }
         }
     }

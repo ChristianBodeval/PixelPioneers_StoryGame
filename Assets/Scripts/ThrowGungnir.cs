@@ -185,21 +185,25 @@ public class ThrowGungnir : Ability, IUpgradeable
         canThrowGungnir = true;
     }
 
-    public void UpgradeOption1()
+    public override void UpgradeOption1()
     {
+        base.UpgradeOption1();
         hasUpgrade1 = true;
         hasUpgrade2 = false;
     }
 
-    public void UpgradeOption2()
+    public override void UpgradeOption2()
     {
+        base.UpgradeOption2();
         hasUpgrade1 = false;
         hasUpgrade2 = true;
     }
 
-    public void Downgrade()
+    public override void Downgrade()
     {
+        base.Downgrade();
         hasUpgrade1 = false;
+        hasUpgrade2 = false;
     }
 
     //public void ThrowTriSpear()

@@ -29,25 +29,25 @@ public class CaveManager : MonoBehaviour
             instance = this;
         }
     }
-
-    private void Start()
-    {
-        player.transform.position = playerSpawnTransform.position;
-    }
+    
 
     public void StartCave()
     {
         //TODO Setup with caves
-        if (SceneManager.GetActiveScene().name = "Village" || SceneManager.GetActiveScene().name != "VillageWithTL")
+        
+        //Check if currentScene name is beginning with "Cave_"
+        if(SceneManager.GetActiveScene().name.StartsWith("Cave_"))
         {
-            return;
-        }
+            //TODO Setup with caves
+            //Set cave entrance to not accessible
             caveEntrance.SetAccessibility(false);
+        }
+        caveEntrance.SetAccessibility(false);
     }
 
     public void EndCave()
     {
         caveEntrance.SetAccessibility(true);
-        ProgressManager.instance.SetNextCaveActive();
+        ProgressManager.instance.CaveHasBeenCleared();
     }
 }
