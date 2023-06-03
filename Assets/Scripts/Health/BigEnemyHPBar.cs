@@ -1,25 +1,34 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class BigEnemyHPBar : MonoBehaviour
 {
-    public Slider HP;
-    public Gradient gradient;
     public Image HPFill;
-    private Health health;
+    public Image DamagedBar;
 
+    private Health health;
+    private float damagedHealthShrinkTimer;
 
     private void Start()
     {
         health = GetComponent<Health>();
-        HP.value = health.currentHealth;
-        HPFill.color = gradient.Evaluate(HP.normalizedValue);
+        HPFill.fillAmount = health.currentHealth;
+        DamagedBar.fillAmount = HPFill.fillAmount;
     }
 
     // StateUpdate is called once per frame
-     private void Update()
+    private void Update()
     {
-        HP.value = health.currentHealth;
-        HPFill.color = gradient.Evaluate(HP.normalizedValue);
+        HPFill.fillAmount = health.currentHealth / 100f;
+        damagedHealthShrinkTimer -= Time.deltaTime;
+
+        if (damagedHealthShrinkTimer < 0)
+        {
+            if (HPFill.fillAmount <= DamagedBar.fillAmount)
+            {
+                float shrinkSpeed = 0.05f;
+                DamagedBar.fillAmount -= shrinkSpeed * Time.deltaTime;
+            }
+        }
     }
 }
