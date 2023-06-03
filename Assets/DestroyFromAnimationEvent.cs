@@ -7,7 +7,6 @@ public class DestroyFromAnimationEvent : MonoBehaviour
     private Animator animator;
     private GameObject player;
     
-    
     private void Awake()
     {
         player = GameObject.FindWithTag("Player");
@@ -21,10 +20,10 @@ public class DestroyFromAnimationEvent : MonoBehaviour
             animator = GetComponent<Animator>();
             Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
         }
-        
-        transform.parent = player.transform;
+
+        transform.parent.parent = player.transform;
     }
-    
+
     public void DestroyNow()
     {
         Destroy(gameObject);
