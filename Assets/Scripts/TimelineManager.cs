@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TimelineManager : MonoBehaviour
 {
@@ -69,7 +72,11 @@ public class TimelineManager : MonoBehaviour
 
         // If the tutorial is started we resume the timeline
     }
-
+    public void StartScene(SceneAsset scene)
+    {
+        SceneManager.LoadScene(scene.name);
+    }
+    
     private IEnumerator ResumeTLCoroutine()
     {
         canContinue = false;
