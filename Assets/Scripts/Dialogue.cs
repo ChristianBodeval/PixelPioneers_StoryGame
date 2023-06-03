@@ -27,7 +27,7 @@ public class Dialogue : MonoBehaviour
     private void Awake()
     {
         playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
-        dialogueManager = FindObjectOfType<DialogueManager>();
+        dialogueManager = GameObject.Find("GameManager").GetComponent<DialogueManager>();
         //dialogueNPCName = dialogueManager.dialogueNPCName;
     }
 

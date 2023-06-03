@@ -78,21 +78,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4777890625766839134}
     m_Modifications:
-    - target: {fileID: 626848064, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1724249966, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 146702678757508234, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
       propertyPath: m_Name
       value: Hermes_Mjoelnir
-      objectReference: {fileID: 0}
-    - target: {fileID: 146702678757508234, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
-      propertyPath: m_Layer
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 146702678757508237, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
       propertyPath: m_RootOrder
@@ -138,42 +126,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 146702678940892861, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
-      propertyPath: m_Layer
-      value: 0
+    - target: {fileID: 8011305717191019474, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
+      propertyPath: baseHitboxSize
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 8011305717191019474, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
-      propertyPath: slamSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: f1e4c6224cdada34f99865440aea7138, type: 3}
-    - target: {fileID: 8011305717191019474, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
-      propertyPath: chargeSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: d46398afb96b55f408b4c6ac3e2debed, type: 3}
-    - target: {fileID: 8011305717191019474, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
-      propertyPath: spinImpactSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 466dfb29a71856343a2e9610845291f3, type: 3}
-    - target: {fileID: 8011305717191019474, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
-      propertyPath: chargeUpLoopSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 67a35c1cfb5604049b436ac23af4abbc, type: 3}
     - target: {fileID: 8011305717191019474, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
       propertyPath: parentTransform
       value: 
       objectReference: {fileID: 4777890625766839134}
-    - target: {fileID: 8011305717191019474, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
-      propertyPath: specialCooldown
-      value: 4.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8011305717191019474, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
-      propertyPath: obstacleLayer.m_Bits
-      value: 8256
-      objectReference: {fileID: 0}
-    - target: {fileID: 8828570852275422769, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87fa5657fd59ee642b797e03e68ee5ff, type: 3}
 --- !u!4 &654972322511225870 stripped

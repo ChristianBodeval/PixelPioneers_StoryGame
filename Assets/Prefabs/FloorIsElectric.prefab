@@ -279,7 +279,6 @@ MonoBehaviour:
   activeColor: {r: 0.9245283, g: 0.8591136, b: 0.8591136, a: 0.77254903}
   cooldownColor: {r: 0.8207547, g: 0.2516465, b: 0.2516465, a: 0}
   nextAbility: {fileID: 0}
-  slashAnimation: {fileID: 0}
   hitCollider: {fileID: 1019147408074125075}
   colliderStat: {fileID: 11400000, guid: 5e269b22577be486fa851899f4cf3e37, type: 2}
   spawnPoint: {fileID: 0}
@@ -297,9 +296,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcff041086bad4f5fb6899dee7c64dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickEveryXSeconds: 1
+  sfxVolume: 0.4
+  groundZapSFX: {fileID: 8300000, guid: a7cb0a60bc66f654a9da6b28cc38c67c, type: 3}
+  tickEveryXSeconds: 0.5
   duration: 5
-  damagePrTick: 0
+  damagePrTick: 0.5
   lightningEffect: {fileID: 3294685474388290021}
 --- !u!1 &3294685474388290021
 GameObject:

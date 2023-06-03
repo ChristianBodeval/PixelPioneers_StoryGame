@@ -126,6 +126,7 @@ public class PlayerAction : MonoBehaviour
     {
         canMove = false;
         rb.velocity = Vector2.zero;
+        animator.SetBool("IsRunning", false);
     }
 
     public IEnumerator StopMove(float time)

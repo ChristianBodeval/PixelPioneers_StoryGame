@@ -212,7 +212,7 @@ public class WeaponAbility : MonoBehaviour
 
         Color lowAlphaRed = new Color(1f, 0f, 0f, 0f);
         Color highAlphaRed = new Color(1f, 0f, 0f, 0.7f);
-        float totalTicks = 60f;
+        float totalTicks = 120f;
         float yieldDuration = (castTime - 0.1f) / totalTicks;
         float t = 0f;
         Vector3 direction = RotateVector((player.transform.position - transform.position).normalized, angleOffset);

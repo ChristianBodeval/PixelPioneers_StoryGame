@@ -3,7 +3,9 @@ guid: fcff041086bad4f5fb6899dee7c64dd6
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - groundZapSFX: {fileID: 8300000, guid: a7cb0a60bc66f654a9da6b28cc38c67c, type: 3}
+  - lightningEffect: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

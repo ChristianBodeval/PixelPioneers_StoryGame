@@ -37,6 +37,8 @@ public class WaveVisual : MonoBehaviour
 
     private void Start()
     {
+        if (!Pool.pool.isActiveAndEnabled) return;
+
         isInCombat = false;
         maxWaves = SpawnSystem.totalWaves;
         wavesLeft = maxWaves - SpawnSystem.currentWave;
@@ -225,7 +227,6 @@ public class WaveVisual : MonoBehaviour
             }
         }
     }
-
 
     private void ExplodeCrystal(GameObject obj)
     {

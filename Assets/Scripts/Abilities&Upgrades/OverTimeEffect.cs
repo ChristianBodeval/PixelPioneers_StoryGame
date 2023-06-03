@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class OverTimeEffect : Effect
 {
+    [Header("SFX")]
+    [Range(0, 1)] public float sfxVolume = 1f;
+    [SerializeField] protected AudioClip groundZapSFX;
+
     private float timer;
     public float tickEveryXSeconds;
     public float duration;
@@ -61,7 +65,9 @@ public class OverTimeEffect : Effect
             //TODO Set to tick pr seconds
 
             targets = colliderDrawer.targets;
-            
+
+            SFXManager.singleton.PlaySound(groundZapSFX, colliderDrawer.transform.position, sfxVolume);
+
             foreach (GameObject target in targets)
             {
                 target.GetComponent<Health>().TakeDamage(damagePrTick);

@@ -40,4 +40,10 @@ public class HermesFireTrail : MonoBehaviour
         isPlayerHit = false;
         isCooldownActive = false;
     }
+
+    private void OnDestroy()
+    {
+        isPlayerHit = false;
+        isCooldownActive = false;
+    }
 }

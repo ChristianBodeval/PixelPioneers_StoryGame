@@ -52,7 +52,7 @@ public class Health : MonoBehaviour
             if (this.currentHealth <= 0) return;
 
             // Hermes moves when haven taken damage
-            if (gameObject.CompareTag("Boss"))
+            if (gameObject.CompareTag("Boss") && gameObject.GetComponent<Hermes_Pathing>().isActiveAndEnabled)
             {
                 GetComponent<Hermes_Pathing>().MoveOnHitTaken();
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 626848067}
   - component: {fileID: 626848066}
   - component: {fileID: 8177254342571706757}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: ChargeParticleSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4908,7 +4908,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1724249967}
   - component: {fileID: 1724249968}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: ChargeVisualCue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4997,7 +4997,7 @@ GameObject:
   - component: {fileID: 644661609}
   - component: {fileID: 257164076}
   - component: {fileID: 8011305717191019474}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: Hermes_Mjoelnir
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9994,14 +9994,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42ad3bb3e636554f8a42cd56fd851c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volume: 0.5
+  spinImpactSFX: {fileID: 8300000, guid: 466dfb29a71856343a2e9610845291f3, type: 3}
+  chargeUpLoopSFX: {fileID: 8300000, guid: 67a35c1cfb5604049b436ac23af4abbc, type: 3}
+  chargeSFX: {fileID: 8300000, guid: d46398afb96b55f408b4c6ac3e2debed, type: 3}
+  slamSFX: {fileID: 8300000, guid: f1e4c6224cdada34f99865440aea7138, type: 3}
   parentTransform: {fileID: 0}
-  speed: 3.5
+  speed: 2.5
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 8256
   updateInterval: 0.1
   nextWayPointDistance: 2
-  specialCooldown: 7
+  specialCooldown: 4.4
   castTime: 2
   spinDMG: 1
   spinRadius: 0.6
@@ -10047,7 +10052,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   baseHitboxSize: 0.7
   hitboxWidthMultiplier: 0.1
-  buttonChargeUpRate: 10
   chargeUpdateInterval: 0.05
   maxCharge: 10
   rangeIndicator: {fileID: 1724249966}
@@ -10066,7 +10070,7 @@ GameObject:
   m_Component:
   - component: {fileID: 146702678940892860}
   - component: {fileID: 146702678940892863}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10150,7 +10154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1568431980854848689}
   - component: {fileID: 8138176939801150446}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: AoeVisualCue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
