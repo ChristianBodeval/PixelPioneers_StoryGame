@@ -130,7 +130,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
 
     private void Move(Vector2 dir)
     {
-        float modifier = (Vector2.Distance(player.transform.position, transform.position) > maxCharge - 2f) ? ((player.transform.position - transform.position).magnitude / 1.4f) + 1f : 1f;
+        float modifier = (Vector2.Distance(player.transform.position, transform.position) > maxCharge - 2f) ? ((player.transform.position - transform.position).magnitude) + 2f : 1f;
 
         if (!isCharging)
         {
@@ -232,7 +232,8 @@ public class Mjoelnir_Behavior : MonoBehaviour
         parentTransform.position = transform.position;
         Vector3 direction = Vector2.zero;
         SpriteRenderer sr = rangeIndicator.GetComponent<SpriteRenderer>();
-        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0f); // Not visible
+        Color lowAlphaRed = new Color(1f, 0f, 0f, 0f);
+        sr.color = lowAlphaRed; // Not visible
         rangeIndicator.SetActive(true);
         rangeIndicator.transform.localScale = new Vector2(1f, 1f);
         charge = 0f; // Resets value
@@ -263,7 +264,18 @@ public class Mjoelnir_Behavior : MonoBehaviour
             yield return new WaitForSeconds(castTime/1.4f / 50f);
         }
 
-        yield return new WaitForSeconds(0.05f);
+        float t = 0f;
+        Color highAlphaRed = new Color(1f, 0f, 0f, 0.5f);
+
+        // Lerp color to white
+        while (t < 1f)
+        {
+            t += 0.2f;
+            sr.color = Color.Lerp(highAlphaRed, Color.white, t);
+
+            yield return new WaitForSeconds(0.01f);
+        }
+        sr.color = highAlphaRed;
 
         rangeIndicator.transform.SetParent(null);
         Pool.pool.ReturnToSFXPool(chargeUpLoopSFX);
@@ -354,7 +366,7 @@ public class Mjoelnir_Behavior : MonoBehaviour
         parentTransform.position = transform.position;
         transform.position = parentTransform.position;
 
-        SFXManager.singleton.PlaySound(slamSFX, transform.position, volume, false, transform);
+        SFXManager.singleton.PlaySound(slamSFX, transform.position, volume);
 
         // Instantiate circle
         SpriteRenderer sr = aoeIndicator.GetComponent<SpriteRenderer>();

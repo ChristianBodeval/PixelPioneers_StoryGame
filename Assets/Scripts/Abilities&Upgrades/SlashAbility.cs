@@ -8,6 +8,10 @@ using UnityEngine.U2D;
 [CreateAssetMenu]
 public class SlashAbility : AbilitySO
 {
+    [Header("SFX")]
+    [Range(0, 1)] public float sfxVolume = 1f;
+    [SerializeField] private AudioClip slashSFX;
+
     public GameObject prefab;
 
     private bool isSwingingFromLeftToRight;
@@ -24,6 +28,8 @@ public class SlashAbility : AbilitySO
         
         Vector3 position = colliderDrawer.transform.position;
         GameObject instance = Instantiate(prefab, position, rotation);
+
+        SFXManager.singleton.PlaySound(slashSFX, position, sfxVolume);
         
         Animator animator = instance.GetComponentInChildren<Animator>();
         Debug.Log(animator);

@@ -9,7 +9,6 @@ public class ProgressManager : MonoBehaviour
 {
     //Make a singleton
     public static ProgressManager instance;
-
     
     //UI's
     public GameObject slashUI;
@@ -38,10 +37,19 @@ public class ProgressManager : MonoBehaviour
         
         Debug.Log("Scene unloaded: " + unloadedScene.name);
     }
-    
 
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Debug.Log("ProgressManager destroy");
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+
         SceneManager.sceneLoaded += OnSceneLoaded;
         lastSceneName = SceneManager.GetActiveScene().name;
 
@@ -54,22 +62,7 @@ public class ProgressManager : MonoBehaviour
         dashGO = GameObject.Find("Dash").GetComponent<Ability>();
         mjoelnirGO = GameObject.Find("Mjoelnir").GetComponent<Ability>();
         gungnirGO = GameObject.Find("GungnirThrow").GetComponent<Ability>();
-
-
-        if (instance != null && instance != this)
-        {
-            Debug.Log("ProgressManager is existing, destroying this one");
-
-
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
     }
-
 
     private void Start()
     {
@@ -143,8 +136,6 @@ public class ProgressManager : MonoBehaviour
             //Search for the cave entrance with the connected to scene name as lastSceneName
             
         }
-        
-
     }
 
     void UpdateUpgrades()

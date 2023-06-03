@@ -13,12 +13,6 @@ public class CaveManager : MonoBehaviour
 
     private void Awake()
     {
-        sendWave = FindObjectOfType<SendWave>();
-        caveEntrance = FindObjectOfType<CaveEntrance>();
-        player = GameObject.FindWithTag("Player");
-        sendWave.caveStartedEvent.AddListener(StartCave);
-        sendWave.caveClearedEvent.AddListener(EndCave);
-
         if (instance != null && instance != this)
         {
             Debug.Log("Destroying CaveManager");
@@ -28,6 +22,13 @@ public class CaveManager : MonoBehaviour
         {
             instance = this;
         }
+
+        playerSpawnTransform = GameObject.Find("SpawnPointOutsideEntrance").transform;
+        sendWave = FindObjectOfType<SendWave>();
+        caveEntrance = FindObjectOfType<CaveEntrance>();
+        player = GameObject.FindWithTag("Player");
+        sendWave.caveStartedEvent.AddListener(StartCave);
+        sendWave.caveClearedEvent.AddListener(EndCave);
     }
     
 

@@ -57,7 +57,6 @@ public class Pool : MonoBehaviour
 
 
     /// Enemy pool
-
     public GameObject DrawFromEnemyPool(WaveObject.EnemyType type)
     {
         if (storageEnemies.Count > 0)
@@ -278,5 +277,22 @@ public class Pool : MonoBehaviour
 
         if (inUseBloodSplatters.Contains(ps)) inUseBloodSplatters.Remove(ps);
         storageBloodSplatters.Add(ps);
+    }
+
+    private void OnDestroy()
+    {
+        // Clear all lists
+        storageEnemies.Clear();
+        storageBloods.Clear();
+        storageBloodSplatters.Clear();
+        storagePickUps.Clear();
+        storageProjectiles.Clear();
+        storageSFX.Clear();
+        inUseEnemies.Clear();
+        inUseBloods.Clear();
+        inUseBloodSplatters.Clear();
+        inUsePickUps.Clear();
+        inUseProjectiles.Clear();
+        inUseSFX.Clear();
     }
 }

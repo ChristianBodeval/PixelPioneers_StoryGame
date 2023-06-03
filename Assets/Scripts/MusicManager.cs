@@ -8,8 +8,8 @@ public class MusicManager : MonoBehaviour
 
     [Range(0f, 1f)] public float masterVolume = 0.5f;
     [SerializeField] private AudioClip caveAmbience;
-    public AudioSource audioSource;
     public float fadeDuration = 1f;
+    private AudioSource audioSource;
     private AudioClip currentClip;
     private float clipVolume = 1f;
     private float targetVolume;
@@ -28,6 +28,8 @@ public class MusicManager : MonoBehaviour
         {
             singleton = this;
         }
+
+        audioSource = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
     }
 
     // 2nd
@@ -64,6 +66,7 @@ public class MusicManager : MonoBehaviour
     public void PlayMusic(AudioClip clip, float volume)
     {
         clipVolume = volume;
+        if (audioSource == null) return;
 
         if (audioSource.isPlaying)
         {

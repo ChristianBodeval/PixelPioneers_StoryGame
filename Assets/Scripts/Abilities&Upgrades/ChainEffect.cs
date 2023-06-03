@@ -5,6 +5,10 @@ using static UnityEngine.GraphicsBuffer;
 
 public class ChainEffect : Effect
 {
+    [Header("SFX")]
+    [Range(0, 1)] public float sfxVolume = 1f;
+    [SerializeField] private AudioClip chainSFX;
+
     [HideInInspector] public float damage;
     [HideInInspector] public float range;
     [HideInInspector] public float timeBetweenEachBounce;
@@ -40,6 +44,7 @@ public class ChainEffect : Effect
             newTargets = Physics2D.OverlapCircleAll(startingTarget.transform.position, range, LayerMask.GetMask("Enemy"));
             
             startingTarget.GetComponent<Health>().TakeDamage(damage);
+            SFXManager.singleton.PlaySound(chainSFX, startingTarget.transform.position, sfxVolume);
 
             if (newTargets.Length == 0)
             {

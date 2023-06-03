@@ -74,7 +74,7 @@ public class Dash : Ability
     private void OnDisable()
     {
         isDashing = false;
-        player.GetComponent<TrailRenderer>().enabled = false;
+        if (player != null && player.isActiveAndEnabled) player.GetComponent<TrailRenderer>().enabled = false;
     }
 
     private void Update()

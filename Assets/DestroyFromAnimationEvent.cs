@@ -18,7 +18,7 @@ public class DestroyFromAnimationEvent : MonoBehaviour
         else
         {
             animator = GetComponent<Animator>();
-            Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
+            Destroy(transform.parent.gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
         }
 
         transform.parent.parent = player.transform;
@@ -26,6 +26,6 @@ public class DestroyFromAnimationEvent : MonoBehaviour
 
     public void DestroyNow()
     {
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 }

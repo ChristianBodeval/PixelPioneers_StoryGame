@@ -70,12 +70,15 @@ public class DialogueManager : MonoBehaviour
     {
         if (dialogManager != null && dialogManager != this)
         {
+            Debug.Log("DialogueManager destroy");
             Destroy(this);
         }
         else
         {
             dialogManager = this;
         }
+
+        SceneManager.activeSceneChanged += FindVariables;
     }
 
     private void Start()
@@ -85,24 +88,31 @@ public class DialogueManager : MonoBehaviour
         lokiFace = Resources.Load<Sprite>("Sprites/LokiFace");
         fatherFace = Resources.Load<Sprite>("Sprites/FatherFace");
 
+        FindVariables(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
+    }
+
+    private void FindVariables(Scene previousScene, Scene newScene)
+    {
         UI = GameObject.Find("UI");
-        dialogueBox = GameObject.Find("DialogueBox");
+        dialogueBox = UI.transform.Find("DialogueBox").gameObject;
+        if (dialogueBox != null) dialogueBox.SetActive(false);
+        dialogBoxAnim = dialogueBox.GetComponent<Animator>();
+
         Speechbubble1 = GameObject.Find("SpeechBubble1");
         if (Speechbubble1 != null) Speechbubble1.SetActive(false);
+
         Speechbubble2 = GameObject.Find("SpeechBubble2");
         if (Speechbubble2 != null) Speechbubble2.SetActive(false);
-        dialogueText = GameObject.Find("DialogueText").GetComponent<TextMeshProUGUI>();
-        continueButton = GameObject.Find("ContinueArrow").GetComponent<Image>();
-        potraitLeft = GameObject.Find("PotraitLeft").GetComponent<Image>();
-        potraitRight = GameObject.Find("PotraitRight").GetComponent<Image>();
-        playerAction = GameObject.Find("Player").GetComponent<PlayerAction>();
+
+        dialogueText = dialogueBox.transform.Find("DialogueText").GetComponent<TextMeshProUGUI>();
+        continueButton = dialogueBox.transform.Find("ContinueArrow").GetComponent<Image>();
+        potraitLeft = dialogueBox.transform.Find("PotraitLeft").GetComponent<Image>();
+        potraitRight = dialogueBox.transform.Find("PotraitRight").GetComponent<Image>();
+        playerAction = GameObject.FindWithTag("Player").GetComponent<PlayerAction>();
         dialogueTarget = GameObject.FindGameObjectsWithTag("NPC");
-        dialogBoxAnim = dialogueBox.GetComponent<Animator>();
 
         isDialoguePlaying = false;
 
-        dialogueBox = GameObject.Find("DialogueBox");
-        if (dialogueBox != null) dialogueBox.SetActive(false);
         if (GameObject.Find("EndTL") != null) endTL = GameObject.Find("EndTL").GetComponent<PlayableDirector>();
 
         if (SceneManager.GetActiveScene().name == "Village" || SceneManager.GetActiveScene().name == "VillageWithTL")
@@ -157,12 +167,18 @@ public class DialogueManager : MonoBehaviour
 
     public void ExitDialogueModeMethod()
     {
-        StartCoroutine("ExitDialogueMode");
+        if (gameObject != null && isActiveAndEnabled)
+        {
+            StartCoroutine(ExitDialogueMode());
+        }
     }
 
     public IEnumerator ExitDialogueMode()
     {
         yield return new WaitForSeconds(0.2f);
+
+        if (dialogManager == null) yield break;
+
         isDialoguePlaying = false;
         //resets the text
         dialogueText.text = "";
@@ -271,7 +287,7 @@ public class DialogueManager : MonoBehaviour
 
     public void ContinueStory()
     {
-        if (currentStory.canContinue)
+        if (currentStory.canContinue && gameObject != null && isActiveAndEnabled)
         {
             continueButton.enabled = false;
 

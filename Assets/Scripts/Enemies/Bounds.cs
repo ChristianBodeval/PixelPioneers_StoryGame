@@ -18,7 +18,7 @@ public class Bounds : MonoBehaviour
         obstacleLayer = LayerMask.GetMask("Obstacles");
         pitLayer = LayerMask.GetMask("Pit");
         enemyLayers = LayerMask.GetMask("Enemy");
-        player = GameObject.Find("Player");
+        player = GameObject.FindWithTag("Player");
 
         if (GameObject.FindWithTag("Mjoelnir") != null) mjoelnir = GameObject.FindWithTag("Mjoelnir");
 
@@ -45,7 +45,8 @@ public class Bounds : MonoBehaviour
             }
 
             // Check if player is out of bounds
-            if (!Physics2D.OverlapPoint(player.transform.position, groundLayer) || Physics2D.OverlapPoint(player.transform.position, obstacleLayer) || Physics2D.OverlapPoint(player.transform.position, pitLayer))
+            player = GameObject.FindWithTag("Player");
+            if (player.activeSelf && (!Physics2D.OverlapPoint(player.transform.position, groundLayer) || Physics2D.OverlapPoint(player.transform.position, obstacleLayer) || Physics2D.OverlapPoint(player.transform.position, pitLayer)))
             {
                 StartCoroutine(FindClosestValidPosition(player));
             }
