@@ -74,7 +74,7 @@ public class TimelineManager : MonoBehaviour
     {
         canContinue = false;
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         ResumeTL();
         canContinue = true; ;
     }
@@ -175,14 +175,14 @@ public class TimelineManager : MonoBehaviour
                     if (canContinue)
                     {
                         AddToCurrentTutorialState();
-                        StartCoroutine(ResumeTLCoroutine());
+                        //StartCoroutine(ResumeTLCoroutine());
                     }
                     break;
 
                 case 5:
                     Debug.Log("Tutorial is done");
-                    dialogueManager.endTL.Play();
                     tutorialIsStarted = false;
+                    dialogueManager.endTL.Play();
                     break;
 
                 default:
