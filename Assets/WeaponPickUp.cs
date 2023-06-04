@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -8,6 +9,14 @@ using UnityEngine.SceneManagement;
 public class WeaponPickUp : MonoBehaviour
 {
     [SerializeField] private TextAsset[] pickUpNotification = new TextAsset[3];
+    
+    
+    public CaveManager caveManager;
+
+    private void Start()
+    {
+        caveManager = FindObjectOfType<CaveManager>();
+    }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -15,7 +24,7 @@ public class WeaponPickUp : MonoBehaviour
 
         SetAbilities();
         
-        CaveManager.instance.EndCave();
+        caveManager.EndCave();
 
         Destroy(gameObject);
     }

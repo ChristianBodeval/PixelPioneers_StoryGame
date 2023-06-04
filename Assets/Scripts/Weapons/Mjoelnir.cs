@@ -167,6 +167,7 @@ public class Mjoelnir : Ability, IUpgradeable
 
     private void EnableHammer()
     {
+        SaveManager.singleton.weapon3 = true;
         isCharging = false;
         canSpin = true;    // Allow the hammer to spin again
         GetComponent<CircleCollider2D>().enabled = true;    // Player can move again
@@ -174,6 +175,7 @@ public class Mjoelnir : Ability, IUpgradeable
 
     private void DisableHammer()
     {
+        SaveManager.singleton.weapon3 = false;
         canSpin = false;    // Stop hammer's spin
         GetComponent<CircleCollider2D>().enabled = false;   // Cannot hit enemies with hammer sprite
     }
