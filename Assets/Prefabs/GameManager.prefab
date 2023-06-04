@@ -18,7 +18,6 @@ GameObject:
   - component: {fileID: 1518463961}
   - component: {fileID: 1605772801}
   - component: {fileID: 5967796784300329842}
-  - component: {fileID: 1655427275}
   - component: {fileID: 1871689898051590982}
   m_Layer: 0
   m_Name: GameManager
@@ -649,29 +648,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialIsStarted: 0
   currentTutorialState: 0
---- !u!114 &1655427275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5980401796314083280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2b0be7fe95a149beaf88fe4b4ae1ee8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slashUI: {fileID: 0}
-  dashUI: {fileID: 0}
-  mjoelnirUI: {fileID: 0}
-  gungnirUI: {fileID: 0}
-  slashGO: {fileID: 0}
-  dashGO: {fileID: 0}
-  mjoelnirGO: {fileID: 0}
-  gungnirGO: {fileID: 0}
-  numberOfCavesCleared: 0
-  lastSceneName: 
-  caveEntrances: []
 --- !u!114 &1871689898051590982
 MonoBehaviour:
   m_ObjectHideFlags: 0
