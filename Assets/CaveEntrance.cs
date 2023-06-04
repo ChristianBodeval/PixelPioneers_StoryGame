@@ -62,6 +62,8 @@ public class CaveEntrance : MonoBehaviour
                 Debug.LogError(connectedToSceneName + " does not exist!");
                 return;
             }
+
+            StopAllCoroutines();
             SceneManager.LoadScene(connectedToSceneName);
         }
     }

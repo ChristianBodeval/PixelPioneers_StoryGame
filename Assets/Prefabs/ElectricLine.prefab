@@ -281,7 +281,6 @@ MonoBehaviour:
   activeColor: {r: 0.87951994, g: 0.85882354, b: 0.9254902, a: 0}
   cooldownColor: {r: 0.8207547, g: 0.2516465, b: 0.2516465, a: 0}
   nextAbility: {fileID: 0}
-  slashAnimation: {fileID: 0}
   hitCollider: {fileID: 8423785600306978792}
   colliderStat: {fileID: 11400000, guid: 5e269b22577be486fa851899f4cf3e37, type: 2}
   spawnPoint: {fileID: 0}
@@ -416,6 +415,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da0742b7e713c4d02929d0b30d0d2fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxVolume: 0.4
+  chainSFX: {fileID: 8300000, guid: 2efb22f8628572845848edba42bb7793, type: 3}
   damage: 0
   range: 0
   timeBetweenEachBounce: 0

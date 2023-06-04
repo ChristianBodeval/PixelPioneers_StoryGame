@@ -82,4 +82,10 @@ public class HealthPickUp : MonoBehaviour
         if (inUsePickUps.Contains(p)) inUsePickUps.Remove(p);
         storagePickUps.Add(p);
     }
+
+    public void ClearLists()
+    {
+        storagePickUps.Clear();
+        inUsePickUps.Clear();
+    }
 }

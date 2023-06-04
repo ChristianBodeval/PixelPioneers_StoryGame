@@ -28,12 +28,7 @@ public class SpawnSystem : MonoBehaviour
         StartCoroutine(SpawnWaves());
         StartCoroutine(CheckIfWaveIsDead()); // Function checks if wave is alive during play
 
-        wavesToSpawn.Clear();
-        waitingDeathList.Clear();
-        randomizingList.Clear();
-        waveAlive = false;
-        totalWaves = 0;
-        currentWave = 0;
+        ClearLists();
     }
 
     public void AddWave(WaveObject wave)
@@ -161,7 +156,7 @@ public class SpawnSystem : MonoBehaviour
     // Returns a point eligible for spawning an enemy outside of the screen
     private Vector2 FindSpawnPoint()
     {
-        Vector3 playerPosition = player.transform.position;
+        Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
         Vector3 point = Vector2.zero;
 
         int recursionCount = 0;
@@ -205,5 +200,15 @@ public class SpawnSystem : MonoBehaviour
         }
 
         return playerPosition; // Default case in case of recursion limit
+    }
+
+    public void ClearLists()
+    {
+        wavesToSpawn.Clear();
+        waitingDeathList.Clear();
+        randomizingList.Clear();
+        waveAlive = false;
+        totalWaves = 0;
+        currentWave = 0;
     }
 }

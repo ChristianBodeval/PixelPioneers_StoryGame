@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,6 +25,7 @@ public class ProgressManager : MonoBehaviour
     
     [FormerlySerializedAs("currentCaveAvailible")] public int numberOfCavesCleared;
 
+    public List<CaveEntrance> caveEntrances = new List<CaveEntrance>();
     public string lastSceneName;
     
     private void OnEnable()
@@ -34,6 +36,8 @@ public class ProgressManager : MonoBehaviour
     private void OnSceneUnloaded(Scene unloadedScene)
     {
         lastSceneName = unloadedScene.name;
+
+        
         
         Debug.Log("Scene unloaded: " + unloadedScene.name);
     }
@@ -53,15 +57,7 @@ public class ProgressManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         lastSceneName = SceneManager.GetActiveScene().name;
 
-        slashUI = GameObject.Find("SlashCD");
-        dashUI = GameObject.Find("DashCD");
-        mjoelnirUI = GameObject.Find("MjoelnirCD");
-        gungnirUI = GameObject.Find("GungnirCD");
-        
-        slashGO = GameObject.Find("SlashAbility").GetComponent<Ability>();
-        dashGO = GameObject.Find("Dash").GetComponent<Ability>();
-        mjoelnirGO = GameObject.Find("Mjoelnir").GetComponent<Ability>();
-        gungnirGO = GameObject.Find("GungnirThrow").GetComponent<Ability>();
+        FindAbilityComponents();
     }
 
     private void Start()
@@ -69,20 +65,6 @@ public class ProgressManager : MonoBehaviour
         DisableAllAbilities();
         UpdateAllAbilities();
     }
-
-    public void Update()
-    {
-        //If x is pressed, enable all abilities
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            CaveHasBeenCleared();
-        }
-    }
-
-
-    public List<CaveEntrance> caveEntrances;
-
-
 
     public void UpdatePlayerPosition()
     {
@@ -106,12 +88,16 @@ public class ProgressManager : MonoBehaviour
     
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("Scene loaded: " + scene.name);
+        FindAbilityComponents();
+        UpdateAllAbilities();
+        HealthPickUp.pickUpPool.ClearLists();
+        Pool.pool.ClearLists();
+
         if (scene.name == "CaveHub")
         {
             caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
 
-            //Errase all caveEntrances from the list that are not tagged CaveEntrance
+            //Erase all caveEntrances from the list that are not tagged CaveEntrance
             for (int i = caveEntrances.Count - 1; i >= 0; i--)
             {
                 if (caveEntrances[i].gameObject.tag != "CaveEntrance")
@@ -120,34 +106,49 @@ public class ProgressManager : MonoBehaviour
                 }
             }
             
-            
             //Sort them by gameobject name
             caveEntrances.Sort((x, y) => x.gameObject.name.CompareTo(y.gameObject.name));
             
             //Activate the number of caves equal to currentCaveAvailible
             for (int i = 0; i < caveEntrances.Count; i++)
             {
-                caveEntrances[i].SetAccessibility(i < numberOfCavesCleared+1);
-
+                caveEntrances[i].SetAccessibility(i < SaveManager.singleton.cavesCleared + 1);
             }
 
-            Invoke("UpdateUpgrades", 1f);
-            
+            UpgradeManager.instance.UpdateProgress(SaveManager.singleton.cavesCleared + 1);
+            ProgressManager.instance.UpdateAllAbilities();
+
             //Search for the cave entrance with the connected to scene name as lastSceneName
-            
         }
     }
 
-    void UpdateUpgrades()
+    private void FindAbilityComponents()
     {
-        UpgradeManager.instance.UpdateProgress(numberOfCavesCleared+1);
-        
-        for (int i = 0; i < numberOfCavesCleared; i++)
-        {
-            caveEntrances[i].SetAccessibility(i < caveEntrances.Count);
-            Debug.Log("Setting cave " + i + " to: " + (i < caveEntrances.Count));
-        }
+        GameObject cds = GameObject.Find("CDs");
+        slashUI = FindChildObjectByName(cds.transform, "SlashCD");
+        dashUI = FindChildObjectByName(cds.transform, "DashCD");
+        mjoelnirUI = FindChildObjectByName(cds.transform, "MjoelnirCD");
+        gungnirUI = FindChildObjectByName(cds.transform, "GungnirCD");
+
+        slashGO = GameObject.Find("SlashAbility").GetComponent<Ability>();
+        dashGO = GameObject.Find("Dash").GetComponent<Ability>();
+        mjoelnirGO = GameObject.Find("Mjoelnir").GetComponent<Ability>();
+        gungnirGO = GameObject.Find("GungnirThrow").GetComponent<Ability>();
     }
+
+    private GameObject FindChildObjectByName(Transform parent, string objectName)
+    {
+        for (int i = 0; i < parent.childCount; i++)
+        {
+            Transform childTransform = parent.GetChild(i);
+            if (childTransform.name == objectName)
+            {
+                return childTransform.gameObject;
+            }
+        }
+        return null;
+    }
+
 
     public void DisableAllAbilities()
     {
@@ -164,38 +165,38 @@ public class ProgressManager : MonoBehaviour
 
     public void UpdateAllAbilities()
     {
-        if(numberOfCavesCleared == -1) return;
-        
-        if (numberOfCavesCleared > -1)
-        {
-            slashUI.SetActive(true);
-            slashGO.enabled = true;
-        }
-        
-        if (numberOfCavesCleared > 0)
-        {
-            dashUI.SetActive(true);
-            dashGO.enabled = true;
-        }
-        if (numberOfCavesCleared > 1)
-        {
-            mjoelnirUI.SetActive(true);
-            mjoelnirGO.enabled = true;
-        }
-        if (numberOfCavesCleared > 2)
-        {
-            gungnirUI.SetActive(true);
-            gungnirGO.enabled = true;
-        }
+        slashUI.SetActive(SaveManager.singleton.cavesCleared > -1);
+        slashGO.enabled = SaveManager.singleton.cavesCleared > -1;
+
+        dashUI.SetActive(SaveManager.singleton.cavesCleared > 0);
+        dashGO.enabled = SaveManager.singleton.cavesCleared > 0;
+
+        mjoelnirUI.SetActive(SaveManager.singleton.cavesCleared > 1);
+        mjoelnirGO.enabled = SaveManager.singleton.cavesCleared > 1;
+
+        gungnirUI.SetActive(SaveManager.singleton.cavesCleared > 2);
+        gungnirGO.enabled = SaveManager.singleton.cavesCleared > 2;
+
+        if (SaveManager.singleton.weapon1Upgrade1) slashGO.UpgradeOption1();
+        if (SaveManager.singleton.weapon1Upgrade2) slashGO.UpgradeOption1();
+
+        if (SaveManager.singleton.weapon2Upgrade1) GameObject.Find("Dash").GetComponent<Dash>().hasUpgrade1 = true;
+        if (SaveManager.singleton.weapon2Upgrade2) GameObject.Find("Dash").GetComponent<Dash>().hasUpgrade2 = true;
+
+        if (SaveManager.singleton.weapon3Upgrade1) GameObject.Find("Mjoelnir").GetComponent<Mjoelnir>().hasChargeUpgrade = true;
+        if (SaveManager.singleton.weapon3Upgrade2) GameObject.Find("Mjoelnir").GetComponent<Mjoelnir>().hasAreaOfEffectUpgrade = true;
+
+        if (SaveManager.singleton.weapon4Upgrade1) GameObject.Find("GungnirThrow").GetComponent<ThrowGungnir>().hasUpgrade1 = true;
+        if (SaveManager.singleton.weapon4Upgrade2) GameObject.Find("GungnirThrow").GetComponent<ThrowGungnir>().hasUpgrade2 = true;
     }
-    
-    
+
     //Make a function that makes the next cave available
     public void CaveHasBeenCleared()
     {
         //If all caves are available, return
-        if(numberOfCavesCleared == 4) return;
-        numberOfCavesCleared++;
+        if(SaveManager.singleton.cavesCleared == 4) return;
+        SaveManager.singleton.cavesCleared++;
+        SaveManager.singleton.SavePlayerData();
         
         UpdateAllAbilities();
     }

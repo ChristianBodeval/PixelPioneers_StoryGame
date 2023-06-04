@@ -19,7 +19,7 @@ public class BigEnemyHPBar : MonoBehaviour
     // StateUpdate is called once per frame
     private void Update()
     {
-        HPFill.fillAmount = health.currentHealth / 100f;
+        HPFill.fillAmount = health.currentHealth / health.maxHealth;
         damagedHealthShrinkTimer -= Time.deltaTime;
 
         if (damagedHealthShrinkTimer < 0)

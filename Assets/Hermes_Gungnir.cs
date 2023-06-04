@@ -72,7 +72,8 @@ public class Hermes_Gungnir : MonoBehaviour
     {
         GameObject hermes = GameObject.FindWithTag("Boss");
         yield return new WaitForSeconds(time);
-        
+
+        if (hermes != null || !hermes.activeSelf) yield break;
         Vector3 dir = (hermes.transform.position - transform.position).normalized;
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
@@ -94,5 +95,7 @@ public class Hermes_Gungnir : MonoBehaviour
             rb.velocity = dir * 2f + dir.normalized * 5f; // Moves faster when further away
             yield return new WaitForSeconds(0.01f);
         }
+
+        Destroy(gameObject);
     }
 }

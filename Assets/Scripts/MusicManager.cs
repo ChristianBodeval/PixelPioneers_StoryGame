@@ -65,6 +65,7 @@ public class MusicManager : MonoBehaviour
 
     public void PlayMusic(AudioClip clip, float volume)
     {
+        audioSource = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
         clipVolume = volume;
         if (audioSource == null) return;
 

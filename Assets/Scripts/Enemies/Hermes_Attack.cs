@@ -18,6 +18,7 @@ public class Hermes_Attack : Enemy_Attack
     [SerializeField] private float waveCooldown;
     public float chargeDelay;
     public float postFireDelay;
+    [HideInInspector] public float castTimeMultiplier = 1f;
     private int currentSegment = 1;
     private bool isWaveRDY = true;
     private Coroutine waveCDCoroutine;
@@ -68,8 +69,12 @@ public class Hermes_Attack : Enemy_Attack
         }
 
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        // Instantiate and manipulate wave segment
         GameObject segment = Instantiate(segmentPrefab, transform.position, Quaternion.AngleAxis(angle, Vector3.forward));
-        StartCoroutine(segment.GetComponent<SegmentScript>().LerpAlphaIn(angle, waveDamage, gameObject));
+        var script = segment.GetComponent<SegmentScript>();
+        script.castTimeMultiplier = castTimeMultiplier;
+        StartCoroutine(script.LerpAlphaIn(angle, waveDamage, gameObject));
         segment.transform.position = startLocation + dir * (currentSegment * segmentLength - (segmentLength / 2) );
         segment.transform.localScale = new Vector3(segmentLength, segmentWidth * (1 + segmentGrowthRate * currentSegment), 1f);
         var ps = segment.GetComponentInChildren<ParticleSystem>().shape; // Shape of particle emitter
@@ -81,7 +86,7 @@ public class Hermes_Attack : Enemy_Attack
     private IEnumerator SegmentDelay()
     {
         if (currentSegment > segmentAmounts) { currentSegment = 1; yield break; } // Guard clause
-        yield return new WaitForSeconds(attackTelegraphTime);
+        yield return new WaitForSeconds(attackTelegraphTime * castTimeMultiplier);
         currentSegment++;
         ThrowWave();
     }

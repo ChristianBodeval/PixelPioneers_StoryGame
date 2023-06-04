@@ -28,7 +28,6 @@ public class UpgradeManager : MonoBehaviour
             instance = this;
         }
         
-        
         abilityGameObjects.ForEach(abilityGameObject =>
         {
             upgradeableAbilities.Add(abilityGameObject.GetComponent<IUpgradeable>());
@@ -59,10 +58,9 @@ public class UpgradeManager : MonoBehaviour
     
     public void UpgradeAbilityOption2(IUpgradeable upgradeable)
     {
+        upgradeable.UpgradeOption2();
         SaveManager.singleton.SaveAbilityUpgrade(upgradeable.GetAbilityName()+1, 0);
         SaveManager.singleton.SaveAbilityUpgrade(upgradeable.GetAbilityName()+2, 1);
-
-        upgradeable.UpgradeOption2();
     }
     
     public void Downgrade(IUpgradeable upgradeable)
