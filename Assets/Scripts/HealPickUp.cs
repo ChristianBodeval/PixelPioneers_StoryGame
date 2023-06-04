@@ -36,6 +36,7 @@ public class HealPickUp : MonoBehaviour
             if (Vector3.Distance(player.transform.position, transform.position) <= consumeDistance)
             {
                 player.GetComponent<PlayerHealth>().HealDamage(healAmount);
+                SFXManager.singleton.PlaySound(pickupSFX, transform.position, sfxVolume);
                 HealthPickUp.pickUpPool.ReturnToPool(gameObject); // Return to pool
             }
         }
@@ -69,7 +70,6 @@ public class HealPickUp : MonoBehaviour
     // Resets variables before next use - healthpickups are pooled and reused
     private void OnDisable()
     {
-        SFXManager.singleton.PlaySound(pickupSFX, transform.position, sfxVolume);
         if (coroutine != null) StopCoroutine(coroutine);
         isMoving = false;
     }

@@ -260,10 +260,13 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Activate Hermes
-        GameObject hermes = GameObject.FindWithTag("Boss");
-        hermes.GetComponent<WeaponAbility>().enabled = true;
-        hermes.GetComponent<Hermes_Pathing>().enabled = true;
-        hermes.GetComponent<Hermes_Attack>().enabled = true;
+        GameObject hermes = GameObject.FindWithTag("Boss") ?? null;
+        if (hermes != null)
+        {
+            hermes.GetComponent<WeaponAbility>().enabled = true;
+            hermes.GetComponent<Hermes_Pathing>().enabled = true;
+            hermes.GetComponent<Hermes_Attack>().enabled = true;
+        }
 
         Time.timeScale = 1f;
     }

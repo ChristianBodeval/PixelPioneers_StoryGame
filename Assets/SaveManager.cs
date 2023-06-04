@@ -19,10 +19,7 @@ public class SaveManager : MonoBehaviour
     public bool weapon4;
     public bool weapon4Upgrade1;
     public bool weapon4Upgrade2;
-    public bool cave1Cleared;
-    public bool cave2Cleared;
-    public bool cave3Cleared;
-    public bool cave4Cleared;
+    public int cavesCleared;
 
     public static SaveManager singleton { get; private set; }
 
@@ -37,6 +34,7 @@ public class SaveManager : MonoBehaviour
         else
         {
             singleton = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -45,6 +43,16 @@ public class SaveManager : MonoBehaviour
         playerPosition = GameObject.Find("Player").transform.position;
         currentScene = SceneManager.GetActiveScene().name;
         LoadPlayerData();
+
+        for (int i = 1; i < 5; i++)
+        {
+            cavesCleared += PlayerPrefs.GetInt($"Weapon{i}");
+        }
+    }
+
+    private void OnDisable()
+    {
+        SavePlayerData();
     }
 
     private void OnDestroy()
@@ -83,19 +91,11 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetInt("Weapon4Upgrade1", weapon4Upgrade1 ? 1 : 0);
         PlayerPrefs.SetInt("Weapon4Upgrade2", weapon4Upgrade2 ? 1 : 0);
 
-        PlayerPrefs.SetInt("Cave1Cleared", cave1Cleared ? 1 : 0);
-        PlayerPrefs.SetInt("Cave2Cleared", cave2Cleared ? 1 : 0);
-        PlayerPrefs.SetInt("Cave3Cleared", cave3Cleared ? 1 : 0);
-        PlayerPrefs.SetInt("Cave4Cleared", cave4Cleared ? 1 : 0);
-        
-
+        PlayerPrefs.SetInt("CavesCleared", cavesCleared);
         
         PlayerPrefs.Save();
-        
     }
     
-    
-
     public void LoadPlayerData()
     {
         // Load player position
@@ -123,9 +123,6 @@ public class SaveManager : MonoBehaviour
         weapon4Upgrade1 = PlayerPrefs.GetInt("Weapon4Upgrade1") == 1;
         weapon4Upgrade2 = PlayerPrefs.GetInt("Weapon4Upgrade2") == 1;
         
-        cave1Cleared = PlayerPrefs.GetInt("Cave1Cleared") == 1;
-        cave2Cleared = PlayerPrefs.GetInt("Cave2Cleared") == 1;
-        cave3Cleared = PlayerPrefs.GetInt("Cave3Cleared") == 1;
-        cave4Cleared = PlayerPrefs.GetInt("Cave4Cleared") == 1;
+        cavesCleared = PlayerPrefs.GetInt("CavesCleared");
     }
 }

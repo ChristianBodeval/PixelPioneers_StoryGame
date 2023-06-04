@@ -11,20 +11,13 @@ public class SendWave : MonoBehaviour
     [Header("Music")]
     [Range(0, 1)] public float musicVolume = 0.5f;
     [SerializeField] protected AudioClip combatTrack;
-
-    [SerializeField] private WaveObject[] waves;
     private SpawnSystem spawnSystem;
     private Coroutine sendWavesCoroutine = null;
     private int currentWave;
     private bool isSent = false;
     
-
-    
     public UnityEvent caveStartedEvent;
-    public UnityEvent caveClearedEvent;
-    
-    
-    
+
     private void Start()
     {
         spawnSystem = GameObject.Find("GameManager").GetComponent<SpawnSystem>();
@@ -52,12 +45,10 @@ public class SendWave : MonoBehaviour
     private IEnumerator SendWavesCoroutine()
     {
         yield return null;
-        
-        if(currentWave == waves.Length) caveClearedEvent.Invoke();
-        
-        while (currentWave < waves.Length)
+
+        foreach (var wave in GetComponentsInChildren<WaveObject>())
         {
-            spawnSystem.AddWave(waves[currentWave]); // Add wave to spawnsystem
+            spawnSystem.AddWave(wave); // Add wave to spawnsystem
             currentWave++;
         }
     }

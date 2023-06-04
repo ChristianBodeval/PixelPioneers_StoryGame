@@ -21,6 +21,8 @@ public class HermesPathingSmol : MonoBehaviour
     private Seeker seeker;
     private Vector2 targetPos;
 
+    [HideInInspector] public bool isFinalScene = false;
+
     private void Start()
     {
         seeker = GetComponent<Seeker>();
@@ -28,8 +30,7 @@ public class HermesPathingSmol : MonoBehaviour
         player = GameObject.Find("Player");
         targetPos = GameObject.Find("SpawnPointOutsideEntrance").transform.position;
 
-        player.GetComponent<PlayerAction>().StopMove();
-        player.GetComponent<PlayerHealth>().HealDamage(10f);
+         player.GetComponent<PlayerHealth>().HealDamage(100f);
 
         StartCoroutine(SetBehavior());
     }

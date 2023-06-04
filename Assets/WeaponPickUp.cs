@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class WeaponPickUp : MonoBehaviour
 {
+    [SerializeField] private TextAsset[] pickUpNotification = new TextAsset[3];
+
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (!col.CompareTag("Player")) return;
@@ -27,18 +29,21 @@ public class WeaponPickUp : MonoBehaviour
                 SaveManager.singleton.weapon2 = true;
                 SaveManager.singleton.weapon3 = false;
                 SaveManager.singleton.weapon4 = false;
+                DialogueManager.dialogManager.EnterDialogueMode(pickUpNotification[0]);
                 break;
             case 2:
                 SaveManager.singleton.weapon1 = true;
                 SaveManager.singleton.weapon2 = true;
                 SaveManager.singleton.weapon3 = true;
                 SaveManager.singleton.weapon4 = false;
+                DialogueManager.dialogManager.EnterDialogueMode(pickUpNotification[1]);
                 break;
             case 3:
                 SaveManager.singleton.weapon1 = true;
                 SaveManager.singleton.weapon2 = true;
                 SaveManager.singleton.weapon3 = true;
                 SaveManager.singleton.weapon4 = true;
+                DialogueManager.dialogManager.EnterDialogueMode(pickUpNotification[2]);
                 break;
             default:
                 break;

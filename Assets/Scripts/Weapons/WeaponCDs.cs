@@ -46,6 +46,8 @@ public class WeaponCDs : MonoBehaviour
         {
             Instance = this;
         }
+
+        DontDestroyOnLoad(gameObject);
     }
     
 

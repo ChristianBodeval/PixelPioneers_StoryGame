@@ -56,18 +56,15 @@ public class Health : MonoBehaviour
             {
                 GetComponent<Hermes_Pathing>().MoveOnHitTaken();
 
-                if (Random.Range(0,2) == 0)
-                {
-                    SFXManager.singleton.PlaySound(bossBloodSFX, transform.position, sfxVolume);
+                SFXManager.singleton.PlaySound(bossBloodSFX, transform.position, sfxVolume * 0.65f);
 
-                    // Create blood and pickup
-                    HealthPickUp.pickUpPool.AddHealthPickUp(transform.position, 1f); // Spawn health pickup
-                    GameObject blood = Pool.pool.DrawFromBloodPool();
-                    blood.transform.position = transform.position;
-                    blood.transform.Rotate(new Vector3(0f, 0f, Random.Range(0, 4) * 90f)); // Random rotation
-                    float size = Random.Range(2f, 3f);
-                    blood.transform.localScale = new Vector3(size, size, 1f);
-                }
+                // Create blood and pickup
+                HealthPickUp.pickUpPool.AddHealthPickUp(transform.position, Random.Range(0.3f, 1f)); // Spawn health pickup
+                GameObject blood = Pool.pool.DrawFromBloodPool();
+                blood.transform.position = transform.position;
+                blood.transform.Rotate(new Vector3(0f, 0f, Random.Range(0, 4) * 90f)); // Random rotation
+                float size = Random.Range(2f, 3f);
+                blood.transform.localScale = new Vector3(size, size, 1f);
             }
 
             // Freeze frame enemies
@@ -189,9 +186,20 @@ public class Health : MonoBehaviour
             gameObject.SetActive(false);
             Destroy(GameObject.Find("Parent_Mjoelnir(Clone)"));
             MusicManager.singleton.PlayMusic(casualTrack, musicVolume);
+
             Instantiate(hermesDeathParticles, transform.position, transform.rotation);
-            Instantiate(GetComponent<WeaponAbility>().weaponPickUp, transform.position, transform.rotation);
-            Instantiate(hermesSmol, transform.position, transform.rotation);
+            GameObject smolHermes = Instantiate(hermesSmol, transform.position, transform.rotation);
+
+            if (!GetComponent<WeaponAbility>().IsFinalScene())
+            {
+                Instantiate(GetComponent<WeaponAbility>().weaponPickUp, transform.position, transform.rotation);
+                player.GetComponent<PlayerAction>().StopMove();
+            }
+            else
+            {
+                // Start dialogue
+                CaveManager.instance.EndCave();
+            }
         }
     }
 
