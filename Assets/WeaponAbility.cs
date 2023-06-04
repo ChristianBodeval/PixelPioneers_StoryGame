@@ -59,6 +59,7 @@ public class WeaponAbility : MonoBehaviour
 
         isPlaying = false;
         if (bossHealthBar != null) bossHealthBar.SetActive(true);
+        GameObject.Find("GameManager").GetComponent<SpawnSystem>().ClearLists();
         SetAbilities();
     }
 
@@ -75,16 +76,20 @@ public class WeaponAbility : MonoBehaviour
         {
             case 1:
                 hasDash = true;
+                GetComponent<Hermes_Attack>().castTimeMultiplier = 2f;
                 break;
             case 2:
                 cleanUpOnDeathList.Add(Instantiate(mjoelnir, new Vector3(transform.position.x, transform.position.y, 0f), transform.rotation));
+                GetComponent<Hermes_Attack>().castTimeMultiplier = 1.5f;
                 break;
             case 3:
                 hasGungnir = true;
+                GetComponent<Hermes_Attack>().castTimeMultiplier = 1.2f;
                 break;
             case 4:
                 hasDash = true;
                 cleanUpOnDeathList.Add(Instantiate(mjoelnir, new Vector3(transform.position.x, transform.position.y, 0f), transform.rotation));
+                GetComponent<Hermes_Attack>().castTimeMultiplier = 1f;
                 hasGungnir = true;
                 break;
             default:
@@ -138,8 +143,6 @@ public class WeaponAbility : MonoBehaviour
         bool isStuck = false;
 
         SFXManager.singleton.PlaySound(sprintSFX, transform.position, sfxVolume, transform);
-
-        float t = 0;
 
         // Move to new position
         while (distance > 1.5f && !isStuck)
@@ -287,6 +290,13 @@ public class WeaponAbility : MonoBehaviour
         animator.Play("Idle");
 
         StartCoroutine(WeaponCooldown());
+    }
+
+    public bool IsFinalScene()
+    {
+        bool isFinalScene = ExtractNumberFromName(SceneManager.GetActiveScene().name) == 4;
+
+        return isFinalScene;
     }
 
     private int ExtractNumberFromName(string name)

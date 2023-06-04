@@ -52,6 +52,7 @@ public class Pool : MonoBehaviour
 
     private void Start()
     {
+        ClearLists();
         StartCoroutine(SpawnPickUps()); // Constantly checking for healthpicks to spawn
     }
 
@@ -279,7 +280,7 @@ public class Pool : MonoBehaviour
         storageBloodSplatters.Add(ps);
     }
 
-    private void OnDestroy()
+    public void ClearLists()
     {
         // Clear all lists
         storageEnemies.Clear();

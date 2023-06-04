@@ -61,6 +61,9 @@ public class Dash : Ability
         fireSpawn = GetComponent<FireDashSpawn>();
         slashDash = GetComponent<SweepingDash>();
         canDash = true;
+
+        hasUpgrade1 = SaveManager.singleton.weapon2Upgrade1;
+        hasUpgrade2 = SaveManager.singleton.weapon2Upgrade2;
     }
     
     private void OnEnable()
@@ -191,16 +194,22 @@ public class Dash : Ability
 
     public override void UpgradeOption1()
     {
-        base.UpgradeOption1();
         hasUpgrade1 = true;
         hasUpgrade2 = false;
+        SaveManager.singleton.weapon2Upgrade1 = true;
+        SaveManager.singleton.weapon2Upgrade2 = false;
+        SaveManager.singleton.SavePlayerData();
+        base.UpgradeOption1();
     }
 
     public override void UpgradeOption2()
     {
-        base.UpgradeOption2();
         hasUpgrade1 = false;
         hasUpgrade2 = true;
+        SaveManager.singleton.weapon2Upgrade1 = false;
+        SaveManager.singleton.weapon2Upgrade2 = true;
+        SaveManager.singleton.SavePlayerData();
+        base.UpgradeOption2();
     }
 
     public override void Downgrade()

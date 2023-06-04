@@ -79,6 +79,9 @@ public class Mjoelnir : Ability, IUpgradeable
         obstacleLayer = LayerMask.GetMask("Obstacles");
         pitLayer = LayerMask.GetMask("Pit");
         isPlaying = false;
+
+        hasChargeUpgrade = SaveManager.singleton.weapon3Upgrade1;
+        hasAreaOfEffectUpgrade = SaveManager.singleton.weapon3Upgrade2;
     }
     
     void OnEnable()
@@ -97,16 +100,7 @@ public class Mjoelnir : Ability, IUpgradeable
 
         ChargeAbility();
 
-        AOEAbility();
-        
-        //If c-key is pressed
-        if(Input.GetKeyDown(KeyCode.C))
-        {
-            WeaponCDs.Instance.StartCoroutine(WeaponCDs.Instance.MjoelnirCD());
-
-        }
-        
-        
+        AOEAbility();     
     }
 
     private void FixedUpdate()
@@ -173,6 +167,7 @@ public class Mjoelnir : Ability, IUpgradeable
 
     private void EnableHammer()
     {
+        isCharging = false;
         canSpin = true;    // Allow the hammer to spin again
         GetComponent<CircleCollider2D>().enabled = true;    // Player can move again
     }
@@ -362,6 +357,8 @@ public class Mjoelnir : Ability, IUpgradeable
 
             yield return null;
         }
+
+        transform.position = player.transform.position;
     }
 
     // AoE ability
@@ -465,6 +462,9 @@ public class Mjoelnir : Ability, IUpgradeable
         base.UpgradeOption1();
         hasChargeUpgrade = true;
         hasAreaOfEffectUpgrade = false;
+        SaveManager.singleton.weapon3Upgrade1 = true;
+        SaveManager.singleton.weapon3Upgrade2 = false;
+        SaveManager.singleton.SavePlayerData();
     }
 
     public override void UpgradeOption2()
@@ -472,6 +472,9 @@ public class Mjoelnir : Ability, IUpgradeable
         base.UpgradeOption2();
         hasChargeUpgrade = false;
         hasAreaOfEffectUpgrade = true;
+        SaveManager.singleton.weapon3Upgrade1 = false;
+        SaveManager.singleton.weapon3Upgrade2 = true;
+        SaveManager.singleton.SavePlayerData();
     }
     
 

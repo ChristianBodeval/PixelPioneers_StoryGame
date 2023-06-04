@@ -27,8 +27,7 @@ public class CaveManager : MonoBehaviour
         sendWave = FindObjectOfType<SendWave>();
         caveEntrance = FindObjectOfType<CaveEntrance>();
         player = GameObject.FindWithTag("Player");
-        sendWave.caveStartedEvent.AddListener(StartCave);
-        sendWave.caveClearedEvent.AddListener(EndCave);
+        if (sendWave != null) sendWave.caveStartedEvent.AddListener(StartCave);
     }
     
 
@@ -50,5 +49,6 @@ public class CaveManager : MonoBehaviour
     {
         caveEntrance.SetAccessibility(true);
         ProgressManager.instance.CaveHasBeenCleared();
+        GameObject.Find("GameManager").GetComponent<SpawnSystem>().ClearLists();
     }
 }

@@ -21,6 +21,6 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: c3bb54478dacfd04db5acf2a986dfe76, type: 3}
   isFollowingCaster: 1
   canChangeColors: 1
-  sfxVolume: 1
+  sfxVolume: 0.5
   slashSFX: {fileID: 8300000, guid: a4efd1ec0f7ccb7449de46cfa4710693, type: 3}
   prefab: {fileID: 2466254036439457206, guid: 22c9c2b72e5c549b0a02f76f3bd834af, type: 3}

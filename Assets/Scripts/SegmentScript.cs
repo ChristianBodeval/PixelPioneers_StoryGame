@@ -11,6 +11,7 @@ public class SegmentScript : MonoBehaviour
     [SerializeField] private AudioClip sfx;
 
     [SerializeField] private float alphaMaximum = 0.5f;
+    [HideInInspector] public float castTimeMultiplier = 1f;
     private GameObject parentBruiser;
     private SpriteRenderer sr;
     private Coroutine cr;
@@ -36,7 +37,7 @@ public class SegmentScript : MonoBehaviour
         // Slow increase of alpha
         while (a < 1f)
         {
-            if (a > 0.2f && !hasPlayed)
+            if (a > 0.8f && !hasPlayed)
             {
                 SFXManager.singleton.PlaySound(sfx, transform.position, sfxVolume);
                 hasPlayed = true;
@@ -44,7 +45,7 @@ public class SegmentScript : MonoBehaviour
 
             a += 0.1f;
             sr.color = new Color(r, g, b, accelerationCurve.Evaluate(a) * alphaMaximum);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.05f * castTimeMultiplier);
         }
 
         // Sudden blink

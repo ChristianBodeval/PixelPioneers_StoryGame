@@ -38,15 +38,22 @@ public class Bounds : MonoBehaviour
             {
                 if (e.transform != null && ( !Physics2D.OverlapPoint(e.transform.position, groundLayer) || Physics2D.OverlapPoint(e.transform.position, obstacleLayer) || Physics2D.OverlapPoint(e.transform.position, pitLayer)) )
                 {
-                    if (!e.transform.gameObject.CompareTag("Boss")) StartCoroutine(FindClosestValidPosition(e.transform.gameObject));               
+                    if (!e.transform.gameObject.CompareTag("Boss"))
+                    {
+                        StartCoroutine(FindClosestValidPosition(e.transform.gameObject));
+                    }
+                    else
+                    {
+                        StartCoroutine(FindClosestValidPosition(e.transform.gameObject));
+                    }
                 }
 
                 yield return null;
             }
 
             // Check if player is out of bounds
-            player = GameObject.FindWithTag("Player");
-            if (player.activeSelf && (!Physics2D.OverlapPoint(player.transform.position, groundLayer) || Physics2D.OverlapPoint(player.transform.position, obstacleLayer) || Physics2D.OverlapPoint(player.transform.position, pitLayer)))
+            player = GameObject.FindWithTag("Player") ?? null;
+            if (player != null && player.activeSelf && (!Physics2D.OverlapPoint(player.transform.position, groundLayer) || Physics2D.OverlapPoint(player.transform.position, obstacleLayer) || Physics2D.OverlapPoint(player.transform.position, pitLayer)))
             {
                 StartCoroutine(FindClosestValidPosition(player));
             }

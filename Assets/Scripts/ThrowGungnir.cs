@@ -41,6 +41,8 @@ public class ThrowGungnir : Ability, IUpgradeable
     private new void Start()
     {
         base.Start();
+        hasUpgrade1 = SaveManager.singleton.weapon4Upgrade1;
+        hasUpgrade2 = SaveManager.singleton.weapon4Upgrade2;
     }
 
     // StateUpdate is called once per frame
@@ -190,6 +192,9 @@ public class ThrowGungnir : Ability, IUpgradeable
         base.UpgradeOption1();
         hasUpgrade1 = true;
         hasUpgrade2 = false;
+        SaveManager.singleton.weapon4Upgrade1 = true;
+        SaveManager.singleton.weapon4Upgrade2 = false;
+        SaveManager.singleton.SavePlayerData();
     }
 
     public override void UpgradeOption2()
@@ -197,6 +202,9 @@ public class ThrowGungnir : Ability, IUpgradeable
         base.UpgradeOption2();
         hasUpgrade1 = false;
         hasUpgrade2 = true;
+        SaveManager.singleton.weapon4Upgrade1 = false;
+        SaveManager.singleton.weapon4Upgrade2 = true;
+        SaveManager.singleton.SavePlayerData();
     }
 
     public override void Downgrade()
