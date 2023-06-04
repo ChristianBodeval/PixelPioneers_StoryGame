@@ -6,12 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="31ee322b-587a-4c99-afc9-1b2b30998f9e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Ink/Demos/Basic Demo.unitypackage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Fathers House.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Fathers House.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerAction.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CaveEntrance.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/CaveEntrance.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/FloorIsElectric.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/FloorIsElectric.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ProgressManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ProgressManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/CaveHub.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/CaveHub.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_02.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_02.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashAbility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashAbility.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HitColliders/ColliderDrawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HitColliders/ColliderDrawer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ThrowGungnir.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ThrowGungnir.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/Dash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/Dash.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/Mjoelnir.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/Mjoelnir.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WeaponPickUp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/WeaponPickUp.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +33,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/dbe61739a05246e1994668ef874896ee27000/07/a590dcc6/StateMachineBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff33ef4d15af4b21939284be593d47da159a00/3b/083861a1/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff33ef4d15af4b21939284be593d47da159a00/70/331e9559/FormerlySerializedAsAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff33ef4d15af4b21939284be593d47da159a00/7b/103d65e2/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff33ef4d15af4b21939284be593d47da159a00/7c/f5da2bd0/LayerMask.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff33ef4d15af4b21939284be593d47da159a00/80/c4f22ec7/Component.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff33ef4d15af4b21939284be593d47da159a00/8e/7599b513/Object.cs" root0="SKIP_HIGHLIGHTING" />
@@ -91,10 +101,10 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="44120">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="44120" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -143,6 +153,8 @@
       <workItem from="1685705647049" duration="17027000" />
       <workItem from="1685730183187" duration="16643000" />
       <workItem from="1685792194257" duration="2273000" />
+      <workItem from="1685900409564" duration="864000" />
+      <workItem from="1685904489548" duration="4855000" />
     </task>
     <servers />
   </component>
@@ -187,6 +199,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/ProgressManager.cs</url>
+          <line>187</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/ProgressManager.cs" initialLine="185" containingFunctionPresentation="Method 'UpdateAllAbilities'">
+            <startOffsets>
+              <option value="6266" />
+            </startOffsets>
+            <endOffsets>
+              <option value="6308" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

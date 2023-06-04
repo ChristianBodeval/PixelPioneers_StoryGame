@@ -298,9 +298,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxVolume: 0.4
   groundZapSFX: {fileID: 8300000, guid: a7cb0a60bc66f654a9da6b28cc38c67c, type: 3}
-  tickEveryXSeconds: 0.5
+  tickEveryXSeconds: 0.3
   duration: 5
-  damagePrTick: 0.5
+  damagePrTick: 1
   lightningEffect: {fileID: 3294685474388290021}
 --- !u!1 &3294685474388290021
 GameObject:

@@ -16,11 +16,14 @@ public class ColliderDrawer : MonoBehaviour
 
     private void Start()
     {
-        // Set the enemy layer using the layer name
-        enemyLayer = LayerMask.GetMask("Enemy");
+        // Set the enemy layer ti Enemy and Charger
+        
+        int enemyLayer = LayerMask.GetMask("Enemy");
+        int chargerLayer = LayerMask.GetMask("Charger");
+        int combinedLayer = enemyLayer | chargerLayer;
 
-        // Alternatively, set the enemy layer using the layer index
-        // enemyLayer = 1 << LayerMask.NameToLayer("Enemies");
+        enemyLayer = combinedLayer;
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

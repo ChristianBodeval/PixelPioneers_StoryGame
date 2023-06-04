@@ -18,10 +18,10 @@ public class ProgressManager : MonoBehaviour
     public GameObject gungnirUI;
 
     //Abilities
-    public Ability slashGO;
-    public Ability dashGO;
-    public Ability mjoelnirGO;
-    public Ability gungnirGO;
+    [FormerlySerializedAs("slashGO")] public Ability slashScript;
+    [FormerlySerializedAs("dashGO")] public Ability dashScript;
+    [FormerlySerializedAs("mjoelnirGO")] public Ability mjoelnirScript;
+    [FormerlySerializedAs("gungnirGO")] public Ability gungnirScript;
     
     [FormerlySerializedAs("currentCaveAvailible")] public int numberOfCavesCleared;
 
@@ -58,6 +58,12 @@ public class ProgressManager : MonoBehaviour
         lastSceneName = SceneManager.GetActiveScene().name;
 
         FindAbilityComponents();
+        
+        
+        //Start with SlashAbility
+        GameObject.Find("SlashAbility").GetComponent<AbilityHolder>().UpgradeOption1();
+        GameObject.Find("SlashAbility").GetComponent<AbilityHolder>().UpgradeOption2();
+        
     }
 
     private void Start()
@@ -130,10 +136,10 @@ public class ProgressManager : MonoBehaviour
         mjoelnirUI = FindChildObjectByName(cds.transform, "MjoelnirCD");
         gungnirUI = FindChildObjectByName(cds.transform, "GungnirCD");
 
-        slashGO = GameObject.Find("SlashAbility").GetComponent<Ability>();
-        dashGO = GameObject.Find("Dash").GetComponent<Ability>();
-        mjoelnirGO = GameObject.Find("Mjoelnir").GetComponent<Ability>();
-        gungnirGO = GameObject.Find("GungnirThrow").GetComponent<Ability>();
+        slashScript = GameObject.Find("SlashAbility").GetComponent<Ability>();
+        dashScript = GameObject.Find("Dash").GetComponent<Ability>();
+        mjoelnirScript = GameObject.Find("Mjoelnir").GetComponent<Ability>();
+        gungnirScript = GameObject.Find("GungnirThrow").GetComponent<Ability>();
     }
 
     private GameObject FindChildObjectByName(Transform parent, string objectName)
@@ -154,31 +160,33 @@ public class ProgressManager : MonoBehaviour
     {
         //Disable all abilities && their UI's
         slashUI.SetActive(false);
-        slashGO.GetComponent<Ability>().enabled = false;
+        slashScript.GetComponent<Ability>().enabled = false;
         dashUI.SetActive(false);
-        dashGO.GetComponent<Ability>().enabled = false;
+        dashScript.GetComponent<Ability>().enabled = false;
         mjoelnirUI.SetActive(false);
-        mjoelnirGO.GetComponent<Ability>().enabled = false;
+        mjoelnirScript.GetComponent<Ability>().enabled = false;
         gungnirUI.SetActive(false);
-        gungnirGO.GetComponent<Ability>().enabled = false;
+        gungnirScript.GetComponent<Ability>().enabled = false;
     }
 
     public void UpdateAllAbilities()
     {
         slashUI.SetActive(SaveManager.singleton.cavesCleared > -1);
-        slashGO.enabled = SaveManager.singleton.cavesCleared > -1;
+        slashScript.enabled = SaveManager.singleton.cavesCleared > -1;
 
         dashUI.SetActive(SaveManager.singleton.cavesCleared > 0);
-        dashGO.enabled = SaveManager.singleton.cavesCleared > 0;
+        dashScript.enabled = SaveManager.singleton.cavesCleared > 0;
 
         mjoelnirUI.SetActive(SaveManager.singleton.cavesCleared > 1);
-        mjoelnirGO.enabled = SaveManager.singleton.cavesCleared > 1;
+        mjoelnirScript.enabled = SaveManager.singleton.cavesCleared > 1;
 
         gungnirUI.SetActive(SaveManager.singleton.cavesCleared > 2);
-        gungnirGO.enabled = SaveManager.singleton.cavesCleared > 2;
+        gungnirScript.enabled = SaveManager.singleton.cavesCleared > 2;
 
-        if (SaveManager.singleton.weapon1Upgrade1) slashGO.UpgradeOption1();
-        if (SaveManager.singleton.weapon1Upgrade2) slashGO.UpgradeOption1();
+        
+        
+        if (SaveManager.singleton.weapon1Upgrade1) slashScript.UpgradeOption1();
+        if (SaveManager.singleton.weapon1Upgrade2) slashScript.UpgradeOption2();
 
         if (SaveManager.singleton.weapon2Upgrade1) GameObject.Find("Dash").GetComponent<Dash>().hasUpgrade1 = true;
         if (SaveManager.singleton.weapon2Upgrade2) GameObject.Find("Dash").GetComponent<Dash>().hasUpgrade2 = true;

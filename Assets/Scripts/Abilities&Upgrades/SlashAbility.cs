@@ -16,6 +16,8 @@ public class SlashAbility : AbilitySO
 
     private bool isSwingingFromLeftToRight;
     
+    
+    
     public override void ActivateEffect(ColliderDrawer colliderDrawer)
     {
         isFollowingCaster = true;
@@ -51,8 +53,6 @@ public class SlashAbility : AbilitySO
         foreach (GameObject target in colliderDrawer.targets)
         {
             Damage(target);
-            
-            //spawn prefab
         }
     }
 
