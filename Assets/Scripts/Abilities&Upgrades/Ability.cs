@@ -48,7 +48,11 @@ public class Ability : MonoBehaviour, IUpgradeable
             Downgrade();
         }
     }
-    
+
+
+   
+
+
     //Listen for GetComponent<IUpgradeable>().UpgradeOption1() with a UnityEvent
     
     [SerializeField] public AbilitySO abilitySO;

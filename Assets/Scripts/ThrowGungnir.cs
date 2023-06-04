@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -37,7 +38,17 @@ public class ThrowGungnir : Ability, IUpgradeable
         gungnirScript = gungnir.GetComponent<Gungnir>();
         triThrowScript = triThrow.GetComponent<TriThrow>();
     }
+
+    private void OnEnable()
+    {
+        SaveManager.singleton.weapon4 = true;
+    }
     
+    private void OnDisable()
+    {
+        SaveManager.singleton.weapon4 = false;
+    }
+
     private new void Start()
     {
         base.Start();

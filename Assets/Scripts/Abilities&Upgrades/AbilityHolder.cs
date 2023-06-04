@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -38,7 +39,25 @@ public class AbilityHolder : Ability, IUpgradeable
         active,
         cooldown
     }
+
+    private void Awake()
+    {
+        upgradeOption1 = GameObject.Find("FloorIsElectric").GetComponent<AbilityHolder>();
+        upgradeOption2 = GameObject.Find("ElectricLine").GetComponent<AbilityHolder>();
+    }
+
+
+    void OnEnable()
+    {
+        if(gameObject.name == "SlashAbility")
+            SaveManager.singleton.weapon1 = true;
+    }
     
+    void OnDisable()
+    {
+        if(gameObject.name == "SlashAbility")
+        SaveManager.singleton.weapon1 = false;
+    }
     
     public IEnumerator ActivateEffect()
     {
