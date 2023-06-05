@@ -31,7 +31,7 @@ public class DialogueManager : MonoBehaviour
 
     [HideInInspector] public bool isShowingText;
 
-    [SerializeField] private float typingSpeed = 0.1f;
+    [SerializeField] private float typingSpeed = 0.02f;
 
     private Coroutine DisplayLineCoroutine;
 
@@ -68,21 +68,21 @@ public class DialogueManager : MonoBehaviour
 
     private void Awake()
     {
-        if (dialogManager != null && dialogManager != this)
-        {
-            Debug.Log("DialogueManager destroy");
-            Destroy(this);
-        }
-        else
-        {
-            dialogManager = this;
-        }
+        //if (dialogManager != null && dialogManager != this)
+        //{
+        //    Debug.Log("DialogueManager destroy");
+        //    //Destroy(this);
+        //}
+        //else
+        //{
+        //}
 
-        SceneManager.activeSceneChanged += FindVariables;
     }
 
     private void Start()
     {
+        SceneManager.activeSceneChanged += FindVariables;
+        dialogManager = this;
         brokkrFace = Resources.Load<Sprite>("Sprites/Brokkr");
         scryerFace = Resources.Load<Sprite>("Sprites/ScryerFace");
         lokiFace = Resources.Load<Sprite>("Sprites/LokiFace");
@@ -178,7 +178,7 @@ public class DialogueManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
 
-        if (dialogManager == null) yield break;
+        //if (dialogManager == null) yield break;
 
         isDialoguePlaying = false;
         //resets the text
@@ -279,7 +279,7 @@ public class DialogueManager : MonoBehaviour
 
     public void ContinueStory()
     {
-        if (currentStory.canContinue && gameObject != null && isActiveAndEnabled)
+        if (currentStory.canContinue && isActiveAndEnabled)
         {
             continueButton.enabled = false;
 
@@ -295,7 +295,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine("ExitDialogueMode");
+            StartCoroutine(ExitDialogueMode());
             Debug.Log("Dialog CANT continue");
         }
     }
@@ -355,5 +355,10 @@ public class DialogueManager : MonoBehaviour
     public void PauseTimeline()
     {
         currentTimeline.Pause();
+    } 
+    public void ResumeTimeline()
+    {
+        if (currentTimeline != null)    
+        currentTimeline.Resume();
     }
 }

@@ -24,6 +24,7 @@ public class SFXManager : MonoBehaviour
         }
         else
         {
+            DontDestroyOnLoad(gameObject);
             singleton = this;
         }
     }
