@@ -26,6 +26,7 @@ public class HermesPathingSmol : MonoBehaviour
     [HideInInspector] public bool isFinalScene = false;
 
     private Sprite hermesSprite;
+    private Sprite lokiSprteFile;
     private SpriteRenderer lokiSprite;
     private bool isUpdating = true;
 
@@ -45,8 +46,15 @@ public class HermesPathingSmol : MonoBehaviour
             isFinalScene = true;
             endScenePos = GameObject.Find("SpawnPointForEndScene").transform.position;
             hermesSprite = Resources.Load<Sprite>("Sprites/Hermes");
+            lokiSprteFile = Resources.Load<Sprite>("Sprites/Loki");
             lokiSprite = GetComponentInChildren<SpriteRenderer>();
             lokiSprite.sprite = hermesSprite;
+
+            if (this.gameObject.name.StartsWith("Loki"))
+            {
+                endScenePos = GameObject.Find("LokiSpawnPointEnd").transform.position;
+                lokiSprite.sprite = lokiSprteFile;
+            }
         }
     }
 
@@ -59,11 +67,8 @@ public class HermesPathingSmol : MonoBehaviour
             case 1:
             case 2:
             case 3:
-                InvokeRepeating("UpdatePath", 0f, updateInterval); // Updates pathfinding regularly
-                break;
             case 4:
-                    InvokeRepeating("UpdatePath", 0f, updateInterval); // Updates pathfinding regularly
-
+                InvokeRepeating("UpdatePath", 0f, updateInterval); // Updates pathfinding regularly
                 break;
 
             default:
@@ -92,12 +97,13 @@ public class HermesPathingSmol : MonoBehaviour
         PathFollow();
 
         if (Vector2.Distance(transform.position, targetPos) < 1.5f) { player.GetComponent<PlayerAction>().StartMove(); Destroy(gameObject); }
-        
-        if (isFinalScene && Vector2.Distance(transform.position, endScenePos) < 1.5f) { 
+
+        if (isFinalScene && Vector2.Distance(transform.position, endScenePos) < 3f)
+        {
             player.GetComponent<PlayerAction>().StartMove();
             isUpdating = false;
-            CancelInvoke();
             rb.velocity = Vector2.zero;
+            CancelInvoke();
         }
     }
 
