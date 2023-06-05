@@ -38,7 +38,7 @@ public class ThrowGungnir : Ability, IUpgradeable
         gungnirScript = gungnir.GetComponent<Gungnir>();
         triThrowScript = triThrow.GetComponent<TriThrow>();
     }
-
+    
     private void OnEnable()
     {
         SaveManager.singleton.weapon4 = true;

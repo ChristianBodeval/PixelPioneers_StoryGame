@@ -60,7 +60,6 @@ public class WeaponCDs : MonoBehaviour
             
         //Find the SlashAbility scriptable object in the resources folder
         //meleeScriptableObject = Resources.Load<SlashAbility>("ScriptableObjects/AbilitiesSO's/MeleeAttack.asset");
-        Debug.Log("MeleeSO:" + meleeScriptableObject);
         dashScript = GameObject.Find("Dash").GetComponent<Dash>();
         mjoelnirScript = GameObject.Find("Mjoelnir").GetComponent<Mjoelnir>();
         gungnirScript = GameObject.Find("GungnirThrow").GetComponent<ThrowGungnir>();

@@ -61,14 +61,13 @@ public class MusicManager : MonoBehaviour
         // Return true if found
         inCave = match.Success ? true : false;
 
+        audioSource = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
         if (inCave) PlayMusic(caveAmbience, 0.3f);
     }
 
     public void PlayMusic(AudioClip clip, float volume)
     {
-        audioSource = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
         clipVolume = volume;
-        if (audioSource == null) return;
 
         if (audioSource.isPlaying)
         {
@@ -127,13 +126,13 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    private void FadeIn()
+    public void FadeIn()
     {
         targetVolume = masterVolume * clipVolume;
         isFadingIn = true;
     }
 
-    private void FadeOut()
+    public void FadeOut()
     {
         targetVolume = 0.0f;
         isFadingOut = true;

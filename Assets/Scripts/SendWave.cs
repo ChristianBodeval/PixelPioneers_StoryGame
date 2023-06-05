@@ -17,7 +17,15 @@ public class SendWave : MonoBehaviour
     private bool isSent = false;
     
     public UnityEvent caveStartedEvent;
-
+    
+    
+    public PolygonCollider2D sendWavesCollider;
+    
+    void Awake()
+    {
+        sendWavesCollider = GetComponent<PolygonCollider2D>();
+    }
+    
     private void Start()
     {
         spawnSystem = GameObject.Find("GameManager").GetComponent<SpawnSystem>();
@@ -35,6 +43,8 @@ public class SendWave : MonoBehaviour
             if (sendWavesCoroutine != null) StopCoroutine(sendWavesCoroutine);
             sendWavesCoroutine = StartCoroutine(SendWavesCoroutine());
         }
+        
+        sendWavesCollider.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D col)

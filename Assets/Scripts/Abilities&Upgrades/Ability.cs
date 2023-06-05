@@ -22,9 +22,8 @@ public class Ability : MonoBehaviour, IUpgradeable
     {
         currentUpgrade = CurrentUpgrade.None;
         
-        PlayerPrefs.DeleteAll();
-        Downgrade();
         
+
         if (PlayerPrefs.GetInt(abilitySO.name+1) == 1)
         {
             //Upgrade from the childclass' IUpgradeable upgrade 1
@@ -39,21 +38,6 @@ public class Ability : MonoBehaviour, IUpgradeable
     }
     
     
-    void Update()
-    {
-        //If n key is pressed
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            //Downgrade
-            Downgrade();
-        }
-    }
-
-
-   
-
-
-    //Listen for GetComponent<IUpgradeable>().UpgradeOption1() with a UnityEvent
     
     [SerializeField] public AbilitySO abilitySO;
     [SerializeField] public List<UpgradeSO> upgrades;
@@ -71,6 +55,7 @@ public class Ability : MonoBehaviour, IUpgradeable
 
     public virtual void UpgradeOption1()
     {
+        Debug.Log("Upgrade 1");
         currentUpgrade = CurrentUpgrade.Upgrade1;
     }
 

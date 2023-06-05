@@ -29,16 +29,17 @@ public class CaveEntrance : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
     }
-
+/*
     void Start()
     {
-        if (spawnPoint == null && GameObject.Find("SpawnPointOutsideEntrance") != null) spawnPoint = GameObject.Find("SpawnPointOutsideEntrance").transform;
+        
 
         if (connectedToSceneName.Equals(ProgressManager.instance.lastSceneName))
         {
             player.transform.position = spawnPoint.position;
         }
     }    
+    */
     
     public void SetAccessibility(bool isAccessible)
     {
@@ -64,6 +65,7 @@ public class CaveEntrance : MonoBehaviour
             }
 
             StopAllCoroutines();
+            SpawnSystem.isSpawning = false;
             SceneManager.LoadScene(connectedToSceneName);
         }
     }

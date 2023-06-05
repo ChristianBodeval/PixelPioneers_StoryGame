@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6586156579023122348}
   - component: {fileID: 6586156579023122346}
-  - component: {fileID: 7289667607122211135}
   - component: {fileID: 1786492857}
   - component: {fileID: 6576694314547523346}
   m_Layer: 0
@@ -51,23 +50,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.2}
   serializedVersion: 2
   m_Radius: 1
---- !u!114 &7289667607122211135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6586156579023122347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 983a0f775b386463cb8d4122f177d7c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  caveNumber: 0
-  isAcessible: 0
-  spawnPoint: {fileID: 0}
-  circleCollider: {fileID: 6586156579023122346}
-  connectedToSceneName: CaveHub
 --- !u!212 &1786492857
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -134,5 +116,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sendWave: {fileID: 0}
   player: {fileID: 0}
-  caveEntrance: {fileID: 7289667607122211135}
+  caveEntrance: {fileID: 0}
   playerSpawnTransform: {fileID: 0}

@@ -17,6 +17,8 @@ public class ProgressManager : MonoBehaviour
     public GameObject mjoelnirUI;
     public GameObject gungnirUI;
 
+    public bool resetPlayerPrefs;
+    
     //Abilities
     [FormerlySerializedAs("slashGO")] public Ability slashScript;
     [FormerlySerializedAs("dashGO")] public Ability dashScript;
@@ -36,40 +38,48 @@ public class ProgressManager : MonoBehaviour
     private void OnSceneUnloaded(Scene unloadedScene)
     {
         lastSceneName = unloadedScene.name;
-
-        
-        
-        Debug.Log("Scene unloaded: " + unloadedScene.name);
     }
 
     private void Awake()
     {
+        
+        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
+        
         if (instance != null && instance != this)
         {
-            Debug.Log("ProgressManager destroy");
-            Destroy(this);
+            Debug.Log("ProgressManager is existing, destroying this one");
+
+
+            Destroy(this.gameObject);
         }
         else
         {
             instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
 
         SceneManager.sceneLoaded += OnSceneLoaded;
         lastSceneName = SceneManager.GetActiveScene().name;
 
+
+        
+        //Reset playerprefs
+        if (resetPlayerPrefs)
+        {
+            PlayerPrefs.DeleteAll();
+        }
+        
         FindAbilityComponents();
         
-        
-        //Start with SlashAbility
-        GameObject.Find("SlashAbility").GetComponent<AbilityHolder>().UpgradeOption1();
-        GameObject.Find("SlashAbility").GetComponent<AbilityHolder>().UpgradeOption2();
-        
+        SaveManager.singleton.cavesCleared = numberOfCavesCleared;
+
     }
 
     private void Start()
     {
         DisableAllAbilities();
         UpdateAllAbilities();
+        
     }
 
     public void UpdatePlayerPosition()
@@ -94,14 +104,24 @@ public class ProgressManager : MonoBehaviour
     
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        
+        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
+        
         FindAbilityComponents();
         UpdateAllAbilities();
-        HealthPickUp.pickUpPool.ClearLists();
-        Pool.pool.ClearLists();
+        
+        if (HealthPickUp.pickUpPool != null)
+            HealthPickUp.pickUpPool.ClearLists();
+        
+        if(Pool.pool != null)
+            Pool.pool.ClearLists();
+
+
+        UpdatePlayerPosition();
+        //Spawn player at the CaveEntrance connected to the last scene
 
         if (scene.name == "CaveHub")
         {
-            caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
 
             //Erase all caveEntrances from the list that are not tagged CaveEntrance
             for (int i = caveEntrances.Count - 1; i >= 0; i--)
@@ -115,6 +135,8 @@ public class ProgressManager : MonoBehaviour
             //Sort them by gameobject name
             caveEntrances.Sort((x, y) => x.gameObject.name.CompareTo(y.gameObject.name));
             
+            
+            
             //Activate the number of caves equal to currentCaveAvailible
             for (int i = 0; i < caveEntrances.Count; i++)
             {
@@ -122,10 +144,10 @@ public class ProgressManager : MonoBehaviour
             }
 
             UpgradeManager.instance.UpdateProgress(SaveManager.singleton.cavesCleared + 1);
-            ProgressManager.instance.UpdateAllAbilities();
-
             //Search for the cave entrance with the connected to scene name as lastSceneName
         }
+
+        
     }
 
     private void FindAbilityComponents()
@@ -185,6 +207,7 @@ public class ProgressManager : MonoBehaviour
 
         
         
+        Debug.Log("Updating abilities");
         if (SaveManager.singleton.weapon1Upgrade1) slashScript.UpgradeOption1();
         if (SaveManager.singleton.weapon1Upgrade2) slashScript.UpgradeOption2();
 

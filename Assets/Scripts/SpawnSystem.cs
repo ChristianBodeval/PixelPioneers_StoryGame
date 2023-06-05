@@ -14,7 +14,7 @@ public class SpawnSystem : MonoBehaviour
     private static int remainingAlive = 0;
     private List<int> randomizingList = new List<int>();
     private Coroutine waveAliveCoroutine = null;
-    private static bool isSpawning = false;
+    [HideInInspector] public static bool isSpawning = false;
     private float postWaveWaitTime = 0f;
     private Coroutine awaitAddWaveCoroutine;
     private GameObject player;
@@ -117,9 +117,6 @@ public class SpawnSystem : MonoBehaviour
 
             if (waveAlive && !isSpawning)
             {
-                Debug.Log("Wave completed. waveAlive: " + waveAlive);
-                Debug.Log("waitingDeathList count: " + remainingAlive);
-                Debug.Log("Isspawning: " + isSpawning);
                 currentWave++; // UI knows it's the next wave - only true if wave was alive and now is dead
                 if (remainingAlive < 1 && !isSpawning) waveAlive = false;
                 yield return new WaitForSeconds(postWaveWaitTime);
@@ -210,6 +207,7 @@ public class SpawnSystem : MonoBehaviour
     {
         wavesToSpawn.Clear();
         randomizingList.Clear();
+        remainingAlive = 0;
     }
 
     private void OnDisable()

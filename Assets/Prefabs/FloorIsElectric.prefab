@@ -58,7 +58,7 @@ MonoBehaviour:
   targets: []
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 4224
   spriteShapeController: {fileID: 1019147408074125077}
   spriteShapeRenderer: {fileID: 1019147408074125074}
   DrawInInspector: 1
@@ -300,7 +300,7 @@ MonoBehaviour:
   groundZapSFX: {fileID: 8300000, guid: a7cb0a60bc66f654a9da6b28cc38c67c, type: 3}
   tickEveryXSeconds: 0.3
   duration: 5
-  damagePrTick: 1
+  damagePrTick: 0.2
   lightningEffect: {fileID: 3294685474388290021}
 --- !u!1 &3294685474388290021
 GameObject:

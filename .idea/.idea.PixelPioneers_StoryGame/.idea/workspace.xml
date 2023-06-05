@@ -6,19 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="31ee322b-587a-4c99-afc9-1b2b30998f9e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CaveEntrance.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CaveEntrance.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CaveManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CaveEntrance.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/CaveEntrance.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CaveManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/CaveManager.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/FloorIsElectric.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/FloorIsElectric.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/SlashAbility.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/SlashAbility.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ProgressManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ProgressManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SaveManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/CaveHub.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/CaveHub.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_01.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_01.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_02.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_02.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashAbility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashAbility.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HitColliders/ColliderDrawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HitColliders/ColliderDrawer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_03.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_03.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/ChainEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/ChainEffect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/OverTimeEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/OverTimeEffect.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ThrowGungnir.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ThrowGungnir.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/Dash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/Dash.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/Mjoelnir.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/Mjoelnir.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/WeaponPickUp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/WeaponPickUp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WaveVisual.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WaveVisual.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
     </list>
@@ -44,7 +48,10 @@
     <setting file="file://$PROJECT_DIR$/Assets/CharacterUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CooldownIcon.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DestroyFromAnimationEvent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DoNotDestroy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Interactable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/bodeval/Spiludvikling_Og_Laeringsteknologi/Unity_Projekter_2.0/PixelPioneers_StoryGame/Assets/ProgressManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/bodeval/Spiludvikling_Og_Laeringsteknologi/Unity_Projekter_2.0/PixelPioneers_StoryGame/Assets/ProgressManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder_UI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitySO.cs" root0="FORCE_HIGHLIGHTING" />
@@ -101,10 +108,10 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="44120">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="44120" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -154,7 +161,8 @@
       <workItem from="1685730183187" duration="16643000" />
       <workItem from="1685792194257" duration="2273000" />
       <workItem from="1685900409564" duration="864000" />
-      <workItem from="1685904489548" duration="4855000" />
+      <workItem from="1685904489548" duration="10670000" />
+      <workItem from="1685971768257" duration="4799000" />
     </task>
     <servers />
   </component>
@@ -202,13 +210,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/ProgressManager.cs</url>
-          <line>187</line>
+          <line>210</line>
           <properties documentPath="$PROJECT_DIR$/Assets/ProgressManager.cs" initialLine="185" containingFunctionPresentation="Method 'UpdateAllAbilities'">
             <startOffsets>
-              <option value="6266" />
+              <option value="6633" />
             </startOffsets>
             <endOffsets>
-              <option value="6308" />
+              <option value="6675" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="15" />

@@ -281,7 +281,7 @@ MonoBehaviour:
   volume: 0.2
   swingSFX: {fileID: 8300000, guid: 108aa14c543847942b83844de1743c72, type: 3}
   attackDMG: 1.5
-  attackTelegraphTime: 0.2
+  attackTelegraphTime: 0.35
 --- !u!114 &1174431493
 MonoBehaviour:
   m_ObjectHideFlags: 0

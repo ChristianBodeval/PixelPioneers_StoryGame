@@ -30,8 +30,8 @@ public class AbilityHolder : Ability, IUpgradeable
     
     AbilityState state = AbilityState.ready;
     public Transform spawnPoint;
-    [SerializeField] private AbilityHolder upgradeOption1;
-    [SerializeField] private AbilityHolder upgradeOption2;
+    [SerializeField] public AbilityHolder upgradeOption1;
+    [SerializeField] public AbilityHolder upgradeOption2;
 
     enum AbilityState
     {
@@ -44,20 +44,23 @@ public class AbilityHolder : Ability, IUpgradeable
     {
         upgradeOption1 = GameObject.Find("FloorIsElectric").GetComponent<AbilityHolder>();
         upgradeOption2 = GameObject.Find("ElectricLine").GetComponent<AbilityHolder>();
+        
+        caster = GameObject.Find("Player");
     }
 
-
+/*    
     void OnEnable()
     {
         if(gameObject.name == "SlashAbility")
-            SaveManager.singleton.weapon1 = true;
+            if(SaveManager.singleton != null)
+                SaveManager.singleton.weapon1 = true;
     }
     
     void OnDisable()
     {
-        if(gameObject.name == "SlashAbility")
+        if(gameObject.name == "SlashAbility" && SaveManager.singleton != null)
         SaveManager.singleton.weapon1 = false;
-    }
+    }*/
     
     public IEnumerator ActivateEffect()
     {
@@ -90,10 +93,6 @@ public class AbilityHolder : Ability, IUpgradeable
             if (playerAction != null)
             {
                 transform.right = new Vector3(playerAction.lastFacing.x, 0, playerAction.lastFacing.y);
-                
-                Debug.Log("PlayerScript: " + playerAction);
-                Debug.Log("LastFacing: " + playerAction.lastFacing);
-                
             }
         }
         
@@ -230,24 +229,25 @@ public class AbilityHolder : Ability, IUpgradeable
     public override void UpgradeOption1()
     {
         base.UpgradeOption1();
+        
+        Debug.Log("Upgrading1");
         nextAbility = upgradeOption1;
-        SaveManager.singleton.weapon1Upgrade1 = true;
-        SaveManager.singleton.weapon1Upgrade2 = false;
+        if (SaveManager.singleton != null) SaveManager.singleton.weapon1Upgrade1 = true;
+        if (SaveManager.singleton != null) SaveManager.singleton.weapon1Upgrade2 = false;
     }
 
     public override void UpgradeOption2()
     {
         base.UpgradeOption2();
         nextAbility = upgradeOption2;
-        SaveManager.singleton.weapon1Upgrade2 = true;
-        SaveManager.singleton.weapon1Upgrade1 = false;
+        if (SaveManager.singleton != null) SaveManager.singleton.weapon1Upgrade2 = true;
+        if (SaveManager.singleton != null) SaveManager.singleton.weapon1Upgrade1 = false;
     }
 
     public override void Downgrade()
     {
         base.Downgrade();
         
-        Debug.Log("Downgrade");
         nextAbility = null;
     }
 }

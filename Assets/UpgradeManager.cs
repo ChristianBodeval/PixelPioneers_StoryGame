@@ -22,7 +22,6 @@ public class UpgradeManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Calling Awake");
         if (instance == null)
         {
             instance = this;

@@ -56,7 +56,7 @@ MonoBehaviour:
   targets: []
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 4224
   spriteShapeController: {fileID: 7653193225246075187}
   spriteShapeRenderer: {fileID: 7653193225246075186}
   DrawInInspector: 1
@@ -289,5 +289,5 @@ MonoBehaviour:
   hitCollider: {fileID: 7653193225246075181}
   colliderStat: {fileID: 11400000, guid: 5e269b22577be486fa851899f4cf3e37, type: 2}
   spawnPoint: {fileID: 0}
-  upgradeOption1: {fileID: 0}
-  upgradeOption2: {fileID: 0}
+  upgradeOption1: {fileID: 1019147408074125079, guid: 700e39e3cb3a249d2b956acbf5d9f7c5, type: 3}
+  upgradeOption2: {fileID: 8423785600306978788, guid: 6e6afd6f5f02a4680a8b5ce7b87f77b6, type: 3}
