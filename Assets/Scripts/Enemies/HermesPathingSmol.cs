@@ -30,7 +30,7 @@ public class HermesPathingSmol : MonoBehaviour
         player = GameObject.Find("Player");
         targetPos = GameObject.Find("SpawnPointOutsideEntrance").transform.position;
 
-         player.GetComponent<PlayerHealth>().HealDamage(100f);
+        player.GetComponent<PlayerHealth>().HealDamage(100f);
 
         StartCoroutine(SetBehavior());
     }

@@ -34,7 +34,6 @@ public class SlashAbility : AbilitySO
         SFXManager.singleton.PlaySound(slashSFX, position, sfxVolume);
         
         Animator animator = instance.GetComponentInChildren<Animator>();
-        Debug.Log(animator);
         
         if(isSwingingFromLeftToRight)
             animator.SetTrigger("RightSwing");
@@ -49,7 +48,6 @@ public class SlashAbility : AbilitySO
 
 
         //TODO Damage all enemy with health.
-        Debug.Log(("Instantiate"));
         foreach (GameObject target in colliderDrawer.targets)
         {
             Damage(target);

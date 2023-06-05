@@ -14,6 +14,11 @@ public class Range_Attack : Enemy_Attack
 
     private void FixedUpdate()
     {
+        if (animator.GetBool("IsFleeing"))
+        {
+            Attack(attackCD);
+        }
+
         InAttackRange(player); // Player variable is inherited from IEnemyAttack
     }
 

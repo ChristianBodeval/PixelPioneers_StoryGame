@@ -326,6 +326,7 @@ public class WeaponAbility : MonoBehaviour
 
     private void OnDisable()
     {
+        SpawnSystem.isSpawning = false;
         foreach (var obj in cleanUpOnDeathList)
         {
             Destroy(obj);

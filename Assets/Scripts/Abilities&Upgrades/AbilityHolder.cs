@@ -49,7 +49,7 @@ public class AbilityHolder : Ability, IUpgradeable
 
     void OnEnable()
     {
-        if(gameObject.name == "SlashAbility")
+        if(gameObject.name == "SlashAbility" && SaveManager.singleton != null)
             SaveManager.singleton.weapon1 = true;
     }
     
@@ -90,10 +90,6 @@ public class AbilityHolder : Ability, IUpgradeable
             if (playerAction != null)
             {
                 transform.right = new Vector3(playerAction.lastFacing.x, 0, playerAction.lastFacing.y);
-                
-                Debug.Log("PlayerScript: " + playerAction);
-                Debug.Log("LastFacing: " + playerAction.lastFacing);
-                
             }
         }
         
@@ -247,7 +243,6 @@ public class AbilityHolder : Ability, IUpgradeable
     {
         base.Downgrade();
         
-        Debug.Log("Downgrade");
         nextAbility = null;
     }
 }
