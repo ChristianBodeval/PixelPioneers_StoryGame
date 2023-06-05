@@ -30,6 +30,8 @@ public class HermesPathingSmol : MonoBehaviour
     private SpriteRenderer lokiSprite;
     private bool isUpdating = true;
 
+    public bool EndTargetTrigger;
+
     private void Start()
     {
         seeker = GetComponent<Seeker>();
@@ -90,6 +92,15 @@ public class HermesPathingSmol : MonoBehaviour
         }
         Debug.LogWarning("Failed to extract number from name: " + name);
         return -1; // Return a default value or handle the error as needed
+    }
+
+    public void SetEndTarget()
+    {
+        if (this.gameObject.name.StartsWith("Hermes"))
+        {
+            endScenePos = targetPos;
+            InvokeRepeating("UpdatePath", 0f, updateInterval); // Updates pathfinding regularly
+        }
     }
 
     private void FixedUpdate()
