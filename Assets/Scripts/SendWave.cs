@@ -43,7 +43,7 @@ public class SendWave : MonoBehaviour
             if (sendWavesCoroutine != null) StopCoroutine(sendWavesCoroutine);
             sendWavesCoroutine = StartCoroutine(SendWavesCoroutine());
         }
-        
+        if (SceneManager.GetActiveScene().name != "Viillage")
         sendWavesCollider.enabled = false;
     }
 

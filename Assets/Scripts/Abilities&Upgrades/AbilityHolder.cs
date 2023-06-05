@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.U2D;
 using UnityEngine.Windows;
@@ -42,8 +43,12 @@ public class AbilityHolder : Ability, IUpgradeable
 
     private void Awake()
     {
+        if(SceneManager.GetActiveScene().name != "Village")
+        {
+            
         upgradeOption1 = GameObject.Find("FloorIsElectric").GetComponent<AbilityHolder>();
         upgradeOption2 = GameObject.Find("ElectricLine").GetComponent<AbilityHolder>();
+        }
         
         caster = GameObject.Find("Player");
     }
