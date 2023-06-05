@@ -65,11 +65,14 @@ public class OverTimeEffect : Effect
             //TODO Set to tick pr seconds
 
             targets = colliderDrawer.targets;
+            
+            
 
             SFXManager.singleton.PlaySound(groundZapSFX, colliderDrawer.transform.position, sfxVolume);
 
             foreach (GameObject target in targets)
             {
+                if (target == null) continue;
                 target.GetComponent<Health>().TakeDamage(damagePrTick);
             }
             yield return new WaitForSeconds(tickEveryXSeconds);

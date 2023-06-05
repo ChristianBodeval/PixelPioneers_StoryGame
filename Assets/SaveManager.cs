@@ -26,6 +26,9 @@ public class SaveManager : MonoBehaviour
 
     private const string PlayerPrefsKey = "PlayerData";
 
+    
+    
+    
     private void Awake()
     {
         if (singleton != null && singleton != this)

@@ -17,6 +17,8 @@ public class ProgressManager : MonoBehaviour
     public GameObject mjoelnirUI;
     public GameObject gungnirUI;
 
+    public bool resetPlayerPrefs;
+    
     //Abilities
     [FormerlySerializedAs("slashGO")] public Ability slashScript;
     [FormerlySerializedAs("dashGO")] public Ability dashScript;
@@ -40,6 +42,9 @@ public class ProgressManager : MonoBehaviour
 
     private void Awake()
     {
+        
+        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
+        
         if (instance != null && instance != this)
         {
             Debug.Log("ProgressManager is existing, destroying this one");
@@ -58,6 +63,12 @@ public class ProgressManager : MonoBehaviour
 
 
         
+        //Reset playerprefs
+        if (resetPlayerPrefs)
+        {
+            PlayerPrefs.DeleteAll();
+        }
+        
         FindAbilityComponents();
         
         SaveManager.singleton.cavesCleared = numberOfCavesCleared;
@@ -68,6 +79,7 @@ public class ProgressManager : MonoBehaviour
     {
         DisableAllAbilities();
         UpdateAllAbilities();
+        
     }
 
     public void UpdatePlayerPosition()
@@ -92,18 +104,24 @@ public class ProgressManager : MonoBehaviour
     
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        
+        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
+        
         FindAbilityComponents();
         UpdateAllAbilities();
         
+        if (HealthPickUp.pickUpPool != null)
+            HealthPickUp.pickUpPool.ClearLists();
         
-        HealthPickUp.pickUpPool.ClearLists();
-        Pool.pool.ClearLists();
-        
-        
+        if(Pool.pool != null)
+            Pool.pool.ClearLists();
+
+
+        UpdatePlayerPosition();
+        //Spawn player at the CaveEntrance connected to the last scene
 
         if (scene.name == "CaveHub")
         {
-            caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
 
             //Erase all caveEntrances from the list that are not tagged CaveEntrance
             for (int i = caveEntrances.Count - 1; i >= 0; i--)
@@ -128,6 +146,8 @@ public class ProgressManager : MonoBehaviour
             UpgradeManager.instance.UpdateProgress(SaveManager.singleton.cavesCleared + 1);
             //Search for the cave entrance with the connected to scene name as lastSceneName
         }
+
+        
     }
 
     private void FindAbilityComponents()

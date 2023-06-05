@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1716280298308289375}
   m_LocalRotation: {x: -0, y: -0, z: -0.95116085, w: -0.30869585}
   m_LocalPosition: {x: 0, y: -0.02, z: 0}
-  m_LocalScale: {x: -3.5785744, y: 3.3691666, z: 0}
+  m_LocalScale: {x: 3.578574, y: -3.369167, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8185384195390594532}
@@ -84,6 +84,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 2
   m_SpriteSortPoint: 0
+--- !u!1 &3876826618728749913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 799369784023396493}
+  m_Layer: 0
+  m_Name: SpawnPointOutsideEntrance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &799369784023396493
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3876826618728749913}
+  m_LocalRotation: {x: -0, y: -0, z: 0.92387867, w: 0.38268548}
+  m_LocalPosition: {x: -0.17, y: 1.929, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8185384195390594532}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6642701386492767366
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,37 +198,6 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
---- !u!1 &6889089693319079517
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4115364895619486436}
-  m_Layer: 0
-  m_Name: SpawnPointOutsideEntrance
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4115364895619486436
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6889089693319079517}
-  m_LocalRotation: {x: -0, y: -0, z: 0.92387867, w: 0.38268548}
-  m_LocalPosition: {x: 0.18, y: 1.01, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8185384195390594532}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8185384195390594531
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +232,7 @@ Transform:
   - {fileID: 2218411013101420889}
   - {fileID: 8185384195493367206}
   - {fileID: 3063155784180091778}
-  - {fileID: 4115364895619486436}
+  - {fileID: 799369784023396493}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -132.67}
@@ -249,9 +249,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.056239415, y: -0.06274119}
+  m_Offset: {x: 0.109079674, y: -0.11558189}
   serializedVersion: 2
-  m_Radius: 0.68101937
+  m_Radius: 0.6062916
 --- !u!114 &5752489931124294519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   caveNumber: 0
   isAcessible: 1
-  spawnPoint: {fileID: 4115364895619486436}
+  spawnPoint: {fileID: 799369784023396493}
   circleCollider: {fileID: 8185384195390594530}
   connectedToSceneName: CaveHub
 --- !u!212 &3098169839242937841

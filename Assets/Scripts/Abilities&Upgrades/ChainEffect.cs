@@ -52,13 +52,23 @@ public class ChainEffect : Effect
             }
 
             randomNumber = Random.Range(0, newTargets.Length);
+            
+            
+            
+            
             newTarget = newTargets[randomNumber].transform.gameObject;
 
+            
+            
             for (int counter = 0; counter < 10; counter++)
             {
+                if (newTarget == null) {
+                    continue;
+                }
                 if (newTarget.GetInstanceID() != startingTarget.GetInstanceID())
                     break;
                 randomNumber = Random.Range(0, newTargets.Length);
+                
                 newTarget = newTargets[randomNumber].transform.gameObject;
             }
             
