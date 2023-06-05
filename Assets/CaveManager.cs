@@ -7,7 +7,7 @@ public class CaveManager : MonoBehaviour
     
     public GameObject player;
     public CaveEntrance caveEntrance;
-    public Transform playerSpawnTransform;
+
     
     public static CaveManager instance;
 
@@ -23,7 +23,7 @@ public class CaveManager : MonoBehaviour
             instance = this;
         }
 
-        playerSpawnTransform = GameObject.Find("SpawnPointOutsideEntrance").transform;
+
         sendWave = FindObjectOfType<SendWave>();
         caveEntrance = FindObjectOfType<CaveEntrance>();
         player = GameObject.FindWithTag("Player");

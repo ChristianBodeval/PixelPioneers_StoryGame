@@ -178,6 +178,7 @@ MonoBehaviour:
   dissolve: {fileID: 0}
   hermesSmol: {fileID: 5346146237246326270, guid: 719bb6bd7d85514489b5366bd8f83bdc, type: 3}
   hermesDeathParticles: {fileID: 9190634620285127154, guid: 91ab62390222a1c4d87151b79fc2c5ea, type: 3}
+  lokiSmol: {fileID: 6318983199925866516, guid: 95e8d07d328a7a844a48a03a9fcaa2d5, type: 3}
 --- !u!114 &979528337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +232,7 @@ MonoBehaviour:
   waveCooldown: 3
   chargeDelay: 0.2
   postFireDelay: 0
+  castTimeMultiplier: 1
 --- !u!114 &269643679029091581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1141,7 +1143,7 @@ MonoBehaviour:
   - {x: 0.4707036, y: -0.017021198, z: 0.00000018483634}
   m_ShapePathHash: 96680608
   m_Mesh: {fileID: 0}
-  m_InstanceId: 217850
+  m_InstanceId: 157784
   m_LocalBounds:
     m_Center: {x: -0.009998858, y: 0.0018541366, z: 0}
     m_Extent: {x: 0.48070246, y: 0.20846152, z: 0}

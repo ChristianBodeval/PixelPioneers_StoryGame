@@ -17,6 +17,8 @@ public class ProgressManager : MonoBehaviour
     public GameObject mjoelnirUI;
     public GameObject gungnirUI;
 
+    public bool resetPlayerPrefs;
+    
     //Abilities
     [FormerlySerializedAs("slashGO")] public Ability slashScript;
     [FormerlySerializedAs("dashGO")] public Ability dashScript;
@@ -40,6 +42,9 @@ public class ProgressManager : MonoBehaviour
 
     private void Awake()
     {
+        
+        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
+        
         if (instance != null && instance != this)
         {
             Debug.Log("ProgressManager is existing, destroying this one");
@@ -53,14 +58,20 @@ public class ProgressManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
 
-        FindAbilityComponents();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        lastSceneName = SceneManager.GetActiveScene().name;
 
-        if (SaveManager.singleton != null && SaveManager.singleton.isActiveAndEnabled)
+
+        
+        //Reset playerprefs
+        if (resetPlayerPrefs)
         {
-            SaveManager.singleton.cavesCleared = numberOfCavesCleared;
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            lastSceneName = SceneManager.GetActiveScene().name;
+            PlayerPrefs.DeleteAll();
         }
+        
+        FindAbilityComponents();
+        
+        SaveManager.singleton.cavesCleared = numberOfCavesCleared;
 
     }
 
@@ -68,6 +79,7 @@ public class ProgressManager : MonoBehaviour
     {
         DisableAllAbilities();
         UpdateAllAbilities();
+        
     }
 
     public void UpdatePlayerPosition()
@@ -92,18 +104,24 @@ public class ProgressManager : MonoBehaviour
     
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        
+        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
+        
         FindAbilityComponents();
         UpdateAllAbilities();
         
+        if (HealthPickUp.pickUpPool != null)
+            HealthPickUp.pickUpPool.ClearLists();
         
-        if (HealthPickUp.pickUpPool != null && HealthPickUp.pickUpPool.isActiveAndEnabled) HealthPickUp.pickUpPool.ClearLists();
-        if (Pool.pool != null && Pool.pool.isActiveAndEnabled) Pool.pool.ClearLists();
-        
-        
+        if(Pool.pool != null)
+            Pool.pool.ClearLists();
+
+
+        UpdatePlayerPosition();
+        //Spawn player at the CaveEntrance connected to the last scene
 
         if (scene.name == "CaveHub")
         {
-            caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
 
             //Erase all caveEntrances from the list that are not tagged CaveEntrance
             for (int i = caveEntrances.Count - 1; i >= 0; i--)
@@ -126,18 +144,10 @@ public class ProgressManager : MonoBehaviour
             }
 
             UpgradeManager.instance.UpdateProgress(SaveManager.singleton.cavesCleared + 1);
-
-            if (WeaponPickUp.stoneConvoPrepped > 0 && WeaponPickUp.isConvoPrepped)
-            {
-                string temp = $"StoneDialogue{WeaponPickUp.stoneConvoPrepped}";
-                Debug.Log(temp);
-                GameObject obj = GameObject.Find(temp);
-                Dialogue dialogue = obj.GetComponent<Dialogue>();
-                dialogue.StartDialogue();
-                WeaponPickUp.isConvoPrepped = false;
-            }
-
+            //Search for the cave entrance with the connected to scene name as lastSceneName
         }
+
+        
     }
 
     private void FindAbilityComponents()
@@ -194,7 +204,10 @@ public class ProgressManager : MonoBehaviour
 
         gungnirUI.SetActive(SaveManager.singleton.cavesCleared > 2);
         gungnirScript.enabled = SaveManager.singleton.cavesCleared > 2;
+
         
+        
+        Debug.Log("Updating abilities");
         if (SaveManager.singleton.weapon1Upgrade1) slashScript.UpgradeOption1();
         if (SaveManager.singleton.weapon1Upgrade2) slashScript.UpgradeOption2();
 
@@ -215,8 +228,7 @@ public class ProgressManager : MonoBehaviour
         if(SaveManager.singleton.cavesCleared == 4) return;
         SaveManager.singleton.cavesCleared++;
         SaveManager.singleton.SavePlayerData();
-
-        FindAbilityComponents();
+        
         UpdateAllAbilities();
     }
 }

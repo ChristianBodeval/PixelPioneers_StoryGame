@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,6 +22,9 @@ public class TimelineManager : MonoBehaviour
 
     private bool canContinue = true;
 
+    private GameObject lokiSmol;
+    private bool endOfGame = false;
+
     private void Awake()
     {
         rainSound = Resources.Load<AudioClip>("SFX/Ambiance_Rain");
@@ -37,7 +39,7 @@ public class TimelineManager : MonoBehaviour
 
     private void Start()
     {
-          timelineManager = this;
+        timelineManager = this;
         dialogueManager = GameObject.Find("GameManager").GetComponent<DialogueManager>();
     }
 
@@ -67,16 +69,27 @@ public class TimelineManager : MonoBehaviour
             timeIsScaled = false;
         }
 
+        // If the tutorial is started we resume the timeline
         if (tutorialIsStarted)
             Tutorial();
 
-        // If the tutorial is started we resume the timeline
+        if (endOfGame)
+        {
+            lokiSmol = GameObject.Find("Loki_smol(Clone)");
+            lokiSmol.GetComponent<HermesPathingSmol>().SetEndTarget();
+        }
     }
+
+    public void SetEndOfGameTarget()
+    {
+        endOfGame = true;
+    }
+
     public void StartScene(SceneAsset scene)
     {
         SceneManager.LoadScene(scene.name);
     }
-    
+
     private IEnumerator ResumeTLCoroutine()
     {
         canContinue = false;
@@ -135,7 +148,7 @@ public class TimelineManager : MonoBehaviour
             hasPressedWASDKeys[1] = true; // Set A key state to true
         }
         if (Input.GetKeyDown(KeyCode.S))
-        {   
+        {
             hasPressedWASDKeys[2] = true; // Set S key state to true
         }
         if (Input.GetKeyDown(KeyCode.D))

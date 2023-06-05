@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Playables;
 
 public class Health : MonoBehaviour
 {
@@ -34,6 +36,12 @@ public class Health : MonoBehaviour
     [SerializeField] private GameObject hermesSmol;
     [SerializeField] private GameObject hermesDeathParticles;
 
+    [Header("Loki Only")]
+    private PlayableDirector endOfGameTL;
+    private Transform lokiSpawnPoint;
+    [SerializeField] private GameObject lokiSmol;
+    
+    
     // Constructor
     public Health(float health, float maxHealth)
     {
@@ -189,6 +197,8 @@ public class Health : MonoBehaviour
 
             Instantiate(hermesDeathParticles, transform.position, transform.rotation);
             GameObject smolHermes = Instantiate(hermesSmol, transform.position, transform.rotation);
+            lokiSpawnPoint = GameObject.Find("LokiSpawnPoint").GetComponent<Transform>();
+            GameObject smolLoki = Instantiate(lokiSmol, lokiSpawnPoint.position, transform.rotation);
 
             if (!GetComponent<WeaponAbility>().IsFinalScene())
             {
@@ -198,7 +208,9 @@ public class Health : MonoBehaviour
             else
             {
                 // Start dialogue
-                CaveManager.instance.EndCave();
+                //CaveManager.instance.EndCave();
+                endOfGameTL = GameObject.Find("EndOfGameTL").GetComponent<PlayableDirector>();
+                endOfGameTL.Play();
             }
         }
     }

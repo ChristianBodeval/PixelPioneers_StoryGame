@@ -1,27 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Pathfinding;
+using System.Collections;
 using System.Text.RegularExpressions;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class HermesPathingSmol : MonoBehaviour
 {
     [Header("General for Pathfinding")]
     [SerializeField] private float speed = 3f;
+
     private GameObject player;
     private Rigidbody2D rb;
 
     [Header("A*")]
     [SerializeField] private LayerMask obstacleLayer;
+
     [SerializeField] private float updateInterval = 0.1f;
     [SerializeField] private float nextWayPointDistance = 2f;
     private Path path;
     private int currentWayPoint = 0;
     private Seeker seeker;
     private Vector2 targetPos;
+    private Vector2 endScenePos;
 
     [HideInInspector] public bool isFinalScene = false;
+
+    private Sprite hermesSprite;
+    private Sprite lokiSprteFile;
+    private SpriteRenderer lokiSprite;
+    private bool isUpdating = true;
+
+    public bool EndTargetTrigger;
 
     private void Start()
     {
@@ -33,6 +42,22 @@ public class HermesPathingSmol : MonoBehaviour
         player.GetComponent<PlayerHealth>().HealDamage(100f);
 
         StartCoroutine(SetBehavior());
+
+        if (SceneManager.GetActiveScene().name == "Cave_04")
+        {
+            isFinalScene = true;
+            endScenePos = GameObject.Find("SpawnPointForEndScene").transform.position;
+            hermesSprite = Resources.Load<Sprite>("Sprites/Hermes");
+            lokiSprteFile = Resources.Load<Sprite>("Sprites/Loki");
+            lokiSprite = GetComponentInChildren<SpriteRenderer>();
+            lokiSprite.sprite = hermesSprite;
+
+            if (this.gameObject.name.StartsWith("Loki"))
+            {
+                endScenePos = GameObject.Find("LokiSpawnPointEnd").transform.position;
+                lokiSprite.sprite = lokiSprteFile;
+            }
+        }
     }
 
     private IEnumerator SetBehavior()
@@ -41,13 +66,13 @@ public class HermesPathingSmol : MonoBehaviour
 
         switch (ExtractNumberFromName(SceneManager.GetActiveScene().name))
         {
-            case 1: case 2: case 3:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
                 InvokeRepeating("UpdatePath", 0f, updateInterval); // Updates pathfinding regularly
                 break;
 
-            case 4:
-                // Do something for cave 4 hermes, post fight
-                break;
             default:
                 break;
         }
@@ -69,11 +94,28 @@ public class HermesPathingSmol : MonoBehaviour
         return -1; // Return a default value or handle the error as needed
     }
 
+    public void SetEndTarget()
+    {
+        if (this.gameObject.name.StartsWith("Hermes"))
+        {
+            endScenePos = targetPos;
+            InvokeRepeating("UpdatePath", 0f, updateInterval); // Updates pathfinding regularly
+        }
+    }
+
     private void FixedUpdate()
-    {       
+    {
         PathFollow();
 
         if (Vector2.Distance(transform.position, targetPos) < 1.5f) { player.GetComponent<PlayerAction>().StartMove(); Destroy(gameObject); }
+
+        if (isFinalScene && Vector2.Distance(transform.position, endScenePos) < 3f)
+        {
+            player.GetComponent<PlayerAction>().StartMove();
+            isUpdating = false;
+            rb.velocity = Vector2.zero;
+            CancelInvoke();
+        }
     }
 
     private void Move(Vector2 dir)
@@ -83,9 +125,16 @@ public class HermesPathingSmol : MonoBehaviour
 
     private void UpdatePath()
     {
-        if (seeker.IsDone())
+        if (!isFinalScene)
         {
-            seeker.StartPath(transform.position, targetPos, OnPathComplete);
+            if (seeker.IsDone())
+            {
+                seeker.StartPath(transform.position, targetPos, OnPathComplete);
+            }
+        }
+        else
+        {
+            seeker.StartPath(transform.position, endScenePos, OnPathComplete);
         }
     }
 
@@ -94,7 +143,7 @@ public class HermesPathingSmol : MonoBehaviour
         Flip(); // Flips sprite
 
         // Guard clause
-        if (path == null || currentWayPoint >= path.vectorPath.Count || false ) { return; } // Is not there yet and has a path && is not Digging
+        if (path == null || currentWayPoint >= path.vectorPath.Count || false) { return; } // Is not there yet and has a path && is not Digging
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
 
@@ -105,13 +154,13 @@ public class HermesPathingSmol : MonoBehaviour
 
         if (distance < nextWayPointDistance)
         {
-            currentWayPoint++; 
+            currentWayPoint++;
         }
     }
 
     private void Flip()
     {
-        Vector2 dir = (rb.velocity).normalized; 
+        Vector2 dir = (rb.velocity).normalized;
         if (dir.x > 0.24f) // Right
         {
             transform.localScale = new Vector3(1f, 1f, 1f);

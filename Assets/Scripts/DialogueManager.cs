@@ -47,6 +47,7 @@ public class DialogueManager : MonoBehaviour
     private Sprite scryerFace;
     private Sprite lokiFace;
     private Sprite fatherFace;
+    private Sprite hermesFace;
 
     private Image potraitLeft;
     private Image potraitRight;
@@ -65,6 +66,8 @@ public class DialogueManager : MonoBehaviour
     private SpawnSystem spawnSystem;
 
     public PlayableDirector currentTimeline;
+
+    private bool isPart2Playing;
 
     private void Awake()
     {
@@ -87,6 +90,7 @@ public class DialogueManager : MonoBehaviour
         scryerFace = Resources.Load<Sprite>("Sprites/ScryerFace");
         lokiFace = Resources.Load<Sprite>("Sprites/LokiFace");
         fatherFace = Resources.Load<Sprite>("Sprites/FatherFace");
+        hermesFace = Resources.Load<Sprite>("Sprites/HermesFace");
 
         FindVariables(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
     }
@@ -98,10 +102,10 @@ public class DialogueManager : MonoBehaviour
         if (dialogueBox != null) dialogueBox.SetActive(false);
         dialogBoxAnim = dialogueBox.GetComponent<Animator>();
 
-        Speechbubble1 = GameObject.Find("SpeechBubble1");
+        Speechbubble1 = GameObject.Find("SpeechBubbleRight");
         if (Speechbubble1 != null) Speechbubble1.SetActive(false);
 
-        Speechbubble2 = GameObject.Find("SpeechBubble2");
+        Speechbubble2 = GameObject.Find("SpeechBubbleLeft");
         if (Speechbubble2 != null) Speechbubble2.SetActive(false);
 
         dialogueText = dialogueBox.transform.Find("DialogueText").GetComponent<TextMeshProUGUI>();
@@ -331,6 +335,12 @@ public class DialogueManager : MonoBehaviour
             potraitRight.sprite = fatherFace;
             potraitLeft.enabled = false;
         }
+        else if (line.StartsWith("Hermes"))
+        {
+            potraitRight.enabled = true;
+            potraitRight.sprite = hermesFace;
+            potraitLeft.enabled = false;
+        }
         else
         {
             potraitLeft.enabled = false;
@@ -345,6 +355,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         isShowingText = false;
+        if(!isPart2Playing)
         continueButton.enabled = true;
     }
 
@@ -362,4 +373,14 @@ public class DialogueManager : MonoBehaviour
         if (currentTimeline != null)    
         currentTimeline.Resume();
     }
+
+    public void SetDialogueText(string text)
+    {
+        dialogueText.text = text;
+    }
+    public void SetPart2IsPlaying(bool value)
+    {
+        isPart2Playing = value;
+    }
+
 }

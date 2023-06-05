@@ -1,0 +1,2 @@
+Loki: Yes… father.
+    -> END
