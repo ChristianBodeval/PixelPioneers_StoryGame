@@ -37,7 +37,7 @@ public class WaveVisual : MonoBehaviour
 
     private void Start()
     {
-        if (!Pool.pool.isActiveAndEnabled) return;
+        if (Pool.pool == null || !Pool.pool.isActiveAndEnabled) return;
 
         isInCombat = false;
         maxWaves = SpawnSystem.totalWaves;

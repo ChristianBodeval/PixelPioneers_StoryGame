@@ -167,7 +167,7 @@ public class Mjoelnir : Ability, IUpgradeable
 
     private void EnableHammer()
     {
-        SaveManager.singleton.weapon3 = true;
+        if (SaveManager.singleton != null) SaveManager.singleton.weapon3 = true;
         isCharging = false;
         canSpin = true;    // Allow the hammer to spin again
         GetComponent<CircleCollider2D>().enabled = true;    // Player can move again
@@ -464,9 +464,9 @@ public class Mjoelnir : Ability, IUpgradeable
         base.UpgradeOption1();
         hasChargeUpgrade = true;
         hasAreaOfEffectUpgrade = false;
-        SaveManager.singleton.weapon3Upgrade1 = true;
-        SaveManager.singleton.weapon3Upgrade2 = false;
-        SaveManager.singleton.SavePlayerData();
+        if (SaveManager.singleton != null) SaveManager.singleton.weapon3Upgrade1 = true;
+        if (SaveManager.singleton != null) SaveManager.singleton.weapon3Upgrade2 = false;
+        if (SaveManager.singleton != null) SaveManager.singleton.SavePlayerData();
     }
 
     public override void UpgradeOption2()
@@ -474,9 +474,9 @@ public class Mjoelnir : Ability, IUpgradeable
         base.UpgradeOption2();
         hasChargeUpgrade = false;
         hasAreaOfEffectUpgrade = true;
-        SaveManager.singleton.weapon3Upgrade1 = false;
-        SaveManager.singleton.weapon3Upgrade2 = true;
-        SaveManager.singleton.SavePlayerData();
+        if (SaveManager.singleton != null) SaveManager.singleton.weapon3Upgrade1 = false;
+        if (SaveManager.singleton != null) SaveManager.singleton.weapon3Upgrade2 = true;
+        if (SaveManager.singleton != null) SaveManager.singleton.SavePlayerData();
     }
     
 

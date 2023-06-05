@@ -92,8 +92,8 @@ public class ProgressManager : MonoBehaviour
     {
         FindAbilityComponents();
         UpdateAllAbilities();
-        HealthPickUp.pickUpPool.ClearLists();
-        Pool.pool.ClearLists();
+        if (HealthPickUp.pickUpPool != null) HealthPickUp.pickUpPool.ClearLists();
+        if (Pool.pool != null) Pool.pool.ClearLists();
 
         if (scene.name == "CaveHub")
         {

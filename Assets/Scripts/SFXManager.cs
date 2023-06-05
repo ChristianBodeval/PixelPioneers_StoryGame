@@ -9,11 +9,13 @@ public class SFXManager : MonoBehaviour
 {
     public static SFXManager singleton;
 
-    [Range(0f, 1f)] public float masterVolume = 0.5f;
+    [Range(0f, 1f)] public static float masterVolume = 0.5f;
     [SerializeField] private AudioClip enterCaveSFX;
     public AudioMixer masterMixer;
+    private float lastMasterVolumeValue = 0.5f;
     private float previousPitch;
     private bool inCave = false;
+    private Coroutine fadeCoroutine; // Store reference to the fade coroutine
 
     // 1st
     private void Awake()
@@ -129,5 +131,59 @@ public class SFXManager : MonoBehaviour
     public void SetMasterVolume(float volume)
     {
         masterMixer.SetFloat("MasterVolume", volume);
+    }
+
+    public void FadeIn(float fadeDuration)
+    {
+        // If a fade coroutine is already running, stop it
+        if (fadeCoroutine != null)
+        {
+            StopCoroutine(fadeCoroutine);
+        }
+
+        // Start the fade-in coroutine
+        fadeCoroutine = StartCoroutine(FadeInCoroutine(fadeDuration));
+    }
+
+    public void FadeOut(float fadeDuration)
+    {
+        // If a fade coroutine is already running, stop it
+        if (fadeCoroutine != null)
+        {
+            StopCoroutine(fadeCoroutine);
+        }
+
+        // Start the fade-out coroutine
+        fadeCoroutine = StartCoroutine(FadeOutCoroutine(fadeDuration));
+    }
+
+    private IEnumerator FadeInCoroutine(float fadeDuration)
+    {
+        while (masterVolume < lastMasterVolumeValue)
+        {
+            masterVolume += Time.unscaledDeltaTime / fadeDuration;
+            yield return null;
+        }
+
+        masterVolume = lastMasterVolumeValue;
+
+        // Reset the fade coroutine reference
+        fadeCoroutine = null;
+    }
+
+    private IEnumerator FadeOutCoroutine(float fadeDuration)
+    {
+        lastMasterVolumeValue = masterVolume;
+
+        while (masterVolume > 0f)
+        {
+            masterVolume -= Time.unscaledDeltaTime / fadeDuration;
+            yield return null;
+        }
+
+        masterVolume = 0f;
+
+        // Reset the fade coroutine reference
+        fadeCoroutine = null;
     }
 }
