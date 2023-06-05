@@ -39,19 +39,19 @@ public class Pool : MonoBehaviour
 
     private void Awake()
     {
-        // If there is an instance, and it's not me, delete myself
-        if (pool != null && pool != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            pool = this;
-        }
+        //// If there is an instance, and it's not me, delete myself
+        //if (pool != null && pool != this)
+        //{
+        //    Destroy(this);
+        //}
+        //else
+        //{
+        //}
     }
 
     private void Start()
     {
+            pool = this;
         ClearLists();
         StartCoroutine(SpawnPickUps()); // Constantly checking for healthpicks to spawn
     }

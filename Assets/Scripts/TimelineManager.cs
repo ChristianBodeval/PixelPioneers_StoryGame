@@ -26,19 +26,19 @@ public class TimelineManager : MonoBehaviour
     private void Awake()
     {
         rainSound = Resources.Load<AudioClip>("SFX/Ambiance_Rain");
-        if (timelineManager != null && timelineManager != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            timelineManager = this;
-        }
+        //if (timelineManager != null && timelineManager != this)
+        //{
+        //    Destroy(this);
+        //}
+        //else
+        //{
+        //}
     }
 
     private void Start()
     {
-        dialogueManager = DialogueManager.dialogManager;
+          timelineManager = this;
+        dialogueManager = GameObject.Find("GameManager").GetComponent<DialogueManager>();
     }
 
     #region Pre Tutorial
@@ -82,7 +82,8 @@ public class TimelineManager : MonoBehaviour
         canContinue = false;
 
         yield return new WaitForSeconds(1f);
-        ResumeTL();
+        //ResumeTL();
+        dialogueManager.ResumeTimeline();
         canContinue = true; ;
     }
 
@@ -145,7 +146,7 @@ public class TimelineManager : MonoBehaviour
         // Example: Check if all WASD keys are pressed
         if (hasPressedWASDKeys[0] && hasPressedWASDKeys[1] && hasPressedWASDKeys[2] && hasPressedWASDKeys[3] && currentTutorialState == 0)
         {
-            ResumeTL();
+            dialogueManager.ResumeTimeline();
             AddToCurrentTutorialState();
         }
 

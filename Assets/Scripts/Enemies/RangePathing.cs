@@ -139,6 +139,8 @@ public class RangePathing : MonoBehaviour
     {
         if (!animator.GetBool("CanMove")) { rb.velocity = Vector2.zero; return; } // Guard clause - can we move
 
+        float modifier = animator.GetBool("IsFleeing") ? 0.5f : 1f;
+
         rb.velocity = dir * speed; // Movement
     }
 

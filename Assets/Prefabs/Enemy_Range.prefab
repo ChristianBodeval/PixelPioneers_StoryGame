@@ -179,16 +179,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9f177283444e649b0b043b71cf13ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 4.5
-  attackCD: 1
+  attackRange: 4.2
+  attackCD: 2.8
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 262208
   volume: 0.2
   fireSFX: {fileID: 8300000, guid: e3bb2853de7c4574ba24fe8da9d2f3b9, type: 3}
   projectile: {fileID: 2191891527132068989, guid: ec1d677d95de0c7409e0c489421ff1f2, type: 3}
-  projectileSpeed: 7
-  attackDMG: 1
+  projectileSpeed: 5
+  attackDMG: 0.5
 --- !u!114 &254720779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,7 +398,7 @@ MonoBehaviour:
   - {x: 0.4707036, y: -0.017021198, z: 0.00000018483634}
   m_ShapePathHash: 96680608
   m_Mesh: {fileID: 0}
-  m_InstanceId: 68126
+  m_InstanceId: 71274
   m_LocalBounds:
     m_Center: {x: -0.009998858, y: 0.0018541366, z: 0}
     m_Extent: {x: 0.48070246, y: 0.20846152, z: 0}

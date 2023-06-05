@@ -13,13 +13,17 @@ public class MaterialManager : MonoBehaviour
     private void Awake()
     {
         // If there is an instance, and it's not me, delete myself
-        if (singleton != null && singleton != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
+        //if (singleton != null && singleton != this)
+        //{
+        //    Destroy(this);
+        //}
+        //else
+        //{
+        //}
+    }
+    private void Start()
+    {
             singleton = this;
-        }
+        
     }
 }

@@ -64,6 +64,7 @@ public class CaveEntrance : MonoBehaviour
             }
 
             StopAllCoroutines();
+            SpawnSystem.isSpawning = false;
             SceneManager.LoadScene(connectedToSceneName);
         }
     }

@@ -36,10 +36,6 @@ public class ProgressManager : MonoBehaviour
     private void OnSceneUnloaded(Scene unloadedScene)
     {
         lastSceneName = unloadedScene.name;
-
-        
-        
-        Debug.Log("Scene unloaded: " + unloadedScene.name);
     }
 
     private void Awake()

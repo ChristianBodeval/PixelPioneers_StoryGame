@@ -15,19 +15,19 @@ public class HealthPickUp : MonoBehaviour
     private void Awake()
     {
         //if there is an instance, and it's not me, delete myself
-        if (pickUpPool != null && pickUpPool != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            pickUpPool = this;
-        }
+        //if (pickUpPool != null && pickUpPool != this)
+        //{
+        //    Destroy(this);
+        //}
+        //else
+        //{
+        //}
     }
 
 
     private void Start()
     {
+            pickUpPool = this;
         StartCoroutine(SpawnPickUps()); // Constantly checking for healthpicks to spawn
     }
 

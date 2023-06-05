@@ -11,10 +11,10 @@ public class SpawnSystem : MonoBehaviour
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private float spawnApartDistance;
     [HideInInspector] public List<WaveObject> wavesToSpawn = new List<WaveObject>();
-    private List<GameObject> waitingDeathList = new List<GameObject>();
+    private static int remainingAlive = 0;
     private List<int> randomizingList = new List<int>();
     private Coroutine waveAliveCoroutine = null;
-    private bool isSpawning = false;
+    [HideInInspector] public static bool isSpawning = false;
     private float postWaveWaitTime = 0f;
     private Coroutine awaitAddWaveCoroutine;
     private GameObject player;
@@ -24,11 +24,11 @@ public class SpawnSystem : MonoBehaviour
 
     private void Start()
     {
+        ClearLists();
+
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(SpawnWaves());
         StartCoroutine(CheckIfWaveIsDead()); // Function checks if wave is alive during play
-
-        ClearLists();
     }
 
     public void AddWave(WaveObject wave)
@@ -61,7 +61,7 @@ public class SpawnSystem : MonoBehaviour
     {
         while (true)
         {
-            // Suspend execution of function until wave is dead if enabled on previous wave
+            // Suspend execution of function until wave is dead
             while (waveAlive || wavesToSpawn.Count < 1)
             {
                 yield return new WaitForSeconds(0.1f);
@@ -100,25 +100,25 @@ public class SpawnSystem : MonoBehaviour
     {
         while (true)
         {
-            while (waitingDeathList.Count > 0 || isSpawning)
+            while (remainingAlive > 0 || isSpawning)
             {
                 yield return new WaitForSeconds(0.1f);
             }
 
-            if (!waveAlive && waitingDeathList.Count < 1)
+            if (!waveAlive && remainingAlive < 1)
             {
                 // Resets wave variables if the waves are all done
-                if (currentWave > 0 && currentWave >= totalWaves && !isSpawning) // Last wave is dead
+                if (currentWave > 0 && currentWave >= totalWaves && !isSpawning && remainingAlive < 1) // Last wave is dead and waitingDeathList is empty
                 {
                     totalWaves = 0;
                     currentWave = 0;
                 }
             }
 
-            if (waveAlive)
+            if (waveAlive && !isSpawning)
             {
-                currentWave++; // UI knows its the next wave - only true if wave was alive and now is dead
-                if (waitingDeathList.Count < 1) waveAlive = false;
+                currentWave++; // UI knows it's the next wave - only true if wave was alive and now is dead
+                if (remainingAlive < 1 && !isSpawning) waveAlive = false;
                 yield return new WaitForSeconds(postWaveWaitTime);
             }
 
@@ -128,7 +128,7 @@ public class SpawnSystem : MonoBehaviour
 
     public void RemoveFromWaitDeathList(GameObject e)
     {
-        if (waitingDeathList.Contains(e)) waitingDeathList.Remove(e);
+        remainingAlive--;
     }
 
     private IEnumerator IterateListRandomly(float timeBetweenMobs)
@@ -147,10 +147,11 @@ public class SpawnSystem : MonoBehaviour
 
     private void SpawnEnemy(WaveObject.EnemyType type)
     {
+        waveAlive = true;
         GameObject enemy = Pool.pool.DrawFromEnemyPool(type);
         enemy.transform.position = FindSpawnPoint();
         enemy.transform.rotation = Quaternion.Euler(-45f, 0f, 0f);
-        waitingDeathList.Add(enemy);
+        remainingAlive++;
     }
 
     // Returns a point eligible for spawning an enemy outside of the screen
@@ -205,10 +206,12 @@ public class SpawnSystem : MonoBehaviour
     public void ClearLists()
     {
         wavesToSpawn.Clear();
-        waitingDeathList.Clear();
         randomizingList.Clear();
-        waveAlive = false;
-        totalWaves = 0;
-        currentWave = 0;
+        remainingAlive = 0;
+    }
+
+    private void OnDisable()
+    {
+        ClearLists();
     }
 }

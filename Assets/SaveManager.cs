@@ -8,6 +8,7 @@ public class SaveManager : MonoBehaviour
 
     // Booleans for weapons and upgrades
     public bool weapon1;
+
     public bool weapon1Upgrade1;
     public bool weapon1Upgrade2;
     public bool weapon2;
@@ -33,8 +34,8 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            singleton = this;
             DontDestroyOnLoad(gameObject);
+            singleton = this;
         }
     }
 
@@ -64,7 +65,7 @@ public class SaveManager : MonoBehaviour
     {
         PlayerPrefs.SetInt(abilityName, upgradeNumber);
     }
-    
+
     public void SavePlayerData()
     {
         // Save player position
@@ -92,10 +93,10 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetInt("Weapon4Upgrade2", weapon4Upgrade2 ? 1 : 0);
 
         PlayerPrefs.SetInt("CavesCleared", cavesCleared);
-        
+
         PlayerPrefs.Save();
     }
-    
+
     public void LoadPlayerData()
     {
         // Load player position
@@ -122,7 +123,7 @@ public class SaveManager : MonoBehaviour
         weapon4 = PlayerPrefs.GetInt("Weapon4") == 1;
         weapon4Upgrade1 = PlayerPrefs.GetInt("Weapon4Upgrade1") == 1;
         weapon4Upgrade2 = PlayerPrefs.GetInt("Weapon4Upgrade2") == 1;
-        
+
         cavesCleared = PlayerPrefs.GetInt("CavesCleared");
     }
 }

@@ -93,10 +93,6 @@ public class AbilityHolder : Ability, IUpgradeable
             if (playerAction != null)
             {
                 transform.right = new Vector3(playerAction.lastFacing.x, 0, playerAction.lastFacing.y);
-                
-                Debug.Log("PlayerScript: " + playerAction);
-                Debug.Log("LastFacing: " + playerAction.lastFacing);
-                
             }
         }
         
@@ -252,7 +248,6 @@ public class AbilityHolder : Ability, IUpgradeable
     {
         base.Downgrade();
         
-        Debug.Log("Downgrade");
         nextAbility = null;
     }
 }

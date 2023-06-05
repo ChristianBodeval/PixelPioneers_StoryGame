@@ -49,6 +49,5 @@ public class CaveManager : MonoBehaviour
     {
         caveEntrance.SetAccessibility(true);
         ProgressManager.instance.CaveHasBeenCleared();
-        GameObject.Find("GameManager").GetComponent<SpawnSystem>().ClearLists();
     }
 }
