@@ -42,24 +42,26 @@ public class ProgressManager : MonoBehaviour
     {
         if (instance != null && instance != this)
         {
-            Debug.Log("ProgressManager destroy");
-            Destroy(this);
+            Debug.Log("ProgressManager is existing, destroying this one");
+
+
+            Destroy(this.gameObject);
         }
         else
         {
             instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
 
         SceneManager.sceneLoaded += OnSceneLoaded;
         lastSceneName = SceneManager.GetActiveScene().name;
 
+
+        
         FindAbilityComponents();
         
-        
-        //Start with SlashAbility
-        GameObject.Find("SlashAbility").GetComponent<AbilityHolder>().UpgradeOption1();
-        GameObject.Find("SlashAbility").GetComponent<AbilityHolder>().UpgradeOption2();
-        
+        SaveManager.singleton.cavesCleared = numberOfCavesCleared;
+
     }
 
     private void Start()
@@ -92,8 +94,12 @@ public class ProgressManager : MonoBehaviour
     {
         FindAbilityComponents();
         UpdateAllAbilities();
-        if (HealthPickUp.pickUpPool != null) HealthPickUp.pickUpPool.ClearLists();
-        if (Pool.pool != null) Pool.pool.ClearLists();
+        
+        
+        HealthPickUp.pickUpPool.ClearLists();
+        Pool.pool.ClearLists();
+        
+        
 
         if (scene.name == "CaveHub")
         {
@@ -111,6 +117,8 @@ public class ProgressManager : MonoBehaviour
             //Sort them by gameobject name
             caveEntrances.Sort((x, y) => x.gameObject.name.CompareTo(y.gameObject.name));
             
+            
+            
             //Activate the number of caves equal to currentCaveAvailible
             for (int i = 0; i < caveEntrances.Count; i++)
             {
@@ -118,8 +126,6 @@ public class ProgressManager : MonoBehaviour
             }
 
             UpgradeManager.instance.UpdateProgress(SaveManager.singleton.cavesCleared + 1);
-            ProgressManager.instance.UpdateAllAbilities();
-
             //Search for the cave entrance with the connected to scene name as lastSceneName
         }
     }
@@ -181,6 +187,7 @@ public class ProgressManager : MonoBehaviour
 
         
         
+        Debug.Log("Updating abilities");
         if (SaveManager.singleton.weapon1Upgrade1) slashScript.UpgradeOption1();
         if (SaveManager.singleton.weapon1Upgrade2) slashScript.UpgradeOption2();
 

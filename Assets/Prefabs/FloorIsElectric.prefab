@@ -58,7 +58,7 @@ MonoBehaviour:
   targets: []
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 4224
   spriteShapeController: {fileID: 1019147408074125077}
   spriteShapeRenderer: {fileID: 1019147408074125074}
   DrawInInspector: 1
