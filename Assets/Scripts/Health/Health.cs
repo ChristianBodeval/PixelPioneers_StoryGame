@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Playables;
 
 public class Health : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class Health : MonoBehaviour
     [SerializeField] private GameObject hermesSmol;
     [SerializeField] private GameObject hermesDeathParticles;
 
+    private PlayableDirector endOfGameTL;
+    
     // Constructor
     public Health(float health, float maxHealth)
     {
@@ -198,7 +201,9 @@ public class Health : MonoBehaviour
             else
             {
                 // Start dialogue
-                CaveManager.instance.EndCave();
+                //CaveManager.instance.EndCave();
+                endOfGameTL = GameObject.Find("EndOfGameTL").GetComponent<PlayableDirector>();
+                endOfGameTL.Play();
             }
         }
     }

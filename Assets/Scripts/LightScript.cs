@@ -5,6 +5,10 @@ using UnityEngine.Rendering.Universal;
 public class LightScript : MonoBehaviour
 {
     public float duration = 4f;
+    public void SetLighDuration(float duration)
+    {
+        this.duration = duration;
+    }
     public void SetLightIntensityOverTime(float targetIntensity)
     {
         StartCoroutine(ChangeLightIntensity(targetIntensity, duration));
