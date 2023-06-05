@@ -56,10 +56,11 @@ public class WeaponAbility : MonoBehaviour
     {
         player = GameObject.Find("Player");
         animator = GetComponentInChildren<Animator>();
-
+        WaveVisual.isDone = true;
         isPlaying = false;
         if (bossHealthBar != null) bossHealthBar.SetActive(true);
         GameObject.Find("GameManager").GetComponent<SpawnSystem>().ClearLists();
+        GameObject.Find("UserInterface").GetComponent<WaveVisual>();
         SetAbilities();
     }
 

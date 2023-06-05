@@ -37,6 +37,7 @@ public class SendWave : MonoBehaviour
         caveStartedEvent.Invoke();
         if (!SpawnSystem.waveAlive && !isSent)
         {
+            WaveVisual.isDone = false;
             if (combatTrack != null) MusicManager.singleton.PlayMusic(combatTrack, musicVolume);
             isSent = true;
             currentWave = 0;

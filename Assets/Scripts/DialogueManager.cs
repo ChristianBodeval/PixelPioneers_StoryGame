@@ -152,6 +152,7 @@ public class DialogueManager : MonoBehaviour
     public void EnterDialogueMode(TextAsset inkJson)
     {
         //Time.timeScale = 0f;
+        FindVariables(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
 
         isDialoguePlaying = true;
         dialogueBox.SetActive(true);

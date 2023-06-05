@@ -53,14 +53,14 @@ public class ProgressManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        lastSceneName = SceneManager.GetActiveScene().name;
-
-
-        
         FindAbilityComponents();
-        
-        SaveManager.singleton.cavesCleared = numberOfCavesCleared;
+
+        if (SaveManager.singleton != null && SaveManager.singleton.isActiveAndEnabled)
+        {
+            SaveManager.singleton.cavesCleared = numberOfCavesCleared;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            lastSceneName = SceneManager.GetActiveScene().name;
+        }
 
     }
 
@@ -96,8 +96,8 @@ public class ProgressManager : MonoBehaviour
         UpdateAllAbilities();
         
         
-        HealthPickUp.pickUpPool.ClearLists();
-        Pool.pool.ClearLists();
+        if (HealthPickUp.pickUpPool != null && HealthPickUp.pickUpPool.isActiveAndEnabled) HealthPickUp.pickUpPool.ClearLists();
+        if (Pool.pool != null && Pool.pool.isActiveAndEnabled) Pool.pool.ClearLists();
         
         
 
@@ -126,7 +126,17 @@ public class ProgressManager : MonoBehaviour
             }
 
             UpgradeManager.instance.UpdateProgress(SaveManager.singleton.cavesCleared + 1);
-            //Search for the cave entrance with the connected to scene name as lastSceneName
+
+            if (WeaponPickUp.stoneConvoPrepped > 0 && WeaponPickUp.isConvoPrepped)
+            {
+                string temp = $"StoneDialogue{WeaponPickUp.stoneConvoPrepped}";
+                Debug.Log(temp);
+                GameObject obj = GameObject.Find(temp);
+                Dialogue dialogue = obj.GetComponent<Dialogue>();
+                dialogue.StartDialogue();
+                WeaponPickUp.isConvoPrepped = false;
+            }
+
         }
     }
 
@@ -184,10 +194,7 @@ public class ProgressManager : MonoBehaviour
 
         gungnirUI.SetActive(SaveManager.singleton.cavesCleared > 2);
         gungnirScript.enabled = SaveManager.singleton.cavesCleared > 2;
-
         
-        
-        Debug.Log("Updating abilities");
         if (SaveManager.singleton.weapon1Upgrade1) slashScript.UpgradeOption1();
         if (SaveManager.singleton.weapon1Upgrade2) slashScript.UpgradeOption2();
 
@@ -208,7 +215,8 @@ public class ProgressManager : MonoBehaviour
         if(SaveManager.singleton.cavesCleared == 4) return;
         SaveManager.singleton.cavesCleared++;
         SaveManager.singleton.SavePlayerData();
-        
+
+        FindAbilityComponents();
         UpdateAllAbilities();
     }
 }

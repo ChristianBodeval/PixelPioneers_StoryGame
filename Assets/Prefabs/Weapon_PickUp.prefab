@@ -5011,6 +5011,9 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 1dd1e92a018a80f4d96ed7051774d775, type: 3}
   - {fileID: 4900000, guid: 710ac0c70cdd9804cbd844d8769c3ee1, type: 3}
   - {fileID: 4900000, guid: a1b0fcd073518d240888c8fd3a988169, type: 3}
+  volumeSFX: 0.8
+  pickUpSFX: {fileID: 8300000, guid: 520747e1b7f7bc3419eb5dbc924682d5, type: 3}
+  caveManager: {fileID: 0}
 --- !u!1 &685070612710227384
 GameObject:
   m_ObjectHideFlags: 0

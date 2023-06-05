@@ -93,6 +93,7 @@ public class PlayerAction : MonoBehaviour
 
     public void StopMove()
     {
+        rb = GetComponent<Rigidbody2D>();
         canMove = false;
         rb.velocity = Vector2.zero;
         animator.SetBool("IsRunning", false);

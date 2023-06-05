@@ -32,7 +32,10 @@ public class PlayerHealth : Health
     private void Start()
     {
         cameraShake = GameObject.Find("Camera").GetComponent<CameraShake>();
-        deathScreen = GameObject.Find("PlayerDeath");
+        foreach (var item in GameObject.Find("UserInterface").GetComponentsInChildren<Transform>())
+        {
+            if (item.name.Equals("PlayerDeath")) deathScreen = item.gameObject;
+        }
         if (deathScreen != null) deathScreen.SetActive(false);
         damagedSlider = GameObject.Find("DamagedSlider").GetComponent<Slider>();
         hpSlider = GameObject.Find("Healthbar").GetComponent<Slider>();

@@ -9,9 +9,14 @@ using UnityEngine.SceneManagement;
 public class WeaponPickUp : MonoBehaviour
 {
     [SerializeField] private TextAsset[] pickUpNotification = new TextAsset[3];
-    
-    
+
+    [Header("SFX")]
+    [Range(0f, 1f)] [SerializeField] private float volumeSFX;
+    [SerializeField] private AudioClip pickUpSFX;
+
     public CaveManager caveManager;
+    public static int stoneConvoPrepped = 0;
+    public static bool isConvoPrepped = false;
 
     private void Start()
     {
@@ -23,7 +28,9 @@ public class WeaponPickUp : MonoBehaviour
         if (!col.CompareTag("Player")) return;
 
         SetAbilities();
-        
+
+        SFXManager.singleton.PlaySound(pickUpSFX, transform.position, volumeSFX);
+
         caveManager.EndCave();
 
         Destroy(gameObject);
@@ -34,6 +41,8 @@ public class WeaponPickUp : MonoBehaviour
         switch (ExtractNumberFromName(SceneManager.GetActiveScene().name))
         {
             case 1:
+                stoneConvoPrepped++;
+                isConvoPrepped = true;
                 SaveManager.singleton.weapon1 = true;
                 SaveManager.singleton.weapon2 = true;
                 SaveManager.singleton.weapon3 = false;
@@ -41,6 +50,8 @@ public class WeaponPickUp : MonoBehaviour
                 DialogueManager.dialogManager.EnterDialogueMode(pickUpNotification[0]);
                 break;
             case 2:
+                stoneConvoPrepped++;
+                isConvoPrepped = true;
                 SaveManager.singleton.weapon1 = true;
                 SaveManager.singleton.weapon2 = true;
                 SaveManager.singleton.weapon3 = true;
@@ -48,6 +59,8 @@ public class WeaponPickUp : MonoBehaviour
                 DialogueManager.dialogManager.EnterDialogueMode(pickUpNotification[1]);
                 break;
             case 3:
+                stoneConvoPrepped++;
+                isConvoPrepped = true;
                 SaveManager.singleton.weapon1 = true;
                 SaveManager.singleton.weapon2 = true;
                 SaveManager.singleton.weapon3 = true;

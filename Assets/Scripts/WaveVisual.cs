@@ -33,6 +33,8 @@ public class WaveVisual : MonoBehaviour
     public Sprite unbrokenCrystal;
     public Sprite questionSprite;
 
+    public static bool isDone = false;
+
     [SerializeField] private ParticleSystem particleSystem;
 
     private void Start()
@@ -173,7 +175,27 @@ public class WaveVisual : MonoBehaviour
 
             yield return new WaitForSeconds(0.05f);
 
-            if (inUseWaveIndicators.Count < 1) continue; // Skip this loop iteration
+            if (isDone)
+            {
+                lock (inUseWaveIndicators)
+                {
+                    GameObject[] tempArray = inUseWaveIndicators.ToArray();
+                    for (int j = 0; j < tempArray.Length; j++)
+                    {
+                        ReturnToIndicatorPool(tempArray[j]);
+                    }
+                }
+
+                lock (inUseWaveChain)
+                {
+                    GameObject[] tempArray = inUseWaveChain.ToArray();
+                    for (int j = 0; j < tempArray.Length; j++)
+                    {
+                        ReturnToChainPool(tempArray[j]);
+                    }
+                    continue; // Skip this loop iteration'
+                }
+            }
 
             int i = 0;
 
