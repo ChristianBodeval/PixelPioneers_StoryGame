@@ -58,7 +58,7 @@ public class AbilityHolder : Ability, IUpgradeable
     
     void OnDisable()
     {
-        if(gameObject.name == "SlashAbility")
+        if(gameObject.name == "SlashAbility" && SaveManager.singleton != null)
         SaveManager.singleton.weapon1 = false;
     }*/
     
@@ -232,16 +232,16 @@ public class AbilityHolder : Ability, IUpgradeable
         
         Debug.Log("Upgrading1");
         nextAbility = upgradeOption1;
-        SaveManager.singleton.weapon1Upgrade1 = true;
-        SaveManager.singleton.weapon1Upgrade2 = false;
+        if (SaveManager.singleton != null) SaveManager.singleton.weapon1Upgrade1 = true;
+        if (SaveManager.singleton != null) SaveManager.singleton.weapon1Upgrade2 = false;
     }
 
     public override void UpgradeOption2()
     {
         base.UpgradeOption2();
         nextAbility = upgradeOption2;
-        SaveManager.singleton.weapon1Upgrade2 = true;
-        SaveManager.singleton.weapon1Upgrade1 = false;
+        if (SaveManager.singleton != null) SaveManager.singleton.weapon1Upgrade2 = true;
+        if (SaveManager.singleton != null) SaveManager.singleton.weapon1Upgrade1 = false;
     }
 
     public override void Downgrade()
