@@ -25,9 +25,6 @@ public class SaveManager : MonoBehaviour
     public static SaveManager singleton { get; private set; }
 
     private const string PlayerPrefsKey = "PlayerData";
-
-    
-    
     
     private void Awake()
     {
