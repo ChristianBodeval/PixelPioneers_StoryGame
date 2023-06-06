@@ -17,6 +17,10 @@ public class ProgressManager : MonoBehaviour
     public GameObject mjoelnirUI;
     public GameObject gungnirUI;
 
+    private bool isNewScene = false;
+    private Scene scene;
+    private LoadSceneMode mode;
+
     public bool resetPlayerPrefs;
     
     //Abilities
@@ -76,6 +80,8 @@ public class ProgressManager : MonoBehaviour
         UpdateAllAbilities();
 
         SaveManager.singleton.cavesCleared = numberOfCavesCleared;
+
+        if (isNewScene) NewScene();
     }
 
     public void UpdatePlayerPosition()
@@ -97,9 +103,17 @@ public class ProgressManager : MonoBehaviour
     
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        
+        isNewScene = true;
+        this.scene = scene;
+        this.mode = mode;
+    }
+
+    private void NewScene()
+    {
+        isNewScene = false;
+
         caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
-        
+
         FindAbilityComponents();
         UpdateAllAbilities();
 
@@ -120,10 +134,9 @@ public class ProgressManager : MonoBehaviour
                     caveEntrances.RemoveAt(i);
                 }
             }
-            
+
             //Sort them by gameobject name
             caveEntrances.Sort((x, y) => x.gameObject.name.CompareTo(y.gameObject.name));
-
 
             if (WeaponPickUp.stoneConvoPrepped > 0 && WeaponPickUp.isConvoPrepped)
             {
@@ -135,7 +148,6 @@ public class ProgressManager : MonoBehaviour
                 WeaponPickUp.isConvoPrepped = false;
             }
 
-
             //Activate the number of caves equal to currentCaveAvailible
             for (int i = 0; i < caveEntrances.Count; i++)
             {
@@ -145,8 +157,6 @@ public class ProgressManager : MonoBehaviour
             UpgradeManager.instance.UpdateProgress(SaveManager.singleton.cavesCleared + 1);
             //Search for the cave entrance with the connected to scene name as lastSceneName
         }
-
-        
     }
 
     private void FindAbilityComponents()
