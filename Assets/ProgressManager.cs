@@ -17,7 +17,6 @@ public class ProgressManager : MonoBehaviour
     public GameObject mjoelnirUI;
     public GameObject gungnirUI;
 
-    private bool isNewScene = false;
     private Scene scene;
     private LoadSceneMode mode;
     
@@ -59,14 +58,10 @@ public class ProgressManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
 
-     
         FindAbilityComponents();
 
-        if (SaveManager.singleton != null && SaveManager.singleton.isActiveAndEnabled)
-        {
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            lastSceneName = SceneManager.GetActiveScene().name;
-        }
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        lastSceneName = SceneManager.GetActiveScene().name;
 
         exitCave01 = Resources.Load<TextAsset>("Dialogue/ExitCave01");
         exitCave02 = Resources.Load<TextAsset>("Dialogue/ExitCave02");
@@ -78,10 +73,6 @@ public class ProgressManager : MonoBehaviour
     {
         DisableAllAbilities();
         UpdateAllAbilities();
-
-       
-
-       
     }
 
     public void UpdatePlayerPosition()
@@ -101,16 +92,13 @@ public class ProgressManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (isNewScene) NewScene();
-    }
-
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        isNewScene = true;
+        Debug.Log("Onscenechange");
         this.scene = scene;
         this.mode = mode;
+
+        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
 
         if (scene.name == "CaveHub")
         {
@@ -154,15 +142,14 @@ public class ProgressManager : MonoBehaviour
             }
 
             UpgradeManager.instance.UpdateProgress(SaveManager.singleton.cavesCleared + 1);
+
+            FindAbilityComponents();
+            UpdateAllAbilities();
         }
     }
 
     private void NewScene()
     {
-        isNewScene = false;
-
-        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
-
         FindAbilityComponents();
         UpdateAllAbilities();
 
@@ -213,17 +200,20 @@ public class ProgressManager : MonoBehaviour
 
     public void UpdateAllAbilities()
     {
+        Debug.Log($"{slashUI} {dashUI} {mjoelnirUI} {gungnirUI}");
+        Debug.Log($"{slashScript} {dashScript} {mjoelnirScript} {gungnirScript}");
+
         slashUI.SetActive(SaveManager.singleton.cavesCleared > -1);
-        slashScript.enabled = SaveManager.singleton.cavesCleared > -1;
+        slashScript.enabled = (SaveManager.singleton.cavesCleared > -1);
 
         dashUI.SetActive(SaveManager.singleton.cavesCleared > 0);
-        dashScript.enabled = SaveManager.singleton.cavesCleared > 0;
+        dashScript.enabled = (SaveManager.singleton.cavesCleared > 0);
 
         mjoelnirUI.SetActive(SaveManager.singleton.cavesCleared > 1);
-        mjoelnirScript.enabled = SaveManager.singleton.cavesCleared > 1;
+        mjoelnirScript.enabled = (SaveManager.singleton.cavesCleared > 1);
 
         gungnirUI.SetActive(SaveManager.singleton.cavesCleared > 2);
-        gungnirScript.enabled = SaveManager.singleton.cavesCleared > 2;
+        gungnirScript.enabled = (SaveManager.singleton.cavesCleared > 2);
 
         
         
