@@ -42,14 +42,10 @@ public class ProgressManager : MonoBehaviour
 
     private void Awake()
     {
-        
         caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
         
         if (instance != null && instance != this)
         {
-            Debug.Log("ProgressManager is existing, destroying this one");
-
-
             Destroy(this.gameObject);
         }
         else
@@ -58,11 +54,6 @@ public class ProgressManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        lastSceneName = SceneManager.GetActiveScene().name;
-
-
-        
         //Reset playerprefs
         if (resetPlayerPrefs)
         {
@@ -70,16 +61,21 @@ public class ProgressManager : MonoBehaviour
         }
         
         FindAbilityComponents();
-        
-        SaveManager.singleton.cavesCleared = numberOfCavesCleared;
 
+        if (SaveManager.singleton != null && SaveManager.singleton.isActiveAndEnabled)
+        {
+            SaveManager.singleton.cavesCleared = numberOfCavesCleared;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            lastSceneName = SceneManager.GetActiveScene().name;
+        }
     }
 
     private void Start()
     {
         DisableAllAbilities();
         UpdateAllAbilities();
-        
+
+        SaveManager.singleton.cavesCleared = numberOfCavesCleared;
     }
 
     public void UpdatePlayerPosition()
@@ -95,9 +91,6 @@ public class ProgressManager : MonoBehaviour
                 Debug.Log(caveEntrance.connectedToSceneName + " is equal to " + lastSceneName);
                 //Set the player position to the cave entrance position
                 GameObject.Find("Player").transform.position = caveEntrance.spawnPoint.position;
-
-                Debug.Log("Current cave entrance is: " + caveEntrance.gameObject.name);
-                Debug.Log("Setting the player position to: " + caveEntrance.spawnPoint.position);
             }
         }
     }
@@ -109,13 +102,9 @@ public class ProgressManager : MonoBehaviour
         
         FindAbilityComponents();
         UpdateAllAbilities();
-        
-        if (HealthPickUp.pickUpPool != null)
-            HealthPickUp.pickUpPool.ClearLists();
-        
-        if(Pool.pool != null)
-            Pool.pool.ClearLists();
 
+        if (HealthPickUp.pickUpPool != null && HealthPickUp.pickUpPool.isActiveAndEnabled) HealthPickUp.pickUpPool.ClearLists();
+        if (Pool.pool != null && Pool.pool.isActiveAndEnabled) Pool.pool.ClearLists();
 
         UpdatePlayerPosition();
         //Spawn player at the CaveEntrance connected to the last scene
@@ -134,9 +123,19 @@ public class ProgressManager : MonoBehaviour
             
             //Sort them by gameobject name
             caveEntrances.Sort((x, y) => x.gameObject.name.CompareTo(y.gameObject.name));
-            
-            
-            
+
+
+            if (WeaponPickUp.stoneConvoPrepped > 0 && WeaponPickUp.isConvoPrepped)
+            {
+                string temp = $"StoneDialogue{WeaponPickUp.stoneConvoPrepped}";
+                Debug.Log(temp);
+                GameObject obj = GameObject.Find(temp);
+                Dialogue dialogue = obj.GetComponent<Dialogue>();
+                dialogue.StartDialogue();
+                WeaponPickUp.isConvoPrepped = false;
+            }
+
+
             //Activate the number of caves equal to currentCaveAvailible
             for (int i = 0; i < caveEntrances.Count; i++)
             {
@@ -228,7 +227,8 @@ public class ProgressManager : MonoBehaviour
         if(SaveManager.singleton.cavesCleared == 4) return;
         SaveManager.singleton.cavesCleared++;
         SaveManager.singleton.SavePlayerData();
-        
+
+        FindAbilityComponents();
         UpdateAllAbilities();
     }
 }

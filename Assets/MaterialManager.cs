@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MaterialManager : MonoBehaviour
@@ -13,17 +11,13 @@ public class MaterialManager : MonoBehaviour
     private void Awake()
     {
         // If there is an instance, and it's not me, delete myself
-        //if (singleton != null && singleton != this)
-        //{
-        //    Destroy(this);
-        //}
-        //else
-        //{
-        //}
-    }
-    private void Start()
-    {
+        if (singleton != null && singleton != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
             singleton = this;
-        
+        }
     }
 }
