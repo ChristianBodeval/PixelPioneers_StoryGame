@@ -28,6 +28,8 @@ public class SaveManager : MonoBehaviour
     
     private void Awake()
     {
+
+        cavesCleared = 3;
         if (singleton != null && singleton != this)
         {
             Destroy(this);

@@ -23,7 +23,11 @@ public class SlashAbility : AbilitySO
         isFollowingCaster = true;
         canChangeColors = true;
         
-        WeaponCDs.Instance.StartCoroutine(WeaponCDs.Instance.BaseMeleeCD());
+        
+        //If weaponCDs is enabled
+        if (WeaponCDs.Instance.gameObject.activeSelf)
+            WeaponCDs.Instance.StartCoroutine(WeaponCDs.Instance.BaseMeleeCD());
+        
         Quaternion rotation = colliderDrawer.transform.rotation;
 
         rotation.eulerAngles = new Vector3(rotation.eulerAngles.x, rotation.eulerAngles.y, rotation.eulerAngles.z);

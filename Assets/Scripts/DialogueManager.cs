@@ -154,7 +154,6 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogueMode(TextAsset inkJson)
     {
-        //Time.timeScale = 0f;
         FindVariables(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
 
         isDialoguePlaying = true;
@@ -270,8 +269,6 @@ public class DialogueManager : MonoBehaviour
             hermes.GetComponent<Hermes_Pathing>().enabled = true;
             hermes.GetComponent<Hermes_Attack>().enabled = true;
         }
-
-        Time.timeScale = 1f;
     }
 
     private IEnumerator TutorialStateCoroutine()

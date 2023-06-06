@@ -28,13 +28,6 @@ public class TimelineManager : MonoBehaviour
     private void Awake()
     {
         rainSound = Resources.Load<AudioClip>("SFX/Ambiance_Rain");
-        //if (timelineManager != null && timelineManager != this)
-        //{
-        //    Destroy(this);
-        //}
-        //else
-        //{
-        //}
     }
 
     private void Start()
@@ -76,6 +69,11 @@ public class TimelineManager : MonoBehaviour
         if (endOfGame)
         {
             lokiSmol = GameObject.Find("Loki_smol(Clone)");
+            
+            
+            
+            
+            
             lokiSmol.GetComponent<HermesPathingSmol>().SetEndTarget();
         }
     }

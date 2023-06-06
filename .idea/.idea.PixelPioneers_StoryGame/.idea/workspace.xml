@@ -6,8 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="31ee322b-587a-4c99-afc9-1b2b30998f9e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Ink/Demos/Basic Demo.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Anvil.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Anvil.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ProgressManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ProgressManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/Hermes.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Sprites/Hermes.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SaveManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/CaveHub.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/CaveHub.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_02.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_02.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_03.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_03.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_04.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_04.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashAbility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/SlashAbility.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HealPickUp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HealPickUp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TimelineManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TimelineManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponCDs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponCDs.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Timeline/EndOfGame/EndOfGameTL.playable" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Timeline/EndOfGame/EndOfGameTL.playable" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,8 +47,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/DestroyFromAnimationEvent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DoNotDestroy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Interactable.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Users/bodeval/Spiludvikling_Og_Laeringsteknologi/Unity_Projekter_2.0/PixelPioneers_StoryGame/Assets/ProgressManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/bodeval/Spiludvikling_Og_Laeringsteknologi/Unity_Projekter_2.0/PixelPioneers_StoryGame/Assets/ProgressManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/bodeval/Spiludvikling_Og_Laeringsteknologi/Unity_Projekter_2.0/PixelPioneers_StoryGame/Assets/Prefabs/Anvil.prefab" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder_UI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitySO.cs" root0="FORCE_HIGHLIGHTING" />
@@ -195,16 +207,29 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/ProgressManager.cs</url>
-          <line>218</line>
+          <line>237</line>
           <properties documentPath="$PROJECT_DIR$/Assets/ProgressManager.cs" initialLine="215" containingFunctionPresentation="Method 'UpdateAllAbilities'">
             <startOffsets>
-              <option value="6687" />
+              <option value="7055" />
             </startOffsets>
             <endOffsets>
-              <option value="6746" />
+              <option value="7114" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/TimelineManager.cs</url>
+          <line>76</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/TimelineManager.cs" initialLine="76" containingFunctionPresentation="Method 'Update'">
+            <startOffsets>
+              <option value="1887" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1945" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

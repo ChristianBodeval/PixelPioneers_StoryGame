@@ -8,6 +8,8 @@ using UnityEngine.Serialization;
 
 public class ProgressManager : MonoBehaviour
 {
+    //TODO DELETE
+    public int currentCavesCleared;
     //Make a singleton
     public static ProgressManager instance;
     
@@ -49,8 +51,12 @@ public class ProgressManager : MonoBehaviour
 
     private void Awake()
     {
+
         
-        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
+        
+        //Reset playerprefs
+        PlayerPrefs.DeleteAll();
+        
         
         if (instance != null && instance != this)
         {
@@ -80,11 +86,15 @@ public class ProgressManager : MonoBehaviour
 
     private void Start()
     {
+        CaveHasBeenCleared();
+        CaveHasBeenCleared();
+        CaveHasBeenCleared();
+        
         DisableAllAbilities();
         UpdateAllAbilities();
 
        
-
+        SaveManager.singleton.cavesCleared = currentCavesCleared;
        
     }
 
@@ -116,6 +126,13 @@ public class ProgressManager : MonoBehaviour
         this.scene = scene;
         this.mode = mode;
 
+        
+        // Reset caveEntrances to null
+        caveEntrances.Clear();
+        
+        
+        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
+        
         if (scene.name == "CaveHub")
         {
             UpdatePlayerPosition();
@@ -123,7 +140,7 @@ public class ProgressManager : MonoBehaviour
             //Erase all caveEntrances from the list that are not tagged CaveEntrance
             for (int i = caveEntrances.Count - 1; i >= 0; i--)
             {
-                if (caveEntrances[i].gameObject.tag != "CaveEntrance")
+                if (!caveEntrances[i].gameObject.CompareTag("CaveEntrance"))
                 {
                     caveEntrances.RemoveAt(i);
                 }
@@ -132,24 +149,7 @@ public class ProgressManager : MonoBehaviour
             //Sort them by gameobject name
             caveEntrances.Sort((x, y) => x.gameObject.name.CompareTo(y.gameObject.name));
 
-            if (WeaponPickUp.stoneConvoPrepped > 0 && WeaponPickUp.isConvoPrepped)
-            {
-
-                switch (WeaponPickUp.stoneConvoPrepped)
-                {
-                    case 1:
-                        DialogueManager.dialogManager.EnterDialogueMode(exitCave01);
-                        break;
-                    case 2:
-                        DialogueManager.dialogManager.EnterDialogueMode(exitCave02);
-                        break;
-                    case 3:
-                        DialogueManager.dialogManager.EnterDialogueMode(exitCave03);
-                        break;
-                }
-                WeaponPickUp.isConvoPrepped = false;
-
-            }
+            
 
             //Activate the number of caves equal to currentCaveAvailible
             for (int i = 0; i < caveEntrances.Count; i++)
@@ -172,6 +172,25 @@ public class ProgressManager : MonoBehaviour
 
         if (HealthPickUp.pickUpPool != null && HealthPickUp.pickUpPool.isActiveAndEnabled) HealthPickUp.pickUpPool.ClearLists();
         if (Pool.pool != null && Pool.pool.isActiveAndEnabled) Pool.pool.ClearLists();
+        
+        if (WeaponPickUp.stoneConvoPrepped > 0 && WeaponPickUp.isConvoPrepped)
+        {
+
+            switch (WeaponPickUp.stoneConvoPrepped)
+            {
+                case 1:
+                    DialogueManager.dialogManager.EnterDialogueMode(exitCave01);
+                    break;
+                case 2:
+                    DialogueManager.dialogManager.EnterDialogueMode(exitCave02);
+                    break;
+                case 3:
+                    DialogueManager.dialogManager.EnterDialogueMode(exitCave03);
+                    break;
+            }
+            WeaponPickUp.isConvoPrepped = false;
+
+        }
     }
 
     private void FindAbilityComponents()
@@ -248,6 +267,9 @@ public class ProgressManager : MonoBehaviour
     //Make a function that makes the next cave available
     public void CaveHasBeenCleared()
     {
+        
+        
+        
         //If all caves are available, return
         if(SaveManager.singleton.cavesCleared == 4) return;
         SaveManager.singleton.cavesCleared++;

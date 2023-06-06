@@ -8,7 +8,7 @@ public class HealPickUp : MonoBehaviour
     [Range(0, 1)] public float sfxVolume = 1f;
     [SerializeField] private AudioClip pickupSFX;
 
-    public float healAmount { get; set; }
+    [SerializeField] public float healAmount;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float moveDistance;
     [SerializeField] private float consumeDistance;

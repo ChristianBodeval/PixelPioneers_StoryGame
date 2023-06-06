@@ -42,14 +42,18 @@ public class WeaponCDs : MonoBehaviour
     // Generic singleton pattern
     public static WeaponCDs Instance { get; private set; }
     
+    //Make it a singleton
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
-
-        DontDestroyOnLoad(gameObject);
+        else
+        {
+            Debug.LogWarning("WeaponCDs instance already exists, destroying object!");
+            Destroy(this);
+        }
     }
     
 
