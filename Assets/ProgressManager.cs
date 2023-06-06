@@ -20,8 +20,6 @@ public class ProgressManager : MonoBehaviour
     private bool isNewScene = false;
     private Scene scene;
     private LoadSceneMode mode;
-
-    public bool resetPlayerPrefs;
     
     //Abilities
     [FormerlySerializedAs("slashGO")] public Ability slashScript;
@@ -57,12 +55,6 @@ public class ProgressManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-
-        //Reset playerprefs
-        if (resetPlayerPrefs)
-        {
-            PlayerPrefs.DeleteAll();
-        }
         
         FindAbilityComponents();
 
@@ -80,8 +72,6 @@ public class ProgressManager : MonoBehaviour
         UpdateAllAbilities();
 
         SaveManager.singleton.cavesCleared = numberOfCavesCleared;
-
-        if (isNewScene) NewScene();
     }
 
     public void UpdatePlayerPosition()
@@ -100,7 +90,12 @@ public class ProgressManager : MonoBehaviour
             }
         }
     }
-    
+
+    private void Update()
+    {
+        if (isNewScene) NewScene();
+    }
+
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         isNewScene = true;
