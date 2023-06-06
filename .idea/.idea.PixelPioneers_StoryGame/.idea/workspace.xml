@@ -6,24 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="31ee322b-587a-4c99-afc9-1b2b30998f9e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/CaveEntrance.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CaveEntrance.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/CaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CaveManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CaveEntrance.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/CaveEntrance.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CaveManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/CaveManager.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/FloorIsElectric.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/FloorIsElectric.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/SlashAbility.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/SlashAbility.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ink/Demos/Basic Demo.unitypackage.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ProgressManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ProgressManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SaveManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/CaveHub.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/CaveHub.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_01.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_01.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_02.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_02.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_03.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_03.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/ChainEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/ChainEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/OverTimeEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/OverTimeEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ThrowGungnir.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ThrowGungnir.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WaveVisual.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WaveVisual.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -163,6 +147,7 @@
       <workItem from="1685900409564" duration="864000" />
       <workItem from="1685904489548" duration="10670000" />
       <workItem from="1685971768257" duration="4799000" />
+      <workItem from="1686072034037" duration="671000" />
     </task>
     <servers />
   </component>
@@ -210,16 +195,16 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/ProgressManager.cs</url>
-          <line>210</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/ProgressManager.cs" initialLine="185" containingFunctionPresentation="Method 'UpdateAllAbilities'">
+          <line>218</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/ProgressManager.cs" initialLine="215" containingFunctionPresentation="Method 'UpdateAllAbilities'">
             <startOffsets>
-              <option value="6633" />
+              <option value="6687" />
             </startOffsets>
             <endOffsets>
-              <option value="6675" />
+              <option value="6746" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="15" />
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

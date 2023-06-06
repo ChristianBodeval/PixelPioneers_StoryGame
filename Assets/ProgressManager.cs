@@ -38,6 +38,8 @@ public class ProgressManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneUnloaded += OnSceneUnloaded;
+        
+        
     }
 
     private void OnSceneUnloaded(Scene unloadedScene)
@@ -47,6 +49,7 @@ public class ProgressManager : MonoBehaviour
 
     private void Awake()
     {
+        
         caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
         
         if (instance != null && instance != this)
@@ -62,11 +65,11 @@ public class ProgressManager : MonoBehaviour
      
         FindAbilityComponents();
 
-        if (SaveManager.singleton != null && SaveManager.singleton.isActiveAndEnabled)
-        {
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            lastSceneName = SceneManager.GetActiveScene().name;
-        }
+       
+        
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        lastSceneName = SceneManager.GetActiveScene().name;
+
 
         exitCave01 = Resources.Load<TextAsset>("Dialogue/ExitCave01");
         exitCave02 = Resources.Load<TextAsset>("Dialogue/ExitCave02");
