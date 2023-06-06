@@ -68,13 +68,11 @@ public class TimelineManager : MonoBehaviour
 
         if (endOfGame)
         {
-            lokiSmol = GameObject.Find("Loki_smol(Clone)");
-            
-            
-            
-            
-            
+            lokiSmol = GameObject.Find("Hermes_Smol(Clone)");
             lokiSmol.GetComponent<HermesPathingSmol>().SetEndTarget();
+            if(lokiSmol != null)
+                Debug.Log("HermesSmol is not null");
+
         }
     }
 
