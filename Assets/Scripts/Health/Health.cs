@@ -197,7 +197,7 @@ public class Health : MonoBehaviour
 
             Instantiate(hermesDeathParticles, transform.position, transform.rotation);
             GameObject smolHermes = Instantiate(hermesSmol, transform.position, transform.rotation);
-            lokiSpawnPoint = GameObject.Find("LokiSpawnPoint").GetComponent<Transform>();
+            if (GameObject.Find("LokiSpawnPoint") != null) lokiSpawnPoint = GameObject.Find("LokiSpawnPoint").GetComponent<Transform>();
             GameObject smolLoki = Instantiate(lokiSmol, lokiSpawnPoint.position, transform.rotation);
 
             if (!GetComponent<WeaponAbility>().IsFinalScene())

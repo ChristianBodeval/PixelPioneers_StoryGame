@@ -253,7 +253,7 @@ public class Pool : MonoBehaviour
 
     /// Bloodsplatter particlesystem
 
-    // Gets pickup from pool
+    // Gets blood from pool
     public GameObject DrawFromBloodSpatterPool()
     {
         if (storageBloodSplatters.Count > 0)
@@ -265,13 +265,14 @@ public class Pool : MonoBehaviour
             return ps;
         }
 
-        GameObject bloodSplatter = Instantiate(BloodSplatterPSPrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(0f, 0f, 0f)); // New projectile
+        GameObject bloodSplatter = Instantiate
+                (BloodSplatterPSPrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(0f, 0f, 0f)); 
         inUseBloodSplatters.Add(bloodSplatter);
         bloodSplatter.SetActive(true);
         return bloodSplatter;
     }
 
-    // Returns pickup to pool
+    // Returns blood to pool
     public void ReturnToBloodSplatterPool(GameObject ps)
     {
         ps.SetActive(false);
