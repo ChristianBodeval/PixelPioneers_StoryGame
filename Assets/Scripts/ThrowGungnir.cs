@@ -41,12 +41,12 @@ public class ThrowGungnir : Ability, IUpgradeable
     
     private void OnEnable()
     {
-        SaveManager.singleton.weapon4 = true;
+        //SaveManager.singleton.weapon4 = true;
     }
     
     private void OnDisable()
     {
-        SaveManager.singleton.weapon4 = false;
+        //SaveManager.singleton.weapon4 = false;
     }
 
     private new void Start()

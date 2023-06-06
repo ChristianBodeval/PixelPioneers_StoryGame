@@ -70,14 +70,14 @@ public class Dash : Ability
     {
         canDash = true;
         dashDirection = GetDashDirection();
-        SaveManager.singleton.weapon2 = true;
+        //SaveManager.singleton.weapon2 = true;
     }
 
     // StateUpdate is called once per frame
 
     private void OnDisable()
     {
-        SaveManager.singleton.weapon2 = false;
+        //SaveManager.singleton.weapon2 = false;
         isDashing = false;
         if (player != null && player.isActiveAndEnabled) player.GetComponent<TrailRenderer>().enabled = false;
     }

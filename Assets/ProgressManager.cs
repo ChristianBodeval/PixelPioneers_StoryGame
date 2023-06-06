@@ -111,25 +111,10 @@ public class ProgressManager : MonoBehaviour
         isNewScene = true;
         this.scene = scene;
         this.mode = mode;
-    }
-
-    private void NewScene()
-    {
-        isNewScene = false;
-
-        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
-
-        FindAbilityComponents();
-        UpdateAllAbilities();
-
-        if (HealthPickUp.pickUpPool != null && HealthPickUp.pickUpPool.isActiveAndEnabled) HealthPickUp.pickUpPool.ClearLists();
-        if (Pool.pool != null && Pool.pool.isActiveAndEnabled) Pool.pool.ClearLists();
-
-        UpdatePlayerPosition();
-        //Spawn player at the CaveEntrance connected to the last scene
 
         if (scene.name == "CaveHub")
         {
+            UpdatePlayerPosition();
 
             //Erase all caveEntrances from the list that are not tagged CaveEntrance
             for (int i = caveEntrances.Count - 1; i >= 0; i--)
@@ -145,7 +130,7 @@ public class ProgressManager : MonoBehaviour
 
             if (WeaponPickUp.stoneConvoPrepped > 0 && WeaponPickUp.isConvoPrepped)
             {
-            
+
                 switch (WeaponPickUp.stoneConvoPrepped)
                 {
                     case 1:
@@ -169,8 +154,20 @@ public class ProgressManager : MonoBehaviour
             }
 
             UpgradeManager.instance.UpdateProgress(SaveManager.singleton.cavesCleared + 1);
-            //Search for the cave entrance with the connected to scene name as lastSceneName
         }
+    }
+
+    private void NewScene()
+    {
+        isNewScene = false;
+
+        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
+
+        FindAbilityComponents();
+        UpdateAllAbilities();
+
+        if (HealthPickUp.pickUpPool != null && HealthPickUp.pickUpPool.isActiveAndEnabled) HealthPickUp.pickUpPool.ClearLists();
+        if (Pool.pool != null && Pool.pool.isActiveAndEnabled) Pool.pool.ClearLists();
     }
 
     private void FindAbilityComponents()
