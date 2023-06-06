@@ -99,7 +99,6 @@ public class DialogueManager : MonoBehaviour
     {
         UI = GameObject.Find("UI");
         dialogueBox = UI.transform.Find("DialogueBox").gameObject;
-        if (dialogueBox != null) dialogueBox.SetActive(false);
         dialogBoxAnim = dialogueBox.GetComponent<Animator>();
 
         Speechbubble1 = GameObject.Find("SpeechBubbleRight");
@@ -159,7 +158,6 @@ public class DialogueManager : MonoBehaviour
         FindVariables(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
 
         isDialoguePlaying = true;
-        dialogueBox.SetActive(true);
         currentStory = new Story(inkJson.text);
         Debug.Log("Entered Dialog Mode");
 

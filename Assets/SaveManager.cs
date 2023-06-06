@@ -44,6 +44,7 @@ public class SaveManager : MonoBehaviour
 
     private void Start()
     {
+        
         playerPosition = GameObject.Find("Player").transform.position;
         currentScene = SceneManager.GetActiveScene().name;
         LoadPlayerData();

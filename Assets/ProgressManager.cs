@@ -17,7 +17,6 @@ public class ProgressManager : MonoBehaviour
     public GameObject mjoelnirUI;
     public GameObject gungnirUI;
 
-    public bool resetPlayerPrefs;
     
     //Abilities
     [FormerlySerializedAs("slashGO")] public Ability slashScript;
@@ -25,11 +24,14 @@ public class ProgressManager : MonoBehaviour
     [FormerlySerializedAs("mjoelnirGO")] public Ability mjoelnirScript;
     [FormerlySerializedAs("gungnirGO")] public Ability gungnirScript;
     
-    [FormerlySerializedAs("currentCaveAvailible")] public int numberOfCavesCleared;
 
     public List<CaveEntrance> caveEntrances = new List<CaveEntrance>();
     public string lastSceneName;
-    
+
+    private TextAsset exitCave01;
+    private TextAsset exitCave02;
+    private TextAsset exitCave03;
+
     private void OnEnable()
     {
         SceneManager.sceneUnloaded += OnSceneUnloaded;
@@ -54,20 +56,19 @@ public class ProgressManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
 
-        //Reset playerprefs
-        if (resetPlayerPrefs)
-        {
-            PlayerPrefs.DeleteAll();
-        }
-        
+     
         FindAbilityComponents();
 
         if (SaveManager.singleton != null && SaveManager.singleton.isActiveAndEnabled)
         {
-            SaveManager.singleton.cavesCleared = numberOfCavesCleared;
             SceneManager.sceneLoaded += OnSceneLoaded;
             lastSceneName = SceneManager.GetActiveScene().name;
         }
+
+        exitCave01 = Resources.Load<TextAsset>("Dialogue/ExitCave01");
+        exitCave02 = Resources.Load<TextAsset>("Dialogue/ExitCave02");
+        exitCave03 = Resources.Load<TextAsset>("Dialogue/ExitCave03");
+
     }
 
     private void Start()
@@ -75,7 +76,9 @@ public class ProgressManager : MonoBehaviour
         DisableAllAbilities();
         UpdateAllAbilities();
 
-        SaveManager.singleton.cavesCleared = numberOfCavesCleared;
+       
+
+       
     }
 
     public void UpdatePlayerPosition()
@@ -127,12 +130,21 @@ public class ProgressManager : MonoBehaviour
 
             if (WeaponPickUp.stoneConvoPrepped > 0 && WeaponPickUp.isConvoPrepped)
             {
-                string temp = $"StoneDialogue{WeaponPickUp.stoneConvoPrepped}";
-                Debug.Log(temp);
-                GameObject obj = GameObject.Find(temp);
-                Dialogue dialogue = obj.GetComponent<Dialogue>();
-                dialogue.StartDialogue();
+            
+                switch (WeaponPickUp.stoneConvoPrepped)
+                {
+                    case 1:
+                        DialogueManager.dialogManager.EnterDialogueMode(exitCave01);
+                        break;
+                    case 2:
+                        DialogueManager.dialogManager.EnterDialogueMode(exitCave02);
+                        break;
+                    case 3:
+                        DialogueManager.dialogManager.EnterDialogueMode(exitCave03);
+                        break;
+                }
                 WeaponPickUp.isConvoPrepped = false;
+
             }
 
 
