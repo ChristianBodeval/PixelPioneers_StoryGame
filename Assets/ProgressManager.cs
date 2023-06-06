@@ -130,8 +130,11 @@ public class ProgressManager : MonoBehaviour
         // Reset caveEntrances to null
         caveEntrances.Clear();
         
-        
         caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
+
+        FindAbilityComponents();
+        UpdateAllAbilities();
+        
         
         if (scene.name == "CaveHub")
         {
@@ -165,10 +168,7 @@ public class ProgressManager : MonoBehaviour
     {
         isNewScene = false;
 
-        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
-
-        FindAbilityComponents();
-        UpdateAllAbilities();
+        
 
         if (HealthPickUp.pickUpPool != null && HealthPickUp.pickUpPool.isActiveAndEnabled) HealthPickUp.pickUpPool.ClearLists();
         if (Pool.pool != null && Pool.pool.isActiveAndEnabled) Pool.pool.ClearLists();

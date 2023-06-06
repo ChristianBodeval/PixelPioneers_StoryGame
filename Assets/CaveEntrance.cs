@@ -29,7 +29,7 @@ public class CaveEntrance : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
     }
-/*
+
     void Start()
     {
         
@@ -39,7 +39,7 @@ public class CaveEntrance : MonoBehaviour
             player.transform.position = spawnPoint.position;
         }
     }    
-    */
+    
     
     public void SetAccessibility(bool isAccessible)
     {
