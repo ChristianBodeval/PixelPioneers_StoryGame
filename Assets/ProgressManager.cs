@@ -66,10 +66,11 @@ public class ProgressManager : MonoBehaviour
         FindAbilityComponents();
 
        
-        
+                
         SceneManager.sceneLoaded += OnSceneLoaded;
+        
         lastSceneName = SceneManager.GetActiveScene().name;
-
+        
 
         exitCave01 = Resources.Load<TextAsset>("Dialogue/ExitCave01");
         exitCave02 = Resources.Load<TextAsset>("Dialogue/ExitCave02");
