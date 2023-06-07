@@ -11,12 +11,15 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CaveEntranceTesting_Cave2.unity
     guid: 21b4c22e44b8046bb81ddba2dcc61168
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/StartMenu.unity
+    guid: 45e793f8469778f42b0d2eff86d3d488
   - enabled: 1
     path: Assets/Scenes/Cave_01.unity
     guid: 690d2e7a71df09c4d99f1cd2a6f2a807
@@ -44,9 +47,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CaveHub.unity
     guid: 090dd07e0f550439f81118d2eefc39a3
-  - enabled: 1
-    path: Assets/Scenes/StartMenu.unity
-    guid: 45e793f8469778f42b0d2eff86d3d488
   - enabled: 1
     path: Assets/Scenes/VillageRunHome.unity
     guid: 305df12a371eade419d826ef49a01cde
