@@ -8,8 +8,6 @@ using UnityEngine.Serialization;
 
 public class ProgressManager : MonoBehaviour
 {
-    //TODO DELETE
-    public int currentCavesCleared;
     //Make a singleton
     public static ProgressManager instance;
     
@@ -52,12 +50,6 @@ public class ProgressManager : MonoBehaviour
     private void Awake()
     {
 
-        
-        
-        //Reset playerprefs
-        PlayerPrefs.DeleteAll();
-        
-        
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
@@ -86,12 +78,7 @@ public class ProgressManager : MonoBehaviour
 
     private void Start()
     {
-        DisableAllAbilities();
-        UpdateAllAbilities();
-
-       
-        SaveManager.singleton.cavesCleared = currentCavesCleared;
-       
+        
     }
 
     public void UpdatePlayerPosition()
@@ -118,18 +105,35 @@ public class ProgressManager : MonoBehaviour
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        PlayerPrefs.DeleteAll();
+        
         isNewScene = true;
         this.scene = scene;
         this.mode = mode;
+
+
+        
 
         
         // Reset caveEntrances to null
         caveEntrances.Clear();
         
         
-        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
         
-        if (scene.name == "CaveHub")
+        
+    }
+
+    private void NewScene()
+    {
+        isNewScene = false;
+
+        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
+
+        FindAbilityComponents();
+        UpdateAllAbilities();
+        
+        
+        if (this.scene.name == "CaveHub")
         {
             UpdatePlayerPosition();
 
@@ -153,18 +157,9 @@ public class ProgressManager : MonoBehaviour
                 caveEntrances[i].SetAccessibility(i < SaveManager.singleton.cavesCleared + 1);
             }
 
-            UpgradeManager.instance.UpdateProgress(SaveManager.singleton.cavesCleared + 1);
+            
         }
-    }
-
-    private void NewScene()
-    {
-        isNewScene = false;
-
-        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
-
-        FindAbilityComponents();
-        UpdateAllAbilities();
+        
 
         if (HealthPickUp.pickUpPool != null && HealthPickUp.pickUpPool.isActiveAndEnabled) HealthPickUp.pickUpPool.ClearLists();
         if (Pool.pool != null && Pool.pool.isActiveAndEnabled) Pool.pool.ClearLists();
@@ -187,6 +182,8 @@ public class ProgressManager : MonoBehaviour
             WeaponPickUp.isConvoPrepped = false;
 
         }
+        
+        UpgradeManager.instance.UpdateProgress(SaveManager.singleton.cavesCleared + 1);
     }
 
     private void FindAbilityComponents()

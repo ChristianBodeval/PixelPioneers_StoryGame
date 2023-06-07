@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -29,22 +30,43 @@ public class PlayerHealth : Health
         this.maxHealth = maxHealth;
     }
 
-    private void Start()
+    private void Awake()
     {
-        cameraShake = GameObject.Find("Camera").GetComponent<CameraShake>();
-        foreach (var item in GameObject.Find("UserInterface").GetComponentsInChildren<Transform>())
-        {
-            if (item.name.Equals("PlayerDeath")) deathScreen = item.gameObject;
-        }
-        if (deathScreen != null) deathScreen.SetActive(false);
-        damagedSlider = GameObject.Find("DamagedSlider").GetComponent<Slider>();
-        hpSlider = GameObject.Find("Healthbar").GetComponent<Slider>();
         
+        damagedSlider = GameObject.Find("DamagedSlider").GetComponent<Slider>();
+
+        hpSlider = GameObject.Find("Healthbar").GetComponent<Slider>();
+
         HPFill = GameObject.Find("Fill-HP").GetComponent<Image>();
         
         sr = GetComponentInChildren<SpriteRenderer>();
-        
+
         damagedSlider.value = hpSlider.value;
+    }
+
+    private void Start()
+    {
+        cameraShake = GameObject.Find("Camera").GetComponent<CameraShake>();
+
+
+        Debug.Log(GameObject.Find("UserInterface"));
+        
+        if (GameObject.Find("UserInterface") != null)
+        {
+            foreach (var item in GameObject.Find("UserInterface").GetComponentsInChildren<Transform>())
+            {
+                if (item.name.Equals("PlayerDeath")) deathScreen = item.gameObject;
+            }
+        }
+         
+            
+        
+        if (deathScreen != null) deathScreen.SetActive(false);
+
+        
+        
+        
+        
     }
 
     public override void TakeDamage(float damage)

@@ -56,6 +56,9 @@ TagManager:
   - name: UI
     uniqueID: 3913922437
     locked: 0
+  - name: Lava
+    uniqueID: 1754188973
+    locked: 0
   - name: Obstacle
     uniqueID: 3926137093
     locked: 0

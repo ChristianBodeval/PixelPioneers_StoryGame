@@ -41140,6 +41140,7 @@ MonoBehaviour:
   caveStartedEvent:
     m_PersistentCalls:
       m_Calls: []
+  sendWavesCollider: {fileID: 0}
 --- !u!95 &297152493 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2062039471, guid: 2b3152c33543d4eb18c15633cb9db199, type: 3}
@@ -58950,6 +58951,7 @@ MonoBehaviour:
   caveStartedEvent:
     m_PersistentCalls:
       m_Calls: []
+  sendWavesCollider: {fileID: 0}
 --- !u!1 &568973619
 GameObject:
   m_ObjectHideFlags: 0
@@ -59559,6 +59561,7 @@ MonoBehaviour:
   caveStartedEvent:
     m_PersistentCalls:
       m_Calls: []
+  sendWavesCollider: {fileID: 0}
 --- !u!1 &857946901
 GameObject:
   m_ObjectHideFlags: 0
@@ -98544,11 +98547,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6933830385489445836, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6933830385489445836, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7023290060121396959, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
       propertyPath: m_Name
@@ -98556,15 +98559,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7871317208840152178, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8936068467533896590, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8936068467533896590, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
