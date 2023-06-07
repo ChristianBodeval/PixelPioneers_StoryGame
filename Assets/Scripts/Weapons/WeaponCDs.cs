@@ -11,7 +11,7 @@ public class WeaponCDs : MonoBehaviour
     public Image mjoelnirCDVisual;
     public Image gungnirCDVisual;
 
-    public SlashAbility meleeScriptableObject;
+    public AbilityHolder meleeScriptableObject;
     public Dash dashScript;
     public Mjoelnir mjoelnirScript;
     public ThrowGungnir gungnirScript;
@@ -66,18 +66,28 @@ public class WeaponCDs : MonoBehaviour
             
         //Find the SlashAbility scriptable object in the resources folder
         //meleeScriptableObject = Resources.Load<SlashAbility>("ScriptableObjects/AbilitiesSO's/MeleeAttack.asset");
-        if(SceneManager.GetActiveScene().name != "Village")
+
+        
+        //Check if it is village
+        if (SceneManager.GetActiveScene().name.Equals("Village"))
         {
-            
-        dashScript = GameObject.Find("Dash").GetComponent<Dash>();
-        mjoelnirScript = GameObject.Find("Mjoelnir").GetComponent<Mjoelnir>();
-        gungnirScript = GameObject.Find("GungnirThrow").GetComponent<ThrowGungnir>();
+            meleeScriptableObject = GameObject.Find("SlashAbility").GetComponent<AbilityHolder>();
+            baseMeleeCooldownTime = meleeScriptableObject.abilitySO.cooldownTime;
         }
         
-        baseMeleeCooldownTime = meleeScriptableObject.cooldownTime;
-        dashCooldownTime = dashScript.dashCooldownTime;
-        mjoelnirCooldownTime = mjoelnirScript.chargeCD;
-        gungnirCooldownTime = gungnirScript.CD;
+        //Check if the first 4 letters of the scene name is not "Cave"
+        if (SceneManager.GetActiveScene().name.Substring(0, 4).Equals("Cave"))
+        {
+            meleeScriptableObject = GameObject.Find("SlashAbility").GetComponent<AbilityHolder>();
+            dashScript = GameObject.Find("Dash").GetComponent<Dash>();
+            mjoelnirScript = GameObject.Find("Mjoelnir").GetComponent<Mjoelnir>();
+            gungnirScript = GameObject.Find("GungnirThrow").GetComponent<ThrowGungnir>();
+        
+            baseMeleeCooldownTime = meleeScriptableObject.abilitySO.cooldownTime;
+            dashCooldownTime = dashScript.dashCooldownTime;
+            mjoelnirCooldownTime = mjoelnirScript.chargeCD;
+            gungnirCooldownTime = gungnirScript.CD;
+        }
     }
 
     // StateUpdate is called once per frame

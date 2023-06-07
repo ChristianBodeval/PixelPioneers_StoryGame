@@ -36,9 +36,12 @@ public class Ability : MonoBehaviour, IUpgradeable
             UpgradeOption2();
         }
     }
+
+
     
     
-    
+
+
     [SerializeField] public AbilitySO abilitySO;
     [SerializeField] public List<UpgradeSO> upgrades;
     

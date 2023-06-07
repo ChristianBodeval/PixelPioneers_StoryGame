@@ -8,8 +8,6 @@ using UnityEngine.Serialization;
 
 public class ProgressManager : MonoBehaviour
 {
-    //TODO DELETE
-    public int currentCavesCleared;
     //Make a singleton
     public static ProgressManager instance;
     
@@ -51,14 +49,8 @@ public class ProgressManager : MonoBehaviour
 
     private void Awake()
     {
+        
 
-        
-        
-        //Reset playerprefs
-        PlayerPrefs.DeleteAll();
-        
-        
-        if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
         }
@@ -86,7 +78,7 @@ public class ProgressManager : MonoBehaviour
 
     private void Start()
     {
-        
+<<<<<<< HEAD
         
         DisableAllAbilities();
         UpdateAllAbilities();
@@ -121,6 +113,8 @@ public class ProgressManager : MonoBehaviour
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         isNewScene = true;
+        PlayerPrefs.DeleteAll();
+        
         this.scene = scene;
         this.mode = mode;
 
@@ -128,14 +122,23 @@ public class ProgressManager : MonoBehaviour
         // Reset caveEntrances to null
         caveEntrances.Clear();
         
-        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
+        
+        
+        
+        
+    }
+
+    private void NewScene()
+    {
+        isNewScene = false;
+
 
         FindAbilityComponents();
         UpdateAllAbilities();
         
         
         if (scene.name == "CaveHub")
-        {
+        if (this.scene.name == "CaveHub")
             UpdatePlayerPosition();
 
             //Erase all caveEntrances from the list that are not tagged CaveEntrance
@@ -159,14 +162,8 @@ public class ProgressManager : MonoBehaviour
             }
 
             UpgradeManager.instance.UpdateProgress(SaveManager.singleton.cavesCleared + 1);
-        }
+            
     }
-
-    private void NewScene()
-    {
-        isNewScene = false;
-
-        
 
         if (HealthPickUp.pickUpPool != null && HealthPickUp.pickUpPool.isActiveAndEnabled) HealthPickUp.pickUpPool.ClearLists();
         if (Pool.pool != null && Pool.pool.isActiveAndEnabled) Pool.pool.ClearLists();
@@ -190,6 +187,8 @@ public class ProgressManager : MonoBehaviour
 
         }
     }
+        
+        UpgradeManager.instance.UpdateProgress(SaveManager.singleton.cavesCleared + 1);
 
     private void FindAbilityComponents()
     {

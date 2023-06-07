@@ -5,10 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31ee322b-587a-4c99-afc9-1b2b30998f9e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/CaveEntrance.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CaveEntrance.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ProgressManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ProgressManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_02.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_02.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/A01_FatherMedicine.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/A01_FatherMedicine.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/A09_FatherEncouragement.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/A09_FatherEncouragement.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/Act-1.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/Act-1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/Anvil.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/Anvil.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/B02.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/B02.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/B03.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/B03.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/B04.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/B04.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/B05.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/B05.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/B06.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/B06.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/ExitCave02Dialogue.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/ExitCave02Dialogue.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/ExitCave03Dialogue.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/ExitCave03Dialogue.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/GlanceAtHermes.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/GlanceAtHermes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/HermesFightIntro01.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/HermesFightIntro01.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/HermesFightIntro02.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/HermesFightIntro02.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/HermesFightIntro03.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/HermesFightIntro03.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/HermesFightIntro04.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/HermesFightIntro04.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/ScryerCaveHubPostUpgrade.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/ScryerCaveHubPostUpgrade.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/ScryerEntersCaveHub.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/ScryerEntersCaveHub.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/TESTInk2.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/TESTInk2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,13 +45,13 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff33ef4d15af4b21939284be593d47da159a00/9d/b0af22b9/SceneManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff33ef4d15af4b21939284be593d47da159a00/d8/6ca89343/Scene.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/AddLightsToCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CaveManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CharacterUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CooldownIcon.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DestroyFromAnimationEvent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DoNotDestroy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Interactable.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Users/bodeval/Spiludvikling_Og_Laeringsteknologi/Unity_Projekter_2.0/PixelPioneers_StoryGame/Assets/Prefabs/Anvil.prefab" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/Ability.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder_UI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilitySO.cs" root0="FORCE_HIGHLIGHTING" />
@@ -148,6 +164,8 @@
       <workItem from="1685904489548" duration="10670000" />
       <workItem from="1685971768257" duration="4799000" />
       <workItem from="1686072034037" duration="671000" />
+      <workItem from="1686090817295" duration="336000" />
+      <workItem from="1686091316293" duration="1551000" />
     </task>
     <servers />
   </component>
@@ -194,17 +212,17 @@
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/TimelineManager.cs</url>
-          <line>76</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/TimelineManager.cs" initialLine="76" containingFunctionPresentation="Method 'Update'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs</url>
+          <line>157</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Abilities&amp;Upgrades/AbilityHolder.cs" initialLine="155" containingFunctionPresentation="Method 'SetActive'">
             <startOffsets>
-              <option value="1887" />
+              <option value="4437" />
             </startOffsets>
             <endOffsets>
-              <option value="1945" />
+              <option value="4461" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="17" />
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

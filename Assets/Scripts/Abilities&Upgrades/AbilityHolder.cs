@@ -45,9 +45,11 @@ public class AbilityHolder : Ability, IUpgradeable
     {
         if(SceneManager.GetActiveScene().name != "Village")
         {
+            if(GameObject.Find("FloorIsElectric") != null)
+                upgradeOption1 = GameObject.Find("FloorIsElectric").GetComponent<AbilityHolder>();
             
-        upgradeOption1 = GameObject.Find("FloorIsElectric").GetComponent<AbilityHolder>();
-        upgradeOption2 = GameObject.Find("ElectricLine").GetComponent<AbilityHolder>();
+            if(GameObject.Find("ElectricLine") != null)
+                upgradeOption2 = GameObject.Find("ElectricLine").GetComponent<AbilityHolder>();
         }
         
         caster = GameObject.Find("Player");

@@ -6538,29 +6538,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 2091900887600034207, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 104.8999
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091900887600034207, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -71.499954
+      objectReference: {fileID: 0}
     - target: {fileID: 6582650028296683520, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6582650028296683523, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 235
+      objectReference: {fileID: 0}
+    - target: {fileID: 6582650028296683523, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 6933830385489445836, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6933830385489445836, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7871317208840152178, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8936068467533896590, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8936068467533896590, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
@@ -7725,6 +7741,7 @@ MonoBehaviour:
   dissolve: {fileID: 0}
   hermesSmol: {fileID: 0}
   hermesDeathParticles: {fileID: 0}
+  lokiSmol: {fileID: 0}
   hpSlider: {fileID: 0}
   damagedSlider: {fileID: 0}
   cameraShake: {fileID: 0}
