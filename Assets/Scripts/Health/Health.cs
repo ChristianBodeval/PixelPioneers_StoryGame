@@ -31,6 +31,8 @@ public class Health : MonoBehaviour
     public UnityEvent DamageTakenEvent;
     public UnityEvent Dead;
 
+    [SerializeField] private bool isPartOfWave = true;
+
     [Header("Hermes Only")]
     [SerializeField] private Shader dissolve;
     [SerializeField] private GameObject hermesSmol;
@@ -181,7 +183,7 @@ public class Health : MonoBehaviour
             }
 
             // Deactivate enemy and return to pool
-            GameObject.Find("GameManager").GetComponent<SpawnSystem>().RemoveFromWaitDeathList(gameObject);
+            if (isPartOfWave) GameObject.Find("GameManager").GetComponent<SpawnSystem>().RemoveFromWaitDeathList();
             Pool.pool.ReturnToEnemyPool(gameObject);
 
         }

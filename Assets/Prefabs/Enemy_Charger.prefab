@@ -524,7 +524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -580,6 +580,10 @@ PrefabInstance:
       propertyPath: bossBloodSFX
       value: 
       objectReference: {fileID: 8300000, guid: 959c146a4e03e684ea325efd49d03b07, type: 3}
+    - target: {fileID: 40040618040465577, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
+      propertyPath: isPartOfWave
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 40040618040465577, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
       propertyPath: currentHealth
       value: 6
@@ -746,7 +750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8798007897952269159, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}
       propertyPath: m_InstanceId
-      value: -1405772
+      value: -274280
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 254720778, guid: c8b8754b8e01e2a48b3069ab8674df4b, type: 3}

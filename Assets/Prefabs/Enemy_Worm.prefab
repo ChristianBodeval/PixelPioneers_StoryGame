@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -225,7 +225,7 @@ MonoBehaviour:
   - {x: 0.4707036, y: -0.017021198, z: 0.00000018483634}
   m_ShapePathHash: 96680608
   m_Mesh: {fileID: 0}
-  m_InstanceId: 211454
+  m_InstanceId: 99488
   m_LocalBounds:
     m_Center: {x: -0.009998858, y: 0.0018541366, z: 0}
     m_Extent: {x: 0.48070246, y: 0.20846152, z: 0}
@@ -5363,7 +5363,7 @@ MonoBehaviour:
   currentHealth: 4
   maxHealth: 4
   deathAnimDuration: 0.2
-  canTakeDamage: 0
+  canTakeDamage: 1
   sr: {fileID: 3084438981890198278}
   DamageTakenEvent:
     m_PersistentCalls:
@@ -5371,9 +5371,11 @@ MonoBehaviour:
   Dead:
     m_PersistentCalls:
       m_Calls: []
+  isPartOfWave: 0
   dissolve: {fileID: -6465566751694194690, guid: 535e27e45a183fc41945a226bbe7618c, type: 3}
   hermesSmol: {fileID: 0}
   hermesDeathParticles: {fileID: 0}
+  lokiSmol: {fileID: 0}
 --- !u!114 &3084438981571517272
 MonoBehaviour:
   m_ObjectHideFlags: 0

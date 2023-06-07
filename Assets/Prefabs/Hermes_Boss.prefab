@@ -175,6 +175,7 @@ MonoBehaviour:
   Dead:
     m_PersistentCalls:
       m_Calls: []
+  isPartOfWave: 1
   dissolve: {fileID: 0}
   hermesSmol: {fileID: 5346146237246326270, guid: 719bb6bd7d85514489b5366bd8f83bdc, type: 3}
   hermesDeathParticles: {fileID: 9190634620285127154, guid: 91ab62390222a1c4d87151b79fc2c5ea, type: 3}

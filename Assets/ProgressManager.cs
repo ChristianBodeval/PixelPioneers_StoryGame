@@ -86,9 +86,7 @@ public class ProgressManager : MonoBehaviour
 
     private void Start()
     {
-        CaveHasBeenCleared();
-        CaveHasBeenCleared();
-        CaveHasBeenCleared();
+        
         
         DisableAllAbilities();
         UpdateAllAbilities();

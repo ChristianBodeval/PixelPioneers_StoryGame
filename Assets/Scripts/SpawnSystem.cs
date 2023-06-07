@@ -126,7 +126,7 @@ public class SpawnSystem : MonoBehaviour
         }
     }
 
-    public void RemoveFromWaitDeathList(GameObject e)
+    public void RemoveFromWaitDeathList()
     {
         remainingAlive--;
     }
