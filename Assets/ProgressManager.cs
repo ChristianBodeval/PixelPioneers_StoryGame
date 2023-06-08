@@ -50,7 +50,7 @@ public class ProgressManager : MonoBehaviour
     private void Awake()
     {
         
-
+        if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
         }
@@ -78,14 +78,9 @@ public class ProgressManager : MonoBehaviour
 
     private void Start()
     {
-<<<<<<< HEAD
         
         DisableAllAbilities();
         UpdateAllAbilities();
-
-       
-        SaveManager.singleton.cavesCleared = currentCavesCleared;
-       
     }
 
     public void UpdatePlayerPosition()
@@ -138,7 +133,7 @@ public class ProgressManager : MonoBehaviour
         
         
         if (scene.name == "CaveHub")
-        if (this.scene.name == "CaveHub")
+        { 
             UpdatePlayerPosition();
 
             //Erase all caveEntrances from the list that are not tagged CaveEntrance
@@ -162,8 +157,7 @@ public class ProgressManager : MonoBehaviour
             }
 
             UpgradeManager.instance.UpdateProgress(SaveManager.singleton.cavesCleared + 1);
-            
-    }
+        }
 
         if (HealthPickUp.pickUpPool != null && HealthPickUp.pickUpPool.isActiveAndEnabled) HealthPickUp.pickUpPool.ClearLists();
         if (Pool.pool != null && Pool.pool.isActiveAndEnabled) Pool.pool.ClearLists();
@@ -187,8 +181,6 @@ public class ProgressManager : MonoBehaviour
 
         }
     }
-        
-        UpgradeManager.instance.UpdateProgress(SaveManager.singleton.cavesCleared + 1);
 
     private void FindAbilityComponents()
     {
