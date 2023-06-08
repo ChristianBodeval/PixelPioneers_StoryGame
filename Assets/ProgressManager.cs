@@ -125,7 +125,9 @@ public class ProgressManager : MonoBehaviour
     {
         isNewScene = false;
 
-
+    
+        caveEntrances = new List<CaveEntrance>(FindObjectsOfType<CaveEntrance>());
+        
         FindAbilityComponents();
         UpdateAllAbilities();
         
