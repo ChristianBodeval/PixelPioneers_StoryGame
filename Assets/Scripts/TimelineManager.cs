@@ -81,9 +81,9 @@ public class TimelineManager : MonoBehaviour
         endOfGame = true;
     }
 
-    public void StartScene(SceneAsset scene)
+    public void StartScene(string sceneName)
     {
-        SceneManager.LoadScene(scene.name);
+        SceneManager.LoadScene(sceneName);
     }
 
     private IEnumerator ResumeTLCoroutine()
