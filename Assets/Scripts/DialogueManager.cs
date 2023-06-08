@@ -233,6 +233,7 @@ public class DialogueManager : MonoBehaviour
             Debug.Log("Resumed timeline but not in tutorial");
         }
 
+
         if (TimelineManager.timelineManager.tutorialIsStarted && !SpawnSystem.waveAlive && SpawnSystem.totalWaves < 1)
         {
             Debug.Log("End of dialog in tutorial");

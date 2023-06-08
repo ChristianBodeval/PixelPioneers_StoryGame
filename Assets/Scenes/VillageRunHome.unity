@@ -74653,7 +74653,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191178086}
   m_LocalRotation: {x: -0.38268343, y: 1e-45, z: 1e-45, w: 0.92387956}
-  m_LocalPosition: {x: 37.79, y: -11.88, z: -20}
+  m_LocalPosition: {x: 16.03, y: 0.6000004, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -97854,7 +97854,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1292307326}
   m_LocalRotation: {x: -0.38268343, y: 1e-45, z: 1e-45, w: 0.92387956}
-  m_LocalPosition: {x: 37.79, y: -21.880001, z: -10.000001}
+  m_LocalPosition: {x: 8.213651, y: -9.92335, z: -9.476651}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -99697,7 +99697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7673939789088615550, guid: 1dbd4700c94f04075af068998dcdcfb9, type: 3}
       propertyPath: m_Events.m_Events.Array.data[34].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7673939789088615550, guid: 1dbd4700c94f04075af068998dcdcfb9, type: 3}
       propertyPath: m_Events.m_Events.Array.data[33].m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -99738,14 +99738,18 @@ PrefabInstance:
     - target: {fileID: 7673939789088615550, guid: 1dbd4700c94f04075af068998dcdcfb9, type: 3}
       propertyPath: m_Events.m_Events.Array.data[34].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 102900000, guid: 67fb7e21ca794a04dbac0e92de48666c, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673939789088615550, guid: 1dbd4700c94f04075af068998dcdcfb9, type: 3}
+      propertyPath: m_Events.m_Events.Array.data[34].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Father House End
+      objectReference: {fileID: 0}
     - target: {fileID: 7673939789088615550, guid: 1dbd4700c94f04075af068998dcdcfb9, type: 3}
       propertyPath: m_Events.m_Events.Array.data[33].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEditor.SceneAsset, UnityEditor.CoreModule
       objectReference: {fileID: 0}
     - target: {fileID: 7673939789088615550, guid: 1dbd4700c94f04075af068998dcdcfb9, type: 3}
       propertyPath: m_Events.m_Events.Array.data[34].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEditor.SceneAsset, UnityEditor.CoreModule
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dbd4700c94f04075af068998dcdcfb9, type: 3}
