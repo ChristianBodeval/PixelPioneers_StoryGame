@@ -24,7 +24,7 @@ public class Bruiser_Pathing : MonoBehaviour
 
     [Header("Custom Behavior")]
     [SerializeField] private bool isFollowing = true;
-    private Slider hpBar;
+    private Image hpBar;
     private object normalized;
 
     private List<Vector2> debug1 = new List<Vector2>();
@@ -37,9 +37,11 @@ public class Bruiser_Pathing : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         attackRange = GetComponent<Bruiser_Attack>().waveRange / 2 - 0.5f;
-        hpBar = GetComponentInChildren<Slider>();
-        hpBar.maxValue = GetComponent<Health>().maxHealth;
-        hpBar.value = GetComponent<Health>().currentHealth;
+
+        foreach (var item in GetComponentsInChildren<Image>())
+        {
+            if (item.gameObject.name == "Fill") hpBar = item;
+        }
 
         InvokeRepeating("UpdatePath", 0f, updateInterval); // Updates pathfinding regularly
     }

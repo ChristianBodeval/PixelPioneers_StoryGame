@@ -26,7 +26,7 @@ public class ChargerPathing : MonoBehaviour
     [SerializeField] private bool isFollowing = true;
 
     [Header("HP Bar")]
-    private Slider hpBar;
+    private Image hpBar;
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -35,9 +35,11 @@ public class ChargerPathing : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         animator.SetBool("CanMove", true);
         attackRange = GetComponent<Charger_Attack>().attackRange;
-        hpBar = GetComponentInChildren<Slider>();
-        hpBar.maxValue = GetComponent<Health>().maxHealth;
-        hpBar.value = GetComponent<Health>().currentHealth;
+
+        foreach (var item in GetComponentsInChildren<Image>())
+        {
+            if (item.gameObject.name == "Fill") hpBar = item;
+        }
 
         StartCoroutine(UpdatePath()); // Updates pathfinding regularly
     }

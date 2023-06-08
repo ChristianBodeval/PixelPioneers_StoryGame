@@ -205,12 +205,22 @@ public class SpawnSystem : MonoBehaviour
 
     public void ClearLists()
     {
+        StopAllCoroutines();
         wavesToSpawn.Clear();
         randomizingList.Clear();
+        waveAlive = false;
+        isSpawning = false;
         remainingAlive = 0;
+        totalWaves = 0;
+        currentWave = 0;
     }
 
     private void OnDisable()
+    {
+        ClearLists();
+    }
+
+    private void OnDestroy()
     {
         ClearLists();
     }

@@ -31,21 +31,6 @@ public class Menu : MonoBehaviour
     private bool isSliderSelected = false;
     private Slider selectedSlider;
 
-    public static Menu singleton { get; private set; }
-
-    private void Awake()
-    {
-        if (singleton != null && singleton != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(GameObject.Find("UserInterface"));
-            singleton = this;
-        }
-    }
-
     private void Start()
     {
         eventSystem = EventSystem.current;

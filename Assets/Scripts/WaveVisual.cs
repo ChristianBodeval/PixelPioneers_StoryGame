@@ -26,7 +26,7 @@ public class WaveVisual : MonoBehaviour
     private float spacing = 60f;
     private float waveUIWidth;
 
-    private int maxWaves;
+    public int maxWaves;
     private int wavesLeft = 0; // Changed through Spawnsystem script
 
     public Sprite currentWave;
@@ -39,14 +39,7 @@ public class WaveVisual : MonoBehaviour
 
     private void Start()
     {
-        if (Pool.pool == null || !Pool.pool.isActiveAndEnabled) return;
-
-        isInCombat = false;
-        maxWaves = SpawnSystem.totalWaves;
-        wavesLeft = maxWaves - SpawnSystem.currentWave;
-
-        StartCoroutine(SetWave()); // Sets the amouont of active crystals
-        StartCoroutine(UpdateIndicatorList());
+        GetVariables();
     }
 
     private IEnumerator UpdateIndicatorList()
@@ -54,9 +47,6 @@ public class WaveVisual : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
-
-            // No change in variables
-            if (maxWaves == SpawnSystem.totalWaves && wavesLeft == maxWaves - SpawnSystem.currentWave) continue; // Guard clause
 
             // Updates variables from SpawnSystem script
             maxWaves = SpawnSystem.totalWaves;
@@ -177,24 +167,18 @@ public class WaveVisual : MonoBehaviour
 
             if (isDone)
             {
-                lock (inUseWaveIndicators)
+                GameObject[] tempArray1 = inUseWaveIndicators.ToArray();
+                for (int j = 0; j < tempArray1.Length; j++)
                 {
-                    GameObject[] tempArray = inUseWaveIndicators.ToArray();
-                    for (int j = 0; j < tempArray.Length; j++)
-                    {
-                        ReturnToIndicatorPool(tempArray[j]);
-                    }
+                    ReturnToIndicatorPool(tempArray1[j]);
                 }
 
-                lock (inUseWaveChain)
+                GameObject[] tempArray2 = inUseWaveChain.ToArray();
+                for (int j = 0; j < tempArray2.Length; j++)
                 {
-                    GameObject[] tempArray = inUseWaveChain.ToArray();
-                    for (int j = 0; j < tempArray.Length; j++)
-                    {
-                        ReturnToChainPool(tempArray[j]);
-                    }
-                    continue; // Skip this loop iteration'
+                    ReturnToChainPool(tempArray2[j]);
                 }
+                continue; // Skip this loop iteration'
             }
 
             int i = 0;
@@ -256,5 +240,25 @@ public class WaveVisual : MonoBehaviour
         GameObject player = GameObject.Find("Player");
         ParticleSystem ps = Instantiate(particleSystem, worldPosition, player.transform.rotation, player.transform);
         SFXManager.singleton.PlaySound(breakCrystalSFX, player.transform.position, sfxVolume, false, player.transform);
+    }
+
+    public void GetVariables()
+    {
+        if (Pool.pool == null || !Pool.pool.isActiveAndEnabled) return;
+
+        isInCombat = false;
+        maxWaves = SpawnSystem.totalWaves;
+        wavesLeft = maxWaves - SpawnSystem.currentWave;
+
+        StartCoroutine(SetWave()); // Sets the amouont of active crystals
+        StartCoroutine(UpdateIndicatorList());
+    }
+
+    public void StartWaveUI()
+    {
+        StopAllCoroutines();
+        isDone = false;
+        StartCoroutine(SetWave()); // Sets the amouont of active crystals
+        StartCoroutine(UpdateIndicatorList());
     }
 }

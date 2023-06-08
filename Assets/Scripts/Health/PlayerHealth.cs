@@ -42,31 +42,14 @@ public class PlayerHealth : Health
         sr = GetComponentInChildren<SpriteRenderer>();
 
         damagedSlider.value = hpSlider.value;
+
+        deathScreen = GameObject.Find("PlayerDeath");
+        if (deathScreen != null) deathScreen.SetActive(false);
     }
 
     private void Start()
     {
         cameraShake = GameObject.Find("Camera").GetComponent<CameraShake>();
-
-
-        Debug.Log(GameObject.Find("UserInterface"));
-        
-        if (GameObject.Find("UserInterface") != null)
-        {
-            foreach (var item in GameObject.Find("UserInterface").GetComponentsInChildren<Transform>())
-            {
-                if (item.name.Equals("PlayerDeath")) deathScreen = item.gameObject;
-            }
-        }
-         
-            
-        
-        if (deathScreen != null) deathScreen.SetActive(false);
-
-        
-        
-        
-        
     }
 
     public override void TakeDamage(float damage)
@@ -160,7 +143,10 @@ public class PlayerHealth : Health
         MusicManager.singleton.StopMusic();
         gameObject.SetActive(false);
         deathScreen.SetActive(true);
+        GameObject.Find("GameManager").GetComponent<SpawnSystem>().ClearLists();
+        SendWave.isSent = false;
         Time.timeScale = 0f;
         yield return new WaitForEndOfFrame();
+        StopAllCoroutines();
     }
 }

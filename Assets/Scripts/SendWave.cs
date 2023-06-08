@@ -14,7 +14,7 @@ public class SendWave : MonoBehaviour
     private SpawnSystem spawnSystem;
     private Coroutine sendWavesCoroutine = null;
     private int currentWave;
-    private bool isSent = false;
+    public static bool isSent = false;
     
     public UnityEvent caveStartedEvent;
     
@@ -37,7 +37,7 @@ public class SendWave : MonoBehaviour
         caveStartedEvent.Invoke();
         if (!SpawnSystem.waveAlive && !isSent)
         {
-            WaveVisual.isDone = false;
+            GameObject.Find("WaveCounters").GetComponent<WaveVisual>().StartWaveUI();
             if (combatTrack != null) MusicManager.singleton.PlayMusic(combatTrack, musicVolume);
             isSent = true;
             currentWave = 0;
