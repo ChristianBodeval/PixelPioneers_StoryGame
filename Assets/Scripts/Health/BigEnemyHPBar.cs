@@ -13,7 +13,7 @@ public class BigEnemyHPBar : MonoBehaviour
     {
         health = GetComponent<Health>();
         HPFill.fillAmount = health.currentHealth;
-        DamagedBar.fillAmount = HPFill.fillAmount;
+        if (DamagedBar != null) DamagedBar.fillAmount = HPFill.fillAmount;
     }
 
     // StateUpdate is called once per frame
@@ -22,7 +22,7 @@ public class BigEnemyHPBar : MonoBehaviour
         HPFill.fillAmount = health.currentHealth / health.maxHealth;
         damagedHealthShrinkTimer -= Time.deltaTime;
 
-        if (damagedHealthShrinkTimer < 0)
+        if (DamagedBar != null && damagedHealthShrinkTimer < 0)
         {
             if (HPFill.fillAmount <= DamagedBar.fillAmount)
             {
