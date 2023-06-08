@@ -68068,7 +68068,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5cf29648832abef4a8f0418464711cb1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8959838a1eaa4b84d97c6add62932a39, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99573,7 +99573,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 788ac0878a8004c47ae8fbb76f8e831b, type: 3}
     - target: {fileID: 2816982928277809494, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3810014245336386654, guid: f0cb9560ce051c746904bc8e64cd77c1, type: 3}
       propertyPath: m_Name
@@ -101974,7 +101974,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ed2a8be1caa64a24ea6698deb5b34ca5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2a581db14dc67ba40a2b17b203d1ddd0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103275,6 +103275,10 @@ PrefabInstance:
     - target: {fileID: 8694874991359215657, guid: e413d3774e34e794f83974f3caeb0cea, type: 3}
       propertyPath: m_Name
       value: Black Borders
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694874991359215657, guid: e413d3774e34e794f83974f3caeb0cea, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e413d3774e34e794f83974f3caeb0cea, type: 3}
