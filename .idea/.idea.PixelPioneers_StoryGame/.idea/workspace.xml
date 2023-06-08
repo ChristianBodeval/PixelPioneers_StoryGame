@@ -5,26 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31ee322b-587a-4c99-afc9-1b2b30998f9e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/A01_FatherMedicine.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/A01_FatherMedicine.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/A09_FatherEncouragement.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/A09_FatherEncouragement.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/Act-1.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/Act-1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/Anvil.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/Anvil.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/B02.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/B02.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/B03.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/B03.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/B04.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/B04.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/B05.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/B05.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/B06.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/B06.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/ExitCave02Dialogue.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/ExitCave02Dialogue.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/ExitCave03Dialogue.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/ExitCave03Dialogue.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/GlanceAtHermes.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/GlanceAtHermes.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/HermesFightIntro01.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/HermesFightIntro01.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/HermesFightIntro02.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/HermesFightIntro02.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/HermesFightIntro03.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/HermesFightIntro03.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/HermesFightIntro04.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/HermesFightIntro04.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/ScryerCaveHubPostUpgrade.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/ScryerCaveHubPostUpgrade.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/ScryerEntersCaveHub.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/ScryerEntersCaveHub.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dialogue/TESTInk2.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dialogue/TESTInk2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ProgressManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ProgressManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
