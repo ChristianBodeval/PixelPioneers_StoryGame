@@ -196,7 +196,7 @@ public class Pool : MonoBehaviour
     // Gets pickup from pool
     public GameObject DrawFromSFXPool()
     {
-        if (storageSFX.Count > 0)
+        if (storageSFX.Count > 0 && storageSFX[0] != null)
         {
             GameObject sfx = storageSFX[0];
             storageSFX.Remove(sfx);

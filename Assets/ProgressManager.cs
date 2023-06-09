@@ -184,7 +184,8 @@ public class ProgressManager : MonoBehaviour
 
     private void FindAbilityComponents()
     {
-        GameObject cds = GameObject.Find("CDs");
+        GameObject ui = GameObject.Find("UI");
+        GameObject cds = FindChildObjectByName(ui.transform, "CDs");
         slashUI = FindChildObjectByName(cds.transform, "SlashCD");
         dashUI = FindChildObjectByName(cds.transform, "DashCD");
         mjoelnirUI = FindChildObjectByName(cds.transform, "MjoelnirCD");
