@@ -138,4 +138,13 @@ public class MusicManager : MonoBehaviour
         targetVolume = 0.0f;
         isFadingOut = true;
     }
+
+    public void SetMasterVolume(float volume)
+    {
+        isFadingOut = false;
+        isFadingIn = false;
+        masterVolume = volume;
+        audioSource.volume = masterVolume * clipVolume;
+    }
+
 }
