@@ -13,11 +13,11 @@ public class SpawnSystem : MonoBehaviour
     [HideInInspector] public List<WaveObject> wavesToSpawn = new List<WaveObject>();
     private static int remainingAlive = 0;
     private List<int> randomizingList = new List<int>();
-    private Coroutine waveAliveCoroutine = null;
     [HideInInspector] public static bool isSpawning = false;
     private float postWaveWaitTime = 0f;
-    private Coroutine awaitAddWaveCoroutine;
-    private GameObject player;
+
+    private Coroutine spawnWavesCoroutine = null;
+    private Coroutine isWaveDeadCoroutine = null;
     [HideInInspector] public static bool waveAlive = false;
     [HideInInspector] public static int totalWaves;
     [HideInInspector] public static int currentWave;
@@ -25,16 +25,10 @@ public class SpawnSystem : MonoBehaviour
     private void Start()
     {
         ClearLists();
-
-        player = GameObject.FindGameObjectWithTag("Player");
-        StartCoroutine(SpawnWaves());
-        StartCoroutine(CheckIfWaveIsDead()); // Function checks if wave is alive during play
     }
 
     public void AddWave(WaveObject wave)
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-
         // If list is being used while we are iterating on it we break the game - so we hold the info in a while loop until the list is no longer used
         if (isSpawning)
         {
@@ -213,6 +207,13 @@ public class SpawnSystem : MonoBehaviour
         remainingAlive = 0;
         totalWaves = 0;
         currentWave = 0;
+        SendWave.isSent = false;
+
+        if (spawnWavesCoroutine != null && gameObject.activeSelf) StopCoroutine(spawnWavesCoroutine);
+        if (gameObject.activeSelf) spawnWavesCoroutine = StartCoroutine(SpawnWaves());
+
+        if (isWaveDeadCoroutine != null && gameObject.activeSelf) StopCoroutine(isWaveDeadCoroutine);
+        if (gameObject.activeSelf) isWaveDeadCoroutine = StartCoroutine(CheckIfWaveIsDead()); // Function checks if wave is alive during play
     }
 
     private void OnDisable()

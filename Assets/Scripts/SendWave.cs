@@ -11,13 +11,12 @@ public class SendWave : MonoBehaviour
     [Header("Music")]
     [Range(0, 1)] public float musicVolume = 0.5f;
     [SerializeField] protected AudioClip combatTrack;
+
     private SpawnSystem spawnSystem;
     private Coroutine sendWavesCoroutine = null;
-    private int currentWave;
     public static bool isSent = false;
     
     public UnityEvent caveStartedEvent;
-    
     
     public PolygonCollider2D sendWavesCollider;
     
@@ -37,15 +36,17 @@ public class SendWave : MonoBehaviour
         caveStartedEvent.Invoke();
         if (!SpawnSystem.waveAlive && !isSent)
         {
-            GameObject.Find("WaveCounters").GetComponent<WaveVisual>().StartWaveUI();
-            if (combatTrack != null) MusicManager.singleton.PlayMusic(combatTrack, musicVolume);
             isSent = true;
-            currentWave = 0;
+
+            if (GameObject.Find("WaveCounters") != null) GameObject.Find("WaveCounters").GetComponent<WaveVisual>().StartWaveUI();
+            if (combatTrack != null) MusicManager.singleton.PlayMusic(combatTrack, musicVolume);
+
             if (sendWavesCoroutine != null) StopCoroutine(sendWavesCoroutine);
             sendWavesCoroutine = StartCoroutine(SendWavesCoroutine());
         }
+
         if (SceneManager.GetActiveScene().name != "Village")
-        sendWavesCollider.enabled = false;
+            sendWavesCollider.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -60,7 +61,6 @@ public class SendWave : MonoBehaviour
         foreach (var wave in GetComponentsInChildren<WaveObject>())
         {
             spawnSystem.AddWave(wave); // Add wave to spawnsystem
-            currentWave++;
         }
     }
 }

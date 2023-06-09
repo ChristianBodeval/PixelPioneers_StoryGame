@@ -118,7 +118,7 @@ public class ProgressManager : MonoBehaviour
         caveEntrances.Clear();
 
         SendWave.isSent = false;
-        GameObject.Find("WaveCounters").GetComponent<WaveVisual>().GetVariables();
+        if (GameObject.Find("WaveCounters") != null) GameObject.Find("WaveCounters").GetComponent<WaveVisual>().GetVariables();
     }
 
     private void NewScene()

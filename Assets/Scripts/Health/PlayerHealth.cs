@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -49,6 +50,10 @@ public class PlayerHealth : Health
 
     private void Start()
     {
+        if (GameObject.Find("Healthbar") != null && 
+            (SceneManager.GetActiveScene().name == "Village" || SceneManager.GetActiveScene().name == "VillageRunHome" || SceneManager.GetActiveScene().name == "VillageRunToCaveHub")) 
+                GameObject.Find("Healthbar").SetActive(false);
+
         cameraShake = GameObject.Find("Camera").GetComponent<CameraShake>();
     }
 
@@ -124,14 +129,14 @@ public class PlayerHealth : Health
         }
         
         if(hpSlider == null) return;
-        hpSlider.value = currentHealth;
+        hpSlider.value = currentHealth / maxHealth;
         HPFill.color = gradient.Evaluate(hpSlider.normalizedValue);
         
         damagedHealthShrinkTimer -= Time.deltaTime;
         if (damagedHealthShrinkTimer < 0)
         {
             if (hpSlider.value <= damagedSlider.value) {
-                float shrinkSpeed = 10f;
+                float shrinkSpeed = 2f;
                 damagedSlider.value-= shrinkSpeed * Time.deltaTime;
             }
         }

@@ -240,11 +240,15 @@ public class DialogueManager : MonoBehaviour
             switch (TimelineManager.timelineManager.currentTutorialState)
             {
                 case 2:
+                    if (GameObject.Find("WaveCounters") != null) GameObject.Find("WaveCounters").GetComponent<WaveVisual>().StartWaveUI();
+                    if (GameObject.Find("GameManager") != null) GameObject.Find("GameManager").GetComponent<SpawnSystem>().ClearLists();
                     T3.GetComponent<SendWave>().SendWaves();
                     StartCoroutine(TutorialStateCoroutine());
                     break;
 
                 case 3:
+                    if (GameObject.Find("WaveCounters") != null) GameObject.Find("WaveCounters").GetComponent<WaveVisual>().StartWaveUI();
+                    if (GameObject.Find("GameManager") != null) GameObject.Find("GameManager").GetComponent<SpawnSystem>().ClearLists();
                     T4.GetComponent<SendWave>().SendWaves();
                     StartCoroutine(TutorialStateCoroutine());
 
