@@ -38,8 +38,9 @@ public class ProgressManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneUnloaded += OnSceneUnloaded;
-        
-        
+
+        FindAbilityComponents();
+        UpdateAllAbilities();
     }
 
     private void OnSceneUnloaded(Scene unloadedScene)
@@ -180,6 +181,11 @@ public class ProgressManager : MonoBehaviour
             WeaponPickUp.isConvoPrepped = false;
 
         }
+
+        if (scene.name == "Fathers House End")
+        {
+            DisableAllAbilities();
+        } 
     }
 
     private void FindAbilityComponents()
@@ -226,6 +232,8 @@ public class ProgressManager : MonoBehaviour
 
     public void UpdateAllAbilities()
     {
+        if (SaveManager.singleton == null || !SaveManager.singleton.isActiveAndEnabled) return;
+
         slashUI.SetActive(SaveManager.singleton.cavesCleared > -1);
         slashScript.enabled = SaveManager.singleton.cavesCleared > -1;
 

@@ -34,7 +34,7 @@ public class CaveEntrance : MonoBehaviour
     {
         
 
-        if (connectedToSceneName.Equals(ProgressManager.instance.lastSceneName))
+        if (connectedToSceneName.Equals(ProgressManager.instance.lastSceneName) && connectedToSceneName != "")
         {
             player.transform.position = spawnPoint.position;
         }

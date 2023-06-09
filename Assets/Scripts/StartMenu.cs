@@ -45,6 +45,7 @@ public class StartMenu : MonoBehaviour
         switch (menuState)
         {
             case MenuState.NewGame:
+                PlayerPrefs.DeleteAll();
                 newGame.material = selected;
                 loadGame.material = unSelected;
                 exit.material = unSelected;
