@@ -6,8 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="31ee322b-587a-4c99-afc9-1b2b30998f9e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PixelPioneers_StoryGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ProgressManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ProgressManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cave_01.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cave_01.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/WormFSM.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/WormFSM.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shaders/Dissolve.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Shaders/Dissolve.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shaders/HDR.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Shaders/HDR.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shaders/MjölnirSmash.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Shaders/MjölnirSmash.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shaders/Pixel.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Shaders/Pixel.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shaders/PixelBase.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Shaders/PixelBase.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shaders/PixelCircle.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Shaders/PixelCircle.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shaders/ScalePixel.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Shaders/ScalePixel.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,6 +158,8 @@
       <workItem from="1686072034037" duration="671000" />
       <workItem from="1686090817295" duration="336000" />
       <workItem from="1686091316293" duration="1551000" />
+      <workItem from="1686388257570" duration="888000" />
+      <workItem from="1688045223108" duration="739000" />
     </task>
     <servers />
   </component>

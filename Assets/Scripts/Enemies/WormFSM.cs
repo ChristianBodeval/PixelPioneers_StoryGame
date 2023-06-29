@@ -43,6 +43,7 @@ public class WormFSM : MonoBehaviour
     [HideInInspector] public Rigidbody rb;
     public LayerMask groundLayer;
     public LayerMask obstacleLayer;
+    public bool alwaysHuntPlayer;
     
     [Header("ChaseState")]
     public float sightRange;
@@ -264,6 +265,9 @@ public class SearchingState : EnemyState
     Vector3 currentPlayerPosition;
     public override void Enter(WormFSM enemy)
     {
+        
+        
+        
         enemy.icon.color = enemy.suspiciousColor;
         
         currentPlayerPosition = enemy.player.transform.position;
